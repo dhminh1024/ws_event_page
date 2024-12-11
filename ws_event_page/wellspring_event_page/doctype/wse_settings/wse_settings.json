@@ -1,0 +1,49 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-12-11 09:25:10.341920",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "default_homepage_event",
+  "default_homepage_url"
+ ],
+ "fields": [
+  {
+   "fieldname": "default_homepage_event",
+   "fieldtype": "Link",
+   "label": "Default Homepage Event",
+   "options": "WSE Event"
+  },
+  {
+   "fetch_from": "default_homepage_event.url",
+   "fieldname": "default_homepage_url",
+   "fieldtype": "Data",
+   "label": "Default Homepage URL",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-12-11 09:34:06.042437",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
