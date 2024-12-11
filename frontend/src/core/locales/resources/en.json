@@ -1,0 +1,84 @@
+{
+  "components": {
+    "buttons": {
+      "add_feed": "Add activity feed",
+      "delete_feed": "Delete feed",
+      "create": "Create",
+      "edit": "Edit",
+      "save": "Save",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "back_to_login": "Back to login",
+      "switch_account": "Switch account",
+      "return_to_home": "Return to home",
+      "refresh_page": "Refresh page",
+      "create_record": "Create new record",
+      "add_reason": "Add reason",
+      "edit_reason": "Edit reason",
+      "save_attendance": "Save attendance",
+      "sign_out": "Sign out",
+      "change_password": "Change password",
+      "sign_in": "Sign in",
+      "sign_up": "Sign up",
+      "send_mail": "Send mail",
+      "reset": "Reset",
+      "view_details": "View details",
+      "show_more": "Show more",
+      "back": "Back",
+      "next": "Next",
+      "submit": "Submit",
+      "save_changes": "Save changes",
+      "update": "Update",
+      "accept": "Accept",
+      "search": "Search",
+      "close": "Close",
+      "send_feedback": "Send feedback",
+      "view_academic_calendar": "Academic Calendar",
+      "edit_profile": "Edit profile",
+      "skip": "Skip",
+      "update_continue": "Update & Continue",
+      "go_to_file": "Go to file"
+    },
+    "notifications": {
+      "news_empty": {
+        "heading": "News is empty",
+        "description": "You have no article at this moment"
+      },
+      "class_not_found": {
+        "heading": "No class found"
+      },
+      "events_empty": {
+        "heading": "Events is empty",
+        "description": "You have no event at this moment"
+      },
+      "activities_empty": {
+        "heading": " Activites is empty",
+        "description": "You have no activities at this moment"
+      },
+      "forbbiden": {
+        "heading": "Fobbiden",
+        "description": "We are sorry, but you don't have access to this page."
+      },
+      "no_permisson": {
+        "heading": "No Permission",
+        "description": "Sorry, you cannot access this page. To Access, please contact the administrator."
+      },
+      "client_error": {
+        "heading": "Opps! Something went wrong",
+        "description": "We apologize for the inconvenience. An error has occurred, and we are working to fix it. Please try again later."
+      },
+      "server_error": {
+        "heading": "Internet Server Error",
+        "description": "We are working on fixing the problem. Please try again"
+      },
+      "coming_soon": {
+        "heading": "Coming Soon",
+        "description": "This feature is still under development. Come back next time"
+      },
+      "no_results": {
+        "heading": "No results found",
+        "description": "Try adjusting your search or filter to find what you're looking for."
+      }
+    }
+  }
+}

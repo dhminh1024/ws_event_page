@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 228 38% 97%;
+    --foreground: 0 0% 30%;
+    --muted: 225 10% 91.7%;
+    --muted-foreground: 225 5% 41.7%;
+    --popover: 225 100% 100%;
+    --popover-foreground: 225 10% 0.8500000000000001%;
+    --card: 225 100% 100%;
+    --card-foreground: 198 31% 95%;
+    --border: 225 15% 89.68%;
+    --input: 225 15% 89.68%;
+    --primary: 212 100% 17%;
+    --primary-foreground: 225 2% 91.7%;
+    --secondary: 225 5% 95.85%;
+    --secondary-foreground: 225 7% 11.7%;
+    --accent: 225 5% 95.85%;
+    --accent-foreground: 225 7% 11.7%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --ring: 225 100% 17%;
+    --radius: 0.5rem;
+    --container-padding: 1.25rem;
+    --gradient-o-y: linear-gradient(74.97deg, #faa61a 0%, #ffcd00 93.5%);
+    --gradient-t-s: linear-gradient(254.54deg, #009684 0%, #006882 100.65%);
+    --gradient-s-p: linear-gradient(254.97deg, #006882 0%, #002855 100%);
+
+    --brand-primary: 212 100% 17%;
+    --brand-secondary: 192 100% 25%;
+    --brand-teal: 173 100% 29%;
+    --brand-green: 89 64% 34%;
+    --brand-orange: 13 86% 54%;
+    --brand-blue: 204 83% 55%;
+    --brand-yellow: 38 96% 54%;
+    --brand-red: 0 100% 50%;
+    --brand-violet: 270 98% 36%;
+
+    --success: 89 64% 34%;
+    --danger: 0 100% 50%;
+
+    --scroll-thumb: 212 100% 17%;
+    --scroll-track: 0 0% 0%;
+  }
+
+  .dark {
+    --background: 231 30% 16%;
+    --foreground: 220 9% 70%;
+    --card: 231 30% 22%;
+    --card-foreground: 219 40% 25%;
+    --popover: 231 30% 28%;
+    --popover-foreground: 220 9% 70%;
+    --primary: 13 86% 54%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 215 27.9% 13%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 219 40% 20%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 240 12% 26%;
+    --input:220 8% 47%;
+    --ring: 192 100% 20%;
+
+    --brand-primary: 212 100% 17%;
+    --brand-secondary: 192 100% 25%;
+    --brand-teal: 173 100% 29%;
+    --brand-green: 89 64% 34%;
+    --brand-orange: 13 86% 54%;
+    --brand-blue: 204 83% 55%;
+    --brand-yellow: 38 96% 54%;
+    --brand-red: 0 100% 50%;
+    --brand-violet: 270 98% 50%;
+
+    --success: 89 64% 34%;
+    --danger: 0 100% 50%;
+
+    --scroll-thumb: 220 9% 50%;
+    --scroll-track:  0 0% 0%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+
+    scrollbar-color: hsl(var(--scroll-thumb)) hsla(0, 0%, 0%, 0.1);
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    overflow: hidden;
+  }
+}
+
+:root {
+  --sidebar-width: 16rem;
+}
