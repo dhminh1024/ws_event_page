@@ -1,0 +1,20 @@
+meta {
+  name: Create HB Submission
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/method/ws_event_page.api.event.happy_box.submission.create_happy_box_challenge_submission
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "wellspring_code": "WS21901086",
+    "user_type": "Student",
+    "full_name": "Phan Hải Châu",
+    "happy_box_challenge": "8g8ng7abd1"
+  }
+}

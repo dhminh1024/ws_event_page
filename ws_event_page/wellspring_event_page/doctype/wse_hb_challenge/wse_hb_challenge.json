@@ -1,0 +1,124 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-12-13 09:06:31.431148",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "thumbnail",
+  "sequence_number",
+  "column_break_rgdd",
+  "happy_box_event",
+  "release_date",
+  "number_of_submissions",
+  "section_break_cbed",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "thumbnail",
+   "fieldtype": "Attach Image",
+   "label": "Thumbnail",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "sequence_number",
+   "fieldtype": "Int",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Sequence Number",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "happy_box_event",
+   "fieldtype": "Link",
+   "label": "Happy Box Event",
+   "options": "WSE Event",
+   "reqd": 1
+  },
+  {
+   "fieldname": "release_date",
+   "fieldtype": "Date",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Release Date",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "number_of_submissions",
+   "fieldtype": "Int",
+   "label": "Number Of Submissions",
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "column_break_rgdd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_cbed",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "WSE HB Submission",
+   "link_fieldname": "happy_box_challenge"
+  }
+ ],
+ "modified": "2024-12-13 10:30:59.792935",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE HB Challenge",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest",
+   "share": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "translated_doctype": 1
+}

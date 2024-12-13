@@ -1,6 +1,7 @@
 import { FC, useMemo } from "react";
 
 import {
+  Navigate,
   RouterProvider,
   createBrowserRouter,
   useRouteError,
@@ -9,6 +10,7 @@ import FullPageLoaderTemplate from "@templates/full-page-loader.template";
 import env from "@/config/env";
 
 import ClientErrorState from "@features/states/client-error-state";
+import { HAPPY_BOX_ROUTES } from "./happy-box/router";
 
 export type GlobalErrorProps = {
   className?: string;
@@ -39,6 +41,12 @@ const RootRouter = () => {
                 path: "/",
                 lazy: () => import("./home.page"),
               },
+              ...HAPPY_BOX_ROUTES,
+
+              // {
+              //   path: "*",
+              //   element: <Navigate replace to="/" />,
+              // },
             ],
           },
         ],

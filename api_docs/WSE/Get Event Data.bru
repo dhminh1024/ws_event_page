@@ -1,0 +1,15 @@
+meta {
+  name: Get Event Data
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{url}}/api/method/ws_event_page.api.event.event.get_event_page_data?site_url=happy-box
+  body: none
+  auth: none
+}
+
+query {
+  site_url: happy-box
+}

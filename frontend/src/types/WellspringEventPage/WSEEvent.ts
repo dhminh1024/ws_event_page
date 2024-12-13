@@ -1,3 +1,4 @@
+import { WSEEventVariable } from './WSEEventVariable'
 
 export interface WSEEvent{
 	creation: string
@@ -16,4 +17,8 @@ export interface WSEEvent{
 	url: string
 	/**	Description : Small Text	*/
 	description?: string
+	/**	Variables : Table - WSE Event Variable	*/
+	variables?: WSEEventVariable[]
+	/**	Resource References : JSON	*/
+	resource_ref?: any
 }

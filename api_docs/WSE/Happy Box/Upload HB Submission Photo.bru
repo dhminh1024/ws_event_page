@@ -1,0 +1,25 @@
+meta {
+  name: Upload HB Submission Photo
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}/api/method/ws_event_page.api.event.happy_box.submission.upload_submission_photo
+  body: multipartForm
+  auth: none
+}
+
+body:json {
+  {
+    "wellspring_code": "WS21901086",
+    "user_type": "Student",
+    "full_name": "Phan Hải Châu",
+    "happy_box_challenge": "8g8ng7abd1"
+  }
+}
+
+body:multipart-form {
+  submission_id: 97e5sn04ll
+  file: @file(/Users/minhdh/Desktop/Screenshot 2024-12-13 at 10.27.14.png)
+}

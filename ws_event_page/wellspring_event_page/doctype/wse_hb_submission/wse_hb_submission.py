@@ -5,7 +5,7 @@
 from frappe.model.document import Document
 
 
-class WSEEvent(Document):
+class WSEHBSubmission(Document):
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
 
@@ -13,12 +13,12 @@ class WSEEvent(Document):
 
 	if TYPE_CHECKING:
 		from frappe.types import DF
-		from ws_event_page.wellspring_event_page.doctype.wse_event_variable.wse_event_variable import WSEEventVariable
 
-		description: DF.SmallText | None
-		resource_ref: DF.JSON | None
-		title: DF.Data
-		url: DF.Data
-		variables: DF.Table[WSEEventVariable]
+		add_to_gallery: DF.Check
+		full_name: DF.Data
+		happy_box_challenge: DF.Link
+		image: DF.AttachImage | None
+		user_type: DF.Literal["Student", "Staff"]
+		wellspring_code: DF.Data
 	# end: auto-generated types
 	pass
