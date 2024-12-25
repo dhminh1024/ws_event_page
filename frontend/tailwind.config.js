@@ -14,6 +14,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Mulish", "sans-serif"],
+        playlist: ["Playlist"],
+        tropen: ["Tropen"]
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,17 +53,26 @@ export default {
         },
         brand: {
           primary: "hsl(var(--brand-primary))",
-          secondary: "hsl(var(--brand-secondary))",
           teal: "hsl(var(--brand-teal))",
-          green: "hsl(var(--brand-green))",
-          orange: "hsl(var(--brand-orange))",
-          blue: "hsl(var(--brand-blue))",
-          yellow: "hsl(var(--brand-yellow))",
-          red: "hsl(var(--brand-red))",
-          violet: "hsl(var(--brand-violet))",
+          persian: "hsl(var(--brand-persian))",
+          lime: "hsl(var(--brand-lime))",
+          honey: "hsl(var(--brand-honey))",
+          amber: "hsl(var(--brand-amber))",
         },
-        success: "hsl(var(--success))",
-        danger: "hsl(var(--danger))",
+        happy_box: {
+          cream: "hsl(var(--page-cream))",
+          red: "hsl(var(--page-red))",
+          honey: "hsl(var(--page-honey))",
+          brick: "hsl(var(--page-brick))",
+          blue: "hsl(var(--page-deep-blue))",
+          mint: "hsl(var(--page-mint))",
+          light_yellow: "hsl(var(--page-light-yellow))",
+          light_red: "hsl(var(--page-light-red))"
+        },
+        status: {
+          success: "hsl(var(--success))",
+          danger: "hsl(var(--danger))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

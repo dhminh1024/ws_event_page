@@ -3,5 +3,8 @@ const env = {
   ASSET_URL: import.meta.env.VITE_ASSET_URL || "",
   VERSION: import.meta.env.VITE_VERSION || "",
   PROVINCES_VN_API: import.meta.env.VITE_PROVINCES_VN_API || "",
+  HAPPY_BOX:{
+    DATE: import.meta.env.VITE_HAPPY_BOX_DATE || "",
+  }
 }
 export default env

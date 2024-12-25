@@ -1,76 +1,9 @@
 {
-  "components": {
-    "buttons": {
-      "add_feed": "Thêm hoạt động",
-      "delete_feed": "Xoá hoạt động",
-      "create": "Tạo",
-      "edit": "Chỉnh sửa",
-      "save": "Lưu",
-      "confirm": "Xác nhận",
-      "cancel": "Huỷ bỏ",
-      "back_to_login": "Trờ về đăng nhập",
-      "switch_account": "Chuyển tài khoản khác",
-      "return_to_home": "Trở về trang chủ",
-      "refresh_page": "Tải lại trang",
-      "create_record": "Tạo bản ghi mới",
-      "add_reason": "Thêm lý do",
-      "edit_reason": "Sửa lý do",
-      "save_attendance": "Lưu điểm danh",
-      "sign_out": "Đăng xuất",
-      "change_password": "Đổi mật khẩu",
-      "sign_in": "Đăng nhập",
-      "sign_up": "Đăng ký",
-      "send_mail": "Gửi mail",
-      "reset": "Đặt lại",
-      "view_details": "Xem chi tiết",
-      "show_more": "Xem thêm",
-      "back": "Trở lại",
-      "next": "Kế tiếp",
-      "submit": "Gửi yêu cầu",
-      "save_changes": "Lưu thay đổi",
-      "update": "Cập nhật",
-      "accept": "Chấp nhận",
-      "close": "Đóng",
-      "search": "Tìm kiếm",
-      "send_feedback": "Gửi phản hồi",
-      "view_academic_calendar": "Xem lịch năm học",
-      "edit_profile": "Cập nhật hồ sơ",
-      "skip": "Bỏ qua",
-      "update_continue": "Cập nhật & Tiếp tục",
-      "go_to_file": "Đi đến tệp"
-    },
-    "notifications": {
-      "news_empty": {
-        "heading": "Không tìm thấy tin tức",
-        "description": "Hiện chưa có tin tức hoặc sự kiện nào"
-      },
-      "events_empty": {
-        "heading": "Không tìm thấy sự kiện",
-        "description": "Hiện chưa có sự kiện nào lúc này"
-      },
-      "class_not_found": {
-        "heading": "Không tìm thấy lớp nào"
-      },
-      "activities_empty": {
-        "heading": "Không tìm thấy tin tức",
-        "description": "Hiện chưa có tin tức hoặc sự kiện nào"
-      },
-      "forbbiden": {
-        "heading": "Không thể truy cập",
-        "description": "Bạn không có quyền hạn để truy cập nội dung này"
-      },
-      "no_permisson": {
-        "heading": "Không có quyền truy cập",
-        "description": "Bạn không thể truy cập. Để có thể truy cập, hãy liên hệ quản trị viên để cấp quyền."
-      },
-      "client_error": {
-        "heading": "Rất tiếc! Đã có lỗi xảy ra",
-        "description": "Chúng tôi rất tiếc vì sự bất tiện này. Có một lỗi đã xảy ra, và chúng tôi đang nỗ lực khắc phục. Vui lòng thử lại sau."
-      },
-      "no_results": {
-        "heading": "Không tìm thấy kết quả",
-        "description": "Thử thay đổi phương thức tìm kiếm hoặc bộ lọc mà bạn đang tìm kiếm là gì."
-      }
-    }
+  "common": {
+    "sign_in":"Đăng nhập"
+  },
+  "happy_box": {
+    "enter_sign_in_code": "Hãy nhập mã số học sinh hoặc mã số nhân viên",
+    "choose_first_letter": "Hãy chọn chữ cái đầu tên của bạn"
   }
 }

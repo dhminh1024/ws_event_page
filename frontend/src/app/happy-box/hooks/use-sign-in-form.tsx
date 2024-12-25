@@ -37,8 +37,9 @@ export const useSignInForm = () => {
 
   const handleSubmit = async (data: any) => {
     try {
+      console.log(typeof login)
       const res = await login(data.wellspringCode);
-      return Promise.resolve(true);
+      return Promise.resolve(res);
     } catch (error: any) {
       setError(error);
       return Promise.reject(error);

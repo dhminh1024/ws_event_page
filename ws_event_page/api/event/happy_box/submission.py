@@ -169,7 +169,7 @@ def clear_attachments(doctype, docname):
         frappe.delete_doc("File", attachment.name)
 
 
-@frappe.whitelist(methods=["POST"])
+@frappe.whitelist(allow_guest=True, methods=["POST"])
 def upload_submission_photo():
     """
     Upload an image with submission data.

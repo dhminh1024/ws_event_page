@@ -25,7 +25,7 @@ export const AuthWSCodeProvider: React.FC<AuthWSCodeProviderProps> = ({
     async (wellspringCode: string) => {
       try {
         const response = await call({ wellspring_code: wellspringCode });
-        setUser(response.data);
+        setUser(response.message);
         setIsAuthenticated(true);
         localStorage.setItem("wse_wellspringCode", wellspringCode);
       } catch (error) {
@@ -46,7 +46,7 @@ export const AuthWSCodeProvider: React.FC<AuthWSCodeProviderProps> = ({
     setUser(null);
     setIsAuthenticated(false);
     localStorage.removeItem("wse_wellspringCode");
-    navigate(`/${eventUrl}`);
+    // navigate(`/${eventUrl}`);
   };
 
   return (

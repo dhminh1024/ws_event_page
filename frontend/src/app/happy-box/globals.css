@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 228 38% 97%;
+    --foreground: 0 0% 30%;
+    --muted: 225 10% 91.7%;
+    --muted-foreground: 225 5% 41.7%;
+    --popover: 225 100% 100%;
+    --popover-foreground: 225 10% 0.8500000000000001%;
+    --card: 225 100% 100%;
+    --card-foreground: 198 31% 95%;
+    --border: 225 15% 89.68%;
+    --input: 225 15% 89.68%;
+    --primary: 212 100% 17%;
+    --primary-foreground: 225 2% 91.7%;
+    --secondary: 225 5% 95.85%;
+    --secondary-foreground: 225 7% 11.7%;
+    --accent: 225 5% 95.85%;
+    --accent-foreground: 225 7% 11.7%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --ring: 225 100% 17%;
+    --radius: 0.5rem;
+    --container-padding: 1.25rem;
+    --gradient-o-y: linear-gradient(74.97deg, #faa61a 0%, #ffcd00 93.5%);
+    --gradient-t-s: linear-gradient(254.54deg, #009684 0%, #006882 100.65%);
+    --gradient-s-p: linear-gradient(254.97deg, #006882 0%, #002855 100%);
+
+    --brand-primary: 210 100% 16%; /* #002855 */
+    --brand-teal: 186 100% 29%; /* #006B80 */
+    --brand-persian: 174 86% 28%; /* #0D8880 */
+    --brand-lime: 80 55% 51%; /* #AFC235 */
+    --brand-honey: 36 79% 53%; /* #E69C24 */
+    --brand-amber: 15 70% 51%; /* #DE5525 */
+
+    --page-cream: 31 100% 92%; /* #FFECD8 */
+    --page-red: 359 70% 30%; /* #6A0809 */
+    --page-honey: 39 100% 55%; /* #FFAD18 */
+    --page-brick: 22 100% 62%; /* #FF843E */
+    --page-deep-blue: 221 56% 21%; /* #172A52 */
+    --page-mint: 63 46% 83%; /* #E6E8C1 */
+    --page-light-yellow: 51 71% 73%; /*  #EBDC87*/
+    --page-light-red: 359 57% 49%; /*  #C63638*/
+    
+    --success: 89 64% 34%;
+    --danger: 0 100% 50%;
+
+    --scroll-thumb: 359 86% 22%;
+    --scroll-track: 0 0% 0%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    scrollbar-width: thin;
+
+    scrollbar-color: hsl(var(--scroll-thumb)) hsla(0, 0%, 0%, 0.1);
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply text-foreground;
+    @apply font-tropen;
+    overflow-x: hidden;
+  }
+}
+
+@layer base {
+  @font-face {
+    font-family: "Playlist";
+
+    src: url(/happy-box/fonts/playlist-script.ttf);
+  }
+  @font-face {
+    font-family: "Tropen";
+    ascent-override: 90%; /* Điều chỉnh chiều cao phần trên */
+    descent-override: 20%; /* Điều chỉnh chiều cao phần dưới */
+    line-gap-override: 0%; /* Bỏ khoảng cách dòng */
+    src: url(/happy-box/fonts/tropen.otf);
+  }
+}
+
+:root {
+  --sidebar-width: 16rem;
+  font-size: calc(1px + (100vw - 375px) / 375 * 1);
+}
+
+@media (min-width: 768px) {
+  :root {
+    font-size: calc(1px + (100vw - 1440px) / 1440);
+  }
+}
