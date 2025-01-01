@@ -24,9 +24,11 @@ export const HAPPY_BOX_ROUTES: RouteObject[] = [
       {
         path: "",
         element: (
-          // <AuthWSCodeGuard redirectTo={`../sign-in`}>
-          <Outlet />
-          // </AuthWSCodeGuard>
+          <AuthWSCodeGuard redirectTo={`./sign-in`}>
+            <HappyBoxLayout>
+              <Outlet />
+            </HappyBoxLayout>
+          </AuthWSCodeGuard>
         ),
         children: [
           {
@@ -34,7 +36,7 @@ export const HAPPY_BOX_ROUTES: RouteObject[] = [
             lazy: () => import("./pages/home.page"),
           },
           {
-            path: ":id/upload",
+            path: "upload/:id",
             lazy: () => import("./pages/upload.page"),
           },
         ],

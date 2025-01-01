@@ -7,7 +7,7 @@ import env from "@/config/env";
 import Typography from "@happy-box/components/typography";
 import { Input } from "@atoms/input";
 import { LunarButton } from "@happy-box/components/button";
-import { ChooseLetterModal } from "@happy-box/components/modal";
+import { ChooseLetterModal } from "@/app/happy-box/components/choose-letter-modal";
 
 import { useLocales } from "@/core/hooks/use-locales";
 import { useResponsive } from "@/core/hooks/use-reponsive";
@@ -15,11 +15,13 @@ import { useSignInForm } from "../hooks/use-sign-in-form";
 import { useState } from "react";
 import { log } from "console";
 import { useAuthWSCode } from "@/lib/auth/auth-ws-code/use-auth-ws-code";
+import { useNavigate } from "react-router-dom";
 
 export const Component = () => {
   const { t } = useLocales();
   const { isDesktop } = useResponsive();
-  const { user, logout } = useAuthWSCode();
+  const navigate = useNavigate()
+  const { user, login, logout } = useAuthWSCode();
   const { handleSubmit } = useSignInForm();
   const [studentCode, setStudentCode] = useState<string>("");
   const [isRequesting, setIsRequesting] = useState(false);
@@ -31,6 +33,14 @@ export const Component = () => {
       setIsRequesting(false);
     } catch (error: any) {
       console.error(error);
+    }
+  };
+
+  const handleConfirm = async (letter:string) => {
+    if (letter === user?.userData.fullName.split(" ")?.pop()?.[0]) {
+      navigate("/happy-box");
+    }else{
+      handleLogout();
     }
   };
 
@@ -67,6 +77,7 @@ export const Component = () => {
 
           <ChooseLetterModal
             correctLetter={user?.userData.fullName.split(" ")?.pop()?.[0]}
+            onConfirm={handleConfirm}
             onClosed={handleLogout}
           >
             <LunarButton

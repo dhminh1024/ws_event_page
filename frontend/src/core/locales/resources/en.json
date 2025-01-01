@@ -1,7 +1,32 @@
 {
-  "common": {},
+  "common": {
+    "sign_in": "Sign In",
+    "sign_out": "Sign Out",
+    "confirm": "Confirm",
+    "go_back": "Go back",
+    "language": "Language",
+    "day_d": "Day {{day}}"
+  },
   "happy_box": {
-    "enter_sign_in_code": "Hãy nhập mã số học sinh hoặc mã số nhân viên",
-    "choose_first_letter": "Hãy chọn chữ cái đầu tên của bạn"
+    "enter_sign_in_code": "Please enter the student ID or employee ID",
+    "choose_first_letter": "Please choose the first letter of your name",
+    "welcome_wiser": "Welcome To WISer",
+    "challenge_section_description_1": "The vibrant spirit of Tet, brimming with the colors of spring, has filled every corner of Wellspring Saigon! This is the perfect time for every WISer to pause, reflect on the past year refresh themselves, spread love, and create meaningful Tet memories.",
+    "challenge_section_description_2": "Are you ready for the 6-Day Tet Challenge? – a journey to capture radiant moments, embracing the festive essence of Wellspring Festival 2025 - Happy Home Grows My Spring!",
+    "challenge_section_description_3": "Get your best angles ready and join us in welcoming a truly unforgettable Tet season.",
+    "video_section_gift_description_1": "{{number}} WISer",
+    "video_section_gift_description_2": "completing",
+    "video_section_gift_description_3": "{{count}} challenges",
+    "video_section_gift_description_4": "will receive gifts from the Organizers.",
+    "video_section_countdown_description_1": "Only",
+    "video_section_countdown_description_2": "days left,",
+    "video_section_countdown_description_3": "See you WISers at the spring festival on the upcoming",
+    "video_section_countdown_description_4": "!",
+    "welcome_modal_description_1": "Join the",
+    "welcome_modal_description_2": "Spring Festival on",
+    "welcome_modal_description_3": "to complete the challenge",
+    "thankyou_modal_description_1": "Thank you",
+    "thankyou_modal_description_2": "You have completed the Tet challenge.",
+    "thankyou_modal_description_3": "Wishing WISer a new year full of joy and happiness"
   }
 }

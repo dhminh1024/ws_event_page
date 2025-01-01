@@ -10,28 +10,17 @@ import { HBChallengeListProvider } from "./context/hb-challenge-provider";
 
 import "./globals.css";
 import { Helmet } from "react-helmet-async";
+import { HBSubmissionListProvider } from "./context/hb-submission-provider";
 
 export default function HappyBoxLayout({ children }: PropsWithChildren) {
   const { theme } = useTheme();
 
   return (
     <>
-
       <AuthWSCodeProvider eventUrl={EVENT_PAGES.HAPPY_BOX.SITE_URL}>
         <EventPageProvider eventUrl={EVENT_PAGES.HAPPY_BOX.SITE_URL}>
           <HBChallengeListProvider>
-            
-            {/* <nav className="flex justify-between">
-              <Logo
-                className="w-[100rem]"
-                variant={theme === "light" ? "default" : "white"}
-              />
-              <Link to="/happy-box">Home Page</Link>
-              <Link to="/happy-box/challenge">Challenge Page</Link>
-              <Link to="/happy-box/album">Album Page</Link>
-              <SignInButton />
-            </nav> */}
-            {children}
+            <HBSubmissionListProvider>{children}</HBSubmissionListProvider>
           </HBChallengeListProvider>
         </EventPageProvider>
       </AuthWSCodeProvider>

@@ -3,26 +3,37 @@ import { cn } from "@/core/utils/shadcn-utils";
 import { cleanPath } from "@/lib/utils/common";
 import env from "@/config/env";
 import Typography from "./typography";
+import { useLocales } from "@/core/hooks/use-locales";
 
 export type BoxChallengeProps = HTMLAttributes<HTMLDivElement> & {
   imageUrl?: string;
+  thumbnail?: string;
+  title?: string;
   challengeNumber: number;
   hightlight?: boolean;
+  disabled?: boolean;
 };
 
 export const BoxChallenge: FC<BoxChallengeProps> = ({
   challengeNumber,
   imageUrl,
+  thumbnail,
+  title,
   hightlight,
   className,
+  disabled,
+  ...props
 }) => {
+  const { t } = useLocales();
   return (
     <div
       className={cn(
-        "group/box relative bg-happy_box-red p-[8rem] inline-block text-center rounded-[14rem] overflow-hidden cursor-pointer",
+        "group/box aspect-[4/3] relative bg-happy_box-red p-[4rem] md:p-[8rem] inline-block text-center rounded-[5rem] md:rounded-[14rem] overflow-hidden ",
         {
           "bg-gradient-to-r from-yellow-400 to-yellow-200  !text-happy_box-red":
             hightlight,
+          "grayscale-[0.6] opacity-70": disabled,
+          "cursor-pointer": !disabled,
         },
         className
       )}
@@ -31,16 +42,21 @@ export const BoxChallenge: FC<BoxChallengeProps> = ({
           backgroundImage: `url(${cleanPath(
             `${env.ASSET_URL}/happy-box/box-golden-metalic.png`
           )})`,
-          backgroundSize: "cover",
+          backgroundSize: "135%",
+          backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }) ||
         {}
       }
+     {...props}
     >
       {imageUrl && (
         <img
           className={cn(
-            "absolute z-30 top-0 left-0 w-full h-full object-cover group-hover/box:scale-110 duration-1000 ease-out transition-all"
+            "absolute z-30 top-0 left-0 w-full h-full object-cover duration-1000 ease-out transition-all"
+          ,{
+            "group-hover/box:scale-110": !disabled
+          }
           )}
           src={imageUrl}
           alt="image-challenge"
@@ -49,36 +65,37 @@ export const BoxChallenge: FC<BoxChallengeProps> = ({
 
       <div
         className={cn(
-          "absolute z-10 top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover group-hover/box:scale-110 duration-1000 ease-out transition-all",
+          "absolute z-10 top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover duration-1000 ease-out transition-all",
           {
             "opacity-30": hightlight,
+            "group-hover/box:scale-110": !disabled
           }
         )}
         style={{
-          backgroundImage: `url(${cleanPath(
-            `${env.ASSET_URL}/happy-box/box-challenge-${challengeNumber}.png`
-          )})`,
+          backgroundImage: `url(${thumbnail && cleanPath(thumbnail)})`,
         }}
       ></div>
       <div
-        className={cn("relative z-20 p-[12rem] ", {
-          "border-[2px] border-happy_box-red rounded-[14rem] ": hightlight,
+        className={cn("relative z-20 p-[12rem] md:p-[12rem] w-full h-full flex flex-col justify-center items-center", {
+          "border-[2px] border-happy_box-red rounded-[5rem] md:rounded-[14rem] ": hightlight,
         })}
       >
         <Typography.Paragraph
           className={cn(
-            "text-[80rem] mt-[50rem] mb-[20rem] font-playlist text-happy_box-honey",
+            "text-[30rem] md:text-[80rem] md:mt-[50rem] mb-[5rem] md:mb-[20rem] font-playlist text-happy_box-honey",
             { "text-happy_box-red": hightlight }
           )}
         >
-          Ngay {challengeNumber > 9 ? challengeNumber : `0${challengeNumber}`}
+          {t("common.day_d", {
+            day: challengeNumber > 9 ? challengeNumber : `0${challengeNumber}`,
+          })}
         </Typography.Paragraph>
         <Typography.Paragraph
-          className={cn("mb-[20rem] text-[23rem] text-happy_box-light_yellow", {
+          className={cn("md:mb-[20rem] text-[12rem] md:text-[23rem] text-happy_box-light_yellow", {
             "text-happy_box-red": hightlight,
           })}
         >
-          Bat dau tu nhung dieu cu
+          {title}
         </Typography.Paragraph>
       </div>
     </div>

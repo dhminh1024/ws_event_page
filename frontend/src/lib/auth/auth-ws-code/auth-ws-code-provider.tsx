@@ -15,7 +15,7 @@ export const AuthWSCodeProvider: React.FC<AuthWSCodeProviderProps> = ({
   eventUrl,
 }) => {
   const [user, setUser] = useState<AuthWSCodeResponse | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const { call } = useFrappePostCall(
     "ws_event_page.api.auth.login.login_with_wellspring_code"
   );
@@ -23,6 +23,8 @@ export const AuthWSCodeProvider: React.FC<AuthWSCodeProviderProps> = ({
 
   const login = useCallback(
     async (wellspringCode: string) => {
+      console.log("login", wellspringCode);
+
       try {
         const response = await call({ wellspring_code: wellspringCode });
         setUser(response.message);

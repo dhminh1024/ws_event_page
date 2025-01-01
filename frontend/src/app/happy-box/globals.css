@@ -85,6 +85,21 @@
   }
 }
 
+@layer components {
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: 15rem;
+    padding-right: 15rem;
+  }
+  .bg-scroll{
+    @apply bg-[linear-gradient(90deg,_#981F20_0%,_#E55450_33%,_#931B1C_100%)]
+  }
+  .bg-scroll-golden{
+    @apply bg-[linear-gradient(90deg,_#BC8824_0%,_#FCECA1_47%,_#B98520_100%)]
+  }
+}
+
 :root {
   --sidebar-width: 16rem;
   font-size: calc(1px + (100vw - 375px) / 375 * 1);
