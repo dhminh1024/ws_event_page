@@ -230,6 +230,7 @@ app_license = "mit"
 fixtures = [
     {"dt": "WSE Event"},
     {"dt": "WSE Settings"},
+    {"dt": "WSE HB Challenge"},
 ]
 
 export_python_type_annotations = True
