@@ -41,6 +41,16 @@
     --brand-red: 0 100% 50%;
     --brand-violet: 270 98% 36%;
 
+    --page-foreground: 0 0% 30%;
+    --page-cream: 31 100% 92%; /* #FFECD8 */
+    --page-red: 359 70% 30%; /* #6A0809 */
+    --page-honey: 39 100% 55%; /* #FFAD18 */
+    --page-brick: 22 100% 62%; /* #FF843E */
+    --page-deep-blue: 221 56% 21%; /* #172A52 */
+    --page-mint: 63 46% 83%; /* #E6E8C1 */
+    --page-light-yellow: 51 71% 73%; /*  #EBDC87*/
+    --page-light-red: 359 57% 49%; /*  #C63638*/
+
     --success: 89 64% 34%;
     --danger: 0 100% 50%;
 
@@ -79,6 +89,16 @@
     --brand-red: 0 100% 50%;
     --brand-violet: 270 98% 50%;
 
+    --page-foreground: 0 0% 30%;
+    --page-cream: 31 100% 92%; /* #FFECD8 */
+    --page-red: 359 70% 30%; /* #6A0809 */
+    --page-honey: 39 100% 55%; /* #FFAD18 */
+    --page-brick: 22 100% 62%; /* #FF843E */
+    --page-deep-blue: 221 56% 21%; /* #172A52 */
+    --page-mint: 63 46% 83%; /* #E6E8C1 */
+    --page-light-yellow: 51 71% 73%; /*  #EBDC87*/
+    --page-light-red: 359 57% 49%; /*  #C63638*/
+
     --success: 89 64% 34%;
     --danger: 0 100% 50%;
 
@@ -91,21 +111,47 @@
   * {
     @apply border-border;
     scrollbar-width: thin;
-
-    scrollbar-color: hsl(var(--scroll-thumb)) hsla(0, 0%, 0%, 0.1);
+    scrollbar-color: hsl(var(--scroll-thumb));
     scroll-behavior: smooth;
   }
+  html{
+    overflow-x: hidden;
+  }
   body {
-    @apply bg-background text-foreground;
-    overflow: hidden;
+    @apply text-happy_box-foreground;
+    @apply font-tropen;
+    overflow-x: hidden;
+    @apply !min-w-[100vw];
   }
 }
 
 @layer base {
   @font-face {
-    font-family: Playlist Script;
-    font-weight: 400;
-    src: url(/assets/fonts/FS_PLAYLIST_SCRIPT.ttf) format("ttf");
+    font-family: "Playlist";
+
+    src: url(/happy-box/fonts/playlist-script.ttf);
+  }
+  @font-face {
+    font-family: "Tropen";
+    ascent-override: 90%; /* Điều chỉnh chiều cao phần trên */
+    descent-override: 20%; /* Điều chỉnh chiều cao phần dưới */
+    line-gap-override: 0%; /* Bỏ khoảng cách dòng */
+    src: url(/happy-box/fonts/tropen.otf);
+  }
+}
+
+@layer components {
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: 15rem;
+    padding-right: 15rem;
+  }
+  .bg-scroll{
+    @apply bg-[linear-gradient(90deg,_#981F20_0%,_#E55450_33%,_#931B1C_100%)]
+  }
+  .bg-scroll-golden{
+    @apply bg-[linear-gradient(90deg,_#BC8824_0%,_#FCECA1_47%,_#B98520_100%)]
   }
 }
 

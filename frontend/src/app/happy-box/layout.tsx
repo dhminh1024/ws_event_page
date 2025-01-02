@@ -8,19 +8,27 @@ import Logo from "@atoms/logo";
 import { useTheme } from "@/lib/shadcn/theme-provider";
 import { HBChallengeListProvider } from "./context/hb-challenge-provider";
 
-import "./globals.css";
-import { Helmet } from "react-helmet-async";
+// import "./globals.css";
+import { Helmet } from "react-helmet";
 import { HBSubmissionListProvider } from "./context/hb-submission-provider";
+import { ThankYouModal } from "./components/thank-you-modal";
+import { useSubmissions } from "./context/use-submissions";
+import { WelcomeModal } from "./components/welcome-modal";
 
 export default function HappyBoxLayout({ children }: PropsWithChildren) {
   const { theme } = useTheme();
 
   return (
     <>
+
       <AuthWSCodeProvider eventUrl={EVENT_PAGES.HAPPY_BOX.SITE_URL}>
         <EventPageProvider eventUrl={EVENT_PAGES.HAPPY_BOX.SITE_URL}>
           <HBChallengeListProvider>
-            <HBSubmissionListProvider>{children}</HBSubmissionListProvider>
+            <HBSubmissionListProvider>
+              {children}
+              <WelcomeModal />
+              <ThankYouModal />
+            </HBSubmissionListProvider>
           </HBChallengeListProvider>
         </EventPageProvider>
       </AuthWSCodeProvider>

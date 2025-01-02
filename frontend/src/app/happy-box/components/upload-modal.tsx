@@ -21,6 +21,7 @@ import { LunarButton } from "./button";
 import { LunarScroll } from "./scroll";
 import { getCroppedImg } from "@/lib/utils/common";
 import { Loader2 } from "lucide-react";
+import { useLocales } from "@/core/hooks/use-locales";
 
 export type UploadModalProps = HTMLAttributes<HTMLDivElement> &
   PropsWithChildren & {
@@ -34,6 +35,7 @@ export const UploadModal: FC<UploadModalProps> = ({
   children,
   onSave,
 }) => {
+  const { t } = useLocales();
   const [croppedAreaPixels, setCroppedAreaPixels] =
     useState<CroppedValue | null>(null);
   const [open, setOpen] = useState(false);
@@ -43,8 +45,6 @@ export const UploadModal: FC<UploadModalProps> = ({
     croppedArea: CroppedValue,
     croppedAreaPixels: CroppedValue
   ) => {
-    console.log(croppedArea, croppedAreaPixels);
-
     setCroppedAreaPixels(croppedAreaPixels);
   };
 
@@ -56,7 +56,6 @@ export const UploadModal: FC<UploadModalProps> = ({
       croppedAreaPixels,
       0
     );
-    console.log(file, url);
     setLoading(false);
     onSave?.(file, url);
     handleOpenChange(false);
@@ -78,8 +77,8 @@ export const UploadModal: FC<UploadModalProps> = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-[880rem] xl:max-w-[640rem] bg-[#F5F8CE] border-happy_box-light_red border-[15rem]">
         <DialogHeader>
-          <DialogTitle className="p-[10rem] text-[24rem] text-happy_box-red">
-            Upload photo
+          <DialogTitle className="p-[10rem] text-[24rem] font-normal text-happy_box-red">
+            {t("common.upload_photo")}
           </DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
@@ -103,14 +102,14 @@ export const UploadModal: FC<UploadModalProps> = ({
               {loading && (
                 <Loader2 className="animate-spin !w-[20rem] !h-[20rem]" />
               )}
-              <span>Luu hinh</span>
+              <span> {t("common.save_image")}</span>
             </div>
           </LunarButton>
           <LunarButton
             className="text-[20rem]"
             onClick={() => handleOpenChange(false)}
           >
-            Huy bo
+            {t("common.cancel")}
           </LunarButton>
         </DialogFooter>
       </DialogContent>

@@ -166,7 +166,7 @@ def clear_attachments(doctype, docname):
         "File", filters={"attached_to_doctype": doctype, "attached_to_name": docname}
     )
     for attachment in attachments:
-        frappe.delete_doc("File", attachment.name)
+        frappe.delete_doc("File", attachment.name, ignore_permissions=True)
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])

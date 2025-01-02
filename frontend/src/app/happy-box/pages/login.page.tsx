@@ -16,11 +16,12 @@ import { useState } from "react";
 import { log } from "console";
 import { useAuthWSCode } from "@/lib/auth/auth-ws-code/use-auth-ws-code";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 export const Component = () => {
   const { t } = useLocales();
   const { isDesktop } = useResponsive();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { user, login, logout } = useAuthWSCode();
   const { handleSubmit } = useSignInForm();
   const [studentCode, setStudentCode] = useState<string>("");
@@ -36,10 +37,10 @@ export const Component = () => {
     }
   };
 
-  const handleConfirm = async (letter:string) => {
+  const handleConfirm = async (letter: string) => {
     if (letter === user?.userData.fullName.split(" ")?.pop()?.[0]) {
       navigate("/happy-box");
-    }else{
+    } else {
       handleLogout();
     }
   };
@@ -50,17 +51,22 @@ export const Component = () => {
     } catch (error: any) {
       console.error(error);
     }
-  }
+  };
 
   return (
     <div className=" w-full h-full min-h-screen">
+      <Helmet>
+        <title>
+          {t("common.login_page")} | Tet Challenge - Vui xuân đón Tết
+        </title>
+      </Helmet>
       <BackgroundCoin className="relative w-full h-full min-h-screen">
         <img
           className="relative z-20 w-full select-none"
           src={
             isDesktop
               ? `${env.ASSET_URL}/happy-box/banner-login.webp`
-              : `${env.ASSET_URL}/happy-box/banner-login-mb.png`
+              : `${env.ASSET_URL}/happy-box/banner-login-mb.avif`
           }
           alt=""
         />

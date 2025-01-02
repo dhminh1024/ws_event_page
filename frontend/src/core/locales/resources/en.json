@@ -3,9 +3,24 @@
     "sign_in": "Sign In",
     "sign_out": "Sign Out",
     "confirm": "Confirm",
-    "go_back": "Go back",
+    "go_back": "Go Back",
     "language": "Language",
-    "day_d": "Day {{day}}"
+    "day_d": "Day {{day}}",
+    "upload_image": "Upload Image",
+    "finish": "Finish",
+    "edit": "Edit",
+    "home_page": "Home page",
+    "login_page": "Login page",
+    "upload_photo": "Upload Photo",
+    "save_image": "Save Image",
+    "cancel": "Cancel",
+    "refresh_page": "Refresh Page"
+  },
+  "notification": {
+    "client_error": {
+      "heading": "Oops! Something went wrong",
+      "description": "We apologize for the inconvenience. An error has occurred, and we are working to fix it. Please try again later."
+    }
   },
   "happy_box": {
     "enter_sign_in_code": "Please enter the student ID or employee ID",

@@ -19,7 +19,7 @@ export const GallerySection: FC<GallerySectionProps> = ({ className }) => {
       <Marquee className="bg-happy_box-light_yellow">
         <div className="flex">
           {gallery?.map((submission, index) => (
-            <div className="h-[120rem] md:h-[300rem] aspect-[4/3]">
+            <div key={submission.name} className="h-[120rem] md:h-[300rem] aspect-[4/3]">
               <img
                 className="object-cover w-full h-full"
                 key={index}

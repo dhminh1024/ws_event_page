@@ -1,5 +1,5 @@
 import { useFrappeGetCall } from "frappe-react-sdk";
-import React from "react";
+import React, { useState } from "react";
 
 import { WSEHBSubmissionExtend } from "./types";
 import { FRAPPE_APIS } from "@happy-box/api/api.config";
@@ -15,17 +15,23 @@ export const HBSubmissionListProvider: React.FC<React.PropsWithChildren> = ({
   }>(
     FRAPPE_APIS.GET_HB_SUBMISSIONS_BY_USER.METHOD_STRING,
     {
-      wellspring_code: user?.userData.wellspringCode
+      wellspring_code: user?.userData.wellspringCode,
     },
     user?.userData.wellspringCode
       ? `${FRAPPE_APIS.GET_HB_SUBMISSIONS_BY_USER.SWR_KEY}_${user?.userData.wellspringCode}`
       : null,
     {} // options
   );
+  const [showThankYouModal, setShowThankYouModal] = useState(false);
 
   return (
     <HBSubmissionsContext.Provider
-      value={{ submissions: data?.message || [], refresh:mutate }}
+      value={{
+        submissions: data?.message || [],
+        refresh: mutate,
+        showThankYouModal: showThankYouModal,
+        setShowThankYouModal,
+      }}
     >
       {children}
     </HBSubmissionsContext.Provider>

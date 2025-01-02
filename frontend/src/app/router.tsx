@@ -43,10 +43,10 @@ const RootRouter = () => {
               },
               ...HAPPY_BOX_ROUTES,
 
-              // {
-              //   path: "*",
-              //   element: <Navigate replace to="/" />,
-              // },
+              {
+                path: "*",
+                element: <Navigate replace to="/" />,
+              },
             ],
           },
         ],

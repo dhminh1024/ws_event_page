@@ -11,7 +11,8 @@ export interface WSEHBChallenge{
 	parenttype?: string
 	idx?: number
 	/**	Title : Data	*/
-	title: string
+	title_vn: string
+	title_en: string
 	/**	Thumbnail : Attach Image	*/
 	thumbnail: string
 	/**	Sequence Number : Int	*/
@@ -23,5 +24,6 @@ export interface WSEHBChallenge{
 	/**	Number Of Submissions : Int	*/
 	number_of_submissions?: number
 	/**	Description : Small Text	*/
-	description?: string
+	description_vn: string
+	description_en: string
 }

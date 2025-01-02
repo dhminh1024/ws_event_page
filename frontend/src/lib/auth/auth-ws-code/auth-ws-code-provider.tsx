@@ -41,6 +41,8 @@ export const AuthWSCodeProvider: React.FC<AuthWSCodeProviderProps> = ({
     const wellspringCode = localStorage.getItem("wse_wellspringCode");
     if (wellspringCode) {
       login(wellspringCode);
+    }else{
+      logout();
     }
   }, [login]);
 

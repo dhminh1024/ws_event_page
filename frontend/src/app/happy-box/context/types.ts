@@ -16,5 +16,7 @@ export type WSEHBSubmissionExtend = Omit<WSEHBSubmission, "happy_box_challenge">
 
 export interface WSEHBSubmissionResponse {
   submissions: WSEHBSubmissionExtend[];
+  showThankYouModal: boolean;
+  setShowThankYouModal: (value: boolean) => void;
   refresh: () => void;
 }

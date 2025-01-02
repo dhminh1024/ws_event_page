@@ -72,7 +72,7 @@ export const WelcomeModal: FC<LunarModalProps> = ({
         <DialogTitle></DialogTitle>
         <DialogDescription></DialogDescription>
         <Button
-          className="absolute top-[-30rem] right-[-30rem] w-[30rem] !bg-transparent h-[30rem] z-20 rounded-full"
+          className="absolute top-[-50rem] right-[10rem] md:right-[-30rem] w-[30rem] !bg-transparent h-[30rem] z-20 rounded-full"
           size={"icon"}
           variant={"outline"}
           onClick={()=>handleOpenChange(false)}
@@ -84,10 +84,10 @@ export const WelcomeModal: FC<LunarModalProps> = ({
             <Typography.Paragraph className="text-[16rem] md:text-[20rem] mb-[0rem] text-center text-happy_box-red">
               {t("happy_box.welcome_modal_description_1")}
             </Typography.Paragraph>
-            <Typography.Paragraph className="text-[24rem] md:text-[40rem] mb-[10rem] text-center text-happy_box-light_red font-playlist">
+            <Typography.Paragraph className="text-[24rem] md:text-[34rem] mb-[10rem] text-center text-happy_box-light_red font-playlist">
               {t("happy_box.welcome_modal_description_2")}
-              <span className="ml-[5rem]">
-                {format(
+              <span className="ml-[8rem]">
+                {event.variables?.date_start?.value && format(
                   new Date(event.variables.date_start.value),
                   "dd/MM/yyyy"
                 )}

@@ -5,7 +5,22 @@
     "confirm": "Xác nhận",
     "go_back": "Quay lại",
     "language": "Ngôn ngữ",
-    "day_d": "Ngày {{day}}"
+    "day_d": "Ngày {{day}}",
+    "upload_image": "Tải ảnh lên",
+    "finish": "Hoàn thành",
+    "edit": "Chỉnh sửa",
+    "home_page": "Trang chủ",
+    "login_page": "Trang đăng nhập",
+    "upload_photo": "Tải ảnh lên",
+    "save_image": "Lưu ảnh",
+    "cancel": "Hủy bỏ",
+    "refresh_page": "Tai lại trang"
+  },
+  "notification": {
+    "client_error": {
+      "heading": "Rất tiếc! Đã có lỗi xảy ra",
+      "description": "Chúng tôi rất tiếc vì sự bất tiện này. Có một lỗi đã xảy ra, và chúng tôi đang nỗ lực khắc phục. Vui lòng thử lại sau."
+    }
   },
   "happy_box": {
     "enter_sign_in_code": "Hãy nhập mã số học sinh hoặc mã số nhân viên",
