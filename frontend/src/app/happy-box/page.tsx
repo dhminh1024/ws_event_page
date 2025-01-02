@@ -12,6 +12,7 @@ import { GallerySection } from "./sections/gallery-section";
 import { TodayChallengeSection } from "./sections/today-challenge-section";
 import { ChallengeSection } from "./sections/challenge-section";
 import { InstructionSection } from "./sections/instruction-section";
+import { Helmet } from "react-helmet";
 
 export const Component = () => {
   const { t } = useTranslation();
@@ -25,6 +26,9 @@ export const Component = () => {
 
   return (
     <div className="w-screen h-screen flex flex-col justify-start items-center">
+      <Helmet>
+        <title>Home page</title>
+      </Helmet>
       <HeroSection />
 
       <GallerySection />

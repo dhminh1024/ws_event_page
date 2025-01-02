@@ -1,84 +1,47 @@
 {
-  "components": {
-    "buttons": {
-      "add_feed": "Add activity feed",
-      "delete_feed": "Delete feed",
-      "create": "Create",
-      "edit": "Edit",
-      "save": "Save",
-      "confirm": "Confirm",
-      "cancel": "Cancel",
-      "back_to_login": "Back to login",
-      "switch_account": "Switch account",
-      "return_to_home": "Return to home",
-      "refresh_page": "Refresh page",
-      "create_record": "Create new record",
-      "add_reason": "Add reason",
-      "edit_reason": "Edit reason",
-      "save_attendance": "Save attendance",
-      "sign_out": "Sign out",
-      "change_password": "Change password",
-      "sign_in": "Sign in",
-      "sign_up": "Sign up",
-      "send_mail": "Send mail",
-      "reset": "Reset",
-      "view_details": "View details",
-      "show_more": "Show more",
-      "back": "Back",
-      "next": "Next",
-      "submit": "Submit",
-      "save_changes": "Save changes",
-      "update": "Update",
-      "accept": "Accept",
-      "search": "Search",
-      "close": "Close",
-      "send_feedback": "Send feedback",
-      "view_academic_calendar": "Academic Calendar",
-      "edit_profile": "Edit profile",
-      "skip": "Skip",
-      "update_continue": "Update & Continue",
-      "go_to_file": "Go to file"
-    },
-    "notifications": {
-      "news_empty": {
-        "heading": "News is empty",
-        "description": "You have no article at this moment"
-      },
-      "class_not_found": {
-        "heading": "No class found"
-      },
-      "events_empty": {
-        "heading": "Events is empty",
-        "description": "You have no event at this moment"
-      },
-      "activities_empty": {
-        "heading": " Activites is empty",
-        "description": "You have no activities at this moment"
-      },
-      "forbbiden": {
-        "heading": "Fobbiden",
-        "description": "We are sorry, but you don't have access to this page."
-      },
-      "no_permisson": {
-        "heading": "No Permission",
-        "description": "Sorry, you cannot access this page. To Access, please contact the administrator."
-      },
-      "client_error": {
-        "heading": "Opps! Something went wrong",
-        "description": "We apologize for the inconvenience. An error has occurred, and we are working to fix it. Please try again later."
-      },
-      "server_error": {
-        "heading": "Internet Server Error",
-        "description": "We are working on fixing the problem. Please try again"
-      },
-      "coming_soon": {
-        "heading": "Coming Soon",
-        "description": "This feature is still under development. Come back next time"
-      },
-      "no_results": {
-        "heading": "No results found",
-        "description": "Try adjusting your search or filter to find what you're looking for."
-      }
+  "common": {
+    "sign_in": "Sign In",
+    "sign_out": "Sign Out",
+    "confirm": "Confirm",
+    "go_back": "Go Back",
+    "language": "Language",
+    "day_d": "Day {{day}}",
+    "upload_image": "Upload Image",
+    "finish": "Finish",
+    "edit": "Edit",
+    "home_page": "Home page",
+    "login_page": "Login page",
+    "upload_photo": "Upload Photo",
+    "save_image": "Save Image",
+    "cancel": "Cancel",
+    "refresh_page": "Refresh Page"
+  },
+  "notification": {
+    "client_error": {
+      "heading": "Oops! Something went wrong",
+      "description": "We apologize for the inconvenience. An error has occurred, and we are working to fix it. Please try again later."
     }
+  },
+  "happy_box": {
+    "enter_sign_in_code": "Please enter the student ID or employee ID",
+    "choose_first_letter": "Please choose the first letter of your name",
+    "welcome_wiser": "Welcome To WISer",
+    "challenge_section_description_1": "The vibrant spirit of Tet, brimming with the colors of spring, has filled every corner of Wellspring Saigon! This is the perfect time for every WISer to pause, reflect on the past year refresh themselves, spread love, and create meaningful Tet memories.",
+    "challenge_section_description_2": "Are you ready for the 6-Day Tet Challenge? – a journey to capture radiant moments, embracing the festive essence of Wellspring Festival 2025 - Happy Home Grows My Spring!",
+    "challenge_section_description_3": "Get your best angles ready and join us in welcoming a truly unforgettable Tet season.",
+    "video_section_gift_description_1": "{{number}} WISer",
+    "video_section_gift_description_2": "completing",
+    "video_section_gift_description_3": "{{count}} challenges",
+    "video_section_gift_description_4": "will receive gifts from the Organizers.",
+    "video_section_countdown_description_1": "Only",
+    "video_section_countdown_description_2": "days left,",
+    "video_section_countdown_description_3": "See you WISers at the spring festival on the upcoming",
+    "video_section_countdown_description_4": "!",
+    "welcome_modal_description_1": "Join the",
+    "welcome_modal_description_2": "Spring Festival on",
+    "welcome_modal_description_3": "to complete the challenge",
+    "thankyou_modal_description_1": "Thank you",
+    "thankyou_modal_description_2": "You have completed the Tet challenge.",
+    "thankyou_modal_description_3": "Wishing WISer a new year full of joy and happiness"
   }
 }

@@ -18,7 +18,10 @@ const AuthWSCodeGuard: FC<AuthWSCodeProps> = ({ children, redirectTo }) => {
     return `${redirectTo}?${returnTo}`;
   }, [location.pathname, redirectTo]);
 
-  if (!isAuthenticated) {
+  console.log(isAuthenticated);
+  
+
+  if (isAuthenticated===false) {
     return <Navigate replace to={redirectToURL || "/"} />;
   }
 

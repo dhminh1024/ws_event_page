@@ -1,5 +1,5 @@
 export const EVENT_PAGES = {
   HAPPY_BOX: {
-    SITE_URL: "happy-box",
+    SITE_URL: "thu-thach-don-tet",
   },
 };

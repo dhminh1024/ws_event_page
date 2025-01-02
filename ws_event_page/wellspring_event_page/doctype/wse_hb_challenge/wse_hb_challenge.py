@@ -14,12 +14,14 @@ class WSEHBChallenge(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
-		description: DF.SmallText | None
+		description_en: DF.SmallText
+		description_vn: DF.SmallText
 		happy_box_event: DF.Link
 		number_of_submissions: DF.Int
 		release_date: DF.Date
 		sequence_number: DF.Int
 		thumbnail: DF.AttachImage
-		title: DF.Data
+		title_en: DF.Data
+		title_vn: DF.Data
 	# end: auto-generated types
 	pass
