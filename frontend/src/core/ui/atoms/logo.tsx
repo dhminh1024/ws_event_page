@@ -15,8 +15,8 @@ export default function Logo({ className, variant = "default" }: Props) {
       src={cleanPath(
         `${env.ASSET_URL}${
           variant == "default"
-            ? `/static/ws-logo-full.avif`
-            : `/static/ws-logo-white.avif`
+            ? `/static/ws-logo-full.png`
+            : `/static/ws-logo-white.png`
         }`
       )}
     />

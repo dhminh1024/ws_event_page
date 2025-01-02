@@ -34,8 +34,8 @@ export const VideoSection: FC<VideoSectionProps> = ({ className }) => {
             ></iframe>
           </div>
           <div className="relative md:w-[80%] mx-auto my-[20rem] md:mt-[50rem]">
-            {isDesktop && <img src={`${env.ASSET_URL}/happy-box/lunar-bar.aviff`} alt="" />}
-            {!isDesktop && <img src={`${env.ASSET_URL}/happy-box/lunar-bar-mobile.avif`} alt="" />}
+            {isDesktop && <img src={`${env.ASSET_URL}/happy-box/lunar-bar.pngf`} alt="" />}
+            {!isDesktop && <img src={`${env.ASSET_URL}/happy-box/lunar-bar-mobile.png`} alt="" />}
             <Typography.Paragraph className="m-0 leading-[1] w-full text-[12rem] md:text-[26rem] text-happy_box-light_yellow absolute top-[50%] left-0 text-center translate-y-[-50%] md:translate-y-[-60%]">
               <Typography.Text className="text-[12rem] md:text-[30rem] mx-[5rem] text-happy_box-honey">
                 {t("happy_box.video_section_gift_description_1", {

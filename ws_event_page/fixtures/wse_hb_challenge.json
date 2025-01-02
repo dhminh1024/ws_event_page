@@ -25,7 +25,7 @@
   "number_of_submissions": 2,
   "release_date": "2025-01-01",
   "sequence_number": 6,
-  "thumbnail": "/files/box-challenge-6.avif",
+  "thumbnail": "/files/box-challenge-6.png",
   "title_en": "The Wellspring  Festival 2025",
   "title_vn": "Du xuân Hạnh phúc"
  },
@@ -40,7 +40,7 @@
   "number_of_submissions": 4,
   "release_date": "2024-12-30",
   "sequence_number": 3,
-  "thumbnail": "/files/box-challenge-3.avif",
+  "thumbnail": "/files/box-challenge-3.png",
   "title_en": "The colors of Tet",
   "title_vn": "Sắc màu ngày Tết"
  },
@@ -70,7 +70,7 @@
   "number_of_submissions": 5,
   "release_date": "2024-12-29",
   "sequence_number": 2,
-  "thumbnail": "/files/box-challenge-2.avif",
+  "thumbnail": "/files/box-challenge-2.png",
   "title_en": "Spread the love",
   "title_vn": "Lan toả yêu thương"
  },
@@ -85,7 +85,7 @@
   "number_of_submissions": 6,
   "release_date": "2024-12-26",
   "sequence_number": 1,
-  "thumbnail": "/files/box-challenge-1.avif",
+  "thumbnail": "/files/box-challenge-1.png",
   "title_en": "Start with the old things",
   "title_vn": "Bắt đầu từ những điều cũ"
  }

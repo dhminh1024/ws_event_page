@@ -109,7 +109,7 @@ export const FileSvgDraw = ({
 
 const dropzoneDefault = {
   accept: {
-    "image/*": [".jpg", ".jpeg", ".avif", ".gif"],
+    "image/*": [".jpg", ".jpeg", ".png", ".gif"],
   },
   maxFiles: 1,
   maxSize: 4 * 1024 * 1024,

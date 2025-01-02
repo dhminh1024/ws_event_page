@@ -101,12 +101,12 @@ export const ChallengeSection: FC<ChallengeSectionProps> = ({ className }) => {
       </div>
       <img
         className="absolute z-1 top-[10rem] md:top-[12%] left-[-10%] w-[33%] animate-swing-left"
-        src={`${env.ASSET_URL}/happy-box/challenge-backdrop-left.avif`}
+        src={`${env.ASSET_URL}/happy-box/challenge-backdrop-left.png`}
         alt="backdrop-left"
       />
       <img
         className="absolute z-1 top-[10rem] md:top-[10%] right-[-10%] w-[32%] animate-swing-right"
-        src={`${env.ASSET_URL}/happy-box/challenge-backdrop-right.avif`}
+        src={`${env.ASSET_URL}/happy-box/challenge-backdrop-right.png`}
         alt="backdrop-left"
       />
     </section>

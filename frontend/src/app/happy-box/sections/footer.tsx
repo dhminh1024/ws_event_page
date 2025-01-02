@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from "react";
-import LogoWhite from "@happy-box/assets/images/logo-white.avif";
+import LogoWhite from "@happy-box/assets/images/logo-white.png";
 import Typography from "../components/typography";
 import { cn } from "@/core/utils/shadcn-utils";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";

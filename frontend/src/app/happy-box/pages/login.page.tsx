@@ -66,7 +66,7 @@ export const Component = () => {
           src={
             isDesktop
               ? `${env.ASSET_URL}/happy-box/banner-login.webp`
-              : `${env.ASSET_URL}/happy-box/banner-login-mb.avif`
+              : `${env.ASSET_URL}/happy-box/banner-login-mb.png`
           }
           alt=""
         />

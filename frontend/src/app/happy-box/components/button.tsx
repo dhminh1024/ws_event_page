@@ -27,8 +27,8 @@ export const LunarButton = forwardRef<HTMLButtonElement, LunarButtonProps>(
           className="w-full h-full"
           src={cleanPath(
             variant === "primary"
-              ? `${env.ASSET_URL}/happy-box/golden-button.avif`
-              : `${env.ASSET_URL}/happy-box/ruby-button.avif`
+              ? `${env.ASSET_URL}/happy-box/golden-button.png`
+              : `${env.ASSET_URL}/happy-box/ruby-button.png`
           )}
           alt="bg-button"
         />
