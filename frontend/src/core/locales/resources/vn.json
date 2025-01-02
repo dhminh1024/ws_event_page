@@ -20,6 +20,15 @@
     "client_error": {
       "heading": "Rất tiếc! Đã có lỗi xảy ra",
       "description": "Chúng tôi rất tiếc vì sự bất tiện này. Có một lỗi đã xảy ra, và chúng tôi đang nỗ lực khắc phục. Vui lòng thử lại sau."
+    },
+    "login_failed": {
+      "heading": "Đăng nhập thất bại"
+    },
+    "invalid_code": {
+      "description": "Mã số không hợp lệ."
+    },
+    "something_went_wrong": {
+      "description": "Đã có lỗi xảy ra, vui lòng thử lại sau."
     }
   },
   "happy_box": {

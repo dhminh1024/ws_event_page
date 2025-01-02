@@ -32,6 +32,7 @@ export const AuthWSCodeProvider: React.FC<AuthWSCodeProviderProps> = ({
         localStorage.setItem("wse_wellspringCode", wellspringCode);
       } catch (error) {
         console.error("Login failed", error);
+        return Promise.reject(error);
       }
     },
     [call]

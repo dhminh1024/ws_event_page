@@ -2,6 +2,7 @@ import {
   HTMLAttributes,
   PropsWithChildren,
   ReactNode,
+  useEffect,
   useMemo,
   useState,
   type FC,
@@ -29,31 +30,36 @@ import { useResponsive } from "@/core/hooks/use-reponsive";
 
 export type LunarModalProps = HTMLAttributes<HTMLDivElement> &
   PropsWithChildren & {
+    open?: boolean;
     correctLetter?: string;
+    disabled?: boolean;
     onConfirm?: (letter: string) => void;
     onCancel?: () => void;
     onClosed?: () => void;
   };
 
 export const ChooseLetterModal: FC<LunarModalProps> = ({
+  open: $open = false,
   correctLetter,
   className,
   children,
+  disabled,
   onConfirm,
   onCancel,
   onClosed,
 }) => {
   const { t } = useLocales();
-  const {isDesktop} = useResponsive();
+  const { isDesktop } = useResponsive();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
-  console.log(selectedLetter)
+
   const letters = useMemo(
     () => generateArrayWithRandomLetters(correctLetter || "?", 4),
     [correctLetter]
   );
 
   const handleOpenChange = (open: boolean) => {
+    if (disabled) return;
     setIsOpen(open);
     if (!open) {
       onClosed?.();
@@ -66,6 +72,10 @@ export const ChooseLetterModal: FC<LunarModalProps> = ({
       onConfirm?.(selectedLetter);
     }
   };
+
+  useEffect(() => {
+    setIsOpen($open);
+  },[$open])
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>

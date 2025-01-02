@@ -20,6 +20,15 @@
     "client_error": {
       "heading": "Oops! Something went wrong",
       "description": "We apologize for the inconvenience. An error has occurred, and we are working to fix it. Please try again later."
+    },
+    "login_failed": {
+      "heading": "Login Failed"
+    },
+    "invalid_code": {
+      "description": "Invalid student ID or employee ID."
+    },
+    "something_went_wrong": {
+      "description": "Something went wrong, please try again later."
     }
   },
   "happy_box": {
