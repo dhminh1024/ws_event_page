@@ -19,6 +19,8 @@ import { useResponsive } from "@/core/hooks/use-reponsive";
 import { ThankYouModal } from "../components/thank-you-modal";
 import { cleanPath } from "@/lib/utils/common";
 import { EVENT_PAGES } from "@/config/event-pages";
+import { nl2br } from "../utils/ultils";
+import { cn } from "@/core/utils/shadcn-utils";
 
 export type ChallengeSectionProps = {
   className?: string;
@@ -38,7 +40,9 @@ export const ChallengeSection: FC<ChallengeSectionProps> = ({ className }) => {
       0;
     if (!disabled) {
       console.log("click challenge");
-      navigate(cleanPath(`/${EVENT_PAGES.HAPPY_BOX.SITE_URL}/upload/${challenge.name}`));
+      navigate(
+        cleanPath(`/${EVENT_PAGES.HAPPY_BOX.SITE_URL}/upload/${challenge.name}`)
+      );
     }
   };
 
@@ -61,21 +65,34 @@ export const ChallengeSection: FC<ChallengeSectionProps> = ({ className }) => {
           scrollSize={isDesktop ? 35 : 15}
           className="max-w-[680rem] md:mx-auto mt-[20rem] mb-[10rem]"
         >
-          <div className="px-[25rem] md:px-[50rem] py-[5rem] md:py-[10rem]">
+          <div
+            className={cn("px-[20rem]  py-[5rem] md:py-[10rem]", {
+              "md:px-[53rem]": currentLanguage === "vn",
+              "md:px-[45rem]": currentLanguage === "en",
+            })}
+          >
             <Typography.Paragraph className="text-center text-happy_box-red text-[12rem] md:text-[20rem]">
               {t("happy_box.challenge_section_description_1")}
             </Typography.Paragraph>
           </div>
         </LunarScroll>
 
-        <div className="py-[10rem] md:py-[30rem] flex flex-col gap-[10rem] max-w-[80vw] md:max-w-[795rem] mx-auto">
-          <Typography.Paragraph className="text-center text-happy_box-red text-[15rem] md:text-[21rem]">
-            {t("happy_box.challenge_section_description_2")}
+        <div className="py-[10rem] md:py-[30rem] flex flex-col gap-[10rem] md:max-w-[830rem] mx-auto">
+          <Typography.Paragraph
+            className="text-center text-happy_box-red text-[12rem] md:text-[21rem]"
+            style={{ whiteSpace: "pre-line" }}
+          >
+            <span>{t("happy_box.challenge_section_description_2_1")}</span>
+            <span className="mx-[4rem]  text-happy_box-honey">
+              {t("happy_box.challenge_section_description_2_2")}
+            </span>
+            <span>{t("happy_box.challenge_section_description_2_3")}</span>
           </Typography.Paragraph>
-          <Typography.Paragraph className="text-center text-happy_box-red text-[15rem] md:text-[21rem]">
+          <Typography.Paragraph className="text-center text-happy_box-red text-[12rem] md:text-[21rem]">
             {t("happy_box.challenge_section_description_3")}
           </Typography.Paragraph>
         </div>
+
         <div className="grid grid-cols-2 md:grid-cols-3 max-w-[1136rem] mx-auto py-[20rem] gap-y-[15rem] md:gap-y-[30rem] gap-x-[10rem] md:gap-x-[50rem]">
           {challenges.map((c, index) => (
             <BoxChallenge

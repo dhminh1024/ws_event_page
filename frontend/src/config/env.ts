@@ -4,6 +4,7 @@ const env = {
   VERSION: import.meta.env.VITE_VERSION || "",
   PROVINCES_VN_API: import.meta.env.VITE_PROVINCES_VN_API || "",
   HAPPY_BOX:{
+    TITLE_PAGE: "Tet Challenge - Thử thách đón Tết",
     DATE: import.meta.env.VITE_HAPPY_BOX_DATE || "",
   }
 }
