@@ -11,13 +11,14 @@ import { WelcomeModal } from "../components/welcome-modal";
 import { ThankYouModal } from "../components/thank-you-modal";
 import { Helmet } from "react-helmet";
 import { useLocales } from "@/core/hooks/use-locales";
+import env from "@/config/env";
 
 export const Component: FC = () => {
   const {t} = useLocales()
   return (
     <BackgroundCoin>
       <Helmet>
-        <title>{t('common.home_page')} | Tet Challenge - Vui xuân đón Tết</title>
+        <title>{t('common.home_page')} | {env.HAPPY_BOX.TITLE_PAGE}</title>
       </Helmet>
       <Header className="px-[20rem] py-[10rem] md:py-[20rem] md:px-[60rem] md:h-[140rem]" />
       <GallerySection />

@@ -10,7 +10,7 @@
     "finish": "Hoàn thành",
     "edit": "Chỉnh sửa",
     "home_page": "Trang chủ",
-    "login_page": "Trang đăng nhập",
+    "login_page": "Đăng nhập",
     "upload_photo": "Tải ảnh lên",
     "save_image": "Lưu ảnh",
     "cancel": "Hủy bỏ",
@@ -20,6 +20,15 @@
     "client_error": {
       "heading": "Rất tiếc! Đã có lỗi xảy ra",
       "description": "Chúng tôi rất tiếc vì sự bất tiện này. Có một lỗi đã xảy ra, và chúng tôi đang nỗ lực khắc phục. Vui lòng thử lại sau."
+    },
+    "login_failed": {
+      "heading": "Đăng nhập thất bại"
+    },
+    "invalid_code": {
+      "description": "Mã số không hợp lệ."
+    },
+    "something_went_wrong": {
+      "description": "Đã có lỗi xảy ra, vui lòng thử lại sau."
     }
   },
   "happy_box": {
@@ -27,15 +36,17 @@
     "choose_first_letter": "Hãy chọn chữ cái đầu tên của bạn",
     "welcome_wiser": "Chào Mừng WISer",
     "challenge_section_description_1": "Không khí Tết rộn ràng, tràn ngập sắc xuân đã lan tỏa khắp Wellspring Saigon! Đây là lúc để mỗi WISer dừng lại một chút, nhìn lại chặng đường một năm đã qua, làm mới chính mình, lan tỏa yêu thương và tạo nên những kỷ niệm Tết thật ý nghĩa.",
-    "challenge_section_description_2": "Các WISers đã sẵn sàng “bung xõa” với 6 Thử Thách Ngày Tết chưa? – Nơi lưu giữ từng khoảnh khắc rực rỡ, đậm chất tinh thần Lễ hội Mùa Xuân 2025 - Nhà là Tết Lớn trong Tim!",
+    "challenge_section_description_2_1": "Các WISers đã sẵn sàng “bung xõa” với",
+    "challenge_section_description_2_2": "6 Thử Thách Ngày Tết",
+    "challenge_section_description_2_3": "chưa? – Nơi lưu giữ từng khoảnh khắc rực rỡ, đậm chất tinh thần Lễ hội Mùa Xuân 2025 - Nhà là Tết Lớn trong Tim!",
     "challenge_section_description_3": "Hãy chuẩn bị những khung hình đẹp nhất và cùng nhau chào đón một mùa Tết thật đáng nhớ.",
-    "video_section_gift_description_1": "{{number}} WISer",
+    "video_section_gift_description_1": "{{number}} WISer may mắn",
     "video_section_gift_description_2": "tham gia hoàn thành",
-    "video_section_gift_description_3": "đủ {{count}} thử thách",
-    "video_section_gift_description_4": "sẽ nhận quà từ Ban chương trình.",
+    "video_section_gift_description_3": "đúng và đủ {{count}} thử thách",
+    "video_section_gift_description_4": "sẽ nhận quà từ Ban tổ chức",
     "video_section_countdown_description_1": "Chỉ còn",
     "video_section_countdown_description_2": "ngày nữa thôi,",
-    "video_section_countdown_description_3": "Hẹn gặp lại các WISers tại lễ hội mùa xuân vào ngày",
+    "video_section_countdown_description_3": "Hẹn gặp lại các WISers tại Lễ hội Mùa Xuân vào ngày",
     "video_section_countdown_description_4": "sắp tới!",
     "welcome_modal_description_1": "Hãy tham gia",
     "welcome_modal_description_2": "Hội xuân ngày",

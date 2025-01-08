@@ -27,6 +27,7 @@ export type UploadModalProps = HTMLAttributes<HTMLDivElement> &
   PropsWithChildren & {
     fileBlob?: Blob | null;
     onSave?: (file: Blob | null, url: string) => void;
+    onClose?: () => void;
   };
 
 export const UploadModal: FC<UploadModalProps> = ({
@@ -34,6 +35,7 @@ export const UploadModal: FC<UploadModalProps> = ({
   className,
   children,
   onSave,
+  onClose,
 }) => {
   const { t } = useLocales();
   const [croppedAreaPixels, setCroppedAreaPixels] =
@@ -63,6 +65,9 @@ export const UploadModal: FC<UploadModalProps> = ({
 
   const handleOpenChange = ($open: boolean) => {
     setOpen($open);
+    if (!open){
+      onClose?.();
+    }
   };
 
   useEffect(() => {
@@ -91,7 +96,7 @@ export const UploadModal: FC<UploadModalProps> = ({
             />
           )}
         </div>
-        <DialogFooter className="flex p-[20rem] sm:justify-center gap-x-[20rem]">
+        <DialogFooter className="flex p-[20rem] justify-center sm:justify-center gap-x-[20rem] gap-y-[10rem]">
           <LunarButton
             className="text-[20rem] "
             variant="primary"

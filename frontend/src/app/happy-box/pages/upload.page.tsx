@@ -84,6 +84,10 @@ export const Component = () => {
     inputUploadRef.current?.click();
   };
 
+  const handleCloseModal = () => {
+    setFile(null);
+  }
+
   const backToHome = () => {
     navigate(cleanPath(`/${EVENT_PAGES.HAPPY_BOX.SITE_URL}`));
   };
@@ -108,7 +112,7 @@ export const Component = () => {
       <Helmet>
         <title>
           {challenge && (currentLanguage === "vn" ? challenge?.title_vn : challenge?.title_en) || ""}
-          | Tet Challenge - Vui xuân đón Tết
+          | {env.HAPPY_BOX.TITLE_PAGE}
         </title>
       </Helmet>
       <div className=" w-full h-full min-h-screen">
@@ -150,6 +154,7 @@ export const Component = () => {
               <UploadModal
                 fileBlob={file}
                 onSave={handleCropCompleted}
+                onClose={handleCloseModal}
               ></UploadModal>
               <LunarButton
                 className="font-[500]"
