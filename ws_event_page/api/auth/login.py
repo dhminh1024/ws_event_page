@@ -37,9 +37,9 @@ def login_with_wellspring_code(wellspring_code):
         staff_person = frappe.get_doc("SIS Person", staff.person).as_dict()
 
         return {
-            "user_type": "Staff",
-            "user_data": {
-                "full_name": staff_person.full_name,
+            "userType": "Staff",
+            "userData": {
+                "fullName": staff_person.full_name,
                 "email": staff_person.email,
                 "gender": staff_person.gender,
                 "wellspringCode": wellspring_code,
