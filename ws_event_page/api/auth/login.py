@@ -39,7 +39,7 @@ def login_with_wellspring_code(wellspring_code):
         return {
             "user_type": "Staff",
             "user_data": {
-                "full_name": staff_person.full_name,
+                "fullName": staff_person.full_name,
                 "email": staff_person.email,
                 "gender": staff_person.gender,
                 "wellspringCode": wellspring_code,
