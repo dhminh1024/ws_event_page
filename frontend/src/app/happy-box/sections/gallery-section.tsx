@@ -16,7 +16,7 @@ export const GallerySection: FC<GallerySectionProps> = ({ className }) => {
       <BackgroundCloud className="py-[15rem] md:py-[40rem]">
         <GreekPattern className="h-[15rem] md:h-[25rem]"></GreekPattern>
       </BackgroundCloud>
-      <Marquee className="bg-happy_box-light_yellow">
+      <Marquee className="bg-happy_box-light_yellow" speed={150}>
         <div className="flex">
           {gallery?.map((submission, index) => (
             <div key={submission.name} className="h-[120rem] md:h-[300rem] aspect-[4/3]">
