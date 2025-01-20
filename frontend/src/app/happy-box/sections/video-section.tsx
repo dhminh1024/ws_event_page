@@ -9,12 +9,13 @@ import { useChallengeList } from "../context/use-challenge-list";
 import { useLocales } from "@/core/hooks/use-locales";
 import { Firework } from "../components/firework";
 import { useResponsive } from "@/core/hooks/use-reponsive";
+import { min } from "lodash";
 
 export type VideoSectionProps = HTMLAttributes<HTMLDivElement> & {};
 
 export const VideoSection: FC<VideoSectionProps> = ({ className }) => {
   const { t } = useLocales();
-  const {isDesktop} = useResponsive();
+  const { isDesktop } = useResponsive();
   const event = useEventPageContext();
   const { challenges } = useChallengeList();
 
@@ -34,8 +35,15 @@ export const VideoSection: FC<VideoSectionProps> = ({ className }) => {
             ></iframe>
           </div>
           <div className="relative md:w-[80%] mx-auto my-[20rem] md:mt-[50rem]">
-            {isDesktop && <img src={`${env.ASSET_URL}/happy-box/lunar-bar.png`} alt="" />}
-            {!isDesktop && <img src={`${env.ASSET_URL}/happy-box/lunar-bar-mobile.png`} alt="" />}
+            {isDesktop && (
+              <img src={`${env.ASSET_URL}/happy-box/lunar-bar.png`} alt="" />
+            )}
+            {!isDesktop && (
+              <img
+                src={`${env.ASSET_URL}/happy-box/lunar-bar-mobile.png`}
+                alt=""
+              />
+            )}
             <Typography.Paragraph className="m-0 leading-[1] w-full text-[12rem] md:text-[26rem] text-happy_box-light_yellow absolute top-[50%] left-0 text-center translate-y-[-50%] md:translate-y-[-60%]">
               <Typography.Text className="text-[12rem] md:text-[30rem] mx-[5rem] text-happy_box-honey">
                 {t("happy_box.video_section_gift_description_1", {
@@ -56,12 +64,18 @@ export const VideoSection: FC<VideoSectionProps> = ({ className }) => {
             <Typography.Paragraph className="text-[22rem] md:text-[50rem] text-happy_box-brick leading-[1]">
               {t("happy_box.video_section_countdown_description_1")}
               <Typography.Text className="text-white mx-[10rem] md:mx-[20rem] text-[40rem] md:text-[80rem]">
-                {differenceInDays(new Date(env.HAPPY_BOX.DATE), new Date()) < 10
-                  ? `0${differenceInDays(
-                      new Date(env.HAPPY_BOX.DATE),
-                      new Date()
-                    )}`
-                  : differenceInDays(new Date(env.HAPPY_BOX.DATE), new Date())}
+                {Math.max(
+                  differenceInDays(new Date(env.HAPPY_BOX.DATE), new Date()),
+                  0
+                )
+                  .toString()
+                  .padStart(
+                    differenceInDays(new Date(env.HAPPY_BOX.DATE), new Date()) >
+                      10
+                      ? 1
+                      : 2,
+                    "0"
+                  )}
               </Typography.Text>
               {t("happy_box.video_section_countdown_description_2")}
             </Typography.Paragraph>
@@ -69,7 +83,11 @@ export const VideoSection: FC<VideoSectionProps> = ({ className }) => {
               {t("happy_box.video_section_countdown_description_3")}
               <Typography.Text className="relative text-happy_box-light_yellow mx-[10rem] text-[22rem] md:text-[50rem]">
                 {format(new Date(env.HAPPY_BOX.DATE), "dd/MM/yyyy")}
-                <img className="absolute bottom-0 left-[50%] translate-y-[50%] translate-x-[-50%] w-[200%] max-w-none h-auto" src={`${env.ASSET_URL}/happy-box/light-effect.png`} alt="" />
+                <img
+                  className="absolute bottom-0 left-[50%] translate-y-[50%] translate-x-[-50%] w-[200%] max-w-none h-auto"
+                  src={`${env.ASSET_URL}/happy-box/light-effect.png`}
+                  alt=""
+                />
               </Typography.Text>
               {t("happy_box.video_section_countdown_description_4")}
             </Typography.Paragraph>
