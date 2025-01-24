@@ -1,0 +1,17 @@
+meta {
+  name: Get Student by WS Code
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/method/ws_event_page.api.auth.login.get_student_by_wellspring_code
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "wellspring_code": "WS22401020"
+  }
+}

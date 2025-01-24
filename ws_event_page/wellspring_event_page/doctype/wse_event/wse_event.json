@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:url",
  "creation": "2024-12-11 09:25:54.422793",
@@ -62,7 +63,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-13 09:16:13.182258",
+ "modified": "2025-01-24 14:12:30.298529",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE Event",
