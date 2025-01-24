@@ -8,7 +8,6 @@ import Typography from "@happy-box/components/typography";
 import { Input } from "@atoms/input";
 import { LunarButton } from "@happy-box/components/button";
 import { ChooseLetterModal } from "@/app/happy-box/components/choose-letter-modal";
-
 import { useLocales } from "@/core/hooks/use-locales";
 import { useResponsive } from "@/core/hooks/use-reponsive";
 import { useSignInForm } from "../hooks/use-sign-in-form";

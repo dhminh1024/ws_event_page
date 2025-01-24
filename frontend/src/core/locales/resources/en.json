@@ -14,7 +14,8 @@
     "upload_photo": "Upload Photo",
     "save_image": "Save Image",
     "cancel": "Cancel",
-    "refresh_page": "Refresh Page"
+    "refresh_page": "Refresh Page",
+    "from_d_to_d": "From {{from}} to {{to}}"
   },
   "notification": {
     "client_error": {
@@ -32,6 +33,41 @@
     }
   },
   "happy_box": {
+    "enter_sign_in_code": "Please enter the student ID or employee ID",
+    "choose_first_letter": "Please choose the first letter of first name",
+    "welcome_wiser": "Welcome WISer",
+    "challenge_section_description_1": "The vibrant spirit of Tet, brimming with the colors of spring, has filled every corner of Wellspring Saigon! This is the perfect time for every WISers to pause, reflect on the past year refresh themselves, spread the love, and create meaningful Tet memories.",
+    "challenge_section_description_2_1": "Are you ready for",
+    "challenge_section_description_2_2": "the 6-Day Tet Challenge",
+    "challenge_section_description_2_3": "? - A journey to capture radiant moments, embracing the festive essence of Well-Spring Festival 2025 - Happy Home Grows My Spring!",
+    "challenge_section_description_3": "Get your best angles ready and join us in welcoming a truly unforgettable Tet season.",
+    "video_section_gift_description_1": "{{number}} WISers",
+    "video_section_gift_description_2": "completing enough",
+    "video_section_gift_description_3": "{{count}} challenge correctly",
+    "video_section_gift_description_4": "will receive gifts from the Organizers",
+    "video_section_countdown_description_1": "Only",
+    "video_section_countdown_description_2": "days left,",
+    "video_section_countdown_description_3": "See you WISers at the upcoming Well-Spring Festival on",
+    "video_section_countdown_description_4": "!",
+    "welcome_modal_description_1": "Join the",
+    "welcome_modal_description_2": "Spring Festival on",
+    "welcome_modal_description_3": "to complete the challenge",
+    "thankyou_modal_description_1": "Thank you",
+    "thankyou_modal_description_2": "You have completed the Tet challenge.",
+    "thankyou_modal_description_3": "Wishing WISer a new year full of joy and happiness"
+  },
+  "nutritional_journey": {
+    "title": "Nutritional Journey",
+    "campaign_name": "Small Changes – Growing with Your Child",
+    "heading_1": "I. Target",
+    "heading_2": "II. Contest Rules",
+    "heading_3": "III. Rewards and Certificates",
+    
+    "sub_heading_2_1": "Time",
+    "sub_heading_2_2": "How to join",
+    "sub_heading_2_3": "How to submit photos",
+    "sub_heading_2_4": "Evaluation criteria",
+
     "enter_sign_in_code": "Please enter the student ID or employee ID",
     "choose_first_letter": "Please choose the first letter of first name",
     "welcome_wiser": "Welcome WISer",

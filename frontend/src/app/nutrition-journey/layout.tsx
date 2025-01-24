@@ -15,23 +15,12 @@ import { ThankYouModal } from "./components/thank-you-modal";
 import { useSubmissions } from "./context/use-submissions";
 import { WelcomeModal } from "./components/welcome-modal";
 
-export default function HappyBoxLayout({ children }: PropsWithChildren) {
+export default function Layout({ children }: PropsWithChildren) {
   const { theme } = useTheme();
 
   return (
     <>
-
-      <AuthWSCodeProvider eventUrl={EVENT_PAGES.HAPPY_BOX.SITE_URL}>
-        <EventPageProvider eventUrl={EVENT_PAGES.HAPPY_BOX.SITE_URL}>
-          <HBChallengeListProvider>
-            <HBSubmissionListProvider>
-              {children}
-              <WelcomeModal />
-              <ThankYouModal />
-            </HBSubmissionListProvider>
-          </HBChallengeListProvider>
-        </EventPageProvider>
-      </AuthWSCodeProvider>
+      {children}
     </>
   );
 }

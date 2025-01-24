@@ -1,15 +1,16 @@
 import { Outlet, RouteObject } from "react-router-dom";
-import HappyBoxLayout from "./layout";
+
 import { EVENT_PAGES } from "@/config/event-pages";
 
 import SignInModal from "./sections/sign-in-modal";
 import AuthWSCodeGuard from "@/lib/auth/auth-ws-code/permissions/auth-guard";
 import AuthWSCodeGuestGuard from "@/lib/auth/auth-ws-code/permissions/guest-guard";
 import RootLayout from "./root";
+import Layout from "./layout";
 
-export const HAPPY_BOX_ROUTES: RouteObject[] = [
+export const NUTRITION_JOURNEY_ROUTES: RouteObject[] = [
   {
-    path: EVENT_PAGES.HAPPY_BOX.SITE_URL,
+    path: EVENT_PAGES.NUTRITION_JOURNEY.SITE_URL,
     element: (
       <RootLayout>
         <Outlet />
@@ -25,9 +26,9 @@ export const HAPPY_BOX_ROUTES: RouteObject[] = [
         path: "",
         element: (
           <AuthWSCodeGuard redirectTo={`./sign-in`}>
-            <HappyBoxLayout>
+            <Layout>
               <Outlet />
-            </HappyBoxLayout>
+            </Layout>
           </AuthWSCodeGuard>
         ),
         children: [

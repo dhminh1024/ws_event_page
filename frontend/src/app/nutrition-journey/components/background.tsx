@@ -27,15 +27,15 @@ export const BackgroundCoin: FC<BackgroundCoinProps> = ({
 }) => {
   return (
     <div
-      className={cn("bg-happy_box-cream", className)}
-      style={{
-        backgroundImage: `url(${cleanPath(
-          `${env.ASSET_URL}/happy-box/bg-coin.png`
-        )})`,
-        backgroundSize: "90rem",
-        backgroundRepeat: "repeat",
-        backgroundBlendMode: "overlay"
-      }}
+      className={cn("bg-happy_box-mint/40", className)}
+      // style={{
+      //   backgroundImage: `url(${cleanPath(
+      //     `${env.ASSET_URL}/happy-box/bg-coin.png`
+      //   )})`,
+      //   backgroundSize: "90rem",
+      //   backgroundRepeat: "repeat",
+      //   backgroundBlendMode: "overlay"
+      // }}
     >
       {children}
     </div>
