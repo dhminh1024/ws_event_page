@@ -27,5 +27,5 @@
       "@happy-box/*": ["src/app/happy-box/*"]
     }
   },
-  "include": ["src", "tailwind.config.ts", ".storybook", "alltypes.d.ts"]
+  "include": ["src", "tailwind.config.ts", "alltypes.d.ts"]
 }

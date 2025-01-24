@@ -1,0 +1,5 @@
+declare module 'react-read-pdf'
+declare module 'react-map-interaction'
+declare module 'html-react-parser'
+declare module 'pdfjs-dist'
+declare module 'pdfjs-dist/build/pdf.worker.entry'
