@@ -1,0 +1,27 @@
+meta {
+  name: Upload NJ Submission Photo
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/api/method/ws_event_page.api.event.nutrition_journey.submission.upload_submission_photo
+  body: multipartForm
+  auth: none
+}
+
+body:json {
+  {
+    "wellspring_code": "WS21901086",
+    "user_type": "Student",
+    "full_name": "Phan Hải Châu",
+    "happy_box_challenge": "8g8ng7abd1"
+  }
+}
+
+body:multipart-form {
+  submission_id: 387cjrmm4s
+  question_id: 2so449sfb4
+  image_sequence_number: 2
+  file: @file(/Users/minhdh/Documents/Cuong.jpg)
+}

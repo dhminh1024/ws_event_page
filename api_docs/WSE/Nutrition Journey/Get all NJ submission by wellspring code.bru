@@ -1,0 +1,15 @@
+meta {
+  name: Get all NJ submission by wellspring code
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{url}}/api/method/ws_event_page.api.event.nutrition_journey.submission.get_submission_by_wellspring_code?wellspring_code=WS21901086
+  body: none
+  auth: none
+}
+
+query {
+  wellspring_code: WS21901086
+}
