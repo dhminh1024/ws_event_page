@@ -1,0 +1,57 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-24 14:54:56.566494",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "question",
+  "sequence_number",
+  "image_url"
+ ],
+ "fields": [
+  {
+   "description": "Format {question_order}.{image_order}, e.g. Q1.1, Q2.3",
+   "fieldname": "sequence_number",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Sequence Number",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "image_url",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Image Url",
+   "reqd": 1
+  },
+  {
+   "fieldname": "question",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Question",
+   "options": "WSE NJ Question",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-01-24 16:46:42.786895",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE NJ Submission Image",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -70,6 +70,21 @@ export default {
           light_yellow: "hsl(var(--page-light-yellow))",
           light_red: "hsl(var(--page-light-red))"
         },
+        nj: {
+          foreground: "hsl(var(--page-foreground))",
+          cream: "hsl(var(--page-cream))",
+          honey: "hsl(var(--page-honey))",
+          brick: "hsl(var(--page-brick))",
+          blue: "hsl(var(--page-deep-blue))",
+          mint: "hsl(var(--page-mint))",
+          light_yellow: "hsl(var(--page-light-yellow))",
+          light_red: "hsl(var(--page-light-red))",
+          green: "#016465",
+          orange: "#E3843F",
+          red: "#F93B00",
+          radiant: "#7ED957",
+          pink: "#EA3882"
+        },
         status: {
           success: "hsl(var(--success))",
           danger: "hsl(var(--danger))",
