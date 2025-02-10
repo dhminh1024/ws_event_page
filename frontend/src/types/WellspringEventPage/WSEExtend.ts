@@ -1,6 +1,12 @@
 import { WSEHBChallenge } from "./WSEHBChallenge"
-import { WSEHBSubmission } from "./WSEHBSubmission"
+import { WSENJQuestion } from "./WSENJQuestion"
+import { WSENJSubmission } from "./WSENJSubmission"
+import { WSENJSubmissionImage } from "./WSENJSubmissionImage"
 
-export type WSEHBSubmissionExtend = Omit<WSEHBSubmission, "happy_box_challenge"> & {
-    happy_box_challenge: WSEHBChallenge
+export type WSESubmissionImageExtend = Omit<WSENJSubmissionImage,"question"> & {
+    question: WSENJQuestion
+}
+
+export type WSESubmissionExtend = Omit<WSENJSubmission, "images"> & {
+    images:WSESubmissionImageExtend[]
 }

@@ -23,9 +23,9 @@ def get_submission_by_wellspring_code(wellspring_code):
 
         # sort images by sequence number
         if isinstance(submission.images, list) and len(submission.images) > 0:
-            submission.images = sorted(
-                submission.images, key=lambda x: x.sequence_number
-            )
+            # submission.images = sorted(
+            #     submission.images, key=lambda x: x.sequence_number
+            # )
 
             # get question info
             for image in submission.images:

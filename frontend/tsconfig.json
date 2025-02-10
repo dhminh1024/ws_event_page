@@ -24,7 +24,8 @@
       "@features/*": ["src/features/*"],
       "@templates/*": ["src/core/ui/templates/*"],
       "@/*": ["src/*"],
-      "@happy-box/*": ["src/app/happy-box/*"]
+      "@happy-box/*": ["src/app/happy-box/*"],
+      "@nutrition-journey/*": ["src/app/nutrition-journey/*"]
     }
   },
   "include": ["src", "tailwind.config.ts", ".storybook", "alltypes.d.ts"]

@@ -11,6 +11,7 @@ import env from "@/config/env";
 
 import ClientErrorState from "@features/states/client-error-state";
 import { HAPPY_BOX_ROUTES } from "./happy-box/router";
+import { NUTRITION_JOURNEY_ROUTES } from "./nutrition-journey/router";
 
 export type GlobalErrorProps = {
   className?: string;
@@ -42,7 +43,7 @@ const RootRouter = () => {
                 lazy: () => import("./home.page"),
               },
               ...HAPPY_BOX_ROUTES,
-
+              ...NUTRITION_JOURNEY_ROUTES,
               {
                 path: "*",
                 element: <Navigate replace to="/" />,

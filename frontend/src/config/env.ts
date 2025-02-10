@@ -6,6 +6,10 @@ const env = {
   HAPPY_BOX:{
     TITLE_PAGE: "Tet Challenge - Thử thách đón Tết",
     DATE: import.meta.env.VITE_HAPPY_BOX_DATE || "",
+  },
+  NUTRITION_JOURNEY:{
+    TITLE_PAGE: "Hành Trình Dinh Dưỡng - Những Thay Đổi Nhỏ – Cùng Con Khôn Lớn",
+
   }
 }
 export default env
