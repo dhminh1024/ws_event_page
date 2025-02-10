@@ -55,7 +55,7 @@ export const BoxQuestion: FC<BoxQuestionProps> = ({
                 "group-hover/box:scale-110": !disabled,
               }
             )}
-            src={cleanPath(`${env.ASSET_URL}/${imageUrl}`)}
+            src={imageUrl}
             alt="image-challenge"
           />
         )}
