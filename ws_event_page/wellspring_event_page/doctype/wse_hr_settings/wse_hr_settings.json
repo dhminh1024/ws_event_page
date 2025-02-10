@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-02-04 19:02:49.257664",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "wellbeing_ticket_price",
+  "email_sender",
+  "column_break_ghgo",
+  "happy_run_ticket_price"
+ ],
+ "fields": [
+  {
+   "default": "990000",
+   "fieldname": "wellbeing_ticket_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Well-being Ticket Price",
+   "non_negative": 1,
+   "precision": "0",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ghgo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "490000",
+   "fieldname": "happy_run_ticket_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Happy Run Ticket Price",
+   "non_negative": 1,
+   "precision": "0",
+   "reqd": 1
+  },
+  {
+   "default": "happyrun2025@wellspringsaigon.edu.vn",
+   "fieldname": "email_sender",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Email Sender",
+   "non_negative": 1,
+   "precision": "0",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-02-06 08:49:00.918022",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE HR Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

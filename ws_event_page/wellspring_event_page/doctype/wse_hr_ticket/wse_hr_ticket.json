@@ -1,0 +1,179 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:WSE-HRT-{YY}-{#####}",
+ "creation": "2025-02-04 09:10:38.130477",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_hhml",
+  "full_name",
+  "email",
+  "wellspring_code",
+  "column_break_fejr",
+  "person_id",
+  "department",
+  "school_class_title",
+  "section_break_tlyg",
+  "status",
+  "ticket_type",
+  "ticket_price",
+  "column_break_fctx",
+  "category",
+  "distance",
+  "shirt_size",
+  "bib"
+ ],
+ "fields": [
+  {
+   "fieldname": "ticket_type",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Ticket Type",
+   "options": "Happy Run\nWell-being",
+   "reqd": 1
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Category",
+   "options": "Primary\nCompanion",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_tlyg",
+   "fieldtype": "Section Break",
+   "label": "Ticket Info"
+  },
+  {
+   "fieldname": "column_break_fctx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_hhml",
+   "fieldtype": "Section Break",
+   "label": "Person Info"
+  },
+  {
+   "columns": 1,
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Full Name",
+   "mandatory_depends_on": "eval: !doc.wellspring_code"
+  },
+  {
+   "fieldname": "person_id",
+   "fieldtype": "Link",
+   "label": "Person",
+   "options": "SIS Person",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_fejr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Email"
+  },
+  {
+   "fieldname": "wellspring_code",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Wellspring Code",
+   "mandatory_depends_on": "eval: !doc.full_name"
+  },
+  {
+   "fieldname": "distance",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Distance",
+   "options": "2.5 km\n5 km",
+   "reqd": 1
+  },
+  {
+   "fieldname": "shirt_size",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "T-Shirt size",
+   "options": "Size 1\nSize 2\nSize 3\nSize 4\nSize 5\nSize 6\nSize 7",
+   "reqd": 1
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "school_class_title",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "School Class Title",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ticket_price",
+   "fieldtype": "Currency",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Ticket Price",
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "bib",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_standard_filter": 1,
+   "label": "BIB",
+   "reqd": 1
+  },
+  {
+   "default": "Pending Payment",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending Payment\nCanceled\nPaid\nRefunded\nAttended",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-02-06 15:11:08.103182",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE HR Ticket",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

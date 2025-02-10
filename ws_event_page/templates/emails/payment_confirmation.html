@@ -1,0 +1,17 @@
+<div class="gray-container text-center">
+  <div>
+    <h1 class="text-center">Thank you for your order!</h1>
+    <p class="text-center">{{message}}</p>
+
+    <!-- QR code -->
+    <div class="text-center">{{ qr_code_img_tag }}</div>
+
+    <!-- Payment details -->
+    <div class="text-center">
+      <p>
+        <strong>Payment details:</strong>
+      </p>
+      <p><strong>Amount:</strong> {{total_payment_pending}} VND</p>
+    </div>
+  </div>
+</div>
