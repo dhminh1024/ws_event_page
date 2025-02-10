@@ -44,14 +44,14 @@ export const Header: FC<HeaderProps> = ({ className }) => {
           alt="Logo"
         />
       </div>
-      <div className="flex gap-x-[10rem] md:gap-x-[20rem] items-center">
+      {/* <div className="flex gap-x-[10rem] md:gap-x-[20rem] items-center">
         <div className="flex items-center gap-x-[20rem]">
           <Typography.Text className="hidden  md:inline text-[12rem] md:text-[16rem]">
             {t("common.language")}
           </Typography.Text>
           <LanguageSelector />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

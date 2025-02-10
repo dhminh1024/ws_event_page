@@ -1,63 +1,61 @@
-import { useTranslation } from "react-i18next";
 import {
   BackgroundCloud,
   BackgroundCoin,
-} from "@happy-box/components/background";
-import { Header } from "@/app/happy-box/sections/header";
+} from "@nutrition-journey/components/background";
 import env from "@/config/env";
-import Typography from "@happy-box/components/typography";
-import { Input } from "@atoms/input";
-import { LunarButton } from "@happy-box/components/button";
-import { ChooseLetterModal } from "@/app/happy-box/components/choose-letter-modal";
-import { RadioGroup, RadioGroupItem } from "@atoms/radio-group";
-import { Label } from "@atoms/label";
-import { generateArrayWithRandomLetters } from "@happy-box/utils/ultils";
+import Typography from "@nutrition-journey/components/typography";
 import { useLocales } from "@/core/hooks/use-locales";
-import { FileInput, FileUploader, ImageSvgDraw } from "@molecules/uploader";
-import { CameraIcon, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { UploadModal } from "../components/upload-modal";
-import useUploadImageChallenge from "@/api/happy-box/use-upload-image-challenge";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSubmissions } from "@happy-box/context/use-submissions";
 import { useSettings } from "@/lib/auth/settings/use-settings";
 import { cleanPath } from "@/lib/utils/common";
-import { useChallengeList } from "@happy-box/context/use-challenge-list";
-import { ThankYouModal } from "../components/thank-you-modal";
-import { log } from "console";
 import { Camera } from "phosphor-react";
 import { Helmet } from "react-helmet";
 import { EVENT_PAGES } from "@/config/event-pages";
+import { Button } from "@atoms/button";
+import { Loader2 } from "lucide-react";
+import useUploadImageSubmission from "../api/use-upload-image-submission";
+import { useUser } from "../context/use-user";
+import useGetSubmissionsByUser from "../api/use-get-submissions-by-user";
+import { useSubmission } from "../context/use-submission";
 
 export const Component = () => {
   const navigate = useNavigate();
   const { t, currentLanguage } = useLocales();
   const params = useParams();
-  const challengeId = params.id;
-  const { default_homepage_url } = useSettings();
-  const { challenges } = useChallengeList();
-  const challenge = challenges.find((c) => c.name === challengeId);
-  const {
-    submissions,
-    refresh: refreshSubmissions,
-    setShowThankYouModal,
-  } = useSubmissions();
+  const { user } = useUser();
+  const questionId = params.qId;
+  const image_sequence_number = params.index;
+
   const inputUploadRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<Blob | null>();
   const [croppedImage, setCroppedImage] = useState<Blob | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  const { handleUpload } = useUploadImageChallenge();
+  const { submission, refresh: refreshSubmission } = useSubmission();
+  const { handleUpload } = useUploadImageSubmission();
   const [isUploading, setIsUploading] = useState(false);
 
+  const submissionTarget = submission?.images?.find(
+    (i) =>
+      i.question.name === questionId &&
+      Number(i.sequence_number.split(".")[1]) === Number(image_sequence_number)
+  );
+
+  console.log(submissionTarget);
+
   const handleClickFinish = async () => {
-    if (challengeId && croppedImage) {
+    const isValid = questionId && image_sequence_number && user && croppedImage;
+    if (isValid) {
       try {
         setIsUploading(true);
-        await handleUpload(challengeId, croppedImage);
-        if (submissions.length === challenges.length - 1) {
-          setShowThankYouModal(true);
-        }
-        refreshSubmissions();
+        await handleUpload(
+          user.wellspringCode,
+          questionId,
+          Number(image_sequence_number),
+          croppedImage
+        );
+        refreshSubmission();
         backToHome();
       } catch (error) {
         alert("Upload failed" + JSON.stringify(error));
@@ -74,34 +72,23 @@ export const Component = () => {
     }
   };
 
-  const handleDeletePhoto = () => {
-    setCroppedImage(null);
-    setFile(null);
-    setPreview(null);
-  };
-
   const handleOpenFile = () => {
     inputUploadRef.current?.click();
   };
 
   const handleCloseModal = () => {
     setFile(null);
-  }
+  };
 
   const backToHome = () => {
-    navigate(cleanPath(`/${EVENT_PAGES.HAPPY_BOX.SITE_URL}`));
+    navigate(cleanPath(`/${EVENT_PAGES.NUTRITION_JOURNEY.SITE_URL}`));
   };
 
   useEffect(() => {
-    if (submissions && challengeId) {
-      const submission = submissions.find(
-        (s) => s.happy_box_challenge.name === challengeId
-      );
-      if (submission && submission.image) {
-        setPreview(submission.image);
-      }
+    if (submissionTarget && submissionTarget.image_url) {
+      setPreview(submissionTarget.image_url);
     }
-  }, [challengeId, submissions]);
+  }, [submissionTarget]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -110,14 +97,11 @@ export const Component = () => {
   return (
     <>
       <Helmet>
-        <title>
-          {challenge && (currentLanguage === "vn" ? challenge?.title_vn : challenge?.title_en) || ""}
-          | {env.HAPPY_BOX.TITLE_PAGE}
-        </title>
+        <title>{t("common.upload_image")} | {env.NUTRITION_JOURNEY.TITLE_PAGE} - {t("nutritional_journey.campaign_name")}</title>
       </Helmet>
       <div className=" w-full h-full min-h-screen">
         <BackgroundCoin className="relative w-full h-full min-h-screen">
-          <div className="relative z-10 max-w-[550rem] mx-auto md:pt-[50rem] md:pb-0 px-[20rem] md:px-[10rem] pt-[100rem] pb-[150rem]">
+          <div className="relative z-10 max-w-[550rem] mx-auto md:pt-[30rem] md:pb-0 px-[20rem] md:px-[10rem] pt-[100rem] pb-[150rem]">
             <input
               type="file"
               accept="image/*"
@@ -156,23 +140,17 @@ export const Component = () => {
                 onSave={handleCropCompleted}
                 onClose={handleCloseModal}
               ></UploadModal>
-              <LunarButton
-                className="font-[500]"
-                variant={preview ? "default" : "primary"}
+              <Button
+                className="font-[500] bg-happy_box-brick text-[30rem] h-[30rem] p-[20rem] rounded-[5rem]"
                 onClick={handleOpenFile}
               >
                 {preview ? t("common.edit") : t("common.upload_image")}
-              </LunarButton>
+              </Button>
             </center>
-            <Typography.Paragraph className="text-center mt-[20rem] text-happy_box-red text-[16rem] md:text-[21rem]">
-              {currentLanguage === "vn"
-                ? challenge?.description_vn
-                : challenge?.description_en}
-            </Typography.Paragraph>
-            <div className="flex justify-center gap-x-[30rem] pt-[20rem] md:pt-[100rem] pb-[80rem]">
-              <LunarButton
-                variant="primary"
-                className="font-[500]"
+
+            <div className="flex justify-center gap-x-[30rem] pt-[20rem] md:pt-[20rem] pb-[80rem]">
+              <Button
+                className="font-[500] bg-happy_box-red/90 hover:bg-happy_box-red text-[30rem] h-[30rem] p-[20rem] rounded-[5rem]"
                 onClick={handleClickFinish}
                 disabled={isUploading}
               >
@@ -180,34 +158,18 @@ export const Component = () => {
                   {isUploading && (
                     <Loader2 className="animate-spin !w-[20rem] !h-[20rem] mr-[5rem]" />
                   )}
-                  <span> {t("common.finish")}</span>
+                  <span> {t("common.send_image")}</span>
                 </div>
-              </LunarButton>
-              <LunarButton className="font-[500]" onClick={backToHome}>
+              </Button>
+              <Button
+                variant={"outline"}
+                className="border-happy_box-brick hover:bg-happy_box-brick/10 bg-transparent !text-happy_box-brick font-[500] text-[30rem] h-[30rem] p-[20rem] rounded-[5rem]"
+                onClick={backToHome}
+              >
                 {t("common.go_back")}
-              </LunarButton>
+              </Button>
             </div>
           </div>
-          <img
-            className="absolute z-1 top-[0%] left-0 md:w-[20%] w-[50%]"
-            src={`${env.ASSET_URL}/happy-box/upload-backdrop-left-1.png`}
-            alt="backdrop-left"
-          />
-          <img
-            className="absolute z-1 top-[0%] right-0 md:w-[20%] w-[50%]"
-            src={`${env.ASSET_URL}/happy-box/upload-backdrop-right-1.png`}
-            alt="backdrop-left"
-          />
-          <img
-            className="absolute z-1 bottom-0 left-0 w-[40%] md:w-[20%]"
-            src={`${env.ASSET_URL}/happy-box/upload-backdrop-left-2.png`}
-            alt="backdrop-left-2"
-          />
-          <img
-            className="absolute z-1 bottom-0 right-0 w-[40%] md:w-[20%]"
-            src={`${env.ASSET_URL}/happy-box/upload-backdrop-right-2.png`}
-            alt="backdrop-left-2"
-          />
         </BackgroundCoin>
       </div>
     </>

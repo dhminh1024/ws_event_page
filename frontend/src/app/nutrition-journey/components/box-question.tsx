@@ -5,19 +5,17 @@ import env from "@/config/env";
 import Typography from "./typography";
 import { useLocales } from "@/core/hooks/use-locales";
 
-export type BoxChallengeProps = HTMLAttributes<HTMLDivElement> & {
+export type BoxQuestionProps = HTMLAttributes<HTMLDivElement> & {
   imageUrl?: string;
-  thumbnail?: string;
   title?: string;
-  challengeNumber: number;
+  sequenceNumber: number;
   hightlight?: boolean;
   disabled?: boolean;
 };
 
-export const BoxChallenge: FC<BoxChallengeProps> = ({
-  challengeNumber,
+export const BoxQuestion: FC<BoxQuestionProps> = ({
+  sequenceNumber,
   imageUrl,
-  thumbnail,
   title,
   hightlight,
   className,
@@ -28,10 +26,8 @@ export const BoxChallenge: FC<BoxChallengeProps> = ({
   return (
     <div
       className={cn(
-        "group/box aspect-[4/3]  relative bg-happy_box-red inline-block text-center rounded-[5rem] md:rounded-[14rem]",
+        "group/box aspect-[4/3]  relative bg-nj-orange/10 inline-block text-center rounded-[5rem] md:rounded-[14rem]",
         {
-          "bg-gradient-to-r from-yellow-400 to-yellow-200  !text-happy_box-red":
-            hightlight,
           "grayscale-[0.6] opacity-70": disabled,
           "cursor-pointer": !disabled,
         },
@@ -64,7 +60,7 @@ export const BoxChallenge: FC<BoxChallengeProps> = ({
           />
         )}
 
-        <div
+        {/* <div
           className={cn(
             "absolute z-10 top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover duration-1000 ease-out transition-all",
             {
@@ -75,32 +71,32 @@ export const BoxChallenge: FC<BoxChallengeProps> = ({
           style={{
             backgroundImage: `url(${thumbnail && cleanPath(thumbnail)})`,
           }}
-        ></div>
+        ></div> */}
         <div
           className={cn(
             "relative z-20  p-[12rem] w-full h-full flex flex-col justify-center items-center",
             {
-              " border-[2px] border-happy_box-red rounded-[5rem] md:rounded-[14rem] ":
+              " border-[2px] border-nj-orange rounded-[5rem] md:rounded-[14rem] ":
                 hightlight,
             }
           )}
         >
           <Typography.Paragraph
             className={cn(
-              "text-[30rem] md:text-[80rem] md:mt-[50rem] mb-[5rem] md:mb-[20rem] font-playlist text-happy_box-honey",
-              { "text-happy_box-red": hightlight }
+              "text-[40rem] md:text-[80rem] md:mt-[50rem] mb-[0rem] md:mb-[20rem] font-playlist text-nj-blue/70",
+              { "text-nj-orange": hightlight }
             )}
           >
-            {t("common.day_d", {
-              day:
-                challengeNumber > 9 ? challengeNumber : `0${challengeNumber}`,
+            {t("common.image_n", {
+              number:
+                sequenceNumber > 9 ? sequenceNumber : `0${sequenceNumber}`,
             })}
           </Typography.Paragraph>
           <Typography.Paragraph
             className={cn(
-              "md:mb-[20rem] text-[12rem] md:text-[23rem] text-happy_box-light_yellow",
+              "md:mb-[20rem] text-[12rem] md:text-[23rem] text-nj-light_yellow",
               {
-                "text-happy_box-red": hightlight,
+                "text-nj-orange": hightlight,
               }
             )}
           >

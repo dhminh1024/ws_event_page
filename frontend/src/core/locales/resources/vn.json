@@ -6,6 +6,8 @@
     "go_back": "Quay lại",
     "language": "Ngôn ngữ",
     "day_d": "Ngày {{day}}",
+    "image_n": "Hình {{number}}",
+    "step_n": "Bước {{number}}",
     "upload_image": "Tải ảnh lên",
     "finish": "Hoàn thành",
     "edit": "Chỉnh sửa",
@@ -13,9 +15,13 @@
     "login_page": "Đăng nhập",
     "upload_photo": "Tải ảnh lên",
     "save_image": "Lưu ảnh",
+    "send_image": "Gửi ảnh",
     "cancel": "Hủy bỏ",
     "refresh_page": "Tải lại trang",
-    "from_d_to_d": "Từ {{from}} đến {{to}}"
+    "from_d_to_d": "Từ {{from}} đến {{to}}",
+    "full_name": "Họ và tên",
+    "class": "Lớp",
+    "student_code": "MSHS"
   },
   "notification": {
     "client_error": {
@@ -65,28 +71,6 @@
     "sub_heading_2_1": "Thời gian",
     "sub_heading_2_2": "Cách tham gia",
     "sub_heading_2_3": "Cách gửi ảnh",
-    "sub_heading_2_4": "Tiêu chí đánh giá",
-    "enter_sign_in_code": "Hãy nhập mã số học sinh hoặc mã số nhân viên",
-    "choose_first_letter": "Hãy chọn chữ cái đầu tên của bạn",
-    "welcome_wiser": "Chào Mừng WISer",
-    "challenge_section_description_1": "Không khí Tết rộn ràng, tràn ngập sắc xuân đã lan tỏa khắp Wellspring Saigon! Đây là lúc để mỗi WISer dừng lại một chút, nhìn lại chặng đường một năm đã qua, làm mới chính mình, lan tỏa yêu thương và tạo nên những kỷ niệm Tết thật ý nghĩa.",
-    "challenge_section_description_2_1": "Các WISers đã sẵn sàng “bung xõa” với",
-    "challenge_section_description_2_2": "6 Thử Thách Ngày Tết",
-    "challenge_section_description_2_3": "chưa? – Nơi lưu giữ từng khoảnh khắc rực rỡ, đậm chất tinh thần Lễ hội Mùa Xuân 2025 - Nhà là Tết Lớn trong Tim!",
-    "challenge_section_description_3": "Hãy chuẩn bị những khung hình đẹp nhất và cùng nhau chào đón một mùa Tết thật đáng nhớ.",
-    "video_section_gift_description_1": "{{number}} WISer may mắn",
-    "video_section_gift_description_2": "tham gia hoàn thành",
-    "video_section_gift_description_3": "đúng và đủ {{count}} thử thách",
-    "video_section_gift_description_4": "sẽ nhận quà từ Ban tổ chức",
-    "video_section_countdown_description_1": "Chỉ còn",
-    "video_section_countdown_description_2": "ngày nữa thôi,",
-    "video_section_countdown_description_3": "Hẹn gặp lại các WISers tại Lễ hội Mùa Xuân vào ngày",
-    "video_section_countdown_description_4": "sắp tới!",
-    "welcome_modal_description_1": "Hãy tham gia",
-    "welcome_modal_description_2": "Hội xuân ngày",
-    "welcome_modal_description_3": "để hoàn thành thử thách nhé",
-    "thankyou_modal_description_1": "Cảm ơn",
-    "thankyou_modal_description_2": "Bạn đã hoàn thành thử thách ngày Tết.",
-    "thankyou_modal_description_3": "Chúc WISer sẽ có một năm mới thật nhiều niềm vui và hạnh phúc"
+    "sub_heading_2_4": "Tiêu chí đánh giá"
   }
 }

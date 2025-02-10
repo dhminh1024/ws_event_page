@@ -45,4 +45,6 @@ export type EventVariable = {
     reward_2_en?: VariableType
     reward_3_vn?: VariableType
     reward_3_en?: VariableType
+
+    campaign_title?: VariableType
 }

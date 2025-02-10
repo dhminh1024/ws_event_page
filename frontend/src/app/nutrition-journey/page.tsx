@@ -10,7 +10,7 @@ import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { HeroSection } from "./sections/hero-section";
 import { GallerySection } from "./sections/gallery-section";
 import { TodayChallengeSection } from "./sections/today-challenge-section";
-import { ChallengeSection } from "./sections/challenge-section";
+import { ChallengeSection } from "./sections/missions-section";
 import { InstructionSection } from "./sections/instruction-section";
 import { Helmet } from "react-helmet";
 

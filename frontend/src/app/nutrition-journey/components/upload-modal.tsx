@@ -65,7 +65,7 @@ export const UploadModal: FC<UploadModalProps> = ({
 
   const handleOpenChange = ($open: boolean) => {
     setOpen($open);
-    if (!open){
+    if (!open) {
       onClose?.();
     }
   };
@@ -80,7 +80,7 @@ export const UploadModal: FC<UploadModalProps> = ({
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-[880rem] xl:max-w-[640rem] bg-[#F5F8CE] border-happy_box-light_red border-[15rem]">
+      <DialogContent className="max-w-[880rem] xl:max-w-[640rem] bg-happy_box-mint border-happy_box-brick border-[15rem]">
         <DialogHeader>
           <DialogTitle className="p-[10rem] text-[24rem] font-normal text-happy_box-red">
             {t("common.upload_photo")}
@@ -97,9 +97,8 @@ export const UploadModal: FC<UploadModalProps> = ({
           )}
         </div>
         <DialogFooter className="flex p-[20rem] justify-center sm:justify-center gap-x-[20rem] gap-y-[10rem]">
-          <LunarButton
-            className="text-[20rem] "
-            variant="primary"
+          <Button
+            className="text-[20rem] h-[30rem] p-[10rem_20rem] rounded-[5rem]"
             onClick={handleCropImage}
             disabled={loading}
           >
@@ -109,13 +108,14 @@ export const UploadModal: FC<UploadModalProps> = ({
               )}
               <span> {t("common.save_image")}</span>
             </div>
-          </LunarButton>
-          <LunarButton
-            className="text-[20rem]"
+          </Button>
+          <Button
+            variant={"outline"}
+            className="border-happy_box-brick hover:bg-happy_box-brick/10 bg-transparent !text-happy_box-brick font-[500] text-[20rem] h-[30rem] p-[10rem_20rem] rounded-[5rem]"
             onClick={() => handleOpenChange(false)}
           >
             {t("common.cancel")}
-          </LunarButton>
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

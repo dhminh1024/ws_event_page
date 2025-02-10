@@ -1,17 +1,15 @@
 import type { FC } from "react";
 import { Header } from "@nutrition-journey/sections/header";
 import { BackgroundCoin } from "@nutrition-journey/components/background";
-import { GallerySection } from "@nutrition-journey/sections/gallery-section";
-import { ChallengeSection } from "@nutrition-journey/sections/challenge-section";
-import { Video } from "lucide-react";
-import { VideoSection } from "../sections/video-section";
+import { MissionsSection } from "@/app/nutrition-journey/sections/missions-section";
 import Footer from "../sections/footer";
-import { HeroSection } from "../sections/hero-section";
-import { WelcomeModal } from "../components/welcome-modal";
-import { ThankYouModal } from "../components/thank-you-modal";
 import { Helmet } from "react-helmet";
 import { useLocales } from "@/core/hooks/use-locales";
 import env from "@/config/env";
+import { TitleSection } from "../sections/title-section";
+import { TargetSection } from "../sections/target-section";
+import { RewardSection } from "../sections/reward-section";
+import { LoginConfirmModal } from "../components/login-confirm-modal";
 
 export const Component: FC = () => {
   const { t } = useLocales();
@@ -19,13 +17,18 @@ export const Component: FC = () => {
     <BackgroundCoin>
       <Helmet>
         <title>
-          {t("common.home_page")} | {env.HAPPY_BOX.TITLE_PAGE}
+          {t("common.home_page")} | {env.NUTRITION_JOURNEY.TITLE_PAGE} -{" "}
+          {t("nutritional_journey.campaign_name")}
         </title>
       </Helmet>
       <Header className="px-[20rem] py-[10rem] md:py-[20rem] md:px-[60rem] md:h-[140rem]" />
       {/* <GallerySection /> */}
-      <ChallengeSection />
-      {/* <VideoSection />  */}
+      <div className="flex flex-col gap-y-[20rem] container font-sans ">
+        <TitleSection />
+        <TargetSection />
+        <MissionsSection />
+        <RewardSection />
+      </div>
       <Footer />
     </BackgroundCoin>
   );

@@ -12,9 +12,9 @@ export default function Footer({ className }: SectionProps) {
     <section
       id="contact"
       aria-labelledby="Footer"
-      className={cn("relative font-sans", className)}
+      className={cn("relative font-sans mt-[60rem]", className)}
     >
-      <div className="bg-happy_box-blue py-[20rem] md:py-[50rem]">
+      <div className="bg-nj-blue py-[20rem] md:py-[50rem]">
         <div className="px-[30rem] ">
           <div className="flex flex-col items-center gap-x-[100rem] gap-y-[20rem] md:flex-row">
             <div className="mt-[15rem] w-[65%] md:mt-0 md:w-auto md:basis-[40%] md:pl-[10%]">

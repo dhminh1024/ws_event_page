@@ -27,7 +27,7 @@ export const BackgroundCoin: FC<BackgroundCoinProps> = ({
 }) => {
   return (
     <div
-      className={cn("bg-happy_box-mint/40", className)}
+      className={cn("bg-nj-mint/40", className)}
       // style={{
       //   backgroundImage: `url(${cleanPath(
       //     `${env.ASSET_URL}/happy-box/bg-coin.png`
@@ -48,7 +48,7 @@ export const BackgroundCloud: FC<BackgroundCoinProps> = ({
 }) => {
   return (
     <BackgroundCloudStyled
-      className={cn("bg-happy_box-red", className)}
+      className={cn("bg-nj-red", className)}
       style={{
         backgroundImage: `url(${cleanPath(
           `${env.ASSET_URL}/happy-box/bg-cloud.png`

@@ -2,9 +2,8 @@ import { Outlet, RouteObject } from "react-router-dom";
 
 import { EVENT_PAGES } from "@/config/event-pages";
 
-import SignInModal from "./sections/sign-in-modal";
 import AuthWSCodeGuard from "@/lib/auth/auth-ws-code/permissions/auth-guard";
-import AuthWSCodeGuestGuard from "@/lib/auth/auth-ws-code/permissions/guest-guard";
+
 import RootLayout from "./root";
 import Layout from "./layout";
 
@@ -17,11 +16,6 @@ export const NUTRITION_JOURNEY_ROUTES: RouteObject[] = [
       </RootLayout>
     ),
     children: [
-      {
-        path: "sign-in",
-        lazy: () => import("./pages/login.page"),
-      },
-
       {
         path: "",
         element: (
@@ -37,7 +31,7 @@ export const NUTRITION_JOURNEY_ROUTES: RouteObject[] = [
             lazy: () => import("./pages/home.page"),
           },
           {
-            path: "upload/:id",
+            path: "upload/:qId/:index",
             lazy: () => import("./pages/upload.page"),
           },
         ],
