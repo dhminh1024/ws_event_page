@@ -136,11 +136,13 @@ export const MissionsSection: FC<MissionsSectionProps> = ({ className }) => {
                   {Array.from({ length: 4 }).map((_, index) => (
                     <Link
                       key={index}
-                      to={cleanPath(
+
+                      to={isValid ? cleanPath(
                         `/${EVENT_PAGES.NUTRITION_JOURNEY.SITE_URL}/upload/${
                           question.name
                         }/${index + 1}`
-                      )}
+                      ):'#'}
+                      
                     >
                       <BoxQuestion
                         className="w-full"
