@@ -8,7 +8,7 @@ const env = {
     DATE: import.meta.env.VITE_HAPPY_BOX_DATE || "",
   },
   NUTRITION_JOURNEY:{
-    TITLE_PAGE: "Hành Trình Dinh Dưỡng - Những Thay Đổi Nhỏ – Cùng Con Khôn Lớn",
+    TITLE_PAGE: "Hành Trình Dinh Dưỡng",
 
   }
 }
