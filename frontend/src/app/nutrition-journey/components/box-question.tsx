@@ -83,13 +83,12 @@ export const BoxQuestion: FC<BoxQuestionProps> = ({
         >
           <Typography.Paragraph
             className={cn(
-              "text-[40rem] md:text-[80rem] md:mt-[50rem] mb-[0rem] md:mb-[20rem] font-playlist text-nj-blue/70",
+              "text-[40rem] md:text-[50rem] md:mt-[50rem] mb-[0rem] md:mb-[20rem] font-bold font-sans text-nj-blue/70",
               { "text-nj-orange": hightlight }
             )}
           >
             {t("common.image_n", {
-              number:
-                sequenceNumber > 9 ? sequenceNumber : `0${sequenceNumber}`,
+              number: sequenceNumber,
             })}
           </Typography.Paragraph>
           <Typography.Paragraph
