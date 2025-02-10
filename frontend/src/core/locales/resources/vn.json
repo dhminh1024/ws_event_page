@@ -19,7 +19,7 @@
     "cancel": "Hủy bỏ",
     "refresh_page": "Tải lại trang",
     "from_d_to_d": "Từ {{from}} đến {{to}}",
-    "full_name": "Họ và tên",
+    "full_name": "Họ tên",
     "class": "Lớp",
     "student_code": "MSHS"
   },
@@ -71,6 +71,7 @@
     "sub_heading_2_1": "Thời gian",
     "sub_heading_2_2": "Cách tham gia",
     "sub_heading_2_3": "Cách gửi ảnh",
-    "sub_heading_2_4": "Tiêu chí đánh giá"
+    "sub_heading_2_4": "Tiêu chí đánh giá",
+    "student_not_found": "Vui lòng nhập chính xác MSHS và Họ tên"
   }
 }
