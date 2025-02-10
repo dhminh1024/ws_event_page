@@ -99,7 +99,7 @@ export const MissionsSection: FC<MissionsSectionProps> = ({ className }) => {
                 <Input
                   className="h-[30rem] w-full text-[14rem] md:text-[20rem] border-b-nj-blue !border-t-transparent !border-l-transparent !border-r-transparent border-b-[2rem] !shadow-none !outline-none md:w-[250rem] "
                   value={fullName}
-                  onChange={(e) => setFullName(e.currentTarget.value)}
+                  onChange={(e) => setFullName(e.currentTarget.value.trim())}
                 />
               </div>
               {/* {user && (
@@ -136,11 +136,13 @@ export const MissionsSection: FC<MissionsSectionProps> = ({ className }) => {
                   {Array.from({ length: 4 }).map((_, index) => (
                     <Link
                       key={index}
-                      to={cleanPath(
+
+                      to={isValid ? cleanPath(
                         `/${EVENT_PAGES.NUTRITION_JOURNEY.SITE_URL}/upload/${
                           question.name
                         }/${index + 1}`
-                      )}
+                      ):'#'}
+                      
                     >
                       <BoxQuestion
                         className="w-full"
