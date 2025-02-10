@@ -1,0 +1,17 @@
+meta {
+  name: Create NJ Submission
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}/api/method/ws_event_page.api.event.nutrition_journey.submission.create_nutrition_journey_submission
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "wellspring_code": "WS21901086"
+  }
+}

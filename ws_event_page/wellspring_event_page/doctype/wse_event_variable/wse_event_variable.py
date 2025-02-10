@@ -20,6 +20,6 @@ class WSEEventVariable(Document):
 		parenttype: DF.Data
 		variable_name: DF.Data
 		variable_type: DF.Literal["Text", "Image"]
-		variable_value: DF.Data | None
+		variable_value: DF.Text | None
 	# end: auto-generated types
 	pass

@@ -15,7 +15,7 @@ export const AuthWSCodeProvider: React.FC<AuthWSCodeProviderProps> = ({
   eventUrl,
 }) => {
   const [user, setUser] = useState<AuthWSCodeResponse | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const { call } = useFrappePostCall(
     "ws_event_page.api.auth.login.login_with_wellspring_code"
   );
@@ -23,13 +23,16 @@ export const AuthWSCodeProvider: React.FC<AuthWSCodeProviderProps> = ({
 
   const login = useCallback(
     async (wellspringCode: string) => {
+      console.log("login", wellspringCode);
+
       try {
         const response = await call({ wellspring_code: wellspringCode });
-        setUser(response.data);
+        setUser(response.message);
         setIsAuthenticated(true);
         localStorage.setItem("wse_wellspringCode", wellspringCode);
       } catch (error) {
         console.error("Login failed", error);
+        return Promise.reject(error);
       }
     },
     [call]
@@ -39,6 +42,8 @@ export const AuthWSCodeProvider: React.FC<AuthWSCodeProviderProps> = ({
     const wellspringCode = localStorage.getItem("wse_wellspringCode");
     if (wellspringCode) {
       login(wellspringCode);
+    }else{
+      logout();
     }
   }, [login]);
 
@@ -46,7 +51,7 @@ export const AuthWSCodeProvider: React.FC<AuthWSCodeProviderProps> = ({
     setUser(null);
     setIsAuthenticated(false);
     localStorage.removeItem("wse_wellspringCode");
-    navigate(`/${eventUrl}`);
+    // navigate(`/${eventUrl}`);
   };
 
   return (

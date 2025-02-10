@@ -1,0 +1,167 @@
+[
+ {
+  "description": null,
+  "docstatus": 0,
+  "doctype": "WSE Event",
+  "modified": "2025-01-02 07:56:51.191610",
+  "name": "thu-thach-don-tet",
+  "resource_ref": "{\n  \"hero_banner_img\": \"http://localhost:8000/files/Screenshot%202024-11-12%20at%2013.48.05.png\",\n  \"number\": 1234\n}",
+  "title": "Thử thách Đón Tết",
+  "url": "thu-thach-don-tet",
+  "variables": [
+   {
+    "image": "/files/logo_primary.png",
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "logo_wellspring_primary",
+    "variable_type": "Image",
+    "variable_value": null
+   },
+   {
+    "image": "/files/logo_happy_journey.png",
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "logo_happy_journey",
+    "variable_type": "Image",
+    "variable_value": null
+   },
+   {
+    "image": null,
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "date_start",
+    "variable_type": "Text",
+    "variable_value": "2025-01-18"
+   },
+   {
+    "image": null,
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "video_url",
+    "variable_type": "Text",
+    "variable_value": "https://www.youtube.com/embed/bxtg_zaicb8?si=g3HXpVyd_jz3vrkj"
+   },
+   {
+    "image": null,
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "gift_limit",
+    "variable_type": "Text",
+    "variable_value": "15"
+   },
+   {
+    "image": null,
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "wellspring_name",
+    "variable_type": "Text",
+    "variable_value": "WELLSPRING INTERNATIONAL BILINGUAL SCHOOLS"
+   },
+   {
+    "image": null,
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "wellspring_hanoi_hotline",
+    "variable_type": "Text",
+    "variable_value": "(+84) 24 7305 8668"
+   },
+   {
+    "image": null,
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "wellspring_hanoi_admissions_hotline",
+    "variable_type": "Text",
+    "variable_value": "(+84) 973 759 229"
+   },
+   {
+    "image": null,
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "wellspring_hanoi_admissions_email",
+    "variable_type": "Text",
+    "variable_value": "tuyensinh@wellspring.edu.vn"
+   },
+   {
+    "image": null,
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "wellspring_website",
+    "variable_type": "Text",
+    "variable_value": "www.wellspring.edu.vn"
+   },
+   {
+    "image": null,
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "wellspring_hanoi_address",
+    "variable_type": "Text",
+    "variable_value": "95 Ai Mo St., Bo De Ward, Long Bien Dist., Ha Noi"
+   },
+   {
+    "image": null,
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "wellspring_saigon_hotline",
+    "variable_type": "Text",
+    "variable_value": "(+84) 28 3840 9292"
+   },
+   {
+    "image": null,
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "wellspring_saigon_website",
+    "variable_type": "Text",
+    "variable_value": "wssg@wellspringsaigon.edu.vn"
+   },
+   {
+    "image": null,
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "wellspring_saigon_admissions_hotline",
+    "variable_type": "Text",
+    "variable_value": "(+84) 937 099 229"
+   },
+   {
+    "image": null,
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "wellspring_saigon_admissions_email",
+    "variable_type": "Text",
+    "variable_value": "admissions@wellspringsaigon.edu.vn"
+   },
+   {
+    "image": null,
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "wellspring_saigon_address",
+    "variable_type": "Text",
+    "variable_value": "92 Nguyen Huu Canh St., Ward 22, Binh Thanh Dist., Ho Chi Minh City"
+   },
+   {
+    "image": "/files/logo-white.png",
+    "parent": "thu-thach-don-tet",
+    "parentfield": "variables",
+    "parenttype": "WSE Event",
+    "variable_name": "logo_wellspring_white",
+    "variable_type": "Image",
+    "variable_value": null
+   }
+  ]
+ }
+]

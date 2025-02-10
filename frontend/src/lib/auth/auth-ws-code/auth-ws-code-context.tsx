@@ -3,7 +3,7 @@ import { AuthWSCodeResponse } from "./types";
 
 interface AuthContextType {
   user: AuthWSCodeResponse | null;
-  isAuthenticated: boolean;
+  isAuthenticated: boolean| null;
   login: (wellspringCode: string) => Promise<void>;
   logout: () => void;
 }

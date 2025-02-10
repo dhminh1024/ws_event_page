@@ -30,17 +30,17 @@ export default function ClientErrorState({ className }: Props) {
           }
           title={
             <p className="text-lg md:text-2xl">
-              {t("components.notifications.client_error.heading")}
+              {t("notification.client_error.heading")}
             </p>
           }
           subtitle={
             <p className="text-sm md:text-base">
-              {t("components.notifications.client_error.description")}
+              {t("notification.client_error.description")}
             </p>
           }
           action={
             <Button className="mt-5" size="lg" onClick={handleRefresh}>
-              {t("components.buttons.refresh_page")}
+              {t("common.refresh_page")}
             </Button>
           }
         />

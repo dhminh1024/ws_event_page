@@ -17,6 +17,8 @@ export default defineConfig({
       "@features": path.resolve(__dirname, "src/features"),
       "@templates": path.resolve(__dirname, "src/core/ui/templates"),
       "@": path.resolve(__dirname, "src"),
+      "@happy-box": path.resolve(__dirname, "src/app/happy-box"),
+      "@nutrition-journey": path.resolve(__dirname, "src/app/nutrition-journey"),
     },
   },
   build: {

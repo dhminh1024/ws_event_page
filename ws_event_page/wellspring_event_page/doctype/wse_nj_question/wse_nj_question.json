@@ -1,0 +1,115 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-24 14:37:02.283944",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "event",
+  "column_break_eecm",
+  "sequence_number",
+  "section_break_ijsj",
+  "title_vn",
+  "description_vn",
+  "column_break_azqn",
+  "title_en",
+  "description_en"
+ ],
+ "fields": [
+  {
+   "fieldname": "event",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Event",
+   "options": "WSE Event",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "description": "e.g. Q1, Q2",
+   "fieldname": "sequence_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Sequence Number",
+   "non_negative": 1,
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_eecm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ijsj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "title_vn",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Title VN",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description_vn",
+   "fieldtype": "Small Text",
+   "label": "Description VN"
+  },
+  {
+   "fieldname": "column_break_azqn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "title_en",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Title EN",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description_en",
+   "fieldtype": "Small Text",
+   "label": "Description EN"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-01-24 15:38:38.726398",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE NJ Question",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest",
+   "share": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "sequence_number",
+ "track_changes": 1
+}

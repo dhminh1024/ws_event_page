@@ -17,7 +17,7 @@ export const HBChallengeListProvider: React.FC<React.PropsWithChildren> = ({
 
   return (
     <HBChallengeContext.Provider
-      value={data?.message ? { challenges: data.message } : { challenges: [] }}
+      value={{ challenges: data?.message || [] }}
     >
       {children}
     </HBChallengeContext.Provider>
