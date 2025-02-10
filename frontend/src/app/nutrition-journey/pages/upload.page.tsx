@@ -97,7 +97,7 @@ export const Component = () => {
   return (
     <>
       <Helmet>
-        <title>{t("common.upload_image")} | {env.NUTRITION_JOURNEY.TITLE_PAGE} - {t("nutritional_journey.campaign_name")}</title>
+        <title>{t("common.upload_image")} | {t("nutritional_journey.campaign_name")}</title>
       </Helmet>
       <div className=" w-full h-full min-h-screen">
         <BackgroundCoin className="relative w-full h-full min-h-screen">
