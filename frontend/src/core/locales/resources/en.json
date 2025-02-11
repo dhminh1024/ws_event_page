@@ -21,7 +21,8 @@
     "from_d_to_d": "Từ {{from}} đến {{to}}",
     "full_name": "Họ tên",
     "class": "Lớp",
-    "student_code": "MSHS"
+    "student_code": "MSHS",
+    "event_email": "Email chương trình"
   },
   "notification": {
     "client_error": {
@@ -63,29 +64,14 @@
     "thankyou_modal_description_3": "Wishing WISer a new year full of joy and happiness"
   },
   "happy_run": {
-    "form_heading": "<span className=\"text-hr-blue\">SỰ KIỆN</span> HAPPY RUN 2025",
-    "enter_sign_in_code": "Hãy nhập mã số học sinh hoặc mã số nhân viên",
-    "choose_first_letter": "Hãy chọn chữ cái đầu tên của bạn",
-    "welcome_wiser": "Chào Mừng WISer",
-    "challenge_section_description_1": "Không khí Tết rộn ràng, tràn ngập sắc xuân đã lan tỏa khắp Wellspring Saigon! Đây là lúc để mỗi WISer dừng lại một chút, nhìn lại chặng đường một năm đã qua, làm mới chính mình, lan tỏa yêu thương và tạo nên những kỷ niệm Tết thật ý nghĩa.",
-    "challenge_section_description_2_1": "Các WISers đã sẵn sàng “bung xõa” với",
-    "challenge_section_description_2_2": "6 Thử Thách Ngày Tết",
-    "challenge_section_description_2_3": "chưa? – Nơi lưu giữ từng khoảnh khắc rực rỡ, đậm chất tinh thần Lễ hội Mùa Xuân 2025 - Nhà là Tết Lớn trong Tim!",
-    "challenge_section_description_3": "Hãy chuẩn bị những khung hình đẹp nhất và cùng nhau chào đón một mùa Tết thật đáng nhớ.",
-    "video_section_gift_description_1": "{{number}} WISer may mắn",
-    "video_section_gift_description_2": "tham gia hoàn thành",
-    "video_section_gift_description_3": "đúng và đủ {{count}} thử thách",
-    "video_section_gift_description_4": "sẽ nhận quà từ Ban tổ chức",
-    "video_section_countdown_description_1": "Chỉ còn",
-    "video_section_countdown_description_2": "ngày nữa thôi,",
-    "video_section_countdown_description_3": "Hẹn gặp lại các WISers tại Lễ hội Mùa Xuân vào ngày",
-    "video_section_countdown_description_4": "sắp tới!",
-    "welcome_modal_description_1": "Hãy tham gia",
-    "welcome_modal_description_2": "Hội xuân ngày",
-    "welcome_modal_description_3": "để hoàn thành thử thách nhé",
-    "thankyou_modal_description_1": "Cảm ơn",
-    "thankyou_modal_description_2": "Bạn đã hoàn thành thử thách ngày Tết.",
-    "thankyou_modal_description_3": "Chúc WISer sẽ có một năm mới thật nhiều niềm vui và hạnh phúc"
+    "form_heading": "SỰ KIỆN <span className=\"text-hr-honey\">HAPPY RUN 2025</span> <br/> <span className=\"text-hr-ember\">ĐĂNG KÝ THAM GIA</span>",
+    "form_description_1": "Chào mừng bạn đến với sự kiện",
+    "form_description_2": "Hãy đăng ký tham dự sự kiện theo thông tin bên dưới.",
+    "form": {
+      "user_code": "Mã số Học sinh/GV-NV",
+      "full_name": "Họ tên",
+      "class_department": "Lớp/Phòng ban"
+    }
   },
   "nutritional_journey": {
     "title": "Hành Trình Dinh Dưỡng",

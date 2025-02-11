@@ -23,10 +23,11 @@ export type EventVariableBase = {
     wellspring_saigon_admissions_hotline?: VariableType
     wellspring_saigon_admissions_email?: VariableType
     wellspring_saigon_address?: VariableType
-    title_event_vn?: VariableType
-    title_event_en?: VariableType
-    slogan_event_vn?: VariableType
-    slogan_event_en?: VariableType
+    event_title_vn?: VariableType
+    event_title_en?: VariableType
+    event_slogan_vn?: VariableType
+    event_slogan_en?: VariableType
+    event_name?: VariableType
 }
 
 export interface WSEEventResponse extends Omit<WSEEvent, "variables"> {

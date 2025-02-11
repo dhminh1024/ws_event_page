@@ -21,7 +21,8 @@
     "from_d_to_d": "Từ {{from}} đến {{to}}",
     "full_name": "Họ tên",
     "class": "Lớp",
-    "student_code": "MSHS"
+    "student_code": "MSHS",
+    "event_email": "Email chương trình"
   },
   "notification": {
     "client_error": {
@@ -63,7 +64,26 @@
     "thankyou_modal_description_3": "Chúc WISer sẽ có một năm mới thật nhiều niềm vui và hạnh phúc"
   },
   "happy_run": {
-    "form_heading": "<span className=\"text-hr-blue\">SỰ KIỆN</span> HAPPY RUN 2025 <br/> <span className=\"text-hr-ember\">ĐĂNG KÝ THAM GIA</span>"
+    "form_heading": "SỰ KIỆN <span className=\"text-hr-honey\">HAPPY RUN 2025</span> <br/> <span className=\"text-hr-ember\">ĐĂNG KÝ THAM GIA</span>",
+    "form_description_1": "Chào mừng bạn đến với sự kiện",
+    "form_description_2": "Hãy đăng ký tham dự sự kiện theo thông tin bên dưới.",
+    "form": {
+      "user_code": "Mã số Học sinh/GV-NV",
+      "full_name": "Họ tên",
+      "class_department": "Lớp/Phòng ban",
+      "ticket_class": "Hạng vé",
+      "ticket_class_placeholder": "Chọn hạng vé",
+      "ticket_class_required": "Hãy chọn hạng vé",
+      "ticket_distance": "Cự ly",
+      "ticket_distance_placeholder": "Chọn cự ly",
+      "ticket_distance_required": "Hãy chọn cự ly",
+      "shirt_size": "Size áo",
+      "shirt_size_placeholder": "Chọn size áo",
+      "shirt_size_required": "Hãy chọn size áo"
+    },
+    "buttons": {
+      "add_person": "Thêm người +"
+    }
   },
   "nutritional_journey": {
     "title": "Hành Trình Dinh Dưỡng",
