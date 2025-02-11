@@ -5,7 +5,7 @@ import { useLocales } from "@/core/hooks/use-locales";
 import { format } from "date-fns";
 import { Link, useNavigate } from "react-router-dom";
 import { useSubmission } from "@nutrition-journey/context/use-submission";
-import { cleanPath } from "@/lib/utils/common";
+import { cleanPath, removeAccents } from "@/lib/utils/common";
 import { EVENT_PAGES } from "@/config/event-pages";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { useQuestions } from "../context/use-questions";
@@ -25,7 +25,7 @@ export const MissionsSection: FC<MissionsSectionProps> = ({ className }) => {
   const { code, setCode, fullName, setFullName, isValid, user } = useUser();
   const { t, currentLanguage } = useLocales();
 
-  console.log(isValid);
+  // console.log(isValid,removeAccents(fullName));
 
   return (
     <section className="relative">
@@ -156,7 +156,7 @@ export const MissionsSection: FC<MissionsSectionProps> = ({ className }) => {
                         className="w-full"
                         imageUrl={
                           submission?.images?.find(
-                            (i) =>
+                            (i:any) =>
                               i.question.name === question.name &&
                               Number(i.sequence_number.split(".")[1]) ===
                                 index + 1
