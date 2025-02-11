@@ -29,3 +29,9 @@ def cancel_order(order_id):
     order.send_cancellation_email()
 
     return order
+
+
+@frappe.whitelist(allow_guest=True, methods=["GET"])
+def get_order_detail(order_id):
+    order = frappe.get_doc("WSE HR Order", order_id)
+    return order.as_dict()

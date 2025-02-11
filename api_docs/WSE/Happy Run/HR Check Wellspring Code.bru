@@ -1,0 +1,17 @@
+meta {
+  name: HR Check Wellspring Code
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}/api/method/ws_event_page.api.event.happy_run.submission.check_wellspring_code
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "wellspring_code": "W224018"
+  }
+}

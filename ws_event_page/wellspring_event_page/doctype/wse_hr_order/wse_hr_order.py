@@ -143,7 +143,8 @@ class WSEHROrder(Document):
             recipients = [self.email]
             message = "Your order has been received and is now being processed. You will receive an email confirmation shortly."
             template = "order_confirmation"
-            send_confirmation_email(template, sender, recipients, subject, message)
+            args = {"message": message}
+            send_confirmation_email(template, sender, recipients, subject, args)
 
     def before_save(self):
         # previous_status = self.get_doc_before_save().status
