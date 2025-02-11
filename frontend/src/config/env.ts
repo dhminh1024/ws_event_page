@@ -9,6 +9,10 @@ const env = {
   },
   HAPPY_RUN:{
     TITLE_PAGE: "Happy Run - Cuộc đua kỳ thú",
+  },
+  NUTRITION_JOURNEY:{
+    TITLE_PAGE: "Hành Trình Dinh Dưỡng",
+
   }
 }
 export default env

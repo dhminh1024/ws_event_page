@@ -6,6 +6,8 @@
     "go_back": "Quay lại",
     "language": "Ngôn ngữ",
     "day_d": "Ngày {{day}}",
+    "image_n": "Hình {{number}}",
+    "step_n": "Bước {{number}}",
     "upload_image": "Tải ảnh lên",
     "finish": "Hoàn thành",
     "edit": "Chỉnh sửa",
@@ -13,8 +15,13 @@
     "login_page": "Đăng nhập",
     "upload_photo": "Tải ảnh lên",
     "save_image": "Lưu ảnh",
+    "send_image": "Gửi ảnh",
     "cancel": "Hủy bỏ",
-    "refresh_page": "Tai lại trang"
+    "refresh_page": "Tải lại trang",
+    "from_d_to_d": "Từ {{from}} đến {{to}}",
+    "full_name": "Họ tên",
+    "class": "Lớp",
+    "student_code": "MSHS"
   },
   "notification": {
     "client_error": {
@@ -57,5 +64,17 @@
   },
   "happy_run": {
     "form_heading": "<span className=\"text-hr-blue\">SỰ KIỆN</span> HAPPY RUN 2025 <br/> <span className=\"text-hr-ember\">ĐĂNG KÝ THAM GIA</span>"
+  },
+  "nutritional_journey": {
+    "title": "Hành Trình Dinh Dưỡng",
+    "campaign_name": "Những Thay Đổi Nhỏ – Cùng Con Khôn Lớn",
+    "heading_1": "I. Mục tiêu",
+    "heading_2": "II. Thể lệ cuộc thi",
+    "heading_3": "III. Phần thưởng và công nhận",
+    "sub_heading_2_1": "Thời gian",
+    "sub_heading_2_2": "Cách tham gia",
+    "sub_heading_2_3": "Cách gửi ảnh",
+    "sub_heading_2_4": "Tiêu chí đánh giá",
+    "student_not_found": "Vui lòng nhập chính xác MSHS và Họ tên"
   }
 }

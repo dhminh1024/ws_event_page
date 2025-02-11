@@ -15,7 +15,7 @@ export default {
       fontFamily: {
         sans: ["Mulish", "sans-serif"],
         playlist: ["Playlist"],
-        tropen: ["Tropen"]
+        tropen: ["Tropen"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -68,7 +68,7 @@ export default {
           blue: "hsl(var(--page-deep-blue))",
           mint: "hsl(var(--page-mint))",
           light_yellow: "hsl(var(--page-light-yellow))",
-          light_red: "hsl(var(--page-light-red))"
+          light_red: "hsl(var(--page-light-red))",
         },
         hr: {
           background: "#E6EBFF",
@@ -76,7 +76,22 @@ export default {
           honey: "#F5AA1E",
           ember: "#F05023",
           steel_blue: "#3B6DAE",
-          lime: "#BED232"
+          lime: "#BED232",
+        },
+        nj: {
+          foreground: "hsl(var(--page-foreground))",
+          cream: "hsl(var(--page-cream))",
+          honey: "hsl(var(--page-honey))",
+          brick: "hsl(var(--page-brick))",
+          blue: "hsl(var(--page-deep-blue))",
+          mint: "hsl(var(--page-mint))",
+          light_yellow: "hsl(var(--page-light-yellow))",
+          light_red: "hsl(var(--page-light-red))",
+          green: "#016465",
+          orange: "#E3843F",
+          red: "#F93B00",
+          radiant: "#7ED957",
+          pink: "#EA3882",
         },
         status: {
           success: "hsl(var(--success))",
@@ -107,21 +122,21 @@ export default {
         },
         "swing-left": {
           from: {
-            "transform": "rotate(-3deg) scale(1)",
-            "transform-origin": "bottom left"
+            transform: "rotate(-3deg) scale(1)",
+            "transform-origin": "bottom left",
           },
           to: {
-            "transform": "rotate(3deg) scale(1.05)"
-          }
+            transform: "rotate(3deg) scale(1.05)",
+          },
         },
         "swing-right": {
           from: {
-            "transform": "rotate(3deg) scale(1.05)",
-            "transform-origin": "bottom right"
+            transform: "rotate(3deg) scale(1.05)",
+            "transform-origin": "bottom right",
           },
           to: {
-            "transform": "rotate(-3deg) scale(1)"
-          }
+            transform: "rotate(-3deg) scale(1)",
+          },
         },
       },
       animation: {
@@ -130,7 +145,7 @@ export default {
         "fade-in": "fade-in 0.5s linear",
         "fade-out": "fade-out 0.5s linear",
         "swing-left": "swing-left 5s ease-in-out infinite alternate",
-        "swing-right": "swing-right 5s ease-in-out infinite alternate"
+        "swing-right": "swing-right 5s ease-in-out infinite alternate",
       },
     },
   },

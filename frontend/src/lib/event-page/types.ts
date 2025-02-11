@@ -1,6 +1,7 @@
 
 import { HBEventVariable } from "@/app/happy-box/types/variables";
 import { HREventVariable } from "@/app/happy-run/types/variables";
+import { EventVariable } from "@/app/nutrition-journey/types/variables";
 import { WSEEvent } from "@/types/WellspringEventPage/WSEEvent";
 
 export type VariableType = {
