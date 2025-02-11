@@ -22,7 +22,7 @@ export const Component: FC = () => {
       </Helmet>
       <Header className="px-[20rem] py-[10rem] md:py-[20rem] md:px-[60rem] md:h-[140rem]" />
       {/* <GallerySection /> */}
-      <div className="flex flex-col gap-y-[20rem] container font-sans ">
+      <div className="flex flex-col gap-y-[20rem] px-[10rem] md:px-[40rem] font-sans ">
         <TitleSection />
         <TargetSection />
         <MissionsSection />

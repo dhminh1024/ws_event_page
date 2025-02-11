@@ -21,7 +21,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
         >
           {t("nutritional_journey.heading_1")}
         </Typography.Heading>
-        <div className="container flex flex-col pl-[5rem] md:pl-[20rem]">
+        <div className="flex flex-col pl-[5rem] md:pl-[20rem]">
           <Typography.Text className="text-nj-orange font-medium text-[14rem] md:text-[20rem]">
             ☛ {event.variables.target_desc_1_vn?.value}
           </Typography.Text>

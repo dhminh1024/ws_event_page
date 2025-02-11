@@ -20,7 +20,7 @@ export const RewardSection: FC<RewardSectionProps> = ({ className }) => {
         >
           {t("nutritional_journey.heading_3")}
         </Typography.Heading>
-        <div className="container flex flex-col gap-y-[10rem] pl-[5rem] md:pl-[20rem]">
+        <div className="flex flex-col gap-y-[10rem] pl-[5rem] md:pl-[20rem]">
           <Typography.Text className="text-nj-orange font-medium text-[14rem] md:text-[20rem]">
             ☛ {event.variables.reward_1_vn?.value}
           </Typography.Text>

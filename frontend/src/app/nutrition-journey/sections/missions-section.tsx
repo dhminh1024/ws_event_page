@@ -36,7 +36,7 @@ export const MissionsSection: FC<MissionsSectionProps> = ({ className }) => {
         >
           {t("nutritional_journey.heading_2")}
         </Typography.Heading>
-        <div className="container flex flex-col gap-y-[10rem] pl-[5rem] md:pl-[20rem]">
+        <div className="flex flex-col gap-y-[10rem] pl-[5rem] md:pl-[20rem]">
           <Typography.Text className="text-nj-orange font-medium text-[14rem] md:text-[20rem]">
             <span className="text-nj-blue">
               <span className="underline">
