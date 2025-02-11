@@ -12,6 +12,7 @@ import { useQuestions } from "../context/use-questions";
 import { Input } from "@atoms/input";
 import { WSENJQuestionExtended } from "../context/types";
 import { useUser } from "../context/use-user";
+import { Check, X } from "lucide-react";
 
 export type MissionsSectionProps = {
   className?: string;
@@ -71,37 +72,46 @@ export const MissionsSection: FC<MissionsSectionProps> = ({ className }) => {
           </Typography.Text>
           <div className="flex flex-col pl-[5rem] md:pl-[25rem] gap-y-[10rem]">
             <div className="flex flex-col gap-y-[10rem] md:gap-y-[20rem]">
-              <div className="flex flex-col md:flex-row gap-x-[5rem] md:gap-x-[10rem]">
+              <div className="gap-x-[5rem] md:gap-x-[10rem]">
                 <Typography.Text className="text-nj-orange font-medium text-[14rem] md:text-[20rem]">
                   <span className="mr-[5rem] underline text-nj-blue font-bold">
                     {t("common.step_n", {
                       number: 1,
                     })}
-                    {}:
+                    :
                   </span>
                   <span>{event.variables.how_to_join_desc_1_vn?.value}</span>
                 </Typography.Text>
-                <Typography.Text className="text-nj-orange font-medium text-[14rem] md:text-[20rem]">
+         
+              </div>
+              <div className="flex flex-col md:flex-row items-center">
+                <Typography.Text className="text-nj-orange  mr-[10rem] font-medium text-[14rem] md:text-[20rem]">
                   <span className="font-bold text-nj-blue">
                     {t("common.student_code")}:
                   </span>
                 </Typography.Text>
+
                 <Input
-                  className="h-[30rem] w-full text-[14rem] md:text-[20rem] uppercase border-b-nj-blue !border-t-transparent !border-l-transparent !border-r-transparent border-b-[2rem] !shadow-none !outline-none md:w-[200rem] tracking-[2rem]"
+                  className="h-[30rem] w-full text-[14rem] md:text-[20rem] uppercase border-b-nj-blue !border-t-transparent !border-l-transparent !border-r-transparent border-b-[2rem] !shadow-none !outline-none md:w-[300rem] tracking-[2rem]"
                   value={code}
                   onChange={(e) => setCode(e.currentTarget.value)}
                 />
-                <Typography.Text className="mt-[10rem] md:mt-0 text-nj-orange font-medium text-[14rem] md:text-[20rem]">
+                <Typography.Text className="mt-[10rem] mx-[10rem] md:mt-0 text-nj-orange font-medium text-[14rem] md:text-[20rem]">
                   <span className="font-bold text-nj-blue">
                     {t("common.full_name")}:
                   </span>
                 </Typography.Text>
                 <Input
-                  className="h-[30rem] w-full text-[14rem] md:text-[20rem] border-b-nj-blue !border-t-transparent !border-l-transparent !border-r-transparent border-b-[2rem] !shadow-none !outline-none md:w-[250rem] "
+                  className="h-[30rem] w-full text-[14rem] md:text-[20rem] border-b-nj-blue !border-t-transparent !border-l-transparent !border-r-transparent border-b-[2rem] !shadow-none !outline-none md:w-[300rem] "
                   value={fullName}
                   onChange={(e) => setFullName(e.currentTarget.value)}
-                  onBlur={(e) => setFullName(e.currentTarget.value.trim())}
                 />
+                {isValid && (
+                  <Check className="text-status-success ml-[10rem]" />
+                )}
+                {!isValid && code && fullName && (
+                  <X className="text-status-danger ml-[10rem]" />
+                )}
               </div>
               {code && fullName && !isValid && (
                 <Typography.Text className="text-nj-red font-medium text-[12rem] md:text-[20rem]">
@@ -156,7 +166,7 @@ export const MissionsSection: FC<MissionsSectionProps> = ({ className }) => {
                         className="w-full"
                         imageUrl={
                           submission?.images?.find(
-                            (i:any) =>
+                            (i: any) =>
                               i.question.name === question.name &&
                               Number(i.sequence_number.split(".")[1]) ===
                                 index + 1

@@ -50,7 +50,7 @@ export const UserProvider: React.FC<React.PropsWithChildren> = ({
         code,
         isValid:
           student?.wellspringCode === code &&
-          removeAccents(student.fullName) === removeAccents(fullName),
+          removeAccents(student.fullName.trim()) === removeAccents(fullName.trim()),
         fullName,
         setCode,
         setFullName,
