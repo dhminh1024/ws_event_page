@@ -19,6 +19,7 @@
     "date-fns": "^4.1.0",
     "dicebear": "^9.2.2",
     "frappe-react-sdk": "^1.9.0",
+    "html-react-parser": "^5.2.2",
     "i18next": "^24.0.5",
     "i18next-browser-languagedetector": "^8.0.2",
     "lodash": "^4.17.21",

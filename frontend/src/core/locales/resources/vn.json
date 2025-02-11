@@ -54,5 +54,8 @@
     "thankyou_modal_description_1": "Cảm ơn",
     "thankyou_modal_description_2": "Bạn đã hoàn thành thử thách ngày Tết.",
     "thankyou_modal_description_3": "Chúc WISer sẽ có một năm mới thật nhiều niềm vui và hạnh phúc"
+  },
+  "happy_run": {
+    "form_heading": "<span className=\"text-hr-blue\">SỰ KIỆN</span> HAPPY RUN 2025 <br/> <span className=\"text-hr-ember\">ĐĂNG KÝ THAM GIA</span>"
   }
 }

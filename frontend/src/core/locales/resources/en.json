@@ -54,5 +54,8 @@
     "thankyou_modal_description_1": "Thank you",
     "thankyou_modal_description_2": "You have completed the Tet challenge.",
     "thankyou_modal_description_3": "Wishing WISer a new year full of joy and happiness"
+  },
+  "happy_run": {
+    "form_heading": "<span className=\"text-hr-blue\">SỰ KIỆN</span> HAPPY RUN 2025"
   }
 }

@@ -70,6 +70,14 @@ export default {
           light_yellow: "hsl(var(--page-light-yellow))",
           light_red: "hsl(var(--page-light-red))"
         },
+        hr: {
+          background: "#E6EBFF",
+          blue: "#172A52",
+          honey: "#F5AA1E",
+          ember: "#F05023",
+          steel_blue: "#3B6DAE",
+          lime: "#BED232"
+        },
         status: {
           success: "hsl(var(--success))",
           danger: "hsl(var(--danger))",
