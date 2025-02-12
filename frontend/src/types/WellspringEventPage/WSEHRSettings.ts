@@ -16,4 +16,12 @@ export interface WSEHRSettings{
 	email_sender: string
 	/**	Happy Run Ticket Price : Currency	*/
 	happy_run_ticket_price: number
+	/**	VietQR URL : Data	*/
+	vietqr_url: string
+	/**	Account Number : Data	*/
+	account_number: string
+	/**	BIN number : Data	*/
+	bin_number: string
+	/**	Account Name : Data	*/
+	account_name: string
 }

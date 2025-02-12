@@ -1,15 +1,21 @@
 import frappe
+from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket import (
+    HRTicketStatus,
+)
+from ws_event_page.wellspring_event_page.doctype.wse_hr_order.wse_hr_order import (
+    HROrderStatus,
+)
 
 
 @frappe.whitelist()
 def confirm_payment(order_id):
     order = frappe.get_doc("WSE HR Order", order_id)
-    if order.status != "Pending Payment":
+    if order.status != HROrderStatus.PENDING_PAYMENT.value:
         frappe.throw("Order is not pending payment")
-    order.status = "Paid"
+    order.status = HROrderStatus.PAID.value
     for ticket in order.tickets:
-        if ticket.status == "Pending Payment":
-            ticket.status = "Paid"
+        if ticket.status == HROrderStatus.PENDING_PAYMENT.value:
+            ticket.status = HRTicketStatus.PAID.value
     order.save()
     order.send_payment_confirmation_email()
 
@@ -19,12 +25,12 @@ def confirm_payment(order_id):
 @frappe.whitelist()
 def cancel_order(order_id):
     order = frappe.get_doc("WSE HR Order", order_id)
-    if order.status == "Canceled":
+    if order.status == HROrderStatus.CANCELED.value:
         frappe.throw("Order is already canceled")
-    order.status = "Canceled"
+    order.status = HROrderStatus.CANCELED.value
     for ticket in order.tickets:
-        if ticket.status == "Pending Payment":
-            ticket.status = "Canceled"
+        if ticket.status == HRTicketStatus.PENDING_PAYMENT.value:
+            ticket.status = HRTicketStatus.CANCELED.value
     order.save()
     order.send_cancellation_email()
 

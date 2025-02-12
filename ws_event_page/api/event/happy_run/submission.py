@@ -1,5 +1,12 @@
 import frappe
 from ws_event_page.api.utils.validation import validate_wellspring_code
+from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket import (
+    HRTicketStatus,
+    HRTicketType,
+)
+from ws_event_page.wellspring_event_page.doctype.wse_hr_order.wse_hr_order import (
+    HROrderStatus,
+)
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])
@@ -16,6 +23,7 @@ def check_wellspring_code(wellspring_code):
             `tabWSE HR Ticket` JOIN `tabWSE HR Order` ON `tabWSE HR Ticket`.parent = `tabWSE HR Order`.name
         WHERE
             `tabWSE HR Ticket`.wellspring_code = "{wellspring_code}"
+            AND `tabWSE HR Order`.status != "{HROrderStatus.CANCELED.value}"
     """
     orders = frappe.db.sql(query, as_dict=True)
     if orders and len(orders) > 0:

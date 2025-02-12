@@ -14,8 +14,12 @@ class WSEHRSettings(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
+		account_name: DF.Data
+		account_number: DF.Data
+		bin_number: DF.Data
 		email_sender: DF.Data
 		happy_run_ticket_price: DF.Currency
+		vietqr_url: DF.Data
 		wellbeing_ticket_price: DF.Currency
 	# end: auto-generated types
 	pass

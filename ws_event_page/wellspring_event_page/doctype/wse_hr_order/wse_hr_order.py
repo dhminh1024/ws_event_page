@@ -7,18 +7,29 @@ from frappe.model.document import Document
 from frappe.utils.file_manager import save_file
 
 from ws_event_page.api.utils.validation import validate_wellspring_code
+from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket import (
+    HRTicketStatus,
+    HRTicketType,
+)
 import requests
 import json
+from enum import Enum
 
 logger = frappe.logger("WSE_HR_ORDER", allow_site=True, file_count=50)
 settings = frappe.get_doc("WSE HR Settings")
 
 
+class HROrderStatus(Enum):
+    PENDING_PAYMENT = "Pending Payment"
+    CANCELED = "Canceled"
+    PAID = "Paid"
+
+
 # get the WSE HR Settings for ticket prices
 def get_ticket_price(ticket_type):
-    if ticket_type == "Happy Run":
+    if ticket_type == HRTicketType.HAPPY_RUN.value:
         return settings.happy_run_ticket_price
-    elif ticket_type == "Well-being":
+    elif ticket_type == HRTicketType.WELL_BEING.value:
         return settings.wellbeing_ticket_price
     else:
         frappe.throw("Invalid Ticket Type")
@@ -93,12 +104,12 @@ class WSEHROrder(Document):
         self.generate_qr_payment_code()
 
     def generate_qr_payment_code(self):
-        vietqr_url = "https://api.vietqr.io/v2/generate"
+        vietqr_url = settings.vietqr_url
         headers = {"Content-Type": "application/json"}
         payload = {
-            "accountNo": "01591109001",
-            "accountName": "Do Hai Minh",
-            "acqId": "970423",
+            "accountNo": settings.account_number,
+            "accountName": settings.account_name,
+            "acqId": settings.bin_number,
             "amount": self.total_price,
             "addInfo": self.name,
             "format": "text",
@@ -137,7 +148,7 @@ class WSEHROrder(Document):
 
     def after_insert(self):
         """Send confirmation email after creating the order"""
-        if self.status == "Pending Payment":
+        if self.status == HROrderStatus.PENDING_PAYMENT.value:
             sender = settings.email_sender
             subject = "Happy Run Order Confirmation"
             recipients = [self.email]
@@ -152,7 +163,7 @@ class WSEHROrder(Document):
         #     frappe.throw("Order is already canceled")
 
         self.calculate_total_price()
-        if self.status == "Pending Payment":
+        if self.status == HROrderStatus.PENDING_PAYMENT.value:
             self.generate_qr_payment_code()
 
     def calculate_total_price(self):
@@ -161,9 +172,9 @@ class WSEHROrder(Document):
         self.total_payment_pending = 0
         for ticket in self.tickets:
             self.total_price += ticket.ticket_price
-            if ticket.status == "Paid":
+            if ticket.status == HRTicketStatus.PAID.value:
                 self.total_paid += ticket.ticket_price
-            elif ticket.status == "Pending Payment":
+            elif ticket.status == HRTicketStatus.PENDING_PAYMENT.value:
                 self.total_payment_pending += ticket.ticket_price
 
     def send_payment_confirmation_email(self):
