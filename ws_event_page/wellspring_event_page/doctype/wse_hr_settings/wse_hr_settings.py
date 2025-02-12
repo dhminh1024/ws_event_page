@@ -16,6 +16,7 @@ class WSEHRSettings(Document):
 
 		account_name: DF.Data
 		account_number: DF.Data
+		bank_short_name: DF.Data
 		bin_number: DF.Data
 		email_sender: DF.Data
 		happy_run_ticket_price: DF.Currency

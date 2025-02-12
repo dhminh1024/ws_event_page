@@ -150,8 +150,7 @@
    "fieldtype": "Data",
    "in_filter": 1,
    "in_standard_filter": 1,
-   "label": "BIB",
-   "reqd": 1
+   "label": "BIB"
   },
   {
    "default": "Pending Payment",
@@ -165,7 +164,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-02-06 15:11:08.103182",
+ "modified": "2025-02-12 14:48:54.338390",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE HR Ticket",

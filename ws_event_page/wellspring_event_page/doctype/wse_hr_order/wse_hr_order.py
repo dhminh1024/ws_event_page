@@ -53,9 +53,9 @@ class WSEHROrder(Document):
         qr_payment_code: DF.AttachImage | None
         status: DF.Literal["Pending Payment", "Canceled", "Paid"]
         tickets: DF.Table[WSEHRTicket]
-        total_paid: DF.Currency
-        total_payment_pending: DF.Currency
-        total_price: DF.Currency
+        total_paid: DF.Int
+        total_payment_pending: DF.Int
+        total_price: DF.Int
     # end: auto-generated types
 
     def validate(self):
@@ -100,16 +100,57 @@ class WSEHROrder(Document):
         if ws_code_count == 0:
             frappe.throw("At least one Wellspring Code is required")
 
-    def before_insert(self):
-        self.generate_qr_payment_code()
+    def after_insert(self):
+        """Send confirmation email after creating the order"""
+        if self.status == HROrderStatus.PENDING_PAYMENT.value:
+            sender = settings.email_sender
+            subject = "Happy Run Order Confirmation"
+            recipients = [self.email]
+            message = "Your order has been received and is now being processed. You will receive an email confirmation shortly."
+            template = "order_confirmation"
+            qr_code_img_tag = f"""<img src="{self.qr_payment_code}" alt="QR Payment Code" style="width: 200px; height: 200px;"/>"""
+
+            args = dict(
+                message=message,
+                total_payment_pending=frappe.utils.fmt_money(
+                    self.total_price, currency="VND", format="#.###", precision=0
+                ),
+                qr_code_img_tag=qr_code_img_tag,
+            )
+            send_confirmation_email(template, sender, recipients, subject, args)
+
+    def before_save(self):
+        # previous_status = self.get_doc_before_save().status
+        # if previous_status == "Canceled":
+        #     frappe.throw("Order is already canceled")
+
+        self.calculate_total_price()
+        if self.status == HROrderStatus.PENDING_PAYMENT.value:
+            self.generate_qr_payment_code()
 
     def generate_qr_payment_code(self):
+        account_number = settings.account_number
+        account_name = settings.account_name
+        bin_number = settings.bin_number
+        bank_short_name = settings.bank_short_name
+        if not all([account_number, account_name, bin_number, bank_short_name]):
+            frappe.throw(f"VietQR settings are not configured: {settings}")
+        vietqr_url = f"https://img.vietqr.io/image/{bank_short_name}-{account_number}-qr_only.jpg?amount={self.total_price}&addInfo={self.name}&accountName={account_name}&acqId={bin_number}"
+        self.qr_payment_code = vietqr_url
+
+    def __generate_qr_payment_code_v1(self):
         vietqr_url = settings.vietqr_url
+        account_number = settings.account_number
+        account_name = settings.account_name
+        bin_number = settings.bin_number
+        if not all([vietqr_url, account_number, account_name, bin_number]):
+            frappe.throw(f"VietQR settings are not configured: {settings}")
+
         headers = {"Content-Type": "application/json"}
         payload = {
-            "accountNo": settings.account_number,
-            "accountName": settings.account_name,
-            "acqId": settings.bin_number,
+            "accountNo": account_number,
+            "accountName": account_name,
+            "acqId": bin_number,
             "amount": self.total_price,
             "addInfo": self.name,
             "format": "text",
@@ -137,34 +178,15 @@ class WSEHROrder(Document):
 
                     self.qr_payment_code = file_doc.file_url
                 else:
-                    logger.error(json.dumps(payload))
-                    logger.error(response_json)
+                    raise Exception("QR Payment Code not found in response")
             except Exception as e:
-                logger.error(json.dumps(payload))
+                # logger.error(json.dumps(payload))
                 logger.error(response.json())
                 logger.error(f"Exception: {e}")
+                frappe.throw(f"Failed to generate QR Payment Code: {e}")
         else:
             logger.error(response)
-
-    def after_insert(self):
-        """Send confirmation email after creating the order"""
-        if self.status == HROrderStatus.PENDING_PAYMENT.value:
-            sender = settings.email_sender
-            subject = "Happy Run Order Confirmation"
-            recipients = [self.email]
-            message = "Your order has been received and is now being processed. You will receive an email confirmation shortly."
-            template = "order_confirmation"
-            args = {"message": message}
-            send_confirmation_email(template, sender, recipients, subject, args)
-
-    def before_save(self):
-        # previous_status = self.get_doc_before_save().status
-        # if previous_status == "Canceled":
-        #     frappe.throw("Order is already canceled")
-
-        self.calculate_total_price()
-        if self.status == HROrderStatus.PENDING_PAYMENT.value:
-            self.generate_qr_payment_code()
+            frappe.throw(f"Failed to generate QR Payment Code: {response}")
 
     def calculate_total_price(self):
         self.total_paid = 0
@@ -184,13 +206,8 @@ class WSEHROrder(Document):
         recipients = [self.email]
         message = "Your payment has been received and your order is now confirmed. We look forward to seeing you at the event."
         template = "payment_confirmation"
-        qr_code_img_tag = f"""<img src="{self.qr_payment_code}" alt="QR Payment Code" style="width: 200px; height: 200px;"/>"""
         args = dict(
             message=message,
-            total_payment_pending=frappe.utils.fmt_money(
-                self.total_price, currency="VND", format="#.###", precision=0
-            ),
-            qr_code_img_tag=qr_code_img_tag,
         )
         send_confirmation_email(template, sender, recipients, subject, args)
 

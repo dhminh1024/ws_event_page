@@ -85,7 +85,7 @@
   },
   {
    "fieldname": "total_price",
-   "fieldtype": "Currency",
+   "fieldtype": "Int",
    "in_filter": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
@@ -96,6 +96,7 @@
   {
    "fieldname": "qr_payment_code",
    "fieldtype": "Attach Image",
+   "hidden": 1,
    "label": "QR Payment Code",
    "read_only": 1
   },
@@ -113,7 +114,7 @@
   },
   {
    "fieldname": "total_paid",
-   "fieldtype": "Currency",
+   "fieldtype": "Int",
    "in_filter": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
@@ -123,7 +124,7 @@
   },
   {
    "fieldname": "total_payment_pending",
-   "fieldtype": "Currency",
+   "fieldtype": "Int",
    "in_filter": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
@@ -135,7 +136,7 @@
  "image_field": "qr_payment_code",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-06 16:36:11.296906",
+ "modified": "2025-02-12 16:22:21.736209",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE HR Order",

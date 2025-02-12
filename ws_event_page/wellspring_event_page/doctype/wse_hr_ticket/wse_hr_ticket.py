@@ -48,7 +48,7 @@ class WSEHRTicket(Document):
     if TYPE_CHECKING:
         from frappe.types import DF
 
-        bib: DF.Data
+        bib: DF.Data | None
         category: DF.Literal["Primary", "Companion"]
         department: DF.Data | None
         distance: DF.Literal["2.5 km", "5 km"]
@@ -59,12 +59,8 @@ class WSEHRTicket(Document):
         parenttype: DF.Data
         person_id: DF.Link | None
         school_class_title: DF.Data | None
-        shirt_size: DF.Literal[
-            "Size 1", "Size 2", "Size 3", "Size 4", "Size 5", "Size 6", "Size 7"
-        ]
-        status: DF.Literal[
-            "Pending Payment", "Canceled", "Paid", "Refunded", "Attended"
-        ]
+        shirt_size: DF.Literal["Size 1", "Size 2", "Size 3", "Size 4", "Size 5", "Size 6", "Size 7"]
+        status: DF.Literal["Pending Payment", "Canceled", "Paid", "Refunded", "Attended"]
         ticket_price: DF.Currency
         ticket_type: DF.Literal["Happy Run", "Well-being"]
         wellspring_code: DF.Data | None
