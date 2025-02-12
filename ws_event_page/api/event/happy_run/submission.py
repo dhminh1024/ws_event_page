@@ -34,7 +34,7 @@ def check_wellspring_code(wellspring_code):
     if user_type == "Student":
         school_class = student_staff.get_current_class()
         if school_class:
-            person_info["school_class_title"].school_class_title = school_class.title
+            person_info["school_class_title"] = school_class.title
     else:
         person_info["department"] = student_staff.department
 
