@@ -16,6 +16,11 @@ export interface HREventVariable extends EventVariableBase {
    info_primary_user_heading_en?: VariableType,
    info_guardian_user_heading_vn?: VariableType,
    info_guardian_user_heading_en?: VariableType,
+   open_shirt_size_selection?: VariableType,
+   policy_note_vn?: VariableType,
+   policy_note_en?: VariableType,
+   policy_content_vn?: VariableType,
+   policy_content_en?: VariableType
 }
 
 export interface HRUserInfo {

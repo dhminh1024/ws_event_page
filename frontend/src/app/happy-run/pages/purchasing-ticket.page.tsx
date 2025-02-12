@@ -50,79 +50,11 @@ export const Component = () => {
       <div className="pallette">
         <span className="text-hr-honey"></span>
         <span className="text-hr-ember"></span>
+        <span className="text-brand-persian"></span>
       </div>
       <div className="bg-gray-400 h-[300rem]"></div>
-      <div className="px-[10rem] md:px-[8%]">
-        <center className="mb-[40rem]">
-          <Typography.Heading
-            className="py-[40rem] text-[45rem] text-hr-blue leading-[1.2] font-extrabold"
-            level={2}
-          >
-            {parser(t("happy_run.form_heading"))}
-          </Typography.Heading>
-          <Typography.Paragraph className="text-hr-blue text-[20rem] font-semibold">
-            <span>{t("happy_run.form_description_1")}</span>
-            <span className="ml-[5rem] text-[23rem] font-black uppercase">
-              {event.variables.event_name?.value}
-            </span>
-          </Typography.Paragraph>
-          <Typography.Paragraph className="text-hr-blue text-[20rem] font-semibold mb-[20rem]">
-            {t("happy_run.form_description_2")}
-          </Typography.Paragraph>
-          <div className="bg-white inline-block mx-auto px-[60rem] py-[10rem] rounded-full">
-            <Typography.Paragraph className="mb-0 text-hr-blue text-[20rem] font-semibold leading-[1.2]">
-              <span>{t("common.event_email")}: </span>
-              <span>{event.variables.event_email?.value}</span>
-            </Typography.Paragraph>
-          </div>
-        </center>
-        {/* Info ticket */}
-        <div className="info-ticket-table mb-[30rem]">
-          <Typography.Heading
-            className="text-white rounded-t-[30rem] bg-hr-blue font-extrabold text-[24rem] uppercase text-center py-[10rem] mb-[30rem]"
-            level={4}
-          >
-            {
-              event.variables?.[
-                currentLanguage === "vn"
-                  ? "info_ticket_heading_vn"
-                  : "info_ticket_heading_en"
-              ]?.value
-            }
-          </Typography.Heading>
-          <img
-            src={
-              event.variables?.[
-                currentLanguage === "vn"
-                  ? "info_ticket_table_vn"
-                  : "info_ticket_table_en"
-              ]?.value
-            }
-            alt="info ticket"
-          />
-          <Typography.Paragraph className="mt-[30rem] text-center text-hr-blue text-[18rem]">
-            {
-              event.variables?.[
-                currentLanguage === "vn"
-                  ? "info_ticket_table_desc_vn"
-                  : "info_ticket_table_desc_en"
-              ]?.value
-            }
-          </Typography.Paragraph>
-          <img
-            className="mt-[30rem]"
-            src={
-              event.variables?.[
-                currentLanguage === "vn"
-                  ? "tshirt_size_table_vn"
-                  : "tshirt_size_table_en"
-              ]?.value
-            }
-            alt="tshirt size"
-          />
-        </div>
-        <PurchasingForm />
-      </div>
+
+      <PurchasingForm />
     </div>
   );
 };

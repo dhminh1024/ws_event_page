@@ -1,5 +1,6 @@
 import { WSEHBChallenge } from "@/types/WellspringEventPage/WSEHBChallenge";
 import { WSEHBSubmission } from "@/types/WellspringEventPage/WSEHBSubmission";
+import { WSEHRSettings } from "@/types/WellspringEventPage/WSEHRSettings";
 
 export interface WSEHBChallengeExtended extends WSEHBChallenge {
   isEnabled: boolean;
@@ -14,9 +15,6 @@ export type WSEHBSubmissionExtend = Omit<WSEHBSubmission, "happy_box_challenge">
   happy_box_challenge: WSEHBChallenge
 }
 
-export interface WSEHBSubmissionResponse {
-  submissions: WSEHBSubmissionExtend[];
-  showThankYouModal: boolean;
-  setShowThankYouModal: (value: boolean) => void;
-  refresh: () => void;
+export interface HRSettingResponse{
+  settings?: WSEHRSettings
 }

@@ -54,7 +54,7 @@ export default {
         brand: {
           primary: "hsl(var(--brand-primary))",
           teal: "hsl(var(--brand-teal))",
-          persian: "hsl(var(--brand-persian))",
+          persian: "#016982",
           lime: "hsl(var(--brand-lime))",
           honey: "hsl(var(--brand-honey))",
           amber: "hsl(var(--brand-amber))",

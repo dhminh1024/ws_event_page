@@ -11,11 +11,11 @@ export const ticket_classes = [
 export const ticket_distance = [
     {
         label: "2.5km",
-        value: "2.5km"
+        value: "2.5 km"
     },
     {
         label: "5km",
-        value: "5km"
+        value: "5 km"
     }
 ]
 export const shirtSizes = [

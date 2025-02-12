@@ -22,23 +22,29 @@ export const usePurchasingForm = () => {
           code: z
             .string()
             .min(1, t("happy_run.form.user_code_required"))
-            .refine(
-              async (code) => {
-                if (!code) return true;
-                console.log("CODE", code);
-                try {
-                  await getInfo({
-                    wellspring_code: code,
+            .superRefine(async (code, ctx) => {
+              if (!code) return true;
+              try {
+                const data = await getInfo({
+                  wellspring_code: code,
+                });
+                if (data.message.orders.length > 0) {
+                  ctx.addIssue({
+                    code: "custom",
+                    message: t("happy_run.form.user_code_has_orders"),
+                    path: [],
                   });
-                  return true;
-                } catch (error) {
-                  console.log("INVALID");
-
                   return false;
                 }
-              },
-              { message: t("happy_run.form.user_code_invalid") }
-            ),
+                return true;
+              } catch (error) {
+                ctx.addIssue({
+                  code: "custom",
+                  message: t("happy_run.form.user_code_invalid"),
+                  path: [],
+                });
+              }
+            }),
           full_name: z.string(),
           department: z.string(),
           ticket_class: z
@@ -65,23 +71,6 @@ export const usePurchasingForm = () => {
             });
           }
         });
-        // const hashMap = items.reduce(
-        //   (prev: Record<string, boolean>, item) => {
-        //     if (item.code && item.full_name)
-        //       prev[item.code.trim().toLowerCase()] = true;
-        //     return prev;
-        //   },
-        //   {}
-        // );
-
-        // if (
-        //   Object.keys(hashMap).length !==
-        //   items.filter((i) => i.code && i.full_name).length
-        // ) {
-        //   // return false;
-
-        // }
-        // return true;
       }),
     guardian_runners: z.array(
       z.object({

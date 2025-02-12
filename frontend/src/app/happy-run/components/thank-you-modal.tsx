@@ -33,7 +33,7 @@ import { format } from "date-fns";
 import { X } from "lucide-react";
 import { Button } from "@atoms/button";
 import { Firework } from "./firework";
-import { useSubmissions } from "../context/use-submissions";
+import { useSubmissions } from "../context/use-settings";
 
 export type LunarModalProps = HTMLAttributes<HTMLDivElement> &
   PropsWithChildren & {

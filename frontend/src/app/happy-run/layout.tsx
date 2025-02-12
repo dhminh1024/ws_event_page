@@ -10,9 +10,9 @@ import { HBChallengeListProvider } from "./context/hb-challenge-provider";
 
 // import "./globals.css";
 import { Helmet } from "react-helmet";
-import { HBSubmissionListProvider } from "./context/hb-submission-provider";
+import { HBSubmissionListProvider } from "./context/hr-setting-provider";
 import { ThankYouModal } from "./components/thank-you-modal";
-import { useSubmissions } from "./context/use-submissions";
+import { useSubmissions } from "./context/use-settings";
 import { WelcomeModal } from "./components/welcome-modal";
 
 export default function HappyBoxLayout({ children }: PropsWithChildren) {

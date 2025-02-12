@@ -3,9 +3,9 @@ export const FRAPPE_APIS = {
     METHOD_STRING: "ws_event_page.api.event.happy_run.submission.check_wellspring_code",
     SWR_KEY: "check_wellspring_code",
   },
-  GET_CHALLENGE_BY_ID: {
-    METHOD_STRING: "ws_event_page.api.login.get_current_user_info",
-    SWR_KEY: "get_current_user_info",
+  SEND_ORDER: {
+    METHOD_STRING: "ws_event_page.api.event.happy_run.submission.submit_happy_run_order",
+    SWR_KEY: "submit_happy_run_order",
   },
   CREATE_HB_SUBMISSION: {
     METHOD_STRING: "ws_event_page.api.event.happy_box.submission.create_happy_box_challenge_submission",

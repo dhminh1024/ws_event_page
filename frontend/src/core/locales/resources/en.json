@@ -70,7 +70,7 @@
     "form": {
       "user_code": "Mã số Học sinh/GV-NV",
       "user_code_required": "Hãy nhập mã số",
-      "user_code_duplicate": "Phát hiện có mã số trùng lặp. Vui lòng kiểm tra lại",
+      "user_code_duplicate": "Mã số trùng lặp",
       "user_code_invalid": "Mã số không hợp lệ",
       "full_name": "Họ tên",
       "full_name_desc": "*Lưu ý: Họ tên của PHHS hoặc người lớn đi cùng",
@@ -94,13 +94,18 @@
       "email_desc": "*Lưu ý: 01 địa chỉ email của PHHS",
       "email_placeholder": "Nhập email",
       "email_required": "Hãy nhập email",
-      "content_bib": "Nội dung in số bib",
-      "content_bib_desc": "Dành cho hạng vé Well-being",
+      "email_invalid": "Email không hợp lệ",
+      "content_bib": "Nội dung in BIB",
+      "content_bib_desc": "*Chỉ dành cho hạng vé Well-being",
       "content_bib_placeholder": "Nội dung từ 6-8 ký tự",
-      "empty_companion": "Hiện không có phụ huynh/ người đi kèm"
+      "empty_companion": "Hiện không có phụ huynh/ người đi kèm",
+      "no_item": "STT",
+      "price": "Giá vé",
+      "total_price:": "Tổng tiền"
     },
     "buttons": {
-      "add_person": "Thêm người +"
+      "add_person": "Thêm người +",
+      "register_now": "Đăng ký ngay"
     }
   },
   "nutritional_journey": {
