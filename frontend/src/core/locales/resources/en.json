@@ -63,14 +63,44 @@
     "thankyou_modal_description_2": "You have completed the Tet challenge.",
     "thankyou_modal_description_3": "Wishing WISer a new year full of joy and happiness"
   },
-  "happy_run": {
+ "happy_run": {
     "form_heading": "SỰ KIỆN <span className=\"text-hr-honey\">HAPPY RUN 2025</span> <br/> <span className=\"text-hr-ember\">ĐĂNG KÝ THAM GIA</span>",
     "form_description_1": "Chào mừng bạn đến với sự kiện",
     "form_description_2": "Hãy đăng ký tham dự sự kiện theo thông tin bên dưới.",
     "form": {
       "user_code": "Mã số Học sinh/GV-NV",
+      "user_code_required": "Hãy nhập mã số",
+      "user_code_duplicate": "Phát hiện có mã số trùng lặp. Vui lòng kiểm tra lại",
+      "user_code_invalid": "Mã số không hợp lệ",
       "full_name": "Họ tên",
-      "class_department": "Lớp/Phòng ban"
+      "full_name_desc": "*Lưu ý: Họ tên của PHHS hoặc người lớn đi cùng",
+      "full_name_placeholder": "Nhập họ tên",
+      "full_name_required": "Hãy nhập họ tên",
+      "class_department": "Lớp/Phòng ban",
+      "ticket_class": "Hạng vé",
+      "ticket_class_placeholder": "Chọn hạng vé",
+      "ticket_class_required": "Hãy chọn hạng vé",
+      "ticket_distance": "Cự ly",
+      "ticket_distance_placeholder": "Chọn cự ly",
+      "ticket_distance_required": "Hãy chọn cự ly",
+      "shirt_size": "Size áo",
+      "shirt_size_placeholder": "Chọn size áo",
+      "shirt_size_required": "Hãy chọn size áo",
+      "mobile_number": "Số điện thoại",
+      "mobile_number_desc": "*Lưu ý: số SĐT của PHHS hoặc người lớn đi cùng",
+      "mobile_number_placeholder": "Nhập số điện thoại",
+      "mobile_number_required": "Hãy nhập số điện thoại",
+      "email": "Email",
+      "email_desc": "*Lưu ý: 01 địa chỉ email của PHHS",
+      "email_placeholder": "Nhập email",
+      "email_required": "Hãy nhập email",
+      "content_bib": "Nội dung in số bib",
+      "content_bib_desc": "Dành cho hạng vé Well-being",
+      "content_bib_placeholder": "Nội dung từ 6-8 ký tự",
+      "empty_companion": "Hiện không có phụ huynh/ người đi kèm"
+    },
+    "buttons": {
+      "add_person": "Thêm người +"
     }
   },
   "nutritional_journey": {

@@ -1,7 +1,7 @@
 export const FRAPPE_APIS = {
-  GET_USER_INFO: {
-    METHOD_STRING: "ws_event_page.api.login.get_current_user_info",
-    SWR_KEY: "get_current_user_info",
+  GET_USER_BY_CODE: {
+    METHOD_STRING: "ws_event_page.api.event.happy_run.submission.check_wellspring_code",
+    SWR_KEY: "check_wellspring_code",
   },
   GET_CHALLENGE_BY_ID: {
     METHOD_STRING: "ws_event_page.api.login.get_current_user_info",

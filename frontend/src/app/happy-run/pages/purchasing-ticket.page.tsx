@@ -38,10 +38,10 @@ export const Component = () => {
   const params = useParams();
   const event = useEventPageContext();
 
-  console.log(event.variables);
+  // console.log(event.variables);
 
   return (
-    <div className="bg-hr-background">
+    <div className="bg-hr-background overflow-hidden">
       <Helmet>
         <title>
           {"Purchasing ticket"} | {env.HAPPY_RUN.TITLE_PAGE}
@@ -52,7 +52,7 @@ export const Component = () => {
         <span className="text-hr-ember"></span>
       </div>
       <div className="bg-gray-400 h-[300rem]"></div>
-      <div className="container">
+      <div className="px-[10rem] md:px-[8%]">
         <center className="mb-[40rem]">
           <Typography.Heading
             className="py-[40rem] text-[45rem] text-hr-blue leading-[1.2] font-extrabold"
@@ -121,24 +121,7 @@ export const Component = () => {
             alt="tshirt size"
           />
         </div>
-        {/* Info Student/Teacher/Staff */}
-        <div className="info-ticket-table mb-[30rem]">
-          <Typography.Heading
-            className="text-white rounded-t-[30rem] bg-[#F6C607] shadow-[inset_0rem_-5rem_10rem_0rem_#EDA41D] font-extrabold text-[24rem] uppercase text-center py-[10rem] mb-[20rem]"
-            level={4}
-          >
-            {
-              event.variables?.[
-                currentLanguage === "vn"
-                  ? "info_primary_user_heading_vn"
-                  : "info_primary_user_heading_en"
-              ]?.value
-            }
-          </Typography.Heading>
-          <div className="fields grid">
-            <PurchasingForm />
-          </div>
-        </div>
+        <PurchasingForm />
       </div>
     </div>
   );
