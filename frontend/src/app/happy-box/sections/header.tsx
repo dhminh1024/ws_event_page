@@ -45,19 +45,7 @@ export const Header: FC<HeaderProps> = ({ className }) => {
         />
       </div>
       <div className="flex gap-x-[10rem] md:gap-x-[20rem] items-center">
-        <Typography.Text
-          onClick={handleLogout}
-          className="text-[11rem] whitespace-nowrap md:text-[16rem] hover:underline text-happy_box-red cursor-pointer"
-        >
-          {t("common.sign_out")}
-        </Typography.Text>
-        <Typography.Text className="text-[11rem] md:text-[16rem]">|</Typography.Text>
-        <div className="flex items-center gap-x-[20rem]">
-          <Typography.Text className="hidden  md:inline text-[12rem] md:text-[16rem]">
-            {t("common.language")}
-          </Typography.Text>
-          <LanguageSelector />
-        </div>
+        <LanguageSelector />
       </div>
     </div>
   );

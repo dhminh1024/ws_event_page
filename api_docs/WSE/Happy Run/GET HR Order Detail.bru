@@ -1,0 +1,15 @@
+meta {
+  name: GET HR Order Detail
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{url}}/api/method/ws_event_page.api.event.happy_run.order.get_order_detail?order_id=WSE-HRO-25-00014
+  body: json
+  auth: none
+}
+
+params:query {
+  order_id: WSE-HRO-25-00014
+}

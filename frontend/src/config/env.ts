@@ -7,6 +7,9 @@ const env = {
     TITLE_PAGE: "Tet Challenge - Thử thách đón Tết",
     DATE: import.meta.env.VITE_HAPPY_BOX_DATE || "",
   },
+  HAPPY_RUN:{
+    TITLE_PAGE: "Happy Run - Cuộc đua kỳ thú",
+  },
   NUTRITION_JOURNEY:{
     TITLE_PAGE: "Hành Trình Dinh Dưỡng",
 

@@ -1,0 +1,35 @@
+meta {
+  name: Submit Happy Run Order
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/method/ws_event_page.api.event.happy_run.submission.submit_happy_run_order
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "full_name": "Minh Do",
+    "email": "dhminh1024@gmail.com",
+    "mobile_number": "1231231",
+    "tickets": [
+      {
+        "wellspring_code": "W224018",
+        "ticket_type": "Happy Run", 
+        "distance": "2.5 km",
+        "shirt_size": "Size 1", 
+        "bib": "handsome boy"
+      },
+      {
+        "full_name": "Mia Do",
+        "ticket_type": "Well-being", 
+        "distance": "5 km",
+        "shirt_size": "Size 7", 
+        "bib": "baby three"    
+      }
+    ]
+  }
+}
