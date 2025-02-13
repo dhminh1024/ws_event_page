@@ -99,6 +99,7 @@
       "content_bib": "Nội dung in BIB",
       "content_bib_desc": "*Chỉ dành cho hạng vé Well-being",
       "content_bib_placeholder": "Nội dung từ 6-8 ký tự",
+      "content_bib_max": "Vượt quá 8 ký tự",
       "empty_companion": "Hiện không có phụ huynh/ người đi kèm",
       "no_item": "STT",
       "price": "Giá vé",
@@ -115,7 +116,9 @@
       "confirm_payment": "Xác nhận thanh toán",
       "go_back": "Quay lại",
       "download_qr": "Tải mã QR",
-      "finish":"Hoàn thành"
+      "finish":"Hoàn thành",
+      "agree": "Tôi đồng ý và Tiếp Tục",
+      "not_agree": "Tôi không đồng ý"
     },
     "policy_content": ""
   },

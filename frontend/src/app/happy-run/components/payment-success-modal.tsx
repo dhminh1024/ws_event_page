@@ -92,29 +92,31 @@ export const PaymentSuccessModal: FC<LunarModalProps> = ({
         <div className="h-[100rem] bg-gray-400"></div>
         <center className="mb-[5rem]">
           <Typography.Heading
-            className="py-[20rem] text-[25rem] text-hr-blue leading-[1.2] font-extrabold"
+            className="py-[20rem] md:py-[20rem] text-[20rem] md:text-[30rem] text-hr-blue leading-[1.2] font-extrabold"
             level={2}
           >
             {parser(t("happy_run.form.payment_success_heading"))}
           </Typography.Heading>
-          <Typography.Paragraph className="pb-[10rem] w-[45%] text-[16rem] text-hr-blue leading-[1.2]">
+          <Typography.Paragraph className="pb-[10rem] w-[90%] md:w-[45%] text-[15rem] md:text-[16rem] text-hr-blue leading-[1.2]">
             {t("happy_run.form.payment_success_qr_guide")}:
           </Typography.Paragraph>
 
-          <img className="w-[25%]" src={codeUrl} alt="QR Code" />
+          <img className="w-[40%] md:w-[25%]" src={codeUrl} alt="QR Code" />
           <Button
             type="button"
             onClick={() => downloadQRCode()}
-            className="my-[20rem] text-[16rem] px-[20rem] py-[20rem] hover:!bg-hr-blue/10  bg-hr-blue text-white rounded-[5rem]"
+            className="my-[20rem] text-[15rem] md:text-[16rem] px-[20rem] py-[20rem] hover:!bg-hr-blue/80  bg-hr-blue text-white rounded-[5rem]"
           >
             {t("happy_run.buttons.download_qr")}
           </Button>
-          <Typography.Paragraph className="pb-[5rem]  text-[16rem] text-hr-blue leading-[1.2]">
+          <div className="px-[5rem]">
+          <Typography.Paragraph className="pb-[5rem]  text-[15rem] md:text-[16rem] text-hr-blue leading-[1.2]">
             {t("happy_run.form.payment_success_desc_1")}
           </Typography.Paragraph>
-          <Typography.Paragraph className="pb-[5rem]  text-[16rem] text-hr-blue leading-[1.2]">
+          <Typography.Paragraph className="pb-[5rem]  text-[15rem] md:text-[16rem] text-hr-blue leading-[1.2]">
             {t("happy_run.form.payment_success_desc_2")}
           </Typography.Paragraph>
+          </div>
         </center>
       </DialogContent>
     </Dialog>

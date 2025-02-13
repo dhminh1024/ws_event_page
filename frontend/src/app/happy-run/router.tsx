@@ -30,7 +30,7 @@ export const HAPPY_RUN_ROUTES: RouteObject[] = [
             lazy: () => import("./pages/home.page"),
           },
           {
-            path: "purchasing-ticket",
+            path: "order",
             lazy: () => import("./pages/purchasing-ticket.page"),
           },
         ],

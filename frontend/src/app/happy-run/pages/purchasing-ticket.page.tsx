@@ -52,7 +52,7 @@ export const Component = () => {
         <span className="text-hr-ember"></span>
         <span className="text-brand-persian"></span>
       </div>
-      <div className="bg-gray-400 h-[300rem]"></div>
+      <div className="bg-gray-400 h-[80rem] md:h-[300rem]"></div>
 
       <PurchasingForm />
     </div>

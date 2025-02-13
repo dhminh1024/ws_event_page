@@ -54,7 +54,7 @@ export const usePurchasingForm = () => {
             .string()
             .min(1, t("happy_run.form.ticket_distance_required")),
           size: z.string().min(1, t("happy_run.form.shirt_size_required")),
-          bib: z.string().optional(),
+          bib: z.string().max(8, t("happy_run.form.content_bib_max")).optional(),
         })
       )
       .superRefine((items, ctx) => {
@@ -82,7 +82,7 @@ export const usePurchasingForm = () => {
           .string()
           .min(1, t("happy_run.form.ticket_distance_required")),
         size: z.string().min(1, t("happy_run.form.shirt_size_required")),
-        bib: z.string().optional(),
+        bib: z.string().max(8, t("happy_run.form.content_bib_max")).optional(),
       })
     ),
     full_name: z

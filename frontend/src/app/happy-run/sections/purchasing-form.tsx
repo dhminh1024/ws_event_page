@@ -49,6 +49,7 @@ const PrimaryDefaultInfo = {
   ticket_class: "",
   distance: "",
   size: "",
+  bib: "",
 };
 
 const GuardianDefaultInfo = {
@@ -56,6 +57,7 @@ const GuardianDefaultInfo = {
   ticket_class: "",
   distance: "",
   size: "",
+  bib: "",
 };
 
 export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
@@ -114,19 +116,18 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
       tickets,
     };
     setOrderData(orderData);
-    if(isAgreed)
-    setOpenConfirmModal(true);
+    if (isAgreed) setOpenConfirmModal(true);
   });
 
-  const handlePayment = async (qr_code:string) => {
+  const handlePayment = async (qr_code: string) => {
     setQRPayment(qr_code);
     setOpenSuccessModal(true);
   };
 
   const handleOrderSuccess = () => {
-    setOpenSuccessModal(false)
+    setOpenSuccessModal(false);
     form.reset();
-  }
+  };
 
   const handleAddPrimaryPerson = () => {
     appendPrimary(PrimaryDefaultInfo);
@@ -177,36 +178,38 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
   return (
     <div className={cn("mb-[40rem]", className)}>
       <section
-        className="form-section px-[10rem] md:px-[8%]"
+        className="form-section px-[20rem] md:px-[8%]"
         hidden={orderData && !isAgreed}
       >
-        <center className="mb-[40rem]">
+        <center className="mb-[30rem] md:mb-[40rem]">
           <Typography.Heading
-            className="py-[40rem] text-[45rem] text-hr-blue leading-[1.2] font-extrabold"
+            className="py-[20rem] md:py-[40rem] text-[20rem] md:text-[45rem] text-hr-blue leading-[1.2] font-extrabold"
             level={2}
           >
             {parser(t("happy_run.form_heading"))}
           </Typography.Heading>
-          <Typography.Paragraph className="text-hr-blue text-[20rem] font-semibold">
+          <Typography.Paragraph className="text-hr-blue text-[12rem] md:text-[20rem] font-semibold">
             <span>{t("happy_run.form_description_1")}</span>
-            <span className="ml-[5rem] text-[23rem] font-black uppercase">
-              {event.variables.event_name?.value}
+            <span className="ml-[5rem] block md:inline text-[14rem] md:text-[23rem] font-black uppercase">
+              {/* {parser(event.variables.event_name?.value || "")} */}
+              Happy Run 2025 <br className="block md:hidden" /> "Set Your Pace -
+              Embrace Wellness"
             </span>
           </Typography.Paragraph>
-          <Typography.Paragraph className="text-hr-blue text-[20rem] font-semibold mb-[20rem]">
+          <Typography.Paragraph className="text-hr-blue text-[12rem] md:text-[20rem] font-semibold mb-[20rem]">
             {t("happy_run.form_description_2")}
           </Typography.Paragraph>
-          <div className="bg-white inline-block mx-auto px-[60rem] py-[10rem] rounded-full">
-            <Typography.Paragraph className="mb-0 text-hr-blue text-[20rem] font-semibold leading-[1.2]">
+          <div className="bg-white inline-block mx-auto px-[10rem] md:px-[60rem] py-[5rem] md:py-[10rem] rounded-full">
+            <Typography.Paragraph className="mb-0 text-hr-blue text-[10rem] md:text-[20rem] font-semibold leading-[1.2]">
               <span>{t("common.event_email")}: </span>
               <span>{event.variables.event_email?.value}</span>
             </Typography.Paragraph>
           </div>
         </center>
         {/* Info ticket */}
-        <div className="info-ticket-table mb-[30rem]">
+        <div className="info-ticket-table mb-[20rem] md:mb-[30rem]">
           <Typography.Heading
-            className="text-white rounded-t-[30rem] bg-hr-blue font-extrabold text-[24rem] uppercase text-center py-[10rem] mb-[30rem]"
+            className="text-white rounded-t-[12rem] md:rounded-t-[30rem] bg-hr-blue font-extrabold text-[10rem] md:text-[24rem] uppercase text-center py-[3rem] md:py-[10rem] mb-[20rem] md:mb-[30rem]"
             level={4}
           >
             {
@@ -227,7 +230,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
             }
             alt="info ticket"
           />
-          <Typography.Paragraph className="mt-[30rem] text-center text-hr-blue text-[18rem]">
+          <Typography.Paragraph className="mt-[10rem] md:mt-[30rem] text-center text-hr-blue text-[10rem] md:text-[18rem]">
             {
               event.variables?.[
                 currentLanguage === "vn"
@@ -237,7 +240,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
             }
           </Typography.Paragraph>
           <img
-            className="mt-[30rem]"
+            className="mt-[10rem] md:mt-[30rem]"
             src={
               event.variables?.[
                 currentLanguage === "vn"
@@ -253,7 +256,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
             {/* Info Student/Teacher/Staff */}
             <div className="info-ticket-table mb-[30rem]">
               <Typography.Heading
-                className="text-white rounded-t-[30rem] bg-[#F6C607] shadow-[inset_0rem_-5rem_10rem_0rem_#EDA41D] font-extrabold text-[24rem] uppercase text-center py-[10rem] mb-[20rem]"
+                className="text-white rounded-t-[12rem] md:rounded-t-[30rem] bg-[#F6C607] shadow-[inset_0rem_-5rem_10rem_0rem_#EDA41D] font-extrabold text-[10rem] md:text-[24rem] uppercase text-center py-[3rem] md:py-[10rem] mb-[20rem]"
                 level={4}
               >
                 {
@@ -271,16 +274,16 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                     key={field.id}
                     name={`primary_runners.${index}`}
                     render={({ field }) => (
-                      <div className="grid grid-cols-[repeat(6,1fr)_auto] items-start gap-[10rem] mx-auto mb-[10rem]">
+                      <div className="grid grid-cols-3 md:grid-cols-[repeat(6,1fr)_auto] items-start gap-[5rem_5rem] md:gap-[10rem] mx-auto mb-[10rem]">
                         <FormItem>
-                          <FormLabel className="text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[40rem]">
+                          <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                             {t("happy_run.form.user_code")}
                           </FormLabel>
                           <FormDescription />
                           <FormControl>
                             <div className="relative">
                               <Input
-                                className="w-full h-[30rem] !pr-[35rem] bg-white border-hr-blue rounded-[5rem] text-[16rem] text-hr-blue py-[20rem] px-[10rem] uppercase"
+                                className="w-full h-[16rem] md:h-[30rem] !pr-[15rem] md:!pr-[35rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem] uppercase"
                                 {...form.register(
                                   `primary_runners.${index}.code`
                                 )}
@@ -298,15 +301,15 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 ?.code &&
                                 form.watch("primary_runners")?.[index]
                                   ?.full_name && (
-                                  <Check className="text-status-success w-[26rem] absolute top-0 bottom-0 right-[5rem] m-auto" />
+                                  <Check className="text-status-success w-[12rem] md:w-[26rem] absolute top-0 bottom-0 right-[5rem] m-auto" />
                                 )}
                               {form.formState.errors.primary_runners?.[index]
                                 ?.code && (
-                                <X className="text-status-danger w-[26rem] absolute top-0 bottom-0 right-[5rem] m-auto" />
+                                <X className="text-status-danger w-[12rem] md:w-[26rem] absolute top-0 bottom-0 right-[5rem] m-auto" />
                               )}
                             </div>
                           </FormControl>
-                          <Typography.Paragraph className="text-[14rem] text-status-danger">
+                          <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
                             {
                               form.formState.errors.primary_runners?.[index]
                                 ?.code?.message
@@ -314,13 +317,13 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                           </Typography.Paragraph>
                         </FormItem>
                         <FormItem>
-                          <FormLabel className="text-[17rem] text-hr-blue font-bold leading-[40rem]">
+                          <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                             {t("happy_run.form.full_name")}
                           </FormLabel>
                           <FormDescription />
                           <FormControl>
                             <Input
-                              className="w-full h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[16rem] text-hr-blue py-[20rem] px-[10rem]"
+                              className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
                               {...form.register(
                                 `primary_runners.${index}.full_name`
                               )}
@@ -329,13 +332,13 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                           </FormControl>
                         </FormItem>
                         <FormItem>
-                          <FormLabel className="text-[17rem] text-hr-blue font-bold leading-[40rem]">
+                          <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                             {t("happy_run.form.class_department")}
                           </FormLabel>
                           <FormDescription />
                           <FormControl>
                             <Input
-                              className="w-full h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[16rem] text-hr-blue py-[20rem] px-[10rem]"
+                              className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem"
                               {...form.register(
                                 `primary_runners.${index}.department`
                               )}
@@ -344,7 +347,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                           </FormControl>
                         </FormItem>
                         <FormItem>
-                          <FormLabel className="text-[17rem] text-hr-blue font-bold leading-[40rem]">
+                          <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                             {t("happy_run.form.ticket_class")}
                           </FormLabel>
                           <FormDescription />
@@ -364,7 +367,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 });
                               }}
                             >
-                              <SelectTrigger className="h-[30rem] py-[20rem] px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[16rem]">
+                              <SelectTrigger className="h-[16rem] md:h-[30rem] p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
                                 <SelectValue
                                   className="flex-1"
                                   placeholder={t(
@@ -376,7 +379,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 {ticket_classes.map((item) => (
                                   <SelectItem
                                     key={item.value}
-                                    className=" text-[12rem] md:text-[16rem] p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
+                                    className=" text-[8rem] md:text-[16rem] p-[5rem] md:p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
                                     value={item.value}
                                   >
                                     {item.label}
@@ -385,7 +388,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                               </SelectContent>
                             </Select>
                           </FormControl>
-                          <Typography.Paragraph className="text-[14rem] text-status-danger">
+                          <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
                             {
                               form.formState.errors.primary_runners?.[index]
                                 ?.ticket_class?.message
@@ -393,7 +396,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                           </Typography.Paragraph>
                         </FormItem>
                         <FormItem>
-                          <FormLabel className="text-[17rem] text-hr-blue font-bold leading-[40rem]">
+                          <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                             {t("happy_run.form.ticket_distance")}
                           </FormLabel>
                           <FormDescription />
@@ -413,7 +416,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 });
                               }}
                             >
-                              <SelectTrigger className="h-[30rem] py-[20rem] px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[16rem]">
+                              <SelectTrigger className="h-[16rem] md:h-[30rem] p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
                                 <SelectValue
                                   className="flex-1"
                                   placeholder={t(
@@ -425,7 +428,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 {ticket_distance.map((item) => (
                                   <SelectItem
                                     key={item.value}
-                                    className=" text-[12rem] md:text-[16rem] p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
+                                    className=" text-[8rem] md:text-[16rem] p-[5rem] md:p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
                                     value={item.value}
                                   >
                                     {item.label}
@@ -434,7 +437,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                               </SelectContent>
                             </Select>
                           </FormControl>
-                          <Typography.Paragraph className="text-[14rem] text-status-danger">
+                          <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
                             {
                               form.formState.errors.primary_runners?.[index]
                                 ?.distance?.message
@@ -442,7 +445,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                           </Typography.Paragraph>
                         </FormItem>
                         <FormItem>
-                          <FormLabel className="text-[17rem] text-hr-blue font-bold leading-[40rem]">
+                          <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                             {t("happy_run.form.shirt_size")}
                           </FormLabel>
                           <FormDescription />
@@ -462,7 +465,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 });
                               }}
                             >
-                              <SelectTrigger className="h-[30rem] py-[20rem] px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[16rem]">
+                              <SelectTrigger className="h-[16rem] md:h-[30rem] p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
                                 <SelectValue
                                   className="flex-1"
                                   placeholder={t(
@@ -474,7 +477,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 {shirtSizes.map((item) => (
                                   <SelectItem
                                     key={item.value}
-                                    className=" text-[12rem] md:text-[16rem] p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
+                                    className=" text-[8rem] md:text-[16rem] p-[5rem] md:p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
                                     value={item.value}
                                   >
                                     {item.label}
@@ -483,7 +486,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                               </SelectContent>
                             </Select>
                           </FormControl>
-                          <Typography.Paragraph className="text-[14rem] text-status-danger">
+                          <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
                             {
                               form.formState.errors.primary_runners?.[index]
                                 ?.size?.message
@@ -492,21 +495,21 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                         </FormItem>
                         <button
                           type="button"
-                          className="mt-[40rem] p-[8rem] border-status-danger border-[1rem] rounded-[5rem] inline-block hover:bg-status-danger/5"
+                          className="col-span-3 md:col-span-1 inline-block mt-[5rem] md:mt-[30rem] p-[5rem] md:p-[8rem] border-status-danger border-[1rem] rounded-[5rem]  hover:bg-status-danger/5"
                           onClick={() => removePrimary(index)}
                         >
-                          <Trash className="w-[24rem] h-[24rem] text-status-danger cursor-pointer" />
+                          <Trash className="mx-auto w-[10rem] h-[10rem] md:w-[24rem] md:h-[24rem] text-status-danger cursor-pointer" />
                         </button>
                       </div>
                     )}
                   />
                 ))}
-                <Typography.Paragraph className="text-[14rem] text-status-danger">
+                <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
                   {form.formState.errors.primary_runners?.["root"]?.message}
                 </Typography.Paragraph>
                 <Button
                   type="button"
-                  className="text-[18rem] p-[18rem] rounded-[8rem] bg-gradient-to-b from-[#1F7777] to-[#009181] italic"
+                  className="text-[10rem] md:text-[18rem] p-[10rem] md:p-[18rem] rounded-[3rem] md:rounded-[8rem] bg-gradient-to-b from-[#1F7777] to-[#009181] italic"
                   onClick={handleAddPrimaryPerson}
                 >
                   {t("happy_run.buttons.add_person")}
@@ -516,7 +519,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
             {/* Info Parents/Guadiants */}
             <div className="info-ticket-table mb-[30rem]">
               <Typography.Heading
-                className="text-white rounded-t-[30rem] bg-[#C4D03D] shadow-[inset_0rem_-5rem_10rem_0rem_#aec22e] font-extrabold text-[24rem] uppercase text-center py-[10rem] mb-[20rem]"
+                className="text-white rounded-t-[12rem] md:rounded-t-[30rem] bg-[#C4D03D] shadow-[inset_0rem_-5rem_10rem_0rem_#aec22e] font-extrabold text-[10rem] md:text-[24rem] uppercase text-center py-[3rem] md:py-[10rem] mb-[10rem] md:mb-[20rem]"
                 level={4}
               >
                 {
@@ -534,24 +537,24 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                     key={field.id}
                     name={`guardian_runners.${index}`}
                     render={({ field }) => (
-                      <div className="grid grid-cols-[repeat(6,1fr)_auto] gap-[10rem] mx-auto mb-[10rem]">
+                      <div className="grid grid-cols-3 md:grid-cols-[repeat(6,1fr)_auto] gap-[5rem_5rem] md:gap-[10rem] mx-auto mb-[10rem]">
                         <FormItem className="col-span-3">
-                          <FormLabel className="text-[17rem] text-hr-blue font-bold leading-[40rem]">
+                          <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                             {t("happy_run.form.full_name")}
                           </FormLabel>
                           <FormDescription />
                           <FormControl>
                             <Input
-                              className="w-full h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[16rem] text-hr-blue py-[20rem] px-[10rem]"
+                              className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
                               {...form.register(
                                 `guardian_runners.${index}.full_name`
                               )}
                             />
                           </FormControl>
-                          <FormMessage className="text-[14rem] text-status-danger" />
+                          <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
                         </FormItem>
                         <FormItem>
-                          <FormLabel className="text-[17rem] text-hr-blue font-bold leading-[40rem]">
+                          <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                             {t("happy_run.form.ticket_class")}
                           </FormLabel>
                           <FormDescription />
@@ -568,7 +571,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 })
                               }
                             >
-                              <SelectTrigger className="h-[30rem] py-[20rem] px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[16rem]">
+                              <SelectTrigger className="h-[16rem] md:h-[30rem] p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
                                 <SelectValue
                                   className="flex-1"
                                   placeholder={t(
@@ -580,7 +583,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 {ticket_classes.map((item) => (
                                   <SelectItem
                                     key={item.value}
-                                    className=" text-[12rem] md:text-[16rem] p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
+                                    className=" text-[8rem] md:text-[16rem] p-[5rem] md:p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
                                     value={item.value}
                                   >
                                     {item.label}
@@ -589,7 +592,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                               </SelectContent>
                             </Select>
                           </FormControl>
-                          <Typography.Paragraph className="text-[14rem] text-status-danger">
+                          <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
                             {
                               form.formState.errors.guardian_runners?.[index]
                                 ?.ticket_class?.message
@@ -597,7 +600,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                           </Typography.Paragraph>
                         </FormItem>
                         <FormItem>
-                          <FormLabel className="text-[17rem] text-hr-blue font-bold leading-[40rem]">
+                          <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                             {t("happy_run.form.ticket_distance")}
                           </FormLabel>
                           <FormDescription />
@@ -614,7 +617,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 })
                               }
                             >
-                              <SelectTrigger className="h-[30rem] py-[20rem] px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[16rem]">
+                              <SelectTrigger className="h-[16rem] md:h-[30rem] p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
                                 <SelectValue
                                   className="flex-1"
                                   placeholder={t(
@@ -626,7 +629,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 {ticket_distance.map((item) => (
                                   <SelectItem
                                     key={item.value}
-                                    className=" text-[12rem] md:text-[16rem] p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
+                                    className=" text-[8rem] md:text-[16rem] p-[5rem] md:p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
                                     value={item.value}
                                   >
                                     {item.label}
@@ -635,7 +638,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                               </SelectContent>
                             </Select>
                           </FormControl>
-                          <Typography.Paragraph className="text-[14rem] text-status-danger">
+                          <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
                             {
                               form.formState.errors.guardian_runners?.[index]
                                 ?.distance?.message
@@ -643,7 +646,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                           </Typography.Paragraph>
                         </FormItem>
                         <FormItem>
-                          <FormLabel className="text-[17rem] text-hr-blue font-bold leading-[40rem]">
+                          <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                             {t("happy_run.form.shirt_size")}
                           </FormLabel>
                           <FormDescription />
@@ -660,7 +663,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 })
                               }
                             >
-                              <SelectTrigger className="h-[30rem] py-[20rem] px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[16rem]">
+                              <SelectTrigger className="h-[16rem] md:h-[30rem] p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
                                 <SelectValue
                                   className="flex-1"
                                   placeholder={t(
@@ -672,7 +675,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 {shirtSizes.map((item) => (
                                   <SelectItem
                                     key={item.value}
-                                    className=" text-[12rem] md:text-[16rem] p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
+                                    className=" text-[8rem] md:text-[16rem] p-[5rem] md:p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
                                     value={item.value}
                                   >
                                     {item.label}
@@ -681,7 +684,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                               </SelectContent>
                             </Select>
                           </FormControl>
-                          <Typography.Paragraph className="text-[14rem] text-status-danger">
+                          <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
                             {
                               form.formState.errors.guardian_runners?.[index]
                                 ?.size?.message
@@ -690,45 +693,45 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                         </FormItem>
                         <button
                           type="button"
-                          className="mt-[40rem] p-[8rem] border-status-danger border-[1rem] rounded-[5rem] inline-block hover:bg-status-danger/5"
+                          className="col-span-3 md:col-span-1 inline-block mt-[5rem] md:mt-[30rem] p-[5rem] md:p-[8rem] border-status-danger border-[1rem] rounded-[5rem]  hover:bg-status-danger/5"
                           onClick={() => removeGuardian(index)}
                         >
-                          <Trash className="w-[24rem] h-[24rem]  text-status-danger cursor-pointer" />
+                          <Trash className="mx-auto w-[10rem] h-[10rem] md:w-[24rem] md:h-[24rem] text-status-danger cursor-pointer" />
                         </button>
                       </div>
                     )}
                   />
                 ))}
                 {guardianFields.length === 0 && (
-                  <Typography.Paragraph className="text-[16rem] italic !mb-[10rem] text-hr-blue">
+                  <Typography.Paragraph className="text-[8rem] md:text-[16rem] italic !mb-[10rem] text-hr-blue">
                     {t("happy_run.form.empty_companion")}
                   </Typography.Paragraph>
                 )}
                 <Button
                   type="button"
-                  className="text-[18rem] p-[18rem] rounded-[8rem] bg-gradient-to-b from-[#1F7777] to-[#009181] italic"
+                  className="text-[10rem] md:text-[18rem] p-[10rem] md:p-[18rem] rounded-[3rem] md:rounded-[8rem] bg-gradient-to-b from-[#1F7777] to-[#009181] italic"
                   onClick={handleAddCompanionPerson}
                 >
                   {t("happy_run.buttons.add_person")}
                 </Button>
               </div>
-              <div className="section-3 mt-[30rem]">
+              <div className="section-3 mt-[20rem] md:mt-[30rem]">
                 <div className="mb-[10rem]">
                   <FormField
                     control={form.control}
                     name="full_name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[17rem] text-hr-blue font-bold leading-[30rem]">
+                        <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                           {t("happy_run.form.full_name")}
                         </FormLabel>
-                        <FormDescription className="text-[16rem] italic !mb-[10rem] text-hr-blue">
+                        <FormDescription className="text-[8rem] md:text-[16rem] italic !mb-[5rem] md:!mb-[10rem] text-hr-blue">
                           {t("happy_run.form.full_name_desc")}
                         </FormDescription>
                         <FormControl>
                           <div className="relative">
                             <Input
-                              className="w-full h-[30rem] !pr-[35rem] bg-white border-hr-blue rounded-[5rem] text-[16rem] text-hr-blue py-[20rem] px-[10rem] "
+                              className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
                               {...field}
                               placeholder={t(
                                 "happy_run.form.full_name_placeholder"
@@ -736,27 +739,27 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                             />
                           </div>
                         </FormControl>
-                        <FormMessage className="text-[14rem] text-status-danger" />
+                        <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
                       </FormItem>
                     )}
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-x-[30%] justify-between">
+                <div className="grid grid-cols-2 gap-x-[2%] md:gap-x-[30%] justify-between">
                   <FormField
                     control={form.control}
                     name={"mobile_number"}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[17rem] text-hr-blue font-bold leading-[30rem]">
+                        <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                           {t("happy_run.form.mobile_number")}
                         </FormLabel>
-                        <FormDescription className="text-[16rem] italic !mb-[10rem] text-hr-blue">
+                        <FormDescription className="text-[8rem] md:text-[16rem] italic !mb-[5rem] md:!mb-[10rem] text-hr-blue">
                           {t("happy_run.form.mobile_number_desc")}
                         </FormDescription>
                         <FormControl>
                           <div className="relative">
                             <Input
-                              className="w-full  h-[30rem] !pr-[35rem] bg-white border-hr-blue rounded-[5rem] text-[16rem] text-hr-blue py-[20rem] px-[10rem] "
+                              className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
                               {...field}
                               placeholder={t(
                                 "happy_run.form.mobile_number_placeholder"
@@ -764,7 +767,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                             />
                           </div>
                         </FormControl>
-                        <FormMessage className="text-[14rem] text-status-danger" />
+                        <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
                       </FormItem>
                     )}
                   />
@@ -773,16 +776,16 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                     name={"email"}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[17rem] text-hr-blue font-bold leading-[30rem]">
+                        <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                           {t("happy_run.form.email")}
                         </FormLabel>
-                        <FormDescription className="text-[16rem] italic !mb-[10rem] text-hr-blue">
+                        <FormDescription className="text-[8rem] md:text-[16rem] italic !mb-[5rem] md:!mb-[10rem] text-hr-blue">
                           {t("happy_run.form.email_desc")}
                         </FormDescription>
                         <FormControl>
                           <div className="relative">
                             <Input
-                              className="w-full  h-[30rem] !pr-[35rem] bg-white border-hr-blue rounded-[5rem] text-[16rem] text-hr-blue py-[20rem] px-[10rem] "
+                              className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
                               {...field}
                               placeholder={t(
                                 "happy_run.form.email_placeholder"
@@ -790,20 +793,20 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                             />
                           </div>
                         </FormControl>
-                        <FormMessage className="text-[14rem] text-status-danger" />
+                        <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
                       </FormItem>
                     )}
                   />
                 </div>
               </div>
-              <div className="section-4 mt-[30rem]">
-                <FormLabel className="text-[17rem] text-hr-blue font-bold leading-[30rem]">
+              <div className="section-4 mt-[10rem] md:mt-[30rem]">
+                <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                   {t("happy_run.form.content_bib")}
                 </FormLabel>
-                <FormDescription className="text-[16rem] italic !mb-[10rem] text-hr-blue">
+                <FormDescription className="text-[9rem] md:text-[16rem] italic !mb-[5rem] md:!mb-[10rem] text-hr-blue">
                   {t("happy_run.form.content_bib_desc")}
                 </FormDescription>
-                <div className="relative border-hr-blue border-[1rem] rounded-[5rem] bg-white min-h-[180rem] p-[20rem]">
+                <div className="relative border-hr-blue border-[1rem] rounded-[5rem] bg-white min-h-[80rem] md:min-h-[180rem] p-[5rem] md:p-[20rem]">
                   {[
                     ...form
                       .watch("primary_runners")
@@ -826,39 +829,59 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                         (i) => i.full_name && i.ticket_class === "Well-being"
                       ),
                   ].map((item, index) => (
-                    <div className="flex items-center gap-x-[5rem]">
-                      <Typography.Text className="text-[18rem] text-hr-blue italic">
+                    <div key={index} className="flex items-center gap-x-[5rem]">
+                      <Typography.Text className="text-[8rem] md:text-[18rem] text-hr-blue italic">
                         {`${index + 1}. ${item.full_name} -`}
                       </Typography.Text>
-                      <Input
-                        placeholder={t(
-                          "happy_run.form.content_bib_placeholder"
-                        )}
-                        className="flex-1 h-[30rem] text-hr-blue italic text-[18rem] border-b-[1rem] border-b-hr-blue !border-l-0 !border-r-0 !border-t-0"
-                        onChange={(e) =>
-                          handleChangeBIB(item.index, item.type, e.target.value)
-                        }
-                      />
+                      <div className="flex gap-x-[10rem] items-end">
+                        <Input
+                          placeholder={t(
+                            "happy_run.form.content_bib_placeholder"
+                          )}
+                          className="flex-1 h-[18rem] md:h-[30rem] text-hr-blue italic text-[8rem] md:text-[18rem] border-b-[1rem] border-b-hr-blue !border-l-0 !border-r-0 !border-t-0"
+                          onChange={(e) =>
+                            handleChangeBIB(
+                              item.index,
+                              item.type,
+                              e.target.value
+                            )
+                          }
+                        />
+                        <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
+                          {
+                            form.formState.errors?.[
+                              item.type === "primary"
+                                ? "primary_runners"
+                                : "guardian_runners"
+                            ]?.[item.index]?.bib?.message
+                          }
+                        </Typography.Paragraph>
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
             <center className="mt-[20rem]">
-              <Button
+              <button
                 type="submit"
-                className="text-[20rem] px-[20rem] py-[20rem] "
+                className={cn(
+                  "text-[14rem] text-center md:text-[30rem] px-[20rem] py-[10rem] rounded-[5rem] mb-[10rem] flex items-center bg-hr-ember text-white"
+                )}
               >
                 {t("happy_run.buttons.register_now")}
-              </Button>
+              </button>
             </center>
           </form>
         </Form>
       </section>
-      <PolicySection hidden={!orderData || isAgreed} onFinish={()=>{
-        setIsAgreed(true);
-        setOpenConfirmModal(true);
-      }} />
+      <PolicySection
+        hidden={!orderData || isAgreed}
+        onFinish={() => {
+          setIsAgreed(true);
+          setOpenConfirmModal(true);
+        }}
+      />
       <OrderConfirmModal
         orderData={orderData}
         open={openConfirmModal}
@@ -885,20 +908,20 @@ export const PolicySection = ({ hidden, onFinish }: PolicySectionProps) => {
     <div className="bg-hr-background" hidden={hidden}>
       <center className="mb-[5rem] px-[20rem]">
         <Typography.Heading
-          className="py-[30rem] text-[40rem] text-hr-blue leading-[1.2] font-extrabold"
+          className="py-[20rem] md:py-[40rem] text-[20rem] md:text-[45rem] text-hr-blue leading-[1.2] font-extrabold"
           level={2}
         >
           {parser(t("happy_run.form.policy_heading"))}
         </Typography.Heading>
 
-        <Typography.Paragraph className="mb-[10rem] w-[85%] text-[18rem] text-hr-blue ">
+        <Typography.Paragraph className="mb-[10rem] w-[90%] md:w-[85%] text-[8rem] md:text-[18rem] text-hr-blue text-justify md:text-center">
           {
             event.variables?.[
               currentLanguage === "en" ? "policy_note_en" : "policy_note_vn"
             ]?.value
           }
         </Typography.Paragraph>
-        <div className="bg-white w-[90%] border-hr-blue border-[1rem] p-[20rem] rounded-[5rem] mb-[20rem] !text-[18rem] text-left">
+        <div className="bg-white w-[90%] border-hr-blue border-[1rem] p-[15rem] md:p-[20rem] rounded-[5rem] mb-[20rem] !text-[10rem] max-h-[300rem] md:max-h-[500rem] overflow-x-hidden md:!text-[18rem] text-left">
           {parser(
             event.variables?.[
               currentLanguage === "en"
@@ -907,16 +930,28 @@ export const PolicySection = ({ hidden, onFinish }: PolicySectionProps) => {
             ]?.value || ""
           )}
         </div>
-        <button
-          type="button"
-          onClick={onFinish}
-          // disabled={isRequesting}
-          className={cn(
-            "text-[20rem] px-[20rem] py-[10rem] rounded-[5rem] mb-[10rem] flex items-center bg-hr-ember text-white"
-          )}
-        >
-          {t("happy_run.buttons.finish")}
-        </button>
+        <div className="flex md:flex-row flex-col-reverse gap-x-[40rem] justify-center">
+          <button
+            type="button"
+            onClick={onFinish}
+            // disabled={isRequesting}
+            className={cn(
+              "text-[14rem] text-center md:text-[20rem] px-[20rem] py-[10rem] rounded-[5rem] mb-[10rem] flex items-center border-hr-ember border-[1rem] text-hr-ember"
+            )}
+          >
+            {t("happy_run.buttons.not_agree")}
+          </button>
+          <button
+            type="button"
+            onClick={onFinish}
+            // disabled={isRequesting}
+            className={cn(
+              "text-[14rem] text-center md:text-[20rem] px-[20rem] py-[10rem] rounded-[5rem] mb-[10rem] flex items-center bg-hr-ember text-white"
+            )}
+          >
+            {t("happy_run.buttons.agree")}
+          </button>
+        </div>
       </center>
     </div>
   );

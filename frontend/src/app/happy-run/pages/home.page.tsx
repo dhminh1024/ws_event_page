@@ -13,6 +13,9 @@ import { Helmet } from "react-helmet";
 import { useLocales } from "@/core/hooks/use-locales";
 import env from "@/config/env";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
+import Typography from "@/app/happy-box/components/typography";
+import { Button } from "@atoms/button";
+import { Link } from "react-router-dom";
 
 export const Component: FC = () => {
   const { t, currentLanguage } = useLocales();
@@ -21,15 +24,24 @@ export const Component: FC = () => {
     <div className="bg-hr-background">
       <Helmet>
         <title>
-          {t("common.home_page")} | {currentLanguage === "en"
-            ? event.variables.title_event_en?.value
-            : event.variables.title_event_vn?.value}
+          {t("common.home_page")} |{" "}
+          {currentLanguage === "en"
+            ? event.variables.event_title_vn?.value
+            : event.variables.event_title_en?.value}
         </title>
       </Helmet>
       <Header className="px-[20rem] py-[10rem] md:py-[20rem] md:px-[60rem] md:h-[140rem]" />
       {/* <GallerySection />
       <ChallengeSection />
       <VideoSection /> */}
+      <center className="py-[40rem]">
+        <Typography.Heading level={1} className="p-[40rem] text-center">
+          COMING SOON
+        </Typography.Heading>
+        <Link to="order" className="text-[20rem] border-[2rem] p-[10rem] text-center">
+          Buy Ticket
+        </Link>
+      </center>
       <Footer />
     </div>
   );
