@@ -23,6 +23,14 @@ def confirm_payment(order_id):
 
 
 @frappe.whitelist()
+def resend_order_confirmation_email(order_id):
+    order = frappe.get_doc("WSE HR Order", order_id)
+    order.send_order_confirmation_email()
+
+    return order
+
+
+@frappe.whitelist()
 def cancel_order(order_id):
     order = frappe.get_doc("WSE HR Order", order_id)
     if order.status == HROrderStatus.CANCELED.value:

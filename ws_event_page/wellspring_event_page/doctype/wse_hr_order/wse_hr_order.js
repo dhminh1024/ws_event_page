@@ -48,6 +48,35 @@ frappe.ui.form.on("WSE HR Order", {
           color: "#fff",
         });
 
+        let resendOrderConfirmationBtn = frm.add_custom_button(
+          "Resend Order Confirmation Email",
+          function () {
+            // Prompt user to confirm the action
+            frappe.confirm(
+              "Are you sure you want to resend the confirmation email?",
+              function () {
+                frappe.call({
+                  method:
+                    "ws_event_page.api.event.happy_run.order.resend_order_confirmation_email",
+                  args: {
+                    order_id: frm.doc.name,
+                  },
+                  callback: function (r) {
+                    if (r.message) {
+                      frappe.msgprint(
+                        "Order Confirmation Email has been sent to the customer."
+                      );
+                      frm.reload_doc();
+                    }
+                  },
+                });
+              }
+            );
+          }
+        );
+
+        resendOrderConfirmationBtn.addClass("btn-secondary");
+
         cancelBtn = frm.add_custom_button("Cancel Order", function () {
           // Prompt user to confirm the action
           frappe.confirm(

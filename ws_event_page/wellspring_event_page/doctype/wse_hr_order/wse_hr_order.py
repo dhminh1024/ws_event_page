@@ -43,9 +43,7 @@ class WSEHROrder(Document):
 
     if TYPE_CHECKING:
         from frappe.types import DF
-        from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket import (
-            WSEHRTicket,
-        )
+        from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket import WSEHRTicket
 
         email: DF.Data
         full_name: DF.Data
@@ -103,21 +101,7 @@ class WSEHROrder(Document):
     def after_insert(self):
         """Send confirmation email after creating the order"""
         if self.status == HROrderStatus.PENDING_PAYMENT.value:
-            sender = settings.email_sender
-            subject = "Happy Run Order Confirmation"
-            recipients = [self.email]
-            message = "Your order has been received and is now being processed. You will receive an email confirmation shortly."
-            template = "order_confirmation"
-            qr_code_img_tag = f"""<img src="{self.qr_payment_code}" alt="QR Payment Code" style="width: 200px; height: 200px;"/>"""
-
-            args = dict(
-                message=message,
-                total_payment_pending=frappe.utils.fmt_money(
-                    self.total_price, currency="VND", format="#.###", precision=0
-                ),
-                qr_code_img_tag=qr_code_img_tag,
-            )
-            send_confirmation_email(template, sender, recipients, subject, args)
+            self.send_order_confirmation_email()
 
     def before_save(self):
         # previous_status = self.get_doc_before_save().status
@@ -135,7 +119,7 @@ class WSEHROrder(Document):
         bank_short_name = settings.bank_short_name
         if not all([account_number, account_name, bin_number, bank_short_name]):
             frappe.throw(f"VietQR settings are not configured: {settings}")
-        vietqr_url = f"https://img.vietqr.io/image/{bank_short_name}-{account_number}-qr_only.jpg?amount={self.total_price}&addInfo={self.name}&accountName={account_name}&acqId={bin_number}"
+        vietqr_url = f"https://img.vietqr.io/image/{bank_short_name}-{account_number}-VjSoh17.jpg?amount={self.total_payment_pending}&addInfo={self.name}&accountName={account_name}&acqId={bin_number}"
         self.qr_payment_code = vietqr_url
 
     def __generate_qr_payment_code_v1(self):
@@ -199,26 +183,87 @@ class WSEHROrder(Document):
             elif ticket.status == HRTicketStatus.PENDING_PAYMENT.value:
                 self.total_payment_pending += ticket.ticket_price
 
+        if self.total_payment_pending == 0:
+            self.status = HROrderStatus.PAID.value
+        else:
+            self.status = HROrderStatus.PENDING_PAYMENT.value
+
+    def get_ticket_list_for_email(self):
+        ticket_list = []
+        for ticket in self.tickets:
+            ticket_list.append(
+                {
+                    "name": ticket.name,
+                    "full_name": (
+                        ticket.full_name
+                        if not ticket.wellspring_code
+                        else f"{ticket.full_name} ({ticket.wellspring_code})"
+                    ),
+                    "ticket_type": ticket.ticket_type,
+                    "distance": ticket.distance,
+                    "shirt_size": ticket.shirt_size,
+                    "bib": ticket.bib,
+                    "ticket_price": frappe.utils.fmt_money(
+                        ticket.ticket_price, currency="VND", format="#.###", precision=0
+                    ),
+                    "status": ticket.status,
+                }
+            )
+        return ticket_list
+
+    def send_order_confirmation_email(self):
+        sender = settings.email_sender
+        subject = "WSSG Happy Run 2025 - Đăng ký thành công"
+        recipients = [self.email]
+        template = "hr_order_confirmation"
+        qr_code_img_tag = f"""<img src="{self.qr_payment_code}" alt="QR Payment Code" style="width: 200px; height: 200px;"/>"""
+        ticket_list = self.get_ticket_list_for_email()
+        args = dict(
+            total_payment_pending=frappe.utils.fmt_money(
+                self.total_payment_pending, currency="VND", format="#.###", precision=0
+            ),
+            total_price=frappe.utils.fmt_money(
+                self.total_price, currency="VND", format="#.###", precision=0
+            ),
+            tickets=ticket_list,
+            qr_code_img_tag=qr_code_img_tag,
+        )
+        send_confirmation_email(template, sender, recipients, subject, args)
+
     def send_payment_confirmation_email(self):
         """Send payment confirmation email after successful payment"""
         sender = settings.email_sender
-        subject = "Happy Run Payment Confirmation"
+        subject = "WSSG Happy Run 2025 - Xác nhận thanh toán"
         recipients = [self.email]
-        message = "Your payment has been received and your order is now confirmed. We look forward to seeing you at the event."
-        template = "payment_confirmation"
+        template = "hr_payment_confirmation"
+        ticket_list = self.get_ticket_list_for_email()
         args = dict(
-            message=message,
+            total_payment_pending=frappe.utils.fmt_money(
+                self.total_payment_pending, currency="VND", format="#.###", precision=0
+            ),
+            total_price=frappe.utils.fmt_money(
+                self.total_price, currency="VND", format="#.###", precision=0
+            ),
+            tickets=ticket_list,
         )
         send_confirmation_email(template, sender, recipients, subject, args)
 
     def send_cancellation_email(self):
         """Send cancellation email after cancelling the order"""
         sender = settings.email_sender
-        subject = "Happy Run Order Cancellation"
+        subject = "WSSG Happy Run 2025 - Huỷ đăng ký thành công"
         recipients = [self.email]
-        message = "Your order has been canceled. If you have any questions, please contact us."
-        template = "order_cancellation"
-        args = {"message": message}
+        template = "hr_order_cancellation"
+        ticket_list = self.get_ticket_list_for_email()
+        args = dict(
+            total_payment_pending=frappe.utils.fmt_money(
+                self.total_payment_pending, currency="VND", format="#.###", precision=0
+            ),
+            total_price=frappe.utils.fmt_money(
+                self.total_price, currency="VND", format="#.###", precision=0
+            ),
+            tickets=ticket_list,
+        )
         send_confirmation_email(template, sender, recipients, subject, args)
 
 
@@ -229,6 +274,6 @@ def send_confirmation_email(email_template, sender, recipients, subject, args):
         subject=subject,
         template=email_template,
         args=args,
-        header=_("Order Confirmation"),
+        header=_("WSSG Happy Run 2025"),
         now=True,
     )

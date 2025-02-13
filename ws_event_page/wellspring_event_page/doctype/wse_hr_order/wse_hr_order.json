@@ -2,7 +2,7 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "format:WSE-HRO-{YY}-{#####}",
+ "autoname": "format:WSEHRO{YY}{#####}",
  "creation": "2025-02-04 09:10:15.074947",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -69,8 +69,12 @@
   {
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
-   "options": "Pending Payment\nCanceled\nPaid"
+   "options": "Pending Payment\nCanceled\nPaid",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_rmyl",
@@ -136,7 +140,7 @@
  "image_field": "qr_payment_code",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-12 16:22:21.736209",
+ "modified": "2025-02-13 18:10:29.751529",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE HR Order",
@@ -164,6 +168,18 @@
    "report": 1,
    "role": "Guest",
    "share": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "WSE HR Admin",
+   "share": 1,
+   "write": 1
   }
  ],
  "sort_field": "modified",
