@@ -20,7 +20,10 @@ export interface HREventVariable extends EventVariableBase {
    policy_note_vn?: VariableType,
    policy_note_en?: VariableType,
    policy_content_vn?: VariableType,
-   policy_content_en?: VariableType
+   policy_content_en?: VariableType,
+   hero_image?: VariableType,
+   logo_happy_summer?: VariableType,
+   logo_spring_in_my_hands?: VariableType,
 }
 
 export interface HRUserInfo {

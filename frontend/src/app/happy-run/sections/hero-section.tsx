@@ -9,8 +9,8 @@ export const HeroSection: FC<HeroSectionProps> = ({ className }) => {
   const event = useEventPageContext();
 
   return (
-    <div>
-      <img src={event.variables.hero_image.value} alt="hero" />
+    <div className="w-full">
+      <img className="w-full" src={event.variables.hero_image?.value} alt="hero" />
     </div>
   );
 };
