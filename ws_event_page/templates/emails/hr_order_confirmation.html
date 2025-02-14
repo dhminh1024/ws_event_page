@@ -27,7 +27,7 @@
           <th
             scope="col"
             style="border-color: #3b6dae; color: #172a52"
-            width="100"
+            width="120"
           >
             Hạng vé
           </th>
@@ -36,21 +36,14 @@
             style="border-color: #3b6dae; color: #172a52"
             width="80"
           >
-            Cự ly
-          </th>
-          <th
-            scope="col"
-            style="border-color: #3b6dae; color: #172a52"
-            width="80"
-          >
-            Size áo
+            Giá vé
           </th>
           <th
             scope="col"
             style="border-color: #3b6dae; color: #172a52"
             width="100"
           >
-            Giá vé
+            Trạng thái
           </th>
         </tr>
       </thead>
@@ -59,10 +52,11 @@
         <tr>
           <th style="border-color: #3b6dae" scope="row">{{loop.index}}</th>
           <td style="border-color: #3b6dae">{{ticket.full_name}}</td>
-          <td style="border-color: #3b6dae">{{ticket.ticket_type}}</td>
-          <td style="border-color: #3b6dae">{{ticket.distance}}</td>
-          <td style="border-color: #3b6dae">{{ticket.shirt_size}}</td>
+          <td style="border-color: #3b6dae">
+            {{ticket.ticket_type}} - {{ticket.distance}}
+          </td>
           <td style="border-color: #3b6dae">{{ticket.ticket_price}}</td>
+          <td style="border-color: #3b6dae">{{ticket.status}}</td>
         </tr>
         {% endfor %}
       </tbody>

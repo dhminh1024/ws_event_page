@@ -34,16 +34,9 @@
           <th
             scope="col"
             style="border-color: #3b6dae; color: #172a52"
-            width="100"
+            width="120"
           >
             Hạng vé
-          </th>
-          <th
-            scope="col"
-            style="border-color: #3b6dae; color: #172a52"
-            width="80"
-          >
-            Cự ly
           </th>
           <th
             scope="col"
@@ -56,21 +49,22 @@
       </thead>
       <tbody style="color: #3d517b">
         <!-- jinja template for tickets -->
-        {% for ticket in tickets %}
+        {% for ticket in tickets %} {% if ticket.status == 'Đã thanh toán' %}
         <tr>
           <th style="border-color: #3b6dae" scope="row">{{loop.index}}</th>
           <td style="border-color: #3b6dae">{{ticket.name}}</td>
           <td style="border-color: #3b6dae">{{ticket.full_name}}</td>
-          <td style="border-color: #3b6dae">{{ticket.ticket_type}}</td>
-          <td style="border-color: #3b6dae">{{ticket.distance}}</td>
+          <td style="border-color: #3b6dae">
+            {{ticket.ticket_type}} - {{ticket.distance}}
+          </td>
           <td style="border-color: #3b6dae">{{ticket.shirt_size}}</td>
         </tr>
-        {% endfor %}
+        {% endif %} {% endfor %}
       </tbody>
     </table>
     <!-- Payment details -->
     <div class="text-right" style="margin-top: 20px">
-      <p style="color: #172a52"><strong>Tổng tiền:</strong> {{total_price}}</p>
+      <p style="color: #172a52"><strong>Tổng tiền:</strong> {{total_paid}}</p>
     </div>
     <p class="text-center" style="margin-top: 20px">
       Xin chân thành cảm ơn và hẹn gặp lại các bạn tại sự kiện Happy Run 2025!
