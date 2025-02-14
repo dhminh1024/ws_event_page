@@ -11,6 +11,7 @@ import { useAuthWSCode } from "@/lib/auth/auth-ws-code/use-auth-ws-code";
 import { useNavigate } from "react-router-dom";
 import { EVENT_PAGES } from "@/config/event-pages";
 import { cleanPath } from "@/lib/utils/common";
+import MenuBar from "./menu-bar";
 
 export type HeaderProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -28,37 +29,38 @@ export const Header: FC<HeaderProps> = ({ className }) => {
   return (
     <div
       className={cn(
-        "h-[100rem] flex justify-between gap-x-[10rem] md:gap-x-[20rem] shadow-[inset_0rem_-10rem_20rem_-10rem_#000]",
+        "bg-hr-primary shadow-[inset_0rem_-10rem_20rem_-10rem_#000]",
         className
       )}
     >
-      <div className="flex items-center gap-x-[10rem] md:gap-x-[20rem]">
-        <img
-          src={event.variables.logo_wellspring_primary?.value}
-          className="h-[50%] md:h-[70%] w-auto"
-          alt="Logo"
-        />
-        <img
-          src={event.variables.logo_happy_journey?.value}
-          className="h-[45%] md:h-[60%] w-auto"
-          alt="Logo"
-        />
-      </div>
-      <div className="flex gap-x-[10rem] md:gap-x-[20rem] items-center">
-        <Typography.Text
-          onClick={handleLogout}
-          className="text-[11rem] whitespace-nowrap md:text-[16rem] hover:underline text-happy_box-red cursor-pointer"
-        >
-          {t("common.sign_out")}
-        </Typography.Text>
-        <Typography.Text className="text-[11rem] md:text-[16rem]">|</Typography.Text>
-        <div className="flex items-center gap-x-[20rem]">
-          <Typography.Text className="hidden  md:inline text-[12rem] md:text-[16rem]">
-            {t("common.language")}
-          </Typography.Text>
-          <LanguageSelector />
+      <div className="flex justify-between gap-x-[10rem] md:gap-x-[20rem] w-full py-[30rem]">
+        <div className="flex items-center gap-x-[20rem] md:gap-x-[30rem]">
+          <img
+            src={event.variables.logo_wellspring_white?.value}
+            className="w-[20%] md:w-[150rem] h-auto"
+            alt="Logo"
+          />
+          <img
+            src={event.variables.logo_happy_journey?.value}
+            className="w-[20%] md:w-[100rem] h-auto"
+            alt="Logo"
+          />
+          <img
+            src={event.variables.logo_happy_summer?.value}
+            className="w-[20%] md:w-[85rem] h-auto"
+            alt="Logo summer"
+          />
+          <img
+            src={event.variables.logo_spring_in_my_hands?.value}
+            className="w-[20%] md:w-[60rem] h-auto"
+            alt="Logo spring"
+          />
+        </div>
+        <div className="flex gap-x-[10rem] md:gap-x-[20rem] items-center">
+        <LanguageSelector />
         </div>
       </div>
+      <MenuBar />
     </div>
   );
 };

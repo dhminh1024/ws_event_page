@@ -71,6 +71,7 @@ export default {
           light_red: "hsl(var(--page-light-red))",
         },
         hr: {
+          primary: "#002855",
           background: "#E6EBFF",
           blue: "#172A52",
           honey: "#F5AA1E",

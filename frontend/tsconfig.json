@@ -25,7 +25,8 @@
       "@templates/*": ["src/core/ui/templates/*"],
       "@/*": ["src/*"],
       "@happy-box/*": ["src/app/happy-box/*"],
-      "@nutrition-journey/*": ["src/app/nutrition-journey/*"]
+      "@nutrition-journey/*": ["src/app/nutrition-journey/*"],
+      "@happy-run/*": ["src/app/happy-run/*"],
     }
   },
   "include": ["src", "tailwind.config.ts", ".storybook", "alltypes.d.ts"]

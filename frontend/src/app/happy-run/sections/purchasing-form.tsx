@@ -495,8 +495,9 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                         </FormItem>
                         <button
                           type="button"
-                          className="col-span-3 md:col-span-1 inline-block mt-[5rem] md:mt-[30rem] p-[5rem] md:p-[8rem] border-status-danger border-[1rem] rounded-[5rem]  hover:bg-status-danger/5"
-                          onClick={() => removePrimary(index)}
+                          className="col-span-3 md:col-span-1 disabled:opacity-20 inline-block mt-[5rem] md:mt-[30rem] p-[5rem] md:p-[8rem] border-status-danger border-[1rem] rounded-[5rem]  hover:bg-status-danger/5"
+                          onClick={() => index > 0 && removePrimary(index)}
+                          disabled={index === 0}
                         >
                           <Trash className="mx-auto w-[10rem] h-[10rem] md:w-[24rem] md:h-[24rem] text-status-danger cursor-pointer" />
                         </button>
