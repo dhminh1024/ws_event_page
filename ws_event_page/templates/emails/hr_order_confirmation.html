@@ -1,0 +1,87 @@
+<div
+  class="gray-container text-center"
+  style="text-align: center; color: #172a52"
+>
+  <div>
+    <h1 style="text-align: center">
+      <span style="color: #f05023">BẠN ĐÃ ĐĂNG KÝ THÀNH CÔNG</span>
+      <br />
+      <span style="color: #172a52">SỰ KIỆN</span
+      ><span style="color: #f5aa1e"> HAPPY RUN 2025</span>
+    </h1>
+    <!-- Order detail -->
+    <table
+      class="table"
+      style="background-color: azure; border: 1px solid #3b6dae"
+    >
+      <thead style="background: #3b6dae45">
+        <tr>
+          <th scope="col" style="border-color: #3b6dae; color: #172a52">#</th>
+          <th
+            scope="col"
+            style="border-color: #3b6dae; color: #172a52"
+            width="180"
+          >
+            Họ tên
+          </th>
+          <th
+            scope="col"
+            style="border-color: #3b6dae; color: #172a52"
+            width="120"
+          >
+            Hạng vé
+          </th>
+          <th
+            scope="col"
+            style="border-color: #3b6dae; color: #172a52"
+            width="80"
+          >
+            Giá vé
+          </th>
+          <th
+            scope="col"
+            style="border-color: #3b6dae; color: #172a52"
+            width="100"
+          >
+            Trạng thái
+          </th>
+        </tr>
+      </thead>
+      <tbody style="color: #3d517b">
+        {% for ticket in tickets %}
+        <tr>
+          <th style="border-color: #3b6dae" scope="row">{{loop.index}}</th>
+          <td style="border-color: #3b6dae">{{ticket.full_name}}</td>
+          <td style="border-color: #3b6dae">
+            {{ticket.ticket_type}} - {{ticket.distance}}
+          </td>
+          <td style="border-color: #3b6dae">{{ticket.ticket_price}}</td>
+          <td style="border-color: #3b6dae">{{ticket.status}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- Payment details -->
+    <div class="text-right" style="margin-top: 20px">
+      <p style="color: #172a52"><strong>Tổng tiền:</strong> {{total_price}}</p>
+      {% if total_payment_pending != total_price %}
+      <p style="color: #172a52">
+        <strong>Cần thanh toán:</strong> {{total_payment_pending}}
+      </p>
+      {% endif %}
+    </div>
+
+    <!-- QR code -->
+    <div class="text-center" style="margin-top: 20px">
+      <p class="text-center" style="color: #172a52">
+        Vui lòng thực hiện thanh toán đơn hàng bằng mã QR dưới đây:
+      </p>
+    </div>
+    <div class="text-center" style="margin: 20px 0">{{ qr_code_img_tag }}</div>
+
+    <p class="text-center" style="margin-top: 20px; color: #172a52">
+      Xin chân thành cảm ơn và hẹn gặp lại các bạn tại sự kiện Happy Run 2025!
+    </p>
+  </div>
+</div>

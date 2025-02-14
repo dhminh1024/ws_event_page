@@ -238,3 +238,7 @@ export_python_type_annotations = True
 website_route_rules = [
     {"from_route": "/events/<path:app_path>", "to_route": "events"},
 ]
+
+after_migrate = [
+    "ws_event_page.install.after_migrate.create_roles_if_not_exists",
+]

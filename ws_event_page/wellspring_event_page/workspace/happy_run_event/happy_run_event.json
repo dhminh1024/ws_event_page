@@ -13,7 +13,7 @@
    "label": "Ticket Distance"
   }
  ],
- "content": "[{\"id\":\"p052yrQmGi\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Happy Run Event</span>\",\"col\":12}},{\"id\":\"Q4kJ3kxnQo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Registration Form\",\"col\":12}},{\"id\":\"WkaTskR1d7\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"#Orders\",\"col\":3}},{\"id\":\"ypxWC_8WhL\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Revenue\",\"col\":3}},{\"id\":\"MaAy659Yp9\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Paid\",\"col\":3}},{\"id\":\"MoKKIWX2cK\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Pending Payment\",\"col\":3}},{\"id\":\"IcSEMgkhDs\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Daily Orders\",\"col\":12}},{\"id\":\"e3jynbBCkf\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Ticket Type\",\"col\":6}},{\"id\":\"opFsi-pGRh\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Ticket Distance\",\"col\":6}},{\"id\":\"lPhTKHQooO\",\"type\":\"card\",\"data\":{\"card_name\":\"Happy Run Admin\",\"col\":6}}]",
+ "content": "[{\"id\":\"p052yrQmGi\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Happy Run Event</span>\",\"col\":12}},{\"id\":\"Q4kJ3kxnQo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Registration Form\",\"col\":12}},{\"id\":\"WkaTskR1d7\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"#Orders\",\"col\":3}},{\"id\":\"ypxWC_8WhL\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Revenue\",\"col\":3}},{\"id\":\"MaAy659Yp9\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Paid\",\"col\":3}},{\"id\":\"MoKKIWX2cK\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Pending Payment\",\"col\":3}},{\"id\":\"IcSEMgkhDs\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Daily Orders\",\"col\":12}},{\"id\":\"e3jynbBCkf\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Ticket Type\",\"col\":6}},{\"id\":\"opFsi-pGRh\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Ticket Distance\",\"col\":6}},{\"id\":\"lPhTKHQooO\",\"type\":\"card\",\"data\":{\"card_name\":\"Happy Run Admin\",\"col\":6}},{\"id\":\"Qujrv-8rde\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":6}}]",
  "creation": "2025-02-04 09:03:34.514781",
  "custom_blocks": [],
  "docstatus": 0,
@@ -54,9 +54,28 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Ticket Report",
+   "link_count": 0,
+   "link_to": "WSE HR Ticket Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
   }
  ],
- "modified": "2025-02-12 15:52:28.733984",
+ "modified": "2025-02-13 18:09:50.859597",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "Happy Run Event",
@@ -82,7 +101,11 @@
  "parent_page": "",
  "public": 1,
  "quick_lists": [],
- "roles": [],
+ "roles": [
+  {
+   "role": "WSE HR Admin"
+  }
+ ],
  "sequence_id": 9.0,
  "shortcuts": [
   {
