@@ -25,6 +25,10 @@ def confirm_payment(order_id):
 @frappe.whitelist()
 def resend_order_confirmation_email(order_id):
     order = frappe.get_doc("WSE HR Order", order_id)
+
+    if order.status != HROrderStatus.PENDING_PAYMENT.value:
+        frappe.throw("Order is not pending payment")
+
     order.send_order_confirmation_email()
 
     return order
@@ -35,10 +39,16 @@ def cancel_order(order_id):
     order = frappe.get_doc("WSE HR Order", order_id)
     if order.status == HROrderStatus.CANCELED.value:
         frappe.throw("Order is already canceled")
+    if order.status == HROrderStatus.PAID.value:
+        frappe.throw("Order is already paid")
+
     order.status = HROrderStatus.CANCELED.value
     for ticket in order.tickets:
         if ticket.status == HRTicketStatus.PENDING_PAYMENT.value:
             ticket.status = HRTicketStatus.CANCELED.value
+        elif ticket.status == HRTicketStatus.PAID.value:
+            frappe.throw("Cannot cancel order with paid ticket")
+
     order.save()
     order.send_cancellation_email()
 

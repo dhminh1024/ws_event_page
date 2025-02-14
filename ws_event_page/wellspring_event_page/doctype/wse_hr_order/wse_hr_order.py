@@ -43,7 +43,9 @@ class WSEHROrder(Document):
 
     if TYPE_CHECKING:
         from frappe.types import DF
-        from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket import WSEHRTicket
+        from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket import (
+            WSEHRTicket,
+        )
 
         email: DF.Data
         full_name: DF.Data
@@ -189,6 +191,13 @@ class WSEHROrder(Document):
             self.status = HROrderStatus.PENDING_PAYMENT.value
 
     def get_ticket_list_for_email(self):
+        ticket_status_translation = {
+            HRTicketStatus.PENDING_PAYMENT.value: "Chờ thanh toán",
+            HRTicketStatus.PAID.value: "Đã thanh toán",
+            HRTicketStatus.CANCELED.value: "Đã huỷ",
+            HRTicketStatus.REFUNDED.value: "Đã hoàn tiền",
+            HRTicketStatus.ATTENDED.value: "Đã tham gia",
+        }
         ticket_list = []
         for ticket in self.tickets:
             ticket_list.append(
@@ -206,7 +215,9 @@ class WSEHROrder(Document):
                     "ticket_price": frappe.utils.fmt_money(
                         ticket.ticket_price, currency="VND", format="#.###", precision=0
                     ),
-                    "status": ticket.status,
+                    "status": ticket_status_translation.get(
+                        ticket.status, ticket.status
+                    ),
                 }
             )
         return ticket_list
@@ -224,6 +235,9 @@ class WSEHROrder(Document):
             ),
             total_price=frappe.utils.fmt_money(
                 self.total_price, currency="VND", format="#.###", precision=0
+            ),
+            total_paid=frappe.utils.fmt_money(
+                self.total_paid, currency="VND", format="#.###", precision=0
             ),
             tickets=ticket_list,
             qr_code_img_tag=qr_code_img_tag,
@@ -244,6 +258,9 @@ class WSEHROrder(Document):
             total_price=frappe.utils.fmt_money(
                 self.total_price, currency="VND", format="#.###", precision=0
             ),
+            total_paid=frappe.utils.fmt_money(
+                self.total_paid, currency="VND", format="#.###", precision=0
+            ),
             tickets=ticket_list,
         )
         send_confirmation_email(template, sender, recipients, subject, args)
@@ -261,6 +278,9 @@ class WSEHROrder(Document):
             ),
             total_price=frappe.utils.fmt_money(
                 self.total_price, currency="VND", format="#.###", precision=0
+            ),
+            total_paid=frappe.utils.fmt_money(
+                self.total_paid, currency="VND", format="#.###", precision=0
             ),
             tickets=ticket_list,
         )
