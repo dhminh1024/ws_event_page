@@ -11,7 +11,8 @@ import { useAuthWSCode } from "@/lib/auth/auth-ws-code/use-auth-ws-code";
 import { useNavigate } from "react-router-dom";
 import { EVENT_PAGES } from "@/config/event-pages";
 import { cleanPath } from "@/lib/utils/common";
-import MenuBar from "./menu-bar";
+import { MenuBar } from "./menu-bar";
+
 
 export type HeaderProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -29,7 +30,7 @@ export const Header: FC<HeaderProps> = ({ className }) => {
   return (
     <div
       className={cn(
-        "bg-hr-primary shadow-[inset_0rem_-10rem_20rem_-10rem_#000]",
+        "bg-hr-primary pb-[40rem]",
         className
       )}
     >
@@ -60,7 +61,6 @@ export const Header: FC<HeaderProps> = ({ className }) => {
         <LanguageSelector />
         </div>
       </div>
-      <MenuBar />
     </div>
   );
 };

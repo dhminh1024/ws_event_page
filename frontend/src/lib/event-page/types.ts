@@ -28,6 +28,11 @@ export type EventVariableBase = {
     event_slogan_vn?: VariableType
     event_slogan_en?: VariableType
     event_name?: VariableType
+    item_tickets?: VariableType
+    item_tshirt?: VariableType
+    item_medals?: VariableType
+    item_hat?: VariableType
+    item_bottle?: VariableType
 }
 
 export interface WSEEventResponse extends Omit<WSEEvent, "variables"> {
