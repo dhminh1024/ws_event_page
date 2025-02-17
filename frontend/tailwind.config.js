@@ -16,6 +16,7 @@ export default {
         sans: ["Mulish", "sans-serif"],
         playlist: ["Playlist"],
         tropen: ["Tropen"],
+        raceChampion: ["Race Champion","Mulish", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -52,12 +53,12 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         brand: {
-          primary: "hsl(var(--brand-primary))",
-          teal: "hsl(var(--brand-teal))",
+          primary: "#002855",
+          teal: "#009684",
           persian: "#016982",
-          lime: "hsl(var(--brand-lime))",
-          honey: "hsl(var(--brand-honey))",
-          amber: "hsl(var(--brand-amber))",
+          lime: "#BED232",
+          honey: "#F5AA1E",
+          amber: "#F05023",
         },
         happy_box: {
           foreground: "hsl(var(--page-foreground))",

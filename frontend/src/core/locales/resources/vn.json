@@ -108,6 +108,7 @@
       "payment_success_qr_guide": "Vui lòng thực hiện thanh toán đơn hàng bằng mã QR dưới đây",
       "payment_success_desc_1": "Email đăng ký thành công sẽ được hệ thống gửi về địa chỉ email của bạn.",
       "payment_success_desc_2": "Xin chân thành cảm ơn và hẹn gặp lại các bạn tại sự kiện Happy Run 2025!",
+      "payment_success_note": "Trong trường hợp không nhận được email xác nhận thông tin hoặc cần hỗ trợ về đơn hàng, vui lòng liên hệ BTC: <b>happyrun2025@wellspringsaigon.edu.vn</b>",
       "policy_heading": "<span className=\"text-hr-ember\">XÁC NHẬN ĐỌC HIỂU</span> <br/> VÀ <span className=\"text-brand-persian\">MIỄN TRỪ TRÁCH NHIỆM </span> <br/> KHI THAM GIA <span className=\"text-hr-honey\">HAPPY RUN 2025</span>"
     },
     "buttons": {
@@ -116,11 +117,25 @@
       "confirm_payment": "Xác nhận thanh toán",
       "go_back": "Quay lại",
       "download_qr": "Tải mã QR",
-      "finish":"Hoàn thành",
+      "finish": "Hoàn thành",
       "agree": "Tôi đồng ý và Tiếp Tục",
       "not_agree": "Tôi không đồng ý"
     },
-    "policy_content": ""
+    "ticket_sale_official_time": "Thời gian bán vé chính thức",
+    "count_down_heading": "Chào mừng các WISERS đến với Happy Run 2025 & <br/> Khởi động Happy Summer 2025",
+    "count_down_date": "Còn <span className=\"text-[40rem] font-semibold\">{{day}}</span> ngày <span className=\"text-[40rem] font-semibold\">{{minutes}}</span> phút <span className=\"text-[40rem] font-semibold\">{{seconds}}</span> giây",
+    "teaser_heading_1": "Happy",
+    "teaser_heading_2": "Run",
+    "target_heading": "Mục tiêu",
+    "route_heading": "Lộ Trình",
+    "detailed_route_heading":"Lộ trình chi tiết",
+    "timing_route_heading": "Thời gian",
+    "highlight_route_heading": "Điểm nổi bật",
+    "ticket_heading": "Hạng vé",
+    "ticket_description": "Nhấn vào từng Hạng vé để xem chi tiết",
+    "kit_heading": "Runner Kit",
+    "kit_description": "Quyền lợi tự chọn nội dung in lên BIB cá nhân <span className=\"text-hr-ember\">dành cho hạng vé Well-being</span>",
+    "kit_meta": "(Nội dung bao gồm với 8 ký tự: chữ và số tự chọn)"
   },
   "nutritional_journey": {
     "title": "Hành Trình Dinh Dưỡng",

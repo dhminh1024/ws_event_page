@@ -43,49 +43,49 @@ type TypographyHeadingProps = TypographyBaseProps &
     level?: number;
   };
 
-Typography.Heading = (({
+Typography.Heading = React.forwardRef<HTMLHeadingElement, TypographyHeadingProps>(({
   level = 4,
   className,
   children,
   ...props
-}: TypographyHeadingProps) => {
+}, ref) => {
   if (level === 1)
     return (
-      <h1 className={cn("text-[32rem] font-semibold", className)} {...props}>
+      <h1 ref={ref} className={cn("text-[32rem] font-semibold", className)} {...props}>
         {children}
       </h1>
     );
   if (level === 2)
     return (
-      <h2 className={cn("text-[24rem] font-semibold", className)} {...props}>
+      <h2 ref={ref} className={cn("text-[24rem] font-semibold", className)} {...props}>
         {children}
       </h2>
     );
   if (level === 3)
     return (
-      <h3 className={cn("text-[20rem] font-semibold", className)} {...props}>
+      <h3 ref={ref} className={cn("text-[20rem] font-semibold", className)} {...props}>
         {children}
       </h3>
     );
   if (level === 4)
     return (
-      <h4 className={cn("text-[18rem] font-semibold", className)} {...props}>
+      <h4 ref={ref} className={cn("text-[18rem] font-semibold", className)} {...props}>
         {children}
       </h4>
     );
   if (level === 5)
     return (
-      <h5 className={cn("text-[16rem] font-semibold", className)} {...props}>
+      <h5 ref={ref} className={cn("text-[16rem] font-semibold", className)} {...props}>
         {children}
       </h5>
     );
   if (level === 6)
     return (
-      <h6 className={cn("text-[14rem] font-semibold", className)} {...props}>
+      <h6 ref={ref} className={cn("text-[14rem] font-semibold", className)} {...props}>
         {children}
       </h6>
     );
-}) as FunctionComponent<TypographyHeadingProps>;
+});
 Typography.Text.displayName = "Typography.Heading";
 
 type TypographyLabelProps = HTMLAttributes<HTMLLabelElement> &

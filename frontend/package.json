@@ -20,6 +20,8 @@
     "dicebear": "^9.2.2",
     "file-saver": "^2.0.5",
     "frappe-react-sdk": "^1.9.0",
+    "gsap": "^3.12.7",
+    "gsap-trial": "^3.12.7",
     "html-react-parser": "^5.2.2",
     "i18next": "^24.0.5",
     "i18next-browser-languagedetector": "^8.0.2",

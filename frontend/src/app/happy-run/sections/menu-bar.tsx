@@ -1,5 +1,4 @@
-import React, { HTMLAttributes, useState } from "react";
-
+import React, { HTMLAttributes, useState, type FC } from "react";
 import Container from "../components/container";
 import { useLocales } from "@/core/hooks/use-locales";
 import { cn } from "@/core/utils/shadcn-utils";
@@ -7,20 +6,40 @@ import ScrollButton from "../components/scroll-button";
 import Typography from "../components/typography";
 import { Popover, PopoverContent, PopoverTrigger } from "@atoms/popover";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { useSticky } from "@/core/hooks/use-sticky";
+import { useEventPageContext } from "@/lib/event-page/use-event-page";
 
-export default function MenuBar() {
+export type MenuBarProps = HTMLAttributes<HTMLDivElement> & {};
+
+export const MenuBar: FC<MenuBarProps> = ({ className }) => {
+  const { t } = useLocales();
+  // const { ref, isSticky } = useSticky();
+  const event = useEventPageContext();
   return (
     <section
+      // ref={ref}
       id="navbar"
       aria-labelledby="introduction-title"
-      className="sticky left-0 top-0 z-50 hidden md:block"
+      className={cn(
+        "sticky top-0 left-0 z-50 hidden md:block ",
+        className
+      )}
     >
-      <Container className="">
-        <NavBar />
-      </Container>
+      <div className="pt-[10rem] bg-hr-primary shadow-[inset_0rem_-10rem_20rem_-10rem_#1b1b1b]">
+        <Container>
+          <NavBar />
+        </Container>
+      </div>
+      <div className="bg-hr-honey py-[5rem] text-center">
+        <Typography.Text className=" text-hr-blue font-bold py-[5rem]">
+          {t("happy_run.ticket_sale_official_time")}:{" "}
+          {event?.variables.ticket_period_time_start?.value} -{" "}
+          {event?.variables.ticket_period_time_end?.value}
+        </Typography.Text>
+      </div>
     </section>
   );
-}
+};
 
 const NavBar = ({
   className,
@@ -46,7 +65,7 @@ const NavBar = ({
     {
       text: "FAQ",
       to: "language-happiness",
-    }
+    },
   ];
 
   if (!isDropdown)
@@ -58,7 +77,7 @@ const NavBar = ({
               <ScrollButton to={navItem.to}>
                 <div
                   className={cn(
-                    "h-full w-[200rem] cursor-pointer rounded-t-[10rem] px-[5rem] text-center bg-gradient-to-t from-[#174C73_] to-[#0C729D] hover:from-[#E16A17] hover:to-[#FFD200]"
+                    "h-full w-[200rem] cursor-pointer rounded-t-[10rem] px-[5rem] text-center bg-gradient-to-t from-[#174C73_] to-[#0C729D] hover:from-[#E16A17] hover:to-[#FFD200] border-t-[5rem] border-[#0C7AA5] hover:border-[#FFD000]"
                   )}
                 >
                   <div className="flex py-[8rem] h-full items-center justify-center rounded-t-[10rem]">

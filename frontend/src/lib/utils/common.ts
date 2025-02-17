@@ -247,3 +247,16 @@ export function rotateSize(width:number, height:number, rotation:number) {
   };
 }
 
+export function getTimeLeft(targetDate: string) {
+  const now = new Date();
+  const target = new Date(targetDate).getTime();
+  const timeDiff = target - now.getTime();
+
+  return {
+    total: timeDiff,
+    days: Math.floor(timeDiff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((timeDiff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((timeDiff / (1000 * 60)) % 60),
+    seconds: Math.floor((timeDiff / 1000) % 60),
+  };
+}

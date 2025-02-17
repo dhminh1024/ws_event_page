@@ -745,7 +745,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                     )}
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-x-[2%] md:gap-x-[30%] justify-between">
+                <div className="grid grid-cols-2 gap-x-[2%] md:gap-x-[25%] justify-between">
                   <FormField
                     control={form.control}
                     name={"mobile_number"}
