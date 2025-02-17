@@ -45,6 +45,13 @@
           >
             Size áo
           </th>
+          <th
+            scope="col"
+            style="border-color: #3b6dae; color: #172a52"
+            width="80"
+          >
+            BIB
+          </th>
         </tr>
       </thead>
       <tbody style="color: #3d517b">
@@ -58,6 +65,7 @@
             {{ticket.ticket_type}} - {{ticket.distance}}
           </td>
           <td style="border-color: #3b6dae">{{ticket.shirt_size}}</td>
+          <td style="border-color: #3b6dae">{{ticket.bib}}</td>
         </tr>
         {% endif %} {% endfor %}
       </tbody>
