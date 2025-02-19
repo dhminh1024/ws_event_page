@@ -1,0 +1,158 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:registration_number",
+ "creation": "2025-02-18 16:09:29.784689",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "status_section",
+  "status",
+  "column_break_jpyd",
+  "qr_code",
+  "general_section",
+  "registration_number",
+  "contact_email",
+  "student_full_name",
+  "parent_full_name",
+  "column_break_kytv",
+  "registration_timestamp",
+  "mobile_number",
+  "student_grade"
+ ],
+ "fields": [
+  {
+   "fieldname": "contact_email",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Contact Email",
+   "reqd": 1
+  },
+  {
+   "fieldname": "registration_number",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Registration Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "student_full_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Student Full Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_kytv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "registration_timestamp",
+   "fieldtype": "Datetime",
+   "label": "Registration Timestamp",
+   "reqd": 1
+  },
+  {
+   "fieldname": "mobile_number",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Mobile Number"
+  },
+  {
+   "fieldname": "parent_full_name",
+   "fieldtype": "Data",
+   "label": "Parent Full Name"
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Status"
+  },
+  {
+   "default": "New",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "New\nConfirmation Email Sent\nChecked in",
+   "reqd": 1
+  },
+  {
+   "fieldname": "general_section",
+   "fieldtype": "Section Break",
+   "label": "General"
+  },
+  {
+   "fieldname": "student_grade",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Student Grade",
+   "non_negative": 1,
+   "options": "K1\nK2\nK3\nK4\nK5\nK6\nK7\nK8\nK9\nK10\nK11\nK12",
+   "read_only": 1
+  },
+  {
+   "fieldname": "qr_code",
+   "fieldtype": "Attach Image",
+   "label": "QR Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_jpyd",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "image_field": "qr_code",
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-02-19 12:39:12.163564",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE AC Lead",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "WSE AC Admin",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "student_full_name,contact_email",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

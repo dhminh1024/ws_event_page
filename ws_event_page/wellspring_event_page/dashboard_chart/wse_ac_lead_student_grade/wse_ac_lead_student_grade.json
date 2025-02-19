@@ -1,0 +1,37 @@
+{
+ "based_on": "",
+ "chart_name": "WSE AC Lead Student Grade",
+ "chart_type": "Group By",
+ "creation": "2025-02-18 16:39:21.859048",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "document_type": "WSE AC Lead",
+ "dynamic_filters_json": "[]",
+ "filters_json": "[]",
+ "group_by_based_on": "student_grade",
+ "group_by_type": "Count",
+ "idx": 0,
+ "is_public": 0,
+ "is_standard": 1,
+ "last_synced_on": "2025-02-18 16:40:40.538989",
+ "modified": "2025-02-18 16:43:54.084412",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE AC Lead Student Grade",
+ "number_of_groups": 12,
+ "owner": "Administrator",
+ "parent_document_type": "",
+ "roles": [
+  {
+   "role": "WSE AC Admin"
+  }
+ ],
+ "source": "",
+ "time_interval": "Yearly",
+ "timeseries": 0,
+ "timespan": "Last Year",
+ "type": "Bar",
+ "use_report_chart": 0,
+ "value_based_on": "",
+ "y_axis": []
+}

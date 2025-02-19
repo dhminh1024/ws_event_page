@@ -1,0 +1,243 @@
+<style>
+  .container {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    padding: 10px 0px;
+  }
+  en-language {
+    color: #00539c !important;
+  }
+  vn-language {
+    color: #102131 !important;
+  }
+  p {
+    margin: 10px 0;
+  }
+  ul {
+    margin: 10px 5px;
+  }
+  .qr-code {
+    text-align: center;
+    margin: 15px 0;
+  }
+  .section {
+    margin-bottom: 30px;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 30px 0;
+  }
+</style>
+
+<div class="container">
+  <div class="section vn-language">
+    <p>
+      Kính gửi Quý Phụ huynh em
+      <strong>{{lead.student_full_name}}</strong>_Lớp
+      <strong>{{lead.student_grade}}</strong>_Số Thứ tự đăng ký:
+      <strong>{{lead.registration_number}}</strong>,
+    </p>
+
+    <p>
+      Hệ thống Trường Phổ thông Liên cấp Song ngữ Quốc tế Wellspring -
+      Wellspring Saigon cảm ơn Quý Phụ huynh đã đăng ký tham dự Sự Kiện Ngày hội
+      Trải Nghiệm “Cùng con khởi đầu Hạnh phúc” được tổ chức vào Sáng Thứ Bảy,
+      ngày <strong>22/02/2025</strong>.
+    </p>
+
+    <p>
+      Nhằm đảm bảo việc tham gia các hoạt động trong Ngày hội trải nghiệm của
+      Phụ huynh Học sinh được diễn ra thuận lợi, Nhà trường xin cập nhật một số
+      thông tin liên quan đến lịch trình và các lưu ý như sau:
+    </p>
+
+    <ol>
+      <li>
+        <strong
+          >NHÓM 1: Học sinh {{lead.student_full_name}} - Số TT:
+          {{lead.registration_number}}</strong
+        >
+        <br />
+        <em>Mã QR:</em>
+        <div class="qr-code">
+          <!-- Replace the src with your QR code image URL -->
+          <img
+            src="{{lead.qr_code}}"
+            alt="QR Code"
+            style="width: 150px; height: 150px"
+          />
+        </div>
+        <p>
+          Quý Phụ huynh vui lòng lưu ý số nhóm để thuận tiện khi nhận Thẻ điểm
+          danh tại khu vực Lễ tân (check in) và di chuyển trong quá trình trải
+          nghiệm.
+        </p>
+      </li>
+      <li>
+        <strong>Thông tin Lịch Trình Sự kiện:</strong>
+        <ul>
+          <li>
+            <strong>a. 08h15 - 08h45 sáng:</strong> Điểm danh và thực hiện các
+            thủ tục đăng ký theo số nhóm của mỗi Học sinh tại Khu vực Lễ tân.
+            Quý Phụ huynh vui lòng đến trường tại cổng B và xuất trình tin nhắn
+            xác nhận tại Bảo vệ cổng B (nếu có).
+          </li>
+          <li>
+            <strong>b. 09h00 - 11h20 sáng:</strong> Học sinh sẽ di chuyển theo
+            số nhóm đã được thông báo để tham gia lần lượt qua 04 (Bốn) Trạm
+            trải nghiệm: Trạm Khám phá, Trạm Sáng tạo, Trạm Yêu thương và Trạm
+            Năng động theo sự hướng dẫn của Thầy Cô phụ trách.
+          </li>
+          <li>
+            <strong>c. Lưu ý:</strong>
+            <ul>
+              <li>
+                01 (một) Học sinh sẽ có 01 (một) Phụ huynh đi kèm cùng tham gia
+                quan sát trong các hoạt động trải nghiệm dành cho Học sinh trong
+                ngày 22/02/2025. Trong trường hợp số lượng Phụ huynh tham gia
+                nhiều hơn 01 (một), Quý Phụ huynh còn lại vui lòng ngồi chờ tại
+                Khu vực Sảnh chung của Nhà trường trong thời gian Học sinh tham
+                gia các hoạt động (dự kiến từ 09h00 - 11h20 sáng cùng ngày).
+              </li>
+              <li>
+                Để thuận tiện trong quá trình tham gia các hoạt động vận động,
+                trải nghiệm tại Trạm Năng động, Quý Phụ huynh vui lòng chuẩn bị
+                cho Học sinh các trang phục thoải mái, phù hợp và có độ co giãn.
+              </li>
+              <li>
+                Trường hợp Quý Phụ huynh và Học sinh tham gia trễ hơn so với các
+                khung giờ hoạt động, vui lòng theo sự hướng dẫn của các Thầy/Cô
+                phụ trách.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>d.</strong> Quý Phụ huynh vui lòng tham khảo trước các hướng
+            dẫn cho buổi trải nghiệm “Cùng con khởi đầu Hạnh phúc” theo hình ảnh
+            đính kèm bên dưới.
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <p>
+      Nếu cần thêm thông tin, Quý Phụ huynh vui lòng liên hệ Phòng Tuyển sinh
+      qua hotline <strong>0937 099 229</strong> để được hỗ trợ.
+    </p>
+
+    <p>
+      Rất hân hạnh được đón tiếp Quý Phụ huynh và Học sinh trong sự kiện “Cùng
+      con khởi đầu Hạnh phúc” vào ngày <strong>22.02.2025</strong> tại
+      Wellspring Saigon!
+    </p>
+
+    <p>Trân trọng,</p>
+    <p><strong>Hội đồng Tuyển sinh Wellspring Saigon</strong></p>
+  </div>
+
+  <hr />
+
+  <!-- English Version -->
+  <div class="section en-language">
+    <p>
+      Dear Parents of <strong>{{lead.student_full_name}}</strong>_Grade
+      <strong>{{lead.student_grade}}</strong>_Order number:
+      <strong>{{lead.registration_number}}</strong>,
+    </p>
+
+    <p>
+      The Wellspring International Bilingual System - Wellspring Saigon
+      Admissions Department would like to thank you for registering to attend
+      the Experience Day “Let's start the Happy Journey” held on the Saturday
+      morning of <strong>February 22, 2025</strong>.
+    </p>
+
+    <p>
+      To ensure smooth participation in the Experience Day activities, the
+      school would like to provide some updated information regarding the
+      schedule and important notes as follows:
+    </p>
+
+    <ol>
+      <li>
+        <strong
+          >GROUP 1: Student {{lead.student_full_name}} - Order number:
+          {{lead.registration_number}}</strong
+        >
+        <br />
+        <em>QR Code:</em>
+        <div class="qr-code">
+          <!-- Replace the src with your QR code image URL -->
+          <img
+            src="{{lead.qr_code}}"
+            alt="QR Code"
+            style="width: 150px; height: 150px"
+          />
+        </div>
+        <p>
+          Please note your group number for ease of receiving Attendance Cards
+          at the Reception area (check-in) and for navigating the event.
+        </p>
+      </li>
+      <li>
+        <strong>Agenda:</strong>
+        <ul>
+          <li>
+            <strong>a. 08:15 - 08:45 AM:</strong> Check-in and registration
+            procedures will be conducted according to each student's group
+            number at the Reception Area. Please arrive at Gate B and present
+            the confirmation message to the security personnel at Gate B (if
+            applicable).
+          </li>
+          <li>
+            <strong>b. 09:00 - 11:20 AM:</strong> Students will use their
+            assigned group numbers to participate in 04 (Four) Experience
+            Stations: Discovery Station, Creativity Station, Love Station, and
+            Dynamic Station under the guidance of the responsible teachers.
+          </li>
+          <li>
+            <strong>c. Notification:</strong>
+            <ul>
+              <li>
+                One (1) student will be accompanied by one (1) parent to observe
+                the experiential activities on February 22, 2025. If more than
+                one parent participates, the additional parents are requested to
+                wait in the Common Hall while the student is involved in
+                activities.
+              </li>
+              <li>
+                To facilitate participation in the physical activities at the
+                Dynamic Station, please prepare comfortable, suitable, and
+                flexible attire for your child.
+              </li>
+              <li>
+                If parents or students arrive later than the scheduled activity
+                time, please follow the guidance of the responsible teachers.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>d.</strong> Parents, please refer to the attached
+            instructions for the Experience Day “Let's start the Happy Journey.”
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <p>
+      For further information, please contact the Admissions Department at
+      <strong>0937 099 229</strong> for assistance.
+    </p>
+
+    <p>
+      We look forward to welcoming you and your child at the “Let's start the
+      Happy Journey” event on <strong>February 22, 2025</strong> at Wellspring
+      Saigon!
+    </p>
+
+    <p>Best regards,</p>
+    <p><strong>Wellspring Saigon Admission Team</strong></p>
+  </div>
+</div>
