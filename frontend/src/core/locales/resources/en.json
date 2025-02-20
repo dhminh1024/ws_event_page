@@ -24,7 +24,7 @@
     "email": "Email",
     "class": "Class",
     "student_code": "Student Code",
-    "event_email": "Event Email"
+    "event_email": "Event’s website"
   },
   "notification": {
     "client_error": {
@@ -76,11 +76,11 @@
     "form": {
       "section_1_heading": "TICKET CLASS INFORMATION",
       "section_2_heading": "FOR STUDENTS / TEACHERS / STAFF AT WELLSPRING SAIGON",
-      "section_3_heading": "FOR STUDENTS / COMPANIONS",
+      "section_3_heading": "FOR PARENTS/ LEGAL GUARDIAN & COMPANIONS",
       "section_4_heading": "CONTACT INFORMATION",
-      "section_4_desc_1": "*Important information to help the organizers contact (if needed) and send registration confirmation to participants",
+      "section_4_desc_1": "*Important information to help the organizers team contact participants when needed and send registration confirmation",
       "section_4_desc_2": "*If the registrant is a student, please fill in the contact information of the parent or accompanying adult",
-      "young_user_warning": "*Note: Elementary students need to be accompanied by an adult",
+      "young_user_warning": "*If the registrant is a Elementary student, please fill in the contact information of the parent or accompanying adult",
       "user_code": "Student/Staff ID",
       "user_code_required": "Please enter the ID",
       "user_code_duplicate": "Duplicate ID",
@@ -133,7 +133,8 @@
         "Paid": "Paid",
         "Attended": "Attended",
         "Refunded": "Refunded"
-      }
+      },
+      "order_detail": "Order Details"
     },
     "order_title": "Order Details <span className=\"text-hr-honey\">Order</span>",
     "buttons": {
@@ -158,7 +159,7 @@
     "target_heading": "Target",
     "route_heading": "Track",
     "detailed_route_heading": "Track details",
-    "timing_route_heading": "Track finish time",
+    "timing_route_heading": "Track finish time (estimate)",
     "highlight_route_heading": "Outstanding",
     "ticket_heading": "Ticket Class",
     "ticket_description": "Click on each ticket to see details",
@@ -166,7 +167,8 @@
     "kit_description": "Option to choose content to print on personal BIB <br className=\"block md:hidden\"/> <span className=\"text-hr-ember\">for Well-being ticket class</span>",
     "kit_meta": "(Content includes up to 8 characters: letters and numbers of your choice)",
     "search_image_heading": "Capture Happy Run moments",
-    "search_image_desc": "Image browsing with <span class=\"text-hr-honey text-[10rem] md:text-[28rem] font-bold\">AI tool</span>",
+    "search_image_desc": "AI-powered photo search (Face ID)",
+    "search_image_note": "*The feature will be activated on March 29, 2025.",
     "info_heading": "Information",
     "info_item_title_1": "Participants",
     "info_item_title_2": "Event Schedule",

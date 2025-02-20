@@ -224,31 +224,20 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
           </Typography.Heading>
           <img
             src={
-              event.variables?.[
-                currentLanguage === "vn"
-                  ? "info_ticket_table_vn"
-                  : "info_ticket_table_en"
-              ]?.value
+              event.variables?.[`info_ticket_table_${currentLanguage}`]?.value
             }
             alt="info ticket"
           />
           <Typography.Paragraph className="mt-[10rem] md:mt-[30rem] text-center text-hr-blue text-[10rem] md:text-[18rem]">
             {
-              event.variables?.[
-                currentLanguage === "vn"
-                  ? "info_ticket_table_desc_vn"
-                  : "info_ticket_table_desc_en"
-              ]?.value
+              event.variables?.[`info_ticket_table_desc_${currentLanguage}`]
+                ?.value
             }
           </Typography.Paragraph>
           <img
             className="mt-[10rem] md:mt-[30rem]"
             src={
-              event.variables?.[
-                currentLanguage === "vn"
-                  ? "tshirt_size_table_vn"
-                  : "tshirt_size_table_en"
-              ]?.value
+              event.variables?.[`tshirt_size_table_${currentLanguage}`]?.value
             }
             alt="tshirt size"
           />
@@ -261,7 +250,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                 className="text-white rounded-t-[12rem] md:rounded-t-[30rem] bg-[#F6C607] shadow-[inset_0rem_-5rem_10rem_0rem_#EDA41D] font-extrabold text-[10rem] md:text-[24rem] uppercase text-center py-[3rem] md:py-[10rem] mb-[20rem]"
                 level={4}
               >
-                {t("happy_run.form.section_1_heading")}
+                {t("happy_run.form.section_2_heading")}
               </Typography.Heading>
               <Typography.Paragraph className="text-hr-ember text-[10rem] md:text-[16rem]">
                 {t("happy_run.form.young_user_warning")}
@@ -862,10 +851,12 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
               </div>
             </div>
             <center className="mt-[20rem]">
-              <PrimaryButton className={cn(
+              <PrimaryButton
+                className={cn(
                   "text-[14rem] text-center md:text-[30rem] font-extrabold p-[35rem_40rem] rounded-[10rem] mb-[10rem] flex items-center"
-                )}>
-              {t("happy_run.buttons.register_now")}
+                )}
+              >
+                {t("happy_run.buttons.register_now")}
               </PrimaryButton>
             </center>
           </form>
@@ -877,11 +868,15 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
           setIsAgreed(true);
           setOpenConfirmModal(true);
         }}
+        onCancel={() => {
+          setIsAgreed(false);
+          setOrderData(undefined)
+        }}
       />
       <OrderConfirmModal
         orderData={orderData}
         open={openConfirmModal}
-        onConfirm={(qr,order_name) => handlePayment(qr,order_name)}
+        onConfirm={(qr, order_name) => handlePayment(qr, order_name)}
         onClosed={() => setOpenConfirmModal(false)}
       />
       <PaymentSuccessModal
@@ -896,9 +891,10 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
 
 type PolicySectionProps = HTMLAttributes<HTMLDivElement> & {
   onFinish?: () => void;
+  onCancel?: () => void;
 };
 
-export const PolicySection = ({ hidden, onFinish }: PolicySectionProps) => {
+export const PolicySection = ({ hidden, onFinish, onCancel }: PolicySectionProps) => {
   const { t, currentLanguage } = useLocales();
   const event = useEventPageContext();
   return (
@@ -930,7 +926,7 @@ export const PolicySection = ({ hidden, onFinish }: PolicySectionProps) => {
         <div className="flex md:flex-row flex-col-reverse gap-x-[40rem] justify-center">
           <button
             type="button"
-            onClick={onFinish}
+            onClick={onCancel}
             // disabled={isRequesting}
             className={cn(
               "text-[14rem] text-center md:text-[20rem] px-[20rem] py-[10rem] rounded-[5rem] mb-[10rem] flex items-center border-hr-ember border-[1rem] text-hr-ember"

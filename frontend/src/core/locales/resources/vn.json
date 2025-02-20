@@ -76,10 +76,10 @@
     "form": {
       "section_1_heading": "THÔNG TIN ƯU ĐÃI HẠNG VÉ",
       "section_2_heading": "PHẦN DÀNH CHO HỌC SINH / GIÁO VIÊN / NHÂN VIÊN TẠI WELLSPRING SAIGON",
-      "section_3_heading": "PHẦN DÀNH CHO HỌC SINH / NGƯỜI ĐI KÈM",
+      "section_3_heading": "PHẦN DÀNH CHO PHỤ HUYNH / NGƯỜI ĐI CÙNG",
       "section_4_heading": "THÔNG TIN LIÊN HỆ",
-      "section_4_desc_1": "*Thông tin quan trọng giúp BTC liên hệ (khi cần) và gửi xác nhận đăng ký đến người tham gia",
-      "section_4_desc_2": "*Nếu đối tượng đăng ký là Học sinh, vui lòng điền thông tin liên hệ của PHHS hoặc người lớn đi cùng",
+      "section_4_desc_1": "*Thông tin quan trọng giúp BTC liên hệ khi cần và·gửi xác nhận đăng ký đến người tham gia",
+      "section_4_desc_2": "*Nếu đối tượng đăng ký là Học sinh Tiểu học, vui lòng điền thông tin liên hệ của PHHS hoặc người lớn đi cùng",
       "young_user_warning": "*Lưu ý: với Học sinh Tiểu học cần có người lớn đi cùng",
       "user_code": "Mã số Học sinh/GV-NV",
       "user_code_required": "Hãy nhập mã số",
@@ -133,7 +133,8 @@
         "Paid": "Đã thanh toán",
         "Attended": "Đã tham gia",
         "Refunded": "Đã hoàn tiền"
-      }
+      },
+      "order_detail": "Chi tiết đơn hàng"
     },
     "order_title": "Chi Tiết <span className=\"text-hr-honey\">Đơn Hàng</span>",
     "buttons": {
@@ -158,15 +159,16 @@
     "target_heading": "Mục tiêu",
     "route_heading": "Lộ Trình",
     "detailed_route_heading": "Lộ trình chi tiết",
-    "timing_route_heading": "Thời gian",
+    "timing_route_heading": "Thời gian kết thúc (dự kiến)",
     "highlight_route_heading": "Điểm nổi bật",
     "ticket_heading": "Hạng vé",
     "ticket_description": "Nhấn vào từng Hạng vé để xem chi tiết",
     "kit_heading": "Runner Kit",
-    "kit_description": "Quyền lợi tự chọn nội dung in lên BIB cá nhân <br className=\"block md:hidden\"/> <span className=\"text-hr-ember\">dành cho hạng vé Well-being</span>",
+    "kit_description": "Quyền lợi tự chọn nội dung in lên Bảng tên (BIB) cá nhân <br className=\"block md:hidden\"/> <span className=\"text-hr-ember\">dành cho hạng vé Well-being</span>",
     "kit_meta": "(Nội dung bao gồm với 8 ký tự: chữ và số tự chọn)",
     "search_image_heading": "Lưu giữ khoảnh khắc Happy Run",
-    "search_image_desc": "Tra cứu hình ảnh bằng <span class=\"text-hr-honey text-[10rem] md:text-[28rem] font-bold\">AI</span>",
+    "search_image_desc": "Tra cứu hình ảnh bằng AI (Face ID)",
+    "search_image_note": "*Tính năng kích hoạt vào ngày 29/03/2025",
     "info_heading": "Thông tin",
     "info_item_title_1": "Đối tượng",
     "info_item_title_2": "Lịch trình sự kiện",

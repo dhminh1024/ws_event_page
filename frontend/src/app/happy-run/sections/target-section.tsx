@@ -292,7 +292,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                 className="relative mt-[5rem] md:mt-[30rem] bg-[linear-gradient(#1F797B,#009180)] p-[4rem_15rem] md:p-[5rem_30rem] text-[10rem] md:text-[18rem] h-auto rounded-[5rem] z-40"
               >
                 {t(
-                  `happy_run.buttons.${collapse2 ? "view_more" : "view_less"}`
+                  `happy_run.buttons.${collapse2 ? "view_less" : "view_more"}`
                 )}
               </Button>
             </div>
@@ -362,7 +362,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                 className="mt-[10rem] md:mt-[30rem] bg-[linear-gradient(#1F797B,#009180)] p-[4rem_15rem] md:p-[5rem_30rem] text-[10rem] md:text-[18rem] h-auto rounded-[5rem]"
               >
                 {t(
-                  `happy_run.buttons.${collapse3 ? "view_more" : "view_less"}`
+                  `happy_run.buttons.${collapse3 ? "view_less" : "view_more"}`
                 )}
               </Button>
             </div>

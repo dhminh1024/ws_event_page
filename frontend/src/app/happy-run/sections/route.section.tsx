@@ -82,7 +82,7 @@ export const RouteSection: FC<RouteSectionProps> = ({ className }) => {
           /> */}
           <div className="flex flex-col md:flex-row h-full p-[20rem] md:p-[60rem] gap-[20rem]">
             <div className="md:basis-[50%] flex justify-center items-center">
-              <img ref={routeGraphicRef} src={RouteMapGIF} alt="Route map" />
+              <img ref={routeGraphicRef} src={RouteMapGIF} className="bg-hr-lime" alt="Route map" />
             </div>
             <div className="md:basis-[50%] flex flex-col gap-y-[10rem] md:gap-y-[20rem]">
               <div ref={paragraph1Ref}>

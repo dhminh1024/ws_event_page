@@ -140,6 +140,11 @@ export interface HREventVariable extends EventVariableBase {
    ticket_well_being_detail_vn?: VariableType
    ticket_well_being_detail_en?: VariableType
    search_image_ai?: VariableType
+   spring_in_my_hands_image?: VariableType
+   spring_in_my_hands_top_vn?: VariableType
+   spring_in_my_hands_top_en?: VariableType
+   summer_tuition_link?: VariableType
+   summer_camp_registration_link?: VariableType
 }
 
 export interface HRUserInfo {

@@ -45,12 +45,12 @@ export const FAQSection: FC<FAQSectionProps> = ({ className, ...props }) => {
                     }
                     className="line-clamp-2 w-full mb-0 !text-[8rem] text-hr-blue md:!text-[18rem] font-bold"
                   >
-                    {events.variables?.[`faq_${index + 1}_question_${currentLanguage}`]?.value}
+                    {index+1}. {events.variables?.[`faq_${index + 1}_question_${currentLanguage}`]?.value}
                   </Typography.Paragraph>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="mt-[20rem]">
-                <Typography.Paragraph className="w-full font-bold text-[12rem] text-hr-blue leading-normal md:text-[18rem]">
+                <Typography.Paragraph className="w-full text-[12rem] text-hr-blue leading-normal md:text-[18rem]">
                   {parser(
                     events.variables?.[`faq_${index + 1}_answer_${currentLanguage}`]?.value ||
                       ""

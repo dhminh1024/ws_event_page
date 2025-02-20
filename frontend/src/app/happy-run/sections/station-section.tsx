@@ -63,7 +63,7 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
               <Canvas flat linear>
                 <Model
                   matcapUrl={cleanPath(
-                    `${env.ASSET_URL}/happy-run/matcap_5.png`
+                    `${env.ASSET_URL}/happy-run/matcap.png`
                   )}
                 />
               </Canvas>
@@ -146,12 +146,12 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
               </Typography.Paragraph>
             </div>
           </div>
-          <div className="absolute bottom-[16%] left-[40%] md:left-[23%] text-right">
-            <div className="absolute top-[-40%] left-[65%] md:left-[85%] w-[100rem] md:w-[250rem] aspect-square">
+          <div className="absolute bottom-[10%] left-[40%] md:left-[23%] text-right">
+            <div className="absolute top-[-40%] left-[65%] md:top-[-10%] md:left-[85%] w-[100rem] md:w-[260rem] aspect-square">
               <Canvas flat linear>
                 <Model
                   matcapUrl={cleanPath(
-                    `${env.ASSET_URL}/happy-run/matcap.png`
+                    `${env.ASSET_URL}/happy-run/matcap_5.png`
                   )}
                 />
               </Canvas>
@@ -162,6 +162,9 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
               </Typography.Paragraph>
               <Typography.Paragraph className="hidden md:block text-[12rem] md:text-[28rem] text-hr-blue font-extrabold leading-[12rem] md:leading-[35rem]">
                 {parser(events.variables.station_5_name_vn?.value || "")}
+              </Typography.Paragraph>
+              <Typography.Paragraph className="hidden md:block text-[8rem] md:text-[18rem] text-hr-blue  mt-[10rem]">
+                {parser(events.variables.station_5_desc_vn?.value || "")}
               </Typography.Paragraph>
             </div>
           </div>

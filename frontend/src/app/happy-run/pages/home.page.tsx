@@ -20,6 +20,7 @@ import { StationSection } from "../sections/station-section";
 import { SummerSection } from "../sections/summer-section";
 import { FAQSection } from "../sections/faq-section";
 import Scroll from "@/app/happy-box/components/smooth-scroll";
+import { SpringSection } from "../sections/spring-section";
 
 export const Component: FC = () => {
   const { t, currentLanguage } = useLocales();
@@ -48,6 +49,7 @@ export const Component: FC = () => {
       <StationSection />  
       <SummerSection id="happy-summer"/>
       <FAQSection id="faq"/>
+      <SpringSection />
       <Footer />
     </div>
   );

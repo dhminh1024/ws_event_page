@@ -129,7 +129,7 @@ export const OrderConfirmModal: FC<LunarModalProps> = ({
               className="py-[15rem] md:py-[20rem] text-[18rem] md:text-[35rem] text-hr-blue leading-[1.2] font-extrabold"
               level={2}
             >
-              Order Detail
+              {t("happy_run.form.order_detail")}
             </Typography.Heading>
           </center>
           <div className="mb-[10rem] md:mb-[20rem] bg-hr-steel_blue/10 border-hr-blue border-[1rem] rounded-[5rem]">
