@@ -24,4 +24,6 @@ export interface WSEHRSettings{
 	bin_number: string
 	/**	Account Name : Data	*/
 	account_name: string
+	/**	Bank Short Name : Data	*/
+	bank_short_name: string
 }

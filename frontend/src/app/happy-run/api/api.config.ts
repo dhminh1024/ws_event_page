@@ -19,8 +19,8 @@ export const FRAPPE_APIS = {
     METHOD_STRING: "ws_event_page.api.event.happy_box.submission.get_submission_by_wellspring_code",
     SWR_KEY: "get_submission_by_wellspring_code",
   },
-  GET_GALLERY:{
-    METHOD_STRING:"ws_event_page.api.event.happy_box.submission.get_submission_in_gallery",
-    SWR_KEY: "get_submission_in_gallery"
+  GET_ORDER:{
+    METHOD_STRING:"ws_event_page.api.event.happy_run.order.get_order_detail",
+    SWR_KEY: "get_order_detail"
   }
 };

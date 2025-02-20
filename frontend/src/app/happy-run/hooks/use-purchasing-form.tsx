@@ -114,6 +114,8 @@ export const usePurchasingForm = () => {
       ],
       guardian_runners: [],
       full_name: "",
+      mobile_number: "",
+      email: "",
     },
     mode: "onChange",
   });

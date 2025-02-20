@@ -10,14 +10,37 @@ export const animateZoomInOut = (
   if (!el) return;
   gsap.fromTo(
     el,
-    { scale: 0.8, opacity: 0 },
+    { scale: 0.5, opacity: 0 },
     {
       scale: 1,
       opacity: 1,
       duration: 1,
+      ease: "power2.out",
       scrollTrigger: {
         trigger: el,
         scrub: true,
+        ...scrollConfig,
+      },
+    }
+  );
+};
+
+export const animateZoomInBounce = (
+  el: HTMLElement | SVGSVGElement | null,
+  scrollConfig?: ScrollTrigger.Vars,
+  debug?: boolean
+) => {
+  if (!el) return;
+  gsap.fromTo(
+    el,
+    { scale: 0 },
+    {
+      scale: 1,
+      duration: 1,
+      ease: "bounce",
+      scrollTrigger: {
+        trigger: el,
+        scrub: false,
         ...scrollConfig,
       },
     }
@@ -29,8 +52,6 @@ export const animateFadeIn = (
   scrollConfig?: ScrollTrigger.Vars,
   debug?: boolean
 ) => {
- 
-
   if (!el) return;
   gsap
     .timeline()
@@ -44,7 +65,6 @@ export const animateFadeIn = (
         scrollTrigger: {
           trigger: el,
           scrub: true,
-          start: "top 150%",
         },
       }
     )
@@ -83,19 +103,17 @@ export const animateFadeInLeft = (
         scrollTrigger: {
           trigger: el,
           scrub: true,
-          start: "top 180%",
         },
       }
     )
     .fromTo(
       el,
-      { x: -200 },
+      { x: -100 },
       {
         x: 0,
         duration: 1,
         scrollTrigger: {
           trigger: el,
-          // start: "top 150%",
           scrub: true,
           markers: debug,
           ...scrollConfig,
@@ -122,7 +140,6 @@ export const animateFadeInRight = (
         scrollTrigger: {
           trigger: el,
           scrub: true,
-          start: "top 150%",
         },
       }
     )
@@ -148,8 +165,6 @@ export const animateFadeInBottom = (
   scrollConfig?: ScrollTrigger.Vars,
   debug?: boolean
 ) => {
- 
-
   if (!el) return;
   gsap.fromTo(
     el,
@@ -160,10 +175,9 @@ export const animateFadeInBottom = (
       duration: 0.1,
       scrollTrigger: {
         trigger: el,
-        end: "bottom 90%",
         scrub: true,
         markers: debug,
-        ...scrollConfig
+        ...scrollConfig,
       },
     }
   );
@@ -173,8 +187,6 @@ export const animateFadeInTop = (
   el: HTMLElement | SVGSVGElement | null,
   debug?: boolean
 ) => {
- 
-
   if (!el) return;
   gsap.fromTo(
     el,
@@ -185,8 +197,6 @@ export const animateFadeInTop = (
       duration: 0.1,
       scrollTrigger: {
         trigger: el,
-        start: "top 90%",
-        end: "bottom 70%",
         scrub: true,
         markers: debug,
       },
@@ -239,7 +249,52 @@ export const activeDashedRectSVG = (
     {
       strokeDashoffset: 0,
       duration: 100,
-      ease: "none"
+      ease: "none",
     }
   );
+};
+
+export const animateBounceUp = (
+  el: HTMLElement | SVGSVGElement | null,
+  scrollConfig?: ScrollTrigger.Vars,
+  debug?: boolean
+) => {
+  if (!el) return;
+  gsap.fromTo(
+    el,
+    { rotateX: "-90deg" },
+    {
+      rotateX: "0deg",
+      ease: "bounce",
+      duration: 1,
+      scrollTrigger: {
+        trigger: el,
+        scrub: false,
+        ...scrollConfig,
+      },
+    }
+  );
+};
+
+export const drawLineSVG = (
+  el?: SVGSVGElement | null,
+  path?: SVGPathElement | null,
+  scrollConfig?: ScrollTrigger.Vars,
+  debug?: boolean
+) => {
+  if (!el || !path) return;
+  const pathLength = (path as SVGPathElement)?.getTotalLength();
+  gsap.set(path as SVGPathElement, {
+    strokeDasharray: pathLength,
+    strokeDashoffset: pathLength,
+  });
+  gsap.to(path, {
+    strokeDashoffset: 0,
+    scrollTrigger: {
+      trigger: el,
+      scrub: true,
+      markers: debug,
+      ...scrollConfig,
+    },
+  });
 };
