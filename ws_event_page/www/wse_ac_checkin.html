@@ -99,11 +99,35 @@
         let countdownInterval; // Declare countdownInterval
 
         window.onload = () => $("#hidden-input").focus();
-        window.addEventListener("click", () => $("#hidden-input").focus());
+        // window.addEventListener("click", () => $("#hidden-input").focus());
         $("#hidden-input").on("focus", function () {
           $(this).select();
         });
         $("#hidden-input").focus();
+
+        // Add event F11 to activate fullscreen
+        $(document).on("click", function (e) {
+          const elem = document.documentElement; // Entire page
+
+          if (document.fullscreenElement) {
+            // document.exitFullscreen();
+          } else {
+            if (elem.requestFullscreen) {
+              elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) {
+              // For Firefox
+              elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) {
+              // For Chrome, Safari, and Opera
+              elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+              // For IE/Edge
+              elem.msRequestFullscreen();
+            }
+          }
+
+          $("#hidden-input").focus();
+        });
 
         $("#hidden-input").keypress(function (e) {
           if (e.which == 13) {
