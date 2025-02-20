@@ -251,6 +251,9 @@ class WSEHROrder(Document):
         recipients = [self.email]
         template = "hr_payment_confirmation"
         ticket_list = self.get_ticket_list_for_email()
+        ticket_list = [
+            ticket for ticket in ticket_list if ticket["status"] == "Đã thanh toán"
+        ]
         args = dict(
             total_payment_pending=frappe.utils.fmt_money(
                 self.total_payment_pending, currency="VND", format="#.###", precision=0

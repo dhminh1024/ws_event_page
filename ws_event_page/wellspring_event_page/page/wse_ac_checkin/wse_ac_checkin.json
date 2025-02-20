@@ -1,0 +1,23 @@
+{
+ "content": null,
+ "creation": "2025-02-19 10:35:35.650611",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2025-02-19 18:05:27.848079",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "wse-ac-checkin",
+ "owner": "Administrator",
+ "page_name": "wse-ac-checkin",
+ "roles": [
+  {
+   "role": "WSE AC Admin"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "WSE AC Check In"
+}
