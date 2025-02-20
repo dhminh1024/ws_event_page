@@ -15,12 +15,18 @@ import { TargetSection } from "../sections/target-section";
 import { RouteSection } from "../sections/route.section";
 import { TicketSection } from "../sections/ticket-section";
 import { KitSection } from "../sections/kit-section";
+import { InfoSection } from "../sections/info-section";
+import { StationSection } from "../sections/station-section";
+import { SummerSection } from "../sections/summer-section";
+import { FAQSection } from "../sections/faq-section";
+import Scroll from "@/app/happy-box/components/smooth-scroll";
 
 export const Component: FC = () => {
   const { t, currentLanguage } = useLocales();
   const event = useEventPageContext();
   return (
     <div className="bg-hr-background rela">
+      {/* <Scroll /> */}
       {/* <Helmet>
         <title>
           {t("common.home_page")} |{" "}
@@ -30,29 +36,18 @@ export const Component: FC = () => {
         </title>
       </Helmet> */}
       <Header className="px-[20rem] md:px-[60rem]" />
-      {/* <MenuBar className="mt-[-55rem]"/> */}
-
-      {/* <HeroSection /> */}
-      {/* <CountDownSection />
-      <TeaserSection />
+      <MenuBar className="mt-[-46rem] md:mt-[-55rem]"/>
+      <HeroSection id="overview"/>
+      <CountDownSection />
+      <TeaserSection id="happy-run"/>
       <TargetSection />
       <RouteSection />
-      <TicketSection /> */}
-      {/* <KitSection /> */}
-      {/* <GallerySection />
-      <ChallengeSection />
-      <VideoSection /> */}
-      <center className="py-[40rem]">
-        <Typography.Heading level={1} className="p-[40rem] text-center">
-          COMING SOON
-        </Typography.Heading>
-        <Link
-          to="order"
-          className="text-[20rem] border-[2rem] p-[10rem] text-center"
-        >
-          Buy Ticket
-        </Link>
-      </center>
+      <TicketSection />
+      <KitSection />
+      <InfoSection />
+      <StationSection />  
+      <SummerSection id="happy-summer"/>
+      <FAQSection id="faq"/>
       <Footer />
     </div>
   );

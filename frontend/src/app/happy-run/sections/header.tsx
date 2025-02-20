@@ -34,11 +34,11 @@ export const Header: FC<HeaderProps> = ({ className }) => {
         className
       )}
     >
-      <div className="flex justify-between gap-x-[10rem] md:gap-x-[20rem] w-full py-[30rem]">
-        <div className="flex items-center gap-x-[20rem] md:gap-x-[30rem]">
+      <div className="flex justify-between gap-x-[10rem] md:gap-x-[20rem] w-full py-[10rem] md:py-[30rem]">
+        <div className="flex items-center gap-x-[10rem] md:gap-x-[30rem]">
           <img
             src={event.variables.logo_wellspring_white?.value}
-            className="w-[20%] md:w-[150rem] h-auto"
+            className="w-[25%] md:w-[150rem] h-auto"
             alt="Logo"
           />
           <img
@@ -48,12 +48,12 @@ export const Header: FC<HeaderProps> = ({ className }) => {
           />
           <img
             src={event.variables.logo_happy_summer?.value}
-            className="w-[20%] md:w-[85rem] h-auto"
+            className="w-[18%] md:w-[85rem] h-auto"
             alt="Logo summer"
           />
           <img
             src={event.variables.logo_spring_in_my_hands?.value}
-            className="w-[20%] md:w-[60rem] h-auto"
+            className="w-[14%] md:w-[60rem] h-auto"
             alt="Logo spring"
           />
         </div>

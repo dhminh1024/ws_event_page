@@ -1,15 +1,15 @@
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
-import { type FC } from "react";
+import { HTMLAttributes, type FC } from "react";
 
-export type HeroSectionProps = {
+export type HeroSectionProps = HTMLAttributes<HTMLDivElement> & {
   className?: string;
 };
 
-export const HeroSection: FC<HeroSectionProps> = ({ className }) => {
+export const HeroSection: FC<HeroSectionProps> = ({ className,...props }) => {
   const event = useEventPageContext();
 
   return (
-    <div className="w-full">
+    <div className="w-full" {...props}>
       <img className="w-full" src={event.variables.hero_image?.value} alt="hero" />
     </div>
   );

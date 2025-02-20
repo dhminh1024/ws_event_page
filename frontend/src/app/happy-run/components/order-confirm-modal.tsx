@@ -17,8 +17,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@atoms/dialog";
-import { LunarButton } from "./button";
-import env from "@/config/env";
 import Typography from "./typography";
 import { Label } from "@atoms/label";
 import { generateArrayWithRandomLetters } from "../utils/ultils";
@@ -62,7 +60,7 @@ export type LunarModalProps = HTMLAttributes<HTMLDivElement> &
     open?: boolean;
     orderData?: OrderData;
     disabled?: boolean;
-    onConfirm?: (qr_code: string) => void;
+    onConfirm?: (qr_code: string, order_name: string) => void;
     onCancel?: () => void;
     onClosed?: () => void;
   };
@@ -97,7 +95,7 @@ export const OrderConfirmModal: FC<LunarModalProps> = ({
       setIsRequesting(true);
       try {
         const data = await payment(orderData);
-        onConfirm?.(data.message.qr_payment_code||"");
+        onConfirm?.(data.message.qr_payment_code||"",data.message.name);
         handleOpenChange(false);
       } catch (error: any) {
         toast({

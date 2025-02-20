@@ -122,6 +122,7 @@
     @apply font-tropen;
     /* overflow-x: hidden; */
     @apply !min-w-[100vw];
+    scroll-behavior: smooth;
   }
 }
 
@@ -141,6 +142,9 @@
   @font-face {
     font-family: "Race Champion";
     src: url(/happy-run/fonts/race_champion.ttf);
+    ascent-override: 90%; /* Điều chỉnh chiều cao phần trên */
+    descent-override: 20%; /* Điều chỉnh chiều cao phần dưới */
+    line-gap-override: 0%; /* Bỏ khoảng cách dòng */
   }
 }
 

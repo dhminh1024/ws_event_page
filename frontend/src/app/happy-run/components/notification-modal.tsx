@@ -17,7 +17,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@atoms/dialog";
-import { LunarButton } from "./button";
 import env from "@/config/env";
 import Typography from "./typography";
 import { Label } from "@atoms/label";
