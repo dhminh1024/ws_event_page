@@ -8,6 +8,9 @@ import { Popover, PopoverContent, PopoverTrigger } from "@atoms/popover";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { useSticky } from "@/core/hooks/use-sticky";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
+import { LanguageSelector } from "../components/language-selector";
+import Marquee from "react-fast-marquee";
+import { LanguageSwitcher } from "../components/language-switcher";
 
 export type MenuBarProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -23,17 +26,26 @@ export const MenuBar: FC<MenuBarProps> = ({ className }) => {
       className={cn("sticky top-0 left-0 z-50", className)}
     >
       <div className="pt-[10rem] bg-hr-primary shadow-[inset_0rem_-10rem_20rem_-10rem_#1b1b1b]">
-        <Container>
+        <Container className="relative">
           <NavBar />
+          <div className="absolute right-0 bottom-[14rem] m-auto hidden md:flex gap-x-[10rem]">
+            <span className="text-[16rem] text-white">
+              {t("common.language")}:
+            </span>
+            <LanguageSwitcher />
+          </div>
         </Container>
       </div>
-      <div className="bg-hr-honey py-[2rem] md:py-[5rem] text-center">
-        <Typography.Text className=" text-hr-blue text-[8rem] md:text-[16rem] font-bold py-[5rem]">
+      <Marquee
+        speed={100}
+        className="bg-hr-honey py-[2rem] md:py-[5rem] text-center"
+      >
+        <Typography.Text className=" text-hr-blue text-[9rem] md:text-[18rem] font-bold py-[5rem]">
           {t("happy_run.ticket_sale_official_time")}:{" "}
           {event?.variables.ticket_period_time_start?.value} -{" "}
           {event?.variables.ticket_period_time_end?.value}
         </Typography.Text>
-      </div>
+      </Marquee>
     </section>
   );
 };

@@ -168,7 +168,7 @@
                     $("#display-group-name").show();
                     $("#checkin-success").show();
                   } else {
-                    $("#display-full-name").text("Student not found");
+                    $("#display-full-name").text("Không tìm thấy Học sinh!");
                     $("#spinner").hide();
                     $("#display-full-name").show();
                   }
@@ -176,9 +176,9 @@
                   reset_after_seconds(5);
                 },
                 error: function () {
-                  $("#display-full-name").text("Error occurred");
+                  $("#display-full-name").text("Không tìm thấy Học sinh!");
                   $("#spinner").hide();
-                  // $("#display-full-name").show();
+                  $("#display-full-name").show();
                   enableInput();
                   reset_after_seconds(5);
                 },

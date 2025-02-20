@@ -119,8 +119,8 @@ class WSEHROrder(Document):
         account_name = settings.account_name
         bin_number = settings.bin_number
         bank_short_name = settings.bank_short_name
-        if not all([account_number, account_name, bin_number, bank_short_name]):
-            frappe.throw(f"VietQR settings are not configured: {settings}")
+        # if not all([account_number, account_name, bin_number, bank_short_name]):
+        #     frappe.throw(f"VietQR settings are not configured: {settings}")
         vietqr_url = f"https://img.vietqr.io/image/{bank_short_name}-{account_number}-VjSoh17.jpg?amount={self.total_payment_pending}&addInfo={self.name}&accountName={account_name}&acqId={bin_number}"
         self.qr_payment_code = vietqr_url
 
@@ -241,6 +241,11 @@ class WSEHROrder(Document):
             ),
             tickets=ticket_list,
             qr_code_img_tag=qr_code_img_tag,
+            bank_name=settings.bank_name,
+            account_number=settings.account_number,
+            account_name=settings.account_name,
+            transaction_notes=self.name,
+            order_detail_link=f"{frappe.utils.get_url()}/events/happy-run/order-detail/{self.name}",
         )
         send_confirmation_email(template, sender, recipients, subject, args)
 
@@ -265,6 +270,7 @@ class WSEHROrder(Document):
                 self.total_paid, currency="VND", format="#.###", precision=0
             ),
             tickets=ticket_list,
+            order_detail_link=f"{frappe.utils.get_url()}/events/happy-run/order-detail/{self.name}",
         )
         send_confirmation_email(template, sender, recipients, subject, args)
 
@@ -286,6 +292,7 @@ class WSEHROrder(Document):
                 self.total_paid, currency="VND", format="#.###", precision=0
             ),
             tickets=ticket_list,
+            order_detail_link=f"{frappe.utils.get_url()}/events/happy-run/order-detail/{self.name}",
         )
         send_confirmation_email(template, sender, recipients, subject, args)
 

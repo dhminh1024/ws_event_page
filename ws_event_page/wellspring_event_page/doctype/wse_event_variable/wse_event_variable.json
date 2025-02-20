@@ -1,66 +1,74 @@
 {
- "actions": [],
- "allow_rename": 1,
- "creation": "2024-12-12 15:08:54.067273",
- "doctype": "DocType",
- "editable_grid": 1,
- "engine": "InnoDB",
- "field_order": [
-  "variable_name",
-  "column_break_kjwz",
-  "variable_type",
-  "section_break_mquy",
-  "image",
-  "variable_value"
- ],
- "fields": [
-  {
-   "fieldname": "variable_name",
-   "fieldtype": "Data",
-   "in_filter": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Variable Name",
-   "reqd": 1
-  },
-  {
-   "depends_on": "eval: doc.variable_type === 'Text'",
-   "fieldname": "variable_value",
-   "fieldtype": "Text",
-   "label": "Variable Value"
-  },
-  {
-   "depends_on": "eval: doc.variable_type === 'Image'",
-   "fieldname": "image",
-   "fieldtype": "Attach Image",
-   "label": "Image"
-  },
-  {
-   "default": "Text",
-   "fieldname": "variable_type",
-   "fieldtype": "Select",
-   "label": "Variable Type",
-   "options": "Text\nImage"
-  },
-  {
-   "fieldname": "column_break_kjwz",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "section_break_mquy",
-   "fieldtype": "Section Break"
-  }
- ],
- "index_web_pages_for_search": 1,
- "istable": 1,
- "links": [],
- "modified": "2025-02-19 07:18:48.879064",
- "modified_by": "Administrator",
- "module": "Wellspring Event Page",
- "name": "WSE Event Variable",
- "owner": "Administrator",
- "permissions": [],
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": []
+  "actions": [],
+  "allow_rename": 1,
+  "creation": "2024-12-12 15:08:54.067273",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "variable_name",
+    "column_break_kjwz",
+    "variable_type",
+    "section_break_mquy",
+    "image",
+    "variable_value",
+    "video"
+  ],
+  "fields": [
+    {
+      "fieldname": "variable_name",
+      "fieldtype": "Data",
+      "in_filter": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Variable Name",
+      "reqd": 1
+    },
+    {
+      "depends_on": "eval: doc.variable_type === 'Text'",
+      "fieldname": "variable_value",
+      "fieldtype": "Text",
+      "ignore_xss_filter": 1,
+      "label": "Variable Value"
+    },
+    {
+      "depends_on": "eval: doc.variable_type === 'Image'",
+      "fieldname": "image",
+      "fieldtype": "Attach Image",
+      "label": "Image"
+    },
+    {
+      "default": "Text",
+      "fieldname": "variable_type",
+      "fieldtype": "Select",
+      "label": "Variable Type",
+      "options": "Text\nImage\nVideo"
+    },
+    {
+      "fieldname": "column_break_kjwz",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "section_break_mquy",
+      "fieldtype": "Section Break"
+    },
+    {
+      "depends_on": "eval: doc.variable_type === 'Video'",
+      "fieldname": "video",
+      "fieldtype": "Attach",
+      "label": "Video"
+    }
+  ],
+  "index_web_pages_for_search": 1,
+  "istable": 1,
+  "links": [],
+  "modified": "2025-02-20 08:07:03.065703",
+  "modified_by": "Administrator",
+  "module": "Wellspring Event Page",
+  "name": "WSE Event Variable",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": []
 }

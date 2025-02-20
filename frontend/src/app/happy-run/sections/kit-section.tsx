@@ -132,7 +132,7 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
                   }}
                 >
                   <img
-                    className="w-[40%] md:w-[30%] mx-auto p-[20rem]"
+                    className="w-[50%] md:w-[40%] mx-auto p-[20rem]"
                     src={event?.variables.item_bib?.value}
                     alt="ticket image"
                   />
@@ -189,7 +189,7 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
                   }}
                 >
                   <img
-                    className="w-[40%] md:w-[30%] mx-auto p-[20rem]"
+                    className="w-[50%] md:w-[40%] mx-auto p-[20rem]"
                     src={event?.variables.item_tshirt?.value}
                     alt="ticket image"
                   />
@@ -257,7 +257,7 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
                   }}
                 >
                   <img
-                    className="w-[40%] md:w-[30%] mx-auto p-[20rem]"
+                    className="w-[50%] md:w-[40%] mx-auto p-[20rem]"
                     src={event?.variables.item_medals?.value}
                     alt="ticket image"
                   />
@@ -316,7 +316,7 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
                   }}
                 >
                   <img
-                    className="w-[40%] md:w-[30%] mx-auto p-[20rem]"
+                    className="w-[50%] md:w-[40%] mx-auto p-[20rem]"
                     src={event?.variables.item_hat?.value}
                     alt="ticket image"
                   />
@@ -430,22 +430,25 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
           >
             <div className="w-[30%] md:w-[20%]">
               <img
-                className="absolute bottom-[-44.5%] md:bottom-[-41%] left-[-8%] md:left-[-2%] w-[50%] md:w-[30%] h-auto"
+                className="absolute bottom-[-39.5%] md:bottom-[-33%] left-[-8%] md:left-[-2%] w-[50%] md:w-[30%] h-auto"
                 src={RobotImage}
                 alt="Robot AI Animation"
               />
             </div>
             <div className="flex-1 flex flex-col md:flex-row justify-center items-center">
               <div className="flex flex-col justify-center items-center">
-                <Typography.Text className="text-[10rem] md:text-[28rem] text-white font-extrabold uppercase leading-[10rem] md:leading-[40rem] m-0">
+                <Typography.Text className="text-[10rem] md:text-[28rem] text-hr-honey font-extrabold uppercase leading-[10rem] md:leading-[40rem] m-0">
                   {t("happy_run.search_image_heading")}
                 </Typography.Text>
-                <Typography.Text className="text-[8rem] md:text-[20rem] leading-[23rem] text-white ">
+                <Typography.Text className="text-[8rem] md:text-[20rem] md:mb-[5rem] md:leading-[23rem] font-semibold text-hr-honey ">
                   {parser(t("happy_run.search_image_desc"))}
+                </Typography.Text>
+                <Typography.Text className="text-[8rem] md:text-[20rem] mb-[5rem] md:leading-[23rem] text-white italic">
+                  {parser(t("happy_run.search_image_note"))}
                 </Typography.Text>
               </div>
               <Link to={event.variables.search_image_ai?.value || ""}>
-                <Button className="text-[8rem] md:text-[20rem] mx-[60rem] p-[3rem_20rem] md:p-[10rem_20rem] h-auto bg-hr-honey border-y-[2rem] md:border-t-[5rem] border-t-white/30 border-b-transparent shadow-none outline-none rounded-[5rem] italic">
+                <Button className="text-[8rem] md:text-[20rem] mx-[60rem] p-[3rem_20rem] md:p-[10rem_20rem] h-auto bg-hr-honey hover:bg-hr-honey/80 border-y-[2rem] md:border-t-[5rem] border-t-white/30 border-b-transparent shadow-none outline-none rounded-[5rem] italic">
                   {t("happy_run.buttons.search_now")}
                 </Button>
               </Link>

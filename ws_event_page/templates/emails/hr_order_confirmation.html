@@ -77,8 +77,18 @@
       <p class="text-center" style="color: #172a52">
         Vui lòng thực hiện thanh toán đơn hàng bằng mã QR dưới đây:
       </p>
+      <em>Bạn có thể theo dõi trạng thái đơn bằng đường link sau:</em>
+      <a href="{{order_detail_link}}" target="_blank">Chi tiết đơn hàng</a>
     </div>
     <div class="text-center" style="margin: 20px 0">{{ qr_code_img_tag }}</div>
+
+    <!-- Bank info -->
+    <div class="text-center" style="margin: 20px 0">
+      <p style="color: #006882; font-weight: bold">{{bank_name}}</p>
+      <p>Tên Tài Khoản: {{account_name}}</p>
+      <p>Số Tài Khoản: {{account_number}}</p>
+      <p>Nội dung chuyển khoản: {{transaction_notes}}</p>
+    </div>
 
     <p class="text-center" style="margin-top: 20px; color: #172a52">
       Xin chân thành cảm ơn và hẹn gặp lại các bạn tại sự kiện Happy Run 2025!

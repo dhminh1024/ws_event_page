@@ -12,6 +12,7 @@
   "happy_run_ticket_price",
   "vietqr_url",
   "bank_account_section",
+  "bank_name",
   "bank_short_name",
   "bin_number",
   "column_break_ddga",
@@ -97,12 +98,19 @@
    "fieldtype": "Data",
    "label": "Bank Short Name",
    "reqd": 1
+  },
+  {
+   "default": "Ng\u00e2n h\u00e0ng TMCP Ph\u01b0\u01a1ng \u0110\u00f4ng",
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-02-17 11:34:21.435757",
+ "modified": "2025-02-20 14:40:53.133212",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE HR Settings",
