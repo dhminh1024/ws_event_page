@@ -26,7 +26,7 @@ def get_lead_info(lead_id):
     return lead.as_dict()
 
 
-@frappe.whitelist(methods=["POST"])
+@frappe.whitelist(allow_guest=True, methods=["POST"])
 def lead_checkin(lead_id):
     lead = frappe.get_doc("WSE AC Lead", lead_id)
     if lead.status in [
@@ -35,8 +35,5 @@ def lead_checkin(lead_id):
     ]:
         lead.status = WSEACLeadStatus.CHECKED_IN.value
         lead.save()
-    elif lead.status == WSEACLeadStatus.CHECKED_IN.value:
-        return f"ERROR: {lead.full_name} đã checkin rồi"
-    else:
-        return f"ERROR: Không thể checkin cho lead này"
-    return f"Đã check in cho {lead.student_full_name} thành công"
+
+    return lead.as_dict()

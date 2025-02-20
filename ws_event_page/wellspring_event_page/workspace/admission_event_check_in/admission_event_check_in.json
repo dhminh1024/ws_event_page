@@ -50,7 +50,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Check In",
+   "label": "Check In Page",
    "link_count": 0,
    "link_to": "wse-ac-checkin",
    "link_type": "Page",
@@ -58,7 +58,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-02-19 16:47:34.904768",
+ "modified": "2025-02-19 18:07:11.802073",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "Admission Event Check In",

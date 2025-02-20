@@ -9,6 +9,7 @@
  "field_order": [
   "status_section",
   "status",
+  "group_name",
   "column_break_jpyd",
   "qr_code",
   "general_section",
@@ -114,12 +115,18 @@
   {
    "fieldname": "column_break_jpyd",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "group_name",
+   "fieldtype": "Data",
+   "label": "Group Name",
+   "reqd": 1
   }
  ],
  "image_field": "qr_code",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-19 12:39:12.163564",
+ "modified": "2025-02-19 23:58:35.999515",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE AC Lead",
@@ -146,6 +153,16 @@
    "read": 1,
    "report": 1,
    "role": "WSE AC Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest",
    "share": 1,
    "write": 1
   }

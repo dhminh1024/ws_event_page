@@ -24,9 +24,9 @@ class WSEACCheckin {
   }
 
   setup_page() {
-    this.page.set_primary_action("Checkin", () => this.checkin());
-    this.page.set_secondary_action("Refresh", () => this.refresh());
-
+    // this.page.set_primary_action("Checkin", () => this.checkin());
+    // this.page.set_secondary_action("Refresh", () => this.refresh());
+    this.show_reset_button();
     this.lead_select = this.page.add_field({
       label: "Registration Number",
       fieldtype: "Data",
@@ -38,10 +38,26 @@ class WSEACCheckin {
       //     },
       //   };
       // },
-      change: () => this.refresh(),
+      // change: () => this.refresh(),
+      // keyPress: (e) => {
+      //   if (e.keyCode === 13) {
+      //     // this.refresh();
+      //     alert("Enter key pressed");
+      //   }
+      // },
       // change: function () {
       //   frappe.set_route("wse-ac-checkin", this.get_value());
       // },
+    });
+    $(this.lead_select.input).on("keypress", (e) => {
+      if (e.keyCode === 13) {
+        this.refresh();
+        e.target.select();
+      }
+    });
+    // Select all on Focus
+    $(this.lead_select.input).on("focus", function () {
+      $(this).select();
     });
 
     // this.set_from_route();
@@ -80,10 +96,7 @@ class WSEACCheckin {
   }
 
   focus_on_input() {
-    this.page.main.find("input").focus();
-    setTimeout(() => {
-      this.page.main.find("input").select();
-    }, 100);
+    $(this.lead_select.input).focus();
   }
 
   focus_on_secondary_action() {
@@ -96,7 +109,6 @@ class WSEACCheckin {
 
   refresh() {
     this.page.clear_primary_action();
-    this.page.clear_secondary_action();
 
     if (!this.lead_select) {
       return this.set_empty_message("Loading");
@@ -123,14 +135,13 @@ class WSEACCheckin {
   }
 
   render() {
-    this.show_reset_button();
     if (!this.lead_doc) {
       return this.set_empty_message("No data found");
     }
 
-    if (this.lead_doc.status !== "New") {
+    if (this.lead_doc.status !== "Checked in") {
       this.set_empty_message(
-        `Số báo danh <b>${this.lead_doc.registration_number}</b> đã được check in thành công! Trạng thái hiện tại: <b>${this.lead_doc.status}</b>`
+        `Số báo danh <b>${this.lead_doc.registration_number}</b> đã được check in thành công!`
       );
       this.focus_on_secondary_action();
       return;

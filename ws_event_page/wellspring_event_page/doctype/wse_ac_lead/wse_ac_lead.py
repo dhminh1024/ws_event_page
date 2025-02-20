@@ -25,6 +25,7 @@ class WSEACLead(Document):
         from frappe.types import DF
 
         contact_email: DF.Data
+        group_name: DF.Data
         mobile_number: DF.Data | None
         parent_full_name: DF.Data | None
         qr_code: DF.AttachImage | None
@@ -95,9 +96,10 @@ class WSEACLead(Document):
         if self.status == WSEACLeadStatus.NEW.value:
 
             frappe.sendmail(
-                sender="",
+                sender="admissions@wellspringsaigon.edu.vn",
+                reply_to="admissions@wellspringsaigon.edu.vn",
                 recipients=[self.contact_email],
-                subject="Confirmation Email",
+                subject='WSSG. SY2025-2026 | Xac nhan tham du Ngay hoi Trai nghiem "Cung con khoi dau Hanh phuc"_Confirmation of attending the Experience Day_22.02.2025',
                 template="ac_confirmation_email",
                 args={"lead": self},
             )
