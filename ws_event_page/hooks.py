@@ -11,7 +11,7 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/ws_event_page/css/ws_event_page.css"
-# app_include_js = "/assets/ws_event_page/js/ws_event_page.js"
+app_include_js = "/assets/ws_event_page/js/ws_event_page.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/ws_event_page/css/ws_event_page.css"
@@ -237,6 +237,7 @@ export_python_type_annotations = True
 
 website_route_rules = [
     {"from_route": "/events/<path:app_path>", "to_route": "events"},
+    {"from_route": "/wse-ac-checkin", "to_route": "wse_ac_checkin"},
 ]
 
 after_migrate = [
