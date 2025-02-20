@@ -119,6 +119,9 @@
   {
    "fieldname": "group_name",
    "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Group Name",
    "reqd": 1
   }
@@ -126,7 +129,7 @@
  "image_field": "qr_code",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-19 23:58:35.999515",
+ "modified": "2025-02-20 12:29:32.054963",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE AC Lead",
