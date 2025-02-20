@@ -3,10 +3,12 @@ import LogoWhite from "@happy-box/assets/images/logo-white.png";
 import Typography from "../components/typography";
 import { cn } from "@/core/utils/shadcn-utils";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
+import { useLocales } from "@/core/hooks/use-locales";
 
 type SectionProps = HTMLAttributes<HTMLDivElement> & {};
 
 export default function Footer({ className }: SectionProps) {
+  const { t } = useLocales();
   const event = useEventPageContext();
   return (
     <section
@@ -14,7 +16,7 @@ export default function Footer({ className }: SectionProps) {
       aria-labelledby="Footer"
       className={cn("relative font-sans", className)}
     >
-      <div className="bg-happy_box-blue py-[20rem] md:py-[50rem]">
+      <div className="bg-hr-primary py-[20rem] md:py-[50rem]">
         <div className="px-[30rem] ">
           <div className="flex flex-col items-center gap-x-[100rem] gap-y-[20rem] md:flex-row">
             <div className="mt-[15rem] w-[65%] md:mt-0 md:w-auto md:basis-[40%] md:pl-[10%]">
@@ -52,7 +54,10 @@ export default function Footer({ className }: SectionProps) {
                     Admissions
                   </Typography.Heading>
                   <Typography.Paragraph className="text-[10rem] font-light md:text-[16rem]">
-                    {event.variables?.wellspring_hanoi_admissions_hotline?.value}
+                    {
+                      event.variables?.wellspring_hanoi_admissions_hotline
+                        ?.value
+                    }
                   </Typography.Paragraph>
                   <Typography.Paragraph className="text-[10rem] font-light md:text-[16rem]">
                     {event.variables?.wellspring_hanoi_admissions_email?.value}
@@ -91,7 +96,10 @@ export default function Footer({ className }: SectionProps) {
                     Admissions
                   </Typography.Heading>
                   <Typography.Paragraph className="text-[10rem] font-light md:text-[16rem]">
-                    {event.variables?.wellspring_saigon_admissions_hotline?.value}
+                    {
+                      event.variables?.wellspring_saigon_admissions_hotline
+                        ?.value
+                    }
                   </Typography.Paragraph>
                   <Typography.Paragraph className="text-[10rem] font-light md:text-[16rem]">
                     {event.variables?.wellspring_saigon_admissions_email?.value}
@@ -104,6 +112,15 @@ export default function Footer({ className }: SectionProps) {
               <Typography.Paragraph className="text-[10rem] font-light md:text-[16rem]">
                 {event.variables?.wellspring_saigon_address?.value}
               </Typography.Paragraph>
+
+              <div className="my-[20rem] h-[1rem] w-[18%] bg-white md:my-[30rem] md:h-[2rem]"></div>
+              <Typography.Heading
+                level={4}
+                className="mb-[5rem] font-sans text-[12rem] font-semibold md:text-[18rem]"
+              >
+                {t("happy_run.collaboration_units")}
+              </Typography.Heading>
+              <img className="w-[15%] mt-[20rem]" src={event.variables?.unit_1?.value} alt="Unit 1" />
             </div>
           </div>
         </div>

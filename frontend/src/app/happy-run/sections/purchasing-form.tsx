@@ -39,6 +39,7 @@ import {
 import { useHRSettings } from "../context/use-settings";
 import { PaymentSuccessModal } from "../components/payment-success-modal";
 import parser from "html-react-parser";
+import { PrimaryButton } from "../components/button";
 
 export type PurchasingFormProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -68,7 +69,13 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
   const [isAgreed, setIsAgreed] = useState(false);
   const [orderData, setOrderData] = useState<OrderData>();
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
-  const [QRPayment, setQRPayment] = useState<string>("");
+  const [paymentData, setPaymentData] = useState<{
+    qr_code: string;
+    order_name: string;
+  }>({
+    qr_code: "",
+    order_name: "",
+  });
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
 
   const {
@@ -119,8 +126,9 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
     if (isAgreed) setOpenConfirmModal(true);
   });
 
-  const handlePayment = async (qr_code: string) => {
-    setQRPayment(qr_code);
+  const handlePayment = async (qr_code: string, order_name: string) => {
+    console.log(order_name);
+    setPaymentData({ qr_code, order_name });
     setOpenSuccessModal(true);
   };
 
@@ -212,13 +220,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
             className="text-white rounded-t-[12rem] md:rounded-t-[30rem] bg-hr-blue font-extrabold text-[10rem] md:text-[24rem] uppercase text-center py-[3rem] md:py-[10rem] mb-[20rem] md:mb-[30rem]"
             level={4}
           >
-            {
-              event.variables?.[
-                currentLanguage === "vn"
-                  ? "info_ticket_heading_vn"
-                  : "info_ticket_heading_en"
-              ]?.value
-            }
+            {t("happy_run.form.section_1_heading")}
           </Typography.Heading>
           <img
             src={
@@ -259,14 +261,11 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                 className="text-white rounded-t-[12rem] md:rounded-t-[30rem] bg-[#F6C607] shadow-[inset_0rem_-5rem_10rem_0rem_#EDA41D] font-extrabold text-[10rem] md:text-[24rem] uppercase text-center py-[3rem] md:py-[10rem] mb-[20rem]"
                 level={4}
               >
-                {
-                  event.variables?.[
-                    currentLanguage === "vn"
-                      ? "info_primary_user_heading_vn"
-                      : "info_primary_user_heading_en"
-                  ]?.value
-                }
+                {t("happy_run.form.section_1_heading")}
               </Typography.Heading>
+              <Typography.Paragraph className="text-hr-ember text-[10rem] md:text-[16rem]">
+                {t("happy_run.form.young_user_warning")}
+              </Typography.Paragraph>
               <div className="section-1">
                 {primaryFields.map((field, index) => (
                   <FormField
@@ -523,13 +522,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                 className="text-white rounded-t-[12rem] md:rounded-t-[30rem] bg-[#C4D03D] shadow-[inset_0rem_-5rem_10rem_0rem_#aec22e] font-extrabold text-[10rem] md:text-[24rem] uppercase text-center py-[3rem] md:py-[10rem] mb-[10rem] md:mb-[20rem]"
                 level={4}
               >
-                {
-                  event.variables?.[
-                    currentLanguage === "vn"
-                      ? "info_guardian_user_heading_vn"
-                      : "info_guardian_user_heading_en"
-                  ]?.value
-                }
+                {t("happy_run.form.section_3_heading")}
               </Typography.Heading>
               <div className="section-2">
                 {guardianFields.map((field, index) => (
@@ -716,7 +709,22 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                   {t("happy_run.buttons.add_person")}
                 </Button>
               </div>
-              <div className="section-3 mt-[20rem] md:mt-[30rem]">
+            </div>
+            {/* Contact Infomation */}
+            <div className="section-3 mt-[20rem] md:mt-[30rem]">
+              <Typography.Heading
+                className="text-white rounded-t-[12rem] md:rounded-t-[30rem] bg-[#E76330] shadow-[inset_0rem_-5rem_10rem_0rem_#be5328] font-extrabold text-[10rem] md:text-[24rem] uppercase text-center py-[3rem] md:py-[10rem] mb-[10rem] md:mb-[20rem]"
+                level={4}
+              >
+                {t("happy_run.form.section_4_heading")}
+              </Typography.Heading>
+              <Typography.Paragraph className="text-[10rem] md:text-[16rem] text-hr-ember">
+                {t("happy_run.form.section_4_desc_1")}
+              </Typography.Paragraph>
+              <Typography.Paragraph className="text-[10rem] md:text-[16rem] text-hr-ember">
+                {t("happy_run.form.section_4_desc_2")}
+              </Typography.Paragraph>
+              <div className="">
                 <div className="mb-[10rem]">
                   <FormField
                     control={form.control}
@@ -726,9 +734,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                         <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                           {t("happy_run.form.full_name")}
                         </FormLabel>
-                        <FormDescription className="text-[8rem] md:text-[16rem] italic !mb-[5rem] md:!mb-[10rem] text-hr-blue">
-                          {t("happy_run.form.full_name_desc")}
-                        </FormDescription>
+                        <FormDescription />
                         <FormControl>
                           <div className="relative">
                             <Input
@@ -754,9 +760,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                         <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                           {t("happy_run.form.mobile_number")}
                         </FormLabel>
-                        <FormDescription className="text-[8rem] md:text-[16rem] italic !mb-[5rem] md:!mb-[10rem] text-hr-blue">
-                          {t("happy_run.form.mobile_number_desc")}
-                        </FormDescription>
+                        <FormDescription />
                         <FormControl>
                           <div className="relative">
                             <Input
@@ -780,9 +784,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                         <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                           {t("happy_run.form.email")}
                         </FormLabel>
-                        <FormDescription className="text-[8rem] md:text-[16rem] italic !mb-[5rem] md:!mb-[10rem] text-hr-blue">
-                          {t("happy_run.form.email_desc")}
-                        </FormDescription>
+                        <FormDescription />
                         <FormControl>
                           <div className="relative">
                             <Input
@@ -800,78 +802,71 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                   />
                 </div>
               </div>
-              <div className="section-4 mt-[10rem] md:mt-[30rem]">
-                <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
-                  {t("happy_run.form.content_bib")}
-                </FormLabel>
-                <FormDescription className="text-[9rem] md:text-[16rem] italic !mb-[5rem] md:!mb-[10rem] text-hr-blue">
-                  {t("happy_run.form.content_bib_desc")}
-                </FormDescription>
-                <div className="relative border-hr-blue border-[1rem] rounded-[5rem] bg-white min-h-[80rem] md:min-h-[180rem] p-[5rem] md:p-[20rem]">
-                  {[
-                    ...form
-                      .watch("primary_runners")
-                      .map((item, index) => ({
-                        ...item,
-                        type: "primary",
-                        index,
-                      }))
-                      .filter(
-                        (i) => i.full_name && i.ticket_class === "Well-being"
-                      ),
-                    ...form
-                      .watch("guardian_runners")
-                      .map((item, index) => ({
-                        ...item,
-                        type: "guardian",
-                        index,
-                      }))
-                      .filter(
-                        (i) => i.full_name && i.ticket_class === "Well-being"
-                      ),
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-center gap-x-[5rem]">
-                      <Typography.Text className="text-[8rem] md:text-[18rem] text-hr-blue italic">
-                        {`${index + 1}. ${item.full_name} -`}
-                      </Typography.Text>
-                      <div className="flex gap-x-[10rem] items-end">
-                        <Input
-                          placeholder={t(
-                            "happy_run.form.content_bib_placeholder"
-                          )}
-                          className="flex-1 h-[18rem] md:h-[30rem] text-hr-blue italic text-[8rem] md:text-[18rem] border-b-[1rem] border-b-hr-blue !border-l-0 !border-r-0 !border-t-0"
-                          onChange={(e) =>
-                            handleChangeBIB(
-                              item.index,
-                              item.type,
-                              e.target.value
-                            )
-                          }
-                        />
-                        <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
-                          {
-                            form.formState.errors?.[
-                              item.type === "primary"
-                                ? "primary_runners"
-                                : "guardian_runners"
-                            ]?.[item.index]?.bib?.message
-                          }
-                        </Typography.Paragraph>
-                      </div>
+            </div>
+            <div className="section-4 mt-[10rem] md:mt-[30rem]">
+              <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
+                {t("happy_run.form.content_bib")}
+              </FormLabel>
+              <FormDescription className="text-[9rem] md:text-[16rem] italic !mb-[5rem] md:!mb-[10rem] text-hr-blue">
+                {t("happy_run.form.content_bib_desc")}
+              </FormDescription>
+              <div className="relative border-hr-blue border-[1rem] rounded-[5rem] bg-white min-h-[80rem] md:min-h-[180rem] p-[5rem] md:p-[20rem]">
+                {[
+                  ...form
+                    .watch("primary_runners")
+                    .map((item, index) => ({
+                      ...item,
+                      type: "primary",
+                      index,
+                    }))
+                    .filter(
+                      (i) => i.full_name && i.ticket_class === "Well-being"
+                    ),
+                  ...form
+                    .watch("guardian_runners")
+                    .map((item, index) => ({
+                      ...item,
+                      type: "guardian",
+                      index,
+                    }))
+                    .filter(
+                      (i) => i.full_name && i.ticket_class === "Well-being"
+                    ),
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-x-[5rem]">
+                    <Typography.Text className="text-[8rem] md:text-[18rem] text-hr-blue italic">
+                      {`${index + 1}. ${item.full_name} -`}
+                    </Typography.Text>
+                    <div className="flex gap-x-[10rem] items-end">
+                      <Input
+                        placeholder={t(
+                          "happy_run.form.content_bib_placeholder"
+                        )}
+                        className="flex-1 h-[18rem] md:h-[30rem] text-hr-blue italic text-[8rem] md:text-[18rem] border-b-[1rem] border-b-hr-blue !border-l-0 !border-r-0 !border-t-0"
+                        onChange={(e) =>
+                          handleChangeBIB(item.index, item.type, e.target.value)
+                        }
+                      />
+                      <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
+                        {
+                          form.formState.errors?.[
+                            item.type === "primary"
+                              ? "primary_runners"
+                              : "guardian_runners"
+                          ]?.[item.index]?.bib?.message
+                        }
+                      </Typography.Paragraph>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
             <center className="mt-[20rem]">
-              <button
-                type="submit"
-                className={cn(
-                  "text-[14rem] text-center md:text-[30rem] px-[20rem] py-[10rem] rounded-[5rem] mb-[10rem] flex items-center bg-hr-ember text-white"
-                )}
-              >
-                {t("happy_run.buttons.register_now")}
-              </button>
+              <PrimaryButton className={cn(
+                  "text-[14rem] text-center md:text-[30rem] font-extrabold p-[35rem_40rem] rounded-[10rem] mb-[10rem] flex items-center"
+                )}>
+              {t("happy_run.buttons.register_now")}
+              </PrimaryButton>
             </center>
           </form>
         </Form>
@@ -886,11 +881,12 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
       <OrderConfirmModal
         orderData={orderData}
         open={openConfirmModal}
-        onConfirm={(qr) => handlePayment(qr)}
+        onConfirm={(qr,order_name) => handlePayment(qr,order_name)}
         onClosed={() => setOpenConfirmModal(false)}
       />
       <PaymentSuccessModal
-        codeUrl={QRPayment}
+        codeUrl={paymentData?.qr_code}
+        orderName={paymentData?.order_name}
         open={openSuccessModal}
         onClosed={handleOrderSuccess}
       />

@@ -13,7 +13,7 @@ export default function ScrollButton({
     const section = document.getElementById(to);
     if (section) {
       const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top: sectionTop - 78, behavior: 'smooth' });
+      window.scrollTo({ top: sectionTop - 100, behavior: 'smooth' });
       window.location.hash = to;
     }
   };
