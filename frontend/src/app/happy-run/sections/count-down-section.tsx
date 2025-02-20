@@ -51,7 +51,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
     >
       <Typography.Heading
         level={2}
-        className="text-white font-black text-[13rem] md:text-[35rem] uppercase"
+        className="text-white font-black text-[13rem] md:text-[35rem]"
       >
         {parser(t("happy_run.count_down_heading"))}
       </Typography.Heading>
@@ -65,7 +65,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
       <Typography.Paragraph className="mb-0 text-[9rem] md:text-[25rem] text-white">
         Happy Run
       </Typography.Paragraph>
-      <Typography.Paragraph className="text-[20rem] md:text-[65rem] tracking-[3rem] md:tracking-[8rem] font-bold text-white">
+      <Typography.Paragraph className="text-[20rem] md:text-[65rem] tracking-[3rem] md:tracking-[8rem] font-bold text-hr-honey">
         {format(targetDate || new Date(), "dd-MM-yyyy")}
       </Typography.Paragraph>
       <span className="text-[40rem] "></span>

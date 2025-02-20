@@ -226,7 +226,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                 className="mt-[20rem] md:mt-[30rem] bg-[linear-gradient(#1F797B,#009180)] p-[4rem_15rem] md:p-[5rem_30rem] text-[10rem] md:text-[18rem] h-auto rounded-[5rem]"
               >
                 {t(
-                  `happy_run.buttons.${collapse1 ? "view_more" : "view_less"}`
+                  `happy_run.buttons.${collapse1 ? "view_less" : "view_more"}`
                 )}
               </Button>
             </div>
