@@ -17,6 +17,8 @@ import {
 import * as THREE from "three";
 import { animateFadeInLeft, animateFadeInRight } from "../components/animate";
 import { useResponsive } from "@/core/hooks/use-reponsive";
+import { cleanPath } from "@/lib/utils/common";
+import env from "@/config/env";
 
 export type StationSectionProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -32,7 +34,7 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      if(!isDesktop) return;
+      if (!isDesktop) return;
       animateFadeInRight(station1Ref?.current);
       animateFadeInRight(station2Ref?.current);
       animateFadeInLeft(station3Ref?.current);
@@ -59,7 +61,11 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
           <div className="absolute top-[10%] md:top-0 right-[30%] md:right-[22%]">
             <div className="absolute top-[30%] left-[-65%] md:top-[60%] md:left-[-30%] w-[50rem] md:w-[150rem] aspect-square">
               <Canvas flat linear>
-                <Model matcapUrl="/happy-run/matcap_5.png" />
+                <Model
+                  matcapUrl={cleanPath(
+                    `${env.ASSET_URL}/happy-run/matcap_5.png`
+                  )}
+                />
               </Canvas>
             </div>
             <div ref={station1Ref}>
@@ -77,7 +83,11 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
           <div className="absolute top-[25%] right-[18%] md:top-[25%] md:right-[9%]">
             <div className="absolute top-[-10%] right-[75%] md:right-[95%] w-[60rem] md:w-[160rem] aspect-square">
               <Canvas flat linear>
-                <Model matcapUrl="/happy-run/matcap_4.png" />
+                <Model
+                  matcapUrl={cleanPath(
+                    `${env.ASSET_URL}/happy-run/matcap_4.png`
+                  )}
+                />
               </Canvas>
             </div>
             <div ref={station2Ref}>
@@ -95,7 +105,11 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
           <div className="absolute top-[40%] md:top-[45%] left-[6%] md:left-[0%] text-right">
             <div className="absolute top-[-60%] left-[85%] w-[80rem] md:w-[220rem] aspect-square">
               <Canvas flat linear>
-                <Model matcapUrl="/happy-run/matcap_3.png" />
+                <Model
+                  matcapUrl={cleanPath(
+                    `${env.ASSET_URL}/happy-run/matcap_3.png`
+                  )}
+                />
               </Canvas>
             </div>
             <div ref={station3Ref}>
@@ -113,7 +127,11 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
           <div className="absolute top-[42%] md:top-[52%] right-[16%] md:right-[-3%]">
             <div className="absolute top-[70%] md:top-[0%] right-[-85%] md:right-[85%] w-[90rem] md:w-[230rem] aspect-square">
               <Canvas flat linear>
-                <Model matcapUrl="/happy-run/matcap_2.png" />
+                <Model
+                  matcapUrl={cleanPath(
+                    `${env.ASSET_URL}/happy-run/matcap_2.png`
+                  )}
+                />
               </Canvas>
             </div>
             <div ref={station4Ref}>
@@ -131,7 +149,11 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
           <div className="absolute bottom-[16%] left-[40%] md:left-[23%] text-right">
             <div className="absolute top-[-40%] left-[65%] md:left-[85%] w-[100rem] md:w-[250rem] aspect-square">
               <Canvas flat linear>
-                <Model />
+                <Model
+                  matcapUrl={cleanPath(
+                    `${env.ASSET_URL}/happy-run/matcap.png`
+                  )}
+                />
               </Canvas>
             </div>
             <div ref={station5Ref}>
@@ -175,9 +197,13 @@ type ModelProps = {
 };
 
 export function Model({ matcapUrl, ...props }: ModelProps) {
-  const { nodes, materials } = useGLTF("/happy-run/map_pointer_3d.glb");
+  const { nodes, materials } = useGLTF(
+    cleanPath(`${env.ASSET_URL}/happy-run/map_pointer_3d.glb`)
+  );
   const meshRef = useRef<THREE.Mesh>(null);
-  const matcap = useTexture(matcapUrl || "/happy-run/matcap.png");
+  const matcap = useTexture(
+    matcapUrl || cleanPath(`${env.ASSET_URL}/happy-run/matcap.png`)
+  );
 
   useFrame((state, delta) => {
     if (meshRef.current) {
@@ -202,4 +228,4 @@ export function Model({ matcapUrl, ...props }: ModelProps) {
   );
 }
 
-useGLTF.preload("/happy-run/map_pointer_3d.glb");
+useGLTF.preload(cleanPath(`${env.ASSET_URL}/happy-run/map_pointer_3d.glb`));
