@@ -5,6 +5,7 @@ def create_roles_if_not_exists():
     roles = [
         {"role_name": "WSE HR Admin", "desk_access": 1},
         {"role_name": "WSE AC Admin", "desk_access": 1},
+        {"role_name": "WSE NJ Admin", "desk_access": 1},
     ]
 
     for role in roles:

@@ -27,6 +27,7 @@
    "depends_on": "eval: doc.variable_type === 'Text'",
    "fieldname": "variable_value",
    "fieldtype": "Text",
+   "ignore_xss_filter": 1,
    "label": "Variable Value"
   },
   {
@@ -54,7 +55,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-02-19 07:18:48.879064",
+ "modified": "2025-02-20 16:06:47.737265",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE Event Variable",
