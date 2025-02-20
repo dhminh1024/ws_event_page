@@ -48,9 +48,9 @@ export const RouteSection: FC<RouteSectionProps> = ({ className }) => {
         scrub: false,
       });
       // Paragraph
-      animateFadeInBottom(paragraph1Ref.current);
-      animateFadeInBottom(paragraph2Ref.current);
-      animateFadeInBottom(paragraph3Ref.current);
+      animateFadeInBottom(paragraph1Ref.current,{start: "top 130%", end: "bottom center"});
+      animateFadeInBottom(paragraph2Ref.current,{start: "top 130%", end: "bottom center"});
+      animateFadeInBottom(paragraph3Ref.current,{start: "top 130%", end: "bottom center"});
     }, 200);
   }, []);
 

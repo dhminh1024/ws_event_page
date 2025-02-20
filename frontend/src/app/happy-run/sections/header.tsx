@@ -13,7 +13,6 @@ import { EVENT_PAGES } from "@/config/event-pages";
 import { cleanPath } from "@/lib/utils/common";
 import { MenuBar } from "./menu-bar";
 
-
 export type HeaderProps = HTMLAttributes<HTMLDivElement> & {};
 
 export const Header: FC<HeaderProps> = ({ className }) => {
@@ -28,12 +27,7 @@ export const Header: FC<HeaderProps> = ({ className }) => {
   };
   // console.log(event);
   return (
-    <div
-      className={cn(
-        "bg-hr-primary pb-[40rem]",
-        className
-      )}
-    >
+    <div className={cn("bg-hr-primary pb-[40rem]", className)}>
       <div className="flex justify-between gap-x-[10rem] md:gap-x-[20rem] w-full py-[10rem] md:py-[30rem]">
         <div className="flex items-center gap-x-[10rem] md:gap-x-[30rem]">
           <img
@@ -57,8 +51,8 @@ export const Header: FC<HeaderProps> = ({ className }) => {
             alt="Logo spring"
           />
         </div>
-        <div className="flex gap-x-[10rem] md:gap-x-[20rem] items-center">
-        <LanguageSelector />
+        <div className="block md:hidden">
+          <LanguageSelector />
         </div>
       </div>
     </div>

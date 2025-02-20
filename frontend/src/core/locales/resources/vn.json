@@ -150,10 +150,11 @@
       "view_less": "Thu gọn"
     },
     "ticket_sale_official_time": "Thời gian bán vé chính thức",
-    "count_down_heading": "Chào mừng các WISERS đến với <br className=\"block md:hidden\"/> Happy Run 2025 & <br/> Khởi động Happy Summer 2025",
+    "count_down_heading": "CHÀO MỪNG CÁC WISers ĐẾN VỚI<br className=\"block md:hidden\"/> HAPPY RUN 2025 & <br/> KHỞI ĐỘNG HAPPY SUMMER 2025",
     "count_down_date": "Còn <span className=\"text-[14rem] md:text-[40rem] font-semibold\">{{day}}</span> ngày <span className=\"text-[14rem] md:text-[40rem] font-semibold\">{{hours}}</span> giờ <span className=\"text-[14rem] md:text-[40rem] font-semibold\">{{minutes}}</span> phút <span className=\"text-[14rem] md:text-[40rem] font-semibold\">{{seconds}}</span> giây",
     "teaser_heading_1": "Happy",
     "teaser_heading_2": "Run",
+    "teaser_description": "CHỜ ĐÓN TEASER SỰ KIỆN HAPPY RUN 2025 VÀO CHỦ NHẬT, NGÀY 23/03/2025",
     "target_heading": "Mục tiêu",
     "route_heading": "Lộ Trình",
     "detailed_route_heading": "Lộ trình chi tiết",

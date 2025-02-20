@@ -8,15 +8,17 @@ def get_event_page_data(site_url):
 
         # transform list of variables to dictionary
         new_variables = {}
-        for variable in event["variables"]:
+        for variable in event["variables"]: 
+            variable_value = variable["variable_value"]
+            if variable["variable_type"] == "Image":
+                variable_value = variable["image"]
+            if variable["variable_type"] == "Video":
+                variable_value = variable["video"]
+
             new_variables[variable["variable_name"]] = {
                 "id": variable["name"],
                 "type": variable["variable_type"],
-                "value": (
-                    variable["variable_value"]
-                    if variable["variable_type"] == "Text"
-                    else variable["image"]
-                ),
+                "value": variable_value,
             }
         event["variables"] = new_variables
 

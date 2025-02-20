@@ -118,9 +118,9 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
           >
             <div
               ref={ticket1Ref}
-              className="relative overflow-hidden rounded-[5rem] md:rounded-[20rem]"
+              className="relative overflow-hidden rounded-[5rem] md:rounded-[20rem] w-[40%]"
             >
-              <img src={TicketWellbeingImage} alt="ticket image" />
+              <img className="w-full h-auto" src={TicketWellbeingImage} alt="ticket image" />
               <div
                 ref={ticketReflective1Ref}
                 className="blur-[3px] effect absolute top-[-20%] bottom-0 m-auto left-[-10%] z-20 h-[160%] rotate-[25deg] w-[20%] bg-[linear-gradient(90deg,#ffffff00,#ffffffd1,#ffffff00)]"
@@ -163,9 +163,9 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
           >
             <div
               ref={ticket2Ref}
-              className="relative overflow-hidden rounded-[5rem] md:rounded-[20rem]"
+              className="relative overflow-hidden rounded-[5rem] md:rounded-[20rem] w-[40%]"
             >
-              <img src={TicketHappyRunImage} alt="ticket image" />
+              <img className="w-full" src={TicketHappyRunImage} alt="ticket image" />
               <div
                 ref={ticketReflective2Ref}
                 className="blur-[3px] effect absolute top-[-20%] bottom-0 m-auto right-0 z-20 h-[160%] rotate-[-25deg] w-[20%] bg-[linear-gradient(90deg,#ffffff00,#ffffffc6,#ffffff00)]"
