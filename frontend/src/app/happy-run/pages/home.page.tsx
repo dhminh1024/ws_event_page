@@ -46,7 +46,7 @@ export const Component: FC = () => {
       <TicketSection />
       <KitSection />
       <InfoSection />
-      {/* <StationSection />   */}
+      <StationSection />  
       <SummerSection id="happy-summer"/>
       <FAQSection id="faq"/>
       <SpringSection />
