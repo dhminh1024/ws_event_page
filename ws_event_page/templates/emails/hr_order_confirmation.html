@@ -42,6 +42,21 @@
           <th
             scope="col"
             style="border-color: #3b6dae; color: #172a52"
+            width="100"
+          >
+            Size áo <br />
+            <em>T-shirt size</em>
+          </th>
+          <th
+            scope="col"
+            style="border-color: #3b6dae; color: #172a52"
+            width="80"
+          >
+            BIB
+          </th>
+          <th
+            scope="col"
+            style="border-color: #3b6dae; color: #172a52"
             width="80"
           >
             Giá vé <br />
@@ -64,6 +79,11 @@
           <td style="border-color: #3b6dae">{{ticket.full_name}}</td>
           <td style="border-color: #3b6dae">
             {{ticket.ticket_type}} - {{ticket.distance}}
+          </td>
+          <td style="border-color: #3b6dae">{{ticket.shirt_size}}</td>
+          <td style="border-color: #3b6dae">
+            {% if ticket.ticket_type == "Well-being" %} {{ticket.bib}} {% endif
+            %}
           </td>
           <td style="border-color: #3b6dae">{{ticket.ticket_price}}</td>
           <td style="border-color: #3b6dae">{{ticket.status}}</td>
