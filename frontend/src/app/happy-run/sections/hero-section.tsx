@@ -13,7 +13,7 @@ export const HeroSection: FC<HeroSectionProps> = ({ className, ...props }) => {
     if (videoRef.current) {
       videoRef.current.muted = true;
       videoRef.current.play();
-      videoRef.current.addEventListener("loadedmetadata", () => {
+      videoRef.current.addEventListener("loadeddata", () => {
         if (videoRef.current) {
           console.log("Loaded");
           videoRef.current.muted = true;
