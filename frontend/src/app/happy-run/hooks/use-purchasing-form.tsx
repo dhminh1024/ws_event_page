@@ -8,7 +8,8 @@ import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import useCheckUserByCode from "../api/use-check-user-by-code";
-import { log } from "node:console";
+import env from "@/config/env";
+import { cleanPath } from "@/lib/utils/common";
 
 export const usePurchasingForm = () => {
   const { t, currentLanguage } = useLocales();
@@ -32,7 +33,7 @@ export const usePurchasingForm = () => {
                   ctx.addIssue({
                     code: "custom",
                     message: t("happy_run.form.user_code_has_orders",{
-                      link: `/happy-run/order-detail/${data.message.orders[0].name}`,
+                      link: cleanPath(`${env.BASE_NAME}/happy-run/order-detail/${data.message.orders[0].name}`),
                     }),
                     path: [],
                   });
