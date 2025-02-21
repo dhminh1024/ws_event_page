@@ -136,7 +136,7 @@
       },
       "order_detail": "Order Details"
     },
-    "order_title": "Order Details <span className=\"text-hr-honey\">Order</span>",
+    "order_title": "Order <span className=\"text-hr-honey\">Details</span>",
     "buttons": {
       "add_person": "Add Person +",
       "register_now": "Register Now",
@@ -181,7 +181,8 @@
     "collaboration_units": "Collaborating Units",
     "info_booker": "Booker Information",
     "info_order": "Order Information",
-    "order_status": "Order Status"
+    "order_status": "Order Status",
+    "order_id": "Order ID"
   },
   "nutritional_journey": {
     "title": "Hành Trình Dinh Dưỡng",

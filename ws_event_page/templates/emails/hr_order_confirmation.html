@@ -9,12 +9,16 @@
     <h3 style="text-align: center; color: #3b6dae">
       YOU HAVE SUCCESSFULLY REGISTERED HAPPY RUN 2025 EVENT
     </h3>
+    <p>
+      Mã đơn hàng | <em>Order ID</em>:
+      <span style="color: #f05023; font-weight: bold">{{order_id}}</span>
+    </p>
     <!-- Order detail -->
     <table
       class="table"
       style="background-color: azure; border: 1px solid #3b6dae"
     >
-      <thead style="background: #3b6dae45">
+      <thead style="background: #3b6dae45; font-size: 12px">
         <tr>
           <th
             scope="col"
@@ -24,28 +28,32 @@
             #
           </th>
           <th scope="col" style="border-color: #3b6dae; color: #172a52">
-            Họ tên
+            Họ tên <br />
+            <em>Full name</em>
           </th>
           <th
             scope="col"
             style="border-color: #3b6dae; color: #172a52"
             width="140"
           >
-            Hạng vé
+            Hạng vé <br />
+            <em>Ticket type</em>
           </th>
           <th
             scope="col"
             style="border-color: #3b6dae; color: #172a52"
             width="80"
           >
-            Giá vé
+            Giá vé <br />
+            <em>Price</em>
           </th>
           <th
             scope="col"
             style="border-color: #3b6dae; color: #172a52"
             width="100"
           >
-            Trạng thái
+            Trạng thái <br />
+            <em>Status</em>
           </th>
         </tr>
       </thead>
@@ -67,12 +75,12 @@
     <!-- Payment details -->
     <div class="text-right" style="margin-top: 20px">
       <p style="color: #172a52">
-        <strong>Tổng tiền | <em>Total price</em>:</strong> {{total_price}}
+        Tổng tiền | <em>Total price</em>: <strong>{{total_price}}</strong>
       </p>
       {% if total_payment_pending != total_price %}
       <p style="color: #172a52">
-        <strong>Cần thanh toán | <em>Payment Required</em>:</strong>
-        {{total_payment_pending}}
+        Cần thanh toán | <em>Payment Required</em>:
+        <strong>{{total_payment_pending}}</strong>
       </p>
       {% endif %}
     </div>
@@ -127,9 +135,9 @@
     <p class="text-center" style="margin-top: 20px; color: #172a52">
       Xin chân thành cảm ơn và hẹn gặp lại các bạn tại sự kiện Happy Run 2025!
       <br />
-      <span style="color: #3b6dae"
-        ><em>Thank you and see you at Happy Run 2025 event!</em></span
-      >
+      <span style="color: #3b6dae">
+        <em> Thank you and see you at Happy Run 2025 event! </em>
+      </span>
     </p>
   </div>
 </div>

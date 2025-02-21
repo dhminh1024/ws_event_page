@@ -15,6 +15,7 @@ import {
 import useGetOrder from "../api/use-get-order";
 import { LanguageSelector } from "../components/language-selector";
 import { useEffect } from "react";
+import { cn } from "@/core/utils/shadcn-utils";
 
 export const Component = () => {
   const navigate = useNavigate();
@@ -104,12 +105,31 @@ export const Component = () => {
             II. {t("happy_run.info_order")}
           </Typography.Paragraph>
         </p>
-        <div className="flex flex-col pl-[5rem] md:pl-[20rem] py-[10rem]">
+        <div className="flex flex-col md:flex-row gap-[2rem_10rem] justify-between pl-[5rem] py-[5rem] md:py-[10rem]">
+          <p className="mb-[10rem] md:mb-[20rem] text-hr-blue ">
+            <Typography.Text className="text-[10rem] md:text-[18rem] font-semibold leading-[1.2]">
+              {t("happy_run.order_id")}:
+            </Typography.Text>
+            <Typography.Text
+              className={cn(
+                "ml-[10rem] text-[10rem] md:text-[16rem] text-hr-ember font-semibold leading-[1.2]"
+              )}
+            >
+              {order?.name}
+            </Typography.Text>
+          </p>
           <p className="mb-[10rem] md:mb-[20rem] text-hr-blue ">
             <Typography.Text className="text-[10rem] md:text-[18rem] font-semibold leading-[1.2]">
               {t("happy_run.order_status")}:
             </Typography.Text>
-            <Typography.Text className="ml-[10rem] bg-hr-ember p-[5rem_10rem] rounded-[5rem] text-[10rem] md:text-[20rem] font-semibold text-white leading-[1.2]">
+            <Typography.Text
+              className={cn(
+                "ml-[10rem] bg-hr-ember p-[5rem_10rem] rounded-[5rem] text-[10rem] md:text-[20rem] font-semibold text-white leading-[1.2]",
+                {
+                  "bg-hr-lime": order?.status === "Paid",
+                }
+              )}
+            >
               {t(`happy_run.form.list_status.${order?.status}`)}
             </Typography.Text>
           </p>

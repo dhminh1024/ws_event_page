@@ -9,12 +9,16 @@
     <h3 style="text-align: center; color: #3b6dae">
       YOUR REGISTRATION HAS BEEN CANCELLED FOR HAPPY RUN 2025 EVENT
     </h3>
+    <p>
+      Mã đơn hàng | <em>Order ID</em>:
+      <span style="color: #f05023; font-weight: bold">{{order_id}}</span>
+    </p>
     <!-- Order detail -->
     <table
       class="table"
       style="background-color: azure; border: 1px solid #3b6dae"
     >
-      <thead style="background: #3b6dae45">
+      <thead style="background: #3b6dae45; font-size: 12px">
         <tr>
           <th
             scope="col"
@@ -24,28 +28,32 @@
             #
           </th>
           <th scope="col" style="border-color: #3b6dae; color: #172a52">
-            Họ tên
+            Họ tên <br />
+            <em>Full name</em>
           </th>
           <th
             scope="col"
             style="border-color: #3b6dae; color: #172a52"
             width="140"
           >
-            Hạng vé
-          </th>
-          <th
-            scope="col"
-            style="border-color: #3b6dae; color: #172a52"
-            width="80"
-          >
-            Size áo
+            Hạng vé <br />
+            <em>Ticket type</em>
           </th>
           <th
             scope="col"
             style="border-color: #3b6dae; color: #172a52"
             width="100"
           >
-            Giá vé
+            Size áo <br />
+            <em>T-shirt size</em>
+          </th>
+          <th
+            scope="col"
+            style="border-color: #3b6dae; color: #172a52"
+            width="100"
+          >
+            Giá vé <br />
+            <em>Price</em>
           </th>
         </tr>
       </thead>
@@ -67,7 +75,7 @@
     <!-- Payment details -->
     <div class="text-right" style="margin-top: 20px">
       <p style="color: #172a52">
-        <strong>Tổng tiền | <em>Total price</em>:</strong> {{total_price}}
+        Tổng tiền | <em>Total price</em>: {<strong>{total_price}}</strong>
       </p>
     </div>
 
@@ -88,11 +96,11 @@
       Xin chân thành cảm ơn và hẹn gặp lại các bạn ở các sự kiện lần sau tại
       Wellspring!
       <br />
-      <span style="color: #3b6dae"
-        ><em
-          >Thank you very much and see you at the next events at Wellspring!</em
-        ></span
-      >
+      <span style="color: #3b6dae">
+        <em>
+          Thank you very much and see you at the next events at Wellspring!
+        </em>
+      </span>
     </p>
   </div>
 </div>
