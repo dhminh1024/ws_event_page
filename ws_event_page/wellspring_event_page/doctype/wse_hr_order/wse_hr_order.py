@@ -311,5 +311,5 @@ def send_confirmation_email(email_template, sender, recipients, subject, args):
         subject=subject,
         template=email_template,
         args=args,
-        # now=True,
+        now=True,
     )
