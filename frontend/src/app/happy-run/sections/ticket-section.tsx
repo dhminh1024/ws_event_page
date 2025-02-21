@@ -75,7 +75,7 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
   }, []);
 
   return (
-    <div className={cn("bg-hr-lime py-[40rem]", className)}>
+    <div className={cn("relative z-[] bg-hr-lime py-[40rem]", className)}>
       <div className="w-[90%] mx-auto">
         <SectionHeading
           //   ref={headingRef}
@@ -89,7 +89,7 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
           </Typography.Paragraph>
         </center>
         <div
-          className="flex gap-x-[2%] md:gap-x-[10%] justify-center py-[20rem] md:py-[40rem]"
+          className="relative z-5 flex gap-x-[2%] md:gap-x-[10%] justify-center py-[20rem] md:py-[40rem]"
           style={{
             transformStyle: "preserve-3d",
             perspective: "1000px",
@@ -118,7 +118,7 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
           >
             <div
               ref={ticket1Ref}
-              className="relative overflow-hidden rounded-[5rem] md:rounded-[20rem] w-[50%] md:w-[40%]"
+              className="relative z-5 overflow-hidden rounded-[5rem] md:rounded-[20rem] w-[50%] md:w-[40%]"
             >
               <img className="w-full h-auto" src={TicketWellbeingImage} alt="ticket image" />
               <div
@@ -163,7 +163,7 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
           >
             <div
               ref={ticket2Ref}
-              className="relative overflow-hidden rounded-[5rem] md:rounded-[20rem] w-[50%] md:w-[40%]"
+              className="relative z-5 overflow-hidden rounded-[5rem] md:rounded-[20rem] w-[50%] md:w-[40%]"
             >
               <img className="w-full" src={TicketHappyRunImage} alt="ticket image" />
               <div

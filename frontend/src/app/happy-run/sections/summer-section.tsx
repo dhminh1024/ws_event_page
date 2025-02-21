@@ -28,27 +28,24 @@ export const SummerSection: FC<SummerSectionProps> = ({
   return (
     <div className={cn("bg-[#EA6E21] ", className)} {...props}>
       <img
-        src={currentLanguage === "en" ? HSTopEN : HSTopVN}
+        src={event.variables?.[`summer_top_${currentLanguage}`]?.value || ""}
         alt="Happy Summer"
         className="w-full"
       />
       <div className="relative">
-        {!isDesktop && currentLanguage === "vn" && (
-          <img src={HSImageMBVN} alt="Happy Summer" className="w-full" />
-        )}
-        {!isDesktop && currentLanguage === "en" && (
-          <img src={HSImageMBEN} alt="Happy Summer" className="w-full" />
-        )}
-        {isDesktop && currentLanguage === "vn" && (
-          <img src={HSImagePCVN} alt="Happy Summer" className="w-full" />
-        )}
-        {isDesktop && currentLanguage === "en" && (
-          <img src={HSImagePCEN} alt="Happy Summer" className="w-full" />
-        )}
-        <div className="absolute bottom-[7%] w-[70%] left-0 right-0 m-auto">
-          <div className="flex flex-col md:flex-row">
+        <img
+          src={
+            event.variables?.[
+              `summer_background_${isDesktop ? "pc" : "mb"}_${currentLanguage}`
+            ]?.value || ""
+          }
+          alt="Happy Summer"
+          className="w-full"
+        />
+        <div className="absolute bottom-[7%] w-[80%] md:w-[70%] left-0 right-0 m-auto">
+          <div className="flex flex-row">
             <Link
-              className="w-[80%] mx-auto md:w-[50%]"
+              className="w-[50%] mx-auto md:w-[50%]"
               to={event.variables.summer_tuition_link?.value || "#"}
               target="_blank"
             >
@@ -58,7 +55,7 @@ export const SummerSection: FC<SummerSectionProps> = ({
               />
             </Link>
             <Link
-              className="w-[80%] mx-auto md:w-[50%]"
+              className="w-[50%] mx-auto md:w-[50%]"
               to={event.variables.summer_camp_registration_link?.value || "#"}
               target="_blank"
             >

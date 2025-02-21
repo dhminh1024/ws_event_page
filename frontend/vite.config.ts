@@ -27,5 +27,6 @@ export default defineConfig({
     outDir: "../ws_event_page/public/frontend",
     emptyOutDir: true,
     target: "es2015",
+    sourcemap: true,
   },
 });

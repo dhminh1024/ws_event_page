@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { EVENT_PAGES } from "@/config/event-pages";
 import { cleanPath } from "@/lib/utils/common";
 import { MenuBar } from "./menu-bar";
+import { LanguageSwitcher } from "../components/language-switcher";
 
 export type HeaderProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -51,8 +52,8 @@ export const Header: FC<HeaderProps> = ({ className }) => {
             alt="Logo spring"
           />
         </div>
-        <div className="block md:hidden">
-          <LanguageSelector />
+        <div className="flex items-center md:hidden">
+          <LanguageSwitcher className="w-[30rem] h-[20rem]" />
         </div>
       </div>
     </div>
