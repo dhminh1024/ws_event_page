@@ -14,7 +14,7 @@ import {
 import Typography from "@/app/happy-box/components/typography";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import BorderWrapper from "../components/border-wrapper";
-import RouteMapGIF from "@happy-run/assets/images/route-map.gif";
+import RouteMapGIF from "@happy-run/assets/images/route-map.webp";
 import { useResponsive } from "@/core/hooks/use-reponsive";
 
 export type RouteSectionProps = HTMLAttributes<HTMLDivElement> & {};
