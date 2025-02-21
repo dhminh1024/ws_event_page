@@ -40,6 +40,7 @@ import { useHRSettings } from "../context/use-settings";
 import { PaymentSuccessModal } from "../components/payment-success-modal";
 import parser from "html-react-parser";
 import { PrimaryButton } from "../components/button";
+import { LanguageSelector } from "../components/language-selector";
 
 export type PurchasingFormProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -191,11 +192,17 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
       >
         <center className="mb-[30rem] md:mb-[40rem]">
           <Typography.Heading
-            className="py-[20rem] md:py-[40rem] text-[20rem] md:text-[45rem] text-hr-blue leading-[1.2] font-extrabold"
+            className="pt-[20rem] md:pt-[40rem] text-[20rem] md:text-[45rem] text-hr-blue leading-[1.2] font-extrabold"
             level={2}
           >
             {parser(t("happy_run.form_heading"))}
           </Typography.Heading>
+          <div className="flex items-center justify-center my-[20rem]">
+            <span className="mr-[10rem] text-[16rem]">
+              {t("common.language")}:
+            </span>
+            <LanguageSelector />
+          </div>
           <Typography.Paragraph className="text-hr-blue text-[12rem] md:text-[20rem] font-semibold">
             <span>{t("happy_run.form_description_1")}</span>
             <span className="ml-[5rem] block md:inline text-[14rem] md:text-[23rem] font-black uppercase">
@@ -204,6 +211,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
               Embrace Wellness"
             </span>
           </Typography.Paragraph>
+
           <Typography.Paragraph className="text-hr-blue text-[12rem] md:text-[20rem] font-semibold mb-[20rem]">
             {t("happy_run.form_description_2")}
           </Typography.Paragraph>
@@ -298,10 +306,10 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                             </div>
                           </FormControl>
                           <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
-                            {
+                            {parser(
                               form.formState.errors.primary_runners?.[index]
-                                ?.code?.message
-                            }
+                                ?.code?.message || ""
+                            )}
                           </Typography.Paragraph>
                         </FormItem>
                         <FormItem>
@@ -870,7 +878,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
         }}
         onCancel={() => {
           setIsAgreed(false);
-          setOrderData(undefined)
+          setOrderData(undefined);
         }}
       />
       <OrderConfirmModal
@@ -894,7 +902,11 @@ type PolicySectionProps = HTMLAttributes<HTMLDivElement> & {
   onCancel?: () => void;
 };
 
-export const PolicySection = ({ hidden, onFinish, onCancel }: PolicySectionProps) => {
+export const PolicySection = ({
+  hidden,
+  onFinish,
+  onCancel,
+}: PolicySectionProps) => {
   const { t, currentLanguage } = useLocales();
   const event = useEventPageContext();
   return (

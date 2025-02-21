@@ -28,7 +28,7 @@ export const RouteSection: FC<RouteSectionProps> = ({ className }) => {
   const routeGraphicRef = useRef(null);
   const paragraph1Ref = useRef(null);
   const paragraph2Ref = useRef(null);
-  const paragraph3Ref = useRef(null);
+  // const paragraph3Ref = useRef(null);
 
   useEffect(() => {
     setTimeout(() => {
@@ -50,7 +50,7 @@ export const RouteSection: FC<RouteSectionProps> = ({ className }) => {
       // Paragraph
       animateFadeInBottom(paragraph1Ref.current,{start: "top 130%", end: "bottom center"});
       animateFadeInBottom(paragraph2Ref.current,{start: "top 130%", end: "bottom center"});
-      animateFadeInBottom(paragraph3Ref.current,{start: "top 130%", end: "bottom center"});
+      // animateFadeInBottom(paragraph3Ref.current,{start: "top 130%", end: "bottom center"});
     }, 200);
   }, []);
 
@@ -113,7 +113,7 @@ export const RouteSection: FC<RouteSectionProps> = ({ className }) => {
                   )}
                 </Typography.Paragraph>
               </div>
-              <div ref={paragraph3Ref}>
+              {/* <div ref={paragraph3Ref}>
                 <Typography.Heading className="text-[13rem] md:text-[25rem] mb-[5rem] md:mb-[20rem] text-brand-persian font-extrabold uppercase">
                   {t("happy_run.highlight_route_heading")}
                 </Typography.Heading>
@@ -126,7 +126,7 @@ export const RouteSection: FC<RouteSectionProps> = ({ className }) => {
                     ]?.value || ""
                   )}
                 </Typography.Paragraph>
-              </div>
+              </div> */}
             </div>
           </div>
         </BorderWrapper>
