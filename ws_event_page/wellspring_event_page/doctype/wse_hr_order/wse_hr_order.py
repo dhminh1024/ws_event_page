@@ -185,10 +185,11 @@ class WSEHROrder(Document):
             elif ticket.status == HRTicketStatus.PENDING_PAYMENT.value:
                 self.total_payment_pending += ticket.ticket_price
 
-        if self.total_payment_pending == 0:
+        if self.total_paid == self.total_price:
             self.status = HROrderStatus.PAID.value
         else:
-            self.status = HROrderStatus.PENDING_PAYMENT.value
+            if self.total_payment_pending > 0:
+                self.status = HROrderStatus.PENDING_PAYMENT.value
 
     def get_ticket_list_for_email(self):
         ticket_status_translation = {
@@ -224,7 +225,7 @@ class WSEHROrder(Document):
 
     def send_order_confirmation_email(self):
         sender = settings.email_sender
-        subject = "WSSG Happy Run 2025 - Đăng ký thành công"
+        subject = "WSSG Happy Run 2025 - Đăng ký thành công | Order Confirmation"
         recipients = [self.email]
         template = "hr_order_confirmation"
         qr_code_img_tag = f"""<img src="{self.qr_payment_code}" alt="QR Payment Code" style="width: 200px; height: 200px;"/>"""
@@ -241,7 +242,7 @@ class WSEHROrder(Document):
             ),
             tickets=ticket_list,
             qr_code_img_tag=qr_code_img_tag,
-            bank_name=settings.bank_name,
+            bank_name=f"{settings.bank_name} ({settings.bank_short_name})",
             account_number=settings.account_number,
             account_name=settings.account_name,
             transaction_notes=self.name,
@@ -252,7 +253,7 @@ class WSEHROrder(Document):
     def send_payment_confirmation_email(self):
         """Send payment confirmation email after successful payment"""
         sender = settings.email_sender
-        subject = "WSSG Happy Run 2025 - Xác nhận thanh toán"
+        subject = "WSSG Happy Run 2025 - Xác nhận thanh toán | Payment Confirmation"
         recipients = [self.email]
         template = "hr_payment_confirmation"
         ticket_list = self.get_ticket_list_for_email()
@@ -277,7 +278,9 @@ class WSEHROrder(Document):
     def send_cancellation_email(self):
         """Send cancellation email after cancelling the order"""
         sender = settings.email_sender
-        subject = "WSSG Happy Run 2025 - Huỷ đăng ký thành công"
+        subject = (
+            "WSSG Happy Run 2025 - Huỷ đăng ký thành công | Cancellation Confirmation"
+        )
         recipients = [self.email]
         template = "hr_order_cancellation"
         ticket_list = self.get_ticket_list_for_email()
@@ -300,10 +303,10 @@ class WSEHROrder(Document):
 def send_confirmation_email(email_template, sender, recipients, subject, args):
     frappe.sendmail(
         sender=sender,
+        reply_to="happyrun2025@wellspringsaigon.edu.vn",
         recipients=recipients,
         subject=subject,
         template=email_template,
         args=args,
-        header=_("WSSG Happy Run 2025"),
         now=True,
     )

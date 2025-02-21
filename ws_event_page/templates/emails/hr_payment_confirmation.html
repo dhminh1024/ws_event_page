@@ -1,7 +1,4 @@
-<div
-  class="gray-container text-center"
-  style="text-align: center; color: #172a52"
->
+<div class="container text-center" style="text-align: center; color: #172a52">
   <div>
     <h1 style="text-align: center">
       <span style="color: #f05023">CÁM ƠN BẠN ĐÃ THANH TOÁN</span>
@@ -9,6 +6,9 @@
       <span style="color: #172a52">SỰ KIỆN</span
       ><span style="color: #f5aa1e"> HAPPY RUN 2025</span>
     </h1>
+    <h3 style="text-align: center; color: #3b6dae">
+      THANK YOU FOR YOUR PAYMENT FOR HAPPY RUN 2025 EVENT
+    </h3>
     <!-- Order detail -->
     <table
       class="table"
@@ -16,25 +16,27 @@
     >
       <thead style="background: #3b6dae45">
         <tr>
-          <th scope="col" style="border-color: #3b6dae; color: #172a52">#</th>
           <th
+            scope="col"
+            style="border-color: #3b6dae; color: #172a52"
+            width="20"
+          >
+            #
+          </th>
+          <!-- <th
             scope="col"
             style="border-color: #3b6dae; color: #172a52"
             width="180"
           >
             Mã số vé
-          </th>
-          <th
-            scope="col"
-            style="border-color: #3b6dae; color: #172a52"
-            width="180"
-          >
+          </th> -->
+          <th scope="col" style="border-color: #3b6dae; color: #172a52">
             Họ tên
           </th>
           <th
             scope="col"
             style="border-color: #3b6dae; color: #172a52"
-            width="120"
+            width="140"
           >
             Hạng vé
           </th>
@@ -52,6 +54,13 @@
           >
             BIB
           </th>
+          <th
+            scope="col"
+            style="border-color: #3b6dae; color: #172a52"
+            width="80"
+          >
+            Giá vé
+          </th>
         </tr>
       </thead>
       <tbody style="color: #3d517b">
@@ -59,29 +68,44 @@
         {% for ticket in tickets %} {% if ticket.status == 'Đã thanh toán' %}
         <tr>
           <th style="border-color: #3b6dae" scope="row">{{loop.index}}</th>
-          <td style="border-color: #3b6dae">{{ticket.name}}</td>
+          <!-- <td style="border-color: #3b6dae">{{ticket.name}}</td> -->
           <td style="border-color: #3b6dae">{{ticket.full_name}}</td>
           <td style="border-color: #3b6dae">
             {{ticket.ticket_type}} - {{ticket.distance}}
           </td>
           <td style="border-color: #3b6dae">{{ticket.shirt_size}}</td>
           <td style="border-color: #3b6dae">{{ticket.bib}}</td>
+          <td style="border-color: #3b6dae">{{ticket.ticket_price}}</td>
         </tr>
         {% endif %} {% endfor %}
       </tbody>
     </table>
     <!-- Payment details -->
     <div class="text-right" style="margin-top: 20px">
-      <p style="color: #172a52"><strong>Tổng tiền:</strong> {{total_paid}}</p>
+      <p style="color: #172a52">
+        <strong>Tổng tiền | <em>Total price</em>:</strong> {{total_price}}
+      </p>
     </div>
 
-    <div class="text-center" style="margin-top: 20px">
+    <p class="text-center" style="margin-top: 20px; color: #172a52">
       <em>Bạn có thể theo dõi trạng thái đơn bằng đường link sau:</em>
-      <a href="{{order_detail_link}}" target="_blank">Chi tiết đơn hàng</a>
-    </div>
 
-    <p class="text-center" style="margin-top: 20px">
+      <br />
+      <span style="color: #3b6dae"
+        ><em>You can track your order status by the following link:</em></span
+      >
+      <br />
+      <a href="{{order_detail_link}}" target="_blank"
+        >Chi tiết đơn hàng | Order Detail</a
+      >
+    </p>
+
+    <p class="text-center" style="margin-top: 20px; color: #172a52">
       Xin chân thành cảm ơn và hẹn gặp lại các bạn tại sự kiện Happy Run 2025!
+      <br />
+      <span style="color: #3b6dae"
+        ><em>Thank you and see you at Happy Run 2025 event!</em></span
+      >
     </p>
   </div>
 </div>

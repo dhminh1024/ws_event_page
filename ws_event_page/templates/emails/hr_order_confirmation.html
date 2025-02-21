@@ -1,7 +1,4 @@
-<div
-  class="gray-container text-center"
-  style="text-align: center; color: #172a52"
->
+<div class="container text-center" style="text-align: center; color: #172a52">
   <div>
     <h1 style="text-align: center">
       <span style="color: #f05023">BẠN ĐÃ ĐĂNG KÝ THÀNH CÔNG</span>
@@ -9,6 +6,9 @@
       <span style="color: #172a52">SỰ KIỆN</span
       ><span style="color: #f5aa1e"> HAPPY RUN 2025</span>
     </h1>
+    <h3 style="text-align: center; color: #3b6dae">
+      YOU HAVE SUCCESSFULLY REGISTERED HAPPY RUN 2025 EVENT
+    </h3>
     <!-- Order detail -->
     <table
       class="table"
@@ -16,18 +16,20 @@
     >
       <thead style="background: #3b6dae45">
         <tr>
-          <th scope="col" style="border-color: #3b6dae; color: #172a52">#</th>
           <th
             scope="col"
             style="border-color: #3b6dae; color: #172a52"
-            width="180"
+            width="20"
           >
+            #
+          </th>
+          <th scope="col" style="border-color: #3b6dae; color: #172a52">
             Họ tên
           </th>
           <th
             scope="col"
             style="border-color: #3b6dae; color: #172a52"
-            width="120"
+            width="140"
           >
             Hạng vé
           </th>
@@ -64,10 +66,13 @@
 
     <!-- Payment details -->
     <div class="text-right" style="margin-top: 20px">
-      <p style="color: #172a52"><strong>Tổng tiền:</strong> {{total_price}}</p>
+      <p style="color: #172a52">
+        <strong>Tổng tiền | <em>Total price</em>:</strong> {{total_price}}
+      </p>
       {% if total_payment_pending != total_price %}
       <p style="color: #172a52">
-        <strong>Cần thanh toán:</strong> {{total_payment_pending}}
+        <strong>Cần thanh toán | <em>Payment Required</em>:</strong>
+        {{total_payment_pending}}
       </p>
       {% endif %}
     </div>
@@ -76,22 +81,55 @@
     <div class="text-center" style="margin-top: 20px">
       <p class="text-center" style="color: #172a52">
         Vui lòng thực hiện thanh toán đơn hàng bằng mã QR dưới đây:
+        <br />
+        <span style="color: #3b6dae"
+          ><em
+            >Please complete your order payment by the below QR Code:</em
+          ></span
+        >
       </p>
-      <em>Bạn có thể theo dõi trạng thái đơn bằng đường link sau:</em>
-      <a href="{{order_detail_link}}" target="_blank">Chi tiết đơn hàng</a>
     </div>
     <div class="text-center" style="margin: 20px 0">{{ qr_code_img_tag }}</div>
 
     <!-- Bank info -->
     <div class="text-center" style="margin: 20px 0">
-      <p style="color: #006882; font-weight: bold">{{bank_name}}</p>
-      <p>Tên Tài Khoản: {{account_name}}</p>
-      <p>Số Tài Khoản: {{account_number}}</p>
-      <p>Nội dung chuyển khoản: {{transaction_notes}}</p>
+      <span style="color: #006882; font-weight: bold">{{bank_name}}</span>
+      <br />
+      <span
+        >Tên Tài Khoản | <em>Account Name</em>:
+        <strong>{{account_name}}</strong></span
+      >
+      <br />
+      <span
+        >Số Tài Khoản | <em>Account Number</em>:
+        <strong>{{account_number}}</strong></span
+      >
+      <br />
+      <span
+        >Nội dung chuyển khoản | <em>Details of Payment</em>:
+        <strong>{{transaction_notes}}</strong></span
+      >
     </div>
 
     <p class="text-center" style="margin-top: 20px; color: #172a52">
+      <em>Bạn có thể theo dõi trạng thái đơn bằng đường link sau:</em>
+
+      <br />
+      <span style="color: #3b6dae"
+        ><em>You can track your order status by the following link:</em></span
+      >
+      <br />
+      <a href="{{order_detail_link}}" target="_blank"
+        >Chi tiết đơn hàng | Order Detail</a
+      >
+    </p>
+
+    <p class="text-center" style="margin-top: 20px; color: #172a52">
       Xin chân thành cảm ơn và hẹn gặp lại các bạn tại sự kiện Happy Run 2025!
+      <br />
+      <span style="color: #3b6dae"
+        ><em>Thank you and see you at Happy Run 2025 event!</em></span
+      >
     </p>
   </div>
 </div>
