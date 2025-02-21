@@ -17,23 +17,42 @@ def execute(filters=None):
     columns = get_columns()
     data = get_data()
     report_summary = get_report_summary(data)
+    chart = get_chart(data)
 
-    return columns, data, None, None, report_summary
+    return columns, data, None, chart, report_summary
 
 
 def get_columns():
     columns = [
         {
-            "fieldname": "ticket_id",
-            "fieldtype": "Data",
-            "label": "Ticket ID",
-            "width": 180,
-        },
-        {
             "fieldname": "order_id",
             "fieldtype": "Link",
             "options": "WSE HR Order",
             "label": "Order ID",
+            "width": 180,
+        },
+        {
+            "fieldname": "order_contact_full_name",
+            "fieldtype": "Data",
+            "label": "Contact Full Name",
+            "width": 180,
+        },
+        {
+            "fieldname": "order_contact_email",
+            "fieldtype": "Data",
+            "label": "Contact Email",
+            "width": 180,
+        },
+        {
+            "fieldname": "order_mobile_number",
+            "fieldtype": "Data",
+            "label": "Contact Mobile Number",
+            "width": 100,
+        },
+        {
+            "fieldname": "ticket_id",
+            "fieldtype": "Data",
+            "label": "Ticket ID",
             "width": 180,
         },
         {
@@ -54,6 +73,18 @@ def get_columns():
             "fieldtype": "Data",
             "label": "WSSG Code",
             "width": 120,
+        },
+        {
+            "fieldname": "department",
+            "fieldtype": "Data",
+            "label": "Department",
+            "width": 100,
+        },
+        {
+            "fieldname": "school_class_title",
+            "fieldtype": "Data",
+            "label": "School Class",
+            "width": 100,
         },
         {
             "fieldname": "ticket_type",
@@ -84,10 +115,16 @@ def get_data():
         SELECT
             `tabWSE HR Ticket`.name AS ticket_id,
             `tabWSE HR Order`.name AS order_id,
+            `tabWSE HR Order`.full_name AS order_contact_full_name,
+            `tabWSE HR Order`.email AS order_contact_email,
+            `tabWSE HR Order`.mobile_number AS order_mobile_number,
             `tabWSE HR Ticket`.status,
             `tabWSE HR Ticket`.category,
             `tabWSE HR Ticket`.full_name,
             `tabWSE HR Ticket`.wellspring_code,
+            `tabWSE HR Ticket`.department AS department,
+            `tabWSE HR Ticket`.school_class_title AS school_class_title,
+            CONCAT(`tabWSE HR Ticket`.department, ' ', `tabWSE HR Ticket`.school_class_title) AS department_class,
             `tabWSE HR Ticket`.ticket_type,
             `tabWSE HR Ticket`.distance,
             `tabWSE HR Ticket`.shirt_size,
@@ -99,11 +136,40 @@ def get_data():
         WHERE
             `tabWSE HR Order`.status != "{HROrderStatus.CANCELED.value}"
         ORDER BY
-            `tabWSE HR Order`.name, `tabWSE HR Ticket`.name;
+            `tabWSE HR Order`.name, `tabWSE HR Ticket`.category DESC;
     """
     data = frappe.db.sql(query, as_dict=True)
 
     return data
+
+
+def get_chart(data):
+    # Chart to show number of tickets by school_class_title
+    school_class_title = {}
+    for d in data:
+        if d.school_class_title and d.school_class_title not in school_class_title:
+            school_class_title[d.school_class_title] = 1
+        elif d.school_class_title:
+            school_class_title[d.school_class_title] += 1
+
+    chart = {
+        "data": {
+            "labels": list(school_class_title.keys()),
+            "datasets": [
+                {"name": "Tickets", "values": list(school_class_title.values())}
+            ],
+        },
+        "type": "bar",
+        "colors": [
+            "#009682",
+            "#f05023",
+            "#002855",
+            "#f5aa1e",
+            "#006982",
+        ],  # Custom colors
+    }
+
+    return chart
 
 
 def get_report_summary(data):
@@ -126,6 +192,8 @@ def get_report_summary(data):
             if d.status == HRTicketStatus.PENDING_PAYMENT.value
         ]
     )
+    total_ticket_25 = len([d for d in data if d.distance == "2.5 km"])
+    total_ticket_50 = len([d for d in data if d.distance == "5 km"])
 
     return [
         {
@@ -137,6 +205,18 @@ def get_report_summary(data):
         {
             "value": f"{total_ticket_happy_run}/{total_ticket}",
             "label": "#Happy Run Tickets",
+            "datatype": "Data",
+            "indicator": "Blue",
+        },
+        {
+            "value": f"{total_ticket_25}/{total_ticket}",
+            "label": "#2.5KM Tickets",
+            "datatype": "Data",
+            "indicator": "Blue",
+        },
+        {
+            "value": f"{total_ticket_50}/{total_ticket}",
+            "label": "#5KM Tickets",
             "datatype": "Data",
             "indicator": "Blue",
         },
