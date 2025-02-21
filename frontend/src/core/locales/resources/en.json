@@ -85,7 +85,7 @@
       "user_code_required": "Please enter the ID",
       "user_code_duplicate": "Duplicate ID",
       "user_code_invalid": "Invalid ID",
-      "user_code_has_orders": "ID has already been registered",
+      "user_code_has_orders": "ID has already been registered. <a className=\"text-hr-blue\" target=\"_blank\" href=\"{{link}}\">Link</a>",
       "full_name": "Full Name",
       "full_name_desc": "*Note: Full name of the parent or accompanying adult",
       "full_name_placeholder": "Enter full name",

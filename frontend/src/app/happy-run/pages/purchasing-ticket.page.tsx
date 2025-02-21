@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { PurchasingForm } from "../sections/purchasing-form";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import TopPageImage from "@happy-run/assets/images/top-page.png";
+import { useEffect } from "react";
 
 export const Component = () => {
   const navigate = useNavigate();
@@ -10,6 +11,9 @@ export const Component = () => {
   const params = useParams();
   const event = useEventPageContext();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // console.log(event.variables);
 
   return (

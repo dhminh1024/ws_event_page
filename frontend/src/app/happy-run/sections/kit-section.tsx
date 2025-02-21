@@ -76,7 +76,7 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
       drawLineSVG(
         kitCurlyArrowRef?.current,
         kitCurlyArrowRef?.current?.querySelector("path#line"),
-        { start: "top 100%", end: "top 30%" }
+        { start: "top 80%", end: "top 30%" }
       );
       drawLineSVG(
         kitCurlyArrowRef?.current,
@@ -87,7 +87,7 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
   }, []);
 
   return (
-    <div className={cn(className)}>
+    <div className={cn("overflow-hidden",className)}>
       <div className="w-[90%] mx-auto py-[20rem] md:py-[60rem]">
         <SectionHeading
           //   ref={headingRef}
@@ -109,12 +109,10 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
             <Typography.Paragraph className="text-center text-[9rem] md:text-[23rem] text-hr-blue font-semibold">
               {t("happy_run.kit_meta")}
             </Typography.Paragraph>
-            <div className="text-left">
-              <SVGCurlyArrow
-                ref={kitCurlyArrowRef}
-                className="absolute top-[-180%] md:top-[-70%] left-[0%] md:left-[9%] w-[60rem] md:w-[130rem]"
-              />
-            </div>
+            <SVGCurlyArrow
+              ref={kitCurlyArrowRef}
+              className="absolute top-[120%] md:top-[-70%] left-[0%] md:left-[9%] h-auto w-[50rem] md:w-[130rem]"
+            />
           </div>
         </center>
         <div className="mt-[50rem] md:mt-[120rem] w-[100%] md:w-[80%] mx-auto">
@@ -145,7 +143,7 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
                       ]?.value || ""
                     )}
                   </Typography.Heading>
-                  <Typography.Text className="text-[10rem] md:text-[16rem] text-left text-hr-blue font-medium">
+                  <Typography.Text className="relative z-20 text-[10rem] md:text-[16rem] text-left text-hr-blue font-medium">
                     {parser(
                       event?.variables?.[
                         currentLanguage === "en"
@@ -155,7 +153,7 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
                     )}
                   </Typography.Text>
                   <div
-                    className="absolute top-[2%] right-[2%] cursor-pointer"
+                    className="absolute top-[2%] right-[2%] cursor-pointer z-5"
                     onClick={close}
                   >
                     <X className="w-[30rem] h-[30rem] text-hr-blue font-black" />
@@ -270,7 +268,7 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
                       ]?.value || ""
                     )}
                   </Typography.Heading>
-                  <Typography.Text className="text-[10rem] md:text-[16rem] text-left text-hr-blue font-medium">
+                  <Typography.Text className="text-[14rem] md:text-[16rem] text-left text-hr-blue font-medium">
                     {parser(
                       event?.variables?.[
                         currentLanguage === "en"

@@ -21,7 +21,7 @@ export const SpringSection: FC<SpringSectionProps> = ({ className }) => {
       <Marquee>
         <img
           src={event.variables?.spring_in_my_hands_image?.value}
-          className="h-[80rem] md:h-[300rem]"
+          className="h-[180rem] md:h-[300rem]"
           alt="image"
         />
       </Marquee>

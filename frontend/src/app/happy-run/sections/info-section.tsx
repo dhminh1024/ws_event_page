@@ -12,6 +12,7 @@ import {
 import Typography from "../components/typography";
 import { DimondBlock } from "../components/dimond-block";
 import parser from "html-react-parser";
+import { useResponsive } from "@/core/hooks/use-reponsive";
 export type InfoSectionProps = HTMLAttributes<HTMLDivElement> & {};
 
 const ColorItems = [
@@ -24,6 +25,7 @@ const ColorItems = [
 
 export const InfoSection: FC<InfoSectionProps> = ({ className }) => {
   const { t, currentLanguage } = useLocales();
+  const { isDesktop } = useResponsive();
   const event = useEventPageContext();
 
   return (
@@ -42,7 +44,10 @@ export const InfoSection: FC<InfoSectionProps> = ({ className }) => {
               value={"item" + (index + 1)}
               className="border-none mb-[30rem] md:mb-[80rem] pl-[30rem] md:pl-[100rem]"
             >
-              <AccordionTrigger iconClassName="text-white h-[20rem] w-[20rem] md:h-[40rem] md:w-[40rem]" className="bg-[#0575FF] rounded-[5rem] md:rounded-[10rem] shadow-[inset_0rem_0rem_12rem_5rem_#00000055] py-[8rem] md:py-[15rem] pr-[10rem] md:pr-[20rem] hover:!no-underline">
+              <AccordionTrigger
+                iconClassName="text-white h-[20rem] w-[20rem] md:h-[40rem] md:w-[40rem]"
+                className="bg-[#0575FF] rounded-[5rem] md:rounded-[10rem] shadow-[inset_0rem_0rem_12rem_5rem_#00000055] py-[8rem] md:py-[15rem] pr-[10rem] md:pr-[20rem] hover:!no-underline"
+              >
                 <div className="relative ">
                   <DimondBlock
                     className={cn(
@@ -66,11 +71,17 @@ export const InfoSection: FC<InfoSectionProps> = ({ className }) => {
                 <div className="w-full min-h-[50rem] md:min-h-[200rem]">
                   <img
                     className="w-full"
-                    src={event.variables[`info_item_${index + 1}_${currentLanguage}`]?.value}
+                    src={
+                      event.variables[
+                        `info_item_${index + 1}_${
+                          isDesktop ? "pc" : "mb"
+                        }_${currentLanguage}`
+                      ]?.value
+                    }
                     alt=""
                   />
                   {index === 2 && (
-                    <div className="md:absolute rounded-[5rem] overflow-hidden mt-[10rem] md:mt-0 w-full h-[100rem] md:w-[450rem] md:h-[300rem] top-[0%] md:top-[10%] bottom-0 m-auto right-[8%]">
+                    <div className="md:absolute rounded-[5rem] overflow-hidden mt-[10rem] md:mt-0 w-full h-[200rem] md:w-[450rem] md:h-[300rem] top-[0%] md:top-[10%] bottom-0 m-auto right-[8%]">
                       <iframe
                         src={event.variables.wellspring_map_embed?.value}
                         allowFullScreen

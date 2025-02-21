@@ -31,7 +31,9 @@ export const usePurchasingForm = () => {
                 if (data.message.orders.length > 0) {
                   ctx.addIssue({
                     code: "custom",
-                    message: t("happy_run.form.user_code_has_orders"),
+                    message: t("happy_run.form.user_code_has_orders",{
+                      link: `/happy-run/order-detail/${data.message.orders[0].name}`,
+                    }),
                     path: [],
                   });
                   return false;

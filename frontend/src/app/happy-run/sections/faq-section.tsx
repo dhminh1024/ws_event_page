@@ -43,7 +43,7 @@ export const FAQSection: FC<FAQSectionProps> = ({ className, ...props }) => {
                     title={
                       events.variables?.[`faq_${index + 1}_question_${currentLanguage}`]?.value
                     }
-                    className="line-clamp-2 w-full mb-0 !text-[8rem] text-hr-blue md:!text-[18rem] font-bold"
+                    className="line-clamp-2 w-full mb-0 !text-[12rem] text-hr-blue md:!text-[18rem] font-bold"
                   >
                     {index+1}. {events.variables?.[`faq_${index + 1}_question_${currentLanguage}`]?.value}
                   </Typography.Paragraph>

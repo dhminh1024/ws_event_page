@@ -46,9 +46,9 @@ export const SummerSection: FC<SummerSectionProps> = ({
           <img src={HSImagePCEN} alt="Happy Summer" className="w-full" />
         )}
         <div className="absolute bottom-[7%] w-[70%] left-0 right-0 m-auto">
-          <div className="flex">
+          <div className="flex flex-col md:flex-row">
             <Link
-              className="w-[50%]"
+              className="w-[80%] mx-auto md:w-[50%]"
               to={event.variables.summer_tuition_link?.value || "#"}
               target="_blank"
             >
@@ -58,7 +58,7 @@ export const SummerSection: FC<SummerSectionProps> = ({
               />
             </Link>
             <Link
-              className="w-[50%]"
+              className="w-[80%] mx-auto md:w-[50%]"
               to={event.variables.summer_camp_registration_link?.value || "#"}
               target="_blank"
             >

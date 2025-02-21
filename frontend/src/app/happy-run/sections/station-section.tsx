@@ -23,7 +23,7 @@ import env from "@/config/env";
 export type StationSectionProps = HTMLAttributes<HTMLDivElement> & {};
 
 export const StationSection: FC<StationSectionProps> = ({ className }) => {
-  const { t } = useLocales();
+  const { t, currentLanguage } = useLocales();
   const events = useEventPageContext();
   const { isDesktop } = useResponsive();
   const station1Ref = useRef<HTMLDivElement>(null);
@@ -35,11 +35,26 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
   useEffect(() => {
     setTimeout(() => {
       if (!isDesktop) return;
-      animateFadeInRight(station1Ref?.current);
-      animateFadeInRight(station2Ref?.current);
-      animateFadeInLeft(station3Ref?.current);
-      animateFadeInRight(station4Ref?.current);
-      animateFadeInLeft(station5Ref?.current);
+      animateFadeInRight(station1Ref?.current, {
+        start: "top 100%",
+        end: "top 50%",
+      });
+      animateFadeInRight(station2Ref?.current, {
+        start: "top 100%",
+        end: "top 50%",
+      });
+      animateFadeInLeft(station3Ref?.current, {
+        start: "top 100%",
+        end: "top 50%",
+      });
+      animateFadeInRight(station4Ref?.current, {
+        start: "top 100%",
+        end: "top 50%",
+      });
+      animateFadeInLeft(station5Ref?.current, {
+        start: "top 100%",
+        end: "top 50%",
+      });
     }, 200);
   }, [isDesktop]);
 
@@ -58,30 +73,58 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
             className="w-full md:w-[80%]"
             alt="Stations image"
           />
-          <div className="absolute top-[10%] md:top-0 right-[30%] md:right-[22%]">
-            <div className="absolute top-[30%] left-[-65%] md:top-[60%] md:left-[-30%] w-[50rem] md:w-[150rem] aspect-square">
+          <div
+            className={cn(
+              "absolute top-[8%] md:top-0 right-[30%] md:right-[22%]",
+              {
+                "md:top-[2%] md:right-[32%]": currentLanguage === "en",
+              }
+            )}
+          >
+            <div
+              className={cn(
+                "absolute top-[35%] left-[-95%] md:top-[60%] md:left-[-30%] w-[50rem] md:w-[150rem] aspect-square",
+                {
+                  "left-[-70%] md:top-[60%] md:left-[-40%] ":
+                    currentLanguage === "en",
+                }
+              )}
+            >
               <Canvas flat linear>
                 <Model
-                  matcapUrl={cleanPath(
-                    `${env.ASSET_URL}/happy-run/matcap.png`
-                  )}
+                  matcapUrl={cleanPath(`${env.ASSET_URL}/happy-run/matcap.png`)}
                 />
               </Canvas>
             </div>
             <div ref={station1Ref}>
-              <Typography.Paragraph className="text-[12rem] md:text-[23rem] font-extrabold mt-[10rem] uppercase text-[#002172] md:text-hr-ember">
+              <Typography.Paragraph className="text-[12rem] md:text-[23rem] font-extrabold mt-[10rem] uppercase text-[#D93C1C] md:text-hr-ember">
                 {t("happy_run.station_n", { number: 1 })}
               </Typography.Paragraph>
-              <Typography.Paragraph className="hidden md:block text-[12rem] md:text-[28rem] text-hr-blue font-extrabold leading-[12rem] md:leading-[35rem]">
-                {parser(events.variables.station_1_name_vn?.value || "")}
+              <Typography.Paragraph className="hidden md:block text-[12rem] md:text-[28rem] uppercase text-hr-blue font-extrabold leading-[12rem] md:leading-[35rem]">
+                {parser(
+                  events.variables?.[`station_1_name_${currentLanguage}`]
+                    ?.value || ""
+                )}
               </Typography.Paragraph>
               <Typography.Paragraph className="hidden md:block text-[8rem] md:text-[18rem] text-hr-blue  mt-[10rem]">
-                {parser(events.variables.station_1_desc_vn?.value || "")}
+                {parser(
+                  events.variables?.[`station_1_desc_${currentLanguage}`]
+                    ?.value || ""
+                )}
               </Typography.Paragraph>
             </div>
           </div>
-          <div className="absolute top-[25%] right-[18%] md:top-[25%] md:right-[9%]">
-            <div className="absolute top-[-10%] right-[75%] md:right-[95%] w-[60rem] md:w-[160rem] aspect-square">
+          <div
+            className={cn(
+              "absolute top-[25%] right-[20%] md:top-[25%] md:right-[9%]",
+              {
+                "right-[15%]": currentLanguage === "en",
+              }
+            )}
+          >
+            <div className={cn("absolute top-[-10%] right-[75%] md:right-[95%] w-[60rem] md:w-[160rem] aspect-square",{
+              "right-[85%]": currentLanguage === "en"
+            })}>
               <Canvas flat linear>
                 <Model
                   matcapUrl={cleanPath(
@@ -94,15 +137,28 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
               <Typography.Paragraph className="text-[12rem] md:text-[23rem] font-extrabold mt-[10rem] uppercase text-[#04A39B] md:text-hr-ember">
                 {t("happy_run.station_n", { number: 2 })}
               </Typography.Paragraph>
-              <Typography.Paragraph className="hidden md:block text-[12rem] md:text-[28rem] text-hr-blue font-extrabold leading-[12rem] md:leading-[35rem]">
-                {parser(events.variables.station_2_name_vn?.value || "")}
+              <Typography.Paragraph className="hidden md:block text-[12rem] md:text-[28rem] uppercase text-hr-blue font-extrabold leading-[12rem] md:leading-[35rem]">
+                {parser(
+                  events.variables?.[`station_2_name_${currentLanguage}`]
+                    ?.value || ""
+                )}
               </Typography.Paragraph>
               <Typography.Paragraph className="hidden md:block text-[8rem] md:text-[18rem] text-hr-blue  mt-[10rem]">
-                {parser(events.variables.station_2_desc_vn?.value || "")}
+                {parser(
+                  events.variables?.[`station_2_desc_${currentLanguage}`]
+                    ?.value || ""
+                )}
               </Typography.Paragraph>
             </div>
           </div>
-          <div className="absolute top-[40%] md:top-[45%] left-[6%] md:left-[0%] text-right">
+          <div
+            className={cn(
+              "absolute top-[40%] md:top-[45%] left-[10%] md:left-[0%] text-right",
+              {
+                "md:top-[45%] left-[5%] md:left-[3%]": currentLanguage === "en",
+              }
+            )}
+          >
             <div className="absolute top-[-60%] left-[85%] w-[80rem] md:w-[220rem] aspect-square">
               <Canvas flat linear>
                 <Model
@@ -116,16 +172,36 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
               <Typography.Paragraph className="text-[12rem] md:text-[23rem] font-extrabold mt-[10rem] uppercase text-[#92B109] md:text-hr-ember">
                 {t("happy_run.station_n", { number: 3 })}
               </Typography.Paragraph>
-              <Typography.Paragraph className="hidden md:block text-[12rem] md:text-[28rem] text-hr-blue font-extrabold leading-[12rem] md:leading-[35rem]">
-                {parser(events.variables.station_3_name_vn?.value || "")}
+              <Typography.Paragraph className="hidden md:block text-[12rem] md:text-[28rem] uppercase text-hr-blue font-extrabold leading-[12rem] md:leading-[35rem]">
+                {parser(
+                  events.variables?.[`station_3_name_${currentLanguage}`]
+                    ?.value || ""
+                )}
               </Typography.Paragraph>
               <Typography.Paragraph className="hidden md:block text-[8rem] md:text-[18rem] text-hr-blue  mt-[10rem]">
-                {parser(events.variables.station_3_desc_vn?.value || "")}
+                {parser(
+                  events.variables?.[`station_3_desc_${currentLanguage}`]
+                    ?.value || ""
+                )}
               </Typography.Paragraph>
             </div>
           </div>
-          <div className="absolute top-[42%] md:top-[52%] right-[16%] md:right-[-3%]">
-            <div className="absolute top-[70%] md:top-[0%] right-[-85%] md:right-[85%] w-[90rem] md:w-[230rem] aspect-square">
+          <div
+            className={cn(
+              "absolute top-[42%] md:top-[52%] right-[16%] md:right-[-3%]",
+              {
+                "right-[10%]": currentLanguage === "en",
+              }
+            )}
+          >
+            <div
+              className={cn(
+                "absolute top-[70%] md:top-[0%] right-[-142%] md:right-[85%] w-[90rem] md:w-[230rem] aspect-square",
+                {
+                  "right-[-70%]": currentLanguage === "en",
+                }
+              )}
+            >
               <Canvas flat linear>
                 <Model
                   matcapUrl={cleanPath(
@@ -138,15 +214,21 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
               <Typography.Paragraph className="text-[12rem] md:text-[23rem] font-extrabold mt-[10rem] uppercase text-[#E29F12] md:text-hr-ember">
                 {t("happy_run.station_n", { number: 4 })}
               </Typography.Paragraph>
-              <Typography.Paragraph className="hidden md:block text-[12rem] md:text-[28rem] text-hr-blue font-extrabold leading-[12rem] md:leading-[35rem]">
-                {parser(events.variables.station_4_name_vn?.value || "")}
+              <Typography.Paragraph className="hidden md:block text-[12rem] md:text-[28rem] uppercase text-hr-blue font-extrabold leading-[12rem] md:leading-[35rem]">
+                {parser(
+                  events.variables?.[`station_4_name_${currentLanguage}`]
+                    ?.value || ""
+                )}
               </Typography.Paragraph>
               <Typography.Paragraph className="hidden md:block text-[8rem] md:text-[18rem] text-hr-blue  mt-[10rem]">
-                {parser(events.variables.station_4_desc_vn?.value || "")}
+                {parser(
+                  events.variables?.[`station_4_desc_${currentLanguage}`]
+                    ?.value || ""
+                )}
               </Typography.Paragraph>
             </div>
           </div>
-          <div className="absolute bottom-[10%] left-[40%] md:left-[23%] text-right">
+          <div className="absolute bottom-[15%] left-[40%] md:left-[23%] text-right">
             <div className="absolute top-[-40%] left-[65%] md:top-[-10%] md:left-[85%] w-[100rem] md:w-[260rem] aspect-square">
               <Canvas flat linear>
                 <Model
@@ -157,14 +239,20 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
               </Canvas>
             </div>
             <div ref={station5Ref}>
-              <Typography.Paragraph className="text-[12rem] md:text-[23rem] font-extrabold mt-[10rem] uppercase text-[#D93C1C] md:text-hr-ember">
+              <Typography.Paragraph className="text-[12rem] md:text-[23rem] font-extrabold mt-[10rem] uppercase text-[#002172] md:text-hr-ember">
                 {t("happy_run.station_n", { number: 5 })}
               </Typography.Paragraph>
-              <Typography.Paragraph className="hidden md:block text-[12rem] md:text-[28rem] text-hr-blue font-extrabold leading-[12rem] md:leading-[35rem]">
-                {parser(events.variables.station_5_name_vn?.value || "")}
+              <Typography.Paragraph className="hidden md:block text-[12rem] md:text-[28rem] uppercase text-hr-blue font-extrabold leading-[12rem] md:leading-[35rem]">
+                {parser(
+                  events.variables?.[`station_5_name_${currentLanguage}`]
+                    ?.value || ""
+                )}
               </Typography.Paragraph>
               <Typography.Paragraph className="hidden md:block text-[8rem] md:text-[18rem] text-hr-blue  mt-[10rem]">
-                {parser(events.variables.station_5_desc_vn?.value || "")}
+                {parser(
+                  events.variables?.[`station_5_desc_${currentLanguage}`]
+                    ?.value || ""
+                )}
               </Typography.Paragraph>
             </div>
           </div>
@@ -175,16 +263,18 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
               <Typography.Paragraph className="text-[12rem] font-extrabold mt-[10rem] uppercase text-hr-ember">
                 {t("happy_run.station_n", { number: index + 1 })}
               </Typography.Paragraph>
-              <Typography.Paragraph className="text-[14rem] text-hr-blue font-extrabold leading-[18rem]">
+              <Typography.Paragraph className="text-[13.3rem] text-hr-blue font-extrabold leading-[18rem] uppercase">
                 {parser(
-                  events.variables?.[`station_${index + 1}_name_vn`]?.value ||
-                    ""
+                  events.variables?.[
+                    `station_${index + 1}_name_${currentLanguage}`
+                  ]?.value.replaceAll("<br>", " - ") || ""
                 )}
               </Typography.Paragraph>
-              <Typography.Paragraph className="text-[10rem] text-hr-blue  mt-[0rem]">
+              <Typography.Paragraph className="text-[10rem] text-hr-blue text-justify mt-[0rem]">
                 {parser(
-                  events.variables?.[`station_${index + 1}_desc_vn`]?.value ||
-                    ""
+                  events.variables?.[
+                    `station_${index + 1}_desc_${currentLanguage}`
+                  ]?.value.replaceAll("<br>", "") || ""
                 )}
               </Typography.Paragraph>
             </div>

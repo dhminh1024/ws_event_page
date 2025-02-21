@@ -13,6 +13,8 @@ import {
   TableRow,
 } from "@atoms/table";
 import useGetOrder from "../api/use-get-order";
+import { LanguageSelector } from "../components/language-selector";
+import { useEffect } from "react";
 
 export const Component = () => {
   const navigate = useNavigate();
@@ -21,6 +23,9 @@ export const Component = () => {
   const event = useEventPageContext();
   const { order } = useGetOrder(params.id, !params.id);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // console.log(event.variables);
 
   return (
@@ -43,11 +48,17 @@ export const Component = () => {
         >
           {parser(t("happy_run.order_title"))}
         </Typography.Heading>
-        <Typography.Paragraph className="w-full px-[10rem]  md:w-[45%] text-[10rem] md:text-[20rem] text-hr-blue leading-[1.2]">
-          {event.variables.order_detail_desc_1_vn?.value}
+        <div className="flex items-center justify-center my-[20rem]">
+          <span className="mr-[10rem] text-[16rem]">
+            {t("common.language")}:
+          </span>
+          <LanguageSelector />
+        </div>
+        <Typography.Paragraph className="w-full px-[10rem] md:w-[48%] text-[10rem] md:text-[20rem] text-hr-blue leading-[1.2]">
+          {event.variables?.[`order_detail_desc_1_${currentLanguage}`]?.value}
         </Typography.Paragraph>
         <Typography.Paragraph className="pb-[10rem] px-[10rem] text-[10rem] md:text-[20rem] text-hr-blue leading-[1.2]">
-          {event.variables.order_detail_desc_2_vn?.value}
+          {event.variables?.[`order_detail_desc_2_${currentLanguage}`]?.value}
         </Typography.Paragraph>
         <div className="bg-white inline-block mx-auto px-[10rem] md:px-[60rem] py-[5rem] md:py-[10rem] rounded-full">
           <Typography.Paragraph className="mb-0 text-hr-blue text-[10rem] md:text-[20rem] font-semibold leading-[1.2]">
@@ -194,11 +205,17 @@ export const Component = () => {
         </div>
         <center className="mt-[20rem] md:mt-[40rem] px-[10rem]">
           <Typography.Paragraph className="pb-[5rem] text-[8rem] md:text-[18rem] text-hr-blue leading-[1.2]">
-            {parser(event.variables.order_detail_bottom_1_vn?.value || "")}
+            {parser(
+              event.variables?.[`order_detail_bottom_1_${currentLanguage}`]
+                ?.value || ""
+            )}
           </Typography.Paragraph>
           <div className="w-[40%] md:w-[10%] h-[1rem] border-t-[1rem] border-dashed border-t-hr-blue my-[10rem]"></div>
           <Typography.Paragraph className="pb-[5rem]  text-[8rem] md:text-[18rem] text-hr-blue leading-[1.2]">
-            {event.variables.order_detail_bottom_2_vn?.value}
+            {
+              event.variables?.[`order_detail_bottom_2_${currentLanguage}`]
+                ?.value
+            }
           </Typography.Paragraph>
         </center>
       </div>
