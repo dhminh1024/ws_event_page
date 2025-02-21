@@ -43,9 +43,7 @@ class WSEHROrder(Document):
 
     if TYPE_CHECKING:
         from frappe.types import DF
-        from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket import (
-            WSEHRTicket,
-        )
+        from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket import WSEHRTicket
 
         email: DF.Data
         full_name: DF.Data
