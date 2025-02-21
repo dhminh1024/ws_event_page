@@ -15,7 +15,10 @@ import parser from "html-react-parser";
 import { SVGCurlyArrow, SVGCustomRectangle } from "../components/svg";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import BorderWrapper from "../components/border-wrapper";
-import RobotImage from "@happy-run/assets/images/robot_3.gif";
+import LightEffect from "@happy-run/assets/images/light-effect.png";
+import RobotLegsImage from "@happy-run/assets/images/robot-legs.png";
+import RobotBodyImage from "@happy-run/assets/images/robot-body.png";
+import RobotCameraImage from "@happy-run/assets/images/robot-camera.png";
 import { Button } from "@atoms/button";
 import { DimondBlock } from "../components/dimond-block";
 import { ItemModal } from "../components/item-modal";
@@ -30,6 +33,7 @@ import {
   drawLineSVG,
 } from "../components/animate";
 import { useResponsive } from "@/core/hooks/use-reponsive";
+import gsap from "gsap";
 
 export type KitSectionProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -45,6 +49,8 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
   const kitItem3Ref = useRef<HTMLDivElement>(null);
   const kitItem4Ref = useRef<HTMLDivElement>(null);
   const kitItem5Ref = useRef<HTMLDivElement>(null);
+  const robotBodyRef = useRef<HTMLImageElement>(null);
+  const LightEffectRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     setTimeout(() => {
@@ -86,6 +92,25 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
         start: "top 100%",
         end: "top center",
       });
+
+      if (robotBodyRef.current && LightEffectRef.current) {
+        gsap.to(robotBodyRef.current, {
+          rotation: 5,
+          duration: 1.2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          repeatDelay: 0.1,
+        });
+        gsap.to(LightEffectRef.current, {
+          scale: 1.1,
+          duration: 1.2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          repeatDelay: 0.1,
+        });
+      }
     }, 200);
   }, []);
 
@@ -432,11 +457,25 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
             className="relative flex justify-between items-center py-[10rem]  md:py-[40rem]"
           >
             <div className="w-[30%] md:w-[20%]">
-              <img
-                className="absolute bottom-[-39.5%] md:bottom-[-33%] left-[-8%] md:left-[-2%] w-[50%] md:w-[30%] h-auto"
-                src={RobotImage}
-                alt="Robot AI Animation"
-              />
+              <div className="absolute z-10 bottom-[-12.5%] md:bottom-[-5.5%] left-[0%] md:left-[3%] w-[100rem] h-[150rem] md:w-[200rem] md:h-[300rem]">
+                <div
+                  ref={robotBodyRef}
+                  className="absolute rotate-[-10deg] origin-bottom left-0 bottom-[12%] right-0 m-auto z-10 "
+                >
+                  <img
+                    ref={LightEffectRef}
+                    src={LightEffect}
+                    className="absolute scale-0 origin-center right-[-22%] top-[-5%] z-20 w-[50%]"
+                    alt="Camera"
+                  />
+                  <img src={RobotBodyImage} className="w-full" alt="Body" />
+                </div>
+                <img
+                  src={RobotLegsImage}
+                  className="absolute  bottom-0 right-[14%] w-[65%]"
+                  alt="Legs"
+                />
+              </div>
             </div>
             <div className="flex-1 flex flex-col md:flex-row justify-center items-center">
               <div className="flex flex-col justify-center items-center">
