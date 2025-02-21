@@ -211,7 +211,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                 className={cn(
                   "text-[10rem] md:text-[18rem] font-medium mt-[10rem] text-[#1F6B95] leading-[14rem] md:leading-[24rem] duration-300 overflow-hidden h-0",
                   {
-                    "h-[130rem] md:h-[100rem]": collapse1,
+                    "h-[140rem] md:h-[100rem]": collapse1,
                   }
                 )}
               >
@@ -283,7 +283,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                 className={cn(
                   "text-[10rem] md:text-[18rem] font-medium mt-[10rem] text-[#1F6B95] leading-[14rem] md:leading-[24rem] duration-300 overflow-hidden h-0",
                   {
-                    "h-[120rem] md:h-[100rem]": collapse2,
+                    "h-[150rem] md:h-[100rem]": collapse2,
                   }
                 )}
               >
