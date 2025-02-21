@@ -155,7 +155,7 @@
     "count_down_date": "Only <span className=\"text-[14rem] md:text-[40rem] font-semibold\">{{day}}</span> days <span className=\"text-[14rem] md:text-[40rem] font-semibold\">{{hours}}</span> hours <span className=\"text-[14rem] md:text-[40rem] font-semibold\">{{minutes}}</span> minutes <span className=\"text-[14rem] md:text-[40rem] font-semibold\">{{seconds}}</span> seconds",
     "teaser_heading_1": "Happy",
     "teaser_heading_2": "Run",
-    "teaser_description": "GET READY FOR THE HAPPY RUN 2025 TEASER PREMIERE ON SUNDAY, MARCH 23, 2025",
+    "teaser_description": "GET READY FOR THE HAPPY RUN 2025 TEASER <br/> ON SUNDAY, 23/03/2025",
     "target_heading": "Target",
     "route_heading": "Track",
     "detailed_route_heading": "Track details",
