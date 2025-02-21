@@ -96,7 +96,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
   const animateTarget1 = () => {
     animateBounceUp(objects1Ref.current);
     drawSVG(line1PCRef.current);
-    drawSVG(line1MBRef.current,{start: "top 100%", end: "top center"});
+    drawSVG(line1MBRef.current, { start: "top 100%", end: "top center" });
     animateZoomInOut(objectStep1Ref.current);
     animateFadeInRight(targetContent1Ref.current, {
       start: "top 100%",
@@ -106,38 +106,38 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
   const animateTarget2 = () => {
     animateBounceUp(objects2Ref.current);
     drawSVG(line2PCRef.current);
-    drawSVG(line2MBRef.current,{start: "top 80%", end: "top 0%"});
+    drawSVG(line2MBRef.current, { start: "top 80%", end: "top 0%" });
     animateZoomInOut(objectStep2Ref.current, {
-      start: "top 100%",
+      start: "top 120%",
       end: "top 60%",
     });
     animateFadeInLeft(targetContent2Ref.current, {
-      start: "top 100%",
+      start: "top 120%",
       end: "top 60%",
     });
   };
   const animateTarget3 = () => {
     animateBounceUp(objects3Ref.current);
     drawSVG(line3PCRef.current);
-    drawSVG(line3MBRef.current,{start: "top 35%", end: "top 0%"});
+    drawSVG(line3MBRef.current, { start: "top 35%", end: "top 0%" });
     animateZoomInOut(objectStep3Ref.current, {
-      start: "top 100%",
+      start: "top 120%",
       end: "top 60%",
     });
     animateFadeInRight(targetContent3Ref.current, {
-      start: "top 100%",
+      start: "top 120%",
       end: "top 60%",
     });
   };
   const animateTarget4 = () => {
-    drawSVG(line4Ref.current,{start: "top 30%", end: "top 0%"});
+    drawSVG(line4Ref.current, { start: "top 30%", end: "top 0%" });
   };
 
   useLayoutEffect(() => {
     setTimeout(() => {
       // Heading
       animateZoomInOut(headingRef.current, {
-        start: "top 100%",
+        start: "top 120%",
         end: "top center",
       });
       // Step 1
@@ -149,7 +149,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
   }, []);
 
   return (
-    <div className={cn("pt-[10rem] md:pt-[50rem] mx-auto", className)}>
+    <div className={cn("pt-[10rem] md:pt-[50rem] mx-auto overflow-hidden", className)}>
       <div className="w-[90%] mx-auto">
         <SectionHeading
           ref={headingRef}
@@ -189,10 +189,10 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
               ref={objectStep1Ref}
               src={currentLanguage === "en" ? Step1EN : Step1VN}
               alt="Target Step 1"
-              className="w-[30%] md:w-[21%] pt-[20rem] pb-[5rem] md:pt-[20rem] md:pb-[20rem]"
+              className="w-[100rem] md:w-[300rem] pt-[20rem] pb-[5rem] md:pt-[20rem] md:pb-[20rem]"
             />
             <div
-              className="relative top-[-20rem] md:top-[-47rem]"
+              className="relative flex-1 top-[-20rem] md:top-[-47rem]"
               ref={targetContent1Ref}
             >
               <Typography.Heading
@@ -211,19 +211,21 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                 className={cn(
                   "text-[10rem] md:text-[18rem] font-medium mt-[10rem] text-[#1F6B95] leading-[14rem] md:leading-[24rem] duration-300 overflow-hidden h-0",
                   {
-                    "h-[100rem]": collapse1,
+                    "h-[130rem] md:h-[100rem]": collapse1,
                   }
                 )}
               >
-                {events.variables?.[
+                {
+                  events.variables?.[
                     currentLanguage === "en"
                       ? "target_1_desc_en"
                       : "target_1_desc_vn"
-                  ]?.value}
+                  ]?.value
+                }
               </Typography.Paragraph>
               <Button
                 onClick={() => setCollapse1((value) => !value)}
-                className="mt-[20rem] md:mt-[30rem] bg-[linear-gradient(#1F797B,#009180)] p-[4rem_15rem] md:p-[5rem_30rem] text-[10rem] md:text-[18rem] h-auto rounded-[5rem]"
+                className="mt-[10rem] md:mt-[30rem] bg-[linear-gradient(#1F797B,#009180)] p-[4rem_15rem] md:p-[5rem_30rem] text-[10rem] md:text-[18rem] h-auto rounded-[5rem]"
               >
                 {t(
                   `happy_run.buttons.${collapse1 ? "view_less" : "view_more"}`
@@ -260,32 +262,38 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
               ref={objectStep2Ref}
               src={currentLanguage === "en" ? Step2EN : Step2VN}
               alt="Target Step 2"
-              className="w-[28%] md:w-[25%] py-[10rem] md:py-[40rem]"
+              className={cn("w-[100rem] md:w-[300rem] py-[10rem] md:py-[40rem]", {
+                "w-[120rem] md:w-[320rem] md:mr-[-40rem]":currentLanguage === "en"
+              })}
             />
             <div className="text-right relative" ref={targetContent2Ref}>
               <Typography.Heading
                 level={2}
                 className="text-[12rem] md:text-[36rem] font-extrabold text-hr-blue leading-[15rem] md:leading-[45rem]"
               >
-                {parser(events.variables?.[
+                {parser(
+                  events.variables?.[
                     currentLanguage === "en"
                       ? "target_2_heading_en"
                       : "target_2_heading_vn"
-                  ]?.value || "")}
+                  ]?.value || ""
+                )}
               </Typography.Heading>
               <Typography.Paragraph
                 className={cn(
                   "text-[10rem] md:text-[18rem] font-medium mt-[10rem] text-[#1F6B95] leading-[14rem] md:leading-[24rem] duration-300 overflow-hidden h-0",
                   {
-                    "h-[100rem]": collapse2,
+                    "h-[120rem] md:h-[100rem]": collapse2,
                   }
                 )}
               >
-                {parser(events.variables?.[
+                {parser(
+                  events.variables?.[
                     currentLanguage === "en"
                       ? "target_2_desc_en"
                       : "target_2_desc_vn"
-                  ]?.value || "")}
+                  ]?.value || ""
+                )}
               </Typography.Paragraph>
               <Button
                 onClick={() => setCollapse2((value) => !value)}
@@ -326,9 +334,11 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
               ref={objectStep3Ref}
               src={currentLanguage === "en" ? Step3EN : Step3VN}
               alt="Target Step 3"
-              className="w-[24%] md:w-[18%] pt-[20rem] pb-[5rem] md:pt-[40rem] md:pb-[20rem]"
+              className={cn("w-[100rem] md:w-[260rem] pt-[20rem] pb-[5rem] md:pt-[40rem] md:pb-[20rem]", {
+                "w-[100rem] md:w-[300rem] mr-[-10rem] md:mr-[-40rem]":currentLanguage === "en"
+              })}
             />
-            
+
             <div
               className="relative top-[-5rem] md:top-[-57rem]"
               ref={targetContent3Ref}
@@ -337,11 +347,13 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                 level={2}
                 className="text-[12rem] md:text-[36rem] font-extrabold text-hr-blue leading-[15rem] md:leading-[45rem]"
               >
-                {parser(events.variables?.[
+                {parser(
+                  events.variables?.[
                     currentLanguage === "en"
                       ? "target_3_heading_en"
                       : "target_3_heading_vn"
-                  ]?.value || "")}
+                  ]?.value || ""
+                )}
               </Typography.Heading>
               <Typography.Paragraph
                 className={cn(
@@ -351,11 +363,13 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                   }
                 )}
               >
-                {events.variables?.[
+                {
+                  events.variables?.[
                     currentLanguage === "en"
                       ? "target_3_desc_en"
                       : "target_3_desc_vn"
-                  ]?.value}
+                  ]?.value
+                }
               </Typography.Paragraph>
               <Button
                 onClick={() => setCollapse3((value) => !value)}

@@ -8,6 +8,7 @@ import {
   animateFadeInBottom,
   animateFadeInLeft,
   animateFadeInRight,
+  animateZoomInOut,
 } from "../components/animate";
 
 export type TeaserSectionProps = HTMLAttributes<HTMLDivElement> & {};
@@ -32,7 +33,7 @@ export const TeaserSection: FC<TeaserSectionProps> = ({
         start: "top 100%",
         end: "top 50%",
       });
-      animateFadeInBottom(textDescRef.current, {
+      animateZoomInOut(textDescRef.current, {
         start: "top 100%",
         end: "top 50%",
       });

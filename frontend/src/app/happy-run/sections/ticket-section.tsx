@@ -118,7 +118,7 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
           >
             <div
               ref={ticket1Ref}
-              className="relative overflow-hidden rounded-[5rem] md:rounded-[20rem] w-[40%]"
+              className="relative overflow-hidden rounded-[5rem] md:rounded-[20rem] w-[50%] md:w-[40%]"
             >
               <img className="w-full h-auto" src={TicketWellbeingImage} alt="ticket image" />
               <div
@@ -163,7 +163,7 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
           >
             <div
               ref={ticket2Ref}
-              className="relative overflow-hidden rounded-[5rem] md:rounded-[20rem] w-[40%]"
+              className="relative overflow-hidden rounded-[5rem] md:rounded-[20rem] w-[50%] md:w-[40%]"
             >
               <img className="w-full" src={TicketHappyRunImage} alt="ticket image" />
               <div

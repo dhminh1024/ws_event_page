@@ -85,7 +85,7 @@
       "user_code_required": "Hãy nhập mã số",
       "user_code_duplicate": "Mã số trùng lặp",
       "user_code_invalid": "Mã số không hợp lệ",
-      "user_code_has_orders": "Mã số được đã đăng ký",
+      "user_code_has_orders": "Mã số được đã đăng ký. <a className=\"text-hr-blue\" target=\"_blank\" href=\"{{link}}\">Link</a>",
       "full_name": "Họ tên",
       "full_name_desc": "*Lưu ý: Họ tên của PHHS hoặc người lớn đi cùng",
       "full_name_placeholder": "Nhập họ tên",
