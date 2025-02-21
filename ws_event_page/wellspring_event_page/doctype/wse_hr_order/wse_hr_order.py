@@ -231,6 +231,7 @@ class WSEHROrder(Document):
         qr_code_img_tag = f"""<img src="{self.qr_payment_code}" alt="QR Payment Code" style="width: 200px; height: 200px;"/>"""
         ticket_list = self.get_ticket_list_for_email()
         args = dict(
+            order_id=self.name,
             total_payment_pending=frappe.utils.fmt_money(
                 self.total_payment_pending, currency="VND", format="#.###", precision=0
             ),
@@ -261,6 +262,7 @@ class WSEHROrder(Document):
             ticket for ticket in ticket_list if ticket["status"] == "Đã thanh toán"
         ]
         args = dict(
+            order_id=self.name,
             total_payment_pending=frappe.utils.fmt_money(
                 self.total_payment_pending, currency="VND", format="#.###", precision=0
             ),
@@ -285,6 +287,7 @@ class WSEHROrder(Document):
         template = "hr_order_cancellation"
         ticket_list = self.get_ticket_list_for_email()
         args = dict(
+            order_id=self.name,
             total_payment_pending=frappe.utils.fmt_money(
                 self.total_payment_pending, currency="VND", format="#.###", precision=0
             ),
