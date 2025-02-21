@@ -145,6 +145,16 @@ export interface HREventVariable extends EventVariableBase {
    spring_in_my_hands_top_en?: VariableType
    summer_tuition_link?: VariableType
    summer_camp_registration_link?: VariableType
+   info_item_1_mb_vn?: VariableType
+   info_item_1_mb_en?: VariableType
+   info_item_2_mb_vn?: VariableType
+   info_item_2_mb_en?: VariableType
+   info_item_3_mb_vn?: VariableType
+   info_item_3_mb_en?: VariableType
+   info_item_4_mb_vn?: VariableType
+   info_item_4_mb_en?: VariableType
+   info_item_5_mb_vn?: VariableType
+   info_item_5_mb_en?: VariableType
 }
 
 export interface HRUserInfo {

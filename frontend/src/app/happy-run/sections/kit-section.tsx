@@ -76,12 +76,12 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
       drawLineSVG(
         kitCurlyArrowRef?.current,
         kitCurlyArrowRef?.current?.querySelector("path#line"),
-        { start: "top 80%", end: "top 30%" }
+        { start: "top 100%", end: "top 40%" }
       );
       drawLineSVG(
         kitCurlyArrowRef?.current,
         kitCurlyArrowRef?.current?.querySelector("path#arrow"),
-        { start: "top 30%", end: "top 0%" }
+        { start: "top 40%", end: "top 0%" }
       );
     }, 200);
   }, []);
@@ -111,7 +111,7 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
             </Typography.Paragraph>
             <SVGCurlyArrow
               ref={kitCurlyArrowRef}
-              className="absolute top-[120%] md:top-[-70%] left-[0%] md:left-[9%] h-auto w-[50rem] md:w-[130rem]"
+              className="absolute top-[120%] md:top-[60%] left-[0%] md:left-[9%] h-auto w-[50rem] md:w-[130rem]"
             />
           </div>
         </center>

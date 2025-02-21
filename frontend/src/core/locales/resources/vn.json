@@ -128,7 +128,7 @@
       "payment_success_note": "Trong trường hợp không nhận được email xác nhận thông tin hoặc cần hỗ trợ về đơn hàng, vui lòng liên hệ BTC: <b>happyrun2025@wellspringsaigon.edu.vn</b>",
       "policy_heading": "<span className=\"text-hr-ember\">XÁC NHẬN ĐỌC HIỂU</span> <br/> VÀ <span className=\"text-brand-persian\">MIỄN TRỪ TRÁCH NHIỆM </span> <br/> KHI THAM GIA <span className=\"text-hr-honey\">HAPPY RUN 2025</span>",
       "list_status": {
-        "Pending Payment": "Chờ xác nhận",
+        "Pending Payment": "Chờ thanh toán",
         "Canceled": "Đã hủy",
         "Paid": "Đã thanh toán",
         "Attended": "Đã tham gia",
@@ -181,7 +181,8 @@
     "collaboration_units": "Đơn vị cộng tác",
     "info_booker": "Thông tin người đặt vé",
     "info_order": "Thông tin đơn hàng",
-    "order_status": "Trạng thái đơn hàng"
+    "order_status": "Trạng thái đơn hàng",
+    "order_id": "Mã đơn hàng"
   },
   "nutritional_journey": {
     "title": "Hành Trình Dinh Dưỡng",

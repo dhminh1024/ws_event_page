@@ -13,7 +13,7 @@ export const SpringSection: FC<SpringSectionProps> = ({ className }) => {
     <div className={cn(className)}>
       <img
         src={
-          event.variables?.[`spring_in_my_hands_top_${currentLanguage}`].value
+          event.variables?.[`spring_in_my_hands_top_${currentLanguage}`]?.value
         }
         className="w-full"
         alt="image top"
