@@ -140,7 +140,7 @@
  "image_field": "qr_payment_code",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-21 16:59:28.274380",
+ "modified": "2025-02-21 22:36:47.264896",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE HR Order",
@@ -171,7 +171,6 @@
   },
   {
    "create": 1,
-   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
