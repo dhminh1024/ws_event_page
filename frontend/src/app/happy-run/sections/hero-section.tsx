@@ -34,6 +34,7 @@ export const HeroSection: FC<HeroSectionProps> = ({ className, ...props }) => {
         muted
         loop
         playsInline
+        controls={false}
       />
       <img
         className="w-full absolute top-0 left-0 z-5"

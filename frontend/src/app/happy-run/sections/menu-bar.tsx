@@ -23,7 +23,7 @@ export const MenuBar: FC<MenuBarProps> = ({ className }) => {
       // ref={ref}
       id="navbar"
       aria-labelledby="introduction-title"
-      className={cn("sticky top-0 left-0 z-50", className)}
+      className={cn("sticky top-0 left-0 z-[9999]", className)}
     >
       <div className="pt-[10rem] bg-hr-primary shadow-[inset_0rem_-10rem_20rem_-10rem_#1b1b1b]">
         <Container className="relative">

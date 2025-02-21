@@ -49,6 +49,19 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
   useEffect(() => {
     setTimeout(() => {
       animateZoomInOut(kitTitleRef?.current);
+
+      drawLineSVG(
+        kitCurlyArrowRef?.current,
+        kitCurlyArrowRef?.current?.querySelector("path#line"),
+        { start: "top 100%", end: "top 40%" }
+      );
+      drawLineSVG(
+        kitCurlyArrowRef?.current,
+        kitCurlyArrowRef?.current?.querySelector("path#arrow"),
+        { start: "top 40%", end: "top 0%" }
+      );
+
+      // if (!isDesktop) return;
       animateFadeInBottom(kitDescRef?.current, {
         start: "top 100%",
         end: "top center",
@@ -73,21 +86,11 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
         start: "top 100%",
         end: "top center",
       });
-      drawLineSVG(
-        kitCurlyArrowRef?.current,
-        kitCurlyArrowRef?.current?.querySelector("path#line"),
-        { start: "top 100%", end: "top 40%" }
-      );
-      drawLineSVG(
-        kitCurlyArrowRef?.current,
-        kitCurlyArrowRef?.current?.querySelector("path#arrow"),
-        { start: "top 40%", end: "top 0%" }
-      );
     }, 200);
   }, []);
 
   return (
-    <div className={cn("overflow-hidden",className)}>
+    <div className={cn("overflow-hidden", className)}>
       <div className="w-[90%] mx-auto py-[20rem] md:py-[60rem]">
         <SectionHeading
           //   ref={headingRef}
@@ -117,65 +120,17 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
         </center>
         <div className="mt-[50rem] md:mt-[120rem] w-[100%] md:w-[80%] mx-auto">
           <div className="flex flex-wrap justify-center items-center gap-x-[60rem] md:gap-x-[120rem]">
-            
-            <ItemModal
-              className="max-w-[640rem] "
-              content={(close) => (
-                <div
-                  className="relative p-[20rem] w-full"
-                  style={{
-                    backgroundImage: `url(${KitBackground})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                  }}
-                >
-                  <img
-                    className="w-[50%] md:w-[40%] mx-auto p-[20rem]"
-                    src={event?.variables.item_bib?.value}
-                    alt="ticket image"
-                  />
-                  <Typography.Heading className="text-[16rem] md:text-[28rem] text-center text-hr-blue font-extrabold uppercase">
-                    {parser(
-                      event?.variables?.[
-                        currentLanguage === "en"
-                          ? "item_bib_title_en"
-                          : "item_bib_title_vn"
-                      ]?.value || ""
-                    )}
-                  </Typography.Heading>
-                  <Typography.Text className="relative z-20 text-[10rem] md:text-[16rem] text-left text-hr-blue font-medium">
-                    {parser(
-                      event?.variables?.[
-                        currentLanguage === "en"
-                          ? "item_bib_desc_en"
-                          : "item_bib_desc_vn"
-                      ]?.value || ""
-                    )}
-                  </Typography.Text>
-                  <div
-                    className="absolute top-[2%] right-[2%] cursor-pointer z-5"
-                    onClick={close}
-                  >
-                    <X className="w-[30rem] h-[30rem] text-hr-blue font-black" />
-                  </div>
-                </div>
-              )}
-            >
-              <div
-                ref={kitItem1Ref}
-                className="w-[35%] md:w-[25%] inline-block"
-              >
-                <DimondBlock className="w-full h-full rounded-[20rem] md:rounded-[40rem] shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-gradient-to-tr bg-brand-persian from-brand-teal/40 to-brand-persian ">
-                  <img
-                    src={event?.variables.item_bib?.value}
-                    className="absolute w-[65%] h-[75%] object-contain top-[0rem] left-0 right-0 bottom-0 m-auto "
-                    alt="BIB"
-                  />
-                  <p className="text-[20rem]">Halow</p>
-                </DimondBlock>
-              </div>
-            </ItemModal>
+            <div ref={kitItem1Ref} className="w-[35%] md:w-[25%] inline-block">
+              <DimondBlock className="w-full h-full rounded-[20rem] md:rounded-[40rem] shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-gradient-to-tr bg-brand-persian from-brand-teal/40 to-brand-persian ">
+                <img
+                  src={event?.variables.item_bib?.value}
+                  className="absolute w-[65%] h-[75%] object-contain top-[0rem] left-0 right-0 bottom-0 m-auto "
+                  alt="BIB"
+                />
+                <p className="text-[20rem]">Halow</p>
+              </DimondBlock>
+            </div>
+
             <ItemModal
               className="max-w-[640rem] "
               content={(close) => (

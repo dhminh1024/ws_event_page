@@ -25,10 +25,10 @@ import { Button } from "@atoms/button";
 import { saveAs } from "file-saver";
 import { useHRSettings } from "../context/use-settings";
 
-export type ItemModalProps = Omit<HTMLAttributes<HTMLDivElement>,"content"> &
+export type ItemModalProps = Omit<HTMLAttributes<HTMLDivElement>, "content"> &
   PropsWithChildren & {
     open?: boolean;
-    content?: (callback?:VoidFunction) => ReactNode;
+    content?: (callback?: VoidFunction) => ReactNode;
     disabled?: boolean;
     onConfirm?: VoidFunction;
     onCancel?: VoidFunction;
@@ -69,7 +69,9 @@ export const ItemModal: FC<ItemModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogTrigger className="cursor-pointer" asChild>{children}</DialogTrigger>
+      <DialogTrigger className="cursor-pointer" asChild>
+        {children}
+      </DialogTrigger>
       <DialogContent
         className={cn(
           "max-w-[768rem] w-full bg-hr-background border-none shadow-none p-0",
@@ -79,7 +81,6 @@ export const ItemModal: FC<ItemModalProps> = ({
         <DialogTitle hidden></DialogTitle>
         <DialogDescription hidden></DialogDescription>
         {content?.(() => handleOpenChange(false))}
-        
       </DialogContent>
     </Dialog>
   );
