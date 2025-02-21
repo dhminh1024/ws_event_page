@@ -183,8 +183,8 @@ export const Component = () => {
                     <TableCell className="py-[8rem] ">
                       {item.shirt_size}
                     </TableCell>
-                    <TableCell className="py-[8rem] text-center">
-                      {item.bib}
+                    <TableCell className="py-[8rem] text-left">
+                      {item.ticket_type === "Well-being" ? item.bib.trim() : ""}
                     </TableCell>
                     <TableCell className="text-center">
                       {t(`happy_run.form.list_status.${item.status}`)}

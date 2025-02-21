@@ -5,9 +5,9 @@ frappe.ui.form.on("WSE HR Order", {
   refresh(frm) {
     // if editing form, disable edit tickets
     if (!frm.is_new()) {
-      frm.set_df_property("full_name", "read_only", 1);
-      frm.set_df_property("email", "read_only", 1);
-      frm.set_df_property("mobile_number", "read_only", 1);
+      // frm.set_df_property("full_name", "read_only", 1);
+      // frm.set_df_property("email", "read_only", 1);
+      // frm.set_df_property("mobile_number", "read_only", 1);
       // frm.fields_dict.tickets.grid.toggle_enable("full_name", false);
       // frm.fields_dict.tickets.grid.toggle_enable("email", false);
       // frm.fields_dict.tickets.grid.toggle_enable("wellspring_code", false);

@@ -24,7 +24,7 @@
     "email": "Email",
     "class": "Class",
     "student_code": "Student Code",
-    "event_email": "Event’s website"
+    "event_email": "Email"
   },
   "notification": {
     "client_error": {

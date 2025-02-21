@@ -117,6 +117,7 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
         </center>
         <div className="mt-[50rem] md:mt-[120rem] w-[100%] md:w-[80%] mx-auto">
           <div className="flex flex-wrap justify-center items-center gap-x-[60rem] md:gap-x-[120rem]">
+            
             <ItemModal
               className="max-w-[640rem] "
               content={(close) => (
@@ -165,12 +166,13 @@ export const KitSection: FC<KitSectionProps> = ({ className }) => {
                 ref={kitItem1Ref}
                 className="w-[35%] md:w-[25%] inline-block"
               >
-                <DimondBlock className="rounded-[20rem] md:rounded-[40rem] shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-gradient-to-tr bg-brand-persian from-brand-teal/40 to-brand-persian ">
+                <DimondBlock className="w-full h-full rounded-[20rem] md:rounded-[40rem] shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-gradient-to-tr bg-brand-persian from-brand-teal/40 to-brand-persian ">
                   <img
-                    src={event?.variables.item_bib?.value + "?abcde"}
+                    src={event?.variables.item_bib?.value}
                     className="absolute w-[65%] h-[75%] object-contain top-[0rem] left-0 right-0 bottom-0 m-auto "
                     alt="BIB"
                   />
+                  <p className="text-[20rem]">Halow</p>
                 </DimondBlock>
               </div>
             </ItemModal>

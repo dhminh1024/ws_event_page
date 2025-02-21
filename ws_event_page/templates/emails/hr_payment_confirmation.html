@@ -82,7 +82,10 @@
             {{ticket.ticket_type}} - {{ticket.distance}}
           </td>
           <td style="border-color: #3b6dae">{{ticket.shirt_size}}</td>
-          <td style="border-color: #3b6dae">{{ticket.bib}}</td>
+          <td style="border-color: #3b6dae">
+            {% if ticket.ticket_type == "Well-being" %} {{ticket.bib}} {% endif
+            %}
+          </td>
           <td style="border-color: #3b6dae">{{ticket.ticket_price}}</td>
         </tr>
         {% endif %} {% endfor %}
