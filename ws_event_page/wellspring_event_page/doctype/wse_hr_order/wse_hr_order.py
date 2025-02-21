@@ -249,7 +249,9 @@ class WSEHROrder(Document):
             transaction_notes=self.name,
             order_detail_link=f"{frappe.utils.get_url()}/events/happy-run/order-detail/{self.name}",
         )
-        send_confirmation_email(template, sender, recipients, subject, args)
+        send_confirmation_email(
+            template, sender, recipients, subject, args, send_now=True
+        )
 
     def send_payment_confirmation_email(self):
         """Send payment confirmation email after successful payment"""
@@ -303,7 +305,9 @@ class WSEHROrder(Document):
         send_confirmation_email(template, sender, recipients, subject, args)
 
 
-def send_confirmation_email(email_template, sender, recipients, subject, args):
+def send_confirmation_email(
+    email_template, sender, recipients, subject, args, send_now=False
+):
     frappe.sendmail(
         sender=sender,
         reply_to="happyrun2025@wellspringsaigon.edu.vn",
@@ -311,5 +315,5 @@ def send_confirmation_email(email_template, sender, recipients, subject, args):
         subject=subject,
         template=email_template,
         args=args,
-        # now=True,
+        now=send_now,
     )
