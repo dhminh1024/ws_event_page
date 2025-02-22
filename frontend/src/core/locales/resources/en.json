@@ -148,7 +148,8 @@
       "not_agree": "I Do Not Agree",
       "search_now": "Search Now",
       "view_more": "View More",
-      "view_less": "View Less"
+      "view_less": "View Less",
+      "view_order": "View Order"
     },
     "ticket_sale_official_time": "Official Ticket Sale Time",
     "count_down_heading": "Welcome WISERS to <br className=\"block md:hidden\"/>the Happy Run 2025 & <br/> The Happy Summer 2025 Kick-off event",

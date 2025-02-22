@@ -66,7 +66,7 @@ gsap.registerPlugin(ScrollTrigger);
 export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
   const { ref: myRef, inView } = useInView({
     triggerOnce: true,
-    rootMargin: "200px",
+    rootMargin: "300px",
   });
   const { t, currentLanguage } = useLocales();
   const { isDesktop } = useResponsive();

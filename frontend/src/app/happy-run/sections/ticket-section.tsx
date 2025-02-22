@@ -18,7 +18,7 @@ export type TicketSectionProps = HTMLAttributes<HTMLDivElement> & {};
 export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
   const { ref: myRef, inView } = useInView({
     triggerOnce: true,
-    rootMargin: "200px",
+    rootMargin: "300px",
   });
   const { t, currentLanguage } = useLocales();
   const { settings } = useHRSettings();

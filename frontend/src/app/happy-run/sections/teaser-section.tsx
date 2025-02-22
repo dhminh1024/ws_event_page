@@ -20,7 +20,7 @@ export const TeaserSection: FC<TeaserSectionProps> = ({
 }) => {
   const { ref: myRef, inView } = useInView({
     triggerOnce: true,
-    rootMargin: "200px",
+    rootMargin: "300px",
   });
   const { t } = useLocales();
   const events = useEventPageContext();

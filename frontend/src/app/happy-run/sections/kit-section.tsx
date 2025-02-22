@@ -45,7 +45,7 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
   ({ className, children, ...props }, ref) => {
     const { ref: myRef, inView } = useInView({
       triggerOnce: true,
-      rootMargin: "200px",
+      rootMargin: "300px",
     });
 
     const { t, currentLanguage } = useLocales();

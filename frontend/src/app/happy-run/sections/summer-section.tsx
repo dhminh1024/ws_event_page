@@ -25,7 +25,7 @@ export const SummerSection: FC<SummerSectionProps> = ({
 }) => {
   const { ref: myRef, inView } = useInView({
     triggerOnce: true,
-    rootMargin: "200px",
+    rootMargin: "300px",
   });
   const { currentLanguage } = useLocales();
   const { isDesktop } = useResponsive();
