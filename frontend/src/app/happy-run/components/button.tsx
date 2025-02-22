@@ -3,7 +3,7 @@ import { Button, ButtonProps } from "@atoms/button";
 import { cn } from "@/core/utils/shadcn-utils";
 import { cleanPath } from "@/lib/utils/common";
 import env from "@/config/env";
-import PrimaryButtonImage from "@happy-run/assets/images/primary-button.png";
+import PrimaryButtonImage from "@happy-run/assets/images/primary-button.webp";
 
 export type PrimaryButtonProps = Omit<ButtonProps, "variant"> & {
   variant?: "primary" | "default";

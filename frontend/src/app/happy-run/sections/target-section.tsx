@@ -9,19 +9,19 @@ import {
 import { cn } from "@/core/utils/shadcn-utils";
 import { useLocales } from "@/core/hooks/use-locales";
 import { SectionHeading } from "../components/section-heading";
-import TargetObject1 from "@happy-run/assets/images/target-object-1.png";
-import TargetLine1 from "@happy-run/assets/images/target-line-1.png";
-import TargetObject2 from "@happy-run/assets/images/target-object-2.png";
-import TargetLine2 from "@happy-run/assets/images/target-line-2.png";
-import TargetObject3 from "@happy-run/assets/images/target-object-3.png";
-import TargetLine3 from "@happy-run/assets/images/target-line-3.png";
-import TargetObject4 from "@happy-run/assets/images/target-object-4.png";
-import Step1VN from "@happy-run/assets/images/target-step-1-vn.png";
-import Step1EN from "@happy-run/assets/images/target-step-1-en.png";
-import Step2VN from "@happy-run/assets/images/target-step-2-vn.png";
-import Step2EN from "@happy-run/assets/images/target-step-2-en.png";
-import Step3VN from "@happy-run/assets/images/target-step-3-vn.png";
-import Step3EN from "@happy-run/assets/images/target-step-3-en.png";
+import TargetObject1 from "@happy-run/assets/images/target-object-1.webp";
+import TargetLine1 from "@happy-run/assets/images/target-line-1.webp";
+import TargetObject2 from "@happy-run/assets/images/target-object-2.webp";
+import TargetLine2 from "@happy-run/assets/images/target-line-2.webp";
+import TargetObject3 from "@happy-run/assets/images/target-object-3.webp";
+import TargetLine3 from "@happy-run/assets/images/target-line-3.webp";
+import TargetObject4 from "@happy-run/assets/images/target-object-4.webp";
+import Step1VN from "@happy-run/assets/images/target-step-1-vn.webp";
+import Step1EN from "@happy-run/assets/images/target-step-1-en.webp";
+import Step2VN from "@happy-run/assets/images/target-step-2-vn.webp";
+import Step2EN from "@happy-run/assets/images/target-step-2-en.webp";
+import Step3VN from "@happy-run/assets/images/target-step-3-vn.webp";
+import Step3EN from "@happy-run/assets/images/target-step-3-en.webp";
 
 import gsap from "gsap";
 import parser from "html-react-parser";
@@ -66,7 +66,7 @@ gsap.registerPlugin(ScrollTrigger);
 export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
   const { ref: myRef, inView } = useInView({
     triggerOnce: true,
-    rootMargin: "100px",
+    rootMargin: "200px",
   });
   const { t, currentLanguage } = useLocales();
   const { isDesktop } = useResponsive();

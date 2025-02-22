@@ -74,11 +74,11 @@ const SpringSection = lazy(() =>
     default: module.SpringSection,
   }))
 );
+import { Element, Link } from "react-scroll";
 
 export const Component: FC = () => {
   const { t, currentLanguage } = useLocales();
   const event = useEventPageContext();
-  const { ref: TicketSectionRef, inView } = useInView({ triggerOnce: true });
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -92,6 +92,7 @@ export const Component: FC = () => {
               : event.variables.event_title_en?.value}
           </title>
         </Helmet> */}
+
         <HeaderSection className="px-[20rem] md:px-[60rem]" />
         <MenuBar className="mt-[-46rem] md:mt-[-55rem]" />
         <HeroSection id="overview" />
@@ -100,7 +101,7 @@ export const Component: FC = () => {
         <TargetSection />
         <RouteSection />
         <TicketSection />
-        <KitSection/>
+        <KitSection />
         <InfoSection />
         <StationSection />
         <SummerSection id="happy-summer" />

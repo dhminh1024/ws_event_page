@@ -1,4 +1,6 @@
-import React, { HTMLAttributes, PropsWithChildren } from 'react';
+import { clear } from "console";
+import React, { HTMLAttributes, PropsWithChildren } from "react";
+import { number } from "zod";
 
 interface ScrollButtonProps extends HTMLAttributes<HTMLElement> {
   to: string;
@@ -9,23 +11,34 @@ export default function ScrollButton({
   children,
   ...props
 }: PropsWithChildren<ScrollButtonProps>) {
-  const scrollToSection = () => {
-    const section = document.getElementById(to);
+  // const scrollToSection = () => {
+  //   const section = document.getElementById(to);
+  //   if (section) {
+  //     const x = setInterval(() => {
+  //       const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+  //       if (section.getBoundingClientRect().top < 1) clearInterval(x);
+  //       window.scrollTo({
+  //         top: sectionTop,
+  //         behavior: "smooth",
+  //       });
+  //     }, 200);
+  //   }
+  // };
+  const scrollToSection = (section: HTMLElement) => {
     if (section) {
-      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top: sectionTop - 100, behavior: 'smooth' });
-      window.location.hash = to;
+      const x = setInterval(() => {
+        if (section.offsetHeight > 0) clearInterval(x);
+        section.scrollIntoView({
+          behavior: "smooth",
+        });
+      }, 300);
     }
   };
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    scrollToSection();
-    // if (React.isValidElement(children)) {
-    //   const originalOnClick = (children as React.ReactElement).props.onClick;
-    //   if (originalOnClick) {
-    //     originalOnClick(e);
-    //   }
-    // }
+    const section = document.getElementById(to);
+    if (!section) return;
+    scrollToSection(section);
   };
 
   const newChildren = React.Children.map(children, (child) => {

@@ -1,7 +1,7 @@
 import { HTMLAttributes, type FC } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
-import LogoPrimary from "@happy-box/assets/images/logo_primary.png";
-import LogoHappyJourney from "@happy-box/assets/images/logo_happy_journey.png";
+import LogoPrimary from "@happy-box/assets/images/logo_primary.webp";
+import LogoHappyJourney from "@happy-box/assets/images/logo_happy_journey.webp";
 import Typography from "@happy-box/components/typography";
 import { LanguageSelector } from "@happy-box/components/language-selector";
 import { useSettings } from "@/lib/auth/settings/use-settings";

@@ -24,7 +24,7 @@ import parser from "html-react-parser";
 import { Button } from "@atoms/button";
 import { saveAs } from "file-saver";
 import { useHRSettings } from "../context/use-settings";
-import TopPageImage from "@happy-run/assets/images/top-page-2.png";
+import TopPageImage from "@happy-run/assets/images/top-page-2.webp";
 
 export type OrderItemDetail = {
   name: string;

@@ -9,21 +9,21 @@ import {
 import { cn } from "@/core/utils/shadcn-utils";
 import { SectionHeading } from "../components/section-heading";
 import { useLocales } from "@/core/hooks/use-locales";
-import KitTitleVN from "@happy-run/assets/images/kit-title-vn.png";
-import KitTitleEN from "@happy-run/assets/images/kit-title-en.png";
+import KitTitleVN from "@happy-run/assets/images/kit-title-vn.webp";
+import KitTitleEN from "@happy-run/assets/images/kit-title-en.webp";
 import Typography from "@/app/happy-box/components/typography";
 import parser from "html-react-parser";
 import { SVGCurlyArrow, SVGCustomRectangle } from "../components/svg";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import BorderWrapper from "../components/border-wrapper";
-import LightEffect from "@happy-run/assets/images/light-effect.png";
-import RobotLegsImage from "@happy-run/assets/images/robot-legs.png";
-import RobotBodyImage from "@happy-run/assets/images/robot-body.png";
-import RobotCameraImage from "@happy-run/assets/images/robot-camera.png";
+import LightEffect from "@happy-run/assets/images/light-effect.webp";
+import RobotLegsImage from "@happy-run/assets/images/robot-legs.webp";
+import RobotBodyImage from "@happy-run/assets/images/robot-body.webp";
+import RobotCameraImage from "@happy-run/assets/images/robot-camera.webp";
 import { Button } from "@atoms/button";
 import { DimondBlock } from "../components/dimond-block";
 import { ItemModal } from "../components/item-modal";
-import KitBackground from "@happy-run/assets/images/kit-background.png";
+import KitBackground from "@happy-run/assets/images/kit-background.webp";
 import { X } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
@@ -45,7 +45,7 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
   ({ className, children, ...props }, ref) => {
     const { ref: myRef, inView } = useInView({
       triggerOnce: true,
-      rootMargin: "500px",
+      rootMargin: "200px",
     });
 
     const { t, currentLanguage } = useLocales();

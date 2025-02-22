@@ -10,6 +10,7 @@ import {
   animateFadeInRight,
   animateZoomInOut,
 } from "../components/animate";
+import { useInView } from "react-intersection-observer";
 
 export type TeaserSectionProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -17,6 +18,10 @@ export const TeaserSection: FC<TeaserSectionProps> = ({
   className,
   ...props
 }) => {
+  const { ref: myRef, inView } = useInView({
+    triggerOnce: true,
+    rootMargin: "200px",
+  });
   const { t } = useLocales();
   const events = useEventPageContext();
   const text1Ref = useRef(null);
@@ -24,6 +29,7 @@ export const TeaserSection: FC<TeaserSectionProps> = ({
   const textDescRef = useRef(null);
 
   useEffect(() => {
+    if(!inView) return;
     setTimeout(() => {
       animateFadeInLeft(text1Ref.current, {
         start: "top 100%",
@@ -38,32 +44,40 @@ export const TeaserSection: FC<TeaserSectionProps> = ({
         end: "top 50%",
       });
     }, 200);
-  }, []);
+  }, [inView]);
 
   return (
-    <div className={cn("text-center py-[10rem]", className)} {...props}>
-      <Typography.Heading
-        level={2}
-        className="pt-[5rem] md:pt-[40rem] font-raceChampion text-hr-blue text-[25rem] md:text-[75rem] uppercase flex items-center justify-center"
-      >
-        <div ref={text1Ref}>{parser(t("happy_run.teaser_heading_1"))}</div>
-        <div ref={text2Ref} className="text-hr-honey ml-[5rem]">
-          {parser(t("happy_run.teaser_heading_2"))}
-        </div>
-      </Typography.Heading>
-      <div ref={textDescRef} className="w-[80%] mx-auto">
-        <Typography.Heading
-          level={2}
-          className="text-hr-blue font-black text-[13rem] md:text-[35rem] mb-[5rem] md:mb-[20rem] "
-        >
-          {parser(t("happy_run.teaser_description"))}
-        </Typography.Heading>
-      </div>
-      {events.variables.teaser_embed_url?.value && (
-        <iframe
-          src={events.variables.teaser_embed_url?.value}
-          className="mx-auto aspect-video w-[75%] md:h-auto"
-        ></iframe>
+    <div
+      ref={myRef}
+      className={cn("text-center py-[10rem]", className)}
+      {...props}
+    >
+      {inView && (
+        <>
+          <Typography.Heading
+            level={2}
+            className="pt-[5rem] md:pt-[40rem] font-raceChampion text-hr-blue text-[25rem] md:text-[75rem] uppercase flex items-center justify-center"
+          >
+            <div ref={text1Ref}>{parser(t("happy_run.teaser_heading_1"))}</div>
+            <div ref={text2Ref} className="text-hr-honey ml-[5rem]">
+              {parser(t("happy_run.teaser_heading_2"))}
+            </div>
+          </Typography.Heading>
+          <div ref={textDescRef} className="w-[80%] mx-auto">
+            <Typography.Heading
+              level={2}
+              className="text-hr-blue font-black text-[13rem] md:text-[35rem] mb-[5rem] md:mb-[20rem] "
+            >
+              {parser(t("happy_run.teaser_description"))}
+            </Typography.Heading>
+          </div>
+          {events.variables.teaser_embed_url?.value && (
+            <iframe
+              src={events.variables.teaser_embed_url?.value}
+              className="mx-auto aspect-video w-[75%] md:h-auto"
+            ></iframe>
+          )}
+        </>
       )}
     </div>
   );
