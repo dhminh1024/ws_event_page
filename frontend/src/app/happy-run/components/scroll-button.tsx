@@ -31,6 +31,7 @@ export default function ScrollButton({
         section.scrollIntoView({
           behavior: "smooth",
         });
+
       }, 300);
     }
   };
@@ -39,6 +40,7 @@ export default function ScrollButton({
     const section = document.getElementById(to);
     if (!section) return;
     scrollToSection(section);
+    window.location.hash = to;
   };
 
   const newChildren = React.Children.map(children, (child) => {

@@ -74,7 +74,6 @@ const SpringSection = lazy(() =>
     default: module.SpringSection,
   }))
 );
-import { Element, Link } from "react-scroll";
 
 export const Component: FC = () => {
   const { t, currentLanguage } = useLocales();
