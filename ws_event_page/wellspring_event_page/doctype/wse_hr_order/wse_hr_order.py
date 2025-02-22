@@ -51,9 +51,9 @@ class WSEHROrder(Document):
         qr_payment_code: DF.AttachImage | None
         status: DF.Literal["Pending Payment", "Canceled", "Paid"]
         tickets: DF.Table[WSEHRTicket]
-        total_paid: DF.Int
-        total_payment_pending: DF.Int
-        total_price: DF.Int
+        total_paid: DF.Currency
+        total_payment_pending: DF.Currency
+        total_price: DF.Currency
     # end: auto-generated types
 
     def validate(self):
