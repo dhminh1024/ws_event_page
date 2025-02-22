@@ -1,7 +1,7 @@
 import { useLocales } from "@/core/hooks/use-locales";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
-import TopPageImage from "@happy-run/assets/images/top-page.png";
+import TopPageImage from "@happy-run/assets/images/top-page.webp";
 import Typography from "../components/typography";
 import parser from "html-react-parser";
 import {

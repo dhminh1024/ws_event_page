@@ -1,10 +1,6 @@
 import { HTMLAttributes, type FC } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
-import LogoPrimary from "@happy-box/assets/images/logo_primary.png";
-import LogoHappyJourney from "@happy-box/assets/images/logo_happy_journey.png";
-import Typography from "@happy-box/components/typography";
 import { LanguageSelector } from "@happy-box/components/language-selector";
-import { useSettings } from "@/lib/auth/settings/use-settings";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { useLocales } from "@/core/hooks/use-locales";
 import { useAuthWSCode } from "@/lib/auth/auth-ws-code/use-auth-ws-code";

@@ -36,11 +36,11 @@ export const VideoSection: FC<VideoSectionProps> = ({ className }) => {
           </div>
           <div className="relative md:w-[80%] mx-auto my-[20rem] md:mt-[50rem]">
             {isDesktop && (
-              <img src={`${env.ASSET_URL}/happy-box/lunar-bar.png`} alt="" />
+              <img src={`${env.ASSET_URL}/happy-box/lunar-bar.webp`} alt="" />
             )}
             {!isDesktop && (
               <img
-                src={`${env.ASSET_URL}/happy-box/lunar-bar-mobile.png`}
+                src={`${env.ASSET_URL}/happy-box/lunar-bar-mobile.webp`}
                 alt=""
               />
             )}
@@ -85,7 +85,7 @@ export const VideoSection: FC<VideoSectionProps> = ({ className }) => {
                 {format(new Date(env.HAPPY_BOX.DATE), "dd/MM/yyyy")}
                 <img
                   className="absolute bottom-0 left-[50%] translate-y-[50%] translate-x-[-50%] w-[200%] max-w-none h-auto"
-                  src={`${env.ASSET_URL}/happy-box/light-effect.png`}
+                  src={`${env.ASSET_URL}/happy-box/light-effect.webp`}
                   alt=""
                 />
               </Typography.Text>
@@ -96,17 +96,17 @@ export const VideoSection: FC<VideoSectionProps> = ({ className }) => {
 
         <img
           className="absolute z-1 top-0 md:top-[5%] left-0 md:w-[22%] w-[40%]"
-          src={`${env.ASSET_URL}/happy-box/video-backdrop-left.png`}
+          src={`${env.ASSET_URL}/happy-box/video-backdrop-left.webp`}
           alt="backdrop-left"
         />
         <img
           className="absolute z-1 top-0 md:top-[5%] right-0 md:w-[22%] w-[40%]"
-          src={`${env.ASSET_URL}/happy-box/video-backdrop-right.png`}
+          src={`${env.ASSET_URL}/happy-box/video-backdrop-right.webp`}
           alt="backdrop-left"
         />
         <img
           className="w-full"
-          src={`${env.ASSET_URL}/happy-box/video-foreground.png`}
+          src={`${env.ASSET_URL}/happy-box/video-foreground.webp`}
           alt="video-foreground"
         />
       </BackgroundCloud>

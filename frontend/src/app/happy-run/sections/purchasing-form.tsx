@@ -861,7 +861,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
             <center className="mt-[20rem]">
               <PrimaryButton
                 className={cn(
-                  "text-[14rem] text-center md:text-[30rem] font-extrabold p-[35rem_40rem] rounded-[10rem] mb-[10rem] flex items-center"
+                  "text-[14rem] text-center md:text-[30rem] font-extrabold p-[20rem_30rem] md:p-[35rem_40rem] rounded-[10rem] mb-[10rem] flex items-center"
                 )}
               >
                 {t("happy_run.buttons.register_now")}

@@ -1,6 +1,6 @@
 import { HTMLAttributes, useEffect, useState, type FC } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
-import BackgroundImage from "@happy-run/assets/images/bg-count-down.png";
+import BackgroundImage from "@happy-run/assets/images/bg-count-down.webp";
 import Typography from "@/app/happy-box/components/typography";
 import parser from "html-react-parser";
 import { useLocales } from "@/core/hooks/use-locales";
