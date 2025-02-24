@@ -136,8 +136,8 @@ export const Component = () => {
         lead_id: lead?.name,
         test_slot_id: slotSelected,
         booking_id: bookingID,
-        switch_slot: lead?.registered_slot ? true : false,
-        send_email: false,
+        switch_slot: lead?.registered_slot ? 1 : 0,
+        send_email: lead?.registered_slot ? 0 : 1,
       });
       alert("SUCCESS");
       mutate();
