@@ -22,6 +22,28 @@ class WSEACTestStatus(Enum):
     CHECKED_IN_TEST = "Checked In Test"
 
 
+class WSEACErrorCode(Enum):
+    # Lead API
+    INVALID_BOOKING_ID = "WSEAC-E101: Invalid Booking ID"
+    INVALID_LEAD_ID = "WSEAC-E102: Invalid Lead ID"
+    PERMISSION_DENIED = "WSEAC-E103: Permission denied - Admin role required"
+    ALREADY_REGISTERED = "WSEAC-E104: Already registered for a test"
+    ALREADY_REGISTERED_FOR_SLOT = "WSEAC-E105: Already registered for this test slot"
+
+    # WSE AC LEAD Doctype
+    REGISTRATION_NUMBER_FORMAT = (
+        "WSEAC-E201: Registration number must be in format 'G1-XXX'"
+    )
+    INVALID_GRADE_IN_REGISTRATION_NUMBER = (
+        "WSEAC-E202: Invalid Grade in Registration Number"
+    )
+    EVENT_CLOSED = "WSEAC-E203: Event is closed"
+    TEST_SLOT_DISABLED = "WSEAC-E204: Test slot is disabled"
+    TEST_SLOT_FULL = "WSEAC-E205: Test slot is full"
+    TEST_REGISTRATION_CLOSED = "WSEAC-E206: Test registration is closed"
+    TEST_REGISTRATION_EXPIRED = "WSEAC-E207: Test registration is expired"
+
+
 class WSEACLead(Document):
     # begin: auto-generated types
     # This code is auto-generated. Do not modify anything in this block.
@@ -60,10 +82,10 @@ class WSEACLead(Document):
     def validation(self):
         # Check if registration_number has format "G{grade}-{number}"
         if not re.match(r"G\d+-\d+", self.registration_number):
-            frappe.throw("Registration Number must have format 'G{grade}-{number}'")
+            frappe.throw(WSEACErrorCode.REGISTRATION_NUMBER_FORMAT.value)
         student_grade = int(self.registration_number.split("-")[0][1:])
         if student_grade < 1 or student_grade > 12:
-            frappe.throw("Invalid Grade in Registration Number")
+            frappe.throw(WSEACErrorCode.INVALID_GRADE_IN_REGISTRATION_NUMBER.value)
         else:
             self.student_grade = f"K{student_grade}"
 
@@ -125,7 +147,7 @@ class WSEACLead(Document):
     def send_confirmation_email(self):
         settings = frappe.get_single("WSE AC Settings")
         if not settings.open_nhtn_event:
-            frappe.throw("NHTN event is closed")
+            frappe.throw(WSEACErrorCode.EVENT_CLOSED.value)
 
         # send confirmation email
         if self.status == WSEACLeadStatus.NEW.value:
@@ -258,9 +280,9 @@ class WSEACLead(Document):
                 if send_email:
                     self.send_test_registration_confirmation_email()
             else:
-                frappe.throw("Test Slot is disabled")
+                frappe.throw(WSEACErrorCode.TEST_SLOT_DISABLED.value)
         else:
-            frappe.throw("Test Slot is full")
+            frappe.throw(WSEACErrorCode.TEST_SLOT_FULL.value)
 
 
 def is_test_registration_open(allow_admin=True):
@@ -269,8 +291,8 @@ def is_test_registration_open(allow_admin=True):
 
     settings = frappe.get_single("WSE AC Settings")
     if not settings.open_test_registration:
-        frappe.throw("Test registration is closed")
+        frappe.throw(WSEACErrorCode.TEST_REGISTRATION_CLOSED.value)
     if settings.test_registration_closing_time and (
         frappe.utils.now() > settings.test_registration_closing_time
     ):
-        frappe.throw("Test registration is closed")
+        frappe.throw(WSEACErrorCode.TEST_REGISTRATION_EXPIRED.value)
