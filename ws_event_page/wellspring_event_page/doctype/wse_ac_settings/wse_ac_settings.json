@@ -1,0 +1,70 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-02-23 15:02:45.472984",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "open_test_registration",
+  "open_nhtn_event",
+  "column_break_cvzp",
+  "test_registration_closing_time"
+ ],
+ "fields": [
+  {
+   "fieldname": "column_break_cvzp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "test_registration_closing_time",
+   "fieldtype": "Datetime",
+   "label": "Test Registration Closing Time"
+  },
+  {
+   "default": "0",
+   "fieldname": "open_nhtn_event",
+   "fieldtype": "Check",
+   "label": "Open NHTN Event"
+  },
+  {
+   "default": "1",
+   "fieldname": "open_test_registration",
+   "fieldtype": "Check",
+   "label": "Open Test Registration"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-02-23 15:06:15.183819",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE AC Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "WSE AC Admin",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
