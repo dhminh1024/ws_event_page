@@ -148,7 +148,8 @@
       "not_agree": "Tôi không đồng ý",
       "search_now": "Tra cứu ngay",
       "view_more": "Xem thêm",
-      "view_less": "Thu gọn"
+      "view_less": "Thu gọn",
+      "view_order": "Xem đơn hàng"
     },
     "ticket_sale_official_time": "Thời gian bán vé chính thức",
     "count_down_heading": "CHÀO MỪNG CÁC WISers ĐẾN VỚI<br className=\"block md:hidden\"/> HAPPY RUN 2025 & <br/> KHỞI ĐỘNG HAPPY SUMMER 2025",

@@ -2,7 +2,7 @@ import { useLocales } from "@/core/hooks/use-locales";
 import { useNavigate, useParams } from "react-router-dom";
 import { PurchasingForm } from "../sections/purchasing-form";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
-import TopPageImage from "@happy-run/assets/images/top-page.png";
+import TopPageImage from "@happy-run/assets/images/top-page.webp";
 import { useEffect } from "react";
 
 export const Component = () => {

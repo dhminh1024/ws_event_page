@@ -40,7 +40,7 @@ export const BoxChallenge: FC<BoxChallengeProps> = ({
       style={
         (hightlight && {
           backgroundImage: `url(${cleanPath(
-            `${env.ASSET_URL}/happy-box/box-golden-metalic.png`
+            `${env.ASSET_URL}/happy-box/box-golden-metalic.webp`
           )})`,
           backgroundSize: "135%",
           backgroundPosition: "center",

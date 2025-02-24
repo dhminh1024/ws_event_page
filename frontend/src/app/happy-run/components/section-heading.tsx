@@ -1,6 +1,6 @@
 import { HTMLAttributes, PropsWithChildren, forwardRef } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
-import SectionHeadingImage from "@happy-run/assets/images/section-heading.png";
+import SectionHeadingImage from "@happy-run/assets/images/section-heading.webp";
 import Typography from "@/app/happy-box/components/typography";
 
 export type SectionHeadingProps = HTMLAttributes<HTMLDivElement> &

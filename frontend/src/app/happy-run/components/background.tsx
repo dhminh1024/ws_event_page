@@ -30,7 +30,7 @@ export const BackgroundCoin: FC<BackgroundCoinProps> = ({
       className={cn("bg-happy_box-cream", className)}
       style={{
         backgroundImage: `url(${cleanPath(
-          `${env.ASSET_URL}/happy-box/bg-coin.png`
+          `${env.ASSET_URL}/happy-box/bg-coin.webp`
         )})`,
         backgroundSize: "90rem",
         backgroundRepeat: "repeat",
@@ -51,7 +51,7 @@ export const BackgroundCloud: FC<BackgroundCoinProps> = ({
       className={cn("bg-happy_box-red", className)}
       style={{
         backgroundImage: `url(${cleanPath(
-          `${env.ASSET_URL}/happy-box/bg-cloud.png`
+          `${env.ASSET_URL}/happy-box/bg-cloud.webp`
         )})`,
         backgroundSize: "contain",
         backgroundRepeat: "repeat",
@@ -71,7 +71,7 @@ export const GreekPattern: FC<BackgroundCoinProps> = ({
       className={cn("h-[40rem]", className)}
       style={{
         backgroundImage: `url(${cleanPath(
-          `${env.ASSET_URL}/happy-box/greek-decor.png`
+          `${env.ASSET_URL}/happy-box/greek-decor.webp`
         )})`,
         backgroundSize: "contain",
         backgroundRepeat: "repeat",

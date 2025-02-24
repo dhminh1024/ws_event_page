@@ -3,7 +3,7 @@ import { cn } from "@/core/utils/shadcn-utils";
 import { SectionHeading } from "../components/section-heading";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { useLocales } from "@/core/hooks/use-locales";
-import StationImage from "@happy-run/assets/images/stations.png";
+import StationImage from "@happy-run/assets/images/stations.webp";
 import Typography from "@/app/happy-box/components/typography";
 import parser from "html-react-parser";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -26,7 +26,7 @@ export type StationSectionProps = HTMLAttributes<HTMLDivElement> & {};
 export const StationSection: FC<StationSectionProps> = ({ className }) => {
   const { ref: myRef, inView } = useInView({
     triggerOnce: true,
-    rootMargin: "500px",
+    rootMargin: "400px",
   });
   const { t, currentLanguage } = useLocales();
   const events = useEventPageContext();
@@ -243,8 +243,8 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
                 </Typography.Paragraph>
               </div>
             </div>
-            <div className="absolute bottom-[15%] left-[40%] md:left-[23%] text-right">
-              <div className="absolute top-[-40%] left-[65%] md:top-[-10%] md:left-[85%] w-[100rem] md:w-[260rem] aspect-square">
+            <div className="absolute bottom-[11%] left-[55%] md:left-[23%] text-right">
+              <div className="absolute top-[-45%] left-[15%] md:top-[-10%] md:left-[85%] w-[100rem] md:w-[260rem] aspect-square">
                 <Canvas flat linear>
                   <Model
                     matcapUrl={cleanPath(
