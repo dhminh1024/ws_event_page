@@ -3,8 +3,18 @@
 
 frappe.listview_settings["WSE AC Lead"] = {
   onload(listview) {
-    // triggers once before the list is loaded
-    listview.page.add_action_item("Send Confirmation Emails", () => {
+    // listview.page.add_action_item("Send Confirmation Emails", () => {
+    //   let names = [];
+    //   $.each(listview.get_checked_items(), function (key, value) {
+    //     names.push(value.name);
+    //   });
+    //   if (names.length === 0) {
+    //     frappe.throw(__("No rows selected."));
+    //   }
+    //   send_confirmation_emails(names, listview);
+    // });
+
+    listview.page.add_action_item("Send Invitation Emails", () => {
       let names = [];
       $.each(listview.get_checked_items(), function (key, value) {
         names.push(value.name);
@@ -12,7 +22,7 @@ frappe.listview_settings["WSE AC Lead"] = {
       if (names.length === 0) {
         frappe.throw(__("No rows selected."));
       }
-      send_confirmation_emails(names, listview);
+      send_invitation_emails(names, listview);
     });
   },
   before_render() {
@@ -34,6 +44,30 @@ function send_confirmation_emails(names, listview) {
       frappe.call({
         method:
           "ws_event_page.api.event.admission_checkin.lead.send_confirmation_emails",
+        args: {
+          lead_ids_str: names_str,
+        },
+        callback: function (r) {
+          if (r.message) {
+            message = r.message.message;
+            frappe.msgprint(message);
+            listview.refresh();
+          }
+        },
+      });
+    }
+  );
+}
+
+function send_invitation_emails(names, listview) {
+  // convert names to string
+  names_str = names.join(",");
+  frappe.confirm(
+    "Are you sure you want to send the invitation emails?",
+    function () {
+      frappe.call({
+        method:
+          "ws_event_page.api.event.admission_checkin.lead.send_test_invitation_emails",
         args: {
           lead_ids_str: names_str,
         },
