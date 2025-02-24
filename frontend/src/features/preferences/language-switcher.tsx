@@ -48,6 +48,7 @@ export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ className }) => {
       onClick={handleToogleLanguage}
     >
       <img
+      className="w-full h-full object-cover"
         src={cleanPath(`${env.ASSET_URL}${currentLanguage?.flagUrl}`)}
         alt={currentLanguage?.code}
         width={24}
