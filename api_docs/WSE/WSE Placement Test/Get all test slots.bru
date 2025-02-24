@@ -1,0 +1,15 @@
+meta {
+  name: Get all test slots
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{url}}/api/method/ws_event_page.api.event.admission_checkin.lead.get_all_test_slots?booking_id=44bf422e41859d5d
+  body: json
+  auth: none
+}
+
+query {
+  booking_id: 44bf422e41859d5d
+}

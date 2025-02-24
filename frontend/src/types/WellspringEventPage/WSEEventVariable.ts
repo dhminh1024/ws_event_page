@@ -13,9 +13,11 @@ export interface WSEEventVariable{
 	/**	Variable Name : Data	*/
 	variable_name: string
 	/**	Variable Type : Select	*/
-	variable_type?: "Text" | "Image"
+	variable_type?: "Text" | "Image" | "Video"
 	/**	Image : Attach Image	*/
 	image?: string
 	/**	Variable Value : Text	*/
 	variable_value?: string
+	/**	Video : Attach	*/
+	video?: string
 }

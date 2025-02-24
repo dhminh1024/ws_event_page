@@ -2,7 +2,9 @@ import frappe
 from ws_event_page.wellspring_event_page.doctype.wse_ac_lead.wse_ac_lead import (
     WSEACLeadStatus,
     WSEACTestStatus,
+    WSEACErrorCode,
 )
+from enum import Enum
 
 
 @frappe.whitelist(methods=["POST"])
@@ -39,7 +41,10 @@ def send_test_invitation_emails(lead_ids_str):
 
 @frappe.whitelist(methods=["GET"])
 def get_lead_info(lead_id):
-    lead = frappe.get_doc("WSE AC Lead", lead_id)
+    try:
+        lead = frappe.get_doc("WSE AC Lead", lead_id)
+    except Exception:
+        frappe.throw(WSEACErrorCode.INVALID_LEAD_ID.value)
     return lead.as_dict()
 
 
@@ -75,8 +80,8 @@ def test_checkin(lead_id):
 def get_lead_by_booking_id(booking_id):
     try:
         lead = frappe.get_doc("WSE AC Lead", {"booking_id": booking_id})
-    except frappe.DoesNotExistError:
-        return None
+    except Exception:
+        frappe.throw(WSEACErrorCode.INVALID_BOOKING_ID.value)
 
     return lead.as_dict()
 
@@ -88,18 +93,18 @@ def register_for_test(
     lead = frappe.get_doc("WSE AC Lead", lead_id)
 
     if lead.booking_id != booking_id:
-        frappe.throw("Invalid booking ID")
+        frappe.throw(WSEACErrorCode.INVALID_BOOKING_ID.value)
 
     if lead.registered_slot:
         if not switch_slot:
-            frappe.throw("Already registered for a test")
+            frappe.throw(WSEACErrorCode.ALREADY_REGISTERED.value)
         else:
             if lead.registered_slot == test_slot_id:
-                frappe.throw("Already registered for this test slot")
+                frappe.throw(WSEACErrorCode.ALREADY_REGISTERED_FOR_SLOT.value)
 
             # User must have WSE AC Admin role to switch test slot
             if "WSE AC Admin" not in frappe.get_roles():
-                frappe.throw("Permission denied: You must have WSE AC Admin role")
+                frappe.throw(WSEACErrorCode.PERMISSION_DENIED.value)
 
             prev_test_slot = frappe.get_doc("WSE AC Test Slot", lead.registered_slot)
             lead.register_for_test(test_slot_id, send_email)
@@ -114,12 +119,20 @@ def register_for_test(
 
 
 @frappe.whitelist(allow_guest=True, methods=["GET"])
-def get_all_test_slot(booking_id):
+def get_all_test_slots(booking_id):
     # validate booking id
     try:
         lead = frappe.get_doc("WSE AC Lead", {"booking_id": booking_id})
-    except frappe.DoesNotExistError:
-        return None
+    except Exception:
+        frappe.throw(WSEACErrorCode.INVALID_BOOKING_ID.value)
 
-    test_slots = frappe.get_all("WSE AC Test Slot", {"is_enabled": 1})
+    test_slots = frappe.get_all(
+        "WSE AC Test Slot", filters={"is_enabled": 1}, fields="*"
+    )
     return test_slots
+
+
+@frappe.whitelist(allow_guest=True, methods=["GET"])
+def get_ac_settings():
+    settings = frappe.get_single("WSE AC Settings")
+    return settings.as_dict()

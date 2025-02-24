@@ -35,5 +35,5 @@ export interface WSEHRTicket{
 	/**	T-Shirt size : Select	*/
 	shirt_size: "Size 1" | "Size 2" | "Size 3" | "Size 4" | "Size 5" | "Size 6" | "Size 7"
 	/**	BIB : Data	*/
-	bib: string
+	bib?: string
 }

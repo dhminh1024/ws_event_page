@@ -1,0 +1,15 @@
+meta {
+  name: Get lead by booking id
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}/api/method/ws_event_page.api.event.admission_checkin.lead.get_lead_by_booking_id?booking_id=44bf422e41859d5d
+  body: json
+  auth: none
+}
+
+query {
+  booking_id: 44bf422e41859d5d
+}
