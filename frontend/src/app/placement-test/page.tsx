@@ -1,7 +1,7 @@
 import { useLocales } from "@/core/hooks/use-locales";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { cleanPath, getDateLocale } from "@/lib/utils/common";
 import { DayContentProps } from "react-day-picker";
@@ -15,8 +15,10 @@ import useGetAllTestSlots from "./api/use-get-all-test-slots";
 import useRegisterTestSlot from "./api/use-register-test-slot";
 import { usePTSettings } from "./context/use-pt-settings";
 import env from "@/config/env";
-import { HouseSimple, User } from "phosphor-react";
+import { HouseSimple, ListNumbers, User } from "phosphor-react";
 import { log } from "console";
+import { WSEACTestSlot } from "@/types/WellspringEventPage/WSEACTestSlot";
+import { Check, Loader2 } from "lucide-react";
 
 const CalendarStyled = styled(Calendar)`
   & > div,
@@ -69,10 +71,11 @@ export const Component = () => {
   const { settings } = usePTSettings();
 
   const { id: bookingID } = params;
-  const { lead, error: getLeadError, mutate } = useGetLeadByBookingID(
-    bookingID,
-    !bookingID
-  );
+  const {
+    lead,
+    error: getLeadError,
+    mutate,
+  } = useGetLeadByBookingID(bookingID, !bookingID);
 
   const { testSlots, error: getTestSlotsError } = useGetAllTestSlots(
     bookingID,
@@ -85,17 +88,41 @@ export const Component = () => {
     return arr;
   }, {});
 
-  const { register } = useRegisterTestSlot();
-  const [dateSelected, setDateSelected] = useState<Date>(new Date());
+  const { register, loading } = useRegisterTestSlot();
+  const [dateSelected, setDateSelected] = useState<Date>();
   const [slotSelected, setSlotSelected] = useState<string | null>();
 
-  useEffect(() => {
-    if (lead?.registered_slot) {
-      console.log("SET SLOT", lead?.registered_slot);
+  const isOpenRegistration = settings?.open_test_registration &&
+    settings.test_registration_closing_time &&
+    differenceInMinutes(
+      new Date(settings.test_registration_closing_time),
+      new Date()
+    ) >= 0 && (
+      <div className="text-center p-5 text-red-500">
+        {t("placement_test.registration_closed")}
+      </div>
+    );
 
+  const currentSlot: WSEACTestSlot | null =
+    (lead?.registered_slot &&
+      testSlots?.find((slot) => slot.name === lead?.registered_slot)) ||
+    null;
+
+  useEffect(() => {
+    if (lead?.registered_slot && !dateSelected) {
+      console.log("SET SLOT", lead?.registered_slot);
+      setDateSelected(
+        currentSlot?.date ? new Date(currentSlot?.date) : undefined
+      );
       setSlotSelected(lead?.registered_slot);
+    } else if (!dateSelected) {
+      console.log("SET FIRST SLOT", testSlots?.[0].name);
+      setDateSelected(
+        testSlots?.[0].date ? new Date(testSlots?.[0].date) : undefined
+      );
+      setSlotSelected(testSlots?.[0].name);
     }
-  }, [lead]);
+  }, [lead, dateSelected, testSlots, currentSlot]);
 
   console.log("GROUP BY", dayGroupBy);
 
@@ -104,7 +131,7 @@ export const Component = () => {
   console.log(testSlots, getTestSlotsError);
 
   const handleSubmit = async () => {
-    if (slotSelected) {
+    if (slotSelected && isOpenRegistration) {
       await register({
         lead_id: lead?.name,
         test_slot_id: slotSelected,
@@ -113,7 +140,7 @@ export const Component = () => {
         send_email: false,
       });
       alert("SUCCESS");
-      mutate()
+      mutate();
     }
   };
 
@@ -146,23 +173,15 @@ export const Component = () => {
             <LanguageSwitcher className="ml-2 w-6 h-4 !bg-transparent" />
           </div>
           <div className=" bg-white rounded-lg overflow-hidden">
-            {!settings?.open_test_registration ||
-              (settings.test_registration_closing_time &&
-                differenceInMinutes(
-                  new Date(settings.test_registration_closing_time),
-                  new Date()
-                ) < 0 && (
-                  <div className="text-center p-5 text-red-500">
-                    {t("placement_test.registration_closed")}
-                  </div>
-                ))}
             <div className="flex flex-col md:flex-row items-stretch h-full w-full">
               <div className="md:flex-1 p-5 h-full text-hr-primary">
                 <div className="h-full flex flex-col justify-between">
                   <div className="">
-                    <p className="text-2xl font-extrabold ">
-                      {lead?.registration_number}
+                    <p className="text-xl font-extrabold ">
+                      {t("placement_test.registration_title")}
                     </p>
+                    <p className="text-lg font-semibold "></p>
+
                     <p className="flex items-center gap-x-2 mt-2">
                       <User className="text-pt-ember" size={16} />
                       <span>
@@ -181,88 +200,161 @@ export const Component = () => {
                         </span>
                       </span>
                     </p>
+                    <p className="flex items-center gap-x-2 mt-2">
+                      <ListNumbers className="text-pt-ember" size={16} />
+                      <span>
+                        {t("placement_test.registration_number")}:
+                        <span className="font-semibold ml-1">
+                          {lead?.registration_number}
+                        </span>
+                      </span>
+                    </p>
                   </div>
-                  <p className="hidden md:block  mt-5">
+                  <p className="hidden md:block mt-10">
+                    <p className="text-center italic">Check In QR Code</p>
                     <img
-                      className="h-[100px] w-auto md:w-[90%] md:mx-auto"
+                      className="h-[100px] w-auto md:h-auto md:w-[60%] md:mx-auto"
                       src={cleanPath(`${env.ASSET_URL}/${lead?.qr_code}`)}
                       alt=""
                     />
                   </p>
+                  {currentSlot && (
+                    <div className="mt-2 text-center">
+                      <p className="">{t("placement_test.registered_slot")}:</p>
+                      <p className="font-bold flex items-center gap-x-2 justify-center">
+                        {format(currentSlot?.date, "dd/MM/yyyy") +
+                          " | " +
+                          format(
+                            new Date("2025-01-01 " + currentSlot.start_time),
+                            "HH:mm"
+                          )}
+                        <Check className="text-green-500 w-5 h-5 inline" />
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="basis-[450px] border-l-transparent border-r-transparent md:border-l-pt-primary/20 md:border-r-pt-primary/20 border-t-transparent md:border-t-transparent md:border-b-transparent border-[1px]">
-                <CalendarStyled
-                  mode="single"
-                  disabled={(date) =>
-                    !Object.keys(dayGroupBy || {})?.includes(
-                      format(date, "dd/MM").toString()
-                    )
-                  }
-                  showOutsideDays={false}
-                  locale={getDateLocale(currentLanguage)}
-                  components={{
-                    DayContent: (props) => <CustomDayContent {...props} />,
-                  }}
-                  className="rounded-md py-10 border-none w-full border text-hr-primary"
-                  selected={dateSelected}
-                  onSelect={(date) => date && setDateSelected(date)}
-                />
+                {useMemo(
+                  () => (
+                    <CalendarStyled
+                      key={testSlots?.[0].name}
+                      mode="single"
+                      defaultMonth={
+                        testSlots?.[0].date
+                          ? new Date(testSlots[0].date)
+                          : new Date()
+                      }
+                      disabled={(date) =>
+                        !Object.keys(dayGroupBy || {})?.includes(
+                          format(date, "dd/MM").toString()
+                        )
+                      }
+                      showOutsideDays={false}
+                      locale={getDateLocale(currentLanguage)}
+                      components={{
+                        DayContent: (props) => <CustomDayContent {...props} />,
+                      }}
+                      className="rounded-md py-10 border-none w-full border text-hr-primary"
+                      selected={dateSelected}
+                      onSelect={(date) => date && setDateSelected(date)}
+                    />
+                  ),
+                  [testSlots, dateSelected, currentLanguage, dayGroupBy]
+                )}
               </div>
               <div className="md:basis-[25%] p-5 h-full">
-                <p className="font-bold text-pt-primary mb-5">
-                  <span className="text-xl mr-2 text-pt-ember">
-                    {dateSelected &&
-                      format(dateSelected, "EEEE", {
-                        locale: getDateLocale(currentLanguage),
-                      })}
-                  </span>
-                  <span className="opacity-80 text-sm">
-                    {dateSelected &&
-                      format(dateSelected, "dd MMMM yyyy", {
-                        locale: getDateLocale(currentLanguage),
-                      })}
-                  </span>
-                </p>
-                <div className="flex flex-col gap-2">
-                  {testSlots
-                    ?.filter(
-                      (slot) =>
-                        format(slot.date, "yyyy-MM-dd") ===
-                        format(dateSelected, "yyyy-MM-dd")
-                    )
-                    .sort((a, b) => {
-                      return (
-                        new Date("2025-01-01 " + a.start_time).getHours() -
-                        new Date("2025-01-01 " + b.start_time).getHours()
-                      );
-                    })
-                    .map((slot) => (
+                {dateSelected && (
+                  <>
+                    <p className="font-bold text-pt-primary mb-5">
+                      <span className="text-xl mr-2 text-pt-ember">
+                        {dateSelected &&
+                          format(dateSelected, "EEEE", {
+                            locale: getDateLocale(currentLanguage),
+                          })}
+                      </span>
+                      <span className="opacity-80 text-sm">
+                        {dateSelected &&
+                          format(dateSelected, "dd MMM yyyy", {
+                            locale: getDateLocale(currentLanguage),
+                          })}
+                      </span>
+                    </p>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex justify-between text-sm text-hr-primary/80">
+                        <span>{t("placement_test.time_slots")}</span>
+                        <span>{t("placement_test.capacity")}</span>
+                      </div>
+                      {testSlots
+                        ?.filter(
+                          (slot) =>
+                            dateSelected &&
+                            format(slot.date, "yyyy-MM-dd") ===
+                              format(dateSelected, "yyyy-MM-dd")
+                        )
+                        // .sort((a, b) => {
+                        //   return (
+                        //     new Date("2025-01-01 " + a.start_time).getHours() -
+                        //     new Date("2025-01-01 " + b.start_time).getHours()
+                        //   );
+                        // })
+                        .map((slot) => (
+                          <Button
+                            key={slot.name}
+                            className={cn(
+                              "text-pt-primary border-pt-primary bg-pt-background/20 hover:bg-slate-200 hover:text-pt-primary flex justify-between",
+                              {
+                                "!bg-pt-primary !text-white":
+                                  slot.name === slotSelected,
+                              },
+                              {
+                                "opacity-50":
+                                  slot.current_registered === slot.max_capacity,
+                              }
+                            )}
+                            disabled={slot.current_registered === slot.max_capacity}
+                            variant="outline"
+                            onClick={() => setSlotSelected(slot.name)}
+                          >
+                            <span>
+                              {format(
+                                new Date("2025-01-01 " + slot.start_time),
+                                "HH:mm"
+                              )}{" "}
+                              -{" "}
+                              {format(
+                                new Date("2025-01-01 " + slot.end_time),
+                                "HH:mm"
+                              )}
+                            </span>
+                            <span>{`${slot.current_registered}/${slot.max_capacity}`}</span>
+                          </Button>
+                        ))}
+                    </div>
+                    <div className="w-full mt-5">
+                      {!isOpenRegistration && (
+                        <p className="text-sm italic text-destructive mb-1">
+                          {t("placement_test.registration_closed")}
+                        </p>
+                      )}
                       <Button
-                        key={slot.name}
-                        className={cn(
-                          "text-pt-primary border-pt-primary bg-pt-background/20 hover:bg-slate-200 hover:text-pt-primary",
-                          {
-                            "!bg-pt-primary !text-white":
-                              slot.name === slotSelected,
-                          }
-                        )}
-                        variant="outline"
-                        onClick={() => setSlotSelected(slot.name)}
+                        className="w-full"
+                        onClick={handleSubmit}
+                        disabled={
+                          !isOpenRegistration ||
+                          lead?.registered_slot === slotSelected ||
+                          !slotSelected ||
+                          loading
+                        }
                       >
-                        {slot.start_time} - {slot.end_time}
+                        {loading && (
+                          <Loader2 className="mr-2 animate-spin w-4 h-4 text-white" />
+                        )}
+                        Submit
                       </Button>
-                    ))}
-                </div>
-                <Button
-                  className="w-full mt-5"
-                  onClick={handleSubmit}
-                  disabled={
-                    lead?.registered_slot === slotSelected || !slotSelected
-                  }
-                >
-                  Submit
-                </Button>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
