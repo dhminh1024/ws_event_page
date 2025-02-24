@@ -23,7 +23,7 @@ import { useResponsive } from "@/core/hooks/use-reponsive";
 import parser from "html-react-parser";
 import { Button } from "@atoms/button";
 import { saveAs } from "file-saver";
-import { useHRSettings } from "../context/use-settings";
+import { useHRSettings } from "../context/use-pt-settings";
 
 export type ItemModalProps = Omit<HTMLAttributes<HTMLDivElement>, "content"> &
   PropsWithChildren & {

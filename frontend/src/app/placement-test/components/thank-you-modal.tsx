@@ -33,7 +33,7 @@ import { format } from "date-fns";
 import { X } from "lucide-react";
 import { Button } from "@atoms/button";
 import { Firework } from "./firework";
-import { useSubmissions } from "../context/use-settings";
+import { useSubmissions } from "../context/use-pt-settings";
 
 export type LunarModalProps = HTMLAttributes<HTMLDivElement> &
   PropsWithChildren & {
@@ -55,7 +55,7 @@ export const ThankYouModal: FC<LunarModalProps> = ({
   const { isDesktop } = useResponsive();
   const [isOpen, setIsOpen] = useState(false);
   const event = useEventPageContext();
-  const { showThankYouModal,setShowThankYouModal } = useSubmissions();
+  const { showThankYouModal, setShowThankYouModal } = useSubmissions();
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open);
@@ -69,8 +69,7 @@ export const ThankYouModal: FC<LunarModalProps> = ({
     if (showThankYouModal) {
       setIsOpen(showThankYouModal);
     }
-  }, [showThankYouModal])
-  
+  }, [showThankYouModal]);
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
@@ -82,7 +81,7 @@ export const ThankYouModal: FC<LunarModalProps> = ({
         )}
       >
         <div className="relative">
-          <Firework className="z-50"/>
+          <Firework className="z-50" />
           <DialogTitle></DialogTitle>
           <DialogDescription></DialogDescription>
           <Button

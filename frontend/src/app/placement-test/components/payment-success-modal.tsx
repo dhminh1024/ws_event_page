@@ -23,7 +23,7 @@ import { useResponsive } from "@/core/hooks/use-reponsive";
 import parser from "html-react-parser";
 import { Button } from "@atoms/button";
 import { saveAs } from "file-saver";
-import { useHRSettings } from "../context/use-settings";
+import { useHRSettings } from "../context/use-pt-settings";
 import TopPageImage from "@happy-run/assets/images/top-page-2.webp";
 import { Link } from "react-router-dom";
 import { cleanPath } from "@/lib/utils/common";
@@ -128,7 +128,12 @@ export const PaymentSuccessModal: FC<LunarModalProps> = ({
             >
               {t("happy_run.buttons.download_qr")}
             </Button>
-            <Link to={cleanPath(`${env.BASE_NAME}/happy-run/order-detail/${orderName}`)} target="_blank">
+            <Link
+              to={cleanPath(
+                `${env.BASE_NAME}/happy-run/order-detail/${orderName}`
+              )}
+              target="_blank"
+            >
               <Button
                 type="button"
                 className="my-[8rem] text-[12rem] md:text-[14rem] px-[20rem] py-[16rem] hover:!bg-hr-ember/80  bg-hr-ember text-white rounded-[5rem]"
