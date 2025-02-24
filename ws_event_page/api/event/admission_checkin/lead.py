@@ -87,9 +87,7 @@ def get_lead_by_booking_id(booking_id):
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])
-def register_for_test(
-    lead_id, test_slot_id, booking_id, switch_slot=False, send_email=True
-):
+def register_for_test(lead_id, test_slot_id, booking_id, switch_slot=0, send_email=1):
     lead = frappe.get_doc("WSE AC Lead", lead_id)
 
     if lead.booking_id != booking_id:
@@ -113,7 +111,7 @@ def register_for_test(
             prev_test_slot.calculate_current_registered()
 
     else:
-        lead.register_for_test(test_slot_id, send_email)
+        lead.register_for_test(test_slot_id)
 
     return lead.as_dict()
 
@@ -127,8 +125,12 @@ def get_all_test_slots(booking_id):
         frappe.throw(WSEACErrorCode.INVALID_BOOKING_ID.value)
 
     test_slots = frappe.get_all(
-        "WSE AC Test Slot", filters={"is_enabled": 1}, fields="*"
+        "WSE AC Test Slot",
+        filters={"is_enabled": 1},
+        fields="*",
+        order_by="date, start_time",
     )
+
     return test_slots
 
 

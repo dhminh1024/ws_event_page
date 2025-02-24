@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Placement Test Check In</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-image: url("/assets/ws_event_page/images/KV_TS_2526.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        font-family: "Mulish", sans-serif; /* Apply the Mulish font */
+      }
+
+      .hidden-input {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+      }
+      .display-title {
+        font-size: 3rem;
+        color: #002855;
+        text-align: center;
+        text-transform: uppercase;
+        /* font-weight: bold; */
+        display: none;
+      }
+      .display-highlight {
+        font-size: 4rem;
+        color: #f05023;
+        text-align: center;
+        text-transform: uppercase;
+        display: none;
+        font-weight: bold;
+      }
+      .display-success {
+        font-size: 2rem;
+        color: #009682;
+        text-align: center;
+        text-transform: uppercase;
+        display: none;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        height: 100%;
+        padding-top: 20vh;
+        /* add space between elements */
+        gap: 20px;
+      }
+
+      .spinner {
+        border: 16px solid #f3f3f3; /* Light grey */
+        border-top: 16px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        animation: spin 2s linear infinite;
+        display: none; /* Hidden by default */
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="hidden-input" class="hidden-input" value="G1-122" />
+    <div class="container">
+      <div id="display-registration-number" class="display-title"></div>
+      <div class="spinner" id="spinner"></div>
+      <!-- <div id="display-welcome" class="display-success">Welcome</div> -->
+      <div id="display-full-name" class="display-highlight"></div>
+      <div id="display-test-slot" class="display-title"></div>
+      <div id="checkin-success" class="display-success">
+        ✅ Chúc con thi may mắn! ✅
+      </div>
+      <div id="countdown-timer"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        let countdownInterval; // Declare countdownInterval
+
+        window.onload = () => $("#hidden-input").focus();
+        // window.addEventListener("click", () => $("#hidden-input").focus());
+        $("#hidden-input").on("focus", function () {
+          $(this).select();
+        });
+        $("#hidden-input").focus();
+
+        // Add event F11 to activate fullscreen
+        $(document).on("click", function (e) {
+          const elem = document.documentElement; // Entire page
+
+          if (document.fullscreenElement) {
+            // document.exitFullscreen();
+          } else {
+            if (elem.requestFullscreen) {
+              elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) {
+              // For Firefox
+              elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) {
+              // For Chrome, Safari, and Opera
+              elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+              // For IE/Edge
+              elem.msRequestFullscreen();
+            }
+          }
+
+          $("#hidden-input").focus();
+        });
+
+        $("#hidden-input").keypress(function (e) {
+          if (e.which == 13) {
+            // Enter key pressed
+            e.preventDefault();
+            var inputValue = $(this).val();
+
+            $("body").css(
+              "background-image",
+              "url('/assets/ws_event_page/images/NHTN_BG_02.jpg')"
+            );
+            $("#display-registration-number").text(inputValue);
+            $("#display-registration-number").show();
+            $("#spinner").show();
+            $("#display-welcome").hide();
+            $("#display-full-name").hide();
+            $("#display-test-slot").hide();
+            $("#checkin-success").hide();
+            disableInput();
+            if (countdownInterval) {
+              clearInterval(countdownInterval);
+            }
+
+            if (inputValue) {
+              $.ajax({
+                url: "/api/method/ws_event_page.api.event.admission_checkin.lead.test_checkin",
+                type: "POST",
+                data: JSON.stringify({ lead_id: inputValue.toUpperCase() }),
+                contentType: "application/json",
+                success: function (r) {
+                  if (r.message) {
+                    var lead = r.message;
+                    $("#display-full-name").text(lead.student_full_name);
+                    if (lead.registered_slot) {
+                      $("#display-test-slot").html(
+                        "Booking: <br/>" +
+                          lead.test_slot_date +
+                          " | " +
+                          lead.test_slot_start_time +
+                          " - " +
+                          lead.test_slot_end_time
+                      );
+                      $("#checkin-success").show();
+                    } else {
+                      $("#display-test-slot").html(
+                        "Không tìm thấy đăng ký lịch thi!"
+                      );
+                    }
+                    $("#spinner").hide();
+                    $("#display-welcome").show();
+                    $("#display-full-name").show();
+                    $("#display-test-slot").show();
+                  } else {
+                    $("#display-full-name").text("Không tìm thấy Học sinh!");
+                    $("#spinner").hide();
+                    $("#display-full-name").show();
+                  }
+                  enableInput();
+                  // reset_after_seconds(5);
+                },
+                error: function () {
+                  $("#display-full-name").text("Không tìm thấy Học sinh!");
+                  $("#spinner").hide();
+                  $("#display-full-name").show();
+                  enableInput();
+                  // reset_after_seconds(5);
+                },
+              });
+            }
+
+            function disableInput() {
+              $("#hidden-input").prop("disabled", true);
+            }
+
+            function enableInput() {
+              $("#hidden-input").prop("disabled", false);
+              $("#hidden-input").focus();
+            }
+
+            function reset_after_seconds(seconds) {
+              let countdown = seconds;
+
+              // Clear any existing countdown interval
+              if (countdownInterval) {
+                clearInterval(countdownInterval);
+              }
+
+              // Start a new countdown interval
+              countdownInterval = setInterval(function () {
+                $("#countdown-timer").text(
+                  `Xoá dữ liệu trong (Clearing data in) : ${countdown} giây (seconds)`
+                ); // Display countdown
+                countdown--;
+
+                // When countdown reaches 0, clear the student_info div
+                if (countdown < 0) {
+                  clearInterval(countdownInterval); // Stop the interval
+                  $("#countdown-timer").text(""); // Clear countdown message
+
+                  $("#display-registration-number").hide();
+                  $("#display-welcome").hide();
+                  $("#display-full-name").hide();
+                  $("#display-test-slot").hide();
+                  $("#checkin-success").hide();
+                  $("#hidden-input").val("");
+                  $("#hidden-input").focus();
+                  $("body").css(
+                    "background-image",
+                    "url('/assets/ws_event_page/images/NHTN_BG_01.jpg')"
+                  );
+                }
+              }, 1000); // Update every second (1000 ms)
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<!-- <div class="container page-body">
+  <form id="checkin-form">
+    <input
+      type="text"
+      id="lead-id"
+      class="form-control"
+      placeholder="Enter Registration Number"
+    />
+  </form>
+
+  <div id="lead-info" class="page-content"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $("#checkin-form").submit(function (e) {
+        e.preventDefault();
+        var leadId = $("#lead-id").val();
+
+        frappe.call({
+          method:
+            "ws_event_page.api.event.admission_checkin.lead.get_lead_info",
+          args: {
+            lead_id: leadId,
+          },
+          callback: function (r) {
+            if (r.message) {
+              var lead = r.message;
+              var leadInfo = `
+                <div class="lead-info">
+                  <h3>${lead.registration_number} - ${lead.student_full_name}</h3>
+                  <p>${lead.contact_email}</p>
+                  <p>${lead.mobile_number}</p>
+                  <p>${lead.parent_full_name}</p>
+                  <p>${lead.student_grade}</p>
+                </div>
+              `;
+              $("#lead-info").html(leadInfo);
+            } else {
+              $("#lead-info").html("<p>Lead not found</p>");
+            }
+          },
+        });
+      });
+    });
+  </script>
+</div> -->
