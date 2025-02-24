@@ -196,5 +196,13 @@
     "sub_heading_2_3": "Cách gửi ảnh",
     "sub_heading_2_4": "Tiêu chí đánh giá",
     "student_not_found": "Không tìm thấy học sinh. Vui lòng thử lại."
+  },
+  "placement_test": {
+    "registration_title": "Placement Test Registration",
+    "registration_closed": "The placement Test Registration is closed!",
+    "registration_number": "Registration Number:",
+    "time_slots": "Time",
+    "capacity": "Capacity",
+    "registered_slot": "Registered Slot"
   }
 }

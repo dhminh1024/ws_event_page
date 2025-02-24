@@ -8,4 +8,7 @@ export const EVENT_PAGES = {
   NUTRITION_JOURNEY: {
     SITE_URL: "nutrition-journey",
   },
+  PLACEMENT_TEST: {
+    SITE_URL: "placement-test",
+  }
 };
