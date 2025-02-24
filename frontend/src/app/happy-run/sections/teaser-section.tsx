@@ -56,21 +56,21 @@ export const TeaserSection: FC<TeaserSectionProps> = ({
         <>
           <Typography.Heading
             level={2}
-            className="pt-[5rem] md:pt-[40rem] font-raceChampion text-hr-blue text-[25rem] md:text-[75rem] uppercase flex items-center justify-center"
+            className="pt-[5rem] md:pt-[40rem] mb-[10rem] md:mb-[30rem] font-raceChampion text-hr-blue text-[25rem] md:text-[75rem] uppercase flex items-center justify-center"
           >
             <div ref={text1Ref}>{parser(t("happy_run.teaser_heading_1"))}</div>
             <div ref={text2Ref} className="text-hr-honey ml-[5rem]">
               {parser(t("happy_run.teaser_heading_2"))}
             </div>
           </Typography.Heading>
-          <div ref={textDescRef} className="w-[80%] mx-auto">
+          {/* <div ref={textDescRef} className="w-[80%] mx-auto">
             <Typography.Heading
               level={2}
               className="text-hr-blue font-black text-[13rem] md:text-[35rem] mb-[5rem] md:mb-[20rem] "
             >
               {parser(t("happy_run.teaser_description"))}
             </Typography.Heading>
-          </div>
+          </div> */}
           {events.variables.teaser_embed_url?.value && (
             <iframe
               src={events.variables.teaser_embed_url?.value}

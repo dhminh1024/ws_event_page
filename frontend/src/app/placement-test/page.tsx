@@ -56,8 +56,8 @@ export const Component = () => {
   return (
     <div className="bg-pt-background overflow-hidden h-[100vh]">
       <div className="flex justify-center items-center h-full">
-        <div className="w-[90%] md:w-[70%] h-[90vh] m-auto bg-white rounded-5 overflow-hidden">
-          <div className="flex h-full w-full">
+        <div className="max-w-[90%] w-[1136px] h-[90vh] m-auto bg-white rounded-lg overflow-hidden">
+          <div className="flex flex-col md:flex-row h-full w-full">
             <div className="basis-[25%] bg-slate-400"></div>
             <div className="basis-[50%] bg-slate-200">
               <Calendar
