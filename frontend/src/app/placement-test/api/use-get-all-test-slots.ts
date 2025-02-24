@@ -25,6 +25,7 @@ const useGetAllTestSlots = (bookingID?: string, skip?: boolean) => {
     isLoading,
     isValidating,
     error: errorCode,
+    mutate
   };
 };
 
