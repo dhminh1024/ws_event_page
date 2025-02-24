@@ -7,11 +7,6 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "status_section",
-  "status",
-  "group_name",
-  "column_break_jpyd",
-  "qr_code",
   "general_section",
   "registration_number",
   "contact_email",
@@ -20,7 +15,21 @@
   "column_break_kytv",
   "registration_timestamp",
   "mobile_number",
-  "student_grade"
+  "student_grade",
+  "qr_code",
+  "status_section",
+  "status",
+  "column_break_jpyd",
+  "group_name",
+  "test_booking_section",
+  "booking_id",
+  "progress_status",
+  "registered_slot",
+  "test_score",
+  "column_break_nplg",
+  "invitation_sent_at",
+  "test_registered_at",
+  "test_checked_in_at"
  ],
  "fields": [
   {
@@ -58,8 +67,7 @@
   {
    "fieldname": "registration_timestamp",
    "fieldtype": "Datetime",
-   "label": "Registration Timestamp",
-   "reqd": 1
+   "label": "Registration Timestamp"
   },
   {
    "fieldname": "mobile_number",
@@ -77,7 +85,7 @@
   {
    "fieldname": "status_section",
    "fieldtype": "Section Break",
-   "label": "Status"
+   "label": "Event NHTN"
   },
   {
    "default": "New",
@@ -124,12 +132,73 @@
    "in_standard_filter": 1,
    "label": "Group Name",
    "reqd": 1
+  },
+  {
+   "fieldname": "test_booking_section",
+   "fieldtype": "Section Break",
+   "label": "Test Booking"
+  },
+  {
+   "default": "Waiting For Invitation",
+   "fieldname": "progress_status",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Progress Status",
+   "options": "Waiting For Invitation\nInvitation Email Sent\nRegistered For Test\nChecked In Test",
+   "reqd": 1
+  },
+  {
+   "fieldname": "invitation_sent_at",
+   "fieldtype": "Datetime",
+   "label": "Invitation Sent At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "test_registered_at",
+   "fieldtype": "Datetime",
+   "label": "Test Registered At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "test_checked_in_at",
+   "fieldtype": "Datetime",
+   "label": "Test Checked In At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_nplg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "booking_id",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_standard_filter": 1,
+   "label": "Booking ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "registered_slot",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Registered Slot",
+   "options": "WSE AC Test Slot",
+   "read_only": 1
+  },
+  {
+   "fieldname": "test_score",
+   "fieldtype": "Float",
+   "label": "Test Score"
   }
  ],
  "image_field": "qr_code",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-20 12:29:32.054963",
+ "modified": "2025-02-23 15:00:43.178820",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE AC Lead",
