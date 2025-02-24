@@ -35,7 +35,7 @@ frappe.ui.form.on("WSE AC Lead", {
               lead_id: frm.doc.name,
               test_slot_id: values.test_slot,
               booking_id: frm.doc.booking_id,
-              switch_slot: frm.doc.registered_slot ? true : false,
+              switch_slot: frm.doc.registered_slot ? 1 : 0,
               send_email: values.send_email,
             },
             callback: (r) => {

@@ -25,7 +25,9 @@
   "booking_id",
   "progress_status",
   "registered_slot",
-  "test_score",
+  "test_slot_date",
+  "test_slot_start_time",
+  "test_slot_end_time",
   "column_break_nplg",
   "invitation_sent_at",
   "test_registered_at",
@@ -190,15 +192,34 @@
    "read_only": 1
   },
   {
-   "fieldname": "test_score",
-   "fieldtype": "Float",
-   "label": "Test Score"
+   "fetch_from": "registered_slot.date",
+   "fieldname": "test_slot_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Test Slot Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "registered_slot.start_time",
+   "fieldname": "test_slot_start_time",
+   "fieldtype": "Time",
+   "hidden": 1,
+   "label": "Test Slot Start Time",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "registered_slot.end_time",
+   "fieldname": "test_slot_end_time",
+   "fieldtype": "Time",
+   "hidden": 1,
+   "label": "Test Slot End Time",
+   "read_only": 1
   }
  ],
  "image_field": "qr_code",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-23 15:00:43.178820",
+ "modified": "2025-02-24 15:23:35.336837",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE AC Lead",

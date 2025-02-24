@@ -1,42 +1,11 @@
-<style>
-  .container {
-    width: 100%;
-    max-width: max-content;
-    margin: auto;
-    padding: 10px 0px;
-    text-align: justify;
-  }
-  .container .en-language {
-    color: #00539c !important;
-  }
-  .container .vn-language {
-    color: #102131 !important;
-  }
-  .container p {
-    margin: 10px 0;
-  }
-  .container ol {
-    margin: 5px 0px;
-  }
-  .container ul {
-    margin: 5px 0px;
-  }
-  .container .qr-code {
-    text-align: center;
-    margin: 15px 0;
-  }
-  .container .section {
-    margin-bottom: 30px;
-  }
-  .container hr {
-    border: none;
-    border-top: 1px solid #ccc;
-    margin: 30px 0;
-  }
-</style>
-
-<div class="container">
-  <div class="section vn-language">
+<div
+  class="container"
+  style="width: 100%; margin: auto; padding: 10px 0px; text-align: justify"
+>
+  <div
+    class="section vn-language"
+    style="margin-bottom: 30px; color: #102131 !important"
+  >
     <p>
       Kính gửi Quý Phụ huynh Học sinh
       <strong>{{lead.student_full_name}}</strong>, Số Thứ tự:
@@ -130,10 +99,10 @@
     <p>Hội đồng Tuyển sinh Wellspring Saigon</p>
   </div>
 
-  <hr />
+  <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0" />
 
   <!-- English Version -->
-  <div class="section en-language">
+  <div class="section en-language" style="color: #00539c !important">
     <p>
       Dear Parents of Student
       <strong>{{lead.student_full_name}}</strong>, Order Number:

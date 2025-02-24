@@ -59,24 +59,19 @@ class WSEACLead(Document):
         invitation_sent_at: DF.Datetime | None
         mobile_number: DF.Data | None
         parent_full_name: DF.Data | None
-        progress_status: DF.Literal[
-            "Waiting For Invitation",
-            "Invitation Email Sent",
-            "Registered For Test",
-            "Checked In Test",
-        ]
+        progress_status: DF.Literal["Waiting For Invitation", "Invitation Email Sent", "Registered For Test", "Checked In Test"]
         qr_code: DF.AttachImage | None
         registered_slot: DF.Link | None
         registration_number: DF.Data
         registration_timestamp: DF.Datetime | None
         status: DF.Literal["New", "Confirmation Email Sent", "Checked in"]
         student_full_name: DF.Data
-        student_grade: DF.Literal[
-            "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "K9", "K10", "K11", "K12"
-        ]
+        student_grade: DF.Literal["K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "K9", "K10", "K11", "K12"]
         test_checked_in_at: DF.Datetime | None
         test_registered_at: DF.Datetime | None
-        test_score: DF.Float
+        test_slot_date: DF.Date | None
+        test_slot_end_time: DF.Time | None
+        test_slot_start_time: DF.Time | None
     # end: auto-generated types
 
     def validation(self):
@@ -182,6 +177,7 @@ class WSEACLead(Document):
                     "lead": self,
                     "registration_link": f"{frappe.utils.get_url()}/events/placement-test/registration/{self.booking_id}",
                 },
+                now=True,
             )
             self.progress_status = WSEACTestStatus.INVITATION_EMAIL_SENT.value
             self.invitation_sent_at = frappe.utils.now()
@@ -256,7 +252,7 @@ class WSEACLead(Document):
                 now=True,
             )
 
-    def register_for_test(self, slot_id, send_email=True):
+    def register_for_test(self, slot_id, send_email=1):
         is_test_registration_open()
 
         # register for test
@@ -277,7 +273,7 @@ class WSEACLead(Document):
                 test_slot.current_registered = current_registered + 1
                 test_slot.save()
 
-                if send_email:
+                if str(send_email) == "1":
                     self.send_test_registration_confirmation_email()
             else:
                 frappe.throw(WSEACErrorCode.TEST_SLOT_DISABLED.value)
