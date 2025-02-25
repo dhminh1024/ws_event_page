@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { ReactNode, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import { cleanPath, getDateLocale } from "@/lib/utils/common";
+import { cleanPath, getDateLocale, parseDate } from "@/lib/utils/common";
 import { DayContentProps } from "react-day-picker";
 import { cn } from "@/core/utils/shadcn-utils";
 import { differenceInMinutes, format } from "date-fns";
@@ -27,6 +27,7 @@ import parser from "html-react-parser";
 import { Separator } from "@radix-ui/react-select";
 import { ModalProps, NotificationModal } from "./components/notification-modal";
 import { FrappeError } from "frappe-react-sdk";
+import { parse } from "path";
 
 const CalendarStyled = styled(Calendar)`
   & > div,
@@ -83,12 +84,13 @@ export const Component = () => {
     error: getLeadError,
     mutate,
   } = useGetLeadByBookingID(bookingID, !bookingID);
-  const { testSlots, error: getTestSlotsError, mutate: mutateSlots } = useGetAllTestSlots(
-    bookingID,
-    !bookingID
-  );
+  const {
+    testSlots,
+    error: getTestSlotsError,
+    mutate: mutateSlots,
+  } = useGetAllTestSlots(bookingID, !bookingID);
   const dayGroupBy = testSlots?.reduce<Record<string, boolean>>((arr, slot) => {
-    const day = format(slot.date, "dd/MM");
+    const day = format(parseDate(slot.date, "yyyy-MM-dd"), "dd/MM");
     arr[day] = true;
     return arr;
   }, {});
@@ -151,20 +153,22 @@ export const Component = () => {
         // alert("SUCCESS");
         setMessage({
           title: t("placement_test.registration_success.title"),
-          message: parser(t("placement_test.registration_success.message",{
-            email: lead?.contact_email,
-          })),
+          message: parser(
+            t("placement_test.registration_success.message", {
+              email: lead?.contact_email,
+            })
+          ),
         });
       } catch (error: any) {
         if (error.exception.includes("WSEAC-E205")) {
           setMessage({
-            type:"error",
+            type: "error",
             title: t("placement_test.registration_max_capacity.title"),
             message: t("placement_test.registration_max_capacity.message"),
           });
         } else {
           setMessage({
-            type:"error",
+            type: "error",
             title: t("placement_test.registration_failed.title"),
             message: t("placement_test.registration_failed.message"),
           });
@@ -257,10 +261,14 @@ export const Component = () => {
                         {t("placement_test.registered_slot")}:
                       </p>
                       <p className="text-md md:text-xl font-bold flex items-center gap-x-2 justify-center">
-                        {format(currentSlot?.date, "EEEE, dd/MM/yyyy",{locale: getDateLocale(currentLanguage)}) +
+                        {format(
+                          parseDate(currentSlot?.date, "yyyy-MM-dd"),
+                          "EEEE, dd/MM/yyyy",
+                          { locale: getDateLocale(currentLanguage) }
+                        ) +
                           " | " +
                           format(
-                            new Date("2025-01-01 " + currentSlot.start_time),
+                            parseDate("2025-01-01 " + currentSlot.start_time),
                             "HH:mm"
                           )}
                         <Check className="text-green-500 w-5 h-5 inline" />
@@ -339,8 +347,10 @@ export const Component = () => {
                           ?.filter(
                             (slot) =>
                               dateSelected &&
-                              format(slot.date, "yyyy-MM-dd") ===
-                                format(dateSelected, "yyyy-MM-dd")
+                              format(
+                                parseDate(slot.date, "yyyy-MM-dd"),
+                                "yyyy-MM-dd"
+                              ) === format(dateSelected, "yyyy-MM-dd")
                           )
                           // .sort((a, b) => {
                           //   return (
@@ -371,12 +381,12 @@ export const Component = () => {
                             >
                               <span>
                                 {format(
-                                  new Date("2025-01-01 " + slot.start_time),
+                                  parseDate("2025-01-01 " + slot.start_time),
                                   "HH:mm"
                                 )}{" "}
                                 -{" "}
                                 {format(
-                                  new Date("2025-01-01 " + slot.end_time),
+                                  parseDate("2025-01-01 " + slot.end_time),
                                   "HH:mm"
                                 )}
                               </span>
