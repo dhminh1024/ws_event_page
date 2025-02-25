@@ -48,7 +48,7 @@ export const NotificationModal: FC<ModalProps> = ({
 }) => {
   const { t } = useLocales();
   const { isDesktop } = useResponsive();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const event = useEventPageContext();
 
   const handleOpenChange = (open: boolean) => {
@@ -76,7 +76,7 @@ export const NotificationModal: FC<ModalProps> = ({
         <div className="">
           <p
             className={cn(
-              "text-[24px] md:text-[34px] mb-[10px] text-center",
+              "text-[24px] md:text-[34px] mb-[10px] text-center font-bold",
               {
                 "text-pt-lime": type === "success",
                 "text-pt-ember": type === "error",

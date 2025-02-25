@@ -207,6 +207,14 @@
     "registration_success": {
       "title": "Registration Successful",
       "message": "Thank you for registering for the survey. Please check your email for detailed information."
+    },
+    "registration_max_capacity": {
+      "title": "Registration Failed",
+      "message": "Currently, there are no available slots. Please select another time."
+    },
+    "registration_failed": {
+      "title": "Registration Failed",
+      "message": "An error occurred. Please try again."
     }
   }
 }

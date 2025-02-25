@@ -26,6 +26,7 @@ import { useResponsive } from "@/core/hooks/use-reponsive";
 import parser from "html-react-parser";
 import { Separator } from "@radix-ui/react-select";
 import { ModalProps, NotificationModal } from "./components/notification-modal";
+import { FrappeError } from "frappe-react-sdk";
 
 const CalendarStyled = styled(Calendar)`
   & > div,
@@ -82,7 +83,7 @@ export const Component = () => {
     error: getLeadError,
     mutate,
   } = useGetLeadByBookingID(bookingID, !bookingID);
-  const { testSlots, error: getTestSlotsError } = useGetAllTestSlots(
+  const { testSlots, error: getTestSlotsError, mutate: mutateSlots } = useGetAllTestSlots(
     bookingID,
     !bookingID
   );
@@ -152,13 +153,23 @@ export const Component = () => {
           title: t("placement_test.registration_success.title"),
           message: t("placement_test.registration_success.message"),
         });
-      } catch (error) {
-        setMessage({
-          title: t("placement_test.registration_failed.title"),
-          message: t("placement_test.registration_failed.message"),
-        });
+      } catch (error: any) {
+        if (error.exception.includes("WSEAC-E205")) {
+          setMessage({
+            type:"error",
+            title: t("placement_test.registration_max_capacity.title"),
+            message: t("placement_test.registration_max_capacity.message"),
+          });
+        } else {
+          setMessage({
+            type:"error",
+            title: t("placement_test.registration_failed.title"),
+            message: t("placement_test.registration_failed.message"),
+          });
+        }
       }
       mutate();
+      mutateSlots();
     }
   };
 
@@ -240,11 +251,11 @@ export const Component = () => {
                   </div>
                   {currentSlot && (
                     <div className="mt-2 text-center">
-                      <p className="text-md">
+                      <p className="text-md md:text-xl">
                         {t("placement_test.registered_slot")}:
                       </p>
-                      <p className="text-sm font-bold flex items-center gap-x-2 justify-center">
-                        {format(currentSlot?.date, "dd/MM/yyyy") +
+                      <p className="text-md md:text-xl font-bold flex items-center gap-x-2 justify-center">
+                        {format(currentSlot?.date, "EEEE, dd/MM/yyyy",{locale: getDateLocale(currentLanguage)}) +
                           " | " +
                           format(
                             new Date("2025-01-01 " + currentSlot.start_time),
@@ -304,7 +315,7 @@ export const Component = () => {
                   <div className="h-full flex flex-col justify-between">
                     <div className="">
                       <p className="font-bold text-pt-primary mb-5">
-                        <span className="text-xl mr-2 text-pt-ember">
+                        <span className="text-md md:text-xl mr-2 text-pt-ember">
                           {dateSelected &&
                             format(dateSelected, "EEEE", {
                               locale: getDateLocale(currentLanguage),

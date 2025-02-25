@@ -209,9 +209,13 @@
       "title": "Đăng ký thành công",
       "message": "Cảm ơn bạn đã đăng ký tham gia khảo sát. Hãy kiểm tra email để xem thông tin chi tiết."
     },
-    "registration_failed": {
+    "registration_max_capacity": {
       "title": "Đăng ký thất bại",
       "message": "Hiện tại không còn chỗ trống. Vui lòng chọn lại thời gian khác."
+    },
+    "registration_failed": {
+      "title": "Đăng ký thất bại",
+      "message": "Đã có lỗi xảy ra. Vui lòng thử lại."
     }
   }
 }
