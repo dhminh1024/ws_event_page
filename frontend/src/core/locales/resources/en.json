@@ -206,15 +206,15 @@
     "registered_slot": "Registered Slot",
     "registration_success": {
       "title": "Registration Successful",
-      "message": "Thank you for registering for the survey. Please check your email for detailed information."
+      "message": "Thank you for registering for the survey. A confirmation email will be sent to <b>{{email}}</b>"
     },
     "registration_max_capacity": {
       "title": "Registration Failed",
-      "message": "Currently, there are no available slots. Please select another time."
+      "message": "The selected time slot is currently full. Please choose another time."
     },
     "registration_failed": {
       "title": "Registration Failed",
-      "message": "An error occurred. Please try again."
+      "message": "Sorry, an error occurred. Please try again later."
     }
   }
 }

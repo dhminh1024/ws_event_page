@@ -1,7 +1,7 @@
 import { useLocales } from "@/core/hooks/use-locales";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
-import { useEffect, useMemo, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { cleanPath, getDateLocale } from "@/lib/utils/common";
 import { DayContentProps } from "react-day-picker";
@@ -98,7 +98,7 @@ export const Component = () => {
   const [message, setMessage] = useState<{
     type?: ModalProps["type"];
     title: string;
-    message: string;
+    message: ReactNode;
   }>();
 
   const isOpenRegistration = settings?.open_test_registration &&
@@ -151,7 +151,9 @@ export const Component = () => {
         // alert("SUCCESS");
         setMessage({
           title: t("placement_test.registration_success.title"),
-          message: t("placement_test.registration_success.message"),
+          message: parser(t("placement_test.registration_success.message",{
+            email: lead?.contact_email,
+          })),
         });
       } catch (error: any) {
         if (error.exception.includes("WSEAC-E205")) {
