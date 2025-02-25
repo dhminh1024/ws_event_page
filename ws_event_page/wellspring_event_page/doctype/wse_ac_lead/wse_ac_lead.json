@@ -132,8 +132,7 @@
    "in_filter": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Group Name",
-   "reqd": 1
+   "label": "Group Name"
   },
   {
    "fieldname": "test_booking_section",
@@ -189,7 +188,8 @@
    "in_standard_filter": 1,
    "label": "Registered Slot",
    "options": "WSE AC Test Slot",
-   "read_only": 1
+   "read_only": 1,
+   "search_index": 1
   },
   {
    "fetch_from": "registered_slot.date",
@@ -219,7 +219,7 @@
  "image_field": "qr_code",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-24 15:23:35.336837",
+ "modified": "2025-02-25 09:40:44.252338",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE AC Lead",

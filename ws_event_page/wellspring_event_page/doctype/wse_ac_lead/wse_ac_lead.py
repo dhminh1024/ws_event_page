@@ -55,7 +55,7 @@ class WSEACLead(Document):
 
         booking_id: DF.Data | None
         contact_email: DF.Data
-        group_name: DF.Data
+        group_name: DF.Data | None
         invitation_sent_at: DF.Datetime | None
         mobile_number: DF.Data | None
         parent_full_name: DF.Data | None
@@ -174,7 +174,7 @@ class WSEACLead(Document):
                 sender="admissions@wellspringsaigon.edu.vn",
                 reply_to="admissions@wellspringsaigon.edu.vn",
                 recipients=[self.contact_email],
-                subject="WSSG. SY2025-2026 | THƯ MỜI ĐĂNG KÝ LỊCH KHẢO SÁT ĐẦU VÀO DÀNH CHO LỚP 1/INVITATION TO REGISTER FOR THE PLACEMENT TEST FOR GRADE 1",
+                subject="[ WSSG.SY2025-2026 ] THƯ MỜI ĐĂNG KÝ KHẢO SÁT ĐẦU VÀO LỚP 1 | INVITATION TO REGISTER FOR THE GRADE 1 PLACEMENT TEST",
                 template=(
                     "ac_test_invitation_after_event"
                     if self.status == WSEACLeadStatus.CHECKED_IN.value
@@ -217,6 +217,9 @@ class WSEACLead(Document):
                 "Saturday": "Thứ Bảy",
                 "Sunday": "Chủ Nhật",
             }[weekday_en]
+            test_slot_start_time = str(test_slot.start_time).rsplit(":", 1)[0]
+            test_slot_date = test_slot.date.strftime("%d/%m/%Y")
+
             account_number = "0531000929292"
             account_name = "Công ty TNHH MTV Đầu Tư và Phát Triển Giáo Dục SSG"
             bin_number = "970436"
@@ -233,13 +236,15 @@ class WSEACLead(Document):
                 sender="admissions@wellspringsaigon.edu.vn",
                 reply_to="admissions@wellspringsaigon.edu.vn",
                 recipients=[self.contact_email],
-                subject="WSSG Xac nhan Lich khao sat dau vao NH2024-2025/WSSG Confirmation of The Placement test Schedule 2024-2025",
+                subject="[WSSG.SY2025-2026] XÁC NHẬN LỊCH KHẢO SÁT ĐẦU VÀO KHỐI 1 | CONFIRMATION OF THE GRADE 1 PLACEMENTEST SCHEDULE ",
                 template="ac_test_registration_confirmation",
                 args={
                     "lead": self,
                     "test_slot": test_slot,
                     "weekday_vn": weekday_vn,
                     "weekday_en": weekday_en,
+                    "test_slot_start_time": test_slot_start_time,
+                    "test_slot_date": test_slot_date,
                     "payment_qr_code": self.generate_qr_payment_code(
                         account_number,
                         account_name,

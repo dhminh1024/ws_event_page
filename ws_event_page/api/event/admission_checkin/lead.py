@@ -101,8 +101,9 @@ def register_for_test(lead_id, test_slot_id, booking_id, switch_slot=0, send_ema
                 frappe.throw(WSEACErrorCode.ALREADY_REGISTERED_FOR_SLOT.value)
 
             # User must have WSE AC Admin role to switch test slot
-            if "WSE AC Admin" not in frappe.get_roles():
-                frappe.throw(WSEACErrorCode.PERMISSION_DENIED.value)
+            # if "WSE AC Admin" not in frappe.get_roles():
+            #     frappe.throw(WSEACErrorCode.PERMISSION_DENIED.value)
+            # Comment out to allow switching test slot for all users
 
             prev_test_slot = frappe.get_doc("WSE AC Test Slot", lead.registered_slot)
             lead.register_for_test(test_slot_id, send_email)
