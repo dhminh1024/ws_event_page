@@ -281,7 +281,7 @@ export const Component = () => {
                   </p> */}
                 </div>
               </div>
-              <div className="w-full md:w-[480px] border-l-transparent border-r-transparent md:border-l-pt-primary/20 md:border-r-pt-primary/20 border-t-transparent md:border-t-transparent md:border-b-transparent border-[1px]">
+              <div className="w-full md:w-[480px] border-l-transparent border-r-transparent md:border-l-pt-primary/20 md:border-r-pt-primary/20 border-t-pt-primary/20 border-b-pt-primary/20 md:border-t-transparent md:border-b-transparent border-[1px]">
                 {useMemo(
                   () => (
                     <CalendarStyled
