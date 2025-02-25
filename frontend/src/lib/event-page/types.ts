@@ -2,6 +2,7 @@
 import { HBEventVariable } from "@/app/happy-box/types/variables";
 import { HREventVariable } from "@/app/happy-run/types/variables";
 import { EventVariable } from "@/app/nutrition-journey/types/variables";
+import { ACEventVariable } from "@/app/placement-test/types/variables";
 import { WSEEvent } from "@/types/WellspringEventPage/WSEEvent";
 
 export type VariableType = {
@@ -31,5 +32,5 @@ export type EventVariableBase = {
 }
 
 export interface WSEEventResponse extends Omit<WSEEvent, "variables"> {
-  variables: HBEventVariable & HREventVariable & Record<string, VariableType>;
+  variables: HBEventVariable & HREventVariable & ACEventVariable & Record<string, VariableType>;
 }

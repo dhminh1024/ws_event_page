@@ -203,6 +203,10 @@
     "registration_number": "Registration Number:",
     "time_slots": "Time",
     "capacity": "Capacity",
-    "registered_slot": "Registered Slot"
+    "registered_slot": "Registered Slot",
+    "registration_success": {
+      "title": "Registration Successful",
+      "message": "Thank you for registering for the survey. Please check your email for detailed information."
+    }
   }
 }
