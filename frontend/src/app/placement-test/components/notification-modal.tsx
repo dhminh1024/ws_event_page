@@ -23,12 +23,13 @@ import { useResponsive } from "@/core/hooks/use-reponsive";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { X } from "lucide-react";
 import { Button } from "@atoms/button";
+import { CheckCircle, XCircle } from "phosphor-react";
 
 export type ModalProps = HTMLAttributes<HTMLDivElement> &
   PropsWithChildren & {
     open?: boolean;
     title?: string;
-    description?: string;
+    description?: ReactNode;
     type?: "success" | "error";
     onConfirm?: (letter: string) => void;
     onCancel?: () => void;
@@ -74,11 +75,13 @@ export const NotificationModal: FC<ModalProps> = ({
         <DialogTitle></DialogTitle>
         <DialogDescription></DialogDescription>
         <div className="">
+          {type === "success"  && <CheckCircle className="text-brand-teal mx-auto" size={100} weight="regular"/>}
+          {type === "error" && <XCircle className="text-pt-ember mx-auto" size={100} weight="regular"/>}
           <p
             className={cn(
               "text-[24px] md:text-[34px] mb-[10px] text-center font-bold",
               {
-                "text-pt-lime": type === "success",
+                "text-brand-teal": type === "success",
                 "text-pt-ember": type === "error",
               }
             )}

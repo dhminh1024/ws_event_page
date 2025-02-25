@@ -207,15 +207,15 @@
     "registered_slot": "Lịch đã đăng ký",
     "registration_success": {
       "title": "Đăng ký thành công",
-      "message": "Cảm ơn bạn đã đăng ký tham gia khảo sát. Hãy kiểm tra email để xem thông tin chi tiết."
+      "message": "Cảm ơn bạn đã đăng ký tham gia khảo sát. Email xác nhận sẽ được gủi tới <b>{{email}}</b>"
     },
     "registration_max_capacity": {
       "title": "Đăng ký thất bại",
-      "message": "Hiện tại không còn chỗ trống. Vui lòng chọn lại thời gian khác."
+      "message": "Lịch đăng ký bạn chọn hiện không còn chỗ trống. Vui lòng chọn lại thời gian khác."
     },
     "registration_failed": {
       "title": "Đăng ký thất bại",
-      "message": "Đã có lỗi xảy ra. Vui lòng thử lại."
+      "message": "Rất tiếc, đã có lỗi xảy ra. Xin vui lòng thử lại sau."
     }
   }
 }
