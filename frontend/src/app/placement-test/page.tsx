@@ -210,10 +210,10 @@ export const Component = () => {
                       </span>
                     </p>
                   </div>
-                  <p className="hidden md:block mt-10">
+                  <p className="mt-5 md:mt-10">
                     <p className="text-center italic">Check In QR Code</p>
                     <img
-                      className="h-[100px] w-auto md:h-auto md:w-[60%] md:mx-auto"
+                      className="h-[100px] w-auto md:h-auto md:w-[60%] mx-auto"
                       src={cleanPath(`${env.ASSET_URL}/${lead?.qr_code}`)}
                       alt=""
                     />
