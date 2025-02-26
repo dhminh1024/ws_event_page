@@ -80,7 +80,7 @@
       "section_4_heading": "CONTACT INFORMATION",
       "section_4_desc_1": "*Important information to help the organizers team contact participants when needed and send registration confirmation",
       "section_4_desc_2": "*If the registrant is a student, please fill in the contact information of the parent or accompanying adult",
-      "young_user_warning": "*If the registrant is a Elementary student, please fill in the contact information of the parent or accompanying adult",
+      "young_user_warning": "*Note: *If the registrant is a Elementary student (ticket purchase is necessary), please fill in the contact information of the parent or accompanying adult",
       "user_code": "Student/Staff ID",
       "user_code_required": "Please enter the ID",
       "user_code_duplicate": "Duplicate ID",
@@ -199,7 +199,7 @@
   },
   "placement_test": {
     "registration_title": "Placement Test Registration",
-    "registration_closed": "The placement Test Registration is closed!",
+    "registration_closed": "The form is currently closed!",
     "registration_number": "Registration Number:",
     "time_slots": "Time",
     "capacity": "Capacity",
