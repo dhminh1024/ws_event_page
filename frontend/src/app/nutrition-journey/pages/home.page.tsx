@@ -14,7 +14,7 @@ import { LoginConfirmModal } from "../components/login-confirm-modal";
 export const Component: FC = () => {
   const { t } = useLocales();
   return (
-    <BackgroundCoin>
+    <BackgroundCoin className="bg-white">
       <Helmet>
         <title>
           {t("common.home_page")} | {t("nutritional_journey.campaign_name")}
