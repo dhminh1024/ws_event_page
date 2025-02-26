@@ -87,7 +87,7 @@
       "user_code_invalid": "Invalid ID",
       "user_code_has_orders": "ID has already been registered. <a className=\"text-hr-blue\" target=\"_blank\" href=\"{{link}}\">Link</a>",
       "full_name": "Full Name",
-      "full_name_desc": "*Note: Full name of the parent or accompanying adult",
+      "full_name_desc": "*Note: *If the registrant is a Elementary student (ticket purchase is necessary), please fill in the contact information of the parent or accompanying adult",
       "full_name_placeholder": "Enter full name",
       "full_name_required": "Please enter full name",
       "class_department": "Class/Department",

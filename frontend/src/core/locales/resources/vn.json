@@ -87,7 +87,7 @@
       "user_code_invalid": "Mã số không hợp lệ",
       "user_code_has_orders": "Mã số được đã đăng ký. <a className=\"text-hr-blue\" target=\"_blank\" href=\"{{link}}\">Link</a>",
       "full_name": "Họ tên",
-      "full_name_desc": "*Lưu ý: Họ tên của PHHS hoặc người lớn đi cùng",
+      "full_name_desc": "*Lưu ý: với Học sinh Tiểu học cần có người lớn đi cùng (có tính phí mua vé)",
       "full_name_placeholder": "Nhập họ tên",
       "full_name_required": "Hãy nhập họ tên",
       "class_department": "Lớp/Phòng ban",
