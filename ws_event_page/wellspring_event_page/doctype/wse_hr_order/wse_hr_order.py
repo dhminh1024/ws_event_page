@@ -43,7 +43,9 @@ class WSEHROrder(Document):
 
     if TYPE_CHECKING:
         from frappe.types import DF
-        from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket import WSEHRTicket
+        from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket import (
+            WSEHRTicket,
+        )
 
         email: DF.Data
         full_name: DF.Data
@@ -309,6 +311,7 @@ def send_confirmation_email(
     frappe.sendmail(
         sender=sender,
         reply_to="happyrun2025@wellspringsaigon.edu.vn",
+        cc=["happyrun2025@wellspringsaigon.edu.vn"],
         recipients=recipients,
         subject=subject,
         template=email_template,

@@ -16,4 +16,5 @@ export interface WSEACSettings{
 	open_nhtn_event?: 0 | 1
 	/**	Test Registration Closing Time : Datetime	*/
 	test_registration_closing_time?: string
+	is_registration_closed?: boolean
 }

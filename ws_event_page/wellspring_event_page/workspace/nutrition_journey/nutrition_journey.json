@@ -1,0 +1,67 @@
+{
+ "charts": [
+  {
+   "chart_name": "WSE NJ Daily Submission",
+   "label": "Daily Submission"
+  }
+ ],
+ "content": "[{\"id\":\"kT23OU1YIB\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Nutrition Journey</span>\",\"col\":12}},{\"id\":\"-uxa4q2SOW\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Submissions\",\"col\":4}},{\"id\":\"gxEuQcjoqA\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Images\",\"col\":4}},{\"id\":\"8s99v99M0E\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":4}},{\"id\":\"A3cCRjN8jL\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Daily Submission\",\"col\":12}}]",
+ "creation": "2025-02-25 16:11:42.094774",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "color-rank",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Nutrition Journey",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Quick Links",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Submissions",
+   "link_count": 0,
+   "link_to": "WSE NJ Submission",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2025-02-26 09:27:36.188026",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "Nutrition Journey",
+ "number_cards": [
+  {
+   "label": "Total Submissions",
+   "number_card_name": "WSE NJ Submission Count"
+  },
+  {
+   "label": "Total Images",
+   "number_card_name": "WSE NJ Submission Image Count"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "WSE NJ Admin"
+  }
+ ],
+ "sequence_id": 33.0,
+ "shortcuts": [],
+ "title": "Nutrition Journey"
+}
