@@ -94,6 +94,7 @@ export const Component = () => {
     arr[day] = true;
     return arr;
   }, {});
+
   const { register, loading } = useRegisterTestSlot();
   const [dateSelected, setDateSelected] = useState<Date>();
   const [slotSelected, setSlotSelected] = useState<string | null>();
@@ -103,16 +104,7 @@ export const Component = () => {
     message: ReactNode;
   }>();
 
-  const isOpenRegistration = settings?.open_test_registration &&
-    settings.test_registration_closing_time &&
-    differenceInMinutes(
-      new Date(settings.test_registration_closing_time),
-      new Date()
-    ) >= 0 && (
-      <div className="text-center p-5 text-red-500">
-        {t("placement_test.registration_closed")}
-      </div>
-    );
+  const isOpenRegistration = !settings?.is_registration_closed
 
   const currentSlot: WSEACTestSlot | null =
     (lead?.registered_slot &&
