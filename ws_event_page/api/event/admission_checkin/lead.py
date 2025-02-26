@@ -138,4 +138,13 @@ def get_all_test_slots(booking_id):
 @frappe.whitelist(allow_guest=True, methods=["GET"])
 def get_ac_settings():
     settings = frappe.get_single("WSE AC Settings")
-    return settings.as_dict()
+    if (frappe.utils.now() > settings.test_registration_closing_time) or (
+        not settings.open_test_registration
+    ):
+        is_registration_closed = True
+    else:
+        is_registration_closed = False
+
+    settings = settings.as_dict()
+    settings["is_registration_closed"] = is_registration_closed
+    return settings
