@@ -1,0 +1,15 @@
+meta {
+  name: Get staffs from department
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{url}}/api/method/ws_event_page.api.event.happy_run.submission.get_department_staffs?department_id=ITT
+  body: none
+  auth: none
+}
+
+query {
+  department_id: ITT
+}
