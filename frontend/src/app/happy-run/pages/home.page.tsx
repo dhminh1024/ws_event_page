@@ -93,7 +93,7 @@ export const Component: FC = () => {
         </Helmet> */}
 
         <HeaderSection className="px-[20rem] md:px-[60rem]" />
-        <MenuBar className="mt-[-46rem] md:mt-[-55rem]" />
+        {/* <MenuBar className="mt-[-46rem] md:mt-[-55rem]" />
         <HeroSection id="overview" />
         <CountDownSection />
         <TeaserSection id="happy-run" />
@@ -102,7 +102,7 @@ export const Component: FC = () => {
         <TicketSection />
         <KitSection />
         <InfoSection />
-        <StationSection />
+        <StationSection /> */}
         <SummerSection id="happy-summer" />
         <FAQSection id="faq" />
         <SpringSection />

@@ -21,7 +21,7 @@ export const LanguageSelector: FC<LanguageSelectProps> = ({ className }) => {
   return (
     <div className={cn(className)}>
       <Select value={i18n.language} onValueChange={handleChangeLanguage} >
-        <SelectTrigger className="text-[12rem] md:text-[16rem] md:w-[150rem] h-[30rem] md:h-[40rem] p-[10rem] bg-white rounded-[8rem]">
+        <SelectTrigger className="text-[12rem] text-black md:text-[16rem] md:w-[150rem] h-[30rem] md:h-[40rem] p-[10rem] bg-white rounded-[8rem]">
           <SelectValue className="" placeholder="Select a mode" />
         </SelectTrigger>
         <SelectContent className="max-h-none bg-white">

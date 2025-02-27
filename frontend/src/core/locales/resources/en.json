@@ -23,6 +23,7 @@
     "phone": "Phone Number",
     "email": "Email",
     "class": "Class",
+    "department": "Department",
     "student_code": "Student Code",
     "event_email": "Email"
   },

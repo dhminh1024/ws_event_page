@@ -29,7 +29,7 @@ import {
 import { Check, ChevronDown, Loader2, Trash, X } from "lucide-react";
 import Typography from "@/app/happy-box/components/typography";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
-import { cleanPath, removeAccents } from "@/lib/utils/common";
+import { cleanPath } from "@/lib/utils/common";
 import { FRAPPE_APIS } from "../api/api.config";
 import useCheckUserByCode from "../api/use-check-user-by-code";
 import {
@@ -41,9 +41,6 @@ import { PaymentSuccessModal } from "../components/payment-success-modal";
 import parser from "html-react-parser";
 import { PrimaryButton } from "../components/button";
 import { LanguageSelector } from "../components/language-selector";
-import { SelectGroup, SelectLabel } from "../components/select";
-import { Combobox } from "../components/combobox";
-import { AutoComplete } from "../components/auto-complete";
 
 export type PurchasingFormProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -187,50 +184,6 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
       form.setValue(`guardian_runners.${index}.bib`, value);
   };
 
-  const [fieldData, setFieldData] = useState<string[]>();
-
-  const findGroups = (value: string) => {
-    const searchValue = removeAccents(value.toLowerCase().trim());
-    if(!value) return setFieldData([]);
-    setFieldData(
-      dataSample.filter((item) => removeAccents(item).includes(searchValue))
-    );
-  };
-
-  const dataSample = [
-    "1.2",
-    "1.3",
-    "1.4",
-    "1.5",
-    "1.6",
-    "1.7",
-    "1.8",
-    "2.1",
-    "2.2",
-    "2.3",
-    "2.4",
-    "2.5",
-    "2.6",
-    "2.7",
-    "IT-Tech",
-    "Marketing",
-    "HR",
-    "Finance",
-    "Admin",
-    "Sales",
-    "Logistics",
-    "Production",
-    "R&D",
-    "Quality",
-    "Purchasing",
-    "Maintenance",
-    "Security",
-    "Cleaning",
-    "Canteen",
-    "Gardening",
-    "Other",
-  ];
-
   return (
     <div className={cn("mb-[40rem]", className)}>
       <section
@@ -245,7 +198,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
             {parser(t("happy_run.form_heading"))}
           </Typography.Heading>
           <div className="flex items-center justify-center my-[20rem]">
-            <span className="mr-[10rem] text-[16rem] text-hr-primary">
+            <span className="mr-[10rem] text-[16rem]">
               {t("common.language")}:
             </span>
             <LanguageSelector />
@@ -320,103 +273,6 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                       <div className="grid grid-cols-3 md:grid-cols-[repeat(6,1fr)_auto] items-start gap-[5rem_5rem] md:gap-[10rem] mx-auto mb-[10rem]">
                         <FormItem>
                           <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
-                            {t("happy_run.form.class_department")}
-                          </FormLabel>
-                          <FormDescription />
-                          <FormControl>
-                            <AutoComplete
-                              className=""
-                              dataAutoComplete={fieldData}
-                              onChange={findGroups}
-                            />
-                            {/* <Combobox className="" items={[{
-                              heading:"Class",
-                              children: ticket_classes
-                            },{
-                              heading:"Department",
-                              children: ticket_classes
-                            }]} /> */}
-                            {/* <Select
-                              {...form.register(
-                                `primary_runners.${index}.department`
-                              )}
-                              value={field.value.ticket_class}
-                              onValueChange={(value) => {
-                                const oldValues = form.watch(
-                                  `primary_runners.${index}`
-                                );
-                                field.onChange({
-                                  ...oldValues,
-                                  ticket_class: value,
-                                });
-                              }}
-                            >
-                              <SelectTrigger className="h-[16rem] md:h-[30rem] p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
-                                <SelectValue
-                                  className="flex-1"
-                                  placeholder={t(
-                                    "happy_run.form.ticket_class_placeholder"
-                                  )}
-                                />
-                              </SelectTrigger>
-                              <SelectContent className="max-h-none bg-white">
-                                <SelectGroup>
-                                  <SelectLabel>{t("common.class")}</SelectLabel>
-                                  {ticket_classes.map((item) => (
-                                    <SelectItem
-                                      key={item.value}
-                                      className=" text-[8rem] md:text-[16rem] p-[5rem] md:p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
-                                      value={item.value}
-                                    >
-                                      {item.label}
-                                    </SelectItem>
-                                  ))}
-                                  {ticket_classes.map((item) => (
-                                    <SelectItem
-                                      key={item.value}
-                                      className=" text-[8rem] md:text-[16rem] p-[5rem] md:p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
-                                      value={item.value}
-                                    >
-                                      {item.label}
-                                    </SelectItem>
-                                  ))}
-                                </SelectGroup>
-                                <SelectGroup>
-                                  <SelectLabel>
-                                    {t("common.department")}
-                                  </SelectLabel>
-                                  {ticket_classes.map((item) => (
-                                    <SelectItem
-                                      key={item.value}
-                                      className=" text-[8rem] md:text-[16rem] p-[5rem] md:p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
-                                      value={item.value}
-                                    >
-                                      {item.label}
-                                    </SelectItem>
-                                  ))}
-                                </SelectGroup>
-                              </SelectContent>
-                            </Select> */}
-                          </FormControl>
-                        </FormItem>
-
-                        <FormItem>
-                          <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
-                            {t("happy_run.form.full_name")}
-                          </FormLabel>
-                          <FormDescription />
-                          <FormControl>
-                            <Input
-                              className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
-                              {...form.register(
-                                `primary_runners.${index}.full_name`
-                              )}
-                              readOnly
-                            />
-                          </FormControl>
-                        </FormItem>
-                        <FormItem>
-                          <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                             {t("happy_run.form.user_code")}
                           </FormLabel>
                           <FormDescription />
@@ -455,6 +311,36 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 ?.code?.message || ""
                             )}
                           </Typography.Paragraph>
+                        </FormItem>
+                        <FormItem>
+                          <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
+                            {t("happy_run.form.full_name")}
+                          </FormLabel>
+                          <FormDescription />
+                          <FormControl>
+                            <Input
+                              className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
+                              {...form.register(
+                                `primary_runners.${index}.full_name`
+                              )}
+                              readOnly
+                            />
+                          </FormControl>
+                        </FormItem>
+                        <FormItem>
+                          <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
+                            {t("happy_run.form.class_department")}
+                          </FormLabel>
+                          <FormDescription />
+                          <FormControl>
+                            <Input
+                              className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem"
+                              {...form.register(
+                                `primary_runners.${index}.department`
+                              )}
+                              readOnly
+                            />
+                          </FormControl>
                         </FormItem>
                         <FormItem>
                           <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">

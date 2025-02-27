@@ -23,6 +23,7 @@
     "phone": "Số điện thoại",
     "email": "Email",
     "class": "Lớp",
+    "department": "Phòng ban",
     "student_code": "MSHS",
     "event_email": "Email chương trình"
   },
