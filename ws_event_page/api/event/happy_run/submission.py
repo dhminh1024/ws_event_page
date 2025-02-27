@@ -51,7 +51,7 @@ def check_wellspring_code(wellspring_code):
 
 
 @frappe.whitelist(allow_guest=True, methods=["GET"])
-def get_list_of_school_class_and_department(keyword, language):
+def get_list_of_school_class_and_department(keyword):
     """API to get list of school class."""
     if not keyword.strip():
         frappe.throw("Keyword is required")
