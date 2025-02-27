@@ -7,6 +7,8 @@ from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket imp
 from ws_event_page.wellspring_event_page.doctype.wse_hr_order.wse_hr_order import (
     HROrderStatus,
 )
+from parent_portal.sis.doctype.sis_school_year.sis_school_year import SISSchoolYear
+from ws_event_page.api.utils.helpers import get_person_info_for_students
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])
@@ -47,6 +49,99 @@ def check_wellspring_code(wellspring_code):
         person_info["department"] = student_staff.department
 
     return {"person": person_info, "orders": orders}
+
+
+@frappe.whitelist(allow_guest=True, methods=["GET"])
+def get_list_of_school_class_and_department(keyword, language):
+    """API to get list of school class."""
+    if not keyword.strip():
+        frappe.throw("Keyword is required")
+
+    current_school_year = SISSchoolYear.get_current_school_year()
+
+    school_classes = frappe.get_all(
+        "SIS School Class",
+        fields=["name", "title", "short_title"],
+        filters={
+            "school_year": current_school_year,
+            "short_title": ["like", f"%{keyword}%"],
+        },
+        order_by="sequence_number",
+    )
+
+    departments = frappe.get_all(
+        "SIS Department",
+        fields=["name", "title_vn", "title_en", "short_title"],
+        or_filters=[
+            ["title_en", "like", f"%{keyword}%"],
+            ["title_vn", "like", f"%{keyword}%"],
+            ["short_title", "like", f"%{keyword}%"],
+        ],
+        order_by="short_title",
+    )
+
+    return {"school_classes": school_classes, "departments": departments}
+
+
+@frappe.whitelist(allow_guest=True, methods=["GET"])
+def get_school_class_students(school_class_id):
+    """API to get list of students in a school class.
+
+    school_class_id (str): School Class ID.
+    """
+    if not school_class_id:
+        return []
+
+    students = frappe.db.sql(
+        """
+            SELECT
+                `tabSIS School Class Person`.name AS name,
+                `tabSIS Person`.full_name AS full_name,
+                `tabSIS Person`.date_of_birth AS date_of_birth,
+                `tabSIS Student`.wellspring_student_code AS wellspring_code
+            FROM
+                `tabSIS School Class Person`
+                JOIN `tabSIS Person` ON `tabSIS School Class Person`.person = `tabSIS Person`.name
+                JOIN `tabSIS Student` ON `tabSIS School Class Person`.person = `tabSIS Student`.person
+            WHERE
+                `tabSIS School Class Person`.parent = %s
+                AND `tabSIS School Class Person`.role = "Student"
+                AND `tabSIS Student`.status = "Enabled"
+            ORDER BY `tabSIS Person`.full_name ASC;
+        """,
+        (school_class_id,),
+        as_dict=True,
+    )
+    return students
+
+
+@frappe.whitelist(allow_guest=True, methods=["GET"])
+def get_department_staffs(department_id):
+    """API to get list of staffs in a department.
+
+    department_id (str): Department ID.
+    """
+    if not department_id:
+        return []
+
+    staffs = frappe.db.sql(
+        """
+            SELECT
+                `tabSIS Staff`.name AS name,
+                `tabSIS Person`.full_name AS full_name,
+                `tabSIS Person`.date_of_birth AS date_of_birth,
+                `tabSIS Staff`.employee_code AS wellspring_code
+            FROM
+                `tabSIS Staff`
+                JOIN `tabSIS Person` ON `tabSIS Staff`.person = `tabSIS Person`.name
+            WHERE
+                `tabSIS Staff`.department = %s
+            ORDER BY `tabSIS Person`.full_name ASC;
+        """,
+        (department_id,),
+        as_dict=True,
+    )
+    return staffs
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])
