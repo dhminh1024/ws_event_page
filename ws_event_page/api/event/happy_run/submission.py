@@ -58,13 +58,17 @@ def get_list_of_school_class_and_department(keyword):
 
     current_school_year = SISSchoolYear.get_current_school_year()
 
+    keyword = keyword.strip()
+    keyword_slit = keyword.split(" ")
+    or_filters = []
+    for word in keyword_slit:
+        or_filters.append(["short_title", "like", f"%{word}%"])
+
     school_classes = frappe.get_all(
         "SIS School Class",
-        fields=["name", "title", "short_title"],
-        filters={
-            "school_year": current_school_year,
-            "short_title": ["like", f"%{keyword}%"],
-        },
+        fields=["name", "title", "short_title", "school_year"],
+        filters={"school_year": current_school_year},
+        or_filters=or_filters,
         order_by="sequence_number",
     )
 
