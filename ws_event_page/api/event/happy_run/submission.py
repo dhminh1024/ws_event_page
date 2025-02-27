@@ -8,7 +8,6 @@ from ws_event_page.wellspring_event_page.doctype.wse_hr_order.wse_hr_order impor
     HROrderStatus,
 )
 from parent_portal.sis.doctype.sis_school_year.sis_school_year import SISSchoolYear
-from ws_event_page.api.utils.helpers import get_person_info_for_students
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])
