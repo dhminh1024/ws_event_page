@@ -10,6 +10,7 @@ import { cn } from "@/core/utils/shadcn-utils";
 import { Popover, PopoverContent, PopoverTrigger } from "@atoms/popover";
 import { forwardRef } from "react";
 import { Input } from "@atoms/input";
+import { useLocales } from "@/core/hooks/use-locales";
 
 export type AutoCompleteProps = Omit<
   HTMLAttributes<HTMLInputElement>,
@@ -35,6 +36,7 @@ export const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
     },
     ref
   ) => {
+    const { t } = useLocales();
     const inputRef = useRef<HTMLInputElement>(null);
     const [inputText, setInputText] = useState<string>();
     const [open, setOpen] = useState(false);
@@ -54,9 +56,9 @@ export const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
     };
 
     useEffect(() => {
-      console.log(dataAutoComplete);
+      // console.log(dataAutoComplete,inputRef.current,document.activeElement);
 
-      if (dataAutoComplete.length > 0) {
+      if (dataAutoComplete.length > 0 || inputRef.current === document.activeElement) {
         setOpen(true);
       } else {
         // setOpen(false);
@@ -65,7 +67,7 @@ export const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
 
     useEffect(() => {
       console.log(value);
-      
+
       setInputText(value);
     }, [value]);
 
@@ -111,6 +113,11 @@ export const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
                   </div>
                 );
               })}
+              {dataAutoComplete.length === 0 && (
+                <div className="text-hr-primary text-left p-[5rem_10rem] text-[8rem] md:text-[14rem] border-hr-primary w-full rounded-[5rem] bg-white">
+                 {t("common.search_empty")}
+                </div>
+              )}
             </div>
           </PopoverContent>
         </Popover>

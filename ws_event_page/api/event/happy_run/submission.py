@@ -87,7 +87,7 @@ def get_list_of_school_class_and_department(keyword):
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])
-def get_school_class_students(school_class_id,keyword):
+def get_school_class_students(school_class_id, keyword):
     """API to get list of students in a school class.
 
     school_class_id (str): School Class ID.
@@ -123,7 +123,7 @@ def get_school_class_students(school_class_id,keyword):
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])
-def get_department_staffs(department_id,keyword):
+def get_department_staffs(department_id, keyword):
     """API to get list of staffs in a department.
 
     department_id (str): Department ID.
@@ -143,10 +143,14 @@ def get_department_staffs(department_id,keyword):
                 JOIN `tabSIS Person` ON `tabSIS Staff`.person = `tabSIS Person`.name
             WHERE
                 `tabSIS Staff`.department = %s 
-            AND `tabSIS Person`.full_name like %s
+                AND (
+                    LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s  
+                    OR LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s 
+                    or LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s 
+                )
             ORDER BY `tabSIS Person`.full_name ASC;
         """,
-        (department_id, '%' + keyword + '%'),
+        (department_id, f"% {keyword}", f"{keyword} %", f"% {keyword} %"),
         as_dict=True,
     )
     return staffs
