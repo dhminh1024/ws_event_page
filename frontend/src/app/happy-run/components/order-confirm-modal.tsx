@@ -133,7 +133,7 @@ export const OrderConfirmModal: FC<LunarModalProps> = ({
             </Typography.Heading>
           </center>
           <div className="mb-[10rem] md:mb-[20rem] bg-hr-steel_blue/10 border-hr-blue border-[1rem] rounded-[5rem]">
-            <Table className="text-[8rem] md:text-[16rem]">
+            <Table className="text-[8rem] md:text-[16rem] text-hr-blue">
               <TableHeader className="bg-hr-steel_blue/20 ">
                 <TableRow className="!bg-transparent">
                   <TableHead className="w-[30rem] md:w-[60rem] text-hr-blue py-[4rem] md:py-[8rem] pl-[8rem] md:pl-[15rem]">

@@ -7,6 +7,7 @@ from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket imp
 from ws_event_page.wellspring_event_page.doctype.wse_hr_order.wse_hr_order import (
     HROrderStatus,
 )
+from parent_portal.sis.doctype.sis_school_year.sis_school_year import SISSchoolYear
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])
@@ -47,6 +48,112 @@ def check_wellspring_code(wellspring_code):
         person_info["department"] = student_staff.department
 
     return {"person": person_info, "orders": orders}
+
+
+@frappe.whitelist(allow_guest=True, methods=["POST"])
+def get_list_of_school_class_and_department(keyword):
+    """API to get list of school class."""
+    if not keyword.strip():
+        frappe.throw("Keyword is required")
+
+    current_school_year = SISSchoolYear.get_current_school_year()
+
+    keyword = keyword.strip()
+    keyword_slit = keyword.split(" ")
+    or_filters = []
+    for word in keyword_slit:
+        or_filters.append(["short_title", "like", f"%{word}%"])
+
+    school_classes = frappe.get_all(
+        "SIS School Class",
+        fields=["name", "title", "short_title", "school_year"],
+        filters={"school_year": current_school_year},
+        or_filters=or_filters,
+        order_by="sequence_number",
+    )
+
+    departments = frappe.get_all(
+        "SIS Department",
+        fields=["name", "title_vn", "title_en", "short_title"],
+        or_filters=[
+            ["title_en", "like", f"%{keyword}%"],
+            ["title_vn", "like", f"%{keyword}%"],
+            ["short_title", "like", f"%{keyword}%"],
+        ],
+        order_by="short_title",
+    )
+
+    return {"school_classes": school_classes, "departments": departments}
+
+
+@frappe.whitelist(allow_guest=True, methods=["POST"])
+def get_school_class_students(school_class_id, keyword):
+    """API to get list of students in a school class.
+
+    school_class_id (str): School Class ID.
+    """
+    if not school_class_id:
+        return []
+
+    students = frappe.db.sql(
+        """
+            SELECT
+                `tabSIS School Class Person`.name AS name,
+                `tabSIS Person`.full_name AS full_name,
+                `tabSIS Person`.date_of_birth AS date_of_birth,
+                `tabSIS Student`.wellspring_student_code AS wellspring_code
+            FROM
+                `tabSIS School Class Person`
+                JOIN `tabSIS Person` ON `tabSIS School Class Person`.person = `tabSIS Person`.name
+                JOIN `tabSIS Student` ON `tabSIS School Class Person`.person = `tabSIS Student`.person
+            WHERE
+                `tabSIS School Class Person`.parent = %s 
+                AND `tabSIS School Class Person`.role = "Student" 
+                AND `tabSIS Student`.status = "Enabled" 
+                AND (LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s  
+                    OR LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s 
+                    or LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s 
+                    ) 
+            ORDER BY `tabSIS Person`.full_name ASC;
+        """,
+        (school_class_id, f"% {keyword}", f"{keyword} %", f"% {keyword} %"),
+        as_dict=True,
+    )
+    return students
+
+
+@frappe.whitelist(allow_guest=True, methods=["POST"])
+def get_department_staffs(department_id, keyword):
+    """API to get list of staffs in a department.
+
+    department_id (str): Department ID.
+    """
+    if not department_id or not keyword:
+        return []
+
+    staffs = frappe.db.sql(
+        """
+            SELECT
+                `tabSIS Staff`.name AS name,
+                `tabSIS Person`.full_name AS full_name,
+                `tabSIS Person`.date_of_birth AS date_of_birth,
+                `tabSIS Staff`.employee_code AS wellspring_code
+            FROM
+                `tabSIS Staff`
+                JOIN `tabSIS Person` ON `tabSIS Staff`.person = `tabSIS Person`.name
+            WHERE
+                `tabSIS Staff`.department = %s 
+                AND (
+                    LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s  
+                    OR LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s 
+                    or LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s 
+                )
+            ORDER BY `tabSIS Person`.full_name ASC;
+        """,
+        (department_id, f"% {keyword}", f"{keyword} %", f"% {keyword} %"),
+        as_dict=True,
+    )
+    return staffs
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])

@@ -32,7 +32,7 @@ export const SummerSection: FC<SummerSectionProps> = ({
   const event = useEventPageContext();
 
   return (
-    <section ref={myRef} className={cn("bg-[#EA6E21] ", className)} {...props}>
+    <section ref={myRef} className={cn("bg-[#23C0F5] ", className)} {...props}>
       {inView && (
         <>
           <img

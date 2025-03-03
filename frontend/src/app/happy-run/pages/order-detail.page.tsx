@@ -50,7 +50,7 @@ export const Component = () => {
           {parser(t("happy_run.order_title"))}
         </Typography.Heading>
         <div className="flex items-center justify-center my-[20rem]">
-          <span className="mr-[10rem] text-[16rem]">
+          <span className="mr-[10rem] text-[16rem] text-hr-blue">
             {t("common.language")}:
           </span>
           <LanguageSelector />
@@ -136,7 +136,7 @@ export const Component = () => {
         </div>
         <div className="px-[5rem]">
           <div className="bg-hr-steel_blue/10 border-hr-blue border-[1rem] rounded-[5rem]">
-            <Table className="text-[8rem] md:text-[16rem]">
+            <Table className="text-[8rem] md:text-[16rem] text-hr-blue">
               <TableHeader className="bg-hr-steel_blue/20 ">
                 <TableRow className="!bg-transparent">
                   <TableHead className="w-[30rem] md:w-[60rem] text-hr-blue py-[4rem] md:py-[8rem] pl-[8rem] md:pl-[15rem]">
@@ -184,7 +184,7 @@ export const Component = () => {
                       {item.shirt_size}
                     </TableCell>
                     <TableCell className="py-[8rem] text-left">
-                      {item.ticket_type === "Well-being" ? item.bib.trim() : ""}
+                      {item.ticket_type === "Well-being" ? item.bib?.trim() : ""}
                     </TableCell>
                     <TableCell className="text-center">
                       {t(`happy_run.form.list_status.${item.status}`)}

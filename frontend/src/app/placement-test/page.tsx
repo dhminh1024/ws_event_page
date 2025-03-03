@@ -104,7 +104,7 @@ export const Component = () => {
     message: ReactNode;
   }>();
 
-  const isOpenRegistration = !settings?.is_registration_closed
+  const isOpenRegistration = !settings?.is_registration_closed;
 
   const currentSlot: WSEACTestSlot | null =
     (lead?.registered_slot &&
@@ -417,7 +417,7 @@ export const Component = () => {
             <span className="ml-2 hidden"></span>
             <div className="my-2 ml-5 pr-5 text-sm text-pt-primary">
               {parser(
-                event.variables?.[`footer_text_${currentLanguage}`]?.value
+                event.variables?.[`footer_text_${currentLanguage}`]?.value || ""
               )}
             </div>
           </div>

@@ -1,0 +1,15 @@
+meta {
+  name: Find school class and department
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{url}}/api/method/ws_event_page.api.event.happy_run.submission.get_list_of_school_class_and_department?keyword=lớp
+  body: none
+  auth: none
+}
+
+query {
+  keyword: lớp
+}
