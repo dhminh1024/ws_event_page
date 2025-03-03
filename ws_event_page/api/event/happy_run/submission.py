@@ -50,7 +50,7 @@ def check_wellspring_code(wellspring_code):
     return {"person": person_info, "orders": orders}
 
 
-@frappe.whitelist(allow_guest=True, methods=["GET"])
+@frappe.whitelist(allow_guest=True, methods=["POST"])
 def get_list_of_school_class_and_department(keyword):
     """API to get list of school class."""
     if not keyword.strip():
@@ -86,8 +86,8 @@ def get_list_of_school_class_and_department(keyword):
     return {"school_classes": school_classes, "departments": departments}
 
 
-@frappe.whitelist(allow_guest=True, methods=["GET"])
-def get_school_class_students(school_class_id):
+@frappe.whitelist(allow_guest=True, methods=["POST"])
+def get_school_class_students(school_class_id,keyword):
     """API to get list of students in a school class.
 
     school_class_id (str): School Class ID.
@@ -107,24 +107,28 @@ def get_school_class_students(school_class_id):
                 JOIN `tabSIS Person` ON `tabSIS School Class Person`.person = `tabSIS Person`.name
                 JOIN `tabSIS Student` ON `tabSIS School Class Person`.person = `tabSIS Student`.person
             WHERE
-                `tabSIS School Class Person`.parent = %s
-                AND `tabSIS School Class Person`.role = "Student"
-                AND `tabSIS Student`.status = "Enabled"
+                `tabSIS School Class Person`.parent = %s 
+                AND `tabSIS School Class Person`.role = "Student" 
+                AND `tabSIS Student`.status = "Enabled" 
+                AND (LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s  
+                    OR LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s 
+                    or LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s 
+                    ) 
             ORDER BY `tabSIS Person`.full_name ASC;
         """,
-        (school_class_id,),
+        (school_class_id, f"% {keyword}", f"{keyword} %", f"% {keyword} %"),
         as_dict=True,
     )
     return students
 
 
-@frappe.whitelist(allow_guest=True, methods=["GET"])
-def get_department_staffs(department_id):
+@frappe.whitelist(allow_guest=True, methods=["POST"])
+def get_department_staffs(department_id,keyword):
     """API to get list of staffs in a department.
 
     department_id (str): Department ID.
     """
-    if not department_id:
+    if not department_id or not keyword:
         return []
 
     staffs = frappe.db.sql(
@@ -138,10 +142,11 @@ def get_department_staffs(department_id):
                 `tabSIS Staff`
                 JOIN `tabSIS Person` ON `tabSIS Staff`.person = `tabSIS Person`.name
             WHERE
-                `tabSIS Staff`.department = %s
+                `tabSIS Staff`.department = %s 
+            AND `tabSIS Person`.full_name like %s
             ORDER BY `tabSIS Person`.full_name ASC;
         """,
-        (department_id,),
+        (department_id, '%' + keyword + '%'),
         as_dict=True,
     )
     return staffs

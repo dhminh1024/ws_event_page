@@ -21,14 +21,14 @@ export const LanguageSelector: FC<LanguageSelectProps> = ({ className }) => {
   return (
     <div className={cn(className)}>
       <Select value={i18n.language} onValueChange={handleChangeLanguage} >
-        <SelectTrigger className="text-[12rem] text-black md:text-[16rem] md:w-[150rem] h-[30rem] md:h-[40rem] p-[10rem] bg-white rounded-[8rem]">
+        <SelectTrigger className="text-[10rem] text-black md:text-[16rem] md:w-[150rem] h-[30rem] md:h-[40rem] p-[2rem_10rem] md:p-[10rem] bg-white rounded-[8rem]">
           <SelectValue className="" placeholder="Select a mode" />
         </SelectTrigger>
         <SelectContent className="max-h-none bg-white">
-          <SelectItem className=" text-[12rem] md:text-[16rem] p-[10rem] !bg-white hover:!bg-slate-200 !text-happy_box-foreground cursor-pointer" value="vn">
+          <SelectItem className=" text-[10rem] md:text-[16rem] p-[10rem] !bg-white hover:!bg-slate-200 !text-happy_box-foreground cursor-pointer" value="vn">
             Tiếng Việt
           </SelectItem>
-          <SelectItem className="text-[12rem] md:text-[16rem] p-[10rem] !bg-white hover:!bg-slate-200 !text-happy_box-foreground cursor-pointer" value="en">
+          <SelectItem className="text-[10rem] md:text-[16rem] p-[10rem] !bg-white hover:!bg-slate-200 !text-happy_box-foreground cursor-pointer" value="en">
             English
           </SelectItem>
         </SelectContent>

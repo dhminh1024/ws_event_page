@@ -14,5 +14,17 @@ export const FRAPPE_APIS = {
   GET_ORDER:{
     METHOD_STRING:"ws_event_page.api.event.happy_run.order.get_order_detail",
     SWR_KEY: "get_order_detail"
+  },
+  FIND_SCHOOL_CLASSES_DEPARTMENT:{
+    METHOD_STRING:"ws_event_page.api.event.happy_run.submission.get_list_of_school_class_and_department",
+    SWR_KEY: "get_list_of_school_class_and_department"
+  },
+  GET_STUDENTS_IN_CLASS:{
+    METHOD_STRING:"ws_event_page.api.event.happy_run.submission.get_school_class_students",
+    SWR_KEY: "get_school_class_students"
+  },
+  GET_STAFFS_IN_DEPARTMENT:{
+    METHOD_STRING:"ws_event_page.api.event.happy_run.submission.get_department_staffs",
+    SWR_KEY: "get_department_staffs"
   }
 };

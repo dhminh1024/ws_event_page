@@ -260,3 +260,11 @@ export function getTimeLeft(targetDate: string) {
     seconds: Math.floor((timeDiff / 1000) % 60),
   };
 }
+
+
+export const toPascalCase = (text: string) => {
+  return text.toLowerCase()
+    .split(' ')
+    .map((t) => t.charAt(0).toUpperCase() + t.slice(1))
+    .join(' ')
+}

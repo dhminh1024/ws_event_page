@@ -20,9 +20,36 @@ export const usePurchasingForm = () => {
     primary_runners: z
       .array(
         z.object({
-          department: z.string().min(1, t("happy_run.form.class_department_required")),
-          full_name: z.string().min(1, t("happy_run.form.full_name_required")),
-          code: z.string().min(1, t("happy_run.form.user_code_required")),
+          code: z
+            .string()
+            .min(1, t("happy_run.form.user_code_required"))
+            .superRefine(async (code, ctx) => {
+              if (!code) return true;
+              try {
+                const data = await getInfo({
+                  wellspring_code: code,
+                });
+                if (data.message.orders.length > 0) {
+                  ctx.addIssue({
+                    code: "custom",
+                    message: t("happy_run.form.user_code_has_orders",{
+                      link: cleanPath(`${env.BASE_NAME}/happy-run/order-detail/${data.message.orders[0].name}`),
+                    }),
+                    path: [],
+                  });
+                  return false;
+                }
+                return true;
+              } catch (error) {
+                ctx.addIssue({
+                  code: "custom",
+                  message: t("happy_run.form.user_code_invalid"),
+                  path: [],
+                });
+              }
+            }),
+          full_name: z.string(),
+          department: z.string(),
           ticket_class: z
             .string()
             .min(1, t("happy_run.form.ticket_class_required")),
@@ -30,10 +57,7 @@ export const usePurchasingForm = () => {
             .string()
             .min(1, t("happy_run.form.ticket_distance_required")),
           size: z.string().min(1, t("happy_run.form.shirt_size_required")),
-          bib: z
-            .string()
-            .max(8, t("happy_run.form.content_bib_max"))
-            .optional(),
+          bib: z.string().max(8, t("happy_run.form.content_bib_max")).optional(),
         })
       )
       .superRefine((items, ctx) => {

@@ -82,6 +82,7 @@
       "section_4_desc_1": "*Important information to help the organizers team contact participants when needed and send registration confirmation",
       "section_4_desc_2": "*If the registrant is a student, please fill in the contact information of the parent or accompanying adult",
       "young_user_warning": "*Note: *If the registrant is a Elementary student (ticket purchase is necessary), please fill in the contact information of the parent or accompanying adult",
+      "class_department_required": "Please select class/department",
       "user_code": "Student/Staff ID",
       "user_code_required": "Please enter the ID",
       "user_code_duplicate": "Duplicate ID",

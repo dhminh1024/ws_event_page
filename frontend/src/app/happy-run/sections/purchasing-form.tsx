@@ -1,4 +1,4 @@
-import { HTMLAttributes, useState, type FC } from "react";
+import { HTMLAttributes, useEffect, useState, type FC } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
 import { useFieldArray } from "react-hook-form";
 import { usePurchasingForm } from "../hooks/use-purchasing-form";
@@ -29,7 +29,7 @@ import {
 import { Check, ChevronDown, Loader2, Trash, X } from "lucide-react";
 import Typography from "@/app/happy-box/components/typography";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
-import { cleanPath, removeAccents } from "@/lib/utils/common";
+import { cleanPath, removeAccents, toPascalCase } from "@/lib/utils/common";
 import { FRAPPE_APIS } from "../api/api.config";
 import useCheckUserByCode from "../api/use-check-user-by-code";
 import {
@@ -44,6 +44,19 @@ import { LanguageSelector } from "../components/language-selector";
 import { SelectGroup, SelectLabel } from "../components/select";
 import { Combobox } from "../components/combobox";
 import { AutoComplete } from "../components/auto-complete";
+import useFindSchoolClassesDepartment from "../api/use-get-staffs-in-dept";
+import { capitalize } from "lodash";
+import {
+  ClassesAndDepts,
+  ClassSimple,
+  DeptSimple,
+} from "@/types/extends/WSEClasses";
+import useGetStaffInDepartment from "../api/use-get-staffs-in-dept";
+import useFindClassesAndDepts from "../api/use-find-classes-and-depts";
+import { StudentSimple } from "@/types/extends/WSEStudent";
+import { StaffSimple } from "@/types/extends/WSEStaff";
+import useGetStudentsInClass from "../api/use-get-students-in-class";
+import { log } from "console";
 
 export type PurchasingFormProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -64,6 +77,8 @@ const GuardianDefaultInfo = {
   size: "",
   bib: "",
 };
+
+let timeout1: NodeJS.Timeout | null = null;
 
 export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
   const { t, currentLanguage } = useLocales();
@@ -151,7 +166,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
 
   const clearUserField = (index: number) => {
     form.setValue(`primary_runners.${index}.full_name`, "");
-    form.setValue(`primary_runners.${index}.department`, "");
+    form.setValue(`primary_runners.${index}.code`, "");
   };
 
   const handleCheckUser = async (index: number, value: string) => {
@@ -186,50 +201,101 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
     if (type === "guardian")
       form.setValue(`guardian_runners.${index}.bib`, value);
   };
+  const [groups, setGroups] = useState<
+    {
+      shorten?: string[];
+      origin?: ClassesAndDepts;
+    }[]
+  >();
+  const { call: fetchGroups } = useFindClassesAndDepts();
 
-  const [fieldData, setFieldData] = useState<string[]>();
+  const [members, setMembers] = useState<
+    {
+      shorten?: string[];
+      origin?: StudentSimple[] | StaffSimple[];
+    }[]
+  >();
+  const { call: fetchStudents } = useGetStudentsInClass();
+  const { call: fetchStaffs } = useGetStaffInDepartment();
 
-  const findGroups = (value: string) => {
+  const findGroups = (index: number, value: string) => {
     const searchValue = removeAccents(value.toLowerCase().trim());
-    if(!value) return setFieldData([]);
-    setFieldData(
-      dataSample.filter((item) => removeAccents(item).includes(searchValue))
-    );
+    if (timeout1) {
+      clearTimeout(timeout1);
+    }
+    if (!searchValue) {
+      setGroups((g) => {
+        if (!g) g = [];
+        g[index] = {};
+        return g;
+      });
+      return;
+    }
+    timeout1 = setTimeout(async () => {
+      const res = await fetchGroups({ keyword: searchValue });
+
+      const classes = res.message.school_classes.map((i: ClassSimple) =>
+        toPascalCase(i.title)
+      );
+      const depts = res.message.departments.map((i: DeptSimple) =>
+        toPascalCase(currentLanguage === "en" ? i.title_en : i.title_vn)
+      );
+      setGroups((g) => {
+        if (!g) g = [];
+        g[index] = { shorten: [...classes, ...depts], origin: res.message };
+        return g;
+      });
+    }, 300);
   };
 
-  const dataSample = [
-    "1.2",
-    "1.3",
-    "1.4",
-    "1.5",
-    "1.6",
-    "1.7",
-    "1.8",
-    "2.1",
-    "2.2",
-    "2.3",
-    "2.4",
-    "2.5",
-    "2.6",
-    "2.7",
-    "IT-Tech",
-    "Marketing",
-    "HR",
-    "Finance",
-    "Admin",
-    "Sales",
-    "Logistics",
-    "Production",
-    "R&D",
-    "Quality",
-    "Purchasing",
-    "Maintenance",
-    "Security",
-    "Cleaning",
-    "Canteen",
-    "Gardening",
-    "Other",
-  ];
+  const findMembers = (index: number, value: string, group: string) => {
+    const searchValue = removeAccents(value.toLowerCase().trim());
+    if (timeout1) {
+      clearTimeout(timeout1);
+    }
+    if (!searchValue) {
+      return;
+    }
+
+    timeout1 = setTimeout(async () => {
+      // console.log(searchValue);
+      const schoolClass = groups?.[index]?.origin?.school_classes.find(
+        (i) => toPascalCase(i.title) === group
+      );
+      const department = groups?.[index]?.origin?.departments.find((i) =>
+        currentLanguage === "en"
+          ? toPascalCase(i.title_en) === group
+          : toPascalCase(i.title_vn) === group
+      );
+      // console.log(schoolClass, department, group, groups?.[index]?.origin);
+      let res;
+      if (schoolClass) {
+        res = await fetchStudents({
+          school_class_id: schoolClass.name,
+          keyword: searchValue,
+        });
+      } else if (department) {
+        res = await fetchStaffs({
+          department_id: department.name,
+          keyword: searchValue,
+        });
+      }
+      if (res) {
+        setMembers((g) => {
+          if (!g) g = [];
+          g[index] = {
+            shorten: res.message.map((i: StudentSimple) =>
+              toPascalCase(i.full_name)
+            ),
+            origin: res.message,
+          };
+          return g;
+        });
+      }
+    }, 300);
+  };
+
+  console.log("err", form.formState.errors);
 
   return (
     <div className={cn("mb-[40rem]", className)}>
@@ -245,7 +311,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
             {parser(t("happy_run.form_heading"))}
           </Typography.Heading>
           <div className="flex items-center justify-center my-[20rem]">
-            <span className="mr-[10rem] text-[16rem] text-hr-primary">
+            <span className="mr-[10rem] text-[10rem] md:text-[16rem] text-hr-primary">
               {t("common.language")}:
             </span>
             <LanguageSelector />
@@ -311,7 +377,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                 {t("happy_run.form.young_user_warning")}
               </Typography.Paragraph>
               <div className="section-1">
-                {primaryFields.map((field, index) => (
+                {primaryFields.map((field, index:number) => (
                   <FormField
                     control={form.control}
                     key={field.id}
@@ -324,96 +390,84 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                           </FormLabel>
                           <FormDescription />
                           <FormControl>
-                            <AutoComplete
-                              className=""
-                              dataAutoComplete={fieldData}
-                              onChange={findGroups}
-                            />
-                            {/* <Combobox className="" items={[{
-                              heading:"Class",
-                              children: ticket_classes
-                            },{
-                              heading:"Department",
-                              children: ticket_classes
-                            }]} /> */}
-                            {/* <Select
-                              {...form.register(
-                                `primary_runners.${index}.department`
-                              )}
-                              value={field.value.ticket_class}
-                              onValueChange={(value) => {
-                                const oldValues = form.watch(
-                                  `primary_runners.${index}`
-                                );
-                                field.onChange({
-                                  ...oldValues,
-                                  ticket_class: value,
-                                });
-                              }}
-                            >
-                              <SelectTrigger className="h-[16rem] md:h-[30rem] p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
-                                <SelectValue
-                                  className="flex-1"
-                                  placeholder={t(
-                                    "happy_run.form.ticket_class_placeholder"
-                                  )}
-                                />
-                              </SelectTrigger>
-                              <SelectContent className="max-h-none bg-white">
-                                <SelectGroup>
-                                  <SelectLabel>{t("common.class")}</SelectLabel>
-                                  {ticket_classes.map((item) => (
-                                    <SelectItem
-                                      key={item.value}
-                                      className=" text-[8rem] md:text-[16rem] p-[5rem] md:p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
-                                      value={item.value}
-                                    >
-                                      {item.label}
-                                    </SelectItem>
-                                  ))}
-                                  {ticket_classes.map((item) => (
-                                    <SelectItem
-                                      key={item.value}
-                                      className=" text-[8rem] md:text-[16rem] p-[5rem] md:p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
-                                      value={item.value}
-                                    >
-                                      {item.label}
-                                    </SelectItem>
-                                  ))}
-                                </SelectGroup>
-                                <SelectGroup>
-                                  <SelectLabel>
-                                    {t("common.department")}
-                                  </SelectLabel>
-                                  {ticket_classes.map((item) => (
-                                    <SelectItem
-                                      key={item.value}
-                                      className=" text-[8rem] md:text-[16rem] p-[5rem] md:p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
-                                      value={item.value}
-                                    >
-                                      {item.label}
-                                    </SelectItem>
-                                  ))}
-                                </SelectGroup>
-                              </SelectContent>
-                            </Select> */}
+                            <div className="relative">
+                              <Input
+                                className="absolute z-[-1] w-0 h-0 invisible"
+                                {...form.register(
+                                  `primary_runners.${index}.department`
+                                )}
+                              />
+                              <AutoComplete
+                                dataAutoComplete={groups?.[index]?.shorten}
+            
+                                onChange={(value) => findGroups(index, value)}
+                                onSelectValue={(value) => {
+                                  form.setValue(
+                                    `primary_runners.${index}.department`,
+                                    value
+                                  );
+                                  clearUserField(index)
+                                }}
+                              />
+                            </div>
                           </FormControl>
+                          <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
+                            {parser(
+                              form.formState.errors.primary_runners?.[index]
+                                ?.department?.message || ""
+                            )}
+                          </Typography.Paragraph>
                         </FormItem>
-
                         <FormItem>
                           <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
                             {t("happy_run.form.full_name")}
                           </FormLabel>
                           <FormDescription />
                           <FormControl>
-                            <Input
-                              className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
-                              {...form.register(
-                                `primary_runners.${index}.full_name`
-                              )}
-                              readOnly
-                            />
+                            <div className="relative">
+                              <Input
+                                className="absolute z-[-1] w-0 h-0 invisible"
+                                {...form.register(
+                                  `primary_runners.${index}.full_name`
+                                )}
+                              />
+                              <AutoComplete
+                                className=""
+                                dataAutoComplete={members?.[index]?.shorten}
+                                value={field.value.full_name}
+                                onChange={(value) =>
+                                  findMembers(
+                                    index,
+                                    value,
+                                    field.value.department
+                                  )
+                                }
+                                onSelectValue={(value) => {
+                                  form.setValue(
+                                    `primary_runners.${index}.full_name`,
+                                    value
+                                  );
+                                  form.setValue(
+                                    `primary_runners.${index}.code`,
+                                    members?.[index]?.origin?.find(
+                                      (i) => toPascalCase(i.full_name) === value
+                                    )?.wellspring_code || "N/A"
+                                  );
+                                }}
+                                readOnly={
+                                  !form.watch(
+                                    `primary_runners.${index}.department`
+                                  )
+                                }
+                              />
+                            </div>
                           </FormControl>
+                          <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
+                            {parser(
+                              form.formState.errors.primary_runners?.[index]
+                                ?.full_name?.message || ""
+                            )}
+                          </Typography.Paragraph>
                         </FormItem>
                         <FormItem>
                           <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap text-hr-blue font-bold leading-[14rem] md:leading-[30rem]">
@@ -427,26 +481,8 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 {...form.register(
                                   `primary_runners.${index}.code`
                                 )}
-                                onBlur={(e) =>
-                                  handleCheckUser(index, e.target.value)
-                                }
-                                onChange={(e) => {
-                                  field.onChange({
-                                    ...field.value,
-                                    code: e.target.value,
-                                  });
-                                }}
+                                readOnly
                               />
-                              {!form.formState.errors.primary_runners?.[index]
-                                ?.code &&
-                                form.watch("primary_runners")?.[index]
-                                  ?.full_name && (
-                                  <Check className="text-status-success w-[12rem] md:w-[26rem] absolute top-0 bottom-0 right-[5rem] m-auto" />
-                                )}
-                              {form.formState.errors.primary_runners?.[index]
-                                ?.code && (
-                                <X className="text-status-danger w-[12rem] md:w-[26rem] absolute top-0 bottom-0 right-[5rem] m-auto" />
-                              )}
                             </div>
                           </FormControl>
                           <Typography.Paragraph className="text-[8rem] md:text-[14rem] text-status-danger">
@@ -477,7 +513,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 });
                               }}
                             >
-                              <SelectTrigger className="h-[16rem] md:h-[30rem] p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
+                              <SelectTrigger className="h-[16rem] md:h-[30rem] text-hr-primary p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
                                 <SelectValue
                                   className="flex-1"
                                   placeholder={t(
@@ -526,7 +562,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 });
                               }}
                             >
-                              <SelectTrigger className="h-[16rem] md:h-[30rem] p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
+                              <SelectTrigger className="h-[16rem] md:h-[30rem] text-hr-primary p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
                                 <SelectValue
                                   className="flex-1"
                                   placeholder={t(
@@ -575,7 +611,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 });
                               }}
                             >
-                              <SelectTrigger className="h-[16rem] md:h-[30rem] p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
+                              <SelectTrigger className="h-[16rem] md:h-[30rem] text-hr-primary p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
                                 <SelectValue
                                   className="flex-1"
                                   placeholder={t(
@@ -650,7 +686,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                           <FormDescription />
                           <FormControl>
                             <Input
-                              className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
+                              className="w-full h-[16rem] md:h-[30rem]  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
                               {...form.register(
                                 `guardian_runners.${index}.full_name`
                               )}
@@ -676,7 +712,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 })
                               }
                             >
-                              <SelectTrigger className="h-[16rem] md:h-[30rem] p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
+                              <SelectTrigger className="h-[16rem] md:h-[30rem] text-hr-primary p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
                                 <SelectValue
                                   className="flex-1"
                                   placeholder={t(
@@ -722,7 +758,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 })
                               }
                             >
-                              <SelectTrigger className="h-[16rem] md:h-[30rem] p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
+                              <SelectTrigger className="h-[16rem] md:h-[30rem] text-hr-primary p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
                                 <SelectValue
                                   className="flex-1"
                                   placeholder={t(
@@ -768,7 +804,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 })
                               }
                             >
-                              <SelectTrigger className="h-[16rem] md:h-[30rem] p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
+                              <SelectTrigger className="h-[16rem] md:h-[30rem] text-hr-primary p-[10rem_5rem] md:py-[20rem] md:px-[10rem] w-full  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem]">
                                 <SelectValue
                                   className="flex-1"
                                   placeholder={t(
@@ -849,7 +885,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                         <FormControl>
                           <div className="relative">
                             <Input
-                              className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
+                              className="w-full h-[16rem] md:h-[30rem]  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
                               {...field}
                               placeholder={t(
                                 "happy_run.form.full_name_placeholder"
@@ -875,7 +911,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                         <FormControl>
                           <div className="relative">
                             <Input
-                              className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
+                              className="w-full h-[16rem] md:h-[30rem]  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
                               {...field}
                               placeholder={t(
                                 "happy_run.form.mobile_number_placeholder"
@@ -899,7 +935,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                         <FormControl>
                           <div className="relative">
                             <Input
-                              className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
+                              className="w-full h-[16rem] md:h-[30rem]  bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
                               {...field}
                               placeholder={t(
                                 "happy_run.form.email_placeholder"

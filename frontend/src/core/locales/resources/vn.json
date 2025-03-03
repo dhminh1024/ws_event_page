@@ -82,6 +82,7 @@
       "section_4_desc_1": "*Thông tin quan trọng giúp BTC liên hệ khi cần và gửi xác nhận đăng ký đến người tham gia",
       "section_4_desc_2": "*Nếu đối tượng đăng ký là Học sinh Tiểu học, vui lòng điền thông tin liên hệ của PHHS hoặc người lớn đi cùng",
       "young_user_warning": "*Lưu ý: với Học sinh Tiểu học cần có người lớn đi cùng (có tính phí mua vé)",
+      "class_department_required": "Hãy chọn lớp/ phòng ban",
       "user_code": "Mã số Học sinh/GV-NV",
       "user_code_required": "Hãy nhập mã số",
       "user_code_duplicate": "Mã số trùng lặp",
