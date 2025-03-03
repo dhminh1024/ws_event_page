@@ -58,10 +58,10 @@ export const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
     useEffect(() => {
       // console.log(dataAutoComplete,inputRef.current,document.activeElement);
 
-      if (dataAutoComplete.length > 0 || inputRef.current === document.activeElement) {
+      if (inputRef.current === document.activeElement) {
         setOpen(true);
       } else {
-        // setOpen(false);
+        setOpen(false);
       }
     }, [dataAutoComplete]);
 
