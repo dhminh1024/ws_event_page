@@ -5,7 +5,7 @@ import { useLocales } from "@/core/hooks/use-locales";
 import { format } from "date-fns";
 import { Link, useNavigate } from "react-router-dom";
 import { useSubmission } from "@nutrition-journey/context/use-submission";
-import { cleanPath } from "@/lib/utils/common";
+import { cleanPath, removeAccents } from "@/lib/utils/common";
 import { EVENT_PAGES } from "@/config/event-pages";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { useQuestions } from "../context/use-questions";
@@ -25,7 +25,7 @@ export const MissionsSection: FC<MissionsSectionProps> = ({ className }) => {
   const { code, setCode, fullName, setFullName, isValid, user } = useUser();
   const { t, currentLanguage } = useLocales();
 
-  console.log(isValid);
+  // console.log(isValid,removeAccents(fullName));
 
   return (
     <section className="relative">
@@ -100,8 +100,14 @@ export const MissionsSection: FC<MissionsSectionProps> = ({ className }) => {
                   className="h-[30rem] w-full text-[14rem] md:text-[20rem] border-b-nj-blue !border-t-transparent !border-l-transparent !border-r-transparent border-b-[2rem] !shadow-none !outline-none md:w-[250rem] "
                   value={fullName}
                   onChange={(e) => setFullName(e.currentTarget.value)}
+                  onBlur={(e) => setFullName(e.currentTarget.value.trim())}
                 />
               </div>
+              {code && fullName && !isValid && (
+                <Typography.Text className="text-nj-red font-medium text-[12rem] md:text-[20rem]">
+                  {t("nutritional_journey.student_not_found")}
+                </Typography.Text>
+              )}
               {/* {user && (
                 <div className="flex flex-col gap-x-[10rem] border border-nj-red rounded-[5rem] p-[10rem]">
                   <Typography.Text className="text-nj-orange font-medium text-[14rem] md:text-[20rem]">
@@ -136,17 +142,21 @@ export const MissionsSection: FC<MissionsSectionProps> = ({ className }) => {
                   {Array.from({ length: 4 }).map((_, index) => (
                     <Link
                       key={index}
-                      to={cleanPath(
-                        `/${EVENT_PAGES.NUTRITION_JOURNEY.SITE_URL}/upload/${
-                          question.name
-                        }/${index + 1}`
-                      )}
+                      to={
+                        isValid
+                          ? cleanPath(
+                              `/${
+                                EVENT_PAGES.NUTRITION_JOURNEY.SITE_URL
+                              }/upload/${question.name}/${index + 1}`
+                            )
+                          : "#"
+                      }
                     >
                       <BoxQuestion
                         className="w-full"
                         imageUrl={
                           submission?.images?.find(
-                            (i) =>
+                            (i:any) =>
                               i.question.name === question.name &&
                               Number(i.sequence_number.split(".")[1]) ===
                                 index + 1

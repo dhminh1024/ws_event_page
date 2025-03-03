@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -120,8 +120,9 @@
   body {
     @apply text-happy_box-foreground;
     @apply font-tropen;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     @apply !min-w-[100vw];
+    scroll-behavior: smooth;
   }
 }
 
@@ -137,6 +138,13 @@
     descent-override: 20%; /* Điều chỉnh chiều cao phần dưới */
     line-gap-override: 0%; /* Bỏ khoảng cách dòng */
     src: url(/happy-box/fonts/tropen.otf);
+  }
+  @font-face {
+    font-family: "Race Champion";
+    src: url(/happy-run/fonts/race_champion.ttf);
+    ascent-override: 90%; /* Điều chỉnh chiều cao phần trên */
+    descent-override: 20%; /* Điều chỉnh chiều cao phần dưới */
+    line-gap-override: 0%; /* Bỏ khoảng cách dòng */
   }
 }
 
@@ -157,4 +165,15 @@
 
 :root {
   --sidebar-width: 16rem;
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

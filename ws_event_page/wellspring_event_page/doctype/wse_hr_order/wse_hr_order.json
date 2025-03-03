@@ -1,0 +1,188 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "format:WSEHRO{YY}{#####}",
+ "creation": "2025-02-04 09:10:15.074947",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "primary_contact_section",
+  "full_name",
+  "email",
+  "column_break_yivi",
+  "mobile_number",
+  "order_status_section",
+  "status",
+  "column_break_tntq",
+  "qr_payment_code",
+  "section_break_rmyl",
+  "tickets",
+  "section_break_dihf",
+  "total_price",
+  "total_payment_pending",
+  "column_break_ylnb",
+  "total_paid"
+ ],
+ "fields": [
+  {
+   "fieldname": "primary_contact_section",
+   "fieldtype": "Section Break",
+   "label": "Primary Contact"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Full Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "mobile_number",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Mobile Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Email",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_yivi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "order_status_section",
+   "fieldtype": "Section Break",
+   "label": "Order Info"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Pending Payment\nCanceled\nPaid",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_rmyl",
+   "fieldtype": "Section Break"
+  },
+  {
+   "columns": 11,
+   "fieldname": "tickets",
+   "fieldtype": "Table",
+   "label": "Tickets",
+   "options": "WSE HR Ticket"
+  },
+  {
+   "fieldname": "total_price",
+   "fieldtype": "Currency",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Total Price",
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "qr_payment_code",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "QR Payment Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_tntq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_dihf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_ylnb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_paid",
+   "fieldtype": "Currency",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Total Paid",
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_payment_pending",
+   "fieldtype": "Currency",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Total Payment Pending",
+   "non_negative": 1,
+   "read_only": 1
+  }
+ ],
+ "image_field": "qr_payment_code",
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-02-22 01:17:32.683558",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE HR Order",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "WSE HR Admin",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

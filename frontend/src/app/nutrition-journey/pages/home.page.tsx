@@ -14,11 +14,10 @@ import { LoginConfirmModal } from "../components/login-confirm-modal";
 export const Component: FC = () => {
   const { t } = useLocales();
   return (
-    <BackgroundCoin>
+    <BackgroundCoin className="bg-white">
       <Helmet>
         <title>
-          {t("common.home_page")} | {env.NUTRITION_JOURNEY.TITLE_PAGE} -{" "}
-          {t("nutritional_journey.campaign_name")}
+          {t("common.home_page")} | {t("nutritional_journey.campaign_name")}
         </title>
       </Helmet>
       <Header className="px-[20rem] py-[10rem] md:py-[20rem] md:px-[60rem] md:h-[140rem]" />

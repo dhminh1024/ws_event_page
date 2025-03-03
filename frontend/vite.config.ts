@@ -9,6 +9,7 @@ export default defineConfig({
   server: {
     port: 8080,
     proxy: proxyOptions,
+    host: true
   },
   resolve: {
     alias: {
@@ -19,11 +20,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
       "@happy-box": path.resolve(__dirname, "src/app/happy-box"),
       "@nutrition-journey": path.resolve(__dirname, "src/app/nutrition-journey"),
+      "@happy-run": path.resolve(__dirname, "src/app/happy-run"),
     },
   },
   build: {
     outDir: "../ws_event_page/public/frontend",
     emptyOutDir: true,
     target: "es2015",
+    sourcemap: true,
   },
 });

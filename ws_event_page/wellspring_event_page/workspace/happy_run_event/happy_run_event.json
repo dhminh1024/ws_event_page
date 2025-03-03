@@ -1,0 +1,124 @@
+{
+ "charts": [
+  {
+   "chart_name": "WSE HR Ticket Type Chart",
+   "label": "Ticket Type"
+  },
+  {
+   "chart_name": "WSE HR Daily Order Chart",
+   "label": "Daily Orders"
+  },
+  {
+   "chart_name": "WSE HR Ticket Distance Chart",
+   "label": "Ticket Distance"
+  },
+  {
+   "chart_name": "WSE HR Ticket Shirt Size Chart",
+   "label": "T-shirt Size"
+  }
+ ],
+ "content": "[{\"id\":\"p052yrQmGi\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Happy Run Event</span>\",\"col\":12}},{\"id\":\"Q4kJ3kxnQo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Registration Form\",\"col\":12}},{\"id\":\"WkaTskR1d7\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"#Orders\",\"col\":3}},{\"id\":\"ypxWC_8WhL\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Revenue\",\"col\":3}},{\"id\":\"MaAy659Yp9\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Paid\",\"col\":3}},{\"id\":\"MoKKIWX2cK\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Pending Payment\",\"col\":3}},{\"id\":\"IcSEMgkhDs\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Daily Orders\",\"col\":12}},{\"id\":\"e3jynbBCkf\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Ticket Type\",\"col\":6}},{\"id\":\"opFsi-pGRh\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Ticket Distance\",\"col\":6}},{\"id\":\"TvZuyvP-ot\",\"type\":\"chart\",\"data\":{\"chart_name\":\"T-shirt Size\",\"col\":12}},{\"id\":\"lPhTKHQooO\",\"type\":\"card\",\"data\":{\"card_name\":\"Happy Run Admin\",\"col\":6}},{\"id\":\"Qujrv-8rde\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":6}}]",
+ "creation": "2025-02-04 09:03:34.514781",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "color-rank",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Happy Run Event",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Happy Run Admin",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Happy Run Settings",
+   "link_count": 0,
+   "link_to": "WSE HR Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "List of Orders",
+   "link_count": 0,
+   "link_to": "WSE HR Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Ticket Report",
+   "link_count": 0,
+   "link_to": "WSE HR Ticket Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  }
+ ],
+ "modified": "2025-02-21 11:17:35.757864",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "Happy Run Event",
+ "number_cards": [
+  {
+   "label": "#Orders",
+   "number_card_name": "HR Order Count"
+  },
+  {
+   "label": "Total Revenue",
+   "number_card_name": "HR Order"
+  },
+  {
+   "label": "Total Paid",
+   "number_card_name": "HR Order Total Paid"
+  },
+  {
+   "label": "Total Pending Payment",
+   "number_card_name": "HR Order Total Payment Pending"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "WSE HR Admin"
+  }
+ ],
+ "sequence_id": 9.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Registration Form",
+   "type": "URL",
+   "url": "/events/happy-run"
+  }
+ ],
+ "title": "Happy Run Event"
+}

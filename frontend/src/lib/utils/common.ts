@@ -105,7 +105,7 @@ export const genAvatarDefault = (name?: string) => {
 export function removeAccents(text: string) {
   return text
     .normalize("NFD")
-    .replace(/[\u0300-\u036f|\s]/g, "")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
 }
 
@@ -247,3 +247,24 @@ export function rotateSize(width:number, height:number, rotation:number) {
   };
 }
 
+export function getTimeLeft(targetDate: string) {
+  const now = new Date();
+  const target = new Date(targetDate).getTime();
+  const timeDiff = target - now.getTime();
+
+  return {
+    total: timeDiff,
+    days: Math.floor(timeDiff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((timeDiff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((timeDiff / (1000 * 60)) % 60),
+    seconds: Math.floor((timeDiff / 1000) % 60),
+  };
+}
+
+
+export const toPascalCase = (text: string) => {
+  return text.toLowerCase()
+    .split(' ')
+    .map((t) => t.charAt(0).toUpperCase() + t.slice(1))
+    .join(' ')
+}

@@ -1,0 +1,20 @@
+meta {
+  name: Register for test
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/api/method/ws_event_page.api.event.admission_checkin.lead.register_for_test
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "lead_id": "G1-121",
+    "test_slot_id": "i23p4g6l03",
+    "booking_id": "44bf422e41859d5d",
+    "switch_slot": 1,
+  }
+}

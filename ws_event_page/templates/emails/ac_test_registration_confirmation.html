@@ -1,0 +1,301 @@
+<div
+  class="container"
+  style="width: 100%; margin: auto; padding: 10px 0px; text-align: justify"
+>
+  <div
+    class="section vn-language"
+    style="margin-bottom: 30px; color: #102131 !important"
+  >
+    <p>
+      Kính gửi Quý Phụ huynh Học sinh
+      <strong>{{lead.student_full_name}}</strong>, Số thứ tự:
+      <strong>{{lead.registration_number}}</strong>,
+    </p>
+
+    <p>
+      Wellspring Saigon cảm ơn Quý Phụ huynh đã đăng ký thành công lịch “<strong
+        >Khảo sát đầu vào</strong
+      >” dành cho Học sinh lớp 1 năm học 2025-2026.
+    </p>
+
+    <p>
+      Lịch khảo sát đầu vào của Học sinh
+      <strong>{{lead.student_full_name}}</strong> được xác nhận như sau:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Thời gian khảo sát:</strong> lúc
+        <span style="color: #f05023"
+          >{{test_slot_start_time}}, {{weekday_vn}}, ngày {{test_slot_date}}
+        </span>
+      </li>
+      <li>
+        <strong>Địa điểm:</strong> Cổng B - Trường Wellspring Saigon, Số 92
+        Nguyễn Hữu Cảnh, Phường 22, Quận Bình Thạnh, TP.HCM.
+      </li>
+      <li>
+        <strong>Hình thức khảo sát:</strong> Học sinh sẽ thực hiện Phỏng vấn
+        trực tiếp 1:1 tối đa 30 phút, bao gồm:
+        <ul>
+          <li>15 phút với Giáo viên Chương trình Quốc tế.</li>
+          <li>15 phút với Giáo viên Chương trình Việt Nam.</li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Lưu ý quan trọng cho Học sinh và Phụ huynh đi cùng:</strong>
+
+        <ol>
+          <li>
+            Vui lòng đến trường bằng Cổng B và xuất trình tin nhắn hoặc nội dung
+            email lịch khảo sát này với Bảo vệ Cổng B để được hỗ trợ thủ tục vào
+            trường.
+          </li>
+          <li>
+            Vui lòng có mặt tại Phòng Tuyển sinh đúng giờ thông báo,
+            <span style="color: #f05023">trước 15 phút</span> so với thời gian
+            khảo sát đã đăng ký để thực hiện các thủ tục cần thiết.
+          </li>
+        </ol>
+      </li>
+
+      <li>
+        <strong>Phí khảo sát:</strong> 2.000.000vnd/Học sinh/lần. Phụ huynh vui
+        lòng lựa chọn một trong các hình thức thanh toán sau:
+        <ol>
+          <li>
+            Thanh toán trực tiếp bằng tiền mặt hoặc cà thẻ tại Phòng Kế toán:
+            vào ngày Học sinh đến trường tham gia khảo sát.
+          </li>
+
+          <li>
+            Thanh toán chuyển khoản theo số tài khoản bên dưới trước 01 (một)
+            ngày lịch khảo sát đã đăng ký:
+
+            <table
+              style="
+                padding: 5px;
+                border: 1px solid #3b6dae;
+                border-collapse: collapse;
+              "
+            >
+              <tbody>
+                <tr style="border: 1px solid #3b6dae">
+                  <td style="padding: 5px; border: 1px solid #3b6dae">
+                    Người thụ hưởng
+                  </td>
+                  <td style="padding: 5px; border: 1px solid #3b6dae">
+                    <strong>{{account_name}}</strong>
+                  </td>
+                  <td rowspan="4" style="padding: 5px 10px; text-align: center">
+                    <p style="font-weight: bold">QR code:</p>
+                    <img
+                      src="{{payment_qr_code}}"
+                      alt="Payment QR Code"
+                      style="width: 150px; height: 150px"
+                    />
+                  </td>
+                </tr>
+                <tr style="border: 1px solid #3b6dae">
+                  <td style="padding: 5px; border: 1px solid #3b6dae">
+                    Số tài khoản
+                  </td>
+                  <td style="padding: 5px; border: 1px solid #3b6dae">
+                    <strong>{{account_number}}</strong>
+                  </td>
+                </tr>
+                <tr style="border: 1px solid #3b6dae">
+                  <td style="padding: 5px; border: 1px solid #3b6dae">
+                    Tại ngân hàng
+                  </td>
+                  <td style="padding: 5px; border: 1px solid #3b6dae">
+                    <strong>{{bank_name}}</strong>
+                  </td>
+                </tr>
+                <tr style="border: 1px solid #3b6dae">
+                  <td style="padding: 5px; border: 1px solid #3b6dae">
+                    Nội dung chuyển khoản
+                  </td>
+                  <td style="padding: 5px; border: 1px solid #3b6dae">
+                    <strong>{{add_info}}</strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ol>
+      </li>
+    </ul>
+
+    <p>
+      Quý Phụ huynh có bất kỳ thắc mắc nào hoặc cần thêm thông tin, vui lòng
+      liên hệ với Phòng Tuyển sinh qua:
+    </p>
+
+    <ul>
+      <li>
+        <span style="width: 10px; margin-right: 5px">📞</span
+        ><strong>Hotline:</strong> 0937 099 229
+      </li>
+      <li>
+        <span style="width: 10px; margin-right: 5px">✉️</span
+        ><strong>Email:</strong> admissions@wellspringsaigon.edu.vn
+      </li>
+    </ul>
+
+    <p>Nhà trường rất háo hức chờ đón Học sinh tham gia khảo sát.</p>
+
+    <p>Trân trọng cảm ơn,</p>
+    <p><strong>Hội đồng Tuyển sinh Wellspring Saigon</strong></p>
+  </div>
+
+  <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0" />
+
+  <!-- English Version -->
+  <div class="section en-language" style="color: #00539c !important">
+    <p>
+      Dear Parents of Student
+      <strong>{{lead.student_full_name}}</strong>, Order Number:
+      <strong>{{lead.registration_number}}</strong>,
+    </p>
+
+    <p>
+      Thank you for your successfully registration in Wellspring Saigon
+      Placement Test Program for new Grade 1 Students of the school year
+      2025-2026.
+    </p>
+
+    <p>
+      Next, we would now like to provide detailed information regarding the
+      upcoming <strong>Placement Test:</strong>
+    </p>
+
+    <ul>
+      <li>
+        <strong>Date and Time:</strong>
+        <span style="color: #f05023"
+          >{{test_slot_start_time}}, {{weekday_en}}, {{test_slot_date}}</span
+        >
+      </li>
+      <li>
+        <strong>Location:</strong> Gate B - Wellspring Saigon, 92 Nguyen Huu
+        Canh Street, Ward 22, Binh Thanh District, HCMC.
+      </li>
+      <li>
+        <strong>Format:</strong> Each student will participate in a 1:1
+        interview, lasting a maximum of 30 minutes, consisting of:
+        <ul>
+          <li>15 minutes with an International Program teacher.</li>
+          <li>15 minutes with a Vietnamese Program teacher.</li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Important Notes for Students and Parents:</strong>
+
+        <ol>
+          <li>
+            Please enter through Gate B and present the confirmation message
+            with the assigned time slot or email to the Gate B security staff
+            for assistance with entry procedures.
+          </li>
+          <li>
+            Please arrive at the Admissions Office on time as scheduled,
+            <span style="color: #f05023">at least 15 minutes</span> before your
+            placement test time, to complete the necessary procedures.
+          </li>
+        </ol>
+      </li>
+
+      <li>
+        <strong>Placement Test Fee:</strong> 2,000,000 VND/student per placement
+        test. Parents may complete the payment using one of the following
+        methods:
+        <ol>
+          <li>
+            Cash or card payment at the Finance & Accounting Office on the
+            assessment day.
+          </li>
+
+          <li>
+            Bank transfer at least one day before the registered assessment date
+            to the following account:
+          </li>
+        </ol>
+        <table
+          style="
+            padding: 5px;
+            border: 1px solid #3b6dae;
+            border-collapse: collapse;
+          "
+        >
+          <tbody>
+            <tr style="border: 1px solid #3b6dae">
+              <td style="padding: 5px; border: 1px solid #3b6dae">
+                <strong>Beneficiary</strong>
+              </td>
+              <td style="padding: 5px; border: 1px solid #3b6dae">
+                SSG Education Investment and Development Co., Ltd.
+              </td>
+              <td rowspan="4" style="padding: 5px 10px; text-align: center">
+                <p style="font-weight: bold">QR code:</p>
+                <img
+                  src="{{payment_qr_code}}"
+                  alt="Payment QR Code"
+                  style="width: 150px; height: 150px"
+                />
+              </td>
+            </tr>
+            <tr style="border: 1px solid #3b6dae">
+              <td style="padding: 5px; border: 1px solid #3b6dae">
+                <strong>Account Number</strong>
+              </td>
+              <td style="padding: 5px; border: 1px solid #3b6dae">
+                {{account_number}}
+              </td>
+            </tr>
+            <tr style="border: 1px solid #3b6dae">
+              <td style="padding: 5px; border: 1px solid #3b6dae">
+                <strong>Bank</strong>
+              </td>
+              <td style="padding: 5px; border: 1px solid #3b6dae">
+                Vietnam Joint Stock Commercial Bank for Foreign Trade
+                (Vietcombank) - Gia Định Branch
+              </td>
+            </tr>
+            <tr style="border: 1px solid #3b6dae">
+              <td style="padding: 5px; border: 1px solid #3b6dae">
+                <strong>Transfer Details</strong>
+              </td>
+              <td style="padding: 5px; border: 1px solid #3b6dae">
+                {{add_info}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+
+    <p>
+      For any inquiries or further information, please do not hesitate to
+      contact the <strong>Admissions Office</strong> via:
+    </p>
+
+    <ul>
+      <li>
+        <span style="width: 10px; margin-right: 5px">📞</span
+        ><strong>Hotline:</strong> 0937 099 229
+      </li>
+      <li>
+        <span style="width: 10px; margin-right: 5px">✉️</span
+        ><strong>Email:</strong> admissions@wellspringsaigon.edu.vn
+      </li>
+    </ul>
+
+    <p>We look forward to welcoming students to the upcoming placement test.</p>
+
+    <p>Best regards,</p>
+    <p><strong>Wellspring Saigon Admission Team</strong></p>
+  </div>
+</div>

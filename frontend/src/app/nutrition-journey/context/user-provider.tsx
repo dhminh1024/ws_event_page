@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { WSENJStudent } from "./types";
 import { UserContext } from "./user-context";
 import useGetStudent from "../api/use-get-student";
+import { removeAccents } from "@/lib/utils/common";
 
 export const UserProvider: React.FC<React.PropsWithChildren> = ({
   children,
@@ -24,11 +25,11 @@ export const UserProvider: React.FC<React.PropsWithChildren> = ({
       });
       setStudent(data?.message);
       localStorage.setItem("wse_wellspringCode", code);
-      localStorage.setItem("wse_fullName", fullName);
+      localStorage.setItem("wse_fullName", data.message.fullName);
     } catch (error) {
       console.error(error);
     }
-  }, [call, code,fullName]);
+  }, [call, code]);
 
   useEffect(() => {
     if (code) {
@@ -49,7 +50,7 @@ export const UserProvider: React.FC<React.PropsWithChildren> = ({
         code,
         isValid:
           student?.wellspringCode === code &&
-          student.fullName.toLowerCase() === fullName.toLowerCase(),
+          removeAccents(student.fullName) === removeAccents(fullName),
         fullName,
         setCode,
         setFullName,

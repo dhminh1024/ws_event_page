@@ -1,0 +1,268 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:registration_number",
+ "creation": "2025-02-18 16:09:29.784689",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "general_section",
+  "registration_number",
+  "contact_email",
+  "student_full_name",
+  "parent_full_name",
+  "column_break_kytv",
+  "registration_timestamp",
+  "mobile_number",
+  "student_grade",
+  "qr_code",
+  "status_section",
+  "status",
+  "column_break_jpyd",
+  "group_name",
+  "test_booking_section",
+  "booking_id",
+  "progress_status",
+  "registered_slot",
+  "test_slot_date",
+  "test_slot_start_time",
+  "test_slot_end_time",
+  "column_break_nplg",
+  "invitation_sent_at",
+  "test_registered_at",
+  "test_checked_in_at"
+ ],
+ "fields": [
+  {
+   "fieldname": "contact_email",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Contact Email",
+   "reqd": 1
+  },
+  {
+   "fieldname": "registration_number",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Registration Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "student_full_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Student Full Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_kytv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "registration_timestamp",
+   "fieldtype": "Datetime",
+   "label": "Registration Timestamp"
+  },
+  {
+   "fieldname": "mobile_number",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Mobile Number"
+  },
+  {
+   "fieldname": "parent_full_name",
+   "fieldtype": "Data",
+   "label": "Parent Full Name"
+  },
+  {
+   "fieldname": "status_section",
+   "fieldtype": "Section Break",
+   "label": "Event NHTN"
+  },
+  {
+   "default": "New",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "New\nConfirmation Email Sent\nChecked in",
+   "reqd": 1
+  },
+  {
+   "fieldname": "general_section",
+   "fieldtype": "Section Break",
+   "label": "General"
+  },
+  {
+   "fieldname": "student_grade",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Student Grade",
+   "non_negative": 1,
+   "options": "K1\nK2\nK3\nK4\nK5\nK6\nK7\nK8\nK9\nK10\nK11\nK12",
+   "read_only": 1
+  },
+  {
+   "fieldname": "qr_code",
+   "fieldtype": "Attach Image",
+   "label": "QR Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_jpyd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "group_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Group Name"
+  },
+  {
+   "fieldname": "test_booking_section",
+   "fieldtype": "Section Break",
+   "label": "Test Booking"
+  },
+  {
+   "default": "Waiting For Invitation",
+   "fieldname": "progress_status",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Progress Status",
+   "options": "Waiting For Invitation\nInvitation Email Sent\nRegistered For Test\nChecked In Test",
+   "reqd": 1
+  },
+  {
+   "fieldname": "invitation_sent_at",
+   "fieldtype": "Datetime",
+   "label": "Invitation Sent At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "test_registered_at",
+   "fieldtype": "Datetime",
+   "label": "Test Registered At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "test_checked_in_at",
+   "fieldtype": "Datetime",
+   "label": "Test Checked In At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_nplg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "booking_id",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_standard_filter": 1,
+   "label": "Booking ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "registered_slot",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Registered Slot",
+   "options": "WSE AC Test Slot",
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fetch_from": "registered_slot.date",
+   "fieldname": "test_slot_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Test Slot Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "registered_slot.start_time",
+   "fieldname": "test_slot_start_time",
+   "fieldtype": "Time",
+   "hidden": 1,
+   "label": "Test Slot Start Time",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "registered_slot.end_time",
+   "fieldname": "test_slot_end_time",
+   "fieldtype": "Time",
+   "hidden": 1,
+   "label": "Test Slot End Time",
+   "read_only": 1
+  }
+ ],
+ "image_field": "qr_code",
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-02-25 09:40:44.252338",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE AC Lead",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "WSE AC Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "student_full_name,contact_email",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
