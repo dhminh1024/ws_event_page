@@ -80,6 +80,7 @@ export const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
           onChange={(e) => handleSearch(e.target.value)}
           onBlur={handleBlur}
           autoComplete="off"
+          aria-autocomplete="none"
           readOnly={readOnly}
         />
         <Popover

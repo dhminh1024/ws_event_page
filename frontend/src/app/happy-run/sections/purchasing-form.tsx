@@ -364,7 +364,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
           />
         </div>
         <Form {...form}>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} autoComplete="off">
             {/* Info Student/Teacher/Staff */}
             <div className="info-ticket-table mb-[30rem]">
               <Typography.Heading
