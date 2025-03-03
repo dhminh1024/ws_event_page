@@ -113,10 +113,11 @@ def get_school_class_students(school_class_id, keyword):
                 AND (LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s  
                     OR LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s 
                     or LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s 
+                    or LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci = %s
                     ) 
             ORDER BY `tabSIS Person`.full_name ASC;
         """,
-        (school_class_id, f"% {keyword}", f"{keyword} %", f"% {keyword} %"),
+        (school_class_id, f"% {keyword}", f"{keyword} %", f"% {keyword} %", keyword),
         as_dict=True,
     )
     return students
@@ -147,10 +148,11 @@ def get_department_staffs(department_id, keyword):
                     LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s  
                     OR LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s 
                     or LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci LIKE %s 
+                    or LOWER(`tabSIS Person`.full_name) COLLATE utf8mb4_general_ci = %s
                 )
             ORDER BY `tabSIS Person`.full_name ASC;
         """,
-        (department_id, f"% {keyword}", f"{keyword} %", f"% {keyword} %"),
+        (department_id, f"% {keyword}", f"{keyword} %", f"% {keyword} %", keyword),
         as_dict=True,
     )
     return staffs
