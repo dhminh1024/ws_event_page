@@ -98,7 +98,8 @@ class WSEHROrder(Document):
                 ticket.department = student_staff.department
 
         if ws_code_count == 0:
-            frappe.throw("At least one Wellspring Code is required")
+            if "WSE HR Admin" not in frappe.get_roles():
+                frappe.throw("At least one Wellspring Code is required")
 
     def after_insert(self):
         """Send confirmation email after creating the order"""
