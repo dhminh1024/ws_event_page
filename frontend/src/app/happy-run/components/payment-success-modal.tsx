@@ -128,7 +128,7 @@ export const PaymentSuccessModal: FC<LunarModalProps> = ({
             >
               {t("happy_run.buttons.download_qr")}
             </Button>
-            <Link to={cleanPath(`${env.BASE_NAME}/happy-run/order-detail/${orderName}`)} target="_blank">
+            <Link to={cleanPath(`/happy-run/order-detail/${orderName}`)} target="_blank">
               <Button
                 type="button"
                 className="my-[8rem] text-[12rem] md:text-[14rem] px-[20rem] py-[16rem] hover:!bg-hr-ember/80  bg-hr-ember text-white rounded-[5rem]"
