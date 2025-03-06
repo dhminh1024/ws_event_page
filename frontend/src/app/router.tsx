@@ -25,9 +25,15 @@ export const GlobalError: FC<GlobalErrorProps> = () => {
   if (import.meta.env.MODE !== "development" && error) {
     console.log(error);
   }
+  alert(error)
   console.log(error);
 
-  return <ClientErrorState />;
+  return (
+    <>
+      <ClientErrorState />
+      <p>{JSON.stringify(error)}</p>
+    </>
+  );
 };
 
 const RootRouter = () => {
