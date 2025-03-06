@@ -156,7 +156,7 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
               </div>
             </center>
             <div className="mt-[50rem] md:mt-[120rem] w-[100%] md:w-[80%] mx-auto">
-              <div className="flex flex-wrap justify-center items-center gap-x-[60rem] md:gap-x-[120rem]">
+              <div className="flex flex-wrap justify-center items-center gap-x-[20rem] md:gap-x-[120rem]">
                 <ItemModal
                   className="max-w-[640rem] "
                   content={(close) => (
@@ -204,9 +204,9 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
                 >
                   <div
                     ref={kitItem1Ref}
-                    className="w-[35%] md:w-[25%] inline-block"
+                    className="w-[35%] md:w-[25%] mx-[20rem] md:mx-[0rem] inline-block"
                   >
-                    <DimondBlock className="w-full h-full rounded-[20rem] md:rounded-[40rem] shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-gradient-to-tr bg-brand-persian from-brand-teal/40 to-brand-persian ">
+                    <DimondBlock className="w-full h-full rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-gradient-to-tr bg-brand-persian from-brand-teal/40 to-brand-persian ">
                       <img
                         src={event?.variables.item_bib?.value}
                         className="absolute w-[65%] h-[75%] object-contain top-[0rem] left-0 right-0 bottom-0 m-auto "
@@ -273,9 +273,9 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
                 >
                   <div
                     ref={kitItem2Ref}
-                    className="w-[35%] md:w-[25%] inline-block"
+                    className="w-[35%] md:w-[25%] mx-[20rem] md:mx-[0rem] inline-block"
                   >
-                    <DimondBlock className="rounded-[20rem] md:rounded-[40rem] shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-gradient-to-tr from-brand-honey bg-black to-brand-lime/80">
+                    <DimondBlock className="rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-gradient-to-tr from-brand-honey bg-black to-brand-lime/80">
                       <img
                         src={event?.variables.item_tshirt?.value + "?abcde"}
                         className="absolute w-[65%] h-[75%] object-contain top-[0rem] left-0 right-0 bottom-0 m-auto "
@@ -330,9 +330,9 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
                 >
                   <div
                     ref={kitItem3Ref}
-                    className="w-[35%] md:w-[25%] inline-block"
+                    className="w-[35%] md:w-[25%] mx-[20rem] md:mx-[0rem] inline-block"
                   >
-                    <DimondBlock className="mt-[-20rem] md:mt-0 rounded-[20rem] md:rounded-[40rem] shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-gradient-to-tr from-brand-honey/80 bg-black to-brand-amber/90">
+                    <DimondBlock className="mt-[-20rem] md:mt-0 rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-gradient-to-tr from-brand-honey/80 bg-black to-brand-amber/90">
                       <img
                         src={event?.variables.item_medals?.value + "?abcde"}
                         className="absolute w-[65%] h-[75%] object-contain top-[0rem] left-0 right-0 bottom-0 m-auto "
@@ -342,7 +342,7 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
                   </div>
                 </ItemModal>
               </div>
-              <div className="mt-[-20rem] md:mt-0 flex justify-center items-center gap-x-[60rem] md:gap-x-[120rem]">
+              <div className="mt-[-20rem] md:mt-0 flex justify-center items-center gap-x-[15rem] md:gap-x-[120rem]">
                 <ItemModal
                   className="max-w-[640rem] "
                   content={(close) => (
@@ -389,9 +389,9 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
                 >
                   <div
                     ref={kitItem4Ref}
-                    className="w-[35%] md:w-[25%] inline-block"
+                    className="w-[35%] md:w-[25%] mx-[20rem] md:mx-[0rem] inline-block"
                   >
-                    <DimondBlock className="rounded-[20rem] md:rounded-[40rem] shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-gradient-to-tr from-brand-lime/80 bg-black to-brand-persian/90">
+                    <DimondBlock className="rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-gradient-to-tr from-brand-lime/80 bg-black to-brand-persian/90">
                       <img
                         src={event?.variables.item_hat?.value + "?abcde"}
                         className="absolute w-[65%] h-[75%] object-contain top-[0rem] left-0 right-0 bottom-0 m-auto "
@@ -446,9 +446,9 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
                 >
                   <div
                     ref={kitItem5Ref}
-                    className="w-[35%] md:w-[25%] inline-block"
+                    className="w-[35%] md:w-[25%] mx-[20rem] md:mx-[0rem] inline-block"
                   >
-                    <DimondBlock className="rounded-[20rem] md:rounded-[40rem] shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-gradient-to-tr from-brand-honey/90 bg-black to-brand-honey/80">
+                    <DimondBlock className="rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-gradient-to-tr from-brand-honey/90 bg-black to-brand-honey/80">
                       <img
                         src={event?.variables.item_bottle?.value + "?abcde"}
                         className="absolute w-[65%] h-[75%] object-contain top-[0rem] left-0 right-0 bottom-0 m-auto "
