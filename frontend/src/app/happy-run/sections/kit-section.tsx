@@ -156,7 +156,7 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
               </div>
             </center>
             <div className="mt-[50rem] md:mt-[120rem] w-[100%] md:w-[80%] mx-auto">
-              <div className="flex flex-wrap justify-center items-center gap-x-[60rem] md:gap-x-[120rem]">
+              <div className="flex flex-wrap justify-center items-center gap-x-[20rem] md:gap-x-[120rem]">
                 <ItemModal
                   className="max-w-[640rem] "
                   content={(close) => (
