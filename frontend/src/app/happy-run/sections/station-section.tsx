@@ -20,6 +20,7 @@ import { useResponsive } from "@/core/hooks/use-reponsive";
 import { cleanPath } from "@/lib/utils/common";
 import env from "@/config/env";
 import { useInView } from "react-intersection-observer";
+import { ErrorBoundary } from "react-error-boundary";
 
 export type StationSectionProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -97,13 +98,15 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
                   }
                 )}
               >
-                <Canvas flat linear>
-                  <Model
-                    matcapUrl={cleanPath(
-                      `${env.ASSET_URL}/happy-run/matcap.png`
-                    )}
-                  />
-                </Canvas>
+                <ErrorBoundary fallback={<></>}>
+                  <Canvas flat linear>
+                    <Model
+                      matcapUrl={cleanPath(
+                        `${env.ASSET_URL}/happy-run/matcap.png`
+                      )}
+                    />
+                  </Canvas>
+                </ErrorBoundary>
               </div>
               <div ref={station1Ref}>
                 <Typography.Paragraph className="text-[12rem] md:text-[23rem] font-extrabold mt-[10rem] uppercase text-[#D93C1C] md:text-hr-ember">
@@ -139,13 +142,15 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
                   }
                 )}
               >
-                <Canvas flat linear>
-                  <Model
-                    matcapUrl={cleanPath(
-                      `${env.ASSET_URL}/happy-run/matcap_4.png`
-                    )}
-                  />
-                </Canvas>
+                <ErrorBoundary fallback={<></>}>
+                  <Canvas flat linear>
+                    <Model
+                      matcapUrl={cleanPath(
+                        `${env.ASSET_URL}/happy-run/matcap_4.png`
+                      )}
+                    />
+                  </Canvas>
+                </ErrorBoundary>
               </div>
               <div ref={station2Ref}>
                 <Typography.Paragraph className="text-[12rem] md:text-[23rem] font-extrabold mt-[10rem] uppercase text-[#04A39B] md:text-hr-ember">
@@ -175,13 +180,15 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
               )}
             >
               <div className="absolute top-[-60%] left-[85%] w-[80rem] md:w-[220rem] aspect-square">
-                <Canvas flat linear>
-                  <Model
-                    matcapUrl={cleanPath(
-                      `${env.ASSET_URL}/happy-run/matcap_3.png`
-                    )}
-                  />
-                </Canvas>
+                <ErrorBoundary fallback={<></>}>
+                  <Canvas flat linear>
+                    <Model
+                      matcapUrl={cleanPath(
+                        `${env.ASSET_URL}/happy-run/matcap_3.png`
+                      )}
+                    />
+                  </Canvas>
+                </ErrorBoundary>
               </div>
               <div ref={station3Ref}>
                 <Typography.Paragraph className="text-[12rem] md:text-[23rem] font-extrabold mt-[10rem] uppercase text-[#92B109] md:text-hr-ember">
@@ -217,13 +224,15 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
                   }
                 )}
               >
-                <Canvas flat linear>
-                  <Model
-                    matcapUrl={cleanPath(
-                      `${env.ASSET_URL}/happy-run/matcap_2.png`
-                    )}
-                  />
-                </Canvas>
+                <ErrorBoundary fallback={<></>}>
+                  <Canvas flat linear>
+                    <Model
+                      matcapUrl={cleanPath(
+                        `${env.ASSET_URL}/happy-run/matcap_2.png`
+                      )}
+                    />
+                  </Canvas>
+                </ErrorBoundary>
               </div>
               <div ref={station4Ref}>
                 <Typography.Paragraph className="text-[12rem] md:text-[23rem] font-extrabold mt-[10rem] uppercase text-[#E29F12] md:text-hr-ember">
@@ -245,13 +254,15 @@ export const StationSection: FC<StationSectionProps> = ({ className }) => {
             </div>
             <div className="absolute bottom-[11%] left-[55%] md:left-[23%] text-right">
               <div className="absolute top-[-45%] left-[15%] md:top-[-10%] md:left-[85%] w-[100rem] md:w-[260rem] aspect-square">
-                <Canvas flat linear>
-                  <Model
-                    matcapUrl={cleanPath(
-                      `${env.ASSET_URL}/happy-run/matcap_5.png`
-                    )}
-                  />
-                </Canvas>
+                <ErrorBoundary fallback={<></>}>
+                  <Canvas flat linear>
+                    <Model
+                      matcapUrl={cleanPath(
+                        `${env.ASSET_URL}/happy-run/matcap_5.png`
+                      )}
+                    />
+                  </Canvas>
+                </ErrorBoundary>
               </div>
               <div ref={station5Ref}>
                 <Typography.Paragraph className="text-[12rem] md:text-[23rem] font-extrabold mt-[10rem] uppercase text-[#002172] md:text-hr-ember">

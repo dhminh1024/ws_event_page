@@ -17,7 +17,7 @@ export const DimondBlock: FC<
     <div
       ref={ref}
       className={cn(
-        "relative aspect-square w-full h-full  rotate-45",
+        "relative aspect-square w-full h-0  rotate-45",
         className
       )}
       {...props}
