@@ -19,6 +19,8 @@ export type AutoCompleteProps = Omit<
   readOnly?: boolean;
   value?: string;
   dataAutoComplete?: string[];
+  placeholder?: string;
+  disabled?: boolean;
   onSelectValue?: (value: string) => void;
   onChange?: (value: string) => void;
 };
@@ -32,6 +34,8 @@ export const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
       onSelectValue,
       readOnly,
       value,
+      disabled,
+      placeholder,
       ...props
     },
     ref
@@ -48,6 +52,8 @@ export const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
 
     const handleBlur = () => {
       setOpen(false);
+      setInputText(dataAutoComplete[0]);
+      onSelectValue?.(dataAutoComplete[0]);
     };
 
     const handleSelected = (value: string) => {
@@ -82,6 +88,8 @@ export const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
           autoComplete="off"
           aria-autocomplete="none"
           readOnly={readOnly}
+          disabled={disabled}
+          placeholder={placeholder}
         />
         <Popover
           open={open}

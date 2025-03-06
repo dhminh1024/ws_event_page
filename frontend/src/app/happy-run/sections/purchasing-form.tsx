@@ -377,7 +377,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                 {t("happy_run.form.young_user_warning")}
               </Typography.Paragraph>
               <div className="section-1">
-                {primaryFields.map((field, index:number) => (
+                {primaryFields.map((field, index: number) => (
                   <FormField
                     control={form.control}
                     key={field.id}
@@ -399,14 +399,14 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                               />
                               <AutoComplete
                                 dataAutoComplete={groups?.[index]?.shorten}
-            
+                                placeholder="e.g. 8.1, 10.2, MKT"
                                 onChange={(value) => findGroups(index, value)}
                                 onSelectValue={(value) => {
                                   form.setValue(
                                     `primary_runners.${index}.department`,
                                     value
                                   );
-                                  clearUserField(index)
+                                  clearUserField(index);
                                 }}
                               />
                             </div>
@@ -435,6 +435,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 className=""
                                 dataAutoComplete={members?.[index]?.shorten}
                                 value={field.value.full_name}
+                                placeholder=""
                                 onChange={(value) =>
                                   findMembers(
                                     index,
