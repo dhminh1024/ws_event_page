@@ -135,6 +135,29 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
             : settings.happy_run_ticket_price,
       })
     );
+    const hr_tickets_count = tickets.reduce(
+      (sum, i) => sum + (i.ticket_type === "Happy Run" ? 1 : 0),
+      0
+    );
+    const wb_tickets_count = tickets.reduce(
+      (sum, i) => sum + (i.ticket_type === "Well-being" ? 1 : 0),
+      0
+    );
+
+    if (
+      hr_tickets_count > 0 &&
+      Number(event.variables.enable_happy_run_ticket?.value ?? 0) === 0
+    ) {
+      alert("Happy Run ticket is not available");
+      return;
+    }
+    if (
+      wb_tickets_count > 0 &&
+      Number(event.variables.enable_well_being_ticket?.value ?? 0) === 0
+    ) {
+      alert("Well-being ticket is not available");
+      return;
+    }
     const orderData = {
       full_name: data.full_name,
       email: data.email,
@@ -523,15 +546,35 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
                                 />
                               </SelectTrigger>
                               <SelectContent className="max-h-none bg-white">
-                                {ticket_classes.map((item) => (
-                                  <SelectItem
-                                    key={item.value}
-                                    className=" text-[8rem] md:text-[16rem] p-[5rem] md:p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
-                                    value={item.value}
-                                  >
-                                    {item.label}
-                                  </SelectItem>
-                                ))}
+                                {ticket_classes.map((item) => {
+                                  let sold_out = false;
+                                  if (
+                                    item.value === "Well-being" &&
+                                    Number(
+                                      event.variables?.enable_well_being_ticket
+                                        ?.value ?? 1
+                                    ) === 0
+                                  )
+                                    sold_out = true;
+                                  if (
+                                    item.value === "Happy Run" &&
+                                    Number(
+                                      event.variables?.enable_happy_run_ticket
+                                        ?.value ?? 1
+                                    ) === 0
+                                  )
+                                    sold_out = true;
+                                  return (
+                                    <SelectItem
+                                      key={item.value}
+                                      className=" text-[8rem] md:text-[16rem] p-[5rem] md:p-[10rem] !bg-white hover:!bg-slate-200 !text-hr-blue cursor-pointer"
+                                      value={item.value}
+                                      disabled={sold_out}
+                                    >
+                                      {item.label} {sold_out && `- ${t('common.sold_out')}`}
+                                    </SelectItem>
+                                  );
+                                })}
                               </SelectContent>
                             </Select>
                           </FormControl>

@@ -26,7 +26,8 @@
     "department": "Phòng ban",
     "student_code": "MSHS",
     "event_email": "Email chương trình",
-    "search_empty": "Không tìm thấy kết quả, vui lòng bổ sung thêm"
+    "search_empty": "Không tìm thấy kết quả, vui lòng bổ sung thêm",
+    "sold_out": "Hết vé"
   },
   "notification": {
     "client_error": {

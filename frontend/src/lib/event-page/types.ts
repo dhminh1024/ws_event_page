@@ -33,4 +33,5 @@ export type EventVariableBase = {
 
 export interface WSEEventResponse extends Omit<WSEEvent, "variables"> {
   variables: HBEventVariable & HREventVariable & ACEventVariable & Record<string, VariableType>;
+  mutate: any;
 }
