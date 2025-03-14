@@ -26,7 +26,8 @@
     "department": "Department",
     "student_code": "Student Code",
     "event_email": "Email",
-    "search_empty": "No results found, please add more"
+    "search_empty": "No results found, please add more",
+    "sold_out": "Sold Out"
   },
   "notification": {
     "client_error": {
