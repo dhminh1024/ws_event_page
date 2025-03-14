@@ -1,7 +1,7 @@
 export const ticket_classes = [
     {
         label: "Happy Run",
-        value: "Happy Run"
+        value: "Happy Run",
     },
     {
         label: "Well-being",

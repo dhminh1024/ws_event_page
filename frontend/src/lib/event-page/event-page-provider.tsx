@@ -13,7 +13,7 @@ export const EventPageProvider: React.FC<
   React.PropsWithChildren<EventPageProviderProps>
 > = ({ eventUrl, children }) => {
   
-  const { data, isLoading, isValidating } = useFrappeGetCall<{
+  const { data, isLoading, isValidating, mutate } = useFrappeGetCall<{
     message: WSEEventResponse;
   }>(
     "ws_event_page.api.event.event.get_event_page_data",
@@ -23,6 +23,7 @@ export const EventPageProvider: React.FC<
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
       revalidateOnMount: true,
+      focusThrottleInterval: 5000
     } // options
   );
 
@@ -31,7 +32,7 @@ export const EventPageProvider: React.FC<
   // if (!data || !data.message) return <h1>Error: Event Page Data not found!</h1>;
 
   return (
-    <EventPageContext.Provider value={data?.message || { variables: {} } as WSEEventResponse}>
+    <EventPageContext.Provider value={{variables: {},mutate, ...data?.message } as WSEEventResponse}>
       {children}
     </EventPageContext.Provider>
   );
