@@ -138,7 +138,10 @@
         "Attended": "Attended",
         "Refunded": "Refunded"
       },
-      "order_detail": "Order Details"
+      "order_detail": "Order Details",
+      "payment_failed_heading": "NOTICE <br/> <span className=\"text-hr-ember\">REGISTRATION FOR </span> <br/> <span className=\"text-hr-honey\">THE HAPPY RUN 2025</span> <span className=\"text-hr-ember\">HAS BEEN CLOSED</span>",
+      "payment_failed_desc_1": "As the maximum number of the participants has been reached according to Organizing Commitee's regulations, the registration form is officially closed.",
+      "payment_failed_desc_2": "Thank you!"
     },
     "order_title": "Order <span className=\"text-hr-honey\">Details</span>",
     "buttons": {
