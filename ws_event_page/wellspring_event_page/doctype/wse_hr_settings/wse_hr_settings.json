@@ -11,6 +11,8 @@
   "column_break_ghgo",
   "happy_run_ticket_price",
   "vietqr_url",
+  "section_break_agqz",
+  "limit_ticket_count",
   "bank_account_section",
   "bank_name",
   "bank_short_name",
@@ -105,12 +107,22 @@
    "fieldtype": "Data",
    "label": "Bank Name",
    "reqd": 1
+  },
+  {
+   "fieldname": "section_break_agqz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "745",
+   "fieldname": "limit_ticket_count",
+   "fieldtype": "Int",
+   "label": "Limit Ticket Count"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-02-20 14:40:53.133212",
+ "modified": "2025-03-15 22:20:20.368036",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE HR Settings",

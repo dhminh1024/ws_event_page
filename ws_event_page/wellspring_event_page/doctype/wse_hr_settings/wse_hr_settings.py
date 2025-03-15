@@ -21,6 +21,7 @@ class WSEHRSettings(Document):
 		bin_number: DF.Data
 		email_sender: DF.Data
 		happy_run_ticket_price: DF.Currency
+		limit_ticket_count: DF.Int
 		vietqr_url: DF.Data
 		wellbeing_ticket_price: DF.Currency
 	# end: auto-generated types
