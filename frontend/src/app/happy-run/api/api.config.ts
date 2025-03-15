@@ -26,5 +26,9 @@ export const FRAPPE_APIS = {
   GET_STAFFS_IN_DEPARTMENT:{
     METHOD_STRING:"ws_event_page.api.event.happy_run.submission.get_department_staffs",
     SWR_KEY: "get_department_staffs"
+  },
+  CHECK_TICKETS:{
+    METHOD_STRING:"ws_event_page.api.event.happy_run.ticket.get_ticket_count",
+    SWR_KEY: "get_ticket_count"
   }
 };

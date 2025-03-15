@@ -138,7 +138,10 @@
         "Attended": "Đã tham gia",
         "Refunded": "Đã hoàn tiền"
       },
-      "order_detail": "Chi tiết đơn hàng"
+      "order_detail": "Chi tiết đơn hàng",
+      "payment_failed_heading": "THÔNG BÁO <br/> <span className=\"text-hr-ember\">ĐÓNG CỔNG ĐĂNG KÝ </span> <span className=\"text-hr-honey\">HAPPY RUN 2025</span>",
+      "payment_failed_desc_1": "Vì số lượng tham dự đã đạt đủ theo quy định của BTC, cổng đăng ký tham dự sự kiện chính thức đóng lại.",
+      "payment_failed_desc_2": "Cảm ơn Quý Phụ huynh, GV-NV và các em học sinh đã ủng hộ Đường chạy hạnh phúc 2025."
     },
     "order_title": "Chi Tiết <span className=\"text-hr-honey\">Đơn Hàng</span>",
     "buttons": {

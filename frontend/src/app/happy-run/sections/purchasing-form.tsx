@@ -57,6 +57,8 @@ import { StudentSimple } from "@/types/extends/WSEStudent";
 import { StaffSimple } from "@/types/extends/WSEStaff";
 import useGetStudentsInClass from "../api/use-get-students-in-class";
 import { log } from "console";
+import useCheckTicketsCount from "@/app/happy-run/api/use-check-tickets-count";
+import { PaymentFailedModal } from "@/app/happy-run/components/payment-failed-modal";
 
 export type PurchasingFormProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -96,6 +98,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
     order_name: "",
   });
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
+  const [openClosedModal, setOpenClosedModal] = useState(false);
 
   const {
     fields: primaryFields,
@@ -121,6 +124,12 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
     console.log(data);
     if (!settings?.wellbeing_ticket_price && !settings?.happy_run_ticket_price)
       return;
+    const allow = await checkAllowBuyTicket()
+    console.log("allow:",allow);
+    
+    if(!allow) 
+      return; 
+    
     const tickets = [...data.primary_runners, ...data.guardian_runners].map(
       (i: any) => ({
         wellspring_code: i.code?.toUpperCase() || null,
@@ -143,8 +152,10 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
       (sum, i) => sum + (i.ticket_type === "Well-being" ? 1 : 0),
       0
     );
-
+    console.log(event.variables.enable_happy_run_ticket?.value);
+    
     if (
+      event.variables.enable_happy_run_ticket?.value && 
       hr_tickets_count > 0 &&
       Number(event.variables.enable_happy_run_ticket?.value ?? 0) === 0
     ) {
@@ -152,6 +163,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
       return;
     }
     if (
+      event.variables.enable_well_being_ticket?.value &&
       wb_tickets_count > 0 &&
       Number(event.variables.enable_well_being_ticket?.value ?? 0) === 0
     ) {
@@ -240,6 +252,7 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
   >();
   const { call: fetchStudents } = useGetStudentsInClass();
   const { call: fetchStaffs } = useGetStaffInDepartment();
+  const { call: checkTickets } = useCheckTicketsCount();
 
   const findGroups = (index: number, value: string) => {
     const searchValue = removeAccents(value.toLowerCase().trim());
@@ -319,6 +332,18 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
   };
 
   console.log("err", form.formState.errors);
+
+  const checkAllowBuyTicket = async () => {
+    const res = await checkTickets({});
+    const allow = res.message.allow_buy_ticket
+    setOpenClosedModal(!allow);
+    return allow
+  }
+  
+  useEffect(() => {
+    checkAllowBuyTicket()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   return (
     <div className={cn("mb-[40rem]", className)}>
@@ -1086,6 +1111,10 @@ export const PurchasingForm: FC<PurchasingFormProps> = ({ className }) => {
         orderName={paymentData?.order_name}
         open={openSuccessModal}
         onClosed={handleOrderSuccess}
+      />
+      <PaymentFailedModal
+        open={openClosedModal}
+        onClosed={()=>setOpenClosedModal(false)}
       />
     </div>
   );
