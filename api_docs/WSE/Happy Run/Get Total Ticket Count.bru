@@ -1,0 +1,15 @@
+meta {
+  name: Get Total Ticket Count
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{url}}/api/method/ws_event_page.api.event.happy_run.order.get_order_detail?order_id=WSEHRO2500046
+  body: none
+  auth: none
+}
+
+query {
+  order_id: WSEHRO2500046
+}
