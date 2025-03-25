@@ -44,6 +44,13 @@ class WSEACErrorCode(Enum):
     TEST_REGISTRATION_EXPIRED = "WSEAC-E207: Test registration is expired"
 
 
+class WSEACResultType(Enum):
+    PASS_TYPE_1 = "DS1"
+    PASS_TYPE_2 = "DS2"
+    PASS_TYPE_3 = "DS3"
+    FAIL_TYPE = "DS4"
+
+
 class WSEACLead(Document):
     # begin: auto-generated types
     # This code is auto-generated. Do not modify anything in this block.
@@ -54,6 +61,7 @@ class WSEACLead(Document):
         from frappe.types import DF
 
         booking_id: DF.Data | None
+        congratz_letter: DF.Attach | None
         contact_email: DF.Data
         group_name: DF.Data | None
         invitation_sent_at: DF.Datetime | None
@@ -69,8 +77,12 @@ class WSEACLead(Document):
         registered_slot: DF.Link | None
         registration_number: DF.Data
         registration_timestamp: DF.Datetime | None
+        result_folder_link: DF.Data | None
+        result_report: DF.Attach | None
+        result_type: DF.Literal["DS1", "DS2", "DS3", "DS4"]
         status: DF.Literal["New", "Confirmation Email Sent", "Checked in"]
         student_full_name: DF.Data
+        student_gender: DF.Literal["Male", "Female"]
         student_grade: DF.Literal[
             "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "K9", "K10", "K11", "K12"
         ]
@@ -145,6 +157,57 @@ class WSEACLead(Document):
 
         encode = self.registration_number.encode()
         self.booking_id = hashlib.md5(encode).hexdigest()[:16]
+
+    def send_result_confirmation_email(self):
+        # send confirmation email
+
+        ac_settings = frappe.frappe.get_single("WSE AC Settings")
+
+        template = ""
+        if self.result_type == WSEACResultType.PASS_TYPE_1.value:
+            template = "ac_ds1_pass_confirmation"
+        elif self.result_type == WSEACResultType.PASS_TYPE_2.value:
+            template = "ac_ds2_pass_confirmation"
+        elif self.result_type == WSEACResultType.PASS_TYPE_3.value:
+            template = "ac_ds3_pass_confirmation"
+        elif self.result_type == WSEACResultType.FAIL_TYPE.value:
+            template = "ac_ds4_fail_confirmation"
+
+        attachments = []
+        if ac_settings.test_result_attachment:
+            if self.result_type == WSEACResultType.FAIL_TYPE.value:
+                attachments = [
+                    {"file_url": self.result_report} if self.result_report else None,
+                ]
+            else:
+                attachments = [
+                    {"file_url": self.result_report} if self.result_report else None,
+                    (
+                        {"file_url": self.congratz_letter}
+                        if self.congratz_letter
+                        else None
+                    ),
+                ]
+            attachments = [item for item in attachments if item]
+
+        if template:
+            frappe.sendmail(
+                sender="admissions@wellspringsaigon.edu.vn",
+                reply_to="admissions@wellspringsaigon.edu.vn",
+                recipients=[self.contact_email],
+                cc=["admissions@wellspringsaigon.edu.vn"],
+                attachments=attachments,
+                subject="[WSSG.SY2025-2026] BÁO CÁO KẾT QUẢ KHẢO SÁT ĐẦU VÀO | THE STUDENT PLACEMENT TEST REPORT",
+                template=template,
+                args={"lead": self},
+                # now=True,
+            )
+            self.status = WSEACLeadStatus.CONFIRMATION_EMAIL_SENT.value
+            self.save()
+        else:
+            frappe.throw(
+                f"ERROR sending result confirmation email: Student {self.student_full_name} - Undefined Result Type!"
+            )
 
     def send_confirmation_email(self):
         settings = frappe.get_single("WSE AC Settings")
