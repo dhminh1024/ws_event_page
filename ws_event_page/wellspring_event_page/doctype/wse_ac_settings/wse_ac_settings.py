@@ -17,5 +17,6 @@ class WSEACSettings(Document):
 		open_nhtn_event: DF.Check
 		open_test_registration: DF.Check
 		test_registration_closing_time: DF.Datetime | None
+		test_result_attachment: DF.Check
 	# end: auto-generated types
 	pass

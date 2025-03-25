@@ -3,8 +3,30 @@ from ws_event_page.wellspring_event_page.doctype.wse_ac_lead.wse_ac_lead import 
     WSEACLeadStatus,
     WSEACTestStatus,
     WSEACErrorCode,
+    WSEACResultType,
 )
 from enum import Enum
+
+
+@frappe.whitelist(methods=["POST"])
+def send_result_confirmation_emails(lead_ids_str):
+    lead_ids = lead_ids_str.split(",")
+    count = 0
+    for lead_id in lead_ids:
+        lead = frappe.get_doc("WSE AC Lead", lead_id)
+        if lead.result_type in [
+            WSEACResultType.PASS_TYPE_1.value,
+            WSEACResultType.PASS_TYPE_2.value,
+            WSEACResultType.PASS_TYPE_3.value,
+            WSEACResultType.FAIL_TYPE.value,
+        ]:
+            lead.send_result_confirmation_email()
+            count += 1
+
+    return {
+        "message": f"{count} email(s) đã được đưa vào danh sách gửi",
+        "count": count,
+    }
 
 
 @frappe.whitelist(methods=["POST"])

@@ -12,6 +12,7 @@
   "contact_email",
   "student_full_name",
   "parent_full_name",
+  "student_gender",
   "column_break_kytv",
   "registration_timestamp",
   "mobile_number",
@@ -31,7 +32,13 @@
   "column_break_nplg",
   "invitation_sent_at",
   "test_registered_at",
-  "test_checked_in_at"
+  "test_checked_in_at",
+  "test_result_section",
+  "result_type",
+  "result_folder_link",
+  "column_break_tegu",
+  "result_report",
+  "congratz_letter"
  ],
  "fields": [
   {
@@ -214,12 +221,56 @@
    "hidden": 1,
    "label": "Test Slot End Time",
    "read_only": 1
+  },
+  {
+   "fieldname": "test_result_section",
+   "fieldtype": "Section Break",
+   "label": "Test Result"
+  },
+  {
+   "fieldname": "result_type",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Result Type",
+   "options": "DS1\nDS2\nDS3\nDS4",
+   "reqd": 1
+  },
+  {
+   "fieldname": "result_folder_link",
+   "fieldtype": "Data",
+   "label": "Result Folder Link"
+  },
+  {
+   "fieldname": "column_break_tegu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "congratz_letter",
+   "fieldtype": "Attach",
+   "label": "Congratulation Letter"
+  },
+  {
+   "fieldname": "result_report",
+   "fieldtype": "Attach",
+   "label": "Result Report"
+  },
+  {
+   "fieldname": "student_gender",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Student Gender",
+   "options": "Male\nFemale",
+   "reqd": 1
   }
  ],
  "image_field": "qr_code",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-25 09:40:44.252338",
+ "modified": "2025-03-25 11:07:11.419593",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE AC Lead",
