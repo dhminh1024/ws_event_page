@@ -161,11 +161,12 @@ def get_all_test_slots(booking_id):
 def get_ac_settings():
     settings = frappe.get_single("WSE AC Settings")
     is_registration_closed = False
+    current_time = frappe.utils.get_datetime(frappe.utils.now())
 
     if not settings.open_test_registration:
         is_registration_closed = True
     elif (settings.test_registration_closing_time) and (
-        frappe.utils.now() > settings.test_registration_closing_time
+        current_time > settings.test_registration_closing_time
     ):
         is_registration_closed = True
 

@@ -361,9 +361,10 @@ def is_test_registration_open(allow_admin=True):
         return True
 
     settings = frappe.get_single("WSE AC Settings")
+    current_time = frappe.utils.get_datetime(frappe.utils.now())
     if not settings.open_test_registration:
         frappe.throw(WSEACErrorCode.TEST_REGISTRATION_CLOSED.value)
     if settings.test_registration_closing_time and (
-        frappe.utils.now() > settings.test_registration_closing_time
+        current_time > settings.test_registration_closing_time
     ):
         frappe.throw(WSEACErrorCode.TEST_REGISTRATION_EXPIRED.value)
