@@ -59,3 +59,19 @@ def cancel_order(order_id):
 def get_order_detail(order_id):
     order = frappe.get_doc("WSE HR Order", order_id)
     return order.as_dict()
+
+
+@frappe.whitelist(methods=["POST"])
+def send_runner_kit_notice_emails(order_ids_str):
+    order_ids = order_ids_str.split(",")
+    count = 0
+    for order_id in order_ids:
+        order = frappe.get_doc("WSE HR Order", order_id)
+        if order.status == HROrderStatus.PAID.value:
+            order.send_runner_kit_notice_email()
+            count += 1
+
+    return {
+        "message": f"{count} email(s) đã được đưa vào danh sách gửi",
+        "count": count,
+    }
