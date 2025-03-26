@@ -305,6 +305,16 @@ class WSEHROrder(Document):
         )
         send_confirmation_email(template, sender, recipients, subject, args)
 
+    def send_runner_kit_notice_email(self):
+        sender = settings.email_sender
+        subject = (
+            "WSSG Happy Run 2025 - THÔNG BÁO THỜI GIAN VÀ ĐỊA ĐIỂM NHẬN RUNNER KIT"
+        )
+        recipients = [self.email]
+        template = "hr_runner_kit_notice"
+        args = None
+        send_confirmation_email(template, sender, recipients, subject, args)
+
 
 def send_confirmation_email(
     email_template, sender, recipients, subject, args, send_now=False
