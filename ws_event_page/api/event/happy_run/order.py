@@ -75,3 +75,19 @@ def send_runner_kit_notice_emails(order_ids_str):
         "message": f"{count} email(s) đã được đưa vào danh sách gửi",
         "count": count,
     }
+
+
+@frappe.whitelist(methods=["POST"])
+def send_reminder_emails(order_ids_str):
+    order_ids = order_ids_str.split(",")
+    count = 0
+    for order_id in order_ids:
+        order = frappe.get_doc("WSE HR Order", order_id)
+        if order.status == HROrderStatus.PAID.value:
+            order.send_reminder_email()
+            count += 1
+
+    return {
+        "message": f"{count} email(s) đã được đưa vào danh sách gửi",
+        "count": count,
+    }
