@@ -315,15 +315,39 @@ class WSEHROrder(Document):
         args = None
         send_confirmation_email(template, sender, recipients, subject, args)
 
+    def send_reminder_email(self):
+        sender = settings.email_sender
+        subject = "[WSSG - HAPPY RUN 2025] CHUẨN BỊ SẴN SÀNG CHO SỰ KIỆN HAPPY RUN 2025 “SET YOUR PACE, EMBRACE WELLNESS”"
+        recipients = [self.email]
+        template = "hr_event_reminder"
+        args = None
+        attachments = [
+            (
+                {"file_url": settings.reminder_email_attached_file_vn}
+                if settings.reminder_email_attached_file_vn
+                else None
+            ),
+            (
+                {"file_url": settings.reminder_email_attached_file_en}
+                if settings.reminder_email_attached_file_en
+                else None
+            ),
+        ]
+        attachments = [attachment for attachment in attachments if attachment]
+        send_confirmation_email(
+            template, sender, recipients, subject, args, attachments=attachments
+        )
+
 
 def send_confirmation_email(
-    email_template, sender, recipients, subject, args, send_now=False
+    email_template, sender, recipients, subject, args, attachments=[], send_now=False
 ):
     frappe.sendmail(
         sender=sender,
         reply_to="happyrun2025@wellspringsaigon.edu.vn",
         cc=["happyrun2025@wellspringsaigon.edu.vn"],
         recipients=recipients,
+        attachments=attachments,
         subject=subject,
         template=email_template,
         args=args,

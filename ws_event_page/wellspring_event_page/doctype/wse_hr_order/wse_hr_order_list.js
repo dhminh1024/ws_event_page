@@ -3,7 +3,17 @@
 
 frappe.listview_settings["WSE HR Order"] = {
   onload(listview) {
-    listview.page.add_action_item("Send Runner Kit Notice Emails", () => {
+    // listview.page.add_action_item("Send Runner Kit Notice Emails", () => {
+    //   let names = [];
+    //   $.each(listview.get_checked_items(), function (key, value) {
+    //     names.push(value.name);
+    //   });
+    //   if (names.length === 0) {
+    //     frappe.throw(__("No rows selected."));
+    //   }
+    //   send_runner_kit_notice_emails(names, listview);
+    // });
+    listview.page.add_action_item("Send Reminder Emails", () => {
       let names = [];
       $.each(listview.get_checked_items(), function (key, value) {
         names.push(value.name);
@@ -11,7 +21,7 @@ frappe.listview_settings["WSE HR Order"] = {
       if (names.length === 0) {
         frappe.throw(__("No rows selected."));
       }
-      send_runner_kit_notice_emails(names, listview);
+      send_reminder_emails(names, listview);
     });
   },
   before_render() {
@@ -33,6 +43,29 @@ function send_runner_kit_notice_emails(names, listview) {
       frappe.call({
         method:
           "ws_event_page.api.event.happy_run.order.send_runner_kit_notice_emails",
+        args: {
+          order_ids_str: names_str,
+        },
+        callback: function (r) {
+          if (r.message) {
+            message = r.message.message;
+            frappe.msgprint(message);
+            listview.refresh();
+          }
+        },
+      });
+    }
+  );
+}
+
+function send_reminder_emails(names, listview) {
+  // convert names to string
+  names_str = names.join(",");
+  frappe.confirm(
+    "Are you sure you want to send the runner kit notice emails?",
+    function () {
+      frappe.call({
+        method: "ws_event_page.api.event.happy_run.order.send_reminder_emails",
         args: {
           order_ids_str: names_str,
         },

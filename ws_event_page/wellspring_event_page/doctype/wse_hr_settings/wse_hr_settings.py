@@ -22,6 +22,8 @@ class WSEHRSettings(Document):
 		email_sender: DF.Data
 		happy_run_ticket_price: DF.Currency
 		limit_ticket_count: DF.Int
+		reminder_email_attached_file_en: DF.Attach | None
+		reminder_email_attached_file_vn: DF.Attach | None
 		vietqr_url: DF.Data
 		wellbeing_ticket_price: DF.Currency
 	# end: auto-generated types
