@@ -8,6 +8,8 @@
   "general_section",
   "wellbeing_ticket_price",
   "email_sender",
+  "reminder_email_attached_file_vn",
+  "reminder_email_attached_file_en",
   "column_break_ghgo",
   "happy_run_ticket_price",
   "vietqr_url",
@@ -117,12 +119,22 @@
    "fieldname": "limit_ticket_count",
    "fieldtype": "Int",
    "label": "Limit Ticket Count"
+  },
+  {
+   "fieldname": "reminder_email_attached_file_vn",
+   "fieldtype": "Attach",
+   "label": "Reminder Email Attached File VN"
+  },
+  {
+   "fieldname": "reminder_email_attached_file_en",
+   "fieldtype": "Attach",
+   "label": "Reminder Email Attached File EN"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-03-15 22:20:20.368036",
+ "modified": "2025-03-28 11:26:52.363707",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE HR Settings",

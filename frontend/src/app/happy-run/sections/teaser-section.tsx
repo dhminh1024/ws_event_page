@@ -4,6 +4,7 @@ import Typography from "@happy-run/components/typography";
 import parser from "html-react-parser";
 import { useLocales } from "@/core/hooks/use-locales";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
+
 import {
   animateFadeInBottom,
   animateFadeInLeft,
@@ -22,14 +23,16 @@ export const TeaserSection: FC<TeaserSectionProps> = ({
     triggerOnce: true,
     rootMargin: "300px",
   });
+
   const { t } = useLocales();
-  const events = useEventPageContext();
+  const event = useEventPageContext();
   const text1Ref = useRef(null);
   const text2Ref = useRef(null);
   const textDescRef = useRef(null);
 
+
   useEffect(() => {
-    if(!inView) return;
+    if (!inView) return;
     setTimeout(() => {
       animateFadeInLeft(text1Ref.current, {
         start: "top 100%",
@@ -43,6 +46,8 @@ export const TeaserSection: FC<TeaserSectionProps> = ({
         start: "top 100%",
         end: "top 50%",
       });
+
+      
     }, 200);
   }, [inView]);
 
@@ -71,12 +76,13 @@ export const TeaserSection: FC<TeaserSectionProps> = ({
               {parser(t("happy_run.teaser_description"))}
             </Typography.Heading>
           </div> */}
-          {events.variables.teaser_embed_url?.value && (
+          {event.variables.teaser_embed_url?.value && (
             <iframe
-              src={events.variables.teaser_embed_url?.value}
+              src={event.variables.teaser_embed_url?.value}
               className="mx-auto aspect-video w-[75%] md:h-auto"
             ></iframe>
           )}
+          
         </>
       )}
     </div>
