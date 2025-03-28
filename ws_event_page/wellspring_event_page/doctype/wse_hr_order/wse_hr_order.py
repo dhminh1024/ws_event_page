@@ -317,9 +317,7 @@ class WSEHROrder(Document):
 
     def send_reminder_email(self):
         sender = settings.email_sender
-        subject = (
-            "WSSG Happy Run 2025 - THÔNG BÁO THỜI GIAN VÀ ĐỊA ĐIỂM NHẬN RUNNER KIT"
-        )
+        subject = "[WSSG - HAPPY RUN 2025] CHUẨN BỊ SẴN SÀNG CHO SỰ KIỆN HAPPY RUN 2025 “SET YOUR PACE, EMBRACE WELLNESS”"
         recipients = [self.email]
         template = "hr_event_reminder"
         args = None
