@@ -1,12 +1,12 @@
 import { useFrappeFileUpload, useFrappePostCall } from 'frappe-react-sdk'
 import React from 'react'
-import { FRAPPE_APIS } from '../api.config'
+import { FRAPPE_APIS } from '@happy-box/api/api.config'
 import { useAuthWSCode } from '@/lib/auth/auth-ws-code/use-auth-ws-code'
 
 
 export default function useUploadImageChallenge() {
     const {user} = useAuthWSCode()
-    const {call } = useFrappePostCall(FRAPPE_APIS.HAPPY_BOX.CREATE_HB_SUBMISSION.METHOD_STRING)
+    const {call } = useFrappePostCall(FRAPPE_APIS.CREATE_HB_SUBMISSION.METHOD_STRING)
     const {upload, isCompleted } = useFrappeFileUpload()
     const handleUpload = async (challlenge_id: string, file: File | Blob) => {
    
@@ -35,7 +35,7 @@ export default function useUploadImageChallenge() {
                 submission_id,
               },
             },
-            FRAPPE_APIS.HAPPY_BOX.UPLOAD_HB_SUBMISSION_PHOTO.METHOD_STRING,
+            FRAPPE_APIS.UPLOAD_HB_SUBMISSION_PHOTO.METHOD_STRING,
           )
     }
   return {handleUpload,isCompleted}

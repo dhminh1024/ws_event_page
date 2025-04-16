@@ -1,16 +1,16 @@
 import { WSEHBChallengeExtended } from '@/app/happy-box/context/types';
 import { useFrappeGetCall } from 'frappe-react-sdk';
 import { useState, useEffect } from 'react';
-import { FRAPPE_APIS } from '../api.config';
-import { WSEHBSubmissionExtend } from '@/types/WellspringEventPage/WSEExtend';
+import { FRAPPE_APIS } from '@happy-box/api/api.config';
+import { WSESubmissionExtend } from '@/types/WellspringEventPage/WSEExtend';
 
 const useGetGallery = (skip?:boolean) => {
 const { data, isLoading, isValidating, error, mutate } = useFrappeGetCall<{
-    message: WSEHBSubmissionExtend[];
+    message: WSESubmissionExtend[];
   }>(
-    FRAPPE_APIS.HAPPY_BOX.GET_GALLERY.METHOD_STRING,
+    FRAPPE_APIS.GET_GALLERY.METHOD_STRING,
     undefined,
-    !skip ? FRAPPE_APIS.HAPPY_BOX.GET_GALLERY.SWR_KEY : null,
+    !skip ? FRAPPE_APIS.GET_GALLERY.SWR_KEY : null,
     {} // options
   );
   

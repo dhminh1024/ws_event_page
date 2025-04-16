@@ -1,4 +1,4 @@
-import { use, type FC } from "react";
+import { type FC } from "react";
 import { useChallengeList } from "@happy-box/context/use-challenge-list";
 import Typography from "@happy-box/components/typography";
 import { LunarScroll } from "@happy-box/components/scroll";
