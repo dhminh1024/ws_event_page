@@ -141,10 +141,18 @@
   }
   @font-face {
     font-family: "Race Champion";
-    src: url(/happy-run/fonts/race_champion.ttf);
+    src: url(/greatest-shơ-25/fonts/race_champion.ttf);
     ascent-override: 90%; /* Điều chỉnh chiều cao phần trên */
     descent-override: 20%; /* Điều chỉnh chiều cao phần dưới */
     line-gap-override: 0%; /* Bỏ khoảng cách dòng */
+  }
+  @font-face {
+    font-family: "Edges";
+    src: url(/greatest-show-25/fonts/edges-italic.ttf);
+  }
+  @font-face {
+    font-family: "Ethnocentric";
+    src: url(/greatest-show-25/fonts/ethnocentric.ttf);
   }
 }
 

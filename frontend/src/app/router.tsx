@@ -14,6 +14,7 @@ import { HAPPY_BOX_ROUTES } from "./happy-box/router";
 import { HAPPY_RUN_ROUTES } from "./happy-run/router";
 import { NUTRITION_JOURNEY_ROUTES } from "./nutrition-journey/router";
 import { PLACEMENT_TEST_ROUTES } from "./placement-test/router";
+import { GREATEST_SHOW_25_ROUTES } from "./greatest-show-25/router";
 
 export type GlobalErrorProps = {
   className?: string;
@@ -54,6 +55,7 @@ const RootRouter = () => {
               ...HAPPY_RUN_ROUTES,
               ...NUTRITION_JOURNEY_ROUTES,
               ...PLACEMENT_TEST_ROUTES,
+              ...GREATEST_SHOW_25_ROUTES,
               {
                 path: "*",
                 element: <Navigate replace to="/" />,
