@@ -17,7 +17,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Administrator",
-   "link_count": 1,
+   "link_count": 2,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -31,9 +31,19 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "WSE Events",
+   "link_count": 0,
+   "link_to": "WSE Event",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-10-29 16:58:16.258184",
+ "modified": "2025-10-29 17:43:38.630461",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "Wellspring Events",

@@ -1,6 +1,11 @@
 {
- "charts": [],
- "content": "[{\"id\":\"MMM2HUGjoQ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">The Greatest Show</span>\",\"col\":12}},{\"id\":\"j-L-9MYQdF\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"L\u01b0\u1ee3t \u0110\u0103ng K\u00fd\",\"col\":3}},{\"id\":\"QjuSWZvlx3\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Ch\u1edd Duy\u1ec7t\",\"col\":3}},{\"id\":\"2pZelL9DGa\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0110\u00e3 Duy\u1ec7t\",\"col\":3}},{\"id\":\"yzxcEvji7Q\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0110\u00e3 Hu\u1ef7\",\"col\":3}}]",
+ "charts": [
+  {
+   "chart_name": "GS Daily Registration Chart",
+   "label": "Daily Registration"
+  }
+ ],
+ "content": "[{\"id\":\"MMM2HUGjoQ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">The Greatest Show</span>\",\"col\":12}},{\"id\":\"4unyn3bu3H\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Home page\",\"col\":10}},{\"id\":\"j-L-9MYQdF\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"L\u01b0\u1ee3t \u0110\u0103ng K\u00fd\",\"col\":3}},{\"id\":\"QjuSWZvlx3\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Ch\u1edd Duy\u1ec7t\",\"col\":3}},{\"id\":\"2pZelL9DGa\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0110\u00e3 Duy\u1ec7t\",\"col\":3}},{\"id\":\"yzxcEvji7Q\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0110\u00e3 Hu\u1ef7\",\"col\":3}},{\"id\":\"osOHbczpYv\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Daily Registration\",\"col\":12}},{\"id\":\"-i38Qkdj3X\",\"type\":\"card\",\"data\":{\"card_name\":\"Admin\",\"col\":4}}]",
  "creation": "2025-10-29 14:17:02.066997",
  "custom_blocks": [],
  "docstatus": 0,
@@ -12,8 +17,48 @@
  "indicator_color": "cyan",
  "is_hidden": 0,
  "label": "The Greatest Show",
- "links": [],
- "modified": "2025-10-29 16:53:50.197055",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Admin",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "GS Programs",
+   "link_count": 0,
+   "link_to": "WSE GS Program",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "GS Registrations",
+   "link_count": 0,
+   "link_to": "WSE GS Registration",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "GS Settings",
+   "link_count": 0,
+   "link_to": "WSE GS Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2025-10-29 17:42:38.607364",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "The Greatest Show",
@@ -41,6 +86,14 @@
  "quick_lists": [],
  "roles": [],
  "sequence_id": 23.0,
- "shortcuts": [],
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Home page",
+   "type": "URL",
+   "url": "/the-greatest-show"
+  }
+ ],
  "title": "The Greatest Show"
 }
