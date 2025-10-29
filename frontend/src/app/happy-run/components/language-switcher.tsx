@@ -44,7 +44,7 @@ export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ className }) => {
     <Button
       variant="ghost"
       size="icon"
-      className={cn("w-[40rem] h-[28rem]", className)}
+      className={cn("w-160 h-112", className)}
       onClick={handleToogleLanguage}
     >
       <img

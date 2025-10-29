@@ -3,9 +3,7 @@ import {
   useFrappeGetCall,
   useFrappePostCall,
 } from "frappe-react-sdk";
-import { useState, useEffect } from "react";
 import { FRAPPE_APIS } from "./api.config";
-import { HRUserInfo } from "../types/variables";
 import { WSEGSRegistration } from "@/types/WellspringEventPage/WSEGSRegistration";
 
 export type Payload = {

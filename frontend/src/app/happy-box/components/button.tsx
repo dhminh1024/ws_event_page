@@ -14,7 +14,7 @@ export const LunarButton = forwardRef<HTMLButtonElement, LunarButtonProps>(
       <Button
         ref={ref}
         className={cn(
-          "relative inline-flex px-[30rem] h-[46rem] uppercase font-tropen leading-[1] text-[20rem] rounded-[5rem] overflow-hidden shadow-[5rem_5rem_8rem_#0e0d0d83] !bg-transparent border-none outline-none",
+          "relative inline-flex px-120 h-184 uppercase font-tropen leading-none text-[20rem] rounded-[5rem] overflow-hidden shadow-[5rem_5rem_8rem_#0e0d0d83] bg-transparent! border-none outline-hidden",
           {
             "text-happy_box-red": variant === "primary",
             "text-happy_box-light_yellow": variant === "default",

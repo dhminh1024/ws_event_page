@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
 
   body{
     font-family: "Mulish", sans-serif;
+    color: var(--color-gs25-secondary)
   }
 
   @media (min-width: 768px) {

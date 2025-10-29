@@ -74,7 +74,7 @@ export const ItemModal: FC<ItemModalProps> = ({
       </DialogTrigger>
       <DialogContent
         className={cn(
-          "max-w-[768rem] w-full bg-hr-background border-none shadow-none p-0",
+          "max-w-3072 w-full bg-hr-background border-none shadow-none p-0",
           className
         )}
       >

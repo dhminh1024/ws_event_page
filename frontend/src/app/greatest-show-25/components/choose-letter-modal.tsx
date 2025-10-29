@@ -82,19 +82,19 @@ export const ChooseLetterModal: FC<LunarModalProps> = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         className={cn(
-          "max-w-[480rem] w-full bg-transparent border-none shadow-none px-[10rem]",
+          "max-w-1920 w-full bg-transparent border-none shadow-none px-40",
           className
         )}
       >
         <DialogTitle></DialogTitle>
         <DialogDescription></DialogDescription>
         <LunarScroll scrollSize={isDesktop ? 30 : 20}>
-          <div className="p-[20rem]">
-            <Typography.Paragraph className="text-[16rem] md:text-[20rem] mb-[20rem] text-center text-happy_box-red">
+          <div className="p-80">
+            <Typography.Paragraph className="text-[16rem] md:text-[20rem] mb-80 text-center text-happy_box-red">
               {t("happy_box.choose_first_letter")}
             </Typography.Paragraph>
 
-            <fieldset className="my-[30rem] flex flex-wrap justify-center gap-x-[30rem]">
+            <fieldset className="my-120 flex flex-wrap justify-center gap-x-120">
               {letters.map((letter) => (
                 <Label key={letter} className="cursor-pointer" htmlFor={letter}>
                   <input
@@ -105,13 +105,13 @@ export const ChooseLetterModal: FC<LunarModalProps> = ({
                     className="hidden peer"
                     onChange={(e) => setSelectedLetter(e.target.value)}
                   />
-                  <Typography.Text className="text-[16rem] md:text-[23rem] text-happy_box-red bg-white p-[12rem] rounded-[5rem] border-[1rem] peer-checked:bg-[#FFE767]">
+                  <Typography.Text className="text-[16rem] md:text-[23rem] text-happy_box-red bg-white p-48 rounded-[5rem] border-[1rem] peer-checked:bg-[#FFE767]">
                     {letter}
                   </Typography.Text>
                 </Label>
               ))}
             </fieldset>
-            <div className="flex gap-x-[10rem] justify-center">
+            <div className="flex gap-x-40 justify-center">
               <LunarButton
                 variant="primary"
                 className="text-[16rem] md:text-[20rem]"

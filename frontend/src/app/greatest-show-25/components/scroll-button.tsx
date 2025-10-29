@@ -28,11 +28,22 @@ export default function ScrollButton({
     if (section) {
       const x = setInterval(() => {
         if (section.offsetHeight > 0) clearInterval(x);
-        section.scrollIntoView({
+
+        // Space in top is 60px
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY - 200;
+        window.scrollTo({
+          top: sectionTop,
           behavior: "smooth",
         });
+      }, 200);
 
-      }, 300);
+      // // Fallback in case the interval doesn't clear
+      // setTimeout(() => {
+      //   clearInterval(x);
+      //   section.scrollIntoView({
+      //     behavior: "smooth",
+      //   });
+      // }, 300);
     }
   };
 

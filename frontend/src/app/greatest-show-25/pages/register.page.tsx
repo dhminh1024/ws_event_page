@@ -1,6 +1,9 @@
 import { RegisterForm } from "../sections/register-form";
-import TopPageImage from "@happy-run/assets/images/top-page.webp";
+import LogoPrimary from "@greatest-show-25/assets/images/logo-wellspring.png";
+import LogoJourney from "@greatest-show-25/assets/images/logo-hj.png";
+import GSLogo from "@greatest-show-25/assets/images/gs-logo.png";
 import { useEffect } from "react";
+import { BackgroundGradient } from "../components/background";
 
 export const Component = () => {
   useEffect(() => {
@@ -9,20 +12,28 @@ export const Component = () => {
   // console.log(event.variables);
 
   return (
-    <div className="bg-hr-background overflow-hidden">
-      {/* <Helmet>
-        <title>
-          {"Register ticket"} | {env.HAPPY_RUN.TITLE_PAGE}
-        </title>
-      </Helmet> */}
-      <div className="pallette">
-        <span className="text-hr-honey"></span>
-        <span className="text-hr-ember"></span>
-        <span className="text-brand-persian"></span>
+    <BackgroundGradient>
+      <div className="overflow-hidden">
+        <div className="px-[3%]">
+          <div className="flex items-center justify-between my-[20rem] h-[70rem] md:h-[200rem]">
+            <div className="flex h-[90%] items-center">
+              <img
+                src={LogoPrimary}
+                className="h-full w-auto mr-[20rem]"
+                alt="Wellspring Logo"
+              />
+              <img
+                src={LogoJourney}
+                className="h-[60%] w-auto"
+                alt="Happy Journey Logo"
+              />
+            </div>
+            <img src={GSLogo} className="h-full w-auto" alt="GS 2025 Logo" />
+          </div>
+        </div>
+        <RegisterForm />
       </div>
-      <img src={TopPageImage} className="w-full" alt="Top Page" />
-      <RegisterForm />
-    </div>
+    </BackgroundGradient>
   );
 };
 

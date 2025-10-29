@@ -154,7 +154,7 @@ export const Combobox: FC<ComboboxProps> = ({
           aria-expanded={open}
           disabled={disabled}
           className={cn(
-            "flex justify-between text-left h-[42rem] border-hr-primary w-full rounded-[5rem] bg-white",
+            "flex justify-between text-left h-168 border-hr-primary w-full rounded-[5rem] bg-white",
             className
           )}
         >
@@ -175,7 +175,7 @@ export const Combobox: FC<ComboboxProps> = ({
         <ComboboxStyled className="bg-white" filter={handleFilter}>
           {items.length > 0 && searchable && (
             <CommandInput
-              className="h-[38rem] p-[5rem_5rem] text-[14rem]"
+              className="h-152 p-[5rem_5rem] text-[14rem]"
               placeholder={searchPlaceholder}
             />
           )}
@@ -197,7 +197,7 @@ export const Combobox: FC<ComboboxProps> = ({
                   >
                     {item.children.map((child, index) => (
                       <CommandItem
-                        className="text-[16rem] !p-[8rem_5rem] !bg-white hover:!bg-slate-200 !text-hr-primary data-[disabled='true']:pointer-events-none data-[disabled]:!pointer-events-auto data-[disabled='true']:opacity-50 data-[disabled]:!opacity-100"
+                        className="text-[16rem] p-[8rem_5rem]! bg-white! hover:bg-slate-200! text-hr-primary! data-[disabled='true']:pointer-events-none data-disabled:pointer-events-auto! data-[disabled='true']:opacity-50 data-disabled:opacity-100!"
                         key={`${item.value}_${index}`}
                         // value={child.value}
                         onSelect={() => handleSelect(child)}
@@ -218,7 +218,7 @@ export const Combobox: FC<ComboboxProps> = ({
               }
               return (
                 <CommandItem
-                  className="text-[16rem] !p-[8rem_5rem] !bg-white hover:!bg-slate-200 !text-hr-primary data-[disabled='true']:pointer-events-none data-[disabled]:!pointer-events-auto data-[disabled='true']:opacity-50 data-[disabled]:!opacity-100"
+                  className="text-[16rem] p-[8rem_5rem]! bg-white! hover:bg-slate-200! text-hr-primary! data-[disabled='true']:pointer-events-none data-disabled:pointer-events-auto! data-[disabled='true']:opacity-50 data-disabled:opacity-100!"
                   key={`${item.value}${index}`}
                   //   value={item.value}
                   onSelect={() => handleSelect(item)}

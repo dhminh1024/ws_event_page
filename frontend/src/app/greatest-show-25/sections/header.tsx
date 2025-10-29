@@ -1,18 +1,16 @@
 import { HTMLAttributes, type FC } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
-import LogoPrimary from "@happy-box/assets/images/logo_primary.webp";
-import LogoHappyJourney from "@happy-box/assets/images/logo_happy_journey.webp";
-import Typography from "@happy-box/components/typography";
-import { LanguageSelector } from "@happy-box/components/language-selector";
-import { useSettings } from "@/lib/auth/settings/use-settings";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { useLocales } from "@/core/hooks/use-locales";
 import { useAuthWSCode } from "@/lib/auth/auth-ws-code/use-auth-ws-code";
 import { useNavigate } from "react-router-dom";
 import { EVENT_PAGES } from "@/config/event-pages";
 import { cleanPath } from "@/lib/utils/common";
-import { MenuBar } from "./menu-bar";
+import LogoWhitedPrimary from "@greatest-show-25/assets/images/logo-white.png";
+import LogoJourney from "@greatest-show-25/assets/images/logo-hj.png";
+import GSLogo from "@greatest-show-25/assets/images/gs-logo.png";
 import { LanguageSwitcher } from "../components/language-switcher";
+import { LanguageSelector } from "../components/language-selector";
 
 export type HeaderProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -28,32 +26,23 @@ export const Header: FC<HeaderProps> = ({ className }) => {
   };
   // console.log(event);
   return (
-    <div className={cn("bg-hr-primary pb-[40rem]", className)}>
-      <div className="flex justify-between gap-x-[10rem] md:gap-x-[20rem] w-full py-[10rem] md:py-[30rem]">
-        <div className="flex items-center gap-x-[10rem] md:gap-x-[30rem]">
+    <div className={cn("bg-hr-primary pb-160", className)}>
+      <div className="flex justify-between gap-x-40 md:gap-x-80 w-full h-full py-40 md:py-[35rem]">
+        <div className="flex w-full h-160 md:h-320 gap-x-0 md:gap-x-160 items-center">
           <img
-            src={event.variables.logo_wellspring_white?.value}
-            className="w-[25%] md:w-[150rem] h-auto"
-            alt="Logo"
+            src={LogoWhitedPrimary}
+            className="h-full w-auto mr-80"
+            alt="Wellspring Logo"
           />
           <img
-            src={event.variables.logo_happy_journey?.value}
-            className="w-[20%] md:w-[100rem] h-auto"
-            alt="Logo"
-          />
-          <img
-            src={event.variables.logo_happy_summer?.value}
-            className="w-[18%] md:w-[85rem] h-auto"
-            alt="Logo summer"
-          />
-          <img
-            src={event.variables.logo_spring_in_my_hands?.value}
-            className="w-[14%] md:w-[60rem] h-auto"
-            alt="Logo spring"
+            src={LogoJourney}
+            className="h-[80%] w-auto"
+            alt="Happy Journey Logo"
           />
         </div>
-        <div className="flex items-center md:hidden">
-          <LanguageSwitcher className="w-[30rem] h-[20rem]" />
+        <div className="flex items-center">
+          {/* <LanguageSwitcher className="w-120 h-80" /> */}
+          <LanguageSelector />
         </div>
       </div>
     </div>

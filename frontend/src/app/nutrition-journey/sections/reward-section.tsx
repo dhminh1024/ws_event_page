@@ -13,14 +13,14 @@ export const RewardSection: FC<RewardSectionProps> = ({ className }) => {
 
   return (
     <section className="relative">
-      <div className="flex flex-col gap-y-[10rem]">
+      <div className="flex flex-col gap-y-40">
         <Typography.Heading
           level={2}
-          className="font-normal text-[20rem] md:text-[28rem] text-nj-green  bg-nj-green/10 px-[20rem]"
+          className="font-normal text-[20rem] md:text-[28rem] text-nj-green  bg-nj-green/10 px-80"
         >
           {t("nutritional_journey.heading_3")}
         </Typography.Heading>
-        <div className="flex flex-col gap-y-[10rem] pl-[5rem] md:pl-[20rem]">
+        <div className="flex flex-col gap-y-40 pl-20 md:pl-80">
           <Typography.Text className="text-nj-orange font-medium text-[14rem] md:text-[20rem]">
             ☛ {event.variables.reward_1_vn?.value}
           </Typography.Text>

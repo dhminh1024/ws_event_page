@@ -22,8 +22,8 @@ export const VideoSection: FC<VideoSectionProps> = ({ className }) => {
   return (
     <section className="relative">
       <BackgroundCloud className={cn("relative", className)}>
-        <div className="relative z-10 px-[10rem]">
-          <div className="relative aspect-[560/376] mx-auto w-[90%] md:w-[60%] pt-[30rem] md:pt-[80rem]">
+        <div className="relative z-10 px-40">
+          <div className="relative aspect-560/376 mx-auto w-[90%] md:w-[60%] pt-120 md:pt-320">
             <iframe
               className="w-full h-full "
               width="560"
@@ -34,7 +34,7 @@ export const VideoSection: FC<VideoSectionProps> = ({ className }) => {
               allowFullScreen
             ></iframe>
           </div>
-          <div className="relative md:w-[80%] mx-auto my-[20rem] md:mt-[50rem]">
+          <div className="relative md:w-[80%] mx-auto my-80 md:mt-200">
             {isDesktop && (
               <img src={`${env.ASSET_URL}/happy-box/lunar-bar.webp`} alt="" />
             )}
@@ -44,15 +44,15 @@ export const VideoSection: FC<VideoSectionProps> = ({ className }) => {
                 alt=""
               />
             )}
-            <Typography.Paragraph className="m-0 leading-[1] w-full text-[12rem] md:text-[26rem] text-happy_box-light_yellow absolute top-[50%] left-0 text-center translate-y-[-50%] md:translate-y-[-60%]">
-              <Typography.Text className="text-[12rem] md:text-[30rem] mx-[5rem] text-happy_box-honey">
+            <Typography.Paragraph className="m-0 leading-none w-full text-[12rem] md:text-[26rem] text-happy_box-light_yellow absolute top-[50%] left-0 text-center translate-y-[-50%] md:translate-y-[-60%]">
+              <Typography.Text className="text-[12rem] md:text-[30rem] mx-20 text-happy_box-honey">
                 {t("happy_box.video_section_gift_description_1", {
                   number: event.variables?.gift_limit?.value,
                 })}
               </Typography.Text>
               {t("happy_box.video_section_gift_description_2")}
               <span className="block md:hidden"></span>
-              <Typography.Text className="text-[12rem] md:text-[30rem] mx-[5rem] text-happy_box-honey">
+              <Typography.Text className="text-[12rem] md:text-[30rem] mx-20 text-happy_box-honey">
                 {t("happy_box.video_section_gift_description_3", {
                   count: challenges?.length || 0,
                 })}
@@ -61,9 +61,9 @@ export const VideoSection: FC<VideoSectionProps> = ({ className }) => {
             </Typography.Paragraph>
           </div>
           <div className="font-playlist text-center">
-            <Typography.Paragraph className="text-[22rem] md:text-[50rem] text-happy_box-brick leading-[1]">
+            <Typography.Paragraph className="text-[22rem] md:text-[50rem] text-happy_box-brick leading-none">
               {t("happy_box.video_section_countdown_description_1")}
-              <Typography.Text className="text-white mx-[10rem] md:mx-[20rem] text-[40rem] md:text-[80rem]">
+              <Typography.Text className="text-white mx-40 md:mx-80 text-[40rem] md:text-[80rem]">
                 {Math.max(
                   differenceInDays(new Date(env.HAPPY_BOX.DATE), new Date()),
                   0
@@ -81,7 +81,7 @@ export const VideoSection: FC<VideoSectionProps> = ({ className }) => {
             </Typography.Paragraph>
             <Typography.Paragraph className="text-[22rem] md:text-[50rem] text-happy_box-brick">
               {t("happy_box.video_section_countdown_description_3")}
-              <Typography.Text className="relative text-happy_box-light_yellow mx-[10rem] text-[22rem] md:text-[50rem]">
+              <Typography.Text className="relative text-happy_box-light_yellow mx-40 text-[22rem] md:text-[50rem]">
                 {format(new Date(env.HAPPY_BOX.DATE), "dd/MM/yyyy")}
                 <img
                   className="absolute bottom-0 left-[50%] translate-y-[50%] translate-x-[-50%] w-[200%] max-w-none h-auto"

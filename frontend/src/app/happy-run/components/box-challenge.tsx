@@ -28,9 +28,9 @@ export const BoxChallenge: FC<BoxChallengeProps> = ({
   return (
     <div
       className={cn(
-        "group/box aspect-[4/3]  relative bg-happy_box-red inline-block text-center rounded-[5rem] md:rounded-[14rem]",
+        "group/box aspect-4/3  relative bg-happy_box-red inline-block text-center rounded-[5rem] md:rounded-[14rem]",
         {
-          "bg-gradient-to-r from-yellow-400 to-yellow-200  !text-happy_box-red":
+          "bg-linear-to-r from-yellow-400 to-yellow-200  text-happy_box-red!":
             hightlight,
           "grayscale-[0.6] opacity-70": disabled,
           "cursor-pointer": !disabled,
@@ -50,7 +50,7 @@ export const BoxChallenge: FC<BoxChallengeProps> = ({
       }
       {...props}
     >
-      <div className="relative p-[4rem] md:p-[8rem] rounded-[5rem] md:rounded-[14rem] overflow-hidden w-full h-full">
+      <div className="relative p-16 md:p-32 rounded-[5rem] md:rounded-[14rem] overflow-hidden w-full h-full">
         {imageUrl && (
           <img
             className={cn(
@@ -78,16 +78,16 @@ export const BoxChallenge: FC<BoxChallengeProps> = ({
         ></div>
         <div
           className={cn(
-            "relative z-20  p-[12rem] w-full h-full flex flex-col justify-center items-center",
+            "relative z-20  p-48 w-full h-full flex flex-col justify-center items-center",
             {
-              " border-[2px] border-happy_box-red rounded-[5rem] md:rounded-[14rem] ":
+              " border-2 border-happy_box-red rounded-[5rem] md:rounded-[14rem] ":
                 hightlight,
             }
           )}
         >
           <Typography.Paragraph
             className={cn(
-              "text-[30rem] md:text-[80rem] md:mt-[50rem] mb-[5rem] md:mb-[20rem] font-playlist text-happy_box-honey",
+              "text-[30rem] md:text-[80rem] md:mt-200 mb-20 md:mb-80 font-playlist text-happy_box-honey",
               { "text-happy_box-red": hightlight }
             )}
           >
@@ -98,7 +98,7 @@ export const BoxChallenge: FC<BoxChallengeProps> = ({
           </Typography.Paragraph>
           <Typography.Paragraph
             className={cn(
-              "md:mb-[20rem] text-[12rem] md:text-[23rem] text-happy_box-light_yellow",
+              "md:mb-80 text-[12rem] md:text-[23rem] text-happy_box-light_yellow",
               {
                 "text-happy_box-red": hightlight,
               }

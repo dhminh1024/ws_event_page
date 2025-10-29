@@ -1,0 +1,24 @@
+meta {
+  name: Create Greatest Show Registration
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/api/method/ws_event_page.api.event.greatest_show.registration.create_registration
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "full_name": "Nguyen Van A",
+    "email": "nguyenvana@example.com",
+    "mobile_number": "0912345678",
+    "entry_group": "Primary students",
+    "entry_name": "Guitar & Voice Duet",
+    "entry_category": "Instrumental",
+    "instrument_info": "Guitar",
+    "entry_participants": "Nguyen Van A - Class 7A; Tran Thi B - Class 7A"
+  }
+}

@@ -80,9 +80,9 @@ export const UploadModal: FC<UploadModalProps> = ({
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-[880rem] xl:max-w-[640rem] bg-[#F5F8CE] border-happy_box-light_red border-[15rem]">
+      <DialogContent className="max-w-3520 xl:max-w-2560 bg-[#F5F8CE] border-happy_box-light_red border-[15rem]">
         <DialogHeader>
-          <DialogTitle className="p-[10rem] text-[24rem] font-normal text-happy_box-red">
+          <DialogTitle className="p-40 text-[24rem] font-normal text-happy_box-red">
             {t("common.upload_photo")}
           </DialogTitle>
           <DialogDescription></DialogDescription>
@@ -96,16 +96,16 @@ export const UploadModal: FC<UploadModalProps> = ({
             />
           )}
         </div>
-        <DialogFooter className="flex p-[20rem] justify-center sm:justify-center gap-x-[20rem] gap-y-[10rem]">
+        <DialogFooter className="flex p-80 justify-center sm:justify-center gap-x-80 gap-y-40">
           <LunarButton
             className="text-[20rem] "
             variant="primary"
             onClick={handleCropImage}
             disabled={loading}
           >
-            <div className="flex gap-x-[10rem] items-center">
+            <div className="flex gap-x-40 items-center">
               {loading && (
-                <Loader2 className="animate-spin !w-[20rem] !h-[20rem]" />
+                <Loader2 className="animate-spin w-[20rem]! h-80!" />
               )}
               <span> {t("common.save_image")}</span>
             </div>

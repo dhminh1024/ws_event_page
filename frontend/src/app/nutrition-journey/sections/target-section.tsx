@@ -14,14 +14,14 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
   return (
     <section className="relative">
       {/* Section 1 */}
-      <div className="flex flex-col gap-y-[10rem] md:gap-y-[20rem]">
+      <div className="flex flex-col gap-y-40 md:gap-y-80">
         <Typography.Heading
           level={2}
-          className="font-normal text-[20rem] md:text-[28rem] text-nj-green  bg-nj-green/10 px-[20rem]"
+          className="font-normal text-[20rem] md:text-[28rem] text-nj-green  bg-nj-green/10 px-80"
         >
           {t("nutritional_journey.heading_1")}
         </Typography.Heading>
-        <div className="flex flex-col pl-[5rem] md:pl-[20rem]">
+        <div className="flex flex-col pl-20 md:pl-80">
           <Typography.Text className="text-nj-orange font-medium text-[14rem] md:text-[20rem]">
             ☛ {event.variables.target_desc_1_vn?.value}
           </Typography.Text>

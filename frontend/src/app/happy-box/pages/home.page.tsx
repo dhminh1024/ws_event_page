@@ -20,7 +20,7 @@ export const Component: FC = () => {
       <Helmet>
         <title>{t('common.home_page')} | {env.HAPPY_BOX.TITLE_PAGE}</title>
       </Helmet>
-      <Header className="px-[20rem] py-[10rem] md:py-[20rem] md:px-[60rem] md:h-[140rem]" />
+      <Header className="px-80 py-40 md:py-80 md:px-240 md:h-560" />
       <GallerySection />
       <ChallengeSection />
       <VideoSection />

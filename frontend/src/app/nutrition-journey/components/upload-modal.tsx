@@ -80,9 +80,9 @@ export const UploadModal: FC<UploadModalProps> = ({
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-[880rem] xl:max-w-[640rem] bg-happy_box-mint border-happy_box-brick border-[15rem]">
+      <DialogContent className="max-w-3520 xl:max-w-2560 bg-happy_box-mint border-happy_box-brick border-[15rem]">
         <DialogHeader>
-          <DialogTitle className="p-[10rem] text-[24rem] font-normal text-happy_box-red">
+          <DialogTitle className="p-40 text-[24rem] font-normal text-happy_box-red">
             {t("common.upload_photo")}
           </DialogTitle>
           <DialogDescription></DialogDescription>
@@ -96,22 +96,22 @@ export const UploadModal: FC<UploadModalProps> = ({
             />
           )}
         </div>
-        <DialogFooter className="flex p-[20rem] justify-center sm:justify-center gap-x-[20rem] gap-y-[10rem]">
+        <DialogFooter className="flex p-80 justify-center sm:justify-center gap-x-80 gap-y-40">
           <Button
-            className="text-[20rem] h-[30rem] p-[10rem_20rem] rounded-[5rem]"
+            className="text-[20rem] h-120 p-[10rem_20rem] rounded-[5rem]"
             onClick={handleCropImage}
             disabled={loading}
           >
-            <div className="flex gap-x-[10rem] items-center">
+            <div className="flex gap-x-40 items-center">
               {loading && (
-                <Loader2 className="animate-spin !w-[20rem] !h-[20rem]" />
+                <Loader2 className="animate-spin w-[20rem]! h-80!" />
               )}
               <span> {t("common.save_image")}</span>
             </div>
           </Button>
           <Button
             variant={"outline"}
-            className="border-happy_box-brick hover:bg-happy_box-brick/10 bg-transparent !text-happy_box-brick font-[500] text-[20rem] h-[30rem] p-[10rem_20rem] rounded-[5rem]"
+            className="border-happy_box-brick hover:bg-happy_box-brick/10 bg-transparent text-happy_box-brick! font-medium text-[20rem] h-120 p-[10rem_20rem] rounded-[5rem]"
             onClick={() => handleOpenChange(false)}
           >
             {t("common.cancel")}

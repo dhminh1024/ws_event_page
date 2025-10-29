@@ -87,25 +87,25 @@ export const PaymentFailedModal: FC<LunarModalProps> = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         className={cn(
-          "max-w-[950rem] w-[95%] md:w-full bg-hr-background border-none shadow-none p-0",
+          "max-w-3800 w-[95%] md:w-full bg-hr-background border-none shadow-none p-0",
           className
         )}
       >
         <DialogTitle hidden></DialogTitle>
         <DialogDescription hidden></DialogDescription>
         <img className="w-full" src={TopPageImage} alt="Top Page" />
-        <center className="mb-[5rem] p-[10rem] md:p-[20rem_40rem]">
+        <center className="mb-20 p-40 md:p-[20rem_40rem]">
           <Typography.Heading
-            className="py-[20rem] md:py-[15rem] text-[18rem] md:text-[28rem] text-hr-blue leading-[1.2] font-extrabold"
+            className="py-80 md:py-60 text-[18rem] md:text-[28rem] text-hr-blue leading-[1.2] font-extrabold"
             level={2}
           >
             {parser(t("happy_run.form.payment_failed_heading"))}
           </Typography.Heading>
-          <div className="px-[0rem]">
-            <Typography.Paragraph className="pb-[5rem]  text-[13rem] md:text-[18rem] text-hr-blue leading-[1.2]">
+          <div className="px-0">
+            <Typography.Paragraph className="pb-20  text-[13rem] md:text-[18rem] text-hr-blue leading-[1.2]">
               {t("happy_run.form.payment_failed_desc_1")}
             </Typography.Paragraph>
-            <Typography.Paragraph className="pb-[5rem]  text-[13rem] md:text-[18rem] text-hr-blue leading-[1.2]">
+            <Typography.Paragraph className="pb-20  text-[13rem] md:text-[18rem] text-hr-blue leading-[1.2]">
               {t("happy_run.form.payment_failed_desc_2")}
             </Typography.Paragraph>
           </div>

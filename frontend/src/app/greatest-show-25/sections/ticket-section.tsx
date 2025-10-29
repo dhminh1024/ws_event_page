@@ -83,13 +83,13 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
   return (
     <section
       ref={myRef}
-      className={cn("relative z-[] bg-hr-lime py-[40rem]", className)}
+      className={cn("relative z-[] bg-hr-lime py-160", className)}
     >
       {inView && (
         <div className="w-[90%] mx-auto">
           <SectionHeading
             //   ref={headingRef}
-            className="text-[10rem] md:text-[30rem] py-[3rem] md:py-[8rem] px-[35rem] md:px-[100rem] italic font-extrabold mb-[20rem] md:mb-[50rem]"
+            className="text-[10rem] md:text-[30rem] py-12 md:py-32 px-140 md:px-400 italic font-extrabold mb-80 md:mb-200"
           >
             {t("happy_run.ticket_heading")}
           </SectionHeading>
@@ -99,7 +99,7 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
             </Typography.Paragraph>
           </center>
           <div
-            className="relative z-5 flex gap-x-[2%] md:gap-x-[10%] justify-center py-[20rem] md:py-[40rem]"
+            className="relative z-5 flex gap-x-[2%] md:gap-x-[10%] justify-center py-80 md:py-160"
             style={{
               transformStyle: "preserve-3d",
               perspective: "1000px",
@@ -137,7 +137,7 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
                 />
                 <div
                   ref={ticketReflective1Ref}
-                  className="blur-[3px] effect absolute top-[-20%] bottom-0 m-auto left-[-10%] z-20 h-[160%] rotate-[25deg] w-[20%] bg-[linear-gradient(90deg,#ffffff00,#ffffffd1,#ffffff00)]"
+                  className="blur-[3px] effect absolute top-[-20%] bottom-0 m-auto left-[-10%] z-20 h-[160%] rotate-25 w-[20%] bg-[linear-gradient(90deg,#ffffff00,#ffffffd1,#ffffff00)]"
                 ></div>
                 <div
                   ref={ticketReflectiveRounded1Ref}
@@ -147,9 +147,9 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
                   <Typography.Paragraph className="text-[14rem] md:text-[36rem] drop-shadow-[0rem_3rem_2rem_#333] md:drop-shadow-[0rem_10rem_5rem_#333] font-extrabold text-white uppercase">
                     Well-Being
                   </Typography.Paragraph>
-                  <Typography.Paragraph className="text-[25rem] md:text-[80rem] leading-[16rem] md:leading-[70rem] font-extrabold text-hr-blue uppercase">
+                  <Typography.Paragraph className="text-[25rem] md:text-[80rem] leading-64 md:leading-280 font-extrabold text-hr-blue uppercase">
                     {settings?.wellbeing_ticket_price.toLocaleString("vi-VN")}
-                    <span className="text-[13rem] md:text-[40rem] ml-[5rem] md:ml-[10rem]">
+                    <span className="text-[13rem] md:text-[40rem] ml-20 md:ml-40">
                       VND
                     </span>
                   </Typography.Paragraph>
@@ -198,9 +198,9 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
                   <Typography.Paragraph className="text-[14rem] md:text-[36rem] drop-shadow-[0rem_3rem_2rem_#333] md:drop-shadow-[0rem_10rem_5rem_#333] font-extrabold text-white uppercase">
                     Happy Run
                   </Typography.Paragraph>
-                  <Typography.Paragraph className="text-[25rem] md:text-[80rem] leading-[16rem] md:leading-[70rem] font-extrabold text-hr-blue uppercase">
+                  <Typography.Paragraph className="text-[25rem] md:text-[80rem] leading-64 md:leading-280 font-extrabold text-hr-blue uppercase">
                     {settings?.happy_run_ticket_price.toLocaleString("vi-VN")}
-                    <span className="text-[13rem] md:text-[40rem] ml-[5rem] md:ml-[10rem]">
+                    <span className="text-[13rem] md:text-[40rem] ml-20 md:ml-40">
                       VND
                     </span>
                   </Typography.Paragraph>
@@ -210,7 +210,7 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
           </div>
           <center>
             <Link to="order">
-              <PrimaryButton className="h-auto p-[8rem_25rem]  md:p-[40rem_50rem] my-[10rem] md:my-[20rem]">
+              <PrimaryButton className="h-auto p-[8rem_25rem]  md:p-[40rem_50rem] my-40 md:my-80">
                 <Typography.Text className="font-black text-[18rem] md:text-[35rem]">
                   {t("happy_run.buttons.register_now")}
                 </Typography.Text>

@@ -47,13 +47,13 @@ export const ChallengeSection: FC<ChallengeSectionProps> = ({ className }) => {
   };
 
   return (
-    <section className="relative pb-[40rem] md:pb-[60rem] shadow-[inset_0rem_-10rem_35rem_-10rem_#000]">
-      <div className="relative z-10 px-[20rem]">
+    <section className="relative pb-160 md:pb-240 shadow-[inset_0rem_-10rem_35rem_-10rem_#000]">
+      <div className="relative z-10 px-80">
         <Typography.Heading
           level={2}
-          className="flex flex-col md:flex-row gap-x-[20rem] items-center justify-center pt-[30rem] md:pt-[60rem] pb-[0rem] md:pb-[20rem] font-playlist"
+          className="flex flex-col md:flex-row gap-x-80 items-center justify-center pt-120 md:pt-240 pb-0 md:pb-80 font-playlist"
         >
-          <Typography.Text className="text-happy_box-red font-medium text-[28rem] md:text-[60rem] leading-[1.5]">
+          <Typography.Text className="text-happy_box-red font-medium text-[28rem] md:text-[60rem] leading-normal">
             {t("happy_box.welcome_wiser")}
           </Typography.Text>
           <Typography.Text className="text-happy_box-honey font-medium text-[28rem] md:text-[60rem]">
@@ -63,12 +63,12 @@ export const ChallengeSection: FC<ChallengeSectionProps> = ({ className }) => {
 
         <LunarScroll
           scrollSize={isDesktop ? 35 : 15}
-          className="max-w-[680rem] md:mx-auto mt-[20rem] mb-[10rem]"
+          className="max-w-2720 md:mx-auto mt-80 mb-40"
         >
           <div
-            className={cn("px-[20rem]  py-[5rem] md:py-[10rem]", {
-              "md:px-[53rem]": currentLanguage === "vn",
-              "md:px-[45rem]": currentLanguage === "en",
+            className={cn("px-80  py-20 md:py-40", {
+              "md:px-212": currentLanguage === "vn",
+              "md:px-180": currentLanguage === "en",
             })}
           >
             <Typography.Paragraph className="text-center text-happy_box-red text-[12rem] md:text-[20rem]">
@@ -77,13 +77,13 @@ export const ChallengeSection: FC<ChallengeSectionProps> = ({ className }) => {
           </div>
         </LunarScroll>
 
-        <div className="py-[10rem] md:py-[30rem] flex flex-col gap-[10rem] md:max-w-[830rem] mx-auto">
+        <div className="py-40 md:py-120 flex flex-col gap-40 md:max-w-3320 mx-auto">
           <Typography.Paragraph
             className="text-center text-happy_box-red text-[12rem] md:text-[21rem]"
             style={{ whiteSpace: "pre-line" }}
           >
             <span>{t("happy_box.challenge_section_description_2_1")}</span>
-            <span className="mx-[4rem]  text-happy_box-honey">
+            <span className="mx-16  text-happy_box-honey">
               {t("happy_box.challenge_section_description_2_2")}
             </span>
             <span>{t("happy_box.challenge_section_description_2_3")}</span>
@@ -93,7 +93,7 @@ export const ChallengeSection: FC<ChallengeSectionProps> = ({ className }) => {
           </Typography.Paragraph>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 max-w-[1136rem] mx-auto py-[20rem] gap-y-[15rem] md:gap-y-[30rem] gap-x-[10rem] md:gap-x-[50rem]">
+        <div className="grid grid-cols-2 md:grid-cols-3 max-w-4544 mx-auto py-80 gap-y-60 md:gap-y-120 gap-x-40 md:gap-x-200">
           {challenges.map((c, index) => (
             <BoxChallenge
               key={index + 1}
@@ -117,12 +117,12 @@ export const ChallengeSection: FC<ChallengeSectionProps> = ({ className }) => {
         </div>
       </div>
       <img
-        className="absolute z-1 top-[10rem] md:top-[12%] left-[-10%] w-[33%] animate-swing-left"
+        className="absolute z-1 top-40 md:top-[12%] left-[-10%] w-[33%] animate-swing-left"
         src={`${env.ASSET_URL}/happy-box/challenge-backdrop-left.webp`}
         alt="backdrop-left"
       />
       <img
-        className="absolute z-1 top-[10rem] md:top-[10%] right-[-10%] w-[32%] animate-swing-right"
+        className="absolute z-1 top-40 md:top-[10%] right-[-10%] w-[32%] animate-swing-right"
         src={`${env.ASSET_URL}/happy-box/challenge-backdrop-right.webp`}
         alt="backdrop-left"
       />

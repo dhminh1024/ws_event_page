@@ -13,13 +13,13 @@ export const GallerySection: FC<GallerySectionProps> = ({ className }) => {
   const { gallery } = useGetGallery();
   return (
     <div className={cn(className)}>
-      <BackgroundCloud className="py-[15rem] md:py-[40rem]">
-        <GreekPattern className="h-[15rem] md:h-[25rem]"></GreekPattern>
+      <BackgroundCloud className="py-60 md:py-160">
+        <GreekPattern className="h-60 md:h-100"></GreekPattern>
       </BackgroundCloud>
       <Marquee className="bg-happy_box-light_yellow" speed={150}>
         <div className="flex">
           {gallery?.map((submission, index) => (
-            <div key={submission.name} className="h-[120rem] md:h-[300rem] aspect-[4/3]">
+            <div key={submission.name} className="h-480 md:h-1200 aspect-4/3">
               <img
                 className="object-cover w-full h-full"
                 key={index}
@@ -30,8 +30,8 @@ export const GallerySection: FC<GallerySectionProps> = ({ className }) => {
           ))}
         </div>
       </Marquee>
-      <BackgroundCloud className="py-[15rem] md:py-[40rem]">
-        <GreekPattern className="h-[15rem] md:h-[25rem]"></GreekPattern>
+      <BackgroundCloud className="py-60 md:py-160">
+        <GreekPattern className="h-60 md:h-100"></GreekPattern>
       </BackgroundCloud>
     </div>
   );

@@ -1,8 +1,259 @@
-@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap")
+layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+@theme {
+  --font-sans: Mulish, sans-serif;
+  --font-playlist: Playlist;
+  --font-tropen: Tropen;
+  --font-race-champion: Race Champion, Mulish, sans-serif;
+  --font-edges: Edges, Mulish, sans-serif;
+  --font-ethnocentric: Ethnocentric, Mulish, sans-serif;
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-brand-primary: #002855;
+  --color-brand-teal: #009684;
+  --color-brand-persian: #016982;
+  --color-brand-lime: #bed232;
+  --color-brand-honey: #f5aa1e;
+  --color-brand-amber: #f05023;
+
+  --color-happy_box-foreground: hsl(var(--page-foreground));
+  --color-happy_box-cream: hsl(var(--page-cream));
+  --color-happy_box-red: hsl(var(--page-red));
+  --color-happy_box-honey: hsl(var(--page-honey));
+  --color-happy_box-brick: hsl(var(--page-brick));
+  --color-happy_box-blue: hsl(var(--page-deep-blue));
+  --color-happy_box-mint: hsl(var(--page-mint));
+  --color-happy_box-light_yellow: hsl(var(--page-light-yellow));
+  --color-happy_box-light_red: hsl(var(--page-light-red));
+
+  --color-hr-primary: #002855;
+  --color-hr-background: #e6ebff;
+  --color-hr-blue: #172a52;
+  --color-hr-honey: #f5aa1e;
+  --color-hr-ember: #f05023;
+  --color-hr-steel_blue: #3b6dae;
+  --color-hr-lime: #bed232;
+
+  --color-nj-foreground: hsl(var(--page-foreground));
+  --color-nj-cream: hsl(var(--page-cream));
+  --color-nj-honey: hsl(var(--page-honey));
+  --color-nj-brick: hsl(var(--page-brick));
+  --color-nj-blue: hsl(var(--page-deep-blue));
+  --color-nj-mint: hsl(var(--page-mint));
+  --color-nj-light_yellow: hsl(var(--page-light-yellow));
+  --color-nj-light_red: hsl(var(--page-light-red));
+  --color-nj-green: #016465;
+  --color-nj-orange: #e3843f;
+  --color-nj-red: #f93b00;
+  --color-nj-radiant: #7ed957;
+  --color-nj-pink: #ea3882;
+
+  --color-pt-primary: #002855;
+  --color-pt-background: #e6ebff;
+  --color-pt-blue: #172a52;
+  --color-pt-honey: #f5aa1e;
+  --color-pt-ember: #f05023;
+  --color-pt-steel_blue: #3b6dae;
+  --color-pt-lime: #bed232;
+
+  --color-status-success: hsl(var(--success));
+  --color-status-danger: hsl(var(--danger));
+
+  --color-gs25-background: #e6ebff;
+  --color-gs25-primary: #5333cd;
+  --color-gs25-secondary: #10478f;
+  --background-image-gs25-gradient-1: linear-gradient(
+    10deg,
+    rgba(255, 100, 255, 1) 0%,
+    rgba(171, 123, 255, 1) 22%,
+    rgba(2, 169, 255, 1) 39%,
+    rgba(140, 40, 255, 1) 69%
+  );
+  --background-image-gs25-gradient-2: linear-gradient(
+    to right,
+    #9b2ff9,
+    #073498
+  );
+  --background-image-gs25-gradient-3: linear-gradient(
+    to right,
+    #ff64ff,
+    #fafcfe,
+    #ff64ff,
+    #19f6fd,
+    #7946ff
+  );
+  --background-image-gs25-gradient-4: linear-gradient(
+    to top,
+    #2a52c6 20%,
+    #6946e1 55%
+  );
+  --background-image-gs25-gradient-5: linear-gradient(
+    to bottom,
+
+    #fafcfe 29%,
+    #ff64ff 39%,
+    #19f6fd 68%,
+    #7946ff 7%
+  );
+  --background-image-gs25-gradient-6: linear-gradient(
+    to top,
+    #422a8a 0%,
+    #9b2ff8 12%,
+    #fa16c0 87%,
+    #da552a 100%
+  );
+    --background-image-gs25-gradient-7: linear-gradient(
+    180deg,
+    rgba(255, 100, 255, 1) 10%,
+    rgba(171, 123, 255, 1) 26%,
+    rgba(2, 169, 255, 1) 50%,
+    rgba(140, 40, 255, 1) 89%
+  );
+    --background-image-gs25-gradient-8: linear-gradient(
+    to right,
+    #A12FFD,
+    #073498 
+  );
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-fade-in: fade-in 0.5s linear;
+  --animate-fade-out: fade-out 0.5s linear;
+  --animate-swing-left: swing-left 5s ease-in-out infinite alternate;
+  --animate-swing-right: swing-right 5s ease-in-out infinite alternate;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes swing-left {
+    from {
+      transform: rotate(-3deg) scale(1);
+      transform-origin: bottom left;
+    }
+    to {
+      transform: rotate(3deg) scale(1.05);
+    }
+  }
+  @keyframes swing-right {
+    from {
+      transform: rotate(3deg) scale(1.05);
+      transform-origin: bottom right;
+    }
+    to {
+      transform: rotate(-3deg) scale(1);
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: 15rem;
+  padding-right: 15rem;
+}
+
+@utility bg-scroll {
+  @apply bg-[linear-gradient(90deg,#981F20_0%,#E55450_33%,#931B1C_100%)];
+}
+
+@utility bg-scroll-golden {
+  @apply bg-[linear-gradient(90deg,#BC8824_0%,#FCECA1_47%,#B98520_100%)];
+}
 
 @layer base {
   :root {
@@ -114,14 +365,14 @@
     scrollbar-color: hsl(var(--scroll-thumb));
     scroll-behavior: smooth;
   }
-  html{
+  html {
     overflow-x: hidden;
   }
   body {
     @apply text-happy_box-foreground;
     @apply font-tropen;
     /* overflow-x: hidden; */
-    @apply !min-w-[100vw];
+    @apply min-w-screen!;
     scroll-behavior: smooth;
   }
 }
@@ -156,26 +407,11 @@
   }
 }
 
-@layer components {
-  .container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding-left: 15rem;
-    padding-right: 15rem;
-  }
-  .bg-scroll{
-    @apply bg-[linear-gradient(90deg,_#981F20_0%,_#E55450_33%,_#931B1C_100%)]
-  }
-  .bg-scroll-golden{
-    @apply bg-[linear-gradient(90deg,_#BC8824_0%,_#FCECA1_47%,_#B98520_100%)]
+@layer utilities {
+  :root {
+    --sidebar-width: 16rem;
   }
 }
-
-:root {
-  --sidebar-width: 16rem;
-}
-
-
 
 @layer base {
   * {

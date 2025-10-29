@@ -3,6 +3,7 @@ import { cn } from "@/core/utils/shadcn-utils";
 import { cleanPath } from "@/lib/utils/common";
 import env from "@/config/env";
 import styled from "styled-components";
+import BackgroundImage from "@greatest-show-25/assets/images/bg.jpg";
 
 const BackgroundCloudStyled = styled.div`
   @keyframes cloud-floating {
@@ -18,23 +19,21 @@ const BackgroundCloudStyled = styled.div`
   }
 `
 
-export type BackgroundCoinProps = HTMLAttributes<HTMLDivElement> &
+export type BackgroundProps = HTMLAttributes<HTMLDivElement> &
   PropsWithChildren & {};
 
-export const BackgroundCoin: FC<BackgroundCoinProps> = ({
+export const BackgroundGradient: FC<BackgroundProps> = ({
   className,
   children,
 }) => {
   return (
     <div
-      className={cn("bg-happy_box-cream", className)}
+      className={cn("bg-gs25-background", className)}
       style={{
-        backgroundImage: `url(${cleanPath(
-          `${env.ASSET_URL}/happy-box/bg-coin.webp`
-        )})`,
-        backgroundSize: "90rem",
-        backgroundRepeat: "repeat",
-        backgroundBlendMode: "overlay"
+        backgroundImage: `url(${BackgroundImage})`,
+        backgroundSize: "cover",
+        // backgroundRepeat: "repeat",
+        // backgroundBlendMode: "overlay"
       }}
     >
       {children}
@@ -42,7 +41,7 @@ export const BackgroundCoin: FC<BackgroundCoinProps> = ({
   );
 };
 
-export const BackgroundCloud: FC<BackgroundCoinProps> = ({
+export const BackgroundCloud: FC<BackgroundProps> = ({
   className,
   children,
 }) => {
@@ -62,13 +61,13 @@ export const BackgroundCloud: FC<BackgroundCoinProps> = ({
   );
 };
 
-export const GreekPattern: FC<BackgroundCoinProps> = ({
+export const GreekPattern: FC<BackgroundProps> = ({
   className,
   children,
 }) => {
   return (
     <div
-      className={cn("h-[40rem]", className)}
+      className={cn("h-160", className)}
       style={{
         backgroundImage: `url(${cleanPath(
           `${env.ASSET_URL}/happy-box/greek-decor.webp`

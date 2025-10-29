@@ -1,0 +1,16 @@
+meta {
+  name: Upload Greatest Show Attachment
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/api/method/ws_event_page.api.event.greatest_show.registration.upload_registration_file
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  registration_id: WSEGSO2500001
+  file: @file(/path/to/performance-audio.mp3)
+}

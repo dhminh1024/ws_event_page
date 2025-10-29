@@ -4,74 +4,69 @@ import { useLocales } from "@/core/hooks/use-locales";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { lazy, Suspense } from "react";
 import { useInView } from "react-intersection-observer";
+import { BackgroundGradient } from "../components/background";
 
 const HeaderSection = lazy(() =>
-  import("@happy-run/sections/header").then((module) => ({
+  import("@greatest-show-25/sections/header").then((module) => ({
     default: module.Header,
   }))
 );
-const FooterSection = lazy(() => import("@happy-run/sections/footer"));
+const FooterSection = lazy(() => import("@greatest-show-25/sections/footer"));
 const HeroSection = lazy(() =>
-  import("@happy-run/sections/hero-section").then((module) => ({
+  import("@greatest-show-25/sections/hero-section").then((module) => ({
     default: module.HeroSection,
   }))
 );
 const MenuBar = lazy(() =>
-  import("../sections/menu-bar").then((module) => ({ default: module.MenuBar }))
+  import("@greatest-show-25/sections/menu-bar").then((module) => ({
+    default: module.MenuBar,
+  }))
 );
 const CountDownSection = lazy(() =>
-  import("../sections/count-down-section").then((module) => ({
+  import("@greatest-show-25/sections/count-down-section").then((module) => ({
     default: module.CountDownSection,
   }))
 );
 const TeaserSection = lazy(() =>
-  import("../sections/teaser-section").then((module) => ({
+  import("@greatest-show-25/sections/teaser-section").then((module) => ({
     default: module.TeaserSection,
   }))
 );
 const TargetSection = lazy(() =>
-  import("../sections/target-section").then((module) => ({
+  import("@greatest-show-25/sections/target-section").then((module) => ({
     default: module.TargetSection,
   }))
 );
-const RouteSection = lazy(() =>
-  import("../sections/route.section").then((module) => ({
-    default: module.RouteSection,
+const EntryCategoriesSection = lazy(() =>
+  import("@/app/greatest-show-25/sections/entry-categories-section").then(
+    (module) => ({
+      default: module.EntryCategoriesSection,
+    })
+  )
+);
+const AwardsSection = lazy(() =>
+  import("@greatest-show-25/sections/awards-section").then((module) => ({
+    default: module.AwardsSection,
   }))
 );
-const TicketSection = lazy(() =>
-  import("../sections/ticket-section").then((module) => ({
-    default: module.TicketSection,
-  }))
-);
-const KitSection = lazy(() =>
-  import("../sections/kit-section").then((module) => ({
-    default: module.KitSection,
-  }))
-);
-const InfoSection = lazy(() =>
-  import("../sections/info-section").then((module) => ({
-    default: module.InfoSection,
-  }))
-);
-const StationSection = lazy(() =>
-  import("../sections/station-section").then((module) => ({
-    default: module.StationSection,
-  }))
-);
-const SummerSection = lazy(() =>
-  import("../sections/summer-section").then((module) => ({
-    default: module.SummerSection,
+const JourneySection = lazy(() =>
+  import("@greatest-show-25/sections/journey-section").then((module) => ({
+    default: module.JourneySection,
   }))
 );
 const FAQSection = lazy(() =>
-  import("../sections/faq-section").then((module) => ({
+  import("@greatest-show-25/sections/faq-section").then((module) => ({
     default: module.FAQSection,
   }))
 );
-const SpringSection = lazy(() =>
-  import("../sections/spring-section").then((module) => ({
-    default: module.SpringSection,
+const PhotosSection = lazy(() =>
+  import("@greatest-show-25/sections/photos-section").then((module) => ({
+    default: module.PhotosSection,
+  }))
+);
+const ContactSection = lazy(() =>
+  import("@greatest-show-25/sections/contact-section").then((module) => ({
+    default: module.ContactSection,
   }))
 );
 
@@ -81,33 +76,21 @@ export const Component: FC = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className="bg-hr-background rela">
-        {/* <Scroll /> */}
-        {/* <Helmet>
-          <title>
-            {t("common.home_page")} |{" "}
-            {currentLanguage === "en"
-              ? event.variables.event_title_vn?.value
-              : event.variables.event_title_en?.value}
-          </title>
-        </Helmet> */}
-
-        <HeaderSection className="px-[20rem] md:px-[60rem]" />
-        <MenuBar className="mt-[-46rem] md:mt-[-55rem]" />
+      <BackgroundGradient className="relative">
+        <HeaderSection className="px-80 md:px-240" />
+        <MenuBar className="-mt-184 md:-mt-220" />
         <HeroSection id="overview" />
         <CountDownSection />
         <TeaserSection id="happy-run" />
         <TargetSection />
-        <RouteSection />
-        <TicketSection />
-        <KitSection />
-        <InfoSection />
-        <StationSection />
-        <SummerSection id="happy-summer" />
-        <FAQSection id="faq" />
-        <SpringSection />
+        <EntryCategoriesSection />
+        <AwardsSection />
+        <JourneySection />
+        <FAQSection />
+        <PhotosSection />
+        <ContactSection />
         <FooterSection />
-      </div>
+      </BackgroundGradient>
     </Suspense>
   );
 };

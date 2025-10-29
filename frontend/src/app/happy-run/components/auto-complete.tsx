@@ -80,7 +80,7 @@ export const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
     return (
       <div className="relative">
         <Input
-          className="w-full h-[16rem] md:h-[30rem] bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-[20rem] md:px-[10rem]"
+          className="w-full h-64 md:h-120 bg-white border-hr-blue rounded-[5rem] text-[8rem] md:text-[16rem] text-hr-blue p-[10rem_5rem] md:py-80 md:px-40"
           ref={inputRef}
           value={inputText}
           onChange={(e) => handleSearch(e.target.value)}
@@ -97,7 +97,7 @@ export const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
           onOpenChange={(isOpen: boolean) => setOpen(isOpen)}
         >
           <PopoverTrigger asChild>
-            <button className="absolute bottom-0 left-0 w-full h-[40rem] z-[-1]"></button>
+            <button className="absolute bottom-0 left-0 w-full h-160 z-[-1]"></button>
           </PopoverTrigger>
           <PopoverContent
             forceMount

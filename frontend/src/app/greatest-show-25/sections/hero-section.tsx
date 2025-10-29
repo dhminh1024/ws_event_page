@@ -59,59 +59,6 @@ export const HeroSection: FC<HeroSectionProps> = ({ className, ...props }) => {
 
   return (
     <>
-      <div className="w-full md:w-[90%] mx-auto bg-gradient-to-b from-brand-teal to-brand-persian shadow-[inset_0rem_0rem_20rem_10rem_#00000055] p-[10rem] rounded-[8rem] md:rounded-[25rem] my-[10rem] md:my-[50rem]">
-        <BorderWrapper
-          dashedArray={isDesktop ? 16 : 10}
-          radius={isDesktop ? 20 : 10}
-          dashedOffset={10}
-          strokeWidth={isDesktop ? 3 : 2}
-          widthOffset={isDesktop ? 0.5 : 2}
-          className="relative flex justify-between items-center py-[10rem]  md:py-[40rem]"
-        >
-          <div className="w-[30%] md:w-[20%]">
-            <div className="absolute z-10 bottom-[-12.5%] md:bottom-[-5.5%] left-[0%] md:left-[3%] w-[100rem] h-[150rem] md:w-[200rem] md:h-[300rem]">
-              <div
-                ref={robotBodyRef}
-                className="absolute rotate-[-10deg] origin-bottom left-0 bottom-[12%] right-0 m-auto z-10 "
-              >
-                <img
-                  ref={LightEffectRef}
-                  src={LightEffect}
-                  className="absolute scale-0 origin-center right-[-22%] top-[-5%] z-20 w-[50%]"
-                  alt="Camera"
-                />
-                <img src={RobotBodyImage} className="w-full" alt="Body" />
-              </div>
-              <img
-                src={RobotLegsImage}
-                className="absolute  bottom-0 right-[14%] w-[65%]"
-                alt="Legs"
-              />
-            </div>
-          </div>
-          <div className="flex-1 flex flex-col md:flex-row justify-center items-center">
-            <div className="flex flex-col justify-center items-center">
-              <Typography.Text className="text-[10rem] md:text-[28rem] text-hr-honey font-extrabold uppercase leading-[10rem] md:leading-[40rem] m-0">
-                {t("happy_run.search_image_heading")}
-              </Typography.Text>
-              <Typography.Text className="text-[8rem] md:text-[20rem] md:mb-[5rem] md:leading-[23rem] font-semibold text-hr-honey ">
-                {parser(t("happy_run.search_image_desc"))}
-              </Typography.Text>
-              <Typography.Text className="text-[8rem] md:text-[20rem] mb-[5rem] md:leading-[23rem] text-white italic">
-                {parser(t("happy_run.search_image_note"))}
-              </Typography.Text>
-            </div>
-            <Link
-              to={event.variables.search_image_ai?.value || ""}
-              target="_blank"
-            >
-              <Button className="text-[8rem] md:text-[20rem] mx-[60rem] p-[3rem_20rem] md:p-[10rem_20rem] h-auto bg-hr-honey hover:bg-hr-honey/80 border-y-[2rem] md:border-t-[5rem] border-t-white/30 border-b-transparent shadow-none outline-none rounded-[5rem] italic">
-                {t("happy_run.buttons.search_now")}
-              </Button>
-            </Link>
-          </div>
-        </BorderWrapper>
-      </div>
       <div className="relative w-full bg-hr-blue overflow-hidden" {...props}>
         <video
           ref={videoRef}

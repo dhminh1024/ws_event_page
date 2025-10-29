@@ -24,12 +24,11 @@ export const TeaserSection: FC<TeaserSectionProps> = ({
     rootMargin: "300px",
   });
 
-  const { t } = useLocales();
+  const { t, currentLanguage } = useLocales();
   const event = useEventPageContext();
   const text1Ref = useRef(null);
   const text2Ref = useRef(null);
   const textDescRef = useRef(null);
-
 
   useEffect(() => {
     if (!inView) return;
@@ -46,45 +45,40 @@ export const TeaserSection: FC<TeaserSectionProps> = ({
         start: "top 100%",
         end: "top 50%",
       });
-
-      
     }, 200);
   }, [inView]);
 
   return (
-    <div
-      ref={myRef}
-      className={cn("text-center py-[10rem]", className)}
-      {...props}
-    >
+    <section ref={myRef} className={cn("text-center py-40", className)} {...props}>
       {inView && (
         <>
-          <Typography.Heading
-            level={2}
-            className="pt-[5rem] md:pt-[40rem] mb-[10rem] md:mb-[30rem] font-raceChampion text-hr-blue text-[25rem] md:text-[75rem] uppercase flex items-center justify-center"
+          <h2
+            ref={textDescRef}
+            className="pt-20 md:pt-160 mb-40 md:mb-120 font-ethnocentric bg-gs25-gradient-4 bg-clip-text text-transparent text-[20rem] md:text-[55rem] uppercase font-normal
+             flex items-center justify-center"
           >
-            <div ref={text1Ref}>{parser(t("happy_run.teaser_heading_1"))}</div>
-            <div ref={text2Ref} className="text-hr-honey ml-[5rem]">
-              {parser(t("happy_run.teaser_heading_2"))}
-            </div>
-          </Typography.Heading>
-          {/* <div ref={textDescRef} className="w-[80%] mx-auto">
+            GREATEST SHOW 2025
+          </h2>
+          <div className="w-[80%] mx-auto">
             <Typography.Heading
               level={2}
-              className="text-hr-blue font-black text-[13rem] md:text-[35rem] mb-[5rem] md:mb-[20rem] "
+              className="text-gs25-secondary flex flex-col  gap-y-40 md:gap-y-120 text-[10rem] md:text-[20rem] mb-20 md:mb-80 "
             >
-              {parser(t("happy_run.teaser_description"))}
+              {parser(
+                event.variables?.[
+                  currentLanguage === "en" ? "teaser_meta_en" : "teaser_meta_vn"
+                ]?.value || ""
+              )}
             </Typography.Heading>
-          </div> */}
+          </div>
           {event.variables.teaser_embed_url?.value && (
             <iframe
               src={event.variables.teaser_embed_url?.value}
-              className="mx-auto aspect-video w-[75%] md:h-auto"
+              className="mx-auto aspect-video w-[80%] md:w-[50%] mt-70 md:mt-280 md:h-auto"
             ></iframe>
           )}
-          
         </>
       )}
-    </div>
+    </section>
   );
 };

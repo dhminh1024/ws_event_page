@@ -28,11 +28,11 @@ export const Header: FC<HeaderProps> = ({ className }) => {
   return (
     <div
       className={cn(
-        "h-[100rem] flex justify-between gap-x-[10rem] md:gap-x-[20rem] ",
+        "h-400 flex justify-between gap-x-40 md:gap-x-80 ",
         className
       )}
     >
-      <div className="flex items-center gap-x-[10rem] md:gap-x-[20rem]">
+      <div className="flex items-center gap-x-40 md:gap-x-80">
         <img
           src={event.variables.logo_wellspring_primary?.value}
           className="h-[50%] md:h-[70%] w-auto"
@@ -44,8 +44,8 @@ export const Header: FC<HeaderProps> = ({ className }) => {
           alt="Logo"
         />
       </div>
-      {/* <div className="flex gap-x-[10rem] md:gap-x-[20rem] items-center">
-        <div className="flex items-center gap-x-[20rem]">
+      {/* <div className="flex gap-x-40 md:gap-x-80 items-center">
+        <div className="flex items-center gap-x-80">
           <Typography.Text className="hidden  md:inline text-[12rem] md:text-[16rem]">
             {t("common.language")}
           </Typography.Text>

@@ -26,7 +26,7 @@ export const GlobalError: FC<GlobalErrorProps> = () => {
   if (import.meta.env.MODE !== "development" && error) {
     console.log(error);
   }
-  alert(error)
+  // alert(error)
   console.log(error);
 
   return (

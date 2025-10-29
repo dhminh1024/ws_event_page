@@ -101,7 +101,7 @@ export const Component = () => {
       </Helmet>
       <div className=" w-full h-full min-h-screen">
         <BackgroundCoin className="relative w-full h-full min-h-screen">
-          <div className="relative z-10 max-w-[550rem] mx-auto md:pt-[30rem] md:pb-0 px-[20rem] md:px-[10rem] pt-[100rem] pb-[150rem]">
+          <div className="relative z-10 max-w-2200 mx-auto md:pt-120 md:pb-0 px-80 md:px-40 pt-400 pb-600">
             <input
               type="file"
               accept="image/*"
@@ -121,7 +121,7 @@ export const Component = () => {
               ref={inputUploadRef}
               hidden
             />
-            <div className="bg-gray-300 w-full aspect-[4/3] mb-[40rem] rounded-[10rem] flex items-center justify-center overflow-hidden">
+            <div className="bg-gray-300 w-full aspect-4/3 mb-160 rounded-[10rem] flex items-center justify-center overflow-hidden">
               {(preview && (
                 <img
                   className="w-full h-full object-contain"
@@ -130,7 +130,7 @@ export const Component = () => {
               )) || (
                 <Camera
                   weight="fill"
-                  className="w-[150rem] h-[150rem] md:w-[200rem] md:h-[200rem] opacity-35"
+                  className="w-600 h-600 md:w-800 md:h-800 opacity-35"
                 />
               )}
             </div>
@@ -141,29 +141,29 @@ export const Component = () => {
                 onClose={handleCloseModal}
               ></UploadModal>
               <Button
-                className="font-[500] bg-happy_box-brick text-[30rem] h-[30rem] p-[20rem] rounded-[5rem]"
+                className="font-medium bg-happy_box-brick text-[30rem] h-120 p-80 rounded-[5rem]"
                 onClick={handleOpenFile}
               >
                 {preview ? t("common.edit") : t("common.upload_image")}
               </Button>
             </center>
 
-            <div className="flex justify-center gap-x-[30rem] pt-[20rem] md:pt-[20rem] pb-[80rem]">
+            <div className="flex justify-center gap-x-120 pt-80 md:pt-80 pb-320">
               <Button
-                className="font-[500] bg-happy_box-red/90 hover:bg-happy_box-red text-[30rem] h-[30rem] p-[20rem] rounded-[5rem]"
+                className="font-medium bg-happy_box-red/90 hover:bg-happy_box-red text-[30rem] h-120 p-80 rounded-[5rem]"
                 onClick={handleClickFinish}
                 disabled={isUploading}
               >
-                <div className="flex gap-x-[10rem] items-center">
+                <div className="flex gap-x-40 items-center">
                   {isUploading && (
-                    <Loader2 className="animate-spin !w-[20rem] !h-[20rem] mr-[5rem]" />
+                    <Loader2 className="animate-spin w-[20rem]! h-80! mr-20" />
                   )}
                   <span> {t("common.send_image")}</span>
                 </div>
               </Button>
               <Button
                 variant={"outline"}
-                className="border-happy_box-brick hover:bg-happy_box-brick/10 bg-transparent !text-happy_box-brick font-[500] text-[30rem] h-[30rem] p-[20rem] rounded-[5rem]"
+                className="border-happy_box-brick hover:bg-happy_box-brick/10 bg-transparent text-happy_box-brick! font-medium text-[30rem] h-120 p-80 rounded-[5rem]"
                 onClick={backToHome}
               >
                 {t("common.go_back")}

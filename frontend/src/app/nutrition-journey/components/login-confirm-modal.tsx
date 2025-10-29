@@ -86,32 +86,32 @@ export const LoginConfirmModal: FC<LunarModalProps> = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         className={cn(
-          "max-w-[450rem] w-full py-[20rem] bg-white",
+          "max-w-1800 w-full py-80 bg-white",
           className
         )}
       >
         <DialogTitle></DialogTitle>
         <DialogDescription></DialogDescription>
        
-          <div className="p-[20rem]">
-            <Typography.Paragraph className="text-[16rem] md:text-[20rem] mb-[20rem] text-center text-happy_box-red">
+          <div className="p-80">
+            <Typography.Paragraph className="text-[16rem] md:text-[20rem] mb-80 text-center text-happy_box-red">
               {t("happy_box.choose_first_letter")}
             </Typography.Paragraph>
 
-            <fieldset className="my-[30rem] flex flex-wrap justify-center gap-x-[30rem]">
+            <fieldset className="my-120 flex flex-wrap justify-center gap-x-120">
               <InputOTP maxLength={6}>
                 <InputOTPGroup>
-                  <InputOTPSlot index={0} className="h-[40rem] w-[40rem] !rounded-l-[5rem] text-[30rem]" />
-                  <InputOTPSlot index={1} className="h-[40rem] w-[40rem] !rounded-r-[5rem] text-[30rem]" />
+                  <InputOTPSlot index={0} className="h-160 w-160 rounded-l-[5rem]! text-[30rem]" />
+                  <InputOTPSlot index={1} className="h-160 w-160 rounded-r-[5rem]! text-[30rem]" />
                 </InputOTPGroup>
-                <span className="text-[30rem] mx-[10rem]">/</span>
+                <span className="text-[30rem] mx-40">/</span>
                 <InputOTPGroup>
-                  <InputOTPSlot index={3} className="h-[40rem] w-[40rem] !rounded-l-[5rem] text-[30rem]" />
-                  <InputOTPSlot index={4} className="h-[40rem] w-[40rem] !rounded-r-[5rem] text-[30rem]" />
+                  <InputOTPSlot index={3} className="h-160 w-160 rounded-l-[5rem]! text-[30rem]" />
+                  <InputOTPSlot index={4} className="h-160 w-160 rounded-r-[5rem]! text-[30rem]" />
                 </InputOTPGroup>
               </InputOTP>
             </fieldset>
-            <div className="flex gap-x-[10rem] justify-center">
+            <div className="flex gap-x-40 justify-center">
               <LunarButton
                 variant="primary"
                 className="text-[16rem] md:text-[20rem]"

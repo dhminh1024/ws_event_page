@@ -26,12 +26,12 @@ export const GREATEST_SHOW_25_ROUTES: RouteObject[] = [
             lazy: () => import("./pages/home.page"),
           },
           {
-            path: "order",
+            path: "registration",
             lazy: () => import("./pages/register.page"),
           },
           {
-            path: "order-detail/:id",
-            lazy: () => import("./pages/order-detail.page"),
+            path: "round-detail/:id",
+            lazy: () => import("./pages/round-detail.page"),
           }
         ],
       },
