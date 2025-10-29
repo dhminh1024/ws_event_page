@@ -1,14 +1,14 @@
 import { WSEHBChallengeExtended } from '@/app/happy-box/context/types';
 import { useFrappeGetCall } from 'frappe-react-sdk';
 import { useState, useEffect } from 'react';
-import { FRAPPE_APIS } from '../api.config';
+import { FRAPPE_APIS } from '@happy-box/api/api.config';
 import { WSEHBSubmissionExtend } from '@/types/WellspringEventPage/WSEExtend';
 
 const useGetSubmissionsByUser = (code?: string,skip?:boolean) => {
 const { data, isLoading, isValidating, error, mutate } = useFrappeGetCall<{
     message: WSEHBSubmissionExtend[];
   }>(
-    FRAPPE_APIS.HAPPY_BOX.GET_HB_SUBMISSIONS_BY_USER.METHOD_STRING,
+    FRAPPE_APIS.GET_HB_SUBMISSIONS_BY_USER.METHOD_STRING,
     {
         wellspring_code: code
     },
