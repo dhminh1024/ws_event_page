@@ -28,7 +28,7 @@ export const DimondBlock: FC<
         strokeDasharray={isDesktop? "20": "10"}
         className="absolute top-0 left-0 right-0 bottom-0 m-auto w-[90%] h-[90%]"
       />
-      <div className="absolute w-full h-full rotate-[-45deg] top-0 left-0 right-0 bottom-0 m-auto flex justify-center items-center">
+      <div className="absolute w-full h-full -rotate-45 top-0 left-0 right-0 bottom-0 m-auto flex justify-center items-center">
         {children}
       </div>
     </div>

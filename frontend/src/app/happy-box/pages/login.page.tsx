@@ -87,25 +87,25 @@ export const Component = () => {
           }
           alt=""
         />
-        <div className="absolute top-[3.5%] md:top-[7%] right-[5%] z-30 flex items-center gap-x-[20rem]">
+        <div className="absolute top-[3.5%] md:top-[7%] right-[5%] z-30 flex items-center gap-x-80">
           <Typography.Text className="hidden  md:inline text-[12rem] md:text-[16rem] text-happy_box-red">
             {t("common.language")}
           </Typography.Text>
           <LanguageSelector />
         </div>
-        <BackgroundCloud className="relative z-30 md:shadow-[0_0rem_30rem_#000000] md:py-[50rem] p-[20rem] md:px-[100rem] flex flex-col md:flex-row justify-center items-center gap-x-[40rem]">
-          <Typography.Text className="text-center uppercase text-[14rem] md:text-[23rem] font-tropen leading-[1] text-happy_box-light_yellow">
+        <BackgroundCloud className="relative z-30 md:shadow-[0_0rem_30rem_#000000] md:py-200 p-80 md:px-400 flex flex-col md:flex-row justify-center items-center gap-x-160">
+          <Typography.Text className="text-center uppercase text-[14rem] md:text-[23rem] font-tropen leading-none text-happy_box-light_yellow">
             {t("happy_box.enter_sign_in_code")}
           </Typography.Text>
           <Input
-            className="my-[10rem] text-[16rem] py-[2rem] md:text-[28rem] w-[70%] md:w-full tracking-[5rem] h-[36rem] md:h-[56rem] flex-1 rounded-[5rem] text-center text-happy_box-red bg-white uppercase"
+            className="my-40 text-[16rem] py-8 md:text-[28rem] w-[70%] md:w-full tracking-[5rem] h-144 md:h-224 flex-1 rounded-[5rem] text-center text-happy_box-red bg-white uppercase"
             placeholder="W000000"
             value={studentCode}
             onChange={(e) => setStudentCode(e.target.value)}
           />
           <LunarButton
             variant="primary"
-            className="w-auto h-[34rem] md:h-[56rem] text-[16rem] md:text-[23rem]"
+            className="w-auto h-136 md:h-224 text-[16rem] md:text-[23rem]"
             disabled={isRequesting || !studentCode}
             onClick={handleLogin}
           >

@@ -117,7 +117,7 @@ export const Component = () => {
       </Helmet>
       <div className=" w-full h-full min-h-screen">
         <BackgroundCoin className="relative w-full h-full min-h-screen">
-          <div className="relative z-10 max-w-[550rem] mx-auto md:pt-[50rem] md:pb-0 px-[20rem] md:px-[10rem] pt-[100rem] pb-[150rem]">
+          <div className="relative z-10 max-w-2200 mx-auto md:pt-200 md:pb-0 px-80 md:px-40 pt-400 pb-600">
             <input
               type="file"
               accept="image/*"
@@ -137,7 +137,7 @@ export const Component = () => {
               ref={inputUploadRef}
               hidden
             />
-            <div className="bg-gray-300 w-full aspect-[4/3] mb-[40rem] rounded-[10rem] flex items-center justify-center overflow-hidden">
+            <div className="bg-gray-300 w-full aspect-4/3 mb-160 rounded-[10rem] flex items-center justify-center overflow-hidden">
               {(preview && (
                 <img
                   className="w-full h-full object-contain"
@@ -146,7 +146,7 @@ export const Component = () => {
               )) || (
                 <Camera
                   weight="fill"
-                  className="w-[150rem] h-[150rem] md:w-[200rem] md:h-[200rem] opacity-35"
+                  className="w-600 h-600 md:w-800 md:h-800 opacity-35"
                 />
               )}
             </div>
@@ -157,33 +157,33 @@ export const Component = () => {
                 onClose={handleCloseModal}
               ></UploadModal>
               <LunarButton
-                className="font-[500]"
+                className="font-medium"
                 variant={preview ? "default" : "primary"}
                 onClick={handleOpenFile}
               >
                 {preview ? t("common.edit") : t("common.upload_image")}
               </LunarButton>
             </center>
-            <Typography.Paragraph className="text-center mt-[20rem] text-happy_box-red text-[16rem] md:text-[21rem]">
+            <Typography.Paragraph className="text-center mt-80 text-happy_box-red text-[16rem] md:text-[21rem]">
               {currentLanguage === "vn"
                 ? challenge?.description_vn
                 : challenge?.description_en}
             </Typography.Paragraph>
-            <div className="flex justify-center gap-x-[30rem] pt-[20rem] md:pt-[100rem] pb-[80rem]">
+            <div className="flex justify-center gap-x-120 pt-80 md:pt-400 pb-320">
               <LunarButton
                 variant="primary"
-                className="font-[500]"
+                className="font-medium"
                 onClick={handleClickFinish}
                 disabled={isUploading}
               >
-                <div className="flex gap-x-[10rem] items-center">
+                <div className="flex gap-x-40 items-center">
                   {isUploading && (
-                    <Loader2 className="animate-spin !w-[20rem] !h-[20rem] mr-[5rem]" />
+                    <Loader2 className="animate-spin w-[20rem]! h-80! mr-20" />
                   )}
                   <span> {t("common.finish")}</span>
                 </div>
               </LunarButton>
-              <LunarButton className="font-[500]" onClick={backToHome}>
+              <LunarButton className="font-medium" onClick={backToHome}>
                 {t("common.go_back")}
               </LunarButton>
             </div>

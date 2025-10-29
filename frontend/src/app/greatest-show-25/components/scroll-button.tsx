@@ -1,0 +1,68 @@
+import { useResponsive } from "@/core/hooks/use-reponsive";
+import { clear } from "console";
+import React, { HTMLAttributes, PropsWithChildren } from "react";
+import { number } from "zod";
+
+interface ScrollButtonProps extends HTMLAttributes<HTMLElement> {
+  to: string;
+}
+
+export default function ScrollButton({
+  to,
+  children,
+  ...props
+}: PropsWithChildren<ScrollButtonProps>) {
+  const { isDesktop } = useResponsive();
+  // const scrollToSection = () => {
+  //   const section = document.getElementById(to);
+  //   if (section) {
+  //     const x = setInterval(() => {
+  //       const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+  //       if (section.getBoundingClientRect().top < 1) clearInterval(x);
+  //       window.scrollTo({
+  //         top: sectionTop,
+  //         behavior: "smooth",
+  //       });
+  //     }, 200);
+  //   }
+  // };
+  const scrollToSection = (section: HTMLElement) => {
+    if (section) {
+      // Space in top is 60px
+      const sectionTop =
+        section.getBoundingClientRect().top +
+        window.scrollY -
+        (isDesktop ? 200 : 60);
+      window.scrollTo({
+        top: sectionTop,
+        behavior: "smooth",
+      });
+
+      // // Fallback in case the interval doesn't clear
+      // setTimeout(() => {
+      //   clearInterval(x);
+      //   section.scrollIntoView({
+      //     behavior: "smooth",
+      //   });
+      // }, 300);
+    }
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    const section = document.getElementById(to);
+    if (!section) return;
+    scrollToSection(section);
+    window.location.hash = to;
+  };
+
+  const newChildren = React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child as React.ReactElement<any>, {
+        onClick: handleClick,
+      });
+    }
+    return child;
+  });
+
+  return <>{newChildren}</>;
+}

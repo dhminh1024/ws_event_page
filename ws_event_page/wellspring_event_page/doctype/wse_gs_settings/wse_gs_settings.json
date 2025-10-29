@@ -1,0 +1,69 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-10-29 15:19:45.228989",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "current_program",
+  "section_break_pwyz",
+  "email_sender",
+  "confirmation_email_template",
+  "cancellation_email_template"
+ ],
+ "fields": [
+  {
+   "fieldname": "current_program",
+   "fieldtype": "Link",
+   "label": "Current Program",
+   "options": "WSE GS Program"
+  },
+  {
+   "fieldname": "confirmation_email_template",
+   "fieldtype": "Link",
+   "label": "Confirmation Email Template",
+   "options": "Email Template"
+  },
+  {
+   "fieldname": "section_break_pwyz",
+   "fieldtype": "Section Break",
+   "label": "Email Configuration"
+  },
+  {
+   "fieldname": "email_sender",
+   "fieldtype": "Data",
+   "label": "Email Sender"
+  },
+  {
+   "fieldname": "cancellation_email_template",
+   "fieldtype": "Link",
+   "label": "Cancellation Email Template",
+   "options": "Email Template"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-10-29 16:07:20.168939",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE GS Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

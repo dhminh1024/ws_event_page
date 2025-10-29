@@ -198,14 +198,14 @@ export const Component = () => {
   //    - send_email: True will send a confirmation email to the user
 
   return (
-    <div className="bg-pt-background h-[100vh] overflow-x-hidden p-5">
+    <div className="bg-pt-background h-screen overflow-x-hidden p-5">
       <div className="flex justify-center items-center h-full">
         <div className="w-full md:w-[1136px] m-auto">
           <div className="flex items-center justify-end mb-2">
             <span className="text-sm text-pt-blue">
               {t("common.language")}:
             </span>
-            <LanguageSwitcher className="ml-2 w-6 h-4 !bg-transparent" />
+            <LanguageSwitcher className="ml-2 w-6 h-4 bg-transparent!" />
           </div>
           <div className=" bg-white rounded-lg overflow-hidden mb-10">
             {isDesktop && <img src={BannerTopPC} alt="Banner Top" />}
@@ -283,7 +283,7 @@ export const Component = () => {
                   </p> */}
                 </div>
               </div>
-              <div className="w-full md:w-[480px] border-l-transparent border-r-transparent md:border-l-pt-primary/20 md:border-r-pt-primary/20 border-t-pt-primary/20 border-b-pt-primary/20 md:border-t-transparent md:border-b-transparent border-[1px]">
+              <div className="w-full md:w-[480px] border-l-transparent border-r-transparent md:border-l-pt-primary/20 md:border-r-pt-primary/20 border-t-pt-primary/20 border-b-pt-primary/20 md:border-t-transparent md:border-b-transparent border">
                 {useMemo(
                   () => (
                     <CalendarStyled
@@ -356,7 +356,7 @@ export const Component = () => {
                               className={cn(
                                 "text-pt-primary border-pt-primary bg-pt-background/20 hover:bg-slate-200 hover:text-pt-primary flex justify-between",
                                 {
-                                  "!bg-pt-primary !text-white":
+                                  "bg-pt-primary! text-white!":
                                     slot.name === slotSelected,
                                 },
                                 {
@@ -413,7 +413,7 @@ export const Component = () => {
                 )}
               </div>
             </div>
-            <div className="h-[1px] bg-pt-primary/20 w-full"></div>
+            <div className="h-px bg-pt-primary/20 w-full"></div>
             <span className="ml-2 hidden"></span>
             <div className="my-2 ml-5 pr-5 text-sm text-pt-primary">
               {parser(

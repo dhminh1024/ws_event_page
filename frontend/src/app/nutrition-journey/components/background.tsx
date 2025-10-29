@@ -68,7 +68,7 @@ export const GreekPattern: FC<BackgroundCoinProps> = ({
 }) => {
   return (
     <div
-      className={cn("h-[40rem]", className)}
+      className={cn("h-160", className)}
       style={{
         backgroundImage: `url(${cleanPath(
           `${env.ASSET_URL}/happy-box/greek-decor.png`

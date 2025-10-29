@@ -80,7 +80,7 @@ export default function SignInModal({
   return (
     <Dialog open={open} onOpenChange={handleOpenChange} onClose={handleClose}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="top-[50%] flex h-[70vh] w-[700px] max-w-[100vw] translate-y-[-50%] flex-col">
+      <DialogContent className="top-[50%] flex h-[70vh] w-[700px] max-w-screen translate-y-[-50%] flex-col">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold">Login</DialogTitle>
           <DialogDescription>Welcome to the Happy Journey</DialogDescription>

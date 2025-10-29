@@ -70,7 +70,7 @@ export const RouteSection: FC<RouteSectionProps> = ({ className }) => {
     <div
       ref={myRef}
       className={cn(
-        "bg-hr-lime border-t-[#333] border-t-[8rem] pt-[20rem] md:pt-[60rem]",
+        "bg-hr-lime border-t-[#333] border-t-[8rem] pt-80 md:pt-240",
         className
       )}
     >
@@ -78,7 +78,7 @@ export const RouteSection: FC<RouteSectionProps> = ({ className }) => {
         <div className="w-[90%] mx-auto">
           <SectionHeading
             ref={headingRef}
-            className="text-[10rem] md:text-[30rem] py-[3rem] md:py-[8rem] px-[35rem] md:px-[100rem] italic font-extrabold mb-[20rem] md:mb-[50rem]"
+            className="text-[10rem] md:text-[30rem] py-12 md:py-32 px-140 md:px-400 italic font-extrabold mb-80 md:mb-200"
           >
             {t("happy_run.route_heading")}
           </SectionHeading>
@@ -88,13 +88,13 @@ export const RouteSection: FC<RouteSectionProps> = ({ className }) => {
             dashedArray={isDesktop ? 25 : 20}
             strokeWidth={isDesktop ? 4 : 2}
             widthOffset={isDesktop ? 0.5 : 2}
-            className="relative w-full py-[20rem] md:py-[10rem]"
+            className="relative w-full py-80 md:py-40"
           >
             {/* <SVGCustomRectangle
             ref={borderRef}
             className="absolute top-0 left-0 w-full h-full"
           /> */}
-            <div className="flex flex-col md:flex-row h-full p-[20rem] md:p-[60rem] gap-[20rem]">
+            <div className="flex flex-col md:flex-row h-full p-80 md:p-240 gap-80">
               <div className="md:basis-[50%] flex justify-center items-center">
                 <img
                   ref={routeGraphicRef}
@@ -103,9 +103,9 @@ export const RouteSection: FC<RouteSectionProps> = ({ className }) => {
                   alt="Route map"
                 />
               </div>
-              <div className="md:basis-[50%] flex flex-col gap-y-[10rem] md:gap-y-[20rem]">
+              <div className="md:basis-[50%] flex flex-col gap-y-40 md:gap-y-80">
                 <div ref={paragraph1Ref}>
-                  <Typography.Heading className="text-[13rem] md:text-[25rem] mb-[5rem] md:mb-[20rem] text-hr-ember/80 font-extrabold uppercase">
+                  <Typography.Heading className="text-[13rem] md:text-[25rem] mb-20 md:mb-80 text-hr-ember/80 font-extrabold uppercase">
                     {t("happy_run.detailed_route_heading")}
                   </Typography.Heading>
                   <Typography.Paragraph className="text-[9rem] md:text-[18rem] text-hr-blue font-semibold">
@@ -119,7 +119,7 @@ export const RouteSection: FC<RouteSectionProps> = ({ className }) => {
                   </Typography.Paragraph>
                 </div>
                 <div ref={paragraph2Ref}>
-                  <Typography.Heading className="text-[13rem] md:text-[25rem] mb-[5rem] md:mb-[20rem] text-hr-ember/80 font-extrabold uppercase">
+                  <Typography.Heading className="text-[13rem] md:text-[25rem] mb-20 md:mb-80 text-hr-ember/80 font-extrabold uppercase">
                     {t("happy_run.timing_route_heading")}
                   </Typography.Heading>
                   <Typography.Paragraph className="text-[9rem] md:text-[18rem] text-hr-blue font-semibold">
@@ -133,7 +133,7 @@ export const RouteSection: FC<RouteSectionProps> = ({ className }) => {
                   </Typography.Paragraph>
                 </div>
                 {/* <div ref={paragraph3Ref}>
-                <Typography.Heading className="text-[13rem] md:text-[25rem] mb-[5rem] md:mb-[20rem] text-brand-persian font-extrabold uppercase">
+                <Typography.Heading className="text-[13rem] md:text-[25rem] mb-20 md:mb-80 text-brand-persian font-extrabold uppercase">
                   {t("happy_run.highlight_route_heading")}
                 </Typography.Heading>
                 <Typography.Paragraph className="text-[9rem] md:text-[18rem] italic text-brand-persian font-semibold">

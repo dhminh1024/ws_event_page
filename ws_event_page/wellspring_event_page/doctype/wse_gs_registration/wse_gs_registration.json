@@ -1,0 +1,188 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "creation": "2025-10-20 15:28:26.510379",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "gs_program",
+  "primary_contact_section",
+  "full_name",
+  "email",
+  "column_break_yivi",
+  "mobile_number",
+  "entry_info_section",
+  "entry_group",
+  "entry_name",
+  "column_break_lmvl",
+  "entry_category",
+  "talent_info",
+  "instrumental_info",
+  "section_break_umho",
+  "entry_participants",
+  "attach_file",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "primary_contact_section",
+   "fieldtype": "Section Break",
+   "label": "Primary Contact"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Full Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Email",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_yivi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mobile_number",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Mobile Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Cancelled\nApproved\nWaitting",
+   "read_only": 1
+  },
+  {
+   "fieldname": "entry_info_section",
+   "fieldtype": "Section Break",
+   "label": "Entry Info"
+  },
+  {
+   "fieldname": "entry_group",
+   "fieldtype": "Select",
+   "label": "Entry group",
+   "options": "Primary students\nSecondary students\nAdult",
+   "reqd": 1
+  },
+  {
+   "fieldname": "entry_name",
+   "fieldtype": "Data",
+   "label": "Entry name",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.entry_category == 'Instrumental'",
+   "fieldname": "instrumental_info",
+   "fieldtype": "Data",
+   "label": "Instrumental info"
+  },
+  {
+   "fieldname": "entry_category",
+   "fieldtype": "Select",
+   "label": "Entry category",
+   "options": "Singing\nDancing\nInstrumental\nOther",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.entry_category == 'Other'",
+   "fieldname": "talent_info",
+   "fieldtype": "Data",
+   "label": "Talent info"
+  },
+  {
+   "fieldname": "entry_participants",
+   "fieldtype": "Small Text",
+   "label": "Entry participants"
+  },
+  {
+   "fieldname": "attach_file",
+   "fieldtype": "Attach",
+   "label": "Attach file"
+  },
+  {
+   "fieldname": "column_break_lmvl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_umho",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "gs_program",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "GS Program",
+   "options": "WSE GS Program",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-10-29 16:10:00.350441",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE GS Registration",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "WSE GS Admin",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

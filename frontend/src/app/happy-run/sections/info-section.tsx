@@ -36,45 +36,45 @@ export const InfoSection: FC<InfoSectionProps> = ({ className }) => {
   return (
     <section ref={myRef} className={cn(className)}>
       {inView && (
-        <div className="w-[90%] mx-auto pt-[60rem]">
+        <div className="w-[90%] mx-auto pt-240">
           <SectionHeading
             //   ref={headingRef}
-            className="text-[12rem] md:text-[25rem] p-[3rem_40rem] md:p-[10rem_70rem] italic font-extrabold mb-[50rem]"
+            className="text-[12rem] md:text-[25rem] p-[3rem_40rem] md:p-[10rem_70rem] italic font-extrabold mb-200"
           >
             {t("happy_run.info_heading")}
           </SectionHeading>
-          <Accordion className="mt-[0rem] md:mt-[40rem]" type="multiple">
+          <Accordion className="mt-0 md:mt-160" type="multiple">
             {ColorItems?.map((c, index) => (
               <AccordionItem
                 key={index}
                 value={"item" + (index + 1)}
-                className="border-none mb-[30rem] md:mb-[80rem] pl-[30rem] md:pl-[100rem]"
+                className="border-none mb-120 md:mb-320 pl-120 md:pl-400"
               >
                 <AccordionTrigger
-                  iconClassName="text-white h-[20rem] w-[20rem] md:h-[40rem] md:w-[40rem]"
-                  className="bg-[#0575FF] rounded-[5rem] md:rounded-[10rem] shadow-[inset_0rem_0rem_12rem_5rem_#00000055] py-[8rem] md:py-[15rem] pr-[10rem] md:pr-[20rem] hover:!no-underline"
+                  iconClassName="text-white h-80 w-[20rem] md:h-160 md:w-160"
+                  className="bg-[#0575FF] rounded-[5rem] md:rounded-[10rem] shadow-[inset_0rem_0rem_12rem_5rem_#00000055] py-32 md:py-60 pr-40 md:pr-80 hover:no-underline!"
                 >
                   <div className="relative ">
                     <DimondBlock
                       className={cn(
-                        "absolute top-0 bottom-0 m-auto left-[-20rem] md:left-[-50rem] w-[45rem] h-[45rem] md:w-[100rem] md:h-[100rem] mr-[50rem] rounded-[10rem] md:rounded-[30rem] bg-gradient-to-tr bg-white drop-shadow-[2rem_-2rem_2rem_#00000083] md:drop-shadow-[10rem_-5rem_5rem_#00000083]",
+                        "absolute top-0 bottom-0 m-auto -left-80 md:-left-200 w-180 h-180 md:w-400 md:h-400 mr-200 rounded-[10rem] md:rounded-[30rem] bg-linear-to-tr bg-white drop-shadow-[2rem_-2rem_2rem_#00000083] md:drop-shadow-[10rem_-5rem_5rem_#00000083]",
                         c
                       )}
                     >
-                      <Typography.Paragraph className="m-0 text-white text-[22rem] md:text-[50rem] text-center font-raceChampion">
+                      <Typography.Paragraph className="m-0 text-white text-[22rem] md:text-[50rem] text-center font-race-champion">
                         0{index + 1}
                       </Typography.Paragraph>
                     </DimondBlock>
                     <Typography.Paragraph
                       title={t(`happy_run.info_item_title_${index + 1}`)}
-                      className="ml-[70rem] md:ml-[120rem] line-clamp-1 w-full mb-0 !text-[12rem]  text-white md:!text-[28rem] uppercase font-extrabold"
+                      className="ml-280 md:ml-480 line-clamp-1 w-full mb-0 text-[12rem]!  text-white md:text-[28rem]! uppercase font-extrabold"
                     >
                       {t(`happy_run.info_item_title_${index + 1}`)}
                     </Typography.Paragraph>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="relative mt-[20rem] md:mt-[40rem] text-hr-primary">
-                  <div className="w-full min-h-[50rem] md:min-h-[200rem]">
+                <AccordionContent className="relative mt-80 md:mt-160 text-hr-primary">
+                  <div className="w-full min-h-200 md:min-h-800">
                     <img
                       className="w-full"
                       src={
@@ -87,7 +87,7 @@ export const InfoSection: FC<InfoSectionProps> = ({ className }) => {
                       alt=""
                     />
                     {index === 2 && (
-                      <div className="md:absolute rounded-[5rem] overflow-hidden mt-[10rem] md:mt-0 w-full h-[200rem] md:w-[450rem] md:h-[300rem] top-[0%] md:top-[10%] bottom-0 m-auto right-[8%]">
+                      <div className="md:absolute rounded-[5rem] overflow-hidden mt-40 md:mt-0 w-full h-800 md:w-1800 md:h-1200 top-[0%] md:top-[10%] bottom-0 m-auto right-[8%]">
                         <iframe
                           src={event.variables.wellspring_map_embed?.value}
                           allowFullScreen

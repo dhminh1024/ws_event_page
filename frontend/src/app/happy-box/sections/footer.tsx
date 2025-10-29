@@ -14,10 +14,10 @@ export default function Footer({ className }: SectionProps) {
       aria-labelledby="Footer"
       className={cn("relative font-sans", className)}
     >
-      <div className="bg-happy_box-blue py-[20rem] md:py-[50rem]">
-        <div className="px-[30rem] ">
-          <div className="flex flex-col items-center gap-x-[100rem] gap-y-[20rem] md:flex-row">
-            <div className="mt-[15rem] w-[65%] md:mt-0 md:w-auto md:basis-[40%] md:pl-[10%]">
+      <div className="bg-happy_box-blue py-80 md:py-200">
+        <div className="px-120 ">
+          <div className="flex flex-col items-center gap-x-400 gap-y-80 md:flex-row">
+            <div className="mt-60 w-[65%] md:mt-0 md:w-auto md:basis-[40%] md:pl-[10%]">
               <img
                 className=" mx-auto w-full"
                 src={event.variables?.logo_wellspring_white?.value}
@@ -28,15 +28,15 @@ export default function Footer({ className }: SectionProps) {
             <div className="flex w-full flex-1 flex-col text-white">
               <Typography.Heading
                 level={3}
-                className="mb-[20rem] font-sans text-[12rem] font-black md:text-[20rem]"
+                className="mb-80 font-sans text-[12rem] font-black md:text-[20rem]"
               >
                 {event.variables?.wellspring_name?.value}
               </Typography.Heading>
-              <div className="grid grid-cols-2 mb-[10rem]">
+              <div className="grid grid-cols-2 mb-40">
                 <div className="flex flex-col">
                   <Typography.Heading
                     level={4}
-                    className="mb-[5rem] font-sans text-[12rem] font-semibold md:text-[18rem]"
+                    className="mb-20 font-sans text-[12rem] font-semibold md:text-[18rem]"
                   >
                     Wellspring Hanoi
                   </Typography.Heading>
@@ -47,7 +47,7 @@ export default function Footer({ className }: SectionProps) {
                 <div className="flex flex-col">
                   <Typography.Heading
                     level={4}
-                    className="mb-[5rem] font-sans text-[12rem] font-semibold md:text-[18rem]"
+                    className="mb-20 font-sans text-[12rem] font-semibold md:text-[18rem]"
                   >
                     Admissions
                   </Typography.Heading>
@@ -66,13 +66,13 @@ export default function Footer({ className }: SectionProps) {
                 {event.variables?.wellspring_hanoi_address?.value}
               </Typography.Paragraph>
 
-              <div className="my-[20rem] h-[1rem] w-[18%] bg-white md:my-[30rem] md:h-[2rem]"></div>
+              <div className="my-80 h-4 w-[18%] bg-white md:my-120 md:h-8"></div>
 
-              <div className="grid grid-cols-2  mb-[10rem]">
+              <div className="grid grid-cols-2  mb-40">
                 <div className="flex flex-col">
                   <Typography.Heading
                     level={4}
-                    className="mb-[5rem] font-sans text-[12rem] font-semibold md:text-[18rem]"
+                    className="mb-20 font-sans text-[12rem] font-semibold md:text-[18rem]"
                   >
                     Wellspring Saigon
                   </Typography.Heading>
@@ -86,7 +86,7 @@ export default function Footer({ className }: SectionProps) {
                 <div className="flex flex-col">
                   <Typography.Heading
                     level={4}
-                    className="mb-[5rem] font-sans text-[12rem] font-semibold md:text-[18rem]"
+                    className="mb-20 font-sans text-[12rem] font-semibold md:text-[18rem]"
                   >
                     Admissions
                   </Typography.Heading>

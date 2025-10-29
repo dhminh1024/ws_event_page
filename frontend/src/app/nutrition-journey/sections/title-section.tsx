@@ -12,15 +12,15 @@ export const TitleSection: FC<TitleSectionProps> = ({ className }) => {
   const event = useEventPageContext();
 
   return (
-    <section className="relative mb-[10rem] md:mb-[40rem]">
+    <section className="relative mb-40 md:mb-160">
       {/* Section Heading */}
       <div className="relative z-10 text-center">
         <img
           src={event.variables.campaign_title?.value}
-          className="w-[100%] md:w-[80%] mx-auto"
+          className="w-full md:w-[80%] mx-auto"
           alt="Logo"
         />
-        <Typography.Text className="text-nj-orange font-medium text-[16rem] md:text-[40rem] leading-[1.5]">
+        <Typography.Text className="text-nj-orange font-medium text-[16rem] md:text-[40rem] leading-normal">
           {t("nutritional_journey.campaign_name")}
         </Typography.Text>
       </div>

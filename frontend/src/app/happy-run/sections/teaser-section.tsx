@@ -54,24 +54,24 @@ export const TeaserSection: FC<TeaserSectionProps> = ({
   return (
     <div
       ref={myRef}
-      className={cn("text-center py-[10rem]", className)}
+      className={cn("text-center py-40", className)}
       {...props}
     >
       {inView && (
         <>
           <Typography.Heading
             level={2}
-            className="pt-[5rem] md:pt-[40rem] mb-[10rem] md:mb-[30rem] font-raceChampion text-hr-blue text-[25rem] md:text-[75rem] uppercase flex items-center justify-center"
+            className="pt-20 md:pt-160 mb-40 md:mb-120 font-race-champion text-hr-blue text-[25rem] md:text-[75rem] uppercase flex items-center justify-center"
           >
             <div ref={text1Ref}>{parser(t("happy_run.teaser_heading_1"))}</div>
-            <div ref={text2Ref} className="text-hr-honey ml-[5rem]">
+            <div ref={text2Ref} className="text-hr-honey ml-20">
               {parser(t("happy_run.teaser_heading_2"))}
             </div>
           </Typography.Heading>
           {/* <div ref={textDescRef} className="w-[80%] mx-auto">
             <Typography.Heading
               level={2}
-              className="text-hr-blue font-black text-[13rem] md:text-[35rem] mb-[5rem] md:mb-[20rem] "
+              className="text-hr-blue font-black text-[13rem] md:text-[35rem] mb-20 md:mb-80 "
             >
               {parser(t("happy_run.teaser_description"))}
             </Typography.Heading>
