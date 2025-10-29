@@ -132,79 +132,73 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
       ref={myRef}
       className={cn("py-20 md:pt-200 mx-auto overflow-hidden", className)}
     >
-      {inView && (
-        <Container>
-          <SectionHeading ref={headingRef} className="">
-            {t("greatest_show_25.target_heading")}
-          </SectionHeading>
-          <div className="target md:m-240">
-            <div className=" w-full h-full ">
-              <div
-                className={cn(
-                  "grid grid-cols-2 md:grid-cols-4 gap-100 px-80 md:gap-[4%] md:py-0"
-                )}
-              >
-                {scheduleData.map((item, index) => (
-                  <div className="relative flex flex-col" key={index}>
-                    <img src={item.img} alt={`Target ${index + 1}`} />
-                    <div className="absolute top-[40%] left-0 w-full flex flex-col">
-                      <Typography.Heading
-                        level={2}
-                        className="text-center mb-20 md:mb-80 text-[13rem] md:text-[23rem] text-gs25-primary font-extrabold leading-60 md:leading-120 uppercase"
-                      >
-                        {parser(item.heading)}
-                      </Typography.Heading>
-                      <div className="text-center text-[10rem] md:text-[22rem] px-80 font-semibold">
-                        {parser(item.desc)}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <center>
-            <div className="text-[11rem] w-[85%] mx-auto md:text-[18rem] my-100 md:my-160">
-              {parser(t("greatest_show_25.target_text_1"))}
-            </div>
-          </center>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-50 md:gap-400 px-80">
-            {groupOptions.map((option, index) => {
-              return (
-                <div
-                  key={option.value}
-                  className={cn("relative flex flex-col justify-between")}
-                >
-                  <img
-                    className="w-full"
-                    src={option.image}
-                    alt={option.label}
-                  />
-                  <div className="absolute top-[23%] left-[50%] md:top-[55%] px-[4%] w-full md:left-0 flex flex-1 flex-col justify-start md:justify-center">
-                    <div
-                      className={cn(
-                        " text-gs25-primary md:text-center text-[14rem] uppercase md:text-[30rem] font-extrabold mb-0 md:mb-40"
-                      )}
+      <Container>
+        <SectionHeading ref={headingRef} className="">
+          {t("greatest_show_25.target_heading")}
+        </SectionHeading>
+        <div className="target md:m-240">
+          <div className=" w-full h-full ">
+            <div
+              className={cn(
+                "grid grid-cols-2 md:grid-cols-4 gap-100 px-80 md:gap-[4%] md:py-0"
+              )}
+            >
+              {scheduleData.map((item, index) => (
+                <div className="relative flex flex-col" key={index}>
+                  <img src={item.img} alt={`Target ${index + 1}`} />
+                  <div className="absolute top-[40%] left-0 w-full flex flex-col">
+                    <Typography.Heading
+                      level={2}
+                      className="text-center mb-20 md:mb-40 text-[13rem] md:text-[23rem] text-gs25-primary font-extrabold leading-60 md:leading-120 uppercase"
                     >
-                      {option.heading}
-                    </div>
-                    <div
-                      className={cn(
-                        "md:px-80 text-gs25-secondary text-[9rem] md:text-[22rem] font-medium mb-40",
-                        {
-                          "md:text-center": index !== 2,
-                        }
-                      )}
-                    >
-                      {parser(option.description)}
+                      {parser(item.heading)}
+                    </Typography.Heading>
+                    <div className="text-center text-[10rem] md:text-[20rem] px-80 font-semibold">
+                      {parser(item.desc)}
                     </div>
                   </div>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
-        </Container>
-      )}
+        </div>
+        <center>
+          <div className="text-[11rem] w-[90%] mx-auto md:text-[18rem] my-100 md:my-160">
+            {parser(t("greatest_show_25.target_text_1"))}
+          </div>
+        </center>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-50 md:gap-400 px-30">
+          {groupOptions.map((option, index) => {
+            return (
+              <div
+                key={option.value}
+                className={cn("relative flex flex-col justify-between")}
+              >
+                <img className="w-full" src={option.image} alt={option.label} />
+                <div className="absolute top-[23%] left-[50%] md:top-[55%] px-[4%] w-full md:left-0 flex flex-1 flex-col justify-start md:justify-center">
+                  <div
+                    className={cn(
+                      " text-gs25-primary md:text-center text-[14rem] uppercase md:text-[30rem] font-extrabold mb-0 md:mb-40"
+                    )}
+                  >
+                    {option.heading}
+                  </div>
+                  <div
+                    className={cn(
+                      "md:px-80 text-gs25-secondary text-[10rem] md:text-[22rem] font-medium mb-40",
+                      {
+                        "md:text-center": index !== 2,
+                      }
+                    )}
+                  >
+                    {parser(option.description)}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </Container>
     </section>
   );
 };

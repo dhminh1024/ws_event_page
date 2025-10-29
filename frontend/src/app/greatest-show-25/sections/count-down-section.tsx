@@ -1,4 +1,4 @@
-import { HTMLAttributes, useEffect, useState, type FC } from "react";
+import { HTMLAttributes, useEffect, useMemo, useRef, useState, type FC } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
 import BackgroundImage from "../assets/images/bg-countdown.png";
 import Typography from "@/app/happy-box/components/typography";
@@ -13,36 +13,49 @@ import { Link } from "react-router-dom";
 export type CountDownSectionProps = HTMLAttributes<HTMLDivElement> & {};
 
 export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
-  const { t } = useLocales();
+  const { t, currentLanguage } = useLocales();
   const event = useEventPageContext();
   const defaultDate = "2025-02-15";
-  const targetDate = event?.variables.countdown_date?.value || defaultDate;
+  const targetDate = useMemo(
+    () => event?.variables.countdown_date?.value || defaultDate,
+    [event?.variables.countdown_date?.value]
+  );
   const [timeLeft, setTimeLeft] = useState(getTimeLeft(targetDate));
-  // Log every second to see the time left update
-    
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const targetDateRef = useRef(targetDate);
+
+  // Update ref when targetDate changes
+  useEffect(() => {
+    targetDateRef.current = targetDate;
+  }, [targetDate]);
 
   useEffect(() => {
-  
-    // const timer = setInterval(() => {
-    //   console.log("Updating time left...");
-      
-    //   // const newTimeLeft = getTimeLeft(targetDate);
-    //   // console.log("newTimeLeft", newTimeLeft);
-      
-    //   // setTimeLeft(newTimeLeft);
+    // Create timer (only once on mount)
+    timerRef.current = setInterval(() => {
+      const newTimeLeft = getTimeLeft(targetDateRef.current);
+      setTimeLeft(newTimeLeft);
 
-    //   // if (
-    //   //   newTimeLeft.days === 0 &&
-    //   //   newTimeLeft.hours === 0 &&
-    //   //   newTimeLeft.minutes === 0 &&
-    //   //   newTimeLeft.seconds === 0
-    //   // ) {
-    //   //   clearInterval(timer);
-    //   // }
-    // }, 1000);
+      if (
+        newTimeLeft.days === 0 &&
+        newTimeLeft.hours === 0 &&
+        newTimeLeft.minutes === 0 &&
+        newTimeLeft.seconds === 0
+      ) {
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+          timerRef.current = null;
+        }
+      }
+    }, 1000);
 
-    // return () => clearInterval(timer);
-  }, []);
+    // Cleanup function (only on unmount)
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, []); // Empty dependency array - only run once
 
   // console.log(timeLeft);
   
@@ -60,7 +73,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
         level={2}
         className="text-white text-[13rem] md:text-[35rem]"
       >
-        {parser(event.variables.countdown_text_vn?.value || "")}
+        {parser(event.variables[`countdown_text_${currentLanguage}`]?.value || "")}
       </Typography.Heading>
       <Typography.Paragraph className="text-[20rem] md:text-[55rem] tracking-[3rem] md:tracking-[8rem] font-bold text-white">
         {format(targetDate || new Date(), "dd-MM-yyyy")}

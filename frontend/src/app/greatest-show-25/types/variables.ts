@@ -45,4 +45,7 @@ export interface GSEventVariable extends EventVariableBase {
    category_item_4_title_en?: VariableType
    category_item_4_desc_vn?: VariableType
    category_item_4_desc_en?: VariableType
+
+   marquee_text_vn?: VariableType
+   marquee_text_en?: VariableType
 }

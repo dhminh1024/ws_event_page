@@ -12,7 +12,7 @@ import { LanguageSwitcher } from "../components/language-switcher";
 export type MenuBarProps = HTMLAttributes<HTMLDivElement> & {};
 
 export const MenuBar: FC<MenuBarProps> = ({ className }) => {
-  const { t } = useLocales();
+  const { t, currentLanguage } = useLocales();
   // const { ref, isSticky } = useSticky();
   const event = useEventPageContext();
   return (
@@ -20,12 +20,12 @@ export const MenuBar: FC<MenuBarProps> = ({ className }) => {
       // ref={ref}
       id="navbar"
       aria-labelledby="introduction-title"
-      className={cn("sticky top-0 left-0 z-9999", className)}
+      className={cn("sticky top-0 left-0 z-2000", className)}
     >
       <div className="pt-40 bg-hr-primary shadow-[inset_0rem_-10rem_20rem_-10rem_#1b1b1b]">
         <Container className="relative">
           <NavBar />
-          {/* <LanguageSwitcher className="absolute top-0 right-0 block md:hidden" /> */}
+          <LanguageSwitcher className="absolute top-[50%] right-0 translate-y-[-50%]" />
         </Container>
       </div>
       <Marquee
@@ -33,9 +33,7 @@ export const MenuBar: FC<MenuBarProps> = ({ className }) => {
         className="bg-gs25-primary py-20 md:py-50 text-center"
       >
         <Typography.Text className=" text-white text-[9rem] md:text-[18rem] font-bold py-30">
-          {t("happy_run.ticket_sale_official_time")}:{" "}
-          {event?.variables.ticket_period_time_start?.value} -{" "}
-          {event?.variables.ticket_period_time_end?.value}
+          {event?.variables?.[`marquee_text_${currentLanguage}`]?.value}
         </Typography.Text>
       </Marquee>
     </section>

@@ -5,6 +5,7 @@ import {
   useEffect,
   useMemo,
   useRef,
+  useState,
   type FC,
 } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
@@ -26,6 +27,7 @@ import BlockIcon2 from "@greatest-show-25/assets/images/dancing-icon.png";
 import BlockIcon3 from "@greatest-show-25/assets/images/intrusment-icon.png";
 import BlockIcon4 from "@greatest-show-25/assets/images/free-icon.png";
 import CategoryCardImage from "../assets/images/category-card.png";
+import { useResponsive } from "@/core/hooks/use-reponsive";
 export type EntryCategoriesSectionProps = HTMLAttributes<HTMLDivElement> &
   PropsWithChildren & {};
 
@@ -37,9 +39,11 @@ export const EntryCategoriesSection = forwardRef<
     triggerOnce: true,
     rootMargin: "300px",
   });
+  const [showCard, setShowCard] = useState<number | null>(null);
 
   const { t, currentLanguage } = useLocales();
-  // const { isDesktop } = useResponsive();
+  const { isDesktop } = useResponsive();
+
   const event = useEventPageContext();
   const kitTitleRef = useRef<HTMLImageElement>(null);
   const kitDescRef = useRef<HTMLDivElement>(null);
@@ -96,6 +100,14 @@ export const EntryCategoriesSection = forwardRef<
     [currentLanguage]
   );
 
+  const toggleCard = (index: number) => {
+    if (showCard === index) {
+      setShowCard(null);
+    } else {
+      setShowCard(index);
+    }
+  };
+
   useEffect(() => {
     if (!inView) return;
     setTimeout(() => {
@@ -142,41 +154,62 @@ export const EntryCategoriesSection = forwardRef<
 
   return (
     <section ref={myRef} className={cn("overflow-hidden", className)}>
-      {inView && (
-        <div className="w-[90%] mx-auto py-80 md:py-240">
-          <SectionHeading
-          //   ref={headingRef}
-          >
-            {t("greatest_show_25.category_heading")}
-          </SectionHeading>
-          <div className="grid md:grid-cols-2 gap-x-60 w-[80%] mx-auto">
-            {categories.map((category, index) => (
-              <div className="group relative cursor-pointer" key={index}>
-                <div className="group-hover:scale-0 transition-transform duration-300">
-                  <img src={category.img} alt={category.title} />
-                  <Typography.Heading className="-mt-100 md:-mt-160 text-[16rem] md:text-[26rem] font-extrabold uppercase text-center text-gs25-primary">
-                    {category.title}
+      <div className="w-[90%] mx-auto py-80 md:py-240">
+        <SectionHeading
+        //   ref={headingRef}
+        >
+          {t("greatest_show_25.category_heading")}
+        </SectionHeading>
+        <div className="grid md:grid-cols-2 gap-x-60 w-[90%] mx-auto">
+          {categories.map((category, index) => (
+            <div
+              className="group relative cursor-pointer"
+              key={index}
+              onClick={() => !isDesktop && toggleCard(index)}
+            >
+              <div
+                className={cn(
+                  "group-hover:scale-0 transition-transform duration-300",
+                  {
+                    "scale-0": showCard === index,
+                  }
+                )}
+              >
+                <img src={category.img} alt={category.title} />
+                <Typography.Heading className="-mt-100 md:-mt-160 text-[16rem] md:text-[26rem] font-extrabold uppercase text-center text-gs25-primary">
+                  {category.title}
+                </Typography.Heading>
+              </div>
+              <div
+                className={cn(
+                  "absolute top-[50%] left-[50%] translate-[-50%] m-auto w-[90%] md:w-[80%] h-auto group-hover:scale-100 group-visited:scale-100 group-focus:scale-100 scale-0 transition-transform duration-300",
+                  {
+                    "scale-100": showCard === index,
+                  }
+                )}
+              >
+                <img src={CategoryCardImage} alt="" />
+                <div className="absolute top-0 left-0 text-center p-60 md:p-80 pt-100 md:pt-140 h-full flex flex-col">
+                  <Typography.Heading className="text-[14rem] md:text-[26rem] font-extrabold uppercase text-center text-white mb-20 md:mb-40">
+                    {category.cardTitle}
                   </Typography.Heading>
-                </div>
-                <div
-                  className="absolute top-[50%] left-[50%] translate-[-50%] m-auto w-[90%] md:w-[80%] h-auto group-hover:scale-100 scale-0 transition-transform duration-300"
-                 
-                >
-                  <img src={CategoryCardImage} alt="" />
-                  <div className="absolute top-0 left-0 text-center p-60 md:p-80 pt-100 md:pt-140 h-full flex flex-col">
-                    <Typography.Heading className="text-[14rem] md:text-[26rem] font-extrabold uppercase text-center text-white mb-20 md:mb-40">
-                      {category.cardTitle}
-                    </Typography.Heading>
-                    <div className="text-[10rem] flex flex-col gap-y-20 md:text-[18rem] text-white font-semibold  text-center">
-                      {parser(category.cardDesc)}
-                    </div>
+                  <div
+                    className={cn(
+                      "text-[10rem] flex flex-col gap-y-20 md:text-[18rem] text-white font-semibold  text-center",
+                      {
+                        "text-[11rem] md:text-[14rem]":
+                          currentLanguage === "en",
+                      }
+                    )}
+                  >
+                    {parser(category.cardDesc)}
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      )}
+      </div>
     </section>
   );
 });

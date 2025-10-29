@@ -1,3 +1,4 @@
+import { useResponsive } from "@/core/hooks/use-reponsive";
 import { clear } from "console";
 import React, { HTMLAttributes, PropsWithChildren } from "react";
 import { number } from "zod";
@@ -11,6 +12,7 @@ export default function ScrollButton({
   children,
   ...props
 }: PropsWithChildren<ScrollButtonProps>) {
+  const { isDesktop } = useResponsive();
   // const scrollToSection = () => {
   //   const section = document.getElementById(to);
   //   if (section) {
@@ -26,16 +28,15 @@ export default function ScrollButton({
   // };
   const scrollToSection = (section: HTMLElement) => {
     if (section) {
-      const x = setInterval(() => {
-        if (section.offsetHeight > 0) clearInterval(x);
-
-        // Space in top is 60px
-        const sectionTop = section.getBoundingClientRect().top + window.scrollY - 200;
-        window.scrollTo({
-          top: sectionTop,
-          behavior: "smooth",
-        });
-      }, 200);
+      // Space in top is 60px
+      const sectionTop =
+        section.getBoundingClientRect().top +
+        window.scrollY -
+        (isDesktop ? 200 : 60);
+      window.scrollTo({
+        top: sectionTop,
+        behavior: "smooth",
+      });
 
       // // Fallback in case the interval doesn't clear
       // setTimeout(() => {

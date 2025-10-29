@@ -73,6 +73,7 @@ const ContactSection = lazy(() =>
 export const Component: FC = () => {
   const { t, currentLanguage } = useLocales();
   const event = useEventPageContext();
+  
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
