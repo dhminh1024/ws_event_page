@@ -55,7 +55,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
       >
         {parser(t("happy_run.count_down_heading"))}
       </Typography.Heading>
-      <Link to="order">
+      <Link to="registration">
         <PrimaryButton className="h-auto p-[8rem_25rem]  md:p-[35rem_50rem] my-40 md:my-80">
           <Typography.Text className="font-black text-[18rem] md:text-[35rem]">
             {t("happy_run.buttons.register_now")}

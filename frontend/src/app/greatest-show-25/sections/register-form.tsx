@@ -170,8 +170,8 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
           <div className="bg-gs25-gradient-3 p-[1.5rem] md:p-[3rem] inline-block rounded-full">
             <div className="bg-linear-to-b from-gs25-primary to-gs25-secondary inline-block mx-auto px-[35rem] md:px-240 py-20 md:py-40 rounded-full text-white">
               <Typography.Paragraph className="mb-0  text-[12rem] md:text-[20rem] font-semibold leading-[1.2] flex flex-col md:flex-row">
-                <span>{t("common.event_email")}: </span>
-                <span>{event.variables.event_email?.value}</span>
+                <span className="mr-20">{t("common.event_email")}: </span>
+                <span>{event.variables.contact_email?.value}</span>
               </Typography.Paragraph>
             </div>
           </div>
@@ -449,6 +449,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                           <div>
                             <label htmlFor={fileInputId}>
                               <SecondaryButton
+                                type="button"
                                 className={cn(
                                   "text-[10rem] mt-[5rem] bg-transparent text-center md:text-[23rem] font-base italic p-[10rem_15rem] md:p-[30rem_30rem] md:rounded-[13rem] mb-40 flex items-center cursor-pointer hover:scale-105 transition-transform duration-200"
                                 )}

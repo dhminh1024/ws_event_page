@@ -119,7 +119,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
           <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_seconds")}</span>
         </div>
       </div>
-      <Link to="order">
+      <Link to="registration">
         <PrimaryButton className="h-auto p-[8rem_25rem] md:p-[35rem_50rem] my-40 md:my-80">
           <Typography.Text className="font-black text-[12rem] md:text-[35rem]">
             {t("happy_run.buttons.register_now")}
