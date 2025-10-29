@@ -8,8 +8,6 @@ from ws_event_page.wellspring_event_page.doctype.wse_gs_registration.wse_gs_regi
     build_registration_name,
 )
 
-settings = frappe.get_doc("WSE GS Settings")
-
 
 class GSRegistrationStatus(Enum):
 	WAITTING = "Waitting"
@@ -52,6 +50,9 @@ class WSEGSRegistration(Document):
 
 	def send_confirmation_email(self):
 		"""Send confirmation email to the registrant."""
+		# Get settings document
+		settings = frappe.get_single("WSE GS Settings")
+
 		# Get email template from settings, use default if not found
 		template_name = settings.confirmation_email_template
 		if not template_name:
@@ -85,6 +86,9 @@ class WSEGSRegistration(Document):
 
 	def send_cancellation_email(self):
 		"""Send cancellation email to the registrant."""
+		# Get settings document
+		settings = frappe.get_single("WSE GS Settings")
+
 		# Get email template from settings, use default if not found
 		template_name = settings.cancellation_email_template
 		if not template_name:

@@ -235,8 +235,11 @@
     "form_heading": " Wisers' <br className=\"block md:hidden\"/> Greatest Show 2025",
     "form_description_1": "Chào mừng các WISers đến với",
     "form_description_2": "Hãy đăng ký dự thi theo thông tin bên dưới.",
-
-    "count_down_date": "Còn <span className=\"text-[14rem] md:text-[40rem] font-semibold\">{{day}}</span> ngày <span className=\"text-[14rem] md:text-[40rem] font-semibold\">{{hours}}</span> giờ <span className=\"text-[14rem] md:text-[40rem] font-semibold\">{{minutes}}</span> phút <span className=\"text-[14rem] md:text-[40rem] font-semibold\">{{seconds}}</span> giây",
+    "count_down_text_prefix": "Còn",
+    "count_down_text_days": "Ngày",
+    "count_down_text_hours": "Giờ",
+    "count_down_text_minutes": "Phút",
+    "count_down_text_seconds": "Giây",
     "teaser_heading_1": "Happy",
     "teaser_heading_2": "Run",
     "teaser_description": "CHỜ ĐÓN TEASER SỰ KIỆN HAPPY RUN 2025 <br/> VÀO CHỦ NHẬT, NGÀY 23/03/2025",

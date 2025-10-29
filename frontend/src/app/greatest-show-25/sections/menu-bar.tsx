@@ -79,7 +79,7 @@ const NavBar = ({
             <ScrollButton to={navItem.to}>
               <div
                 className={cn(
-                  "h-full w-240 md:w-800 cursor-pointer rounded-t-[5rem] md:rounded-t-[10rem] px-20 text-center bg-linear-to-t from-[#0229B2] to-[#0429A9] hover:from-[#E16A17] hover:to-[#FFD200] border-t-[2rem] md:border-t-[5rem] border-[#0229B2] hover:border-[#FFD000]"
+                  "h-full w-240 md:w-800 cursor-pointer rounded-t-[5rem] md:rounded-t-[10rem] px-20 text-center bg-linear-to-t from-[#081b61] to-[#0429A9] hover:from-[#E16A17] hover:to-[#FFD200] border-t-[2rem] md:border-t-[5rem] border-[#0229B2] hover:border-[#FFD000]"
                 )}
               >
                 <div className="flex py-16 md:py-32 h-full items-center justify-center rounded-t-[10rem]">

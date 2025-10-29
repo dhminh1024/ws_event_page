@@ -1,4 +1,11 @@
-import { HTMLAttributes, useEffect, useMemo, useRef, useState, type FC } from "react";
+import {
+  HTMLAttributes,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type FC,
+} from "react";
 import { cn } from "@/core/utils/shadcn-utils";
 import BackgroundImage from "../assets/images/bg-countdown.png";
 import Typography from "@/app/happy-box/components/typography";
@@ -9,11 +16,14 @@ import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { differenceInDays, differenceInMinutes, format } from "date-fns";
 import { getTimeLeft } from "@/lib/utils/common";
 import { Link } from "react-router-dom";
+import Counter from "@atoms/counter";
+import { useResponsive } from "@/core/hooks/use-reponsive";
 
 export type CountDownSectionProps = HTMLAttributes<HTMLDivElement> & {};
 
 export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
   const { t, currentLanguage } = useLocales();
+  const { isDesktop } = useResponsive();
   const event = useEventPageContext();
   const defaultDate = "2025-02-15";
   const targetDate = useMemo(
@@ -58,7 +68,6 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
   }, []); // Empty dependency array - only run once
 
   // console.log(timeLeft);
-  
 
   return (
     <section
@@ -73,33 +82,42 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
         level={2}
         className="text-white text-[13rem] md:text-[35rem]"
       >
-        {parser(event.variables[`countdown_text_${currentLanguage}`]?.value || "")}
+        {parser(
+          event.variables[`countdown_text_${currentLanguage}`]?.value || ""
+        )}
       </Typography.Heading>
       <Typography.Paragraph className="text-[20rem] md:text-[55rem] tracking-[3rem] md:tracking-[8rem] font-bold text-white">
         {format(targetDate || new Date(), "dd-MM-yyyy")}
       </Typography.Paragraph>
       <span className="text-[40rem] "></span>
       <div className="text-[10rem] md:text-[28rem] text-white">
-        {parser(
-          t("happy_run.count_down_date", {
-            day:
-              timeLeft.days > 9
-                ? timeLeft.days
-                : `0${Math.max(timeLeft.days, 0)}`,
-            hours:
-              timeLeft.hours > 9
-                ? timeLeft.hours
-                : `0${Math.max(timeLeft.hours, 0)}`,
-            minutes:
-              timeLeft.minutes > 9
-                ? timeLeft.minutes
-                : `0${Math.max(0, timeLeft.minutes)}`,
-            seconds:
-              timeLeft.seconds > 9
-                ? timeLeft.seconds
-                : `0${Math.max(0, timeLeft.seconds)}`,
-          })
-        )}
+        <div className="flex justify-center items-end gap-20 md:gap-20">
+          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_prefix")}</span>
+          <Counter
+            value={timeLeft.days}
+            fontSize={isDesktop ? "44rem" : "18rem"}
+            places={[10, 1]}
+          />
+          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_days")}</span>
+          <Counter
+            value={timeLeft.hours}
+            fontSize={isDesktop ? "44rem" : "18rem"}
+            places={[10, 1]}
+          />
+          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_hours")}</span>
+          <Counter
+            value={timeLeft.minutes}
+            fontSize={isDesktop ? "44rem" : "18rem"}
+            places={[10, 1]}
+          />
+          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_minutes")}</span>
+          <Counter
+            value={timeLeft.seconds}
+            fontSize={isDesktop ? "44rem" : "18rem"}
+            places={[10, 1]}
+          />
+          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_seconds")}</span>
+        </div>
       </div>
       <Link to="order">
         <PrimaryButton className="h-auto p-[8rem_25rem] md:p-[35rem_50rem] my-40 md:my-80">

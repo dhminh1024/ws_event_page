@@ -32,6 +32,8 @@ import Group1Mobile from "@greatest-show-25/assets/images/group-1-mb.png";
 import Group2Mobile from "@greatest-show-25/assets/images/group-2-mb.png";
 import Group3Mobile from "@greatest-show-25/assets/images/group-3-mb.png";
 import Container from "../components/container";
+import { animateFadeInTop } from "../components/animate";
+import { el } from "date-fns/locale/el";
 export type TargetSectionProps = HTMLAttributes<HTMLDivElement> & {};
 
 gsap.registerPlugin(ScrollTrigger);
@@ -50,6 +52,10 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
   const { isDesktop } = useResponsive();
   const events = useEventPageContext();
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const target1Ref = useRef<HTMLDivElement>(null);
+  const target2Ref = useRef<HTMLDivElement>(null);
+  const target3Ref = useRef<HTMLDivElement>(null);
+  const target4Ref = useRef<HTMLDivElement>(null);
 
   const scheduleData = useMemo(
     () => [
@@ -57,21 +63,25 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
         heading: t("greatest_show_25.target_group_title_1"),
         desc: t("greatest_show_25.target_group_desc_1"),
         img: TargetBox1,
+        ref: target1Ref,
       },
       {
         heading: t("greatest_show_25.target_group_title_2"),
         desc: t("greatest_show_25.target_group_desc_2"),
         img: TargetBox2,
+        ref: target2Ref,
       },
       {
         heading: t("greatest_show_25.target_group_title_3"),
         desc: t("greatest_show_25.target_group_desc_3"),
         img: TargetBox3,
+        ref: target3Ref,
       },
       {
         heading: t("greatest_show_25.target_group_title_4"),
         desc: t("greatest_show_25.target_group_desc_4"),
         img: TargetBox4,
+        ref: target4Ref,
       },
     ],
     [currentLanguage]
@@ -124,6 +134,26 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
         start: "top 120%",
         end: "top center",
       });
+      // Group animation by order from right to left
+      scheduleData.forEach((item, index) => {
+        gsap.fromTo(
+          item.ref.current,
+          { y: 500, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            delay: index + 2,
+            scrollTrigger: {
+              trigger: item.ref.current,
+              scrub: true,
+              start: "top 120%",
+              end: "top 80%",
+              markers: true,
+            },
+          }
+        );
+      });
     }, 200);
   }, [inView]);
 
@@ -144,7 +174,11 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
               )}
             >
               {scheduleData.map((item, index) => (
-                <div className="relative flex flex-col" key={index}>
+                <div
+                  className="relative flex flex-col"
+                  key={index}
+                  ref={item.ref}
+                >
                   <img src={item.img} alt={`Target ${index + 1}`} />
                   <div className="absolute top-[40%] left-0 w-full flex flex-col">
                     <Typography.Heading
