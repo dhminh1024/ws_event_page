@@ -35,6 +35,7 @@ import TableBImage from "@greatest-show-25/assets/images/table-b.png";
 import TableCImage from "@greatest-show-25/assets/images/table-c.png";
 import RegisterHeading from "@greatest-show-25/assets/images/register-heading.png";
 import RegisterFooterImage from "@greatest-show-25/assets/images/register-footer.png";
+import SecondaryButtonImage from "@greatest-show-25/assets/images/button-2.png";
 import { RegistrationSuccessModal } from "../components/registration-success-modal";
 import { useNavigate } from "react-router-dom";
 
@@ -447,22 +448,20 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
 
                         <FormControl>
                           <div>
-                            <label htmlFor={fileInputId}>
-                              <SecondaryButton
-                                type="button"
+                            <label htmlFor={fileInputId} className="cursor-pointer inline-block">
+                              <div
                                 className={cn(
-                                  "text-[10rem] mt-[5rem] bg-transparent text-center md:text-[23rem] font-base italic p-[10rem_15rem] md:p-[30rem_30rem] md:rounded-[13rem] mb-40 flex items-center cursor-pointer hover:scale-105 transition-transform duration-200"
+                                  "relative text-white inline-flex p-[20rem_20rem] h-104 md:h-184 leading-none rounded-[6rem] md:rounded-[13rem] overflow-hidden bg-transparent border-none outline-hidden",
+                                  "text-[10rem] mt-[5rem] text-center md:text-[23rem] font-base italic p-[10rem_15rem] md:p-[30rem_30rem] md:rounded-[13rem] mb-40 flex items-center cursor-pointer hover:scale-105 transition-transform duration-200"
                                 )}
+                                style={{
+                                  backgroundImage: `url(${SecondaryButtonImage})`,
+                                  backgroundSize: "100% 100%",
+                                }}
                               >
                                 {t("greatest_show_25.form.entry_file_button")}
-                              </SecondaryButton>
+                              </div>
                             </label>
-                            {/* <label
-                              htmlFor={fileInputId}
-                              className="inline-flex cursor-pointer items-center justify-center rounded-[5rem] border border-gs25-secondary bg-white px-60 py-40 text-[10rem] md:text-[16rem] font-semibold  transition-colors hover:border-hr-ember hover:text-hr-ember"
-                            >
-                              {t("greatest_show_25.form.entry_file_button")}
-                            </label> */}
                             <input
                               id={fileInputId}
                               type="file"
