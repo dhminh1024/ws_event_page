@@ -1,0 +1,51 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"c84NB8JBre\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Wellspring Events</span>\",\"col\":12}},{\"id\":\"80c6CYl2eY\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Placement Test Registration\",\"col\":3}},{\"id\":\"EmLB78XAnf\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Happy Run\",\"col\":3}},{\"id\":\"KEc_2CIyBX\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Nutrition Journey\",\"col\":3}}]",
+ "creation": "2025-10-29 14:08:17.671415",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "image-view",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Wellspring Events",
+ "links": [],
+ "modified": "2025-10-29 14:16:16.325517",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "Wellspring Events",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 15.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Placement Test Registration",
+   "type": "URL",
+   "url": "/app/admission-event-check-in"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Happy Run",
+   "type": "URL",
+   "url": "/app/happy-run-event"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Nutrition Journey",
+   "type": "URL",
+   "url": "/app/nutrition-journey"
+  }
+ ],
+ "title": "Wellspring Events"
+}

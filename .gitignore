@@ -8,3 +8,4 @@ __pycache__
 
 ws_event_page/public/frontend
 ws_event_page/www/events.html
+CLAUDE_LOCAL.md
