@@ -2,7 +2,6 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "format:WSEHRO{YY}{#####}",
  "creation": "2025-02-04 09:10:15.074947",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -137,14 +136,14 @@
    "read_only": 1
   }
  ],
+ "grid_page_length": 50,
  "image_field": "qr_payment_code",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-22 01:17:32.683558",
+ "modified": "2025-10-29 15:15:30.712854",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE HR Order",
- "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -181,6 +180,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

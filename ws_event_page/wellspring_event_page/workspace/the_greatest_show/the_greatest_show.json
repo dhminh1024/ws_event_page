@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"MMM2HUGjoQ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">The Greatest Show</span>\",\"col\":12}}]",
+ "content": "[{\"id\":\"MMM2HUGjoQ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">The Greatest Show</span>\",\"col\":12}},{\"id\":\"j-L-9MYQdF\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"L\u01b0\u1ee3t \u0110\u0103ng K\u00fd\",\"col\":3}},{\"id\":\"QjuSWZvlx3\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Ch\u1edd Duy\u1ec7t\",\"col\":3}},{\"id\":\"2pZelL9DGa\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0110\u00e3 Duy\u1ec7t\",\"col\":3}},{\"id\":\"yzxcEvji7Q\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0110\u00e3 Hu\u1ef7\",\"col\":3}}]",
  "creation": "2025-10-29 14:17:02.066997",
  "custom_blocks": [],
  "docstatus": 0,
@@ -13,11 +13,28 @@
  "is_hidden": 0,
  "label": "The Greatest Show",
  "links": [],
- "modified": "2025-10-29 14:17:21.691937",
+ "modified": "2025-10-29 16:53:50.197055",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "The Greatest Show",
- "number_cards": [],
+ "number_cards": [
+  {
+   "label": "L\u01b0\u1ee3t \u0110\u0103ng K\u00fd",
+   "number_card_name": "GS Registration Count"
+  },
+  {
+   "label": "Ch\u1edd Duy\u1ec7t",
+   "number_card_name": "GS Waiting Count"
+  },
+  {
+   "label": "\u0110\u00e3 Duy\u1ec7t",
+   "number_card_name": "GS Approved Count"
+  },
+  {
+   "label": "\u0110\u00e3 Hu\u1ef7",
+   "number_card_name": "GS Cancelled Count"
+  }
+ ],
  "owner": "Administrator",
  "parent_page": "Wellspring Events",
  "public": 1,
