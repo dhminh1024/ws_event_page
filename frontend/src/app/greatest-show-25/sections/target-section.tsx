@@ -143,13 +143,12 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
             y: 0,
             opacity: 1,
             duration: 0.9,
-            delay: index + 2,
             scrollTrigger: {
               trigger: item.ref.current,
               scrub: true,
-              start: "top 120%",
+              start: `top ${120 - (index * 10)}%`,
               end: "top 80%",
-              markers: true,
+              // markers: true,
             },
           }
         );

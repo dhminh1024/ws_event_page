@@ -209,7 +209,7 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
             </ItemModal>
           </div>
           <center>
-            <Link to="order">
+            <Link to="registration">
               <PrimaryButton className="h-auto p-[8rem_25rem]  md:p-[40rem_50rem] my-40 md:my-80">
                 <Typography.Text className="font-black text-[18rem] md:text-[35rem]">
                   {t("happy_run.buttons.register_now")}

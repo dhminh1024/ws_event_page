@@ -203,7 +203,7 @@ export const JourneySection: FC<JourneySectionProps> = ({
               ))}
             </div>
           </div>
-          <Link to={"#"}>
+          <Link to={"registration"}>
             <PrimaryButton
               className={cn(
                 "mt-100 md:mt-120 mb-200 px-140 md:px-160 py-20 h-180 md:h-300 rounded-[12rem] md:rounded-[18rem] font-black text-[16rem] md:text-[40rem] ",{
