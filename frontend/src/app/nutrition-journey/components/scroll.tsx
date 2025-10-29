@@ -12,18 +12,18 @@ const ScrollObject: FC<ScrollProps> = ({ scrollSize = 20, className }) => {
   return (
     <div
       className={cn(
-        "absolute z-20 top-0 bottom-0 my-auto h-[105%] rounded-[2rem] bg-scroll",
+        "absolute z-20 top-0 bottom-0 my-auto h-[105%] rounded-4xl bg-scroll",
         className
       )}
       style={{
         width: `${scrollSize}rem`,
       }}
     >
-      <div className="absolute top-full left-0 right-0 mx-auto w-[80%] aspect-[16/3] shadow-[inset_0rem_10rem_20rem_-10rem_#00000061] bg-scroll">
-        <div className="absolute top-full left-0 right-0 mx-auto w-[80%] aspect-[16/5] bg-scroll-golden rounded-[1rem]"></div>
+      <div className="absolute top-full left-0 right-0 mx-auto w-[80%] aspect-16/3 shadow-[inset_0rem_10rem_20rem_-10rem_#00000061] bg-scroll">
+        <div className="absolute top-full left-0 right-0 mx-auto w-[80%] aspect-16/5 bg-scroll-golden rounded-2xl"></div>
       </div>
-      <div className="absolute bottom-full left-0 right-0 mx-auto w-[80%] aspect-[16/3] shadow-[inset_0rem_-10rem_20rem_-10rem_#00000061] bg-scroll">
-        <div className="absolute bottom-full left-0 right-0 mx-auto w-[80%] aspect-[16/5] bg-scroll-golden rounded-[1rem]"></div>
+      <div className="absolute bottom-full left-0 right-0 mx-auto w-[80%] aspect-16/3 shadow-[inset_0rem_-10rem_20rem_-10rem_#00000061] bg-scroll">
+        <div className="absolute bottom-full left-0 right-0 mx-auto w-[80%] aspect-16/5 bg-scroll-golden rounded-2xl"></div>
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ export const EventPageProvider: React.FC<
     } // options
   );
 
-  if (isLoading || isValidating) return <FullPageLoaderTemplate />;
+  if (isLoading) return <FullPageLoaderTemplate />;
 
   // if (!data || !data.message) return <h1>Error: Event Page Data not found!</h1>;
 

@@ -11,6 +11,9 @@ from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket imp
     HRTicketStatus,
     HRTicketType,
 )
+from ws_event_page.wellspring_event_page.doctype.wse_hr_order.wse_hr_order_process import (
+    build_order_name,
+)
 import requests
 import json
 from enum import Enum
@@ -43,9 +46,7 @@ class WSEHROrder(Document):
 
     if TYPE_CHECKING:
         from frappe.types import DF
-        from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket import (
-            WSEHRTicket,
-        )
+        from ws_event_page.wellspring_event_page.doctype.wse_hr_ticket.wse_hr_ticket import WSEHRTicket
 
         email: DF.Data
         full_name: DF.Data
@@ -57,6 +58,11 @@ class WSEHROrder(Document):
         total_payment_pending: DF.Currency
         total_price: DF.Currency
     # end: auto-generated types
+
+    def autoname(self):
+        """Generate auto name for order with format WSEHRO{YY}{#####}."""
+        if not self.name or self.name.startswith("new-wse-hr-order"):
+            self.name = build_order_name(self)
 
     def validate(self):
         self.validate_wellspring_codes()

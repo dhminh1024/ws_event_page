@@ -10,5 +10,8 @@ export const EVENT_PAGES = {
   },
   PLACEMENT_TEST: {
     SITE_URL: "placement-test",
-  }
+  },
+  GREATEST_SHOW_25: {
+    SITE_URL: "the-greatest-show",
+  },
 };

@@ -26,7 +26,7 @@ export const BoxQuestion: FC<BoxQuestionProps> = ({
   return (
     <div
       className={cn(
-        "group/box aspect-[4/3]  relative bg-nj-orange/10 inline-block text-center rounded-[5rem] md:rounded-[14rem]",
+        "group/box aspect-4/3  relative bg-nj-orange/10 inline-block text-center rounded-[5rem] md:rounded-[14rem]",
         {
           "grayscale-[0.6] opacity-40": disabled,
           "cursor-pointer": !disabled,
@@ -46,7 +46,7 @@ export const BoxQuestion: FC<BoxQuestionProps> = ({
       }
       {...props}
     >
-      <div className="relative p-[4rem] md:p-[8rem] rounded-[5rem] md:rounded-[14rem] overflow-hidden w-full h-full">
+      <div className="relative p-16 md:p-32 rounded-[5rem] md:rounded-[14rem] overflow-hidden w-full h-full">
         {imageUrl && (
           <img
             className={cn(
@@ -74,16 +74,16 @@ export const BoxQuestion: FC<BoxQuestionProps> = ({
         ></div> */}
         <div
           className={cn(
-            "relative z-20  p-[12rem] w-full h-full flex flex-col justify-center items-center",
+            "relative z-20  p-48 w-full h-full flex flex-col justify-center items-center",
             {
-              " border-[2px] border-nj-orange rounded-[5rem] md:rounded-[14rem] ":
+              " border-2 border-nj-orange rounded-[5rem] md:rounded-[14rem] ":
                 hightlight,
             }
           )}
         >
           <Typography.Paragraph
             className={cn(
-              "text-[30rem] md:text-[50rem] md:mt-[50rem] mb-[0rem] md:mb-[20rem] font-bold font-sans text-nj-blue/70",
+              "text-[30rem] md:text-[50rem] md:mt-200 mb-0 md:mb-80 font-bold font-sans text-nj-blue/70",
               { "text-nj-orange": hightlight }
             )}
           >
@@ -93,7 +93,7 @@ export const BoxQuestion: FC<BoxQuestionProps> = ({
           </Typography.Paragraph>
           <Typography.Paragraph
             className={cn(
-              "md:mb-[20rem] text-[12rem] md:text-[23rem] text-nj-light_yellow",
+              "md:mb-80 text-[12rem] md:text-[23rem] text-nj-light_yellow",
               {
                 "text-nj-orange": hightlight,
               }

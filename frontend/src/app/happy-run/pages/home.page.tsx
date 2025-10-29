@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocales } from "@/core/hooks/use-locales";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
 const HeaderSection = lazy(() =>
@@ -92,8 +92,8 @@ export const Component: FC = () => {
           </title>
         </Helmet> */}
 
-        <HeaderSection className="px-[20rem] md:px-[60rem]" />
-        <MenuBar className="mt-[-46rem] md:mt-[-55rem]" />
+        <HeaderSection className="px-80 md:px-240" />
+        <MenuBar className="-mt-184 md:-mt-220" />
         <HeroSection id="overview" />
         <CountDownSection />
         <TeaserSection id="happy-run" />

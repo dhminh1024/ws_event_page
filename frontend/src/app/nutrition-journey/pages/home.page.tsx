@@ -20,9 +20,9 @@ export const Component: FC = () => {
           {t("common.home_page")} | {t("nutritional_journey.campaign_name")}
         </title>
       </Helmet>
-      <Header className="px-[20rem] py-[10rem] md:py-[20rem] md:px-[60rem] md:h-[140rem]" />
+      <Header className="px-80 py-40 md:py-80 md:px-240 md:h-560" />
       {/* <GallerySection /> */}
-      <div className="flex flex-col gap-y-[20rem] container font-sans ">
+      <div className="flex flex-col gap-y-80 px-40 md:px-160 font-sans ">
         <TitleSection />
         <TargetSection />
         <MissionsSection />

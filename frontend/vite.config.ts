@@ -21,6 +21,7 @@ export default defineConfig({
       "@happy-box": path.resolve(__dirname, "src/app/happy-box"),
       "@nutrition-journey": path.resolve(__dirname, "src/app/nutrition-journey"),
       "@happy-run": path.resolve(__dirname, "src/app/happy-run"),
+      "@greatest-show-25": path.resolve(__dirname, "src/app/greatest-show-25"),
     },
   },
   build: {

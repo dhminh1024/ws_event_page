@@ -74,23 +74,23 @@ export const NotificationModal: FC<LunarModalProps> = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         className={cn(
-          " max-w-[480rem] w-full bg-transparent border-none shadow-none px-[10rem]",
+          " max-w-1920 w-full bg-transparent border-none shadow-none px-40",
           className
         )}
       >
         <DialogTitle></DialogTitle>
         <DialogDescription></DialogDescription>
         <Button
-          className="absolute top-[-50rem] right-[10rem] md:right-[-30rem] w-[30rem] !bg-transparent h-[30rem] z-20 rounded-full"
+          className="absolute -top-200 right-40 md:-right-120 w-120 bg-transparent! h-120 z-20 rounded-full"
           size={"icon"}
           variant={"outline"}
           onClick={() => handleOpenChange(false)}
         >
-          <X className="!w-[20rem] !h-[20rem] text-white" />
+          <X className="w-[20rem]! h-80! text-white" />
         </Button>
         <LunarScroll scrollSize={isDesktop ? 30 : 20}>
-          <div className="p-[20rem]">
-            <Typography.Paragraph className="text-[24rem] md:text-[34rem] mb-[10rem] text-center text-happy_box-light_red font-playlist">
+          <div className="p-80">
+            <Typography.Paragraph className="text-[24rem] md:text-[34rem] mb-40 text-center text-happy_box-light_red font-playlist">
               {title}
             </Typography.Paragraph>
             <Typography.Paragraph className="text-[16rem] md:text-[20rem] text-center text-happy_box-red">

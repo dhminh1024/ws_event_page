@@ -31,7 +31,7 @@ Typography.Paragraph = (({
   ...props
 }: TypographyParagraphProps) => {
   return (
-    <p className={cn("mb-[5rem] text-[14rem]", className)} {...props}>
+    <p className={cn("mb-20 text-[14rem]", className)} {...props}>
       {children}
     </p>
   );

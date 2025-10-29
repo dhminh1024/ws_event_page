@@ -10,7 +10,7 @@ type ContainerProps = HTMLAttributes<HTMLDivElement> & PropsWithChildren & {};
 
 const Container = ({ className, children, ...props }: ContainerProps) => {
   return (
-    <div className={cn('max-w-[1280rem] md:px-[5rem] px-[20rem] mx-auto', className)} {...props}>
+    <div className={cn('max-w-5120 md:px-20 px-80 mx-auto', className)} {...props}>
       {children}
     </div>
   );

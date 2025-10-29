@@ -91,21 +91,21 @@ export const PaymentSuccessModal: FC<LunarModalProps> = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         className={cn(
-          "max-w-[768rem] w-full bg-hr-background border-none shadow-none p-0",
+          "max-w-3072 w-full bg-hr-background border-none shadow-none p-0",
           className
         )}
       >
         <DialogTitle hidden></DialogTitle>
         <DialogDescription hidden></DialogDescription>
         <img className="w-full" src={TopPageImage} alt="Top Page" />
-        <center className="mb-[5rem]">
+        <center className="mb-20">
           <Typography.Heading
-            className="py-[20rem] md:py-[15rem] text-[20rem] md:text-[24rem] text-hr-blue leading-[1.2] font-extrabold"
+            className="py-80 md:py-60 text-[20rem] md:text-[24rem] text-hr-blue leading-[1.2] font-extrabold"
             level={2}
           >
             {parser(t("happy_run.form.payment_success_heading"))}
           </Typography.Heading>
-          <Typography.Paragraph className="pb-[5rem] w-full text-[15rem] md:text-[16rem] text-hr-blue leading-[1.2]">
+          <Typography.Paragraph className="pb-20 w-full text-[15rem] md:text-[16rem] text-hr-blue leading-[1.2]">
             {t("happy_run.form.payment_success_qr_guide")}:
           </Typography.Paragraph>
 
@@ -114,37 +114,37 @@ export const PaymentSuccessModal: FC<LunarModalProps> = ({
             src={codeUrl}
             alt="QR Code"
           />
-          <Typography.Paragraph className="mt-[10rem] font-bold w-full text-[12rem] md:text-[14rem] text-hr-blue leading-[16rem]">
+          <Typography.Paragraph className="mt-40 font-bold w-full text-[12rem] md:text-[14rem] text-hr-blue leading-64">
             {`${settings?.bank_short_name} - ${settings?.account_number} - ${settings?.account_name}`}
           </Typography.Paragraph>
-          <Typography.Paragraph className="mt-[10rem] italic w-full text-[12rem] md:text-[14rem] text-hr-blue leading-[16rem]">
+          <Typography.Paragraph className="mt-40 italic w-full text-[12rem] md:text-[14rem] text-hr-blue leading-64">
             {t("happy_run.form.transfer_content", { content: orderName })}
           </Typography.Paragraph>
-          <div className="flex gap-x-[10rem] justify-center">
+          <div className="flex gap-x-40 justify-center">
             <Button
               type="button"
               onClick={() => downloadQRCode()}
-              className="my-[8rem] text-[12rem] md:text-[14rem] px-[20rem] py-[16rem] hover:!bg-hr-blue/80  bg-hr-blue text-white rounded-[5rem]"
+              className="my-32 text-[12rem] md:text-[14rem] px-80 py-64 hover:bg-hr-blue/80!  bg-hr-blue text-white rounded-[5rem]"
             >
               {t("happy_run.buttons.download_qr")}
             </Button>
             <Link to={cleanPath(`/happy-run/order-detail/${orderName}`)} target="_blank">
               <Button
                 type="button"
-                className="my-[8rem] text-[12rem] md:text-[14rem] px-[20rem] py-[16rem] hover:!bg-hr-ember/80  bg-hr-ember text-white rounded-[5rem]"
+                className="my-32 text-[12rem] md:text-[14rem] px-80 py-64 hover:bg-hr-ember/80!  bg-hr-ember text-white rounded-[5rem]"
               >
                 {t("happy_run.buttons.view_order")}
               </Button>
             </Link>
           </div>
-          <div className="px-[10rem]">
-            <Typography.Paragraph className="pb-[5rem]  text-[14rem] md:text-[15rem] text-hr-blue leading-[1.2]">
+          <div className="px-40">
+            <Typography.Paragraph className="pb-20  text-[14rem] md:text-[15rem] text-hr-blue leading-[1.2]">
               {t("happy_run.form.payment_success_desc_1")}
             </Typography.Paragraph>
-            <Typography.Paragraph className="pb-[5rem] text-hr-ember text-[12rem] md:text-[15rem] leading-[1.2]">
+            <Typography.Paragraph className="pb-20 text-hr-ember text-[12rem] md:text-[15rem] leading-[1.2]">
               {parser(t("happy_run.form.payment_success_note"))}
             </Typography.Paragraph>
-            <Typography.Paragraph className="pb-[5rem]  text-[15rem] md:text-[15rem] text-hr-blue leading-[1.2]">
+            <Typography.Paragraph className="pb-20  text-[15rem] md:text-[15rem] text-hr-blue leading-[1.2]">
               {t("happy_run.form.payment_success_desc_2")}
             </Typography.Paragraph>
           </div>

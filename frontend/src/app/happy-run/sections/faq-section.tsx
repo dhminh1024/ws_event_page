@@ -26,23 +26,23 @@ export const FAQSection: FC<FAQSectionProps> = ({ className, ...props }) => {
   return (
     <section ref={myRef} className={cn(className)} {...props}>
       {inView && (
-        <div className="w-[90%] md:w-[60%] mx-auto py-[20rem] md:py-[60rem]">
+        <div className="w-[90%] md:w-[60%] mx-auto py-80 md:py-240">
           <Typography.Heading
             //   ref={headingRef}
-            className="text-[40rem] md:text-[70rem] text-center text-hr-blue font-raceChampion font-extrabold mb-[0rem] md:mb-[50rem]"
+            className="text-[40rem] md:text-[70rem] text-center text-hr-blue font-race-champion font-extrabold mb-0 md:mb-200"
           >
             {t("happy_run.faq_heading")}
           </Typography.Heading>
-          <Accordion className="mt-[10rem] md:mt-[40rem]" type="multiple">
+          <Accordion className="mt-40 md:mt-160" type="multiple">
             {Array.from(Array(7).keys()).map((index) => (
               <AccordionItem
                 key={index}
                 value={"item" + (index + 1)}
-                className="border-none mb-[10rem] md:mb-[20rem]"
+                className="border-none mb-40 md:mb-80"
               >
                 <AccordionTrigger
-                  className="py-[5rem] md:py-[15rem] pr-[5rem] md:pr-[20rem] hover:!no-underline border-b-[1rem] md:border-b-[2rem] border-b-hr-honey"
-                  iconClassName="w-[15rem] h-[15rem] md:w-[30rem] md:h-[30rem] text-brand-teal"
+                  className="py-20 md:py-60 pr-20 md:pr-80 hover:no-underline! border-b-[1rem] md:border-b-[2rem] border-b-hr-honey"
+                  iconClassName="w-60 h-60 md:w-120 md:h-120 text-brand-teal"
                 >
                   <div className="relative ">
                     <Typography.Paragraph
@@ -51,7 +51,7 @@ export const FAQSection: FC<FAQSectionProps> = ({ className, ...props }) => {
                           `faq_${index + 1}_question_${currentLanguage}`
                         ]?.value
                       }
-                      className="line-clamp-2 w-full mb-0 !text-[12rem] text-hr-blue md:!text-[18rem] font-bold"
+                      className="line-clamp-2 w-full mb-0 text-[12rem]! text-hr-blue md:text-[18rem]! font-bold"
                     >
                       {index + 1}.{" "}
                       {
@@ -62,7 +62,7 @@ export const FAQSection: FC<FAQSectionProps> = ({ className, ...props }) => {
                     </Typography.Paragraph>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="mt-[20rem]">
+                <AccordionContent className="mt-80">
                   <Typography.Paragraph className="w-full text-[12rem] text-hr-blue leading-normal md:text-[18rem]">
                     {parser(
                       events.variables?.[

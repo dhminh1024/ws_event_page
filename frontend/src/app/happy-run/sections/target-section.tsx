@@ -158,7 +158,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
     <section
       ref={myRef}
       className={cn(
-        "pt-[10rem] md:pt-[50rem] mx-auto overflow-hidden",
+        "pt-40 md:pt-200 mx-auto overflow-hidden",
         className
       )}
     >
@@ -167,7 +167,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
           <div className="w-[90%] mx-auto">
             <SectionHeading
               ref={headingRef}
-              className="text-[10rem] md:text-[30rem] py-[3rem] md:py-[8rem] px-[35rem] md:px-[100rem] italic font-extrabold mb-[50rem]"
+              className="text-[10rem] md:text-[30rem] py-12 md:py-32 px-140 md:px-400 italic font-extrabold mb-200"
             >
               {t("happy_run.target_heading")}
             </SectionHeading>
@@ -203,15 +203,15 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                   ref={objectStep1Ref}
                   src={currentLanguage === "en" ? Step1EN : Step1VN}
                   alt="Target Step 1"
-                  className="w-[100rem] md:w-[300rem] pt-[20rem] pb-[5rem] md:pt-[20rem] md:pb-[20rem]"
+                  className="w-400 md:w-1200 pt-80 pb-20 md:pt-80 md:pb-80"
                 />
                 <div
-                  className="relative flex-1 top-[-20rem] md:top-[-47rem]"
+                  className="relative flex-1 -top-80 md:-top-188"
                   ref={targetContent1Ref}
                 >
                   <Typography.Heading
                     level={2}
-                    className="text-[12rem] md:text-[36rem] font-extrabold text-hr-blue leading-[15rem] md:leading-[45rem]"
+                    className="text-[12rem] md:text-[36rem] font-extrabold text-hr-blue leading-60 md:leading-180"
                   >
                     {parser(
                       events.variables?.[
@@ -223,9 +223,9 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                   </Typography.Heading>
                   <Typography.Paragraph
                     className={cn(
-                      "text-[10rem] md:text-[18rem] font-medium mt-[10rem] text-[#1F6B95] leading-[14rem] md:leading-[24rem] duration-300 overflow-hidden h-0",
+                      "text-[10rem] md:text-[18rem] font-medium mt-40 text-[#1F6B95] leading-56 md:leading-96 duration-300 overflow-hidden h-0",
                       {
-                        "h-[140rem] md:h-[100rem]": collapse1,
+                        "h-560 md:h-400": collapse1,
                       }
                     )}
                   >
@@ -239,7 +239,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                   </Typography.Paragraph>
                   <Button
                     onClick={() => setCollapse1((value) => !value)}
-                    className="mt-[10rem] md:mt-[30rem] bg-[linear-gradient(#1F797B,#009180)] p-[4rem_15rem] md:p-[5rem_30rem] text-[10rem] md:text-[18rem] h-auto rounded-[5rem]"
+                    className="mt-40 md:mt-120 bg-[linear-gradient(#1F797B,#009180)] p-[4rem_15rem] md:p-[5rem_30rem] text-[10rem] md:text-[18rem] h-auto rounded-[5rem]"
                   >
                     {t(
                       `happy_run.buttons.${
@@ -273,15 +273,15 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                   </div>
                 </div>
               </div>
-              <div className="relative w-[90%] md:w-[75%] right-[5.4%] md:right-[6.7%] self-end flex items-center flex-row-reverse gap-x-[15rem] md:gap-x-[75rem]">
+              <div className="relative w-[90%] md:w-[75%] right-[5.4%] md:right-[6.7%] self-end flex items-center flex-row-reverse gap-x-60 md:gap-x-300">
                 <img
                   ref={objectStep2Ref}
                   src={currentLanguage === "en" ? Step2EN : Step2VN}
                   alt="Target Step 2"
                   className={cn(
-                    "w-[100rem] md:w-[300rem] py-[10rem] md:py-[40rem]",
+                    "w-400 md:w-1200 py-40 md:py-160",
                     {
-                      "w-[120rem] md:w-[320rem] md:mr-[-40rem]":
+                      "w-480 md:w-1280 md:-mr-160":
                         currentLanguage === "en",
                     }
                   )}
@@ -289,7 +289,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                 <div className="text-right relative" ref={targetContent2Ref}>
                   <Typography.Heading
                     level={2}
-                    className="text-[12rem] md:text-[36rem] font-extrabold text-hr-blue leading-[15rem] md:leading-[45rem]"
+                    className="text-[12rem] md:text-[36rem] font-extrabold text-hr-blue leading-60 md:leading-180"
                   >
                     {parser(
                       events.variables?.[
@@ -301,9 +301,9 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                   </Typography.Heading>
                   <Typography.Paragraph
                     className={cn(
-                      "text-[10rem] md:text-[18rem] font-medium mt-[10rem] text-[#1F6B95] leading-[14rem] md:leading-[24rem] duration-300 overflow-hidden h-0",
+                      "text-[10rem] md:text-[18rem] font-medium mt-40 text-[#1F6B95] leading-56 md:leading-96 duration-300 overflow-hidden h-0",
                       {
-                        "h-[150rem] md:h-[100rem]": collapse2,
+                        "h-600 md:h-400": collapse2,
                       }
                     )}
                   >
@@ -317,7 +317,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                   </Typography.Paragraph>
                   <Button
                     onClick={() => setCollapse2((value) => !value)}
-                    className="relative mt-[5rem] md:mt-[30rem] bg-[linear-gradient(#1F797B,#009180)] p-[4rem_15rem] md:p-[5rem_30rem] text-[10rem] md:text-[18rem] h-auto rounded-[5rem] z-40"
+                    className="relative mt-20 md:mt-120 bg-[linear-gradient(#1F797B,#009180)] p-[4rem_15rem] md:p-[5rem_30rem] text-[10rem] md:text-[18rem] h-auto rounded-[5rem] z-40"
                   >
                     {t(
                       `happy_run.buttons.${
@@ -357,21 +357,21 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                   src={currentLanguage === "en" ? Step3EN : Step3VN}
                   alt="Target Step 3"
                   className={cn(
-                    "w-[100rem] md:w-[260rem] pt-[20rem] pb-[5rem] md:pt-[40rem] md:pb-[20rem]",
+                    "w-400 md:w-1040 pt-80 pb-20 md:pt-160 md:pb-80",
                     {
-                      "w-[100rem] md:w-[300rem] mr-[-10rem] md:mr-[-40rem]":
+                      "w-400 md:w-1200 -mr-40 md:-mr-160":
                         currentLanguage === "en",
                     }
                   )}
                 />
 
                 <div
-                  className="relative top-[-5rem] md:top-[-57rem]"
+                  className="relative -top-20 md:-top-228"
                   ref={targetContent3Ref}
                 >
                   <Typography.Heading
                     level={2}
-                    className="text-[12rem] md:text-[36rem] font-extrabold text-hr-blue leading-[15rem] md:leading-[45rem]"
+                    className="text-[12rem] md:text-[36rem] font-extrabold text-hr-blue leading-60 md:leading-180"
                   >
                     {parser(
                       events.variables?.[
@@ -383,9 +383,9 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                   </Typography.Heading>
                   <Typography.Paragraph
                     className={cn(
-                      "text-[10rem] md:text-[18rem] font-medium mt-[10rem] text-[#1F6B95] leading-[14rem] md:leading-[24rem] duration-300 overflow-hidden h-0",
+                      "text-[10rem] md:text-[18rem] font-medium mt-40 text-[#1F6B95] leading-56 md:leading-96 duration-300 overflow-hidden h-0",
                       {
-                        "h-[100rem]": collapse3,
+                        "h-400": collapse3,
                       }
                     )}
                   >
@@ -399,7 +399,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                   </Typography.Paragraph>
                   <Button
                     onClick={() => setCollapse3((value) => !value)}
-                    className="mt-[10rem] md:mt-[30rem] bg-[linear-gradient(#1F797B,#009180)] p-[4rem_15rem] md:p-[5rem_30rem] text-[10rem] md:text-[18rem] h-auto rounded-[5rem]"
+                    className="mt-40 md:mt-120 bg-[linear-gradient(#1F797B,#009180)] p-[4rem_15rem] md:p-[5rem_30rem] text-[10rem] md:text-[18rem] h-auto rounded-[5rem]"
                   >
                     {t(
                       `happy_run.buttons.${
@@ -410,7 +410,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                 </div>
               </div>
             </div>
-            <div className="target-4 flex flex-col mt-[2%] h-[45rem] md:h-auto overflow-hidden ">
+            <div className="target-4 flex flex-col mt-[2%] h-180 md:h-auto overflow-hidden ">
               <div className="relative w-[6%]  md:w-[3.3%] left-[13.1%] ">
                 <SVGRoad4
                   ref={line4Ref}

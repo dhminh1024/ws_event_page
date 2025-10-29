@@ -12,7 +12,7 @@ export const SectionHeading = forwardRef<HTMLDivElement, SectionHeadingProps>(
       <Typography.Heading
         level={2}
         className={cn(
-          "inline-block px-[100rem] py-[8rem] text-white font-black text-[35rem] uppercase",
+          "inline-block px-400 py-32 text-white font-black text-[35rem] uppercase",
           className
         )}
         style={{
