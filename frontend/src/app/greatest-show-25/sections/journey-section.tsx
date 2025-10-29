@@ -136,7 +136,12 @@ export const JourneySection: FC<JourneySectionProps> = ({
   }, [inView]);
 
   return (
-    <div id="journey" ref={myRef} className={cn("text-center py-40", className)} {...props}>
+    <div
+      id="journey"
+      ref={myRef}
+      className={cn("text-center py-40", className)}
+      {...props}
+    >
       {inView && (
         <>
           <h2
@@ -175,7 +180,7 @@ export const JourneySection: FC<JourneySectionProps> = ({
                     >
                       {parser(item.title)}
                     </Typography.Heading>
-                    <Typography.Paragraph className="text-gs25-secondary px-140 md:px-0 leading-70! md:leading-130! text-[11rem] md:text-[20rem]">
+                    <Typography.Paragraph className="text-gs25-secondary px-140 md:px-0 leading-70! md:leading-130! text-[11rem] md:text-[19rem]">
                       {parser(item.desc)}
                     </Typography.Paragraph>
                     <div
@@ -199,7 +204,13 @@ export const JourneySection: FC<JourneySectionProps> = ({
             </div>
           </div>
           <Link to={"#"}>
-            <PrimaryButton className="mt-100 md:mt-120 mb-200 px-140 md:px-160 py-20 h-180 md:h-300 rounded-[12rem] md:rounded-[18rem] font-black text-[16rem] md:text-[40rem] ">
+            <PrimaryButton
+              className={cn(
+                "mt-100 md:mt-120 mb-200 px-140 md:px-160 py-20 h-180 md:h-300 rounded-[12rem] md:rounded-[18rem] font-black text-[16rem] md:text-[40rem] ",{
+                  "md:mt-420": currentLanguage === "en",
+                }
+              )}
+            >
               {t("greatest_show_25.buttons.register_now")}
             </PrimaryButton>
           </Link>

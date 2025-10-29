@@ -55,21 +55,19 @@ export const ContactSection: FC<ContactSectionProps> = ({
       className={cn("text-center py-40 bg-gs25-gradient-8", className)}
       {...props}
     >
-      {inView && (
-        <div className="w-[80%] mx-auto py-40">
-          <Typography.Heading
-            level={2}
-            className="text-white text-[13rem] md:text-[26rem]"
-          >
-            {t("greatest_show_25.contact_section_heading")}
-          </Typography.Heading>
-          <Typography.Paragraph className="text-white text-[12rem] md:text-[30rem] font-bold leading-[180%] md:leading-[200%]">
-            {t("greatest_show_25.contact_email", {
-              email: event.variables?.contact_email?.value,
-            })}
-          </Typography.Paragraph>
-        </div>
-      )}
+      <div className="w-[80%] mx-auto py-40">
+        <Typography.Heading
+          level={2}
+          className="text-white text-[13rem] md:text-[26rem]"
+        >
+          {t("greatest_show_25.contact_section_heading")}
+        </Typography.Heading>
+        <Typography.Paragraph className="text-white text-[12rem] md:text-[30rem] font-bold leading-[180%] md:leading-[200%]">
+          {t("greatest_show_25.contact_email", {
+            email: event.variables?.contact_email?.value,
+          })}
+        </Typography.Paragraph>
+      </div>
     </div>
   );
 };

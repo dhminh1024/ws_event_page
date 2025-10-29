@@ -137,47 +137,45 @@ export const AwardsSection = forwardRef<HTMLDivElement, AwardsSectionProps>(
         }}
         {...props}
       >
-        {inView && (
-          <div className="w-[90%] mx-auto py-80 pt-[40%] pb-[40%] md:pt-[40%] md:pb-[43%]">
-            <div id="awards">
-              <Typography.Heading className="text-center font-ethnocentric bg-gs25-gradient-5 bg-clip-text text-transparent text-[20rem] md:text-[65rem] uppercase font-normal">
-                {t("greatest_show_25.awards_heading")}
-              </Typography.Heading>
-              <Typography.Paragraph className="mt-40 md:mt-80 text-center text-[16rem] md:text-[24rem] text-white max-w-[800rem] mx-auto">
-                {t("greatest_show_25.awards_value_title")}
-              </Typography.Paragraph>
-              <img
-                className="w-[90%] mx-auto"
-                src={AwardValueImage}
-                alt="Award Value Image"
-              />
-              <div className="flex flex-wrap flex-col md:flex-row justify-center gap-x-200 gap-y-60 md:gap-y-100 mx-auto">
-                {awards.map((award, index) => (
-                  <div
-                    className="relative w-[70%] mx-auto md:w-[40%]"
-                    key={index}
-                  >
-                    <img src={award.img} alt={award.title} />
-                    <div className="flex flex-col absolute w-full pl-140 md:px-280 left-0 bottom-[2%] md:bottom-[5%] items-start mt-20">
-                      <Typography.Paragraph className="mb-10 text-[11rem] md:text-[20rem] text-center text-white">
-                        {parser(
-                          t(
-                            "greatest_show_25.award_item_" +
-                              (index + 1) +
-                              "_value"
-                          )
-                        )}
-                      </Typography.Paragraph>
-                      <Typography.Paragraph className="text-[11rem] md:text-[20rem] text-center text-white">
-                        {t("greatest_show_25.award_item_bonus")}
-                      </Typography.Paragraph>
-                    </div>
+        <div className="w-[90%] mx-auto py-80 pt-[40%] pb-[40%] md:pt-[40%] md:pb-[43%]">
+          <div id="awards">
+            <Typography.Heading className="text-center font-ethnocentric bg-gs25-gradient-5 bg-clip-text text-transparent text-[20rem] md:text-[65rem] uppercase font-normal">
+              {t("greatest_show_25.awards_heading")}
+            </Typography.Heading>
+            <Typography.Paragraph className="mt-40 md:mt-80 text-center text-[16rem] md:text-[24rem] text-white max-w-[800rem] mx-auto">
+              {t("greatest_show_25.awards_value_title")}
+            </Typography.Paragraph>
+            <img
+              className="w-[90%] mx-auto"
+              src={AwardValueImage}
+              alt="Award Value Image"
+            />
+            <div className="flex flex-wrap flex-col md:flex-row justify-center gap-x-200 gap-y-60 md:gap-y-100 mx-auto">
+              {awards.map((award, index) => (
+                <div
+                  className="relative w-[70%] mx-auto md:w-[40%]"
+                  key={index}
+                >
+                  <img src={award.img} alt={award.title} />
+                  <div className="flex flex-col absolute w-full pl-140 md:px-280 left-0 bottom-[2%] md:bottom-[5%] items-start mt-20">
+                    <Typography.Paragraph className="mb-10 text-[11rem] md:text-[20rem] text-center text-white">
+                      {parser(
+                        t(
+                          "greatest_show_25.award_item_" +
+                            (index + 1) +
+                            "_value"
+                        )
+                      )}
+                    </Typography.Paragraph>
+                    <Typography.Paragraph className="text-[11rem] md:text-[20rem] text-center text-white">
+                      {t("greatest_show_25.award_item_bonus")}
+                    </Typography.Paragraph>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
-        )}
+        </div>
       </section>
     );
   }

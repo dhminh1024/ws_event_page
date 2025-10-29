@@ -26,7 +26,7 @@ export const Header: FC<HeaderProps> = ({ className }) => {
   };
   // console.log(event);
   return (
-    <div className={cn("bg-hr-primary pb-160", className)}>
+    <div className={cn("bg-hr-primary pb-160 relative", className)}>
       <div className="flex justify-between gap-x-40 md:gap-x-80 w-full h-full py-40 md:py-[35rem]">
         <div className="flex w-full h-160 md:h-320 gap-x-0 md:gap-x-160 items-center">
           <img

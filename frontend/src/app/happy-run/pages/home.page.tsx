@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocales } from "@/core/hooks/use-locales";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
 const HeaderSection = lazy(() =>
