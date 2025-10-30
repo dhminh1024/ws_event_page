@@ -5,6 +5,7 @@ import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { lazy, Suspense } from "react";
 import { useInView } from "react-intersection-observer";
 import { BackgroundGradient } from "../components/background";
+import { useSmoothScroll } from "../hooks/use-smooth-scroll";
 
 const HeaderSection = lazy(() =>
   import("@greatest-show-25/sections/header").then((module) => ({
@@ -73,25 +74,35 @@ const ContactSection = lazy(() =>
 export const Component: FC = () => {
   const { t, currentLanguage } = useLocales();
   const event = useEventPageContext();
-  
+
+  // Initialize smooth scroll
+  useSmoothScroll({
+    smooth: 1.5,
+    effects: true,
+    smoothTouch: true,
+  });
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <BackgroundGradient className="relative">
-        <HeaderSection className="px-80 md:px-240" />
-        <MenuBar className="-mt-184 md:-mt-220" />
-        <HeroSection id="overview" />
-        <CountDownSection />
-        <TeaserSection id="happy-run" />
-        <TargetSection />
-        <EntryCategoriesSection />
-        <AwardsSection />
-        <JourneySection />
-        <FAQSection />
-        <PhotosSection />
-        <ContactSection />
-        <FooterSection />
-      </BackgroundGradient>
+      <div>
+        <div id="smooth-content">
+          <BackgroundGradient className="relative">
+            <HeaderSection className="px-80 md:px-240" />
+            <MenuBar className="-mt-184 md:-mt-220" />
+            <HeroSection id="overview" />
+            <CountDownSection />
+            <TeaserSection id="happy-run" />
+            <TargetSection />
+            <EntryCategoriesSection />
+            <AwardsSection />
+            <JourneySection />
+            <FAQSection />
+            <PhotosSection />
+            <ContactSection />
+            <FooterSection />
+          </BackgroundGradient>
+        </div>
+      </div>
     </Suspense>
   );
 };

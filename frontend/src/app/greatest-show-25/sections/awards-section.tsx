@@ -18,6 +18,7 @@ import {
   animateZoomInBounce,
   animateZoomInOut,
   drawLineSVG,
+  animateWavebeat,
 } from "../components/animate";
 import { useInView } from "react-intersection-observer";
 import BlockIcon1 from "@greatest-show-25/assets/images/award-item-1.png";
@@ -44,36 +45,40 @@ export const AwardsSection = forwardRef<HTMLDivElement, AwardsSectionProps>(
     const { t, currentLanguage } = useLocales();
     // const { isDesktop } = useResponsive();
     const event = useEventPageContext();
-    const kitTitleRef = useRef<HTMLImageElement>(null);
-    const kitDescRef = useRef<HTMLDivElement>(null);
-    const kitCurlyArrowRef = useRef<SVGSVGElement>(null);
-    const kitItem1Ref = useRef<HTMLDivElement>(null);
-    const kitItem2Ref = useRef<HTMLDivElement>(null);
-    const kitItem3Ref = useRef<HTMLDivElement>(null);
-    const kitItem4Ref = useRef<HTMLDivElement>(null);
-    const kitItem5Ref = useRef<HTMLDivElement>(null);
+    const headingRef = useRef<HTMLImageElement>(null);
+    const moneyRef = useRef<HTMLImageElement>(null);
+    const award1Ref = useRef<HTMLDivElement>(null);
+    const award2Ref = useRef<HTMLDivElement>(null);
+    const award3Ref = useRef<HTMLDivElement>(null);
+    const award4Ref = useRef<HTMLDivElement>(null);
+    const award5Ref = useRef<HTMLDivElement>(null);
 
     const awards = useMemo(
       () => [
         {
           title: t("greatest_show_25.category_item_1"),
           img: BlockIcon1,
+          ref: award1Ref,
         },
         {
           title: t("greatest_show_25.category_item_2"),
           img: BlockIcon2,
+          ref: award2Ref,
         },
         {
           title: t("greatest_show_25.category_item_3"),
           img: BlockIcon3,
+          ref: award3Ref,
         },
         {
           title: t("greatest_show_25.category_item_4"),
           img: BlockIcon4,
+          ref: award4Ref,
         },
         {
           title: t("greatest_show_25.category_item_5"),
           img: BlockIcon5,
+          ref: award5Ref,
         },
       ],
       [currentLanguage]
@@ -82,43 +87,20 @@ export const AwardsSection = forwardRef<HTMLDivElement, AwardsSectionProps>(
     useEffect(() => {
       if (!inView) return;
       setTimeout(() => {
-        animateZoomInOut(kitTitleRef?.current);
-
-        drawLineSVG(
-          kitCurlyArrowRef?.current,
-          kitCurlyArrowRef?.current?.querySelector("path#line"),
-          { start: "top 100%", end: "top 40%" }
-        );
-        drawLineSVG(
-          kitCurlyArrowRef?.current,
-          kitCurlyArrowRef?.current?.querySelector("path#arrow"),
-          { start: "top 40%", end: "top 0%" }
-        );
-
-        // if (!isDesktop) return;
-        animateFadeInBottom(kitDescRef?.current, {
-          start: "top 100%",
-          end: "top center",
+        animateZoomInOut(headingRef?.current);
+        animateWavebeat(moneyRef?.current, {
+          scale: 1.04,
+          rotation: 2,
+          duration: 2,
+          delay: 0.5,
+          yoyo: true,
         });
-        animateFadeInBottom(kitItem1Ref?.current, {
-          start: "top 100%",
-          end: "top center",
-        });
-        animateFadeInBottom(kitItem2Ref?.current, {
-          start: "top 100%",
-          end: "top center",
-        });
-        animateFadeInBottom(kitItem3Ref?.current, {
-          start: "top 100%",
-          end: "top center",
-        });
-        animateFadeInBottom(kitItem4Ref?.current, {
-          start: "top 100%",
-          end: "top center",
-        });
-        animateFadeInBottom(kitItem5Ref?.current, {
-          start: "top 100%",
-          end: "top center",
+        awards.forEach((award, index) => {
+          animateFadeInBottom(award.ref.current, {
+            start: "top 90%",
+            end: "top 60%",
+            scrub: true,
+          });
         });
       }, 200);
     }, [inView]);
@@ -139,7 +121,10 @@ export const AwardsSection = forwardRef<HTMLDivElement, AwardsSectionProps>(
       >
         <div className="w-[90%] mx-auto py-80 pt-[40%] pb-[40%] md:pt-[40%] md:pb-[43%]">
           <div id="awards">
-            <Typography.Heading className="text-center font-ethnocentric bg-gs25-gradient-5 bg-clip-text text-transparent text-[20rem] md:text-[65rem] uppercase font-normal">
+            <Typography.Heading
+              ref={headingRef}
+              className="text-center font-ethnocentric bg-gs25-gradient-5 bg-clip-text text-transparent text-[20rem] md:text-[65rem] uppercase font-normal"
+            >
               {t("greatest_show_25.awards_heading")}
             </Typography.Heading>
             <Typography.Paragraph className="mt-40 md:mt-80 text-center text-[16rem] md:text-[24rem] text-white max-w-[800rem] mx-auto">
@@ -148,11 +133,13 @@ export const AwardsSection = forwardRef<HTMLDivElement, AwardsSectionProps>(
             <img
               className="w-[90%] mx-auto"
               src={AwardValueImage}
+              ref={moneyRef}
               alt="Award Value Image"
             />
             <div className="flex flex-wrap flex-col md:flex-row justify-center gap-x-200 gap-y-60 md:gap-y-100 mx-auto">
               {awards.map((award, index) => (
                 <div
+                  ref={award.ref}
                   className="relative w-[70%] mx-auto md:w-[40%]"
                   key={index}
                 >

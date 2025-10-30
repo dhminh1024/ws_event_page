@@ -57,6 +57,10 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
   const target3Ref = useRef<HTMLDivElement>(null);
   const target4Ref = useRef<HTMLDivElement>(null);
 
+  const group1Ref = useRef<HTMLDivElement>(null);
+  const group2Ref = useRef<HTMLDivElement>(null);
+  const group3Ref = useRef<HTMLDivElement>(null);
+
   const scheduleData = useMemo(
     () => [
       {
@@ -99,6 +103,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
           "greatest_show_25.form.group_items.primary_students_description"
         ),
         image: isDesktop ? Group1 : Group1Mobile,
+        ref: group1Ref,
       },
       {
         value: "secondary",
@@ -110,6 +115,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
           "greatest_show_25.form.group_items.secondary_students_description"
         ),
         image: isDesktop ? Group2 : Group2Mobile,
+        ref: group2Ref,
       },
       {
         value: "parent_teacher_staff",
@@ -121,6 +127,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
           "greatest_show_25.form.group_items.parent_teacher_staff_description"
         ),
         image: isDesktop ? Group3 : Group3Mobile,
+        ref: group3Ref,
       },
     ],
     [currentLanguage, isDesktop]
@@ -138,7 +145,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
       scheduleData.forEach((item, index) => {
         gsap.fromTo(
           item.ref.current,
-          { y: 500, opacity: 0 },
+          { y: isDesktop ? 500 : 300, opacity: 0 },
           {
             y: 0,
             opacity: 1,
@@ -146,8 +153,27 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
             scrollTrigger: {
               trigger: item.ref.current,
               scrub: true,
-              start: `top ${120 - (index * 10)}%`,
-              end: "top 80%",
+              start: `top ${120 - index * (isDesktop ? 10 : 0)}%`,
+              end: `top ${isDesktop ? 80 : 40}%`,
+              // markers: true,
+            },
+          }
+        );
+      });
+      groupOptions.forEach((item, index) => {
+        gsap.fromTo(
+          item.ref.current,
+          { x: isDesktop ? 0 : -300, y: isDesktop ? 500 : 0, opacity: 0 },
+          {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            scrollTrigger: {
+              trigger: item.ref.current,
+              scrub: true,
+              start: `top ${100 - index * (isDesktop ? 10 : 0)}%`,
+              end: `top 40%`,
               // markers: true,
             },
           }
@@ -204,6 +230,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
           {groupOptions.map((option, index) => {
             return (
               <div
+                ref={option.ref}
                 key={option.value}
                 className={cn("relative flex flex-col justify-between")}
               >

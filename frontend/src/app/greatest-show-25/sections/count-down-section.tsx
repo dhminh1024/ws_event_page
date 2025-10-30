@@ -91,32 +91,46 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
       </Typography.Paragraph>
       <span className="text-[40rem] "></span>
       <div className="text-[10rem] md:text-[28rem] text-white">
-        <div className="flex justify-center items-end gap-20 md:gap-20">
-          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_prefix")}</span>
+        <div className="flex justify-center items-end gap-0 md:gap-20">
+          <span className="text-[10rem] leading-40 md:leading-80 md:text-[20rem]">
+            {t("greatest_show_25.count_down_text_prefix")}
+          </span>
           <Counter
             value={timeLeft.days}
-            fontSize={isDesktop ? "44rem" : "18rem"}
+            fontSize={isDesktop ? "44rem" : "14rem"}
+            gap={isDesktop ? 8 : 0}
             places={[10, 1]}
           />
-          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_days")}</span>
+          <span className="text-[10rem] leading-40 md:leading-80 md:text-[20rem]">
+            {t("greatest_show_25.count_down_text_days")}
+          </span>
           <Counter
             value={timeLeft.hours}
-            fontSize={isDesktop ? "44rem" : "18rem"}
+            fontSize={isDesktop ? "44rem" : "14rem"}
+            gap={isDesktop ? 8 : 0}
             places={[10, 1]}
           />
-          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_hours")}</span>
+          <span className="text-[10rem] leading-40 md:leading-80 md:text-[20rem]">
+            {t("greatest_show_25.count_down_text_hours")}
+          </span>
           <Counter
             value={timeLeft.minutes}
-            fontSize={isDesktop ? "44rem" : "18rem"}
+            fontSize={isDesktop ? "44rem" : "14rem"}
+            gap={isDesktop ? 8 : 0}
             places={[10, 1]}
           />
-          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_minutes")}</span>
+          <span className="text-[10rem] leading-40 md:leading-80 md:text-[20rem]">
+            {t("greatest_show_25.count_down_text_minutes")}
+          </span>
           <Counter
             value={timeLeft.seconds}
-            fontSize={isDesktop ? "44rem" : "18rem"}
+            fontSize={isDesktop ? "44rem" : "14rem"}
+            gap={isDesktop ? 8 : 0}
             places={[10, 1]}
           />
-          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_seconds")}</span>
+          <span className="text-[10rem] leading-40 md:leading-80 md:text-[20rem]">
+            {t("greatest_show_25.count_down_text_seconds")}
+          </span>
         </div>
       </div>
       <Link to="registration">

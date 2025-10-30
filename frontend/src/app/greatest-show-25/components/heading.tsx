@@ -12,7 +12,7 @@ export const Heading: FC<HeadingProps> = ({ className, children }) => {
       <div className={cn("relative m-[43rem_12rem_32rem_12rem]", className)}>
         <Typography.Heading
           className={cn(
-            "relative z-10  border-[#B454FE] text-white  font-black uppercase text-center outline-white  bg-gs25-gradient-1",
+            "relative z-10  border-[#B454FE] text-white  font-black uppercase text-center outline-white  bg-gs25-gradient-1-animated",
             "rounded-[3rem_8rem_3rem_8rem] border-[1.5rem] text-[14rem] outline-[3rem] px-[14rem] py-[3rem]", // Mobile
             "md:rounded-[8rem_15rem_8rem_15rem] md:border-[2.5rem] md:text-[24rem] md:text-[24rem] md:outline-[5rem] md:px-[40rem] md:py-[5rem]" //Desktop
           )}

@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useState, type FC } from "react";
+import React, { HTMLAttributes, useState, useEffect, useRef, type FC } from "react";
 import Container from "../components/container";
 import { useLocales } from "@/core/hooks/use-locales";
 import { cn } from "@/core/utils/shadcn-utils";
@@ -8,29 +8,50 @@ import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { LanguageSelector } from "../components/language-selector";
 import Marquee from "react-fast-marquee";
 import { LanguageSwitcher } from "../components/language-switcher";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export type MenuBarProps = HTMLAttributes<HTMLDivElement> & {};
 
 export const MenuBar: FC<MenuBarProps> = ({ className }) => {
   const { t, currentLanguage } = useLocales();
-  // const { ref, isSticky } = useSticky();
   const event = useEventPageContext();
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!navRef.current) return;
+
+    const st = ScrollTrigger.create({
+      trigger: navRef.current,
+      start: "top top",
+      end: "max",
+      pin: true,
+      pinSpacing: false,
+    });
+
+    return () => {
+      st.kill();
+    };
+  }, []);
+
   return (
     <section
-      // ref={ref}
+      ref={navRef}
       id="navbar"
       aria-labelledby="introduction-title"
-      className={cn("sticky top-0 left-0 z-2000", className)}
+      className={cn("z-2000", className)}
     >
       <div className="pt-40 bg-hr-primary shadow-[inset_0rem_-10rem_20rem_-10rem_#1b1b1b]">
         <Container className="relative">
           <NavBar />
-          <LanguageSwitcher className="absolute top-[50%] right-0 translate-y-[-50%]" />
+          <LanguageSwitcher className="absolute top-[50%] w-60 h-40 md:w-140 md:h-100 right-20 md:right-0 translate-y-[-50%]" />
         </Container>
       </div>
       <Marquee
         speed={100}
-        className="bg-gs25-primary py-20 md:py-50 text-center"
+        className="bg-gs25-primary py-20 md:py-50 text-center overflow-hidden"
       >
         <Typography.Text className=" text-white text-[9rem] md:text-[18rem] font-bold py-30">
           {event?.variables?.[`marquee_text_${currentLanguage}`]?.value}
