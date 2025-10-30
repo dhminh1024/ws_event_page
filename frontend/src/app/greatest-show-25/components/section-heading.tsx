@@ -12,27 +12,30 @@ export const SectionHeading = forwardRef<HTMLDivElement, SectionHeadingProps>(
     return (
       <div className={cn("inline-block", className)} ref={ref} {...props}>
         <div className={cn("relative m-[43rem_12rem_32rem_12rem]", className)}>
-          <Typography.Heading
-            className={cn(
-              "relative z-10  border-[#B454FE] text-white  font-black uppercase text-center outline-white  bg-gs25-gradient-1",
-              "rounded-[3rem_8rem_3rem_8rem] border-[1.5rem] text-[14rem] outline-[3rem] px-[14rem] py-[3rem]", // Mobile
-              "md:rounded-[8rem_15rem_8rem_15rem] md:border-[2.5rem] md:text-[24rem] md:text-[24rem] md:outline-[5rem] md:px-[40rem] md:py-[5rem]" //Desktop
-            )}
-            style={{
-              transform: "skew(-30deg)",
-            }}
-            level={4}
-          >
-            <div
-              className="w-full h-full "
+          
+            <Typography.Heading
+              className={cn(
+                "relative z-10  border-[#B454FE] text-white font-black uppercase text-center outline-white  overflow-hidden",
+                "rounded-[3rem_8rem_3rem_8rem] border-[1.5rem] text-[14rem] outline-[3rem] px-56 py-12", // Mobile
+                "md:rounded-[8rem_15rem_8rem_15rem] md:border-[2.5rem] md:text-[24rem] md:outline-[5rem] md:px-160 md:py-20" //Desktop
+              )}
               style={{
-                textShadow: "1.5rem 1.5rem 2rem rgba(0, 0, 0, 0.7)",
-                transform: "skew(30deg)",
+                transform: "skew(-30deg)",
               }}
+              level={4}
             >
-              {children}
-            </div>
-          </Typography.Heading>
+              <div className="bg-gs25-gradient-1-animated w-[100%] h-[800%] absolute top-[50%] left-[50%] translate-[-50%] inset-0 rotate-[-60deg]"></div>
+              <div
+                className="w-full h-full "
+                style={{
+                  textShadow: "1.5rem 1.5rem 2rem rgba(0, 0, 0, 0.7)",
+                  transform: "skew(30deg)",
+                }}
+              >
+                {children}
+              </div>
+            </Typography.Heading>
+
           <div
             className="absolute z-5  w-full h-[125%] bg-gs25-gradient-2 rounded-[3rem_8rem_7rem_8rem] md:rounded-[8rem_15rem_8rem_15rem] bottom-[-18%] right-[-3%]"
             style={{

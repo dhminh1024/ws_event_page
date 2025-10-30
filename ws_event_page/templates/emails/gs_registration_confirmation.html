@@ -1,3 +1,5 @@
+{% extends "templates/emails/ws_newsletter_template.html" %} {% block content %}
+
 <div class="container text-center" style="text-align: center; color: #172a52">
   <div>
     <h1 style="text-align: center">
@@ -17,64 +19,141 @@
     <!-- Registration details -->
     <table
       class="table"
-      style="background-color: azure; border: 1px solid #3b6dae; margin: 20px auto; max-width: 600px"
+      style="
+        background-color: azure;
+        border: 1px solid #3b6dae;
+        margin: 20px auto;
+        max-width: 600px;
+      "
     >
       <tbody style="color: #3d517b">
         <tr>
-          <td style="border-color: #3b6dae; text-align: right; padding: 10px; font-weight: bold">
+          <td
+            style="
+              border-color: #3b6dae;
+              text-align: right;
+              padding: 10px;
+              font-weight: bold;
+            "
+          >
             Họ tên | <em>Full Name</em>:
           </td>
           <td style="border-color: #3b6dae; padding: 10px">{{full_name}}</td>
         </tr>
         <tr>
-          <td style="border-color: #3b6dae; text-align: right; padding: 10px; font-weight: bold">
+          <td
+            style="
+              border-color: #3b6dae;
+              text-align: right;
+              padding: 10px;
+              font-weight: bold;
+            "
+          >
             Email:
           </td>
           <td style="border-color: #3b6dae; padding: 10px">{{email}}</td>
         </tr>
         <tr>
-          <td style="border-color: #3b6dae; text-align: right; padding: 10px; font-weight: bold">
+          <td
+            style="
+              border-color: #3b6dae;
+              text-align: right;
+              padding: 10px;
+              font-weight: bold;
+            "
+          >
             Số điện thoại | <em>Mobile</em>:
           </td>
-          <td style="border-color: #3b6dae; padding: 10px">{{mobile_number}}</td>
+          <td style="border-color: #3b6dae; padding: 10px">
+            {{mobile_number}}
+          </td>
         </tr>
         <tr>
-          <td style="border-color: #3b6dae; text-align: right; padding: 10px; font-weight: bold">
+          <td
+            style="
+              border-color: #3b6dae;
+              text-align: right;
+              padding: 10px;
+              font-weight: bold;
+            "
+          >
             Nhóm | <em>Entry Group</em>:
           </td>
           <td style="border-color: #3b6dae; padding: 10px">{{entry_group}}</td>
         </tr>
         <tr>
-          <td style="border-color: #3b6dae; text-align: right; padding: 10px; font-weight: bold">
+          <td
+            style="
+              border-color: #3b6dae;
+              text-align: right;
+              padding: 10px;
+              font-weight: bold;
+            "
+          >
             Tên tiết mục | <em>Entry Name</em>:
           </td>
           <td style="border-color: #3b6dae; padding: 10px">{{entry_name}}</td>
         </tr>
         <tr>
-          <td style="border-color: #3b6dae; text-align: right; padding: 10px; font-weight: bold">
+          <td
+            style="
+              border-color: #3b6dae;
+              text-align: right;
+              padding: 10px;
+              font-weight: bold;
+            "
+          >
             Hạng mục | <em>Category</em>:
           </td>
-          <td style="border-color: #3b6dae; padding: 10px">{{entry_category}}</td>
+          <td style="border-color: #3b6dae; padding: 10px">
+            {{entry_category}}
+          </td>
         </tr>
         {% if entry_participants %}
         <tr>
-          <td style="border-color: #3b6dae; text-align: right; padding: 10px; font-weight: bold; vertical-align: top">
+          <td
+            style="
+              border-color: #3b6dae;
+              text-align: right;
+              padding: 10px;
+              font-weight: bold;
+              vertical-align: top;
+            "
+          >
             Thành viên | <em>Participants</em>:
           </td>
-          <td style="border-color: #3b6dae; padding: 10px">{{entry_participants}}</td>
+          <td style="border-color: #3b6dae; padding: 10px">
+            {{entry_participants}}
+          </td>
         </tr>
-        {% endif %}
-        {% if instrumental_info %}
+        {% endif %} {% if instrumental_info %}
         <tr>
-          <td style="border-color: #3b6dae; text-align: right; padding: 10px; font-weight: bold; vertical-align: top">
+          <td
+            style="
+              border-color: #3b6dae;
+              text-align: right;
+              padding: 10px;
+              font-weight: bold;
+              vertical-align: top;
+            "
+          >
             Thông tin nhạc cụ | <em>Instrument Info</em>:
           </td>
-          <td style="border-color: #3b6dae; padding: 10px">{{instrumental_info}}</td>
+          <td style="border-color: #3b6dae; padding: 10px">
+            {{instrumental_info}}
+          </td>
         </tr>
-        {% endif %}
-        {% if talent_info %}
+        {% endif %} {% if talent_info %}
         <tr>
-          <td style="border-color: #3b6dae; text-align: right; padding: 10px; font-weight: bold; vertical-align: top">
+          <td
+            style="
+              border-color: #3b6dae;
+              text-align: right;
+              padding: 10px;
+              font-weight: bold;
+              vertical-align: top;
+            "
+          >
             Thông tin tài năng | <em>Talent Info</em>:
           </td>
           <td style="border-color: #3b6dae; padding: 10px">{{talent_info}}</td>
@@ -92,19 +171,30 @@
 
     <p class="text-center" style="margin-top: 30px; color: #172a52">
       Trạng thái | <em>Status</em>:
+      {% if status == "Waiting for Approval" %}
+      <strong style="color: #f5aa1e">Chờ Duyệt | <em>Waiting for Approval</em></strong>
+      {% elif status == "Approved" %}
+      <strong style="color: #28a745">Đã Duyệt | <em>Approved</em></strong>
+      {% elif status == "Cancelled" %}
+      <strong style="color: #dc3545">Đã Huỷ | <em>Cancelled</em></strong>
+      {% else %}
       <strong style="color: #3b6dae">{{status}}</strong>
+      {% endif %}
     </p>
 
     <p class="text-center" style="margin-top: 20px; color: #172a52">
       Chúng tôi sẽ xem xét và phản hồi kết quả trong thời gian sớm nhất.
       <br />
       <span style="color: #3b6dae">
-        <em>We will review your registration and respond as soon as possible.</em>
+        <em
+          >We will review your registration and respond as soon as possible.</em
+        >
       </span>
     </p>
 
     <p class="text-center" style="margin-top: 30px; color: #172a52">
-      Xin chân thành cảm ơn và hẹn gặp lại các bạn tại sự kiện The Greatest Show!
+      Xin chân thành cảm ơn và hẹn gặp lại các bạn tại sự kiện The Greatest
+      Show!
       <br />
       <span style="color: #3b6dae">
         <em>Thank you and see you at The Greatest Show event!</em>
@@ -112,3 +202,5 @@
     </p>
   </div>
 </div>
+
+{% endblock %}

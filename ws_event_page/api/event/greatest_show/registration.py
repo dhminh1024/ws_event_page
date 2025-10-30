@@ -34,11 +34,15 @@ FIELD_LABELS_VN = {
 }
 
 
-def _normalize_choice(value: str | None, mapping: Dict[str, str], field_label: str) -> str:
+def _normalize_choice(
+    value: str | None, mapping: Dict[str, str], field_label: str
+) -> str:
     field_label_vn = FIELD_LABELS_VN.get(field_label, field_label)
 
     if not value:
-        frappe.throw(f"{field_label_vn.capitalize()} là bắt buộc | {field_label.capitalize()} is required")
+        frappe.throw(
+            f"{field_label_vn.capitalize()} là bắt buộc | {field_label.capitalize()} is required"
+        )
 
     key = value.strip().lower()
     normalized = mapping.get(key)
@@ -49,7 +53,9 @@ def _normalize_choice(value: str | None, mapping: Dict[str, str], field_label: s
     if value in mapping.values():
         return value
 
-    frappe.throw(f"{field_label_vn.capitalize()} không hợp lệ: {value} | Invalid {field_label}: {value}")
+    frappe.throw(
+        f"{field_label_vn.capitalize()} không hợp lệ: {value} | Invalid {field_label}: {value}"
+    )
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])
@@ -77,7 +83,9 @@ def create_registration(
             "No active Greatest Show program is currently available for registration"
         )
 
-    normalized_group = _normalize_choice(entry_group, ENTRY_GROUP_CHOICES, "entry group")
+    normalized_group = _normalize_choice(
+        entry_group, ENTRY_GROUP_CHOICES, "entry group"
+    )
     normalized_category = _normalize_choice(
         entry_category, ENTRY_CATEGORY_CHOICES, "entry category"
     )
@@ -112,7 +120,7 @@ def create_registration(
             "entry_participants": (entry_participants or "").strip() or None,
             "instrumental_info": (instrumental_info or "").strip() or None,
             "talent_info": (talent_info or "").strip() or None,
-            "status": "Waitting",
+            "status": "Waiting for Approval",
             "gs_program": current_program.name,
         }
     )
@@ -126,6 +134,7 @@ def create_registration(
         "program_title": current_program.title_en,
     }
 
+
 def _clear_registration_attachments(docname: str) -> None:
     attachments = frappe.get_all(
         "File",
@@ -137,11 +146,16 @@ def _clear_registration_attachments(docname: str) -> None:
     for attachment in attachments:
         frappe.delete_doc("File", attachment.name, ignore_permissions=True)
 
+
 @frappe.whitelist(allow_guest=True, methods=["POST"])
 def upload_registration_file(registration_id: str):
     """Upload or replace the performance attachment for an existing registration."""
 
-    frappe.log("upload_registration_file called with registration_id: {}".format(registration_id))
+    frappe.log(
+        "upload_registration_file called with registration_id: {}".format(
+            registration_id
+        )
+    )
     if not registration_id:
         frappe.throw("Mã đăng ký là bắt buộc | Registration ID is required")
 
@@ -215,9 +229,7 @@ def cancel_registration(registration_id: str):
     registration = frappe.get_doc("WSE GS Registration", registration_id)
 
     if registration.status == GSRegistrationStatus.CANCELLED.value:
-        frappe.throw(
-            "Đăng ký đã được huỷ trước đó | Registration is already cancelled"
-        )
+        frappe.throw("Đăng ký đã được huỷ trước đó | Registration is already cancelled")
 
     if registration.status == GSRegistrationStatus.APPROVED.value:
         frappe.throw(
@@ -231,5 +243,35 @@ def cancel_registration(registration_id: str):
 
     return {
         "message": "Đăng ký đã được huỷ | Registration has been cancelled",
+        "registration_id": registration.name,
+    }
+
+
+@frappe.whitelist()
+def approve_registration(registration_id: str):
+    """Approve a registration."""
+    from ws_event_page.wellspring_event_page.doctype.wse_gs_registration.wse_gs_registration import (
+        GSRegistrationStatus,
+    )
+
+    registration = frappe.get_doc("WSE GS Registration", registration_id)
+
+    if registration.status == GSRegistrationStatus.CANCELLED.value:
+        frappe.throw(
+            "Không thể phê duyệt đăng ký đã huỷ | "
+            "Cannot approve cancelled registration"
+        )
+
+    if registration.status == GSRegistrationStatus.APPROVED.value:
+        frappe.throw(
+            "Đăng ký đã được phê duyệt trước đó | " "Registration is already approved"
+        )
+
+    registration.status = GSRegistrationStatus.APPROVED.value
+    registration.save()
+    registration.send_approval_email()
+
+    return {
+        "message": "Đăng ký đã được phê duyệt | Registration has been approved",
         "registration_id": registration.name,
     }

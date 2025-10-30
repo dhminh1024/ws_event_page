@@ -169,6 +169,7 @@ layer(base);
   --animate-fade-out: fade-out 0.5s linear;
   --animate-swing-left: swing-left 5s ease-in-out infinite alternate;
   --animate-swing-right: swing-right 5s ease-in-out infinite alternate;
+  --animate-gradient-shift: gradient-shift 3s ease infinite;
 
   @keyframes accordion-down {
     from {
@@ -220,6 +221,14 @@ layer(base);
       transform: rotate(-3deg) scale(1);
     }
   }
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 0%;
+    }
+  }
 }
 
 /*
@@ -253,6 +262,23 @@ layer(base);
 
 @utility bg-scroll-golden {
   @apply bg-[linear-gradient(90deg,#BC8824_0%,#FCECA1_47%,#B98520_100%)];
+}
+
+@utility bg-gs25-gradient-1-animated {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 100, 255, 1) 0%,
+    rgba(171, 123, 255, 1) 12.5%,
+    rgba(2, 169, 255, 1) 25%,
+    rgba(140, 40, 255, 1) 37.5%,
+    rgba(255, 100, 255, 1) 50%,
+    rgba(171, 123, 255, 1) 62.5%,
+    rgba(2, 169, 255, 1) 75%,
+    rgba(140, 40, 255, 1) 87.5%,
+    rgba(255, 100, 255, 1) 100%
+  );
+  background-size: 200% 100%;
+  animation: gradient-shift 4s linear infinite;
 }
 
 @layer base {
@@ -419,5 +445,21 @@ layer(base);
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* GSAP ScrollSmoother wrapper styles */
+  #smooth-wrapper {
+    overflow: hidden;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  #smooth-content {
+    overflow: visible;
+    width: 100%;
   }
 }
