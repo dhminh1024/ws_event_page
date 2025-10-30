@@ -9,7 +9,8 @@
   "section_break_pwyz",
   "email_sender",
   "confirmation_email_template",
-  "cancellation_email_template"
+  "cancellation_email_template",
+  "approval_email_template"
  ],
  "fields": [
   {
@@ -38,6 +39,12 @@
    "fieldname": "cancellation_email_template",
    "fieldtype": "Link",
    "label": "Cancellation Email Template",
+   "options": "Email Template"
+  },
+  {
+   "fieldname": "approval_email_template",
+   "fieldtype": "Link",
+   "label": "Approval Email Template",
    "options": "Email Template"
   }
  ],

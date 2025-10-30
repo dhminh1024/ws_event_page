@@ -1,3 +1,5 @@
+{% extends "templates/emails/ws_newsletter_template.html" %} {% block content %}
+
 <div class="container text-center" style="text-align: center; color: #172a52">
   <div>
     <h1 style="text-align: center">
@@ -17,32 +19,67 @@
     <!-- Registration details -->
     <table
       class="table"
-      style="background-color: azure; border: 1px solid #3b6dae; margin: 20px auto; max-width: 600px"
+      style="
+        background-color: azure;
+        border: 1px solid #3b6dae;
+        margin: 20px auto;
+        max-width: 600px;
+      "
     >
       <tbody style="color: #3d517b">
         <tr>
-          <td style="border-color: #3b6dae; text-align: right; padding: 10px; font-weight: bold">
+          <td
+            style="
+              border-color: #3b6dae;
+              text-align: right;
+              padding: 10px;
+              font-weight: bold;
+            "
+          >
             Họ tên | <em>Full Name</em>:
           </td>
           <td style="border-color: #3b6dae; padding: 10px">{{full_name}}</td>
         </tr>
         <tr>
-          <td style="border-color: #3b6dae; text-align: right; padding: 10px; font-weight: bold">
+          <td
+            style="
+              border-color: #3b6dae;
+              text-align: right;
+              padding: 10px;
+              font-weight: bold;
+            "
+          >
             Email:
           </td>
           <td style="border-color: #3b6dae; padding: 10px">{{email}}</td>
         </tr>
         <tr>
-          <td style="border-color: #3b6dae; text-align: right; padding: 10px; font-weight: bold">
+          <td
+            style="
+              border-color: #3b6dae;
+              text-align: right;
+              padding: 10px;
+              font-weight: bold;
+            "
+          >
             Tên tiết mục | <em>Entry Name</em>:
           </td>
           <td style="border-color: #3b6dae; padding: 10px">{{entry_name}}</td>
         </tr>
         <tr>
-          <td style="border-color: #3b6dae; text-align: right; padding: 10px; font-weight: bold">
+          <td
+            style="
+              border-color: #3b6dae;
+              text-align: right;
+              padding: 10px;
+              font-weight: bold;
+            "
+          >
             Hạng mục | <em>Category</em>:
           </td>
-          <td style="border-color: #3b6dae; padding: 10px">{{entry_category}}</td>
+          <td style="border-color: #3b6dae; padding: 10px">
+            {{entry_category}}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -56,23 +93,40 @@
 
     <p class="text-center" style="margin-top: 30px; color: #172a52">
       Trạng thái | <em>Status</em>:
-      <strong style="color: #f05023">Đã huỷ | Cancelled</strong>
+      {% if status == "Waiting for Approval" %}
+      <strong style="color: #f5aa1e">Chờ Duyệt | <em>Waiting for Approval</em></strong>
+      {% elif status == "Approved" %}
+      <strong style="color: #28a745">Đã Duyệt | <em>Approved</em></strong>
+      {% elif status == "Cancelled" %}
+      <strong style="color: #dc3545">Đã Huỷ | <em>Cancelled</em></strong>
+      {% else %}
+      <strong style="color: #3b6dae">{{status}}</strong>
+      {% endif %}
     </p>
 
     <p class="text-center" style="margin-top: 30px; color: #172a52">
-      Nếu việc huỷ đăng ký này là nhầm lẫn, vui lòng liên hệ với chúng tôi để được hỗ trợ.
+      Nếu việc huỷ đăng ký này là nhầm lẫn, vui lòng liên hệ với chúng tôi để
+      được hỗ trợ.
       <br />
       <span style="color: #3b6dae">
-        <em>If this cancellation was made in error, please contact us for assistance.</em>
+        <em
+          >If this cancellation was made in error, please contact us for
+          assistance.</em
+        >
       </span>
     </p>
 
     <p class="text-center" style="margin-top: 20px; color: #172a52">
-      Xin chân thành cảm ơn và hẹn gặp lại các bạn ở các sự kiện lần sau tại Wellspring!
+      Xin chân thành cảm ơn và hẹn gặp lại các bạn ở các sự kiện lần sau tại
+      Wellspring!
       <br />
       <span style="color: #3b6dae">
-        <em>Thank you very much and see you at the next events at Wellspring!</em>
+        <em
+          >Thank you very much and see you at the next events at Wellspring!</em
+        >
       </span>
     </p>
   </div>
 </div>
+
+{% endblock content %}
