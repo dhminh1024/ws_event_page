@@ -30,7 +30,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
     () => event?.variables.countdown_date?.value || defaultDate,
     [event?.variables.countdown_date?.value]
   );
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft(parseDate(targetDate)));
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft(parseDate(targetDate,"yyyy-MM-dd")));
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const targetDateRef = useRef(targetDate);
 
@@ -42,7 +42,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
   useEffect(() => {
     // Create timer (only once on mount)
     timerRef.current = setInterval(() => {
-      const newTimeLeft = getTimeLeft(parseDate(targetDateRef.current));
+      const newTimeLeft = getTimeLeft(parseDate(targetDateRef.current,"yyyy-MM-dd"));
       setTimeLeft(newTimeLeft);
 
       if (
@@ -80,7 +80,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
     >
       <Typography.Heading
         level={2}
-        className="text-white text-[13rem] md:text-[35rem]"
+        className="text-brand-honey text-[13rem] md:text-[35rem]"
       >
         {parser(
           event.variables[`countdown_text_${currentLanguage}`]?.value || ""
