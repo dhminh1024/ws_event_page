@@ -359,6 +359,16 @@
       "go_home": "Return Home",
       "register": "Register",
       "add_person": "Add member +"
+    },
+    "program_status": {
+      "not_opened_title": "Registration Opens Soon!",
+      "not_opened_message": "Registration will open on the countdown date and time above. <br/> Please check back then to register for WISers' Greatest Show 2025!",
+      "expired_title": "Registration Has Closed",
+      "expired_message": "We're sorry, but registration for WISers' Greatest Show 2025 has ended. <br/> Thank you for your interest! Stay tuned for future events.",
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
     }
   }
 }

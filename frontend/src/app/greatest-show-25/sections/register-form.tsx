@@ -38,7 +38,10 @@ import RegisterHeadingMobile from "@greatest-show-25/assets/images/register-head
 import RegisterFooterImage from "@greatest-show-25/assets/images/register-footer.webp";
 import SecondaryButtonImage from "@greatest-show-25/assets/images/button-2.png";
 import { RegistrationSuccessModal } from "../components/registration-success-modal";
+import { ProgramStatusModal } from "../components/program-status-modal";
 import { Link, useNavigate } from "react-router-dom";
+import useCurrentProgram from "../api/use-current-program";
+import { parseDate } from "@/core/utils/common";
 
 export type RegisterFormProps = HTMLAttributes<HTMLDivElement>;
 
@@ -49,8 +52,20 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
   const event = useEventPageContext();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const fileInputId = useId();
-  const { submit: submitRegistration, loading } = useRegistration();
+  const { currentProgram } = useCurrentProgram();
+  const isOpened = currentProgram ? currentProgram?.is_opened === 1 : null;
+  const isExpired = currentProgram ? currentProgram?.is_expired === 1 : null;
+  const { submit: submitRegistration, loading: isSubmitting } =
+    useRegistration();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  console.log(
+    currentProgram,
+    "Register Form - isOpened:",
+    isOpened,
+    "isExpired:",
+    isExpired
+  );
 
   const groupOptions = useMemo(
     () => [
@@ -115,20 +130,8 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
 
   const entryCategory = form.watch("entry_category");
 
-  useEffect(() => {
-    if (entryCategory !== "instrument") {
-      form.setValue("instrumental_info", "");
-      form.clearErrors("instrumental_info");
-    }
-    if (entryCategory !== "talent") {
-      form.setValue("talent_info", "");
-      form.clearErrors("talent_info");
-    }
-  }, [entryCategory, form]);
-
   const handleSubmit = form.handleSubmit(async (data) => {
-    console.log("register-form submission", data);
-
+    if(!isOpened || isExpired) return;
     setShowSuccessModal(true);
     try {
       await submitRegistration(data);
@@ -137,6 +140,8 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
       setShowSuccessModal(false);
     }
   });
+
+  console.log("Render Register Form", currentProgram);
 
   return (
     <div className={cn("", className)}>
@@ -671,14 +676,16 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
               <Typography.Paragraph className="text-center text-[10rem] md:text-[20rem] text-gs25-primary font-semibold my-60 mb-100">
                 {t("greatest_show_25.form.submit_note")}
               </Typography.Paragraph>
-              <PrimaryButton
-                disabled={loading}
-                className={cn(
-                  "text-[14rem] bg-transparent text-center md:text-[45rem] font-black p-[20rem_30rem] md:p-[45rem_70rem] md:rounded-[20rem] mb-40 flex items-center cursor-pointer hover:scale-105 transition-transform duration-200"
-                )}
-              >
-                {t("greatest_show_25.buttons.register")}
-              </PrimaryButton>
+              {isOpened === true && isExpired === false && (
+                <PrimaryButton
+                  disabled={isSubmitting}
+                  className={cn(
+                    "text-[14rem] bg-transparent text-center md:text-[45rem] font-black p-[20rem_30rem] md:p-[45rem_70rem] md:rounded-[20rem] mb-40 flex items-center cursor-pointer hover:scale-105 transition-transform duration-200"
+                  )}
+                >
+                  {t("greatest_show_25.buttons.register")}
+                </PrimaryButton>
+              )}
               <Link
                 to="/greatest-show-25"
                 className="inline-block mt-40 text-[10rem] md:text-[30rem] cursor-pointer text-gs25-primary font-semibold underline"
@@ -696,7 +703,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
       />
       <RegistrationSuccessModal
         open={showSuccessModal}
-        isSubmitting={loading}
+        isSubmitting={isSubmitting}
         onConfirm={() => {
           // Redirect to home page use React-router
           navigate(`${event.url}`);
@@ -705,6 +712,21 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
           setShowSuccessModal(false);
         }}
       />
+      {
+        /* Program Status Modal - show when program is not opened or expired */
+        isOpened === false || isExpired === true ? (
+          <ProgramStatusModal
+            open={isOpened === false || isExpired === true}
+            type={isExpired ? "expired" : !isOpened ? "not_opened" : undefined}
+            openedDatetime={
+              currentProgram?.opened_datetime
+                ? parseDate(currentProgram?.opened_datetime)
+                : undefined
+            }
+            onClose={() => {}}
+          />
+        ) : null
+      }
     </div>
   );
 };

@@ -363,6 +363,16 @@
       "go_home": "Trở về",
       "register": "Register",
       "add_person": "Thêm thành viên +"
+    },
+    "program_status": {
+      "not_opened_title": "Đăng ký sắp mở!",
+      "not_opened_message": "Đăng ký sẽ mở vào lúc <b>{{date}}</b>. <br/> Vui lòng quay lại sau.",
+      "expired_title": "Đăng ký đã đóng",
+      "expired_message": "Chúng tôi rất tiếc, nhưng thời gian đăng ký đã kết thúc. <br/> Vui lòng liên hệ BTC qua email để được hỗ trợ thêm.",
+      "days": "Ngày",
+      "hours": "Giờ",
+      "minutes": "Phút",
+      "seconds": "Giây"
     }
   }
 }
