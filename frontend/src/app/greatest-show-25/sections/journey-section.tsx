@@ -339,7 +339,7 @@ export const JourneySection: FC<JourneySectionProps> = ({
                       `/${event.url}/round-detail/within-me`
                     )
                   }
-                  className="text-white px-60 md:px-120 py-20 md:h-140 md:rounded-[8rem] italic text-[11rem] md:text-[18rem]"
+                  className="text-white px-30 md:px-120 py-20 md:h-140 md:rounded-[8rem] italic text-[10rem] md:text-[18rem]"
                 >
                   {t("greatest_show_25.buttons.entry_rules")}
                 </SecondaryButton>
@@ -350,7 +350,7 @@ export const JourneySection: FC<JourneySectionProps> = ({
                 ]?.value && (
                   <SecondaryButton
                     onClick={() => handleOpenListRoundModal(1)}
-                    className="text-white px-60 md:px-120 py-20 md:h-140 md:rounded-[8rem] italic text-[11rem] md:text-[18rem]"
+                    className="text-white px-30 md:px-120 py-20 md:h-140 md:rounded-[8rem] italic text-[10rem] md:text-[18rem]"
                   >
                     {t("greatest_show_25.buttons.round_1_entry_list")}
                   </SecondaryButton>
@@ -362,7 +362,7 @@ export const JourneySection: FC<JourneySectionProps> = ({
                 ]?.value && (
                   <ThirdaryButton
                     onClick={() => handleOpenResultsRoundModal(1)}
-                    className="text-white px-60 md:px-120 py-20 md:h-140 md:rounded-[8rem] italic text-[11rem] md:text-[18rem]"
+                    className="text-white px-30 md:px-120 py-20 md:h-140 md:rounded-[8rem] italic text-[10rem] md:text-[18rem]"
                   >
                     {t("greatest_show_25.buttons.entry_results")}
                   </ThirdaryButton>
