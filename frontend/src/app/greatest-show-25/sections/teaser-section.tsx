@@ -74,12 +74,12 @@ export const TeaserSection: FC<TeaserSectionProps> = ({
             )}
           </Typography.Heading>
         </div>
-        {event.variables.teaser_embed_url?.value && (
+        {/* {event.variables.teaser_embed_url?.value && (
           <iframe
             src={event.variables.teaser_embed_url?.value}
             className="mx-auto aspect-video w-[80%] md:w-[50%] mt-70 md:mt-280 md:h-auto"
           ></iframe>
-        )}
+        )} */}
       </>
     </section>
   );

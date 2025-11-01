@@ -46,5 +46,10 @@ export const FRAPPE_APIS = {
     METHOD_STRING:
       "ws_event_page.api.event.greatest_show.registration.upload_registration_file",
     SWR_KEY: "upload_registration_file",
-  }
+  },
+  GET_CURRENT_PROGRAM: {
+    METHOD_STRING:
+      "ws_event_page.api.event.greatest_show.program.get_current_program",
+    SWR_KEY: "get_current_greatest_show_program",
+  },
 };

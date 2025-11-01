@@ -248,9 +248,9 @@ export function rotateSize(width:number, height:number, rotation:number) {
   };
 }
 
-export function getTimeLeft(targetDate: string) {
+export function getTimeLeft(targetDate?: Date) {
   const now = new Date();
-  const target = new Date(targetDate).getTime();
+  const target = targetDate?.getTime() || now.getTime();
   const timeDiff = target - now.getTime();
 
   return {

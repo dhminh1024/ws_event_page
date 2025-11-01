@@ -14,7 +14,7 @@ import { useLocales } from "@/core/hooks/use-locales";
 import { PrimaryButton } from "../components/button";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { differenceInDays, differenceInMinutes, format } from "date-fns";
-import { getTimeLeft } from "@/lib/utils/common";
+import { getTimeLeft, parseDate } from "@/lib/utils/common";
 import { Link } from "react-router-dom";
 import Counter from "@atoms/counter";
 import { useResponsive } from "@/core/hooks/use-reponsive";
@@ -30,7 +30,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
     () => event?.variables.countdown_date?.value || defaultDate,
     [event?.variables.countdown_date?.value]
   );
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft(targetDate));
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft(parseDate(targetDate)));
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const targetDateRef = useRef(targetDate);
 
@@ -42,7 +42,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
   useEffect(() => {
     // Create timer (only once on mount)
     timerRef.current = setInterval(() => {
-      const newTimeLeft = getTimeLeft(targetDateRef.current);
+      const newTimeLeft = getTimeLeft(parseDate(targetDateRef.current));
       setTimeLeft(newTimeLeft);
 
       if (
@@ -136,7 +136,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
       <Link to="registration">
         <PrimaryButton className="h-auto p-[8rem_25rem] md:p-[35rem_50rem] my-40 md:my-80">
           <Typography.Text className="font-black text-[12rem] md:text-[35rem]">
-            {t("happy_run.buttons.register_now")}
+            {t("happy_run.buttons.join_now")}
           </Typography.Text>
         </PrimaryButton>
       </Link>

@@ -208,7 +208,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                   <div className="absolute top-[40%] left-0 w-full flex flex-col">
                     <Typography.Heading
                       level={2}
-                      className="text-center mb-20 md:mb-40 text-[13rem] md:text-[23rem] text-gs25-primary font-extrabold leading-60 md:leading-120 uppercase"
+                      className="text-center mb-20 md:mb-40 text-[13rem] md:text-[18rem] text-gs25-primary font-extrabold leading-60 md:leading-120 uppercase"
                     >
                       {parser(item.heading)}
                     </Typography.Heading>
@@ -235,7 +235,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                 className={cn("relative flex flex-col justify-between")}
               >
                 <img className="w-full" src={option.image} alt={option.label} />
-                <div className="absolute top-[23%] left-[50%] md:top-[55%] px-[4%] w-full md:left-0 flex flex-1 flex-col justify-start md:justify-center">
+                <div className="absolute top-[23%] left-[50%] md:top-[52%] px-[4%] w-full md:left-0 flex flex-1 flex-col justify-start md:justify-center">
                   <div
                     className={cn(
                       " text-gs25-primary md:text-center text-[14rem] uppercase md:text-[30rem] font-extrabold mb-0 md:mb-40"

@@ -47,6 +47,7 @@ export type ModalProps = HTMLAttributes<HTMLDivElement> &
     codeUrl?: string;
     orderName?: string;
     disabled?: boolean;
+    isSubmitting?: boolean;
     onConfirm?: () => void;
     onCancel?: () => void;
     onClosed?: () => void;
@@ -59,6 +60,7 @@ export const RegistrationSuccessModal: FC<ModalProps> = ({
   codeUrl,
   orderName,
   disabled,
+  isSubmitting = false,
   onConfirm,
   onCancel,
   onClosed,
@@ -100,41 +102,60 @@ export const RegistrationSuccessModal: FC<ModalProps> = ({
       >
         <DialogTitle hidden></DialogTitle>
         <DialogDescription hidden></DialogDescription>
-        <div className="px-[2%] py-[20rem]">
-          <img className="w-full" src={RegisterSuccessHeading} alt="Top Page" />
-          <center className="mb-20 px-[7%]">
-            <Typography.Heading
-              className="py-80 md:py-60 text-[20rem] md:text-[24rem] text-gs-primary leading-[2] font-base"
-              level={2}
-            >
-              {parser(t("greatest_show_25.form.success_text_1"))}
-            </Typography.Heading>
-            <Typography.Heading
-              className="py-80 md:py-60 text-[20rem] md:text-[24rem] text-gs-primary leading-[2] font-base"
-              level={2}
-            >
-              {parser(t("greatest_show_25.form.success_text_2"))}
-            </Typography.Heading>
-            <Typography.Heading
-              className="py-80 md:py-60 text-[20rem] md:text-[24rem] text-gs-primary leading-[2] font-base"
-              level={2}
-            >
-              {parser(t("greatest_show_25.form.success_text_3"))}
-            </Typography.Heading>
 
-            <center className="mt-[20rem]">
-              <SecondaryButton
-                className={cn(
-                  "text-[14rem] bg-transparent text-center md:text-[30rem] font-base italic p-[20rem_30rem] md:p-[30rem_30rem] md:rounded-[13rem] mb-40 flex items-center cursor-pointer hover:scale-105 transition-transform duration-200"
-                )}
-                onClick={handleConfirm}
-              >
-                {t("greatest_show_25.buttons.back_to_home")}
-              </SecondaryButton>
+        {isSubmitting ? (
+          <div className="px-[2%] py-[10%]">
+            <center className="mb-20 px-[7%]">
+              <div className="flex flex-col items-center justify-center gap-40">
+                <div className="animate-spin rounded-full h-160 w-160 border-t-8 border-b-8 border-gs25-primary"></div>
+                <Typography.Heading
+                  className="text-[16rem] md:text-[24rem] text-gs-primary leading-[2] font-base"
+                  level={2}
+                >
+                  {t("greatest_show_25.form.submitting")}
+                </Typography.Heading>
+              </div>
             </center>
-          </center>
-        </div>
-        <img className="w-full" src={SuccessFooterImage} alt="Footer" />
+          </div>
+        ) : (
+          <>
+            <div className="px-[2%]">
+              <img className="w-full" src={RegisterSuccessHeading} alt="Top Page" />
+              <center className="mb-20 px-[7%]">
+                <Typography.Heading
+                  className="text-[16rem] md:text-[20rem] text-gs-primary leading-[2] font-base"
+                  level={2}
+                >
+                  {parser(t("greatest_show_25.form.success_text_1"))}
+                </Typography.Heading>
+                <Typography.Heading
+                  className="text-[16rem] md:text-[20rem] text-gs-primary leading-[2] font-base"
+                  level={2}
+                >
+                  {parser(t("greatest_show_25.form.success_text_2"))}
+                </Typography.Heading>
+                <Typography.Heading
+                  className="text-[16rem] md:text-[20rem] text-gs-primary leading-[2] font-base"
+                  level={2}
+                >
+                  {parser(t("greatest_show_25.form.success_text_3"))}
+                </Typography.Heading>
+
+                <center className="mt-[20rem]">
+                  <SecondaryButton
+                    className={cn(
+                      "text-[14rem] bg-transparent text-center md:text-[20rem] font-base italic p-[20rem_30rem] md:p-[25rem_30rem] md:rounded-[13rem] flex items-center cursor-pointer hover:scale-105 transition-transform duration-200"
+                    )}
+                    onClick={handleConfirm}
+                  >
+                    {t("greatest_show_25.buttons.back_to_home")}
+                  </SecondaryButton>
+                </center>
+              </center>
+            </div>
+            <img className="w-full" src={SuccessFooterImage} alt="Footer" />
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );

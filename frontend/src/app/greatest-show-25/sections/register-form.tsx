@@ -34,10 +34,14 @@ import TableAImage from "@greatest-show-25/assets/images/table-a.png";
 import TableBImage from "@greatest-show-25/assets/images/table-b.png";
 import TableCImage from "@greatest-show-25/assets/images/table-c.png";
 import RegisterHeading from "@greatest-show-25/assets/images/register-heading.png";
-import RegisterFooterImage from "@greatest-show-25/assets/images/register-footer.png";
+import RegisterHeadingMobile from "@greatest-show-25/assets/images/register-heading-mb.png";
+import RegisterFooterImage from "@greatest-show-25/assets/images/register-footer.webp";
 import SecondaryButtonImage from "@greatest-show-25/assets/images/button-2.png";
 import { RegistrationSuccessModal } from "../components/registration-success-modal";
-import { useNavigate } from "react-router-dom";
+import { ProgramStatusModal } from "../components/program-status-modal";
+import { Link, useNavigate } from "react-router-dom";
+import useCurrentProgram from "../api/use-current-program";
+import { parseDate } from "@/core/utils/common";
 
 export type RegisterFormProps = HTMLAttributes<HTMLDivElement>;
 
@@ -48,8 +52,20 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
   const event = useEventPageContext();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const fileInputId = useId();
-  const { submit: submitRegistration } = useRegistration();
+  const { currentProgram } = useCurrentProgram();
+  const isOpened = currentProgram ? currentProgram?.is_opened === 1 : null;
+  const isExpired = currentProgram ? currentProgram?.is_expired === 1 : null;
+  const { submit: submitRegistration, loading: isSubmitting } =
+    useRegistration();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  console.log(
+    currentProgram,
+    "Register Form - isOpened:",
+    isOpened,
+    "isExpired:",
+    isExpired
+  );
 
   const groupOptions = useMemo(
     () => [
@@ -114,30 +130,22 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
 
   const entryCategory = form.watch("entry_category");
 
-  useEffect(() => {
-    if (entryCategory !== "instrument") {
-      form.setValue("instrument_info", "");
-      form.clearErrors("instrument_info");
-    }
-    if (entryCategory !== "talent") {
-      form.setValue("talent_info", "");
-      form.clearErrors("talent_info");
-    }
-  }, [entryCategory, form]);
-
   const handleSubmit = form.handleSubmit(async (data) => {
-    console.log("register-form submission", data);
+    if(!isOpened || isExpired) return;
+    setShowSuccessModal(true);
     try {
       await submitRegistration(data);
-      setShowSuccessModal(true);
     } catch (error) {
       console.error("Registration submission error:", error);
+      setShowSuccessModal(false);
     }
   });
 
+  console.log("Render Register Form", currentProgram);
+
   return (
     <div className={cn("", className)}>
-      <section className="form-section px-80 md:px-[8%]">
+      <section className="relative z-20 form-section px-80 md:px-[8%]">
         <center className="mb-120 md:mb-160">
           {/* Heading */}
           <Typography.Heading
@@ -147,8 +155,10 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
             {parser(t("greatest_show_25.form_heading"))}
           </Typography.Heading>
           <img
-            className="w-[95%] mt-[20rem] md:w-[70%]"
-            src={RegisterHeading}
+            className="w-[95%] mt-80 md:w-[70%]"
+            src={
+              currentLanguage === "vn" ? RegisterHeading : RegisterHeadingMobile
+            }
             alt="Register Heading"
           />
           {/* Description */}
@@ -168,8 +178,8 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
             {t("greatest_show_25.form_description_2")}
           </Typography.Paragraph>
           {/* Contact */}
-          <div className="bg-gs25-gradient-3 p-[1.5rem] md:p-[3rem] inline-block rounded-full">
-            <div className="bg-linear-to-b from-gs25-primary to-gs25-secondary inline-block mx-auto px-[35rem] md:px-240 py-20 md:py-40 rounded-full text-white">
+          <div className="bg-gs25-gradient-3 p-6 md:p-12 inline-block rounded-full">
+            <div className="bg-linear-to-b from-gs25-primary to-gs25-secondary inline-block mx-auto px-140 md:px-240 py-20 md:py-40 rounded-full text-white">
               <Typography.Paragraph className="mb-0  text-[12rem] md:text-[20rem] font-semibold leading-[1.2] flex flex-col md:flex-row">
                 <span className="mr-20">{t("common.event_email")}: </span>
                 <span>{event.variables.contact_email?.value}</span>
@@ -184,16 +194,16 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
               {t("greatest_show_25.form.section_info_heading")}
             </Heading>
           </center>
-          <div className="py-[40rem]">
+          <div className="py-160">
             <Schedule />
           </div>
         </div>
         <Form {...form}>
           <form onSubmit={handleSubmit} autoComplete="off">
             {/* Group target*/}
-            <section className="info-ticket-table mb-120 px-[20rem]">
+            <section className="info-ticket-table mb-120 px-80">
               <center>
-                <Heading className="mb-[30rem] md:mb-[60rem]">
+                <Heading className="mb-120 md:mb-240">
                   {t("greatest_show_25.form.section_1_heading")}
                 </Heading>
               </center>
@@ -215,20 +225,20 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                                 key={option.value}
                                 htmlFor={`entry_group-${option.value}`}
                                 className={cn(
-                                  "cursor-pointer flex flex-col justify-between border-[2rem] md:border-[3rem] border-transparent rounded-[10rem] md:rounded-[25rem] p-[8rem] md:p-[20rem]",
+                                  "cursor-pointer flex flex-col justify-between border-[2rem] md:border-[3rem] border-transparent rounded-[10rem] md:rounded-[25rem] p-32 md:p-80",
                                   {
                                     " border-gs25-primary":
                                       field.value === option.value,
                                   }
                                 )}
                               >
-                                <div className="flex flex-row md:flex-col items-start gap-x-[10rem]">
+                                <div className="flex flex-row md:flex-col items-start gap-x-40">
                                   <img
                                     className="w-[50%] md:w-full"
                                     src={option.image}
                                     alt={option.label}
                                   />
-                                  <div className="flex flex-1 flex-col justify-start md:justify-center">
+                                  <div className="flex flex-1 flex-col justify-center text-center w-full md:justify-center">
                                     <Typography.Paragraph className=" text-gs25-primary text-[14rem] uppercase md:text-[30rem] font-extrabold mb-10 md:mb-40">
                                       {option.heading}
                                     </Typography.Paragraph>
@@ -237,7 +247,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                                     </Typography.Paragraph>
                                   </div>
                                 </div>
-                                <div className="flex items-center justify-center mt-[-12rem] md:mt-[20rem] ml-[60rem] md:ml-0">
+                                <div className="flex items-center justify-center -mt-48 md:mt-80 ml-240 md:ml-0">
                                   <input
                                     id={`entry_group-${option.value}`}
                                     type="radio"
@@ -251,19 +261,19 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                                   />
                                   <div
                                     className={cn(
-                                      "inline-flex items-center justify-center rounded-full border-2 mr-20 md:mr-40 w-[14rem] h-[14rem] md:w-[30rem] md:h-[30rem]  transition-colors duration-200",
+                                      "inline-flex items-center justify-center rounded-full border-2 mr-20 md:mr-40 w-56 h-56 md:w-120 md:h-120  transition-colors duration-200",
                                       "border-white border-[2.5rem] md:border-[5rem] bg-white",
                                       "peer-checked:bg-gs25-gradient-2"
                                     )}
                                   >
                                     <span
                                       className={cn(
-                                        "rounded-full transition-colors duration-200 w-[18rem] h-[18rem] md:w-[24rem] md:h-[24rem]",
+                                        "rounded-full transition-colors duration-200 w-[18rem] h-72 md:w-[24rem] md:h-96",
                                         "bg-transparent peer-checked:bg-hr-ember"
                                       )}
                                     />
                                   </div>
-                                  <span className="text-[10rem] md:text-[20rem] text-gs25-secondary font-semibold">
+                                  <span className="text-[10rem] md:text-[20rem] text-gs25-secondary font-extrabold uppercase">
                                     {t("common.select")}
                                   </span>
                                 </div>
@@ -279,9 +289,9 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
               </div>
             </section>
             {/* Entry Infomation */}
-            <section className="section-3 mt-80 md:mt-[60rem]">
+            <section className="section-3 mt-80 md:mt-240">
               <center>
-                <Heading className="md:mb-[40rem]">
+                <Heading className="md:mb-160">
                   {t("greatest_show_25.form.section_2_heading")}
                 </Heading>
               </center>
@@ -315,7 +325,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                       </FormLabel>
                       <FormControl>
                         <RadioGroup
-                          className="grid gap-[10rem] md:gap-[20rem] md:grid-cols-2 my-[10rem]"
+                          className="grid gap-40 md:gap-80 md:grid-cols-2 my-40"
                           onValueChange={field.onChange}
                           value={field.value}
                         >
@@ -340,14 +350,14 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                                   />
                                   <div
                                     className={cn(
-                                      "inline-flex items-center justify-center rounded-full border-2 mr-30 md:mr-40 w-[10rem] h-[10rem] md:w-[20rem] md:h-[20rem]  transition-colors duration-200",
+                                      "inline-flex items-center justify-center rounded-full border-2 mr-30 md:mr-40 w-40 h-40 md:w-[20rem] md:h-80  transition-colors duration-200",
                                       "border-white border-[2rem] md:border-[5rem] bg-white",
                                       "peer-checked:bg-gs25-gradient-2"
                                     )}
                                   >
                                     <span
                                       className={cn(
-                                        "rounded-full transition-colors duration-200 w-[18rem] h-[18rem] md:w-[24rem] md:h-[24rem]",
+                                        "rounded-full transition-colors duration-200 w-[18rem] h-72 md:w-[24rem] md:h-96",
                                         "bg-transparent peer-checked:bg-hr-ember"
                                       )}
                                     />
@@ -369,7 +379,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                 {entryCategory === "instrument" && (
                   <FormField
                     control={form.control}
-                    name="instrument_info"
+                    name="instrumental_info"
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
@@ -413,17 +423,58 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                   name="entry_participants"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap  font-bold leading-56 md:leading-120">
+                      <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap w-full font-bold leading-56 md:leading-120">
                         {t("greatest_show_25.form.entry_participants_label")}
                       </FormLabel>
                       <FormControl>
-                        <textarea
-                          className="w-full border-gs25-secondary min-h-320 md:min-h-600 bg-white border-[1rem] rounded-[5rem] text-[8rem] md:text-[16rem]  p-[10rem_5rem] md:py-80 md:px-40 resize-y"
-                          placeholder={t(
-                            "greatest_show_25.form.entry_participants_placeholder"
-                          )}
-                          {...field}
-                        />
+                        <div className="space-y-20">
+                          {field.value.map((participant, index) => (
+                            <div
+                              key={index}
+                              className="flex gap-20 items-center"
+                            >
+                              <Input
+                                className="flex-1 h-64 md:h-120 bg-white border-gs25-secondary rounded-[5rem] text-[8rem] md:text-[16rem] p-[10rem_5rem] md:py-80 md:px-40"
+                                placeholder={t(
+                                  "greatest_show_25.form.entry_participants_placeholder"
+                                )}
+                                value={participant}
+                                onChange={(e) => {
+                                  const newParticipants = [...field.value];
+                                  newParticipants[index] = e.target.value;
+                                  field.onChange(newParticipants);
+                                }}
+                              />
+                              {field.value.length > 1 && (
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const newParticipants = field.value.filter(
+                                      (_, i) => i !== index
+                                    );
+                                    field.onChange(newParticipants);
+                                  }}
+                                  className="h-64 md:h-160 w-64 cursor-pointer md:w-160 bg-status-danger hover:bg-red-700 text-white rounded-[5rem] flex items-center justify-center text-[12rem] md:text-[20rem] font-bold"
+                                >
+                                  ×
+                                </button>
+                              )}
+                            </div>
+                          ))}
+                          <SecondaryButton
+                            type="button"
+                            onClick={() => {
+                              if (field.value.length < 25) {
+                                field.onChange([...field.value, ""]);
+                              }
+                            }}
+                            disabled={field.value.length >= 25}
+                            className="capitalize text-[14rem] padding-[5rem_20rem]! md:text-[16rem] disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            {t("greatest_show_25.buttons.add_person")}
+                            {field.value.length >= 25 && " (Max 25)"}
+                          </SecondaryButton>
+                        </div>
                       </FormControl>
                       <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
                     </FormItem>
@@ -448,11 +499,14 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
 
                         <FormControl>
                           <div>
-                            <label htmlFor={fileInputId} className="cursor-pointer inline-block">
+                            <label
+                              htmlFor={fileInputId}
+                              className="cursor-pointer inline-block"
+                            >
                               <div
                                 className={cn(
                                   "relative text-white inline-flex p-[20rem_20rem] h-104 md:h-184 leading-none rounded-[6rem] md:rounded-[13rem] overflow-hidden bg-transparent border-none outline-hidden",
-                                  "text-[10rem] mt-[5rem] text-center md:text-[23rem] font-base italic p-[10rem_15rem] md:p-[30rem_30rem] md:rounded-[13rem] mb-40 flex items-center cursor-pointer hover:scale-105 transition-transform duration-200"
+                                  "text-[10rem] mt-20 text-center md:text-[23rem] font-base italic p-[10rem_15rem] md:p-[30rem_30rem] md:rounded-[13rem] mb-40 flex items-center cursor-pointer hover:scale-105 transition-transform duration-200"
                                 )}
                                 style={{
                                   backgroundImage: `url(${SecondaryButtonImage})`,
@@ -540,7 +594,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                     )}
                   />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[2%] gap-y-[10rem] md:gap-x-[25%] justify-between">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[2%] gap-y-40 md:gap-x-[25%] justify-between">
                   <FormField
                     control={form.control}
                     name={"mobile_number"}
@@ -592,14 +646,14 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                 </div>
               </div>
             </section>
-            <section className="section-3 mt-80 md:mt-[60rem]">
+            <section className="section-3 mt-80 md:mt-240">
               <center>
-                <Heading className="text-center md:mb-[60rem]">
+                <Heading className="text-center md:mb-240">
                   {t("greatest_show_25.form.footer_heading")}
                 </Heading>
               </center>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[60rem]">
-                <div className="flex flex-col gap-x-[30rem]">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-240">
+                <div className="flex flex-col gap-x-120">
                   <Typography.Paragraph className="text-[10rem] md:text-[26rem] font-medium mb-40 md:mb-0">
                     {parser(t("greatest_show_25.form.footer_note_1"))}
                   </Typography.Paragraph>
@@ -607,7 +661,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                     {parser(t("greatest_show_25.form.footer_note_2"))}
                   </Typography.Paragraph>
                 </div>
-                <div className="flex flex-col gap-x-[30rem]">
+                <div className="flex flex-col gap-x-120">
                   <Typography.Paragraph className="text-[10rem] md:text-[26rem] font-medium mb-40 md:mb-0">
                     {parser(t("greatest_show_25.form.footer_note_3"))}
                   </Typography.Paragraph>
@@ -617,27 +671,62 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                 </div>
               </div>
             </section>
-            <center className="mt-[20rem] md:mt-[80rem]">
-              <PrimaryButton
-                className={cn(
-                  "text-[14rem] bg-transparent text-center md:text-[45rem] font-black p-[20rem_30rem] md:p-[45rem_70rem] md:rounded-[20rem] mb-40 flex items-center cursor-pointer hover:scale-105 transition-transform duration-200"
-                )}
+
+            <center className="mt-80 md:mt-320">
+              <Typography.Paragraph className="text-center text-[10rem] md:text-[20rem] text-gs25-primary font-semibold my-60 mb-100">
+                {t("greatest_show_25.form.submit_note")}
+              </Typography.Paragraph>
+              {isOpened === true && isExpired === false && (
+                <PrimaryButton
+                  disabled={isSubmitting}
+                  className={cn(
+                    "text-[14rem] bg-transparent text-center md:text-[45rem] font-black p-[20rem_30rem] md:p-[45rem_70rem] md:rounded-[20rem] mb-40 flex items-center cursor-pointer hover:scale-105 transition-transform duration-200"
+                  )}
+                >
+                  {t("greatest_show_25.buttons.register")}
+                </PrimaryButton>
+              )}
+              <Link
+                to="/greatest-show-25"
+                className="inline-block mt-40 text-[10rem] md:text-[30rem] cursor-pointer text-gs25-primary font-semibold underline"
               >
-                {t("greatest_show_25.buttons.finish")}
-              </PrimaryButton>
+                {t("greatest_show_25.buttons.go_back")}
+              </Link>
             </center>
           </form>
         </Form>
       </section>
-      <img src={RegisterFooterImage} className="md:mt-[-250rem]" alt="" />
+      <img
+        src={RegisterFooterImage}
+        className="md:-mt-1000 relative z-1"
+        alt=""
+      />
       <RegistrationSuccessModal
         open={showSuccessModal}
+        isSubmitting={isSubmitting}
         onConfirm={() => {
           // Redirect to home page use React-router
-          navigate("/greatest-show-25");
+          navigate(`${event.url}`);
         }}
-        onClosed={() => setShowSuccessModal(false)}
+        onClosed={() => {
+          setShowSuccessModal(false);
+        }}
       />
+      {
+        /* Program Status Modal - show when program is not opened or expired */
+        isOpened === false || isExpired === true ? (
+          <ProgramStatusModal
+            open={isOpened === false || isExpired === true}
+            type={isExpired ? "expired" : !isOpened ? "not_opened" : undefined}
+            openedDatetime={
+              currentProgram?.opened_datetime
+                ? parseDate(currentProgram?.opened_datetime)
+                : undefined
+            }
+            onClose={() => {}}
+          />
+        ) : null
+      }
     </div>
   );
 };

@@ -12,7 +12,6 @@ const env = {
   },
   NUTRITION_JOURNEY:{
     TITLE_PAGE: "Hành Trình Dinh Dưỡng",
-
   }
 }
 export default env

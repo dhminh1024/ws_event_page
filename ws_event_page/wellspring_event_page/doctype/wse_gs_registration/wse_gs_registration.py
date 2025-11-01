@@ -58,10 +58,8 @@ class WSEGSRegistration(Document):
         if not template_name:
             template_name = "gs_registration_confirmation"
 
-        sender = settings.email_sender or frappe.utils.get_formatted_email(
-            "Administrator"
-        )
-        subject = "WSSG Greatest Show - Đăng ký thành công | Registration Confirmation"
+        sender = settings.email_sender or "greatestshow@wellspringsaigon.edu.vn"
+        subject = "WSSG Greatest Show - Xác nhận đăng ký | Registration Confirmation"
         recipients = [self.email]
 
         # Get program title if available
@@ -98,9 +96,7 @@ class WSEGSRegistration(Document):
         if not template_name:
             template_name = "gs_registration_cancellation"
 
-        sender = settings.email_sender or frappe.utils.get_formatted_email(
-            "Administrator"
-        )
+        sender = settings.email_sender or "greatestshow@wellspringsaigon.edu.vn"
         subject = "WSSG Greatest Show - Huỷ đăng ký | Registration Cancelled"
         recipients = [self.email]
 
@@ -133,9 +129,7 @@ class WSEGSRegistration(Document):
         if not template_name:
             template_name = "gs_registration_approval"
 
-        sender = settings.email_sender or frappe.utils.get_formatted_email(
-            "Administrator"
-        )
+        sender = settings.email_sender or "greatestshow@wellspringsaigon.edu.vn"
         subject = "WSSG Greatest Show - Đăng ký được phê duyệt | Registration Approved"
         recipients = [self.email]
 

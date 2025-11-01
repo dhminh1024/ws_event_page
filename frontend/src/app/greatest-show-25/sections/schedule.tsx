@@ -42,7 +42,7 @@ export const Schedule: FC<ScheduleProps> = ({ className }) => {
         alt="Schedule"
         className="md:hidden w-full"
       />
-      <div className="absolute w-full h-full bottom-[0] left-0">
+      <div className="absolute w-full h-full bottom-0 left-0">
         <div
           className={cn(
             "flex flex-col h-full items-end py-[3%] gap-y-[4%]",
@@ -51,12 +51,12 @@ export const Schedule: FC<ScheduleProps> = ({ className }) => {
         >
           {scheduleData.map((item, index) => (
             <div
-              className="flex flex-col h-[130rem] w-[155rem] p-[4%] md:h-[40%] md:w-full md:pb-[16rem] justify-between items-start md:items-center md:text-center"
+              className="flex flex-col h-520 w-620 p-[4%] md:h-[40%] md:w-full md:pb-64 justify-between items-start md:items-center md:text-center"
               key={index}
             >
               <Typography.Heading
                 level={2}
-                className="md:text-center text-[13rem] md:text-[26rem] text-gs25-primary font-extrabold leading-[15rem] md:leading-[30rem] uppercase"
+                className="md:text-center text-[13rem] md:text-[20rem] text-gs25-primary font-extrabold leading-60 md:leading-120 uppercase"
               >
                 {parser(item.heading)}
               </Typography.Heading>

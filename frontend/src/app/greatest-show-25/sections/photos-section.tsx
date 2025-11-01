@@ -52,23 +52,6 @@ export const PhotosSection: FC<PhotosSectionProps> = ({
     });
   }, [api]);
 
-  useEffect(() => {
-    if (!inView) return;
-    // setTimeout(() => {
-    //   animateFadeInLeft(text1Ref.current, {
-    //     start: "top 100%",
-    //     end: "top 50%",
-    //   });
-    //   animateFadeInRight(text2Ref.current, {
-    //     start: "top 100%",
-    //     end: "top 50%",
-    //   });
-    //   animateZoomInOut(textDescRef.current, {
-    //     start: "top 100%",
-    //     end: "top 50%",
-    //   });
-    // }, 200);
-  }, [inView]);
 
   return (
     <section
@@ -93,15 +76,18 @@ export const PhotosSection: FC<PhotosSectionProps> = ({
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="h-full w-[20%] rounded-none opacity-0! cursor-pointer" />
+          <CarouselNext className="h-full w-[20%] rounded-none opacity-0! cursor-pointer" />
         </Carousel>
         <div className="flex gap-x-40 md:gap-x-80 justify-center my-70 md:my-160">
           {Array.from({ length: count }).map((_, index) => (
             <div
               key={index}
+              onClick={() => {
+                api?.scrollTo(index);
+              }}
               className={cn(
-                "w-40 h-40 md:w-100 md:h-100 rounded-full bg-gs25-secondary",
+                "w-40 h-40 md:w-100 md:h-100 rounded-full bg-gs25-secondary cursor-pointer",
                 {
                   "bg-gs25-primary": current === index + 1,
                 }
