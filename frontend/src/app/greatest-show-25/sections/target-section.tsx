@@ -245,7 +245,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                   </div>
                   <div
                     className={cn(
-                      "md:px-80 text-gs25-secondary text-[10rem] md:text-[22rem] font-medium mb-40",
+                      "md:px-80 text-gs25-secondary text-[8.5rem] md:text-[22rem] font-medium mb-40",
                       {
                         "md:text-center": index !== 2,
                       }
