@@ -5,6 +5,7 @@ import {
 } from "frappe-react-sdk";
 import { FRAPPE_APIS } from "./api.config";
 import { WSEGSRegistration } from "@/types/WellspringEventPage/WSEGSRegistration";
+import { useState } from "react";
 
 export type Payload = {
   full_name: string;
@@ -12,10 +13,10 @@ export type Payload = {
   entry_group: string;
   entry_name: string;
   entry_category: string;
-  entry_participants: string;
+  entry_participants: string[];
   mobile_number: string;
   entry_file?: File;
-  instrument_info?: string | undefined;
+  instrumental_info?: string | undefined;
   talent_info?: string | undefined;
 };
 
@@ -25,10 +26,17 @@ const useRegistration = () => {
   );
 
   const { upload } = useFrappeFileUpload();
+  const [loading, setLoading] = useState(false);
 
   const submit = async (data: Payload) => {
-    const { entry_file, ...rest } = data;
-    const response = await call(rest);
+    setLoading(true);
+    const { entry_file, entry_participants, ...rest } = data;
+    // Convert participants array to newline-separated string for backend
+    const formattedData = {
+      ...rest,
+      entry_participants: entry_participants.filter(p => p.trim()).join('\n'),
+    };
+    const response = await call(formattedData);
     const registration_id = response.message.registration_id;
     if (entry_file) {
       const uploadResponse = await upload(
@@ -42,11 +50,11 @@ const useRegistration = () => {
         FRAPPE_APIS.UPLOAD_REGISTRATION_FILE.METHOD_STRING
       );
     }
-
+    setLoading(false);
     return;
   };
 
-  return { submit };
+  return { submit, loading };
 };
 
 export default useRegistration;

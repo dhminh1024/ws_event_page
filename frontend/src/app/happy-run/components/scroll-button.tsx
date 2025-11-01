@@ -24,22 +24,27 @@ export default function ScrollButton({
   //     }, 200);
   //   }
   // };
-  const scrollToSection = (section: HTMLElement) => {
+  const smoother = ScrollSmoother.create({
+    smooth: 1.5,
+    effects: true,
+  });
+  const scrollToSection = (section: HTMLElement, id: string) => {
     if (section) {
-      const x = setInterval(() => {
-        if (section.offsetHeight > 0) clearInterval(x);
-        section.scrollIntoView({
-          behavior: "smooth",
-        });
+      smoother.scrollTo(id, true);
+      // section.scrollIntoView({
+      //   behavior: "smooth",
+      // });
+      // const x = setInterval(() => {
+      //   if (section.offsetHeight > 0) clearInterval(x);
 
-      }, 300);
+      // }, 300);
     }
   };
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const section = document.getElementById(to);
     if (!section) return;
-    scrollToSection(section);
+    scrollToSection(section, to);
     window.location.hash = to;
   };
 

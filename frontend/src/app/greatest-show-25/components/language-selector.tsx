@@ -25,10 +25,10 @@ export const LanguageSelector: FC<LanguageSelectProps> = ({ className }) => {
           <SelectValue className="" placeholder="Select a mode" />
         </SelectTrigger>
         <SelectContent className="h-350 z-2001 max-h-none bg-white">
-          <SelectItem className=" text-[10rem] md:text-[16rem] p-40 bg-white! hover:bg-slate-200! text-black cursor-pointer" value="vn">
+          <SelectItem className=" text-[10rem] md:text-[16rem] p-40 bg-white! hover:bg-slate-200! text-black! cursor-pointer" value="vn">
             Tiếng Việt
           </SelectItem>
-          <SelectItem className="text-[10rem] md:text-[16rem] p-40 bg-white! hover:bg-slate-200! text-black cursor-pointer" value="en">
+          <SelectItem className="text-[10rem] md:text-[16rem] p-40 bg-white! hover:bg-slate-200! text-black! cursor-pointer" value="en">
             English
           </SelectItem>
         </SelectContent>

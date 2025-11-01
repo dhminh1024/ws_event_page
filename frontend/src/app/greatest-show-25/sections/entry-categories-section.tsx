@@ -153,22 +153,22 @@ export const EntryCategoriesSection = forwardRef<
               </div>
               <div
                 className={cn(
-                  "absolute top-[50%] left-[50%] translate-[-50%] m-auto w-[90%] md:w-[80%] h-auto group-hover:scale-100 group-visited:scale-100 group-focus:scale-100 scale-0 transition-transform duration-300",
+                  "absolute top-[50%] left-[50%] translate-[-50%] m-auto w-[90%] md:w-[80%] h-auto group-hover:scale-100 group-visited:scale-100 group-focus:scale-100 scale-0 transition-transform duration-300 text-center",
                   {
                     "scale-100": showCard === index,
                   }
                 )}
               >
                 <img src={CategoryCardImage} alt="" />
-                <div className="absolute top-0 left-0 text-center p-60 md:p-80 pt-100 md:pt-140 h-full flex flex-col">
-                  <Typography.Heading className="text-[14rem] md:text-[26rem] font-extrabold uppercase text-center text-white mb-20 md:mb-40">
-                    {category.cardTitle}
-                  </Typography.Heading>
+                <div className="absolute top-0 left-0 text-center p-60 md:p-120 mx-auto pt-100 md:pt-180 w-full h-full flex flex-col">
+                  <div className="text-[14rem] md:text-[23rem] font-extrabold uppercase text-center text-white mb-20 md:mb-40">
+                    {parser(category.cardTitle)}
+                  </div>
                   <div
                     className={cn(
                       "text-[10rem] flex flex-col gap-y-20 md:text-[18rem] text-white font-semibold  text-center",
                       {
-                        "text-[11rem] md:text-[14rem]":
+                        "text-[11rem] md:text-[18rem]":
                           currentLanguage === "en",
                       }
                     )}

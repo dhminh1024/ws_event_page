@@ -31,12 +31,16 @@ export const useRegisterForm = () => {
         .string()
         .trim()
         .min(1, t("greatest_show_25.form.entry_category_required")),
-      instrument_info: z.string().trim().optional(),
+      instrumental_info: z.string().trim().optional(),
       talent_info: z.string().trim().optional(),
       entry_participants: z
-        .string()
-        .trim()
-        .min(1, t("greatest_show_25.form.entry_participants_required")),
+        .array(z.string().trim().min(1, "Name is required"))
+        .min(1, t("greatest_show_25.form.entry_participants_required"))
+        .max(25, t("greatest_show_25.form.entry_participants_max"))
+        .refine(
+          (participants) => participants.some((p) => p.trim().length > 0),
+          t("greatest_show_25.form.entry_participants_required")
+        ),
       entry_file: z
         .any()
         .refine((file) => {
@@ -68,12 +72,12 @@ export const useRegisterForm = () => {
     .superRefine((data, ctx) => {
       if (
         data.entry_category === "instrument" &&
-        !data.instrument_info?.trim()
+        !data.instrumental_info?.trim()
       ) {
         ctx.addIssue({
           code: "custom",
           message: t("greatest_show_25.form.instrument_info_required"),
-          path: ["instrument_info"],
+          path: ["instrumental_info"],
         });
       }
 
@@ -92,9 +96,9 @@ export const useRegisterForm = () => {
       entry_group: "",
       entry_name: "",
       entry_category: "",
-      instrument_info: "",
+      instrumental_info: "",
       talent_info: "",
-      entry_participants: "",
+      entry_participants: [""],
       entry_file: undefined,
       full_name: "",
       mobile_number: "",

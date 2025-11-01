@@ -17,21 +17,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@atoms/dialog";
-import env from "@/config/env";
 import Typography from "./typography";
-import { Label } from "@atoms/label";
-import { generateArrayWithRandomLetters } from "../utils/ultils";
 import { useLocales } from "@/core/hooks/use-locales";
-import { LunarScroll } from "./scroll";
-import { on } from "events";
-import { set } from "lodash";
 import { useResponsive } from "@/core/hooks/use-reponsive";
-import { useSettings } from "@/lib/auth/settings/use-settings";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
-import { format } from "date-fns";
 import { X } from "lucide-react";
+import { SecondaryButton } from "./button";
+import SuccessFooterImage from "@greatest-show-25/assets/images/success-footer.png";
+import parser from "html-react-parser";
 import { Button } from "@atoms/button";
-
 export type LunarModalProps = HTMLAttributes<HTMLDivElement> &
   PropsWithChildren & {
     open?: boolean;
@@ -44,15 +38,15 @@ export type LunarModalProps = HTMLAttributes<HTMLDivElement> &
 
 export const NotificationModal: FC<LunarModalProps> = ({
   open: $open = false,
-  title,
-  description,
+  title = "Title",
+  description = "Description",
   className,
   children,
   onConfirm,
   onCancel,
   onClosed,
 }) => {
-  const { t } = useLocales();
+  const { t, currentLanguage } = useLocales();
   const { isDesktop } = useResponsive();
   const [isOpen, setIsOpen] = useState(true);
   const event = useEventPageContext();
@@ -73,7 +67,7 @@ export const NotificationModal: FC<LunarModalProps> = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         className={cn(
-          " max-w-1920 w-full bg-transparent border-none shadow-none px-40",
+          " max-w-1920 w-full bg-hr-background border-none shadow-none ",
           className
         )}
       >
@@ -87,16 +81,17 @@ export const NotificationModal: FC<LunarModalProps> = ({
         >
           <X className="w-[20rem]! h-80! text-white" />
         </Button>
-        <LunarScroll scrollSize={isDesktop ? 30 : 20}>
-          <div className="p-80">
-            <Typography.Paragraph className="text-[24rem] md:text-[34rem] mb-40 text-center text-happy_box-light_red font-playlist">
+        <div className="px-[2%] py-80">
+          <center className="mb-20 px-[7%]">
+            <div className="py-80 md:py-60 text-[20rem] md:text-[26rem] text-gs-primary font-bold">
               {title}
-            </Typography.Paragraph>
-            <Typography.Paragraph className="text-[16rem] md:text-[20rem] text-center text-happy_box-red">
+            </div>
+            <div className="py-80 md:py-60 text-[20rem] md:text-[24rem] text-gs-primary font-medium">
               {description}
-            </Typography.Paragraph>
-          </div>
-        </LunarScroll>
+            </div>
+          </center>
+        </div>
+        <img className="w-full" src={SuccessFooterImage} alt="Footer" />
       </DialogContent>
     </Dialog>
   );

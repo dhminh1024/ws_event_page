@@ -76,33 +76,29 @@ export const Component: FC = () => {
   const event = useEventPageContext();
 
   // Initialize smooth scroll
-  useSmoothScroll({
-    smooth: 1.5,
-    effects: true,
-    smoothTouch: true,
-  });
+  // useSmoothScroll({
+  //   smooth: 1.5,
+  //   effects: false,
+  //   smoothTouch: true,
+  // });
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div>
-        <div id="smooth-content">
-          <BackgroundGradient className="relative">
-            <HeaderSection className="px-80 md:px-240" />
-            <MenuBar className="-mt-184 md:-mt-220" />
-            <HeroSection id="overview" />
-            <CountDownSection />
-            <TeaserSection id="happy-run" />
-            <TargetSection />
-            <EntryCategoriesSection />
-            <AwardsSection />
-            <JourneySection />
-            <FAQSection />
-            <PhotosSection />
-            <ContactSection />
-            <FooterSection />
-          </BackgroundGradient>
-        </div>
-      </div>
+      <BackgroundGradient className="relative">
+        <HeaderSection className="px-80 md:px-240" />
+        <MenuBar className="-mt-184 md:-mt-220" />
+        <HeroSection id="overview" />
+        <CountDownSection />
+        <TeaserSection id="happy-run" />
+        <TargetSection />
+        <EntryCategoriesSection />
+        <AwardsSection />
+        <JourneySection />
+        <FAQSection />
+        <PhotosSection />
+        <ContactSection />
+        <FooterSection />
+      </BackgroundGradient>
     </Suspense>
   );
 };

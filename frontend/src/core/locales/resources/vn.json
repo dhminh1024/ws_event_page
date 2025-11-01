@@ -28,7 +28,8 @@
     "student_code": "MSHS",
     "event_email": "Email chương trình",
     "search_empty": "Không tìm thấy kết quả, vui lòng bổ sung thêm",
-    "sold_out": "Hết vé"
+    "sold_out": "Hết vé",
+    "notification": "Thông báo"
   },
   "notification": {
     "client_error": {
@@ -248,11 +249,11 @@
     "target_group_desc_1": "Học sinh từ khối lớp 1-12 đang học tại trường Wellspring Saigon (năm học 2025-2026)",
     "target_group_title_2": "Cựu học sinh",
     "target_group_desc_2": "Cựu học sinh đã từng học tại Wellspring Saigon",
-    "target_group_title_3": "GV-NV",
+    "target_group_title_3": "Giáo Viên - Nhân viên",
     "target_group_desc_3": "Giáo viên, Cán bộ Công nhân viên đang công tác tại trường Wellspring Saigon",
     "target_group_title_4": "Phụ huynh",
     "target_group_desc_4": "Phụ huynh Học sinh có con đang học tại trường Wellspring Saigon (năm học 2025-2026)",
-    "target_text_1": "Các thí sinh được chia trong <b>3 BẢNG DỰ THI</b> phù hợp với đối tượng tham gia",
+    "target_text_1": "Các thí sinh được chia thành <b>3 BẢNG DỰ THI:</b>",
     "category_heading": "Hình thức dự thi",
     "category_item_1": "Ca hát",
     "category_item_2": "Nhảy múa",
@@ -260,12 +261,14 @@
     "category_item_4": "Tiết mục tài năng khác",
     "awards_heading": "Giải thưởng",
     "awards_value_title": "Tổng giá trị giải thưởng lên đến",
-    "award_item_1_value": "Trị giá <b className=\"text-[14rem] md:text-[28rem] font-[800]\">10.000.000 VND</b>",
-    "award_item_2_value": "Trị giá <b className=\"text-[14rem] md:text-[28rem] font-[800]\">7.000.000 VND</b>",
-    "award_item_3_value": "Trị giá <b className=\"text-[14rem] md:text-[28rem] font-[800]\">5.000.000 VND</b>",
-    "award_item_4_value": "Trị giá <b className=\"text-[14rem] md:text-[28rem] font-[800]\">3.000.000 VND</b>",
-    "award_item_5_value": "Trị giá <b className=\"text-[14rem] md:text-[28rem] font-[800]\">2.000.000 VND</b>",
-    "award_item_bonus": "Kỷ niệm chương và Huy chương",
+    "award_item_1_value": "Trị giá <b className=\"text-[14rem] md:text-[28rem] font-[800]\">10.000.000 VNĐ/GIẢI</b>",
+    "award_item_2_value": "Trị giá <b className=\"text-[14rem] md:text-[28rem] font-[800]\">7.000.000 VNĐ/GIẢI</b>",
+    "award_item_3_value": "Trị giá <b className=\"text-[14rem] md:text-[28rem] font-[800]\">5.000.000 VNĐ/GIẢI</b>",
+    "award_item_4_value": "Trị giá <b className=\"text-[14rem] md:text-[28rem] font-[800]\">3.000.000 VNĐ/GIẢI</b>",
+    "award_item_5_value": "Trị giá <b className=\"text-[14rem] md:text-[28rem] font-[800]\">2.000.000 VNĐ/GIẢI</b>",
+    "award_item_bonus_1": "Cùng với kỷ niệm chương & Huy chương",
+    "award_item_bonus_2": "Cùng với Huy chương và Giấy chứng nhận​",
+    "award_note": "Lưu ý: Số lượng giải thưởng có thể được điều chỉnh dựa trên số lượng thực tế đăng ký​​.​​​",
     "journey_section_heading": "Hành trình",
     "contact_section_heading": "Thông tin liên hệ",
     "contact_email": "Email BTC: {{email}}",
@@ -295,10 +298,10 @@
         "secondary_students_description": "Học sinh Trung học: <br/> từ Khối 6 - Khối 12",
         "parent_teacher_staff": "Phụ huynh - Giáo viên - Nhân viên",
         "parent_teacher_staff_heading": "Bảng C",
-        "parent_teacher_staff_description": "<ul className=\"pl-[15rem] md:pl-[40rem]\" style=\"list-style: disc; text-align:left\"><li>Phụ huynh</li><li>Phụ huynh và Học sinh</li><li>Giáo viên - Nhân viên <br/> Wellspring Saigon</li><li>Cựu Học sinh</li></ul>"
+        "parent_teacher_staff_description": "<ul className=\"pl-[15rem] md:pl-[40rem]\" style=\"list-style: disc; text-align:left\"><li>Cựu Học sinh</li><li>Phụ huynh & Học sinh</li><li>Học sinh & Giáo viên</li><li>Giáo viên</li><li>Nhân viên</li><li>Phụ huynh & Giáo viên</li></ul>"
       },
       "group_required": "Hãy chọn một đối tượng dự thi",
-      "entry_name": "Tên tiếc mục",
+      "entry_name": "Tên tiếc mục dự thi",
       "entry_name_required": "Hãy nhập tên tiết mục",
       "entry_category_label": "Hạng mục đăng ký dự thi",
       "entry_category_required": "Hãy chọn hạng mục dự thi",
@@ -308,13 +311,14 @@
         "instrument": "Biểu diễn nhạc cụ",
         "instrument_placeholder": "Vui lòng điền nhạc cụ bạn dự thi",
         "talent": "Biểu diễn tài năng khác",
-        "talent_placeholder": "Vui lòng điền thông tin"
+        "talent_placeholder": "Vui lòng điền hạng mục dự thi (xiếc, võ thuật,…)​"
       },
       "instrument_info_required": "Vui lòng điền nhạc cụ dự thi",
       "entry_talent_required": "Vui lòng điền thông tin tiết mục dự thi",
-      "entry_participants_label": "Thông tin đăng ký dự thi",
-      "entry_participants_required": "Hãy nhập thông tin đăng ký dự thi",
-      "entry_participants_placeholder": "Họ và tên (bắt buộc); lớp, phòng ban (nếu có). Ví dụ: Nguyễn Văn A - Lớp 8.8 \nNếu đăng ký dự thi theo nhóm, vui lòng điền đầy đủ tên theo số lượng thành viên tham gia",
+      "entry_participants_label": "Tên thành viên dự thi (Tối đa 25 người)",
+      "entry_participants_required": "Hãy nhập thông tin người tham gia",
+      "entry_participants_placeholder": "Họ và tên (bắt buộc); lớp, phòng ban (nếu có). Ví dụ: Nguyễn Văn A - Lớp 8.8",
+      "entry_participants_max": "Vượt quá số lượng người tham gia cho phép (tối đa 25 người)",
       "entry_file_label": "Đăng tải file nhạc/video biểu diễn (Dung lượng tối đa 100MB)",
       "entry_file_button": "Tải file lên",
       "entry_file_invalid": "Vui lòng tải file định dạng hợp lệ (mp3, mp4, mov, wmv, avi)",
@@ -338,10 +342,13 @@
       "footer_note_4": "4. Thí sinh chuẩn bị tiết mục cho vòng 1 với thời lượng không quá 3 phút, thể hiện được kỹ năng, năng khiếu của bản thân và nội dung chính của tác phẩm dự thi.",
       "success_text_1": "Cảm ơn bạn đã đăng ký tham gia WISer's Greatest Show. Thông tin đăng ký chi tiết sẽ được hệ thống gửi đến địa chỉ email đã đăng ký",
       "success_text_2": "Hẹn gặp lại bạn tại <b>VÒNG 1 - WITHIN ME</b> diễn ra vào <b>29/11/2025.</b>",
-      "success_text_3": "Hãy sẵn sàng thể hiện tài năng và đam mê của bản thân tại <br/> WISers' Greatest show 2025!"
+      "success_text_3": "Hãy sẵn sàng thể hiện tài năng và đam mê của bản thân tại <br/> WISers' Greatest show 2025!",
+      "submit_note": "Bằng việc nhấn nút “ĐĂNG KÝ”, bạn xác nhận rằng mình đã đọc và đồng ý với các quy định, thể lệ tham gia cuộc thi WISers’ Greatest Show 2025 trên website sự kiện​",
+      "submitting": "Đang gửi đơn đăng ký. Vui lòng đợi..."
     },
     "buttons": {
       "register_now": "Đăng ký ngay",
+      "join_now": "Đăng ký ngay​",
       "go_back": "Quay lại",
       "finish": "Hoàn thành",
       "view_more": "Xem thêm",
@@ -349,8 +356,13 @@
       "view_order": "Xem đơn hàng",
       "back_to_home": "Trở về trang chủ",
       "entry_rules": "Thể lệ thi",
+      "round_1_entry_list": "Danh sách tiết mục Vòng 1",
+      "round_2_entry_list": "Danh sách tiết mục Vòng 2",
+      "round_3_entry_list": "Danh sách tiết mục Vòng 3",
       "entry_results": "Kết quả thi",
-      "go_home": "Trở về"
+      "go_home": "Trở về",
+      "register": "Register",
+      "add_person": "Thêm thành viên +"
     }
   }
 }

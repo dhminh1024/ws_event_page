@@ -26,9 +26,16 @@ import BlockIcon2 from "@greatest-show-25/assets/images/award-item-2.png";
 import BlockIcon3 from "@greatest-show-25/assets/images/award-item-3.png";
 import BlockIcon4 from "@greatest-show-25/assets/images/award-item-4.png";
 import BlockIcon5 from "@greatest-show-25/assets/images/award-item-5.png";
-import BackgroundImage from "@greatest-show-25/assets/images/awards-section-bg.png";
-import BackgroundImageMobile from "@greatest-show-25/assets/images/awards-section-bg-mb.png";
+import BlockIcon1Eng from "@greatest-show-25/assets/images/award-item-1-eng.png";
+import BlockIcon2Eng from "@greatest-show-25/assets/images/award-item-2-eng.png";
+import BlockIcon3Eng from "@greatest-show-25/assets/images/award-item-3-eng.png";
+import BlockIcon4Eng from "@greatest-show-25/assets/images/award-item-4-eng.png";
+import BlockIcon5Eng from "@greatest-show-25/assets/images/award-item-5-eng.png";
+
+import BackgroundImage from "@greatest-show-25/assets/images/awards-section-bg.webp";
+import BackgroundImageMobile from "@greatest-show-25/assets/images/awards-section-bg-mb.webp";
 import AwardValueImage from "@greatest-show-25/assets/images/award-value.png";
+import AwardValueEngImage from "@greatest-show-25/assets/images/award-value-eng.png";
 import { useResponsive } from "@/core/hooks/use-reponsive";
 
 export type AwardsSectionProps = HTMLAttributes<HTMLDivElement> &
@@ -57,28 +64,33 @@ export const AwardsSection = forwardRef<HTMLDivElement, AwardsSectionProps>(
       () => [
         {
           title: t("greatest_show_25.category_item_1"),
-          img: BlockIcon1,
+          img: currentLanguage === "en" ? BlockIcon1Eng : BlockIcon1,
           ref: award1Ref,
+          bonus: t("greatest_show_25.award_item_bonus_1")
         },
         {
           title: t("greatest_show_25.category_item_2"),
-          img: BlockIcon2,
+          img: currentLanguage === "en" ? BlockIcon2Eng : BlockIcon2,
           ref: award2Ref,
+          bonus: t("greatest_show_25.award_item_bonus_1")
         },
         {
           title: t("greatest_show_25.category_item_3"),
-          img: BlockIcon3,
+          img: currentLanguage === "en" ? BlockIcon3Eng : BlockIcon3,
           ref: award3Ref,
+          bonus: t("greatest_show_25.award_item_bonus_1")
         },
         {
           title: t("greatest_show_25.category_item_4"),
-          img: BlockIcon4,
+          img: currentLanguage === "en" ? BlockIcon4Eng : BlockIcon4,
           ref: award4Ref,
+          bonus: t("greatest_show_25.award_item_bonus_2")
         },
         {
           title: t("greatest_show_25.category_item_5"),
-          img: BlockIcon5,
+          img: currentLanguage === "en" ? BlockIcon5Eng : BlockIcon5,
           ref: award5Ref,
+          bonus: t("greatest_show_25.award_item_bonus_2")
         },
       ],
       [currentLanguage]
@@ -119,7 +131,7 @@ export const AwardsSection = forwardRef<HTMLDivElement, AwardsSectionProps>(
         }}
         {...props}
       >
-        <div className="w-[90%] mx-auto py-80 pt-[40%] pb-[40%] md:pt-[40%] md:pb-[43%]">
+        <div className="w-[90%] mx-auto py-80 pt-[40%] pb-[40%] md:pt-[40%] md:pb-[40%]">
           <div id="awards">
             <Typography.Heading
               ref={headingRef}
@@ -127,16 +139,16 @@ export const AwardsSection = forwardRef<HTMLDivElement, AwardsSectionProps>(
             >
               {t("greatest_show_25.awards_heading")}
             </Typography.Heading>
-            <Typography.Paragraph className="mt-40 md:mt-80 text-center text-[16rem] md:text-[24rem] text-white max-w-[800rem] mx-auto">
+            <Typography.Paragraph className="mt-40 md:mt-80 text-center text-[16rem] md:text-[24rem] text-white max-w-3200 mx-auto">
               {t("greatest_show_25.awards_value_title")}
             </Typography.Paragraph>
             <img
               className="w-[90%] mx-auto"
-              src={AwardValueImage}
+              src={currentLanguage === "en" ? AwardValueEngImage : AwardValueImage}
               ref={moneyRef}
               alt="Award Value Image"
             />
-            <div className="flex flex-wrap flex-col md:flex-row justify-center gap-x-200 gap-y-60 md:gap-y-100 mx-auto">
+            <div className="flex flex-wrap flex-col md:flex-row justify-center gap-x-200 gap-y-20 md:gap-y-100 mx-auto">
               {awards.map((award, index) => (
                 <div
                   ref={award.ref}
@@ -154,13 +166,14 @@ export const AwardsSection = forwardRef<HTMLDivElement, AwardsSectionProps>(
                         )
                       )}
                     </Typography.Paragraph>
-                    <Typography.Paragraph className="text-[11rem] md:text-[20rem] text-center text-white">
-                      {t("greatest_show_25.award_item_bonus")}
+                    <Typography.Paragraph className="text-[9rem] md:text-[19rem] text-left text-white">
+                      {award.bonus}
                     </Typography.Paragraph>
                   </div>
                 </div>
               ))}
             </div>
+            <center className="mt-80 md:mt-200"><Typography.Paragraph className="text-[8rem] md:text-[20rem] text-center text-white">{t("greatest_show_25.award_note")}</Typography.Paragraph></center>
           </div>
         </div>
       </section>
