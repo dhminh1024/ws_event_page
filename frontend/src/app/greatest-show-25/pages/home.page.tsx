@@ -76,11 +76,11 @@ export const Component: FC = () => {
   const event = useEventPageContext();
 
   // Initialize smooth scroll
-  // useSmoothScroll({
-  //   smooth: 1.5,
-  //   effects: false,
-  //   smoothTouch: true,
-  // });
+  useSmoothScroll({
+    smooth: 1.5,
+    effects: false,
+    smoothTouch: true,
+  });
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
