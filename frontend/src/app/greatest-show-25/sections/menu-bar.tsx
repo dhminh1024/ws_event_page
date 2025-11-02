@@ -23,16 +23,27 @@ export const MenuBar: FC<MenuBarProps> = ({ className }) => {
   useEffect(() => {
     if (!navRef.current) return;
 
-    const st = ScrollTrigger.create({
-      trigger: navRef.current,
-      start: "top top",
-      end: "max",
-      pin: true,
-      pinSpacing: false,
-    });
+    let st: ScrollTrigger | null = null;
+
+    // Delay to allow page to fully render
+    const timer = setTimeout(() => {
+      if (!navRef.current) return;
+
+      st = ScrollTrigger.create({
+        trigger: navRef.current,
+        start: "top top",
+        end: "+=999999", // Keep pinned throughout entire scroll
+        pin: true,
+        pinSpacing: false,
+        invalidateOnRefresh: true, // Recalculate on refresh
+      });
+    }, 50);
 
     return () => {
-      st.kill();
+      clearTimeout(timer);
+      if (st) {
+        st.kill();
+      }
     };
   }, []);
 

@@ -36,6 +36,7 @@ import {
 } from "../components/animate";
 import { useInView } from "react-intersection-observer";
 import parser from "html-react-parser";
+import { LightEffect } from "../components/light-effect";
 import {
   PrimaryButton,
   SecondaryButton,
@@ -297,6 +298,12 @@ export const JourneySection: FC<JourneySectionProps> = ({
                 className="w-[12%] md:w-[10%] h-auto top-[11%] md:top-[6%] left-[82%] absolute"
                 alt="Material 3"
               />
+              <LightEffect className="top-[20%] left-[28%] md:top-[10%] md:left-[23%] md:w-300 md:h-300 w-100 h-100" />
+              <LightEffect className="top-[28%] left-[27%] md:top-[12%] md:left-[22%] md:w-100 md:h-100 w-30 h-30" />
+              <LightEffect className="top-[7%] left-[60%] md:top-[3%] md:left-[60%] md:w-300 md:h-300 w-100 h-100" />
+              <LightEffect className="top-[13%] left-[60%] md:top-[6%] md:left-[59%] md:w-100 md:h-100  w-30 h-30" />
+              <LightEffect className="top-[21%] left-[80%] md:top-[10%] md:left-[79%] md:w-300 md:h-300 w-100 h-100" />
+              <LightEffect className="top-[27%] left-[78%] md:top-[12%] md:left-[78%] md:w-100 md:h-100  w-30 h-30" />
             </div>
             <div
               className="w-full md:absolute text-left"
@@ -399,6 +406,13 @@ export const JourneySection: FC<JourneySectionProps> = ({
                 className="w-[18%] md:w-[12%] h-auto top-[28%] md:top-[35%] left-[43%] md:left-[59%] absolute"
                 alt="Material 5"
               />
+              <LightEffect className="top-[27%] left-[16%] md:top-[30%] md:left-[23%] md:w-300 md:h-300 w-100 h-100" />
+              <LightEffect className="top-[34%] left-[14%] md:top-[32%] md:left-[22%] md:w-100 md:h-100 w-30 h-30" />
+              <LightEffect className="top-[50%] left-[28%] md:top-[40%] md:left-[40%] md:w-300 md:h-300 w-100 h-100" />
+              <LightEffect className="top-[56%] left-[27%] md:top-[42%] md:left-[38%] md:w-100 md:h-100 w-30 h-30" />
+              <LightEffect className="top-[44%] left-[37%] md:top-[38%] md:left-[52%] md:w-300 md:h-300 w-100 h-100" />
+              <LightEffect className="top-[53%] left-[55%] md:top-[42.5%] md:left-[70%] md:w-300 md:h-300 w-100 h-100" />
+              <LightEffect className="top-[62%] left-[57%] md:top-[45.5%] md:left-[72%] md:w-100 md:h-100 w-30 h-30" />
             </div>
 
             <div
@@ -504,6 +518,13 @@ export const JourneySection: FC<JourneySectionProps> = ({
                 className="w-[14%] h-auto top-[28%] md:top-[65%] left-[45%] md:left-[30%] absolute"
                 alt="Material 8"
               />
+              <LightEffect className="top-[24%] left-[85%] md:top-[52%] md:left-[93%] md:w-300 md:h-300 w-100 h-100" />
+              <LightEffect className="top-[36%] left-[79%] md:top-[63%] md:left-[85%] md:w-300 md:h-300 w-100 h-100" />
+              <LightEffect className="top-[36%] left-[83%] md:top-[65%] md:left-[84%] md:w-100 md:h-100 w-30 h-30" />
+              <LightEffect className="top-[38%] left-[59%] md:top-[70%] md:left-[45%] md:w-300 md:h-300 w-100 h-100" />
+              <LightEffect className="top-[44%] left-[59%] md:top-[72%] md:left-[44%] md:w-100 md:h-100 w-30 h-30" />
+              <LightEffect className="top-[39%] left-[42%] md:top-[72%] md:left-[31%] md:w-300 md:h-300 w-100 h-100" />
+              <LightEffect className="top-[44%] left-[42%] md:top-[75%] md:left-[30%] md:w-100 md:h-100 w-30 h-30" />
             </div>
 
             <div

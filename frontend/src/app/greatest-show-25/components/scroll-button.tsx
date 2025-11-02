@@ -1,7 +1,10 @@
 import { useResponsive } from "@/core/hooks/use-reponsive";
-import { clear } from "console";
 import React, { HTMLAttributes, PropsWithChildren } from "react";
-import { number } from "zod";
+import gsap from "gsap";
+import ScrollSmoother from "gsap/ScrollSmoother";
+import ScrollToPlugin from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollToPlugin);
 
 interface ScrollButtonProps extends HTMLAttributes<HTMLElement> {
   to: string;
@@ -13,46 +16,46 @@ export default function ScrollButton({
   ...props
 }: PropsWithChildren<ScrollButtonProps>) {
   const { isDesktop } = useResponsive();
-  // const scrollToSection = () => {
-  //   const section = document.getElementById(to);
-  //   if (section) {
-  //     const x = setInterval(() => {
-  //       const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-  //       if (section.getBoundingClientRect().top < 1) clearInterval(x);
-  //       window.scrollTo({
-  //         top: sectionTop,
-  //         behavior: "smooth",
-  //       });
-  //     }, 200);
-  //   }
-  // };
+
   const scrollToSection = (section: HTMLElement) => {
-    if (section) {
-      // Space in top is 60px
+    if (!section) return;
+
+    // Get ScrollSmoother instance if it exists
+    const smoother = ScrollSmoother.get();
+
+    // Space in top offset
+    const offset = isDesktop ? 150 : 60;
+
+    if (smoother) {
+      // Use ScrollSmoother's scrollTo method
+      smoother.scrollTo(section, true, `top ${offset}px`);
+    } else {
+      // Fallback to gsap scrollTo for smooth animation
       const sectionTop =
         section.getBoundingClientRect().top +
         window.scrollY -
-        (isDesktop ? 200 : 60);
-      window.scrollTo({
-        top: sectionTop,
-        behavior: "smooth",
-      });
+        offset;
 
-      // // Fallback in case the interval doesn't clear
-      // setTimeout(() => {
-      //   clearInterval(x);
-      //   section.scrollIntoView({
-      //     behavior: "smooth",
-      //   });
-      // }, 300);
+      gsap.to(window, {
+        duration: 1,
+        scrollTo: { y: sectionTop, autoKill: true },
+        ease: "power2.inOut",
+      });
     }
   };
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
     const section = document.getElementById(to);
     if (!section) return;
     scrollToSection(section);
-    window.location.hash = to;
+
+    // Update hash without jumping
+    if (window.history.pushState) {
+      window.history.pushState(null, "", `#${to}`);
+    } else {
+      window.location.hash = to;
+    }
   };
 
   const newChildren = React.Children.map(children, (child) => {
