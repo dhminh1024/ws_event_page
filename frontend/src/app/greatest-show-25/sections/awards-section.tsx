@@ -21,21 +21,21 @@ import {
   animateWavebeat,
 } from "../components/animate";
 import { useInView } from "react-intersection-observer";
-import BlockIcon1 from "@greatest-show-25/assets/images/award-item-1.png";
-import BlockIcon2 from "@greatest-show-25/assets/images/award-item-2.png";
-import BlockIcon3 from "@greatest-show-25/assets/images/award-item-3.png";
-import BlockIcon4 from "@greatest-show-25/assets/images/award-item-4.png";
-import BlockIcon5 from "@greatest-show-25/assets/images/award-item-5.png";
-import BlockIcon1Eng from "@greatest-show-25/assets/images/award-item-1-eng.png";
-import BlockIcon2Eng from "@greatest-show-25/assets/images/award-item-2-eng.png";
-import BlockIcon3Eng from "@greatest-show-25/assets/images/award-item-3-eng.png";
-import BlockIcon4Eng from "@greatest-show-25/assets/images/award-item-4-eng.png";
-import BlockIcon5Eng from "@greatest-show-25/assets/images/award-item-5-eng.png";
+import BlockIcon1 from "@greatest-show-25/assets/images/award-item-1.webp";
+import BlockIcon2 from "@greatest-show-25/assets/images/award-item-2.webp";
+import BlockIcon3 from "@greatest-show-25/assets/images/award-item-3.webp";
+import BlockIcon4 from "@greatest-show-25/assets/images/award-item-4.webp";
+import BlockIcon5 from "@greatest-show-25/assets/images/award-item-5.webp";
+import BlockIcon1Eng from "@greatest-show-25/assets/images/award-item-1-eng.webp";
+import BlockIcon2Eng from "@greatest-show-25/assets/images/award-item-2-eng.webp";
+import BlockIcon3Eng from "@greatest-show-25/assets/images/award-item-3-eng.webp";
+import BlockIcon4Eng from "@greatest-show-25/assets/images/award-item-4-eng.webp";
+import BlockIcon5Eng from "@greatest-show-25/assets/images/award-item-5-eng.webp";
 
 import BackgroundImage from "@greatest-show-25/assets/images/awards-section-bg.webp";
 import BackgroundImageMobile from "@greatest-show-25/assets/images/awards-section-bg-mb.webp";
-import AwardValueImage from "@greatest-show-25/assets/images/award-value.png";
-import AwardValueEngImage from "@greatest-show-25/assets/images/award-value-eng.png";
+import AwardValueImage from "@greatest-show-25/assets/images/award-value.webp";
+import AwardValueEngImage from "@greatest-show-25/assets/images/award-value-eng.webp";
 import { useResponsive } from "@/core/hooks/use-reponsive";
 
 export type AwardsSectionProps = HTMLAttributes<HTMLDivElement> &

@@ -17,8 +17,8 @@ import {
 import Typography from "./typography";
 import { useLocales } from "@/core/hooks/use-locales";
 import parser from "html-react-parser";
-import RegisterSuccessHeading from "@greatest-show-25/assets/images/registration-success-heading.png";
-import SuccessFooterImage from "@greatest-show-25/assets/images/success-footer.png";
+import RegisterSuccessHeading from "@greatest-show-25/assets/images/registration-success-heading.webp";
+import SuccessFooterImage from "@greatest-show-25/assets/images/success-footer.webp";
 import { getTimeLeft } from "@/lib/utils/common";
 import Counter from "@atoms/counter";
 import { useResponsive } from "@/core/hooks/use-reponsive";

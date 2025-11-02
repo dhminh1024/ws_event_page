@@ -28,9 +28,9 @@ import TopPageImage from "@happy-run/assets/images/top-page-2.webp";
 import { Link } from "react-router-dom";
 import { cleanPath } from "@/lib/utils/common";
 import env from "@/config/env";
-import RegisterSuccessHeading from "@greatest-show-25/assets/images/registration-success-heading.png";
+import RegisterSuccessHeading from "@greatest-show-25/assets/images/registration-success-heading.webp";
 import { SecondaryButton } from "./button";
-import SuccessFooterImage from "@greatest-show-25/assets/images/success-footer.png";
+import SuccessFooterImage from "@greatest-show-25/assets/images/success-footer.webp";
 
 export type OrderItemDetail = {
   name: string;

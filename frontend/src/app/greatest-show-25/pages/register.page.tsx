@@ -1,6 +1,6 @@
 import { RegisterForm } from "../sections/register-form";
-import LogoPrimary from "@greatest-show-25/assets/images/logo-wellspring.png";
-import LogoJourney from "@greatest-show-25/assets/images/logo-hj.png";
+import LogoPrimary from "@greatest-show-25/assets/images/logo-wellspring.webp";
+import LogoJourney from "@greatest-show-25/assets/images/logo-hj.webp";
 import GSLogo from "@greatest-show-25/assets/images/gs-logo.webp";
 import { useEffect } from "react";
 import { BackgroundGradient } from "../components/background";

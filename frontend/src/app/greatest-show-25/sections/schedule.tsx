@@ -1,7 +1,7 @@
 import { HTMLAttributes, useMemo, type FC } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
-import ScheduleImage from "@greatest-show-25/assets/images/schedule.png";
-import ScheduleMobileImage from "@greatest-show-25/assets/images/schedule-mb.png";
+import ScheduleImage from "@greatest-show-25/assets/images/schedule.webp";
+import ScheduleMobileImage from "@greatest-show-25/assets/images/schedule-mb.webp";
 import Typography from "@/app/happy-box/components/typography";
 import { useLocales } from "@/core/hooks/use-locales";
 import parser from "html-react-parser";

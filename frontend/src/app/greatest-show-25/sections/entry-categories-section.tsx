@@ -22,11 +22,11 @@ import {
   drawLineSVG,
 } from "../components/animate";
 import { useInView } from "react-intersection-observer";
-import BlockIcon1 from "@greatest-show-25/assets/images/singing-icon.png";
-import BlockIcon2 from "@greatest-show-25/assets/images/dancing-icon.png";
-import BlockIcon3 from "@greatest-show-25/assets/images/intrusment-icon.png";
-import BlockIcon4 from "@greatest-show-25/assets/images/free-icon.png";
-import CategoryCardImage from "../assets/images/category-card.png";
+import BlockIcon1 from "@greatest-show-25/assets/images/singing-icon.webp";
+import BlockIcon2 from "@greatest-show-25/assets/images/dancing-icon.webp";
+import BlockIcon3 from "@greatest-show-25/assets/images/intrusment-icon.webp";
+import BlockIcon4 from "@greatest-show-25/assets/images/free-icon.webp";
+import CategoryCardImage from "../assets/images/category-card.webp";
 import { useResponsive } from "@/core/hooks/use-reponsive";
 export type EntryCategoriesSectionProps = HTMLAttributes<HTMLDivElement> &
   PropsWithChildren & {};

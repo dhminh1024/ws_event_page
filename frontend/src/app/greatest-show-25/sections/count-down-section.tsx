@@ -7,7 +7,7 @@ import {
   type FC,
 } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
-import BackgroundImage from "../assets/images/bg-countdown.png";
+import BackgroundImage from "../assets/images/bg-countdown.webp";
 import Typography from "@/app/happy-box/components/typography";
 import parser from "html-react-parser";
 import { useLocales } from "@/core/hooks/use-locales";
