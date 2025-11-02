@@ -38,8 +38,8 @@ export type LunarModalProps = HTMLAttributes<HTMLDivElement> &
 
 export const NotificationModal: FC<LunarModalProps> = ({
   open: $open = false,
-  title = "Title",
-  description = "Description",
+  title,
+  description,
   className,
   children,
   onConfirm,
@@ -61,6 +61,10 @@ export const NotificationModal: FC<LunarModalProps> = ({
   useEffect(() => {
     setIsOpen($open);
   }, [$open]);
+
+  if (title === undefined && description === undefined) {
+    return null;
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
