@@ -3,7 +3,7 @@ import Typography from "../components/typography";
 import { cn } from "@/core/utils/shadcn-utils";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { useLocales } from "@/core/hooks/use-locales";
-import LogoWhite from "../assets/images/logo-white.png";
+import LogoWhite from "../assets/images/logo-white.webp";
 type SectionProps = HTMLAttributes<HTMLDivElement> & {};
 
 export default function Footer({ className }: SectionProps) {

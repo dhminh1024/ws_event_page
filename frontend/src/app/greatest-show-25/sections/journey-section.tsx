@@ -3,26 +3,26 @@ import { cn } from "@/core/utils/shadcn-utils";
 import Typography from "..//components/typography";
 import { useLocales } from "@/core/hooks/use-locales";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
-import JourneyRoadImage from "../assets/images/journey-road.png";
-import Round1SilkPathImage from "../assets/images/round-1-slik-path.png";
-import Round2SilkPathImage from "../assets/images/round-2-slik-path.png";
-import Round3SilkPathImage from "../assets/images/round-3-slik-path.png";
+import JourneyRoadImage from "../assets/images/journey-road.webp";
+import Round1SilkPathImage from "../assets/images/round-1-slik-path.webp";
+import Round2SilkPathImage from "../assets/images/round-2-slik-path.webp";
+import Round3SilkPathImage from "../assets/images/round-3-slik-path.webp";
 
-import Round2Image from "../assets/images/journey-round-2-mb.png";
-import Round3Image from "../assets/images/journey-round-3-mb.png";
+import Round2Image from "../assets/images/journey-round-2-mb.webp";
+import Round3Image from "../assets/images/journey-round-3-mb.webp";
 
-import Round1Logo from "../assets/images/journey-round-1-logo.png";
-import Round2Logo from "../assets/images/journey-round-2-logo.png";
-import Round3Logo from "../assets/images/journey-round-3-logo.png";
+import Round1Logo from "../assets/images/journey-round-1-logo.webp";
+import Round2Logo from "../assets/images/journey-round-2-logo.webp";
+import Round3Logo from "../assets/images/journey-round-3-logo.webp";
 // Import 8 material images
-import Material1Image from "../assets/images/material-1.png";
-import Material2Image from "../assets/images/material-2.png";
-import Material3Image from "../assets/images/material-3.png";
-import Material4Image from "../assets/images/material-4.png";
-import Material5Image from "../assets/images/material-5.png";
-import Material6Image from "../assets/images/material-6.png";
-import Material7Image from "../assets/images/material-7.png";
-import Material8Image from "../assets/images/material-8.png";
+import Material1Image from "../assets/images/material-1.webp";
+import Material2Image from "../assets/images/material-2.webp";
+import Material3Image from "../assets/images/material-3.webp";
+import Material4Image from "../assets/images/material-4.webp";
+import Material5Image from "../assets/images/material-5.webp";
+import Material6Image from "../assets/images/material-6.webp";
+import Material7Image from "../assets/images/material-7.webp";
+import Material8Image from "../assets/images/material-8.webp";
 import {
   animateFadeInBottom,
   animateFadeInLeft,

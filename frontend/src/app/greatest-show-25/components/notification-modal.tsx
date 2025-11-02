@@ -23,7 +23,7 @@ import { useResponsive } from "@/core/hooks/use-reponsive";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { X } from "lucide-react";
 import { SecondaryButton } from "./button";
-import SuccessFooterImage from "@greatest-show-25/assets/images/success-footer.png";
+import SuccessFooterImage from "@greatest-show-25/assets/images/success-footer.webp";
 import parser from "html-react-parser";
 import { Button } from "@atoms/button";
 export type LunarModalProps = HTMLAttributes<HTMLDivElement> &

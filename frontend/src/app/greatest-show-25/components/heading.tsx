@@ -1,8 +1,8 @@
 import { HTMLAttributes, PropsWithChildren, type FC } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
 import Typography from "./typography";
-import NonLaPart1 from "@greatest-show-25/assets/images/non-la-part-1.png";
-import NonLaPart2 from "@greatest-show-25/assets/images/non-la-part-2.png";
+import NonLaPart1 from "@greatest-show-25/assets/images/non-la-part-1.webp";
+import NonLaPart2 from "@greatest-show-25/assets/images/non-la-part-2.webp";
 export type HeadingProps = HTMLAttributes<HTMLHeadingElement> &
   PropsWithChildren & {};
 

@@ -3,8 +3,8 @@ import { Button, ButtonProps } from "@atoms/button";
 import { cn } from "@/core/utils/shadcn-utils";
 import { cleanPath } from "@/lib/utils/common";
 import env from "@/config/env";
-import PrimaryButtonImage from "@greatest-show-25/assets/images/button.png";
-import SecondaryButtonImage from "@greatest-show-25/assets/images/button-2.png";
+import PrimaryButtonImage from "@greatest-show-25/assets/images/button.webp";
+import SecondaryButtonImage from "@greatest-show-25/assets/images/button-2.webp";
 export type PrimaryButtonProps = Omit<ButtonProps, "variant"> & {
   variant?: "primary" | "default";
 };
