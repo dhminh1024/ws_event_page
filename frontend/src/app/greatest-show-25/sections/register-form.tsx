@@ -60,8 +60,6 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
     useRegistration();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-
-
   const groupOptions = useMemo(
     () => [
       {
@@ -670,7 +668,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
 
             <center className="mt-80 md:mt-320">
               <Typography.Paragraph className="text-center text-[10rem] md:text-[20rem] text-gs25-primary font-semibold my-60 mb-100">
-                {t("greatest_show_25.form.submit_note")}
+                {parser(t("greatest_show_25.form.submit_note"))}
               </Typography.Paragraph>
               {isOpened === true && isExpired === false && (
                 <PrimaryButton
