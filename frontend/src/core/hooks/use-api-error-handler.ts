@@ -1,4 +1,4 @@
-import { toast } from "@atoms/use-toast";
+import { toast } from "sonner";
 import { useCallback } from "react";
 
 interface FrappeError {
@@ -60,10 +60,8 @@ export const useApiErrorHandler = () => {
       }
     }
 
-    // Display toast notification
-    toast({
-      variant: "destructive",
-      title: errorTitle,
+    // Display Sonner toast notification
+    toast.error(errorTitle, {
       description: errorMessage,
     });
 

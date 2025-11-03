@@ -1,11 +1,11 @@
 /**
- * HOW TO USE API ERROR HANDLER WITH TOAST NOTIFICATIONS
+ * HOW TO USE API ERROR HANDLER WITH SONNER TOAST NOTIFICATIONS
  *
- * This file shows examples of how to display API errors using toast notifications
+ * This file shows examples of how to display API errors using Sonner toast notifications
  */
 
 import { useApiErrorHandler } from "./use-api-error-handler";
-import { toast } from "@atoms/use-toast";
+import { toast } from "sonner";
 import { useFrappePostCall, useFrappeGetCall } from "frappe-react-sdk";
 
 // ============================================
@@ -21,8 +21,7 @@ export function ExampleBasicApiCall() {
       const response = await call(data);
 
       // Success toast
-      toast({
-        title: "Success",
+      toast.success("Success", {
         description: "Operation completed successfully!",
       });
 
@@ -57,8 +56,7 @@ export function ExampleSequentialApiCalls() {
       });
 
       // Success toast
-      toast({
-        title: "Success",
+      toast.success("Success", {
         description: "Item created and file uploaded successfully!",
       });
     } catch (error) {
@@ -82,8 +80,7 @@ export function ExampleCustomErrorMessages() {
     try {
       await call(data);
 
-      toast({
-        title: "Form Submitted",
+      toast.success("Form Submitted", {
         description: "Your form has been submitted for review.",
       });
     } catch (error) {
@@ -91,9 +88,7 @@ export function ExampleCustomErrorMessages() {
       handleError(error);
 
       // Or show custom error message
-      toast({
-        variant: "destructive",
-        title: "Submission Failed",
+      toast.error("Submission Failed", {
         description: "Please check your form and try again.",
       });
     }
@@ -108,30 +103,25 @@ export function ExampleCustomErrorMessages() {
 
 export function ExampleInfoAndWarningToasts() {
   const showInfoToast = () => {
-    toast({
-      title: "Information",
+    toast.info("Information", {
       description: "This is an informational message.",
     });
   };
 
   const showWarningToast = () => {
-    toast({
-      title: "Warning",
+    toast.warning("Warning", {
       description: "Please save your changes before leaving.",
     });
   };
 
   const showSuccessToast = () => {
-    toast({
-      title: "Success",
+    toast.success("Success", {
       description: "Your changes have been saved.",
     });
   };
 
   const showErrorToast = () => {
-    toast({
-      variant: "destructive",
-      title: "Error",
+    toast.error("Error", {
       description: "Something went wrong. Please try again.",
     });
   };
@@ -151,8 +141,7 @@ export function ExampleWithReactHookForm() {
     try {
       const response = await call(formData);
 
-      toast({
-        title: "Registration Successful",
+      toast.success("Registration Successful", {
         description: `Welcome, ${response.message.name}!`,
       });
 
@@ -182,8 +171,7 @@ export function ExampleToastWithAction() {
     try {
       await call({ item_id: itemId });
 
-      toast({
-        title: "Item Deleted",
+      toast.success("Item Deleted", {
         description: "The item has been removed.",
         action: {
           label: "Undo",
@@ -191,12 +179,10 @@ export function ExampleToastWithAction() {
             // Handle undo logic
             console.log("Undo delete");
           },
-        } as any,
+        },
       });
     } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Delete Failed",
+      toast.error("Delete Failed", {
         description: "Could not delete the item.",
       });
     }
@@ -215,27 +201,25 @@ export function ExampleLoadingWithToast() {
 
   const handleProcess = async (data: any) => {
     // Show loading toast
-    const loadingToast = toast({
-      title: "Processing...",
+    const loadingToastId = toast.loading("Processing...", {
       description: "Please wait while we process your data.",
     });
 
     try {
       const response = await call(data);
 
-      // Dismiss loading toast
-      loadingToast.dismiss();
-
-      // Show success toast
-      toast({
-        title: "Processing Complete",
+      // Dismiss loading toast and show success
+      toast.success("Processing Complete", {
         description: "Your data has been processed successfully.",
+        id: loadingToastId, // Replace the loading toast
       });
     } catch (error) {
-      // Dismiss loading toast
-      loadingToast.dismiss();
+      // Dismiss loading toast and show error
+      toast.error("Processing Failed", {
+        description: "An error occurred while processing your data.",
+        id: loadingToastId, // Replace the loading toast
+      });
 
-      // Show error toast
       handleError(error);
     }
   };
@@ -244,29 +228,56 @@ export function ExampleLoadingWithToast() {
 }
 
 // ============================================
-// QUICK REFERENCE
+// QUICK REFERENCE - SONNER TOAST
 // ============================================
 
 /*
 
 // Import required hooks
-import { toast } from "@atoms/use-toast";
+import { toast } from "sonner";
 import { useApiErrorHandler } from "@/core/hooks/use-api-error-handler";
 
 // Initialize error handler
 const { handleError } = useApiErrorHandler();
 
 // Show success toast
-toast({
-  title: "Success",
+toast.success("Success", {
   description: "Operation completed successfully",
 });
 
 // Show error toast (manual)
-toast({
-  variant: "destructive",
-  title: "Error",
+toast.error("Error", {
   description: "Something went wrong",
+});
+
+// Show info toast
+toast.info("Info", {
+  description: "This is an informational message",
+});
+
+// Show warning toast
+toast.warning("Warning", {
+  description: "Please be careful",
+});
+
+// Show loading toast
+const loadingId = toast.loading("Loading...", {
+  description: "Please wait",
+});
+
+// Update/replace loading toast
+toast.success("Complete!", {
+  description: "Operation finished",
+  id: loadingId, // Replace the loading toast
+});
+
+// Toast with action button
+toast.success("Deleted", {
+  description: "Item removed successfully",
+  action: {
+    label: "Undo",
+    onClick: () => console.log("Undo"),
+  },
 });
 
 // Handle API error (automatic)
