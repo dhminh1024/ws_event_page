@@ -4,6 +4,7 @@ from fileinput import filename
 from typing import Dict
 
 import frappe
+from frappe.handler import upload_file as frappe_upload_file
 from frappe.utils.file_manager import save_file
 
 ENTRY_GROUP_CHOICES = {
@@ -156,38 +157,30 @@ def upload_registration_file(registration_id: str):
             registration_id
         )
     )
+
     if not registration_id:
         frappe.throw("Mã đăng ký là bắt buộc | Registration ID is required")
 
-    # doc = frappe.get_doc("WSE GS Registration", registration_id)
+    # Validate registration exists
+    if not frappe.db.exists("WSE GS Registration", registration_id):
+        frappe.throw("Không tìm thấy đăng ký | Registration not found")
 
-    file = frappe.request.files.get("attach_file") or frappe.request.files.get("file")
-    if not file:
+    # Check if file is uploaded
+    files = frappe.request.files
+    if not (files.get("attach_file") or files.get("file")):
         frappe.throw("Không có tệp tin được tải lên | No file uploaded")
 
+    # Clear old attachments
     _clear_registration_attachments(registration_id)
 
-    # file_doc = save_file(
-    #     fname=upload.filename,
-    #     content=upload.stream.read(),
-    #     dt=doc.doctype,
-    #     dn=registration_id,
-    #     is_private=0,
-    # )
-    # doc.db_set("attach_file", file_doc.file_url)
-    file_content = file.stream.read()
-    file_doc = frappe.get_doc(
-        {
-            "doctype": "File",
-            "attached_to_doctype": "WSE GS Registration",
-            "attached_to_name": registration_id,
-            "attached_to_field": "attach_file",
-            # "folder": student_application.student_folder,
-            "file_name": file.filename,
-            "is_private": 1,
-            "content": file_content,
-        }
-    ).save()
+    # Setup form_dict for Frappe's upload_file handler
+    frappe.form_dict.doctype = "WSE GS Registration"
+    frappe.form_dict.docname = registration_id
+    frappe.form_dict.fieldname = "attach_file"
+    frappe.form_dict.is_private = 0  # Changed to public for easier guest access
+
+    # Use Frappe's handler - automatically handles guest permissions
+    file_doc = frappe_upload_file()
 
     return {
         "message": "Tải tệp tin thành công | Attachment uploaded successfully",
