@@ -41,46 +41,6 @@ export default function Footer({ className }: SectionProps) {
               </div>
               <div className="flex flex-col md:flex-row gap-x-200 gap-y-80 md:gap-y-0">
                 <div className="">
-                  <div className="grid grid-cols-2 mb-40">
-                    <div className="flex flex-col">
-                      <Typography.Heading
-                        level={4}
-                        className="mb-20 font-sans text-[12rem] font-semibold md:text-[18rem]"
-                      >
-                        Wellspring Hanoi
-                      </Typography.Heading>
-                      <Typography.Paragraph className="text-[10rem] font-light md:text-[16rem]">
-                        {event.variables?.wellspring_hanoi_hotline?.value}
-                      </Typography.Paragraph>
-                    </div>
-                    <div className="flex flex-col">
-                      <Typography.Heading
-                        level={4}
-                        className="mb-20 font-sans text-[12rem] font-semibold md:text-[18rem]"
-                      >
-                        Admissions
-                      </Typography.Heading>
-                      <Typography.Paragraph className="text-[10rem] font-light md:text-[16rem]">
-                        {
-                          event.variables?.wellspring_hanoi_admissions_hotline
-                            ?.value
-                        }
-                      </Typography.Paragraph>
-                      <Typography.Paragraph className="text-[10rem] font-light md:text-[16rem]">
-                        {
-                          event.variables?.wellspring_hanoi_admissions_email
-                            ?.value
-                        }
-                      </Typography.Paragraph>
-                    </div>
-                  </div>
-
-                  <Typography.Paragraph className="text-[10rem] font-light md:text-[16rem]">
-                    {event.variables?.wellspring_hanoi_address?.value}
-                  </Typography.Paragraph>
-                </div>
-
-                <div className="">
                   <div className="grid grid-cols-2  mb-40">
                     <div className="flex flex-col">
                       <Typography.Heading
@@ -120,6 +80,46 @@ export default function Footer({ className }: SectionProps) {
 
                   <Typography.Paragraph className="text-[10rem] font-light md:text-[16rem]">
                     {event.variables?.wellspring_saigon_address?.value}
+                  </Typography.Paragraph>
+                </div>
+
+                <div className="">
+                  <div className="grid grid-cols-2 mb-40">
+                    <div className="flex flex-col">
+                      <Typography.Heading
+                        level={4}
+                        className="mb-20 font-sans text-[12rem] font-semibold md:text-[18rem]"
+                      >
+                        Wellspring Hanoi
+                      </Typography.Heading>
+                      <Typography.Paragraph className="text-[10rem] font-light md:text-[16rem]">
+                        {event.variables?.wellspring_hanoi_hotline?.value}
+                      </Typography.Paragraph>
+                    </div>
+                    <div className="flex flex-col">
+                      <Typography.Heading
+                        level={4}
+                        className="mb-20 font-sans text-[12rem] font-semibold md:text-[18rem]"
+                      >
+                        Admissions
+                      </Typography.Heading>
+                      <Typography.Paragraph className="text-[10rem] font-light md:text-[16rem]">
+                        {
+                          event.variables?.wellspring_hanoi_admissions_hotline
+                            ?.value
+                        }
+                      </Typography.Paragraph>
+                      <Typography.Paragraph className="text-[10rem] font-light md:text-[16rem]">
+                        {
+                          event.variables?.wellspring_hanoi_admissions_email
+                            ?.value
+                        }
+                      </Typography.Paragraph>
+                    </div>
+                  </div>
+
+                  <Typography.Paragraph className="text-[10rem] font-light md:text-[16rem]">
+                    {event.variables?.wellspring_hanoi_address?.value}
                   </Typography.Paragraph>
                 </div>
               </div>
