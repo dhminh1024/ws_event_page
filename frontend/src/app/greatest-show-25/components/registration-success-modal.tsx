@@ -125,7 +125,7 @@ export const RegistrationSuccessModal: FC<ModalProps> = ({
                 src={RegisterSuccessHeading}
                 alt="Top Page"
               />
-              <center className="mb-20 px-[7%]">
+              <center className="mb-20 px-[2%]">
                 <Typography.Heading
                   className="text-[13rem] md:text-[18rem] text-gs-primary leading-[2] font-base"
                   level={2}
