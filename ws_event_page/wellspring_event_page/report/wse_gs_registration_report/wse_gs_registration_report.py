@@ -169,9 +169,9 @@ def get_report_summary(data):
     total_registrations = len(data)
 
     # Count by entry_group
-    primary_count = len([d for d in data if d.entry_group == "Primary students"])
-    secondary_count = len([d for d in data if d.entry_group == "Secondary students"])
-    adult_count = len([d for d in data if d.entry_group == "Adult"])
+    primary_count = len([d for d in data if d.entry_group == "Group A"])
+    secondary_count = len([d for d in data if d.entry_group == "Group B"])
+    adult_count = len([d for d in data if d.entry_group == "Group C"])
 
     # Count by status
     waiting_count = len(
@@ -190,19 +190,19 @@ def get_report_summary(data):
         },
         {
             "value": f"{primary_count}/{total_registrations}",
-            "label": "Primary Students",
+            "label": "Group A",
             "datatype": "Data",
             "indicator": "Green",
         },
         {
             "value": f"{secondary_count}/{total_registrations}",
-            "label": "Secondary Students",
+            "label": "Group B",
             "datatype": "Data",
             "indicator": "Orange",
         },
         {
             "value": f"{adult_count}/{total_registrations}",
-            "label": "Adults",
+            "label": "Group C",
             "datatype": "Data",
             "indicator": "Purple",
         },

@@ -27,7 +27,7 @@ class WSEGSRegistration(Document):
         attach_file: DF.Attach | None
         email: DF.Data
         entry_category: DF.Literal["Singing", "Dancing", "Instrumental", "Other"]
-        entry_group: DF.Literal["Primary students", "Secondary students", "Adult"]
+        entry_group: DF.Literal["Group A", "Group B", "Group C"]
         entry_name: DF.Data
         entry_participants: DF.SmallText | None
         full_name: DF.Data
@@ -166,4 +166,5 @@ def send_registration_email(email_template, sender, recipients, subject, args):
         subject=subject,
         template=email_template,
         args=args,
+        now=True,
     )

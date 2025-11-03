@@ -79,7 +79,7 @@
           >
             Nhóm | <em>Entry Group</em>:
           </td>
-          <td style="border-color: #3b6dae; padding: 10px">{% if entry_group == "Primary students" %}Bảng A{% elif entry_group == "Secondary students" %}Bảng B{% elif entry_group == "Adult" %}Bảng C{% else %}{{entry_group}}{% endif %}</td>
+          <td style="border-color: #3b6dae; padding: 10px">{% if entry_group == "Group A" %}Bảng A{% elif entry_group == "Group B" %}Bảng B{% elif entry_group == "Group C" %}Bảng C{% else %}{{entry_group}}{% endif %}</td>
         </tr>
         <tr>
           <td
@@ -123,7 +123,7 @@
             Thành viên | <em>Participants</em>:
           </td>
           <td style="border-color: #3b6dae; padding: 10px">
-            {{entry_participants}}
+            {{entry_participants|replace("\n", "<br>")|safe}}
           </td>
         </tr>
         {% endif %} {% if instrumental_info %}

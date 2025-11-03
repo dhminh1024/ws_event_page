@@ -6,3 +6,4 @@
 # Patches added in this section will be executed after doctypes are migrated
 
 ws_event_page.patches.wse_ac.add_booking_id
+ws_event_page.patches.wse_gs.update_entry_group_values
