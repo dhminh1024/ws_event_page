@@ -6,10 +6,10 @@
       <span style="color: #f05023">BẠN ĐÃ ĐĂNG KÝ THÀNH CÔNG</span>
       <br />
       <span style="color: #172a52">SỰ KIỆN</span
-      ><span style="color: #f5aa1e"> GREATEST SHOW</span>
+      ><span style="color: #f5aa1e"> WISers' GREATEST SHOW</span>
     </h1>
     <h3 style="text-align: center; color: #3b6dae">
-      YOU HAVE SUCCESSFULLY REGISTERED FOR THE GREATEST SHOW EVENT
+      YOU HAVE SUCCESSFULLY REGISTERED FOR THE WISers' GREATEST SHOW EVENT
     </h3>
     <p>
       Mã đăng ký | <em>Registration ID</em>:
@@ -79,7 +79,7 @@
           >
             Nhóm | <em>Entry Group</em>:
           </td>
-          <td style="border-color: #3b6dae; padding: 10px">{{entry_group}}</td>
+          <td style="border-color: #3b6dae; padding: 10px">{% if entry_group == "Primary students" %}Bảng A{% elif entry_group == "Secondary students" %}Bảng B{% elif entry_group == "Adult" %}Bảng C{% else %}{{entry_group}}{% endif %}</td>
         </tr>
         <tr>
           <td
@@ -170,9 +170,10 @@
     {% endif %}
 
     <p class="text-center" style="margin-top: 30px; color: #172a52">
-      Trạng thái | <em>Status</em>:
-      {% if status == "Waiting for Approval" %}
-      <strong style="color: #f5aa1e">Chờ Duyệt | <em>Waiting for Approval</em></strong>
+      Trạng thái | <em>Status</em>: {% if status == "Waiting for Approval" %}
+      <strong style="color: #f5aa1e"
+        >Chờ Duyệt | <em>Waiting for Approval</em></strong
+      >
       {% elif status == "Approved" %}
       <strong style="color: #28a745">Đã Duyệt | <em>Approved</em></strong>
       {% elif status == "Cancelled" %}
