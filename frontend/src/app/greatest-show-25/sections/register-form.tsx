@@ -52,6 +52,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
   const event = useEventPageContext();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const fileInputId = useId();
+  const entryGroupRef = useRef<HTMLDivElement | null>(null);
   const { currentProgram } = useCurrentProgram();
   const isOpened = currentProgram ? currentProgram?.is_opened === 1 : null;
   const isExpired = currentProgram ? currentProgram?.is_expired === 1 : null;
@@ -131,7 +132,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
   const entryCategory = form.watch("entry_category");
 
   const handleSubmit = form.handleSubmit(async (data) => {
-    if(!isOpened || isExpired) return;
+    if (!isOpened || isExpired) return;
     setShowSuccessModal(true);
     try {
       await submitRegistration(data);
@@ -141,7 +142,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
     }
   });
 
-  console.log("Render Register Form", currentProgram);
+  // console.log("Render Register Form", currentProgram);
 
   return (
     <div className={cn("", className)}>
@@ -215,6 +216,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                     <FormItem>
                       <FormControl>
                         <RadioGroup
+                          ref={field.ref}
                           className="grid gap-40 md:grid-cols-3"
                           onValueChange={field.onChange}
                           value={field.value}
