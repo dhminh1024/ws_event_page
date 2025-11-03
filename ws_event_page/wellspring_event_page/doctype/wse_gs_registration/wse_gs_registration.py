@@ -166,4 +166,5 @@ def send_registration_email(email_template, sender, recipients, subject, args):
         subject=subject,
         template=email_template,
         args=args,
+        now=True,
     )
