@@ -6,10 +6,10 @@
       <span style="color: #28a745">ĐĂNG KÝ CỦA BẠN ĐÃ ĐƯỢC PHÊ DUYỆT</span>
       <br />
       <span style="color: #172a52">SỰ KIỆN</span
-      ><span style="color: #f5aa1e"> GREATEST SHOW</span>
+      ><span style="color: #f5aa1e"> WISers' GREATEST SHOW</span>
     </h1>
     <h3 style="text-align: center; color: #3b6dae">
-      YOUR REGISTRATION HAS BEEN APPROVED FOR THE GREATEST SHOW EVENT
+      YOUR REGISTRATION HAS BEEN APPROVED FOR THE WISers' GREATEST SHOW EVENT
     </h3>
     <p>
       Mã đăng ký | <em>Registration ID</em>:
@@ -79,7 +79,7 @@
           >
             Nhóm | <em>Entry Group</em>:
           </td>
-          <td style="border-color: #3b6dae; padding: 10px">{{entry_group}}</td>
+          <td style="border-color: #3b6dae; padding: 10px">{% if entry_group == "Primary students" %}Bảng A{% elif entry_group == "Secondary students" %}Bảng B{% elif entry_group == "Adult" %}Bảng C{% else %}{{entry_group}}{% endif %}</td>
         </tr>
         <tr>
           <td
@@ -170,9 +170,10 @@
     {% endif %}
 
     <p class="text-center" style="margin-top: 30px; color: #172a52">
-      Trạng thái | <em>Status</em>:
-      {% if status == "Waiting for Approval" %}
-      <strong style="color: #f5aa1e">Chờ Duyệt | <em>Waiting for Approval</em></strong>
+      Trạng thái | <em>Status</em>: {% if status == "Waiting for Approval" %}
+      <strong style="color: #f5aa1e"
+        >Chờ Duyệt | <em>Waiting for Approval</em></strong
+      >
       {% elif status == "Approved" %}
       <strong style="color: #28a745">Đã Duyệt | <em>Approved</em></strong>
       {% elif status == "Cancelled" %}
@@ -182,24 +183,36 @@
       {% endif %}
     </p>
 
-    <p class="text-center" style="margin-top: 20px; color: #172a52; font-size: 18px">
+    <p
+      class="text-center"
+      style="margin-top: 20px; color: #172a52; font-size: 18px"
+    >
       <strong>Chúc mừng! Đăng ký của bạn đã được phê duyệt.</strong>
       <br />
       <span style="color: #3b6dae">
-        <em><strong>Congratulations! Your registration has been approved.</strong></em>
+        <em
+          ><strong
+            >Congratulations! Your registration has been approved.</strong
+          ></em
+        >
       </span>
     </p>
 
     <p class="text-center" style="margin-top: 20px; color: #172a52">
-      Chúng tôi rất mong được gặp bạn tại sự kiện. Vui lòng theo dõi email để nhận thêm thông tin chi tiết.
+      Chúng tôi rất mong được gặp bạn tại sự kiện. Vui lòng theo dõi email để
+      nhận thêm thông tin chi tiết.
       <br />
       <span style="color: #3b6dae">
-        <em>We look forward to seeing you at the event. Please check your email for further details.</em>
+        <em
+          >We look forward to seeing you at the event. Please check your email
+          for further details.</em
+        >
       </span>
     </p>
 
     <p class="text-center" style="margin-top: 30px; color: #172a52">
-      Xin chân thành cảm ơn và hẹn gặp lại các bạn tại sự kiện The Greatest Show!
+      Xin chân thành cảm ơn và hẹn gặp lại các bạn tại sự kiện The Greatest
+      Show!
       <br />
       <span style="color: #3b6dae">
         <em>Thank you and see you at The Greatest Show event!</em>

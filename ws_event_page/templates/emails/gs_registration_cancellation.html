@@ -6,10 +6,10 @@
       <span style="color: #f05023">ĐĂNG KÝ CỦA BẠN ĐÃ ĐƯỢC HUỶ</span>
       <br />
       <span style="color: #172a52">SỰ KIỆN</span
-      ><span style="color: #f5aa1e"> GREATEST SHOW</span>
+      ><span style="color: #f5aa1e"> WISers' GREATEST SHOW</span>
     </h1>
     <h3 style="text-align: center; color: #3b6dae">
-      YOUR REGISTRATION HAS BEEN CANCELLED FOR THE GREATEST SHOW EVENT
+      YOUR REGISTRATION HAS BEEN CANCELLED FOR THE WISers' GREATEST SHOW EVENT
     </h3>
     <p>
       Mã đăng ký | <em>Registration ID</em>:
@@ -92,9 +92,10 @@
     {% endif %}
 
     <p class="text-center" style="margin-top: 30px; color: #172a52">
-      Trạng thái | <em>Status</em>:
-      {% if status == "Waiting for Approval" %}
-      <strong style="color: #f5aa1e">Chờ Duyệt | <em>Waiting for Approval</em></strong>
+      Trạng thái | <em>Status</em>: {% if status == "Waiting for Approval" %}
+      <strong style="color: #f5aa1e"
+        >Chờ Duyệt | <em>Waiting for Approval</em></strong
+      >
       {% elif status == "Approved" %}
       <strong style="color: #28a745">Đã Duyệt | <em>Approved</em></strong>
       {% elif status == "Cancelled" %}
