@@ -289,13 +289,13 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                   {t("greatest_show_25.form.section_2_heading")}
                 </Heading>
               </center>
-              <div className="grid gap-60">
+              <div className="flex flex-col gap-60">
                 <FormField
                   control={form.control}
                   name="entry_name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[14rem] md:text-[17rem] whitespace-nowrap  font-bold leading-120 md:leading-120">
+                      <FormLabel className="text-[14rem] md:text-[17rem] font-bold leading-120 md:leading-120">
                         {t("greatest_show_25.form.entry_name")}
                       </FormLabel>
                       <FormControl>
@@ -314,7 +314,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                   name="entry_category"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[14rem] md:text-[17rem] whitespace-nowrap  font-bold leading-100 md:leading-120">
+                      <FormLabel className="text-[14rem] md:text-[17rem] font-bold leading-100 md:leading-120">
                         {t("greatest_show_25.form.entry_category_label")}
                       </FormLabel>
                       <FormControl>
@@ -420,6 +420,11 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                       <FormLabel className="text-[14rem] md:text-[17rem] whitespace-nowrap w-full font-bold leading-100 md:leading-120">
                         {t("greatest_show_25.form.entry_participants_label")}
                       </FormLabel>
+                      <p className="text-[12rem] md:text-[14rem] mb-20 text-gs25-secondary opacity-80">
+                        {t(
+                          "greatest_show_25.form.entry_participants_placeholder"
+                        )}
+                      </p>
                       <FormControl>
                         <div className="space-y-20">
                           {field.value.map((participant, index) => (
@@ -487,7 +492,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                     };
                     return (
                       <FormItem className="space-y-40">
-                        <FormLabel className="text-[14rem] md:text-[17rem] whitespace-nowrap  font-bold leading-100 md:leading-120">
+                        <FormLabel className="text-[14rem] md:text-[17rem] font-bold leading-100 md:leading-120">
                           {t("greatest_show_25.form.entry_file_label")}
                         </FormLabel>
 
@@ -568,7 +573,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                     name="full_name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[14rem] md:text-[17rem] whitespace-nowrap  font-bold leading-100 md:leading-120">
+                        <FormLabel className="text-[14rem] md:text-[17rem] font-bold leading-100 md:leading-120">
                           {t("greatest_show_25.form.full_name")}
                         </FormLabel>
                         <FormDescription />
@@ -594,7 +599,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                     name={"mobile_number"}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[14rem] md:text-[17rem] whitespace-nowrap  font-bold leading-100 md:leading-120">
+                        <FormLabel className="text-[14rem] md:text-[17rem] font-bold leading-100 md:leading-120">
                           {t("greatest_show_25.form.mobile_number")}
                         </FormLabel>
                         <FormDescription />
@@ -618,7 +623,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                     name={"email"}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[14rem] md:text-[17rem] whitespace-nowrap  font-bold leading-100 md:leading-120">
+                        <FormLabel className="text-[14rem] md:text-[17rem] font-bold leading-100 md:leading-120">
                           {t("greatest_show_25.form.email")}
                         </FormLabel>
                         <FormDescription />
