@@ -75,12 +75,6 @@ export const Component: FC = () => {
   const { t, currentLanguage } = useLocales();
   const event = useEventPageContext();
 
-  // Initialize smooth scroll
-  useSmoothScroll({
-    smooth: 1.5,
-    effects: false,
-    smoothTouch: true,
-  });
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
