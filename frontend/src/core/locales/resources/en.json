@@ -149,7 +149,7 @@
     "buttons": {
       "add_person": "Add Person +",
       "register_now": "Register Now",
-      "join_now": "JOIN NOW BEFORE​",
+      "join_now": "Register now​",
       "confirm_payment": "Confirm Payment",
       "go_back": "Go Back",
       "download_qr": "Download QR Code",
@@ -360,7 +360,8 @@
       "entry_results": "Results",
       "go_home": "Return Home",
       "register": "Register",
-      "add_person": "Add member +"
+      "add_person": "Add member +",
+      "join_now": "Register now​"
     },
     "program_status": {
       "not_opened_title": "Registration Opens Soon!",

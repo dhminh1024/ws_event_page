@@ -40,8 +40,8 @@ export const Heading: FC<HeadingProps> = ({ className, children }) => {
         <img
           className={cn(
             "z-20 h-auto absolute",
-            "w-[68rem] top-[-20rem] right-[-25rem]",
-            "md:w-[112rem] md:top-[-34rem] md:right-[-45rem]"
+            "w-[65rem] top-[-20rem] right-[-24rem]",
+            "md:w-[109rem] md:top-[-31rem] md:right-[-45rem]"
           )}
           src={NonLaPart1}
           alt="Non La Part 1q"
