@@ -60,13 +60,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
     useRegistration();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  console.log(
-    currentProgram,
-    "Register Form - isOpened:",
-    isOpened,
-    "isExpired:",
-    isExpired
-  );
+
 
   const groupOptions = useMemo(
     () => [
