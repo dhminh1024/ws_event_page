@@ -276,7 +276,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                           })}
                         </RadioGroup>
                       </FormControl>
-                      <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
+                      <FormMessage className="text-[14rem]  md:text-[14rem] text-status-danger" />
                     </FormItem>
                   )}
                 />
@@ -289,22 +289,22 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                   {t("greatest_show_25.form.section_2_heading")}
                 </Heading>
               </center>
-              <div className="grid gap-60">
+              <div className="flex flex-col gap-60">
                 <FormField
                   control={form.control}
                   name="entry_name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap  font-bold leading-56 md:leading-120">
+                      <FormLabel className="text-[14rem] md:text-[17rem] font-bold leading-120 md:leading-120">
                         {t("greatest_show_25.form.entry_name")}
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="w-full h-64 md:h-120 bg-white border-gs25-secondary rounded-[5rem] text-[8rem] md:text-[16rem]  p-[10rem_5rem] md:py-80 md:px-40"
+                          className="w-full h-64 md:h-120 bg-white border-gs25-secondary rounded-[5rem] text-[14rem] md:text-[16rem] p-[15rem_10rem]  md:p-[10rem_5rem] md:py-80 md:px-40"
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
+                      <FormMessage className="text-[14rem]  md:text-[14rem] text-status-danger" />
                     </FormItem>
                   )}
                 />
@@ -314,7 +314,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                   name="entry_category"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap  font-bold leading-56 md:leading-120">
+                      <FormLabel className="text-[14rem] md:text-[17rem] font-bold leading-100 md:leading-120">
                         {t("greatest_show_25.form.entry_category_label")}
                       </FormLabel>
                       <FormControl>
@@ -356,7 +356,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                                       )}
                                     />
                                   </div>
-                                  <span className="text-[10rem] md:text-[16rem] text-gs25-secondary font-semibold">
+                                  <span className="text-[14rem] md:text-[16rem] text-gs25-secondary font-semibold">
                                     {option.label}
                                   </span>
                                 </div>
@@ -365,7 +365,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                           })}
                         </RadioGroup>
                       </FormControl>
-                      <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
+                      <FormMessage className="text-[14rem]  md:text-[14rem] text-status-danger" />
                     </FormItem>
                   )}
                 />
@@ -378,14 +378,14 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                       <FormItem>
                         <FormControl>
                           <Input
-                            className="w-full h-64 md:h-120 bg-white border-gs25-secondary rounded-[5rem] text-[8rem] md:text-[16rem]  p-[10rem_5rem] md:py-80 md:px-40"
+                            className="w-full h-64 md:h-120 bg-white border-gs25-secondary rounded-[5rem] text-[14rem] md:text-[16rem]  p-[15rem_10rem]  md:p-[10rem_5rem] md:py-80 md:px-40"
                             placeholder={t(
                               "greatest_show_25.form.entry_categories.instrument_placeholder"
                             )}
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
+                        <FormMessage className="text-[14rem]  md:text-[14rem] text-status-danger" />
                       </FormItem>
                     )}
                   />
@@ -399,14 +399,14 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                       <FormItem>
                         <FormControl>
                           <Input
-                            className="w-full h-64 md:h-120 bg-white border-gs25-secondary rounded-[5rem] text-[8rem] md:text-[16rem]  p-[10rem_5rem] md:py-80 md:px-40"
+                            className="w-full h-64 md:h-120 bg-white border-gs25-secondary rounded-[5rem] text-[14rem] md:text-[16rem]  p-[15rem_10rem]  md:p-[10rem_5rem] md:py-80 md:px-40"
                             placeholder={t(
                               "greatest_show_25.form.entry_categories.talent_placeholder"
                             )}
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
+                        <FormMessage className="text-[14rem]  md:text-[14rem] text-status-danger" />
                       </FormItem>
                     )}
                   />
@@ -417,9 +417,14 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                   name="entry_participants"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap w-full font-bold leading-56 md:leading-120">
+                      <FormLabel className="text-[14rem] md:text-[17rem] whitespace-nowrap w-full font-bold leading-100 md:leading-120">
                         {t("greatest_show_25.form.entry_participants_label")}
                       </FormLabel>
+                      <p className="text-[12rem] md:text-[14rem] mb-20 text-gs25-secondary opacity-80">
+                        {t(
+                          "greatest_show_25.form.entry_participants_placeholder"
+                        )}
+                      </p>
                       <FormControl>
                         <div className="space-y-20">
                           {field.value.map((participant, index) => (
@@ -428,7 +433,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                               className="flex gap-20 items-center"
                             >
                               <Input
-                                className="flex-1 h-64 md:h-120 bg-white border-gs25-secondary rounded-[5rem] text-[8rem] md:text-[16rem] p-[10rem_5rem] md:py-80 md:px-40"
+                                className="flex-1 h-64 md:h-120 bg-white border-gs25-secondary rounded-[5rem] text-[14rem] md:text-[16rem] p-[15rem_10rem]  md:p-[10rem_5rem] md:py-80 md:px-40"
                                 placeholder={t(
                                   "greatest_show_25.form.entry_participants_placeholder"
                                 )}
@@ -463,14 +468,14 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                               }
                             }}
                             disabled={field.value.length >= 25}
-                            className="capitalize text-[14rem] padding-[5rem_20rem]! md:text-[16rem] disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="capitalize text-[14rem] p-[15rem] md:p-[10rem_20rem] md:text-[16rem] disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             {t("greatest_show_25.buttons.add_person")}
                             {field.value.length >= 25 && " (Max 25)"}
                           </SecondaryButton>
                         </div>
                       </FormControl>
-                      <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
+                      <FormMessage className="text-[14rem]  md:text-[14rem] text-status-danger" />
                     </FormItem>
                   )}
                 />
@@ -487,7 +492,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                     };
                     return (
                       <FormItem className="space-y-40">
-                        <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap  font-bold leading-56 md:leading-120">
+                        <FormLabel className="text-[14rem] md:text-[17rem] font-bold leading-100 md:leading-120">
                           {t("greatest_show_25.form.entry_file_label")}
                         </FormLabel>
 
@@ -500,7 +505,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                               <div
                                 className={cn(
                                   "relative text-white inline-flex p-[20rem_20rem] h-104 md:h-184 leading-none rounded-[6rem] md:rounded-[13rem] overflow-hidden bg-transparent border-none outline-hidden",
-                                  "text-[10rem] mt-20 text-center md:text-[23rem] font-base italic p-[10rem_15rem] md:p-[30rem_30rem] md:rounded-[13rem] mb-40 flex items-center cursor-pointer hover:scale-105 transition-transform duration-200"
+                                  "text-[14rem] mt-20 text-center md:text-[18rem] font-base italic p-[15rem] md:p-[20rem_30rem] md:rounded-[13rem] mb-40 flex items-center cursor-pointer hover:scale-105 transition-transform duration-200"
                                 )}
                                 style={{
                                   backgroundImage: `url(${SecondaryButtonImage})`,
@@ -530,21 +535,21 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                         {field.value && (
                           <div className="flex items-center justify-between rounded-[5rem]  ">
                             <span
-                              className="max-w-[70%] truncate text-[9rem] md:text-[16rem]"
+                              className="max-w-[70%] truncate text-[14rem] md:text-[16rem]"
                               title={field.value.name}
                             >
                               {field.value.name}
                             </span>
                             <button
                               type="button"
-                              className="text-[9rem] md:text-[14rem] font-semibold text-hr-ember"
+                              className="text-[14rem] md:text-[14rem] font-semibold text-hr-ember"
                               onClick={handleClearFile}
                             >
                               {}
                             </button>
                           </div>
                         )}
-                        <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
+                        <FormMessage className="text-[14rem]  md:text-[14rem] text-status-danger" />
                       </FormItem>
                     );
                   }}
@@ -568,14 +573,14 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                     name="full_name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap  font-bold leading-56 md:leading-120">
+                        <FormLabel className="text-[14rem] md:text-[17rem] font-bold leading-100 md:leading-120">
                           {t("greatest_show_25.form.full_name")}
                         </FormLabel>
                         <FormDescription />
                         <FormControl>
                           <div className="relative">
                             <Input
-                              className="w-full h-64 md:h-120  bg-white border-gs25-secondary rounded-[5rem] text-[8rem] md:text-[16rem]  p-[10rem_5rem] md:py-80 md:px-40"
+                              className="w-full h-64 md:h-120  bg-white border-gs25-secondary rounded-[5rem] text-[14rem]  md:text-[16rem] p-[15rem_10rem]  md:p-[10rem_5rem] md:py-80 md:px-40"
                               {...field}
                               placeholder={t(
                                 "greatest_show_25.form.full_name_placeholder"
@@ -583,7 +588,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                             />
                           </div>
                         </FormControl>
-                        <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
+                        <FormMessage className="text-[14rem]  md:text-[14rem] text-status-danger" />
                       </FormItem>
                     )}
                   />
@@ -594,14 +599,14 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                     name={"mobile_number"}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap  font-bold leading-56 md:leading-120">
+                        <FormLabel className="text-[14rem] md:text-[17rem] font-bold leading-100 md:leading-120">
                           {t("greatest_show_25.form.mobile_number")}
                         </FormLabel>
                         <FormDescription />
                         <FormControl>
                           <div className="relative">
                             <Input
-                              className="w-full h-64 md:h-120  bg-white border-gs25-secondary rounded-[5rem] text-[8rem] md:text-[16rem]  p-[10rem_5rem] md:py-80 md:px-40"
+                              className="w-full h-64 md:h-120  bg-white border-gs25-secondary rounded-[5rem] text-[14rem]  md:text-[16rem] p-[15rem_10rem]  md:p-[10rem_5rem] md:py-80 md:px-40"
                               {...field}
                               placeholder={t(
                                 "greatest_show_25.form.mobile_number_placeholder"
@@ -609,7 +614,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                             />
                           </div>
                         </FormControl>
-                        <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
+                        <FormMessage className="text-[14rem]  md:text-[14rem] text-status-danger" />
                       </FormItem>
                     )}
                   />
@@ -618,14 +623,14 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                     name={"email"}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[9rem] md:text-[17rem] whitespace-nowrap  font-bold leading-56 md:leading-120">
+                        <FormLabel className="text-[14rem] md:text-[17rem] font-bold leading-100 md:leading-120">
                           {t("greatest_show_25.form.email")}
                         </FormLabel>
                         <FormDescription />
                         <FormControl>
                           <div className="relative">
                             <Input
-                              className="w-full h-64 md:h-120  bg-white border-gs25-secondary rounded-[5rem] text-[8rem] md:text-[16rem]  p-[10rem_5rem] md:py-80 md:px-40"
+                              className="w-full h-64 md:h-120  bg-white border-gs25-secondary rounded-[5rem] text-[14rem]  md:text-[16rem] p-[15rem_10rem]  md:p-[10rem_5rem] md:py-80 md:px-40"
                               {...field}
                               placeholder={t(
                                 "greatest_show_25.form.email_placeholder"
@@ -633,7 +638,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                             />
                           </div>
                         </FormControl>
-                        <FormMessage className="text-[8rem] md:text-[14rem] text-status-danger" />
+                        <FormMessage className="text-[14rem]  md:text-[14rem] text-status-danger" />
                       </FormItem>
                     )}
                   />
@@ -648,18 +653,18 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
               </center>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-240">
                 <div className="flex flex-col gap-x-120">
-                  <Typography.Paragraph className="text-[10rem] md:text-[26rem] font-medium mb-40 md:mb-0">
+                  <Typography.Paragraph className="text-[14rem] md:text-[26rem] font-medium mb-40 md:mb-0">
                     {parser(t("greatest_show_25.form.footer_note_1"))}
                   </Typography.Paragraph>
-                  <Typography.Paragraph className="text-[10rem] md:text-[26rem] font-medium">
+                  <Typography.Paragraph className="text-[14rem] md:text-[26rem] font-medium">
                     {parser(t("greatest_show_25.form.footer_note_2"))}
                   </Typography.Paragraph>
                 </div>
                 <div className="flex flex-col gap-x-120">
-                  <Typography.Paragraph className="text-[10rem] md:text-[26rem] font-medium mb-40 md:mb-0">
+                  <Typography.Paragraph className="text-[14rem] md:text-[26rem] font-medium mb-40 md:mb-0">
                     {parser(t("greatest_show_25.form.footer_note_3"))}
                   </Typography.Paragraph>
-                  <Typography.Paragraph className="text-[10rem] md:text-[26rem] font-medium">
+                  <Typography.Paragraph className="text-[14rem] md:text-[26rem] font-medium">
                     {parser(t("greatest_show_25.form.footer_note_4"))}
                   </Typography.Paragraph>
                 </div>
@@ -667,7 +672,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
             </section>
 
             <center className="mt-80 md:mt-320">
-              <Typography.Paragraph className="text-center text-[10rem] md:text-[20rem] text-gs25-primary font-semibold my-60 mb-100">
+              <Typography.Paragraph className="text-center text-[11rem] md:text-[20rem] text-gs25-primary font-semibold my-60 mb-100">
                 {parser(t("greatest_show_25.form.submit_note"))}
               </Typography.Paragraph>
               {isOpened === true && isExpired === false && (
@@ -682,7 +687,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
               )}
               <Link
                 to="/greatest-show-25"
-                className="inline-block mt-40 text-[10rem] md:text-[30rem] cursor-pointer text-gs25-primary font-semibold underline"
+                className="inline-block mt-40 text-[14rem] md:text-[30rem] cursor-pointer text-gs25-primary font-semibold underline"
               >
                 {t("greatest_show_25.buttons.go_back")}
               </Link>

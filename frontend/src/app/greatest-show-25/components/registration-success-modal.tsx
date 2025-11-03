@@ -96,7 +96,7 @@ export const RegistrationSuccessModal: FC<ModalProps> = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         className={cn(
-          "max-w-[70%] w-full bg-hr-background border-none shadow-none p-0",
+          "max-w-[1280px] w-full bg-hr-background border-none shadow-none p-0",
           className
         )}
       >
