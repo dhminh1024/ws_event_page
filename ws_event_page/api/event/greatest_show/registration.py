@@ -7,15 +7,15 @@ import frappe
 from frappe.utils.file_manager import save_file
 
 ENTRY_GROUP_CHOICES = {
-    "primary students": "Primary students",
-    "primary": "Primary students",
-    "primary_students": "Primary students",
-    "secondary students": "Secondary students",
-    "secondary": "Secondary students",
-    "secondary_students": "Secondary students",
-    "adult": "Adult",
-    "parent": "Adult",
-    "parent_teacher_staff": "Adult",
+    "primary students": "Group A",
+    "primary": "Group A",
+    "primary_students": "Group A",
+    "secondary students": "Group B",
+    "secondary": "Group B",
+    "secondary_students": "Group B",
+    "adult": "Group C",
+    "parent": "Group C",
+    "parent_teacher_staff": "Group C",
 }
 
 ENTRY_CATEGORY_CHOICES = {

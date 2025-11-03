@@ -81,7 +81,7 @@
    "fieldname": "entry_group",
    "fieldtype": "Select",
    "label": "Entry group",
-   "options": "Primary students\nSecondary students\nAdult",
+   "options": "Group A\nGroup B\nGroup C",
    "reqd": 1
   },
   {
