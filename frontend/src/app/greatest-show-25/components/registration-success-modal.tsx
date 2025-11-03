@@ -120,27 +120,42 @@ export const RegistrationSuccessModal: FC<ModalProps> = ({
         ) : (
           <>
             <div className="px-[2%]">
-              <img className="w-full" src={RegisterSuccessHeading} alt="Top Page" />
+              <img
+                className="w-full"
+                src={RegisterSuccessHeading}
+                alt="Top Page"
+              />
               <center className="mb-20 px-[7%]">
                 <Typography.Heading
-                  className="text-[16rem] md:text-[20rem] text-gs-primary leading-[2] font-base"
+                  className="text-[13rem] md:text-[18rem] text-gs-primary leading-[2] font-base"
                   level={2}
                 >
                   {parser(t("greatest_show_25.form.success_text_1"))}
                 </Typography.Heading>
                 <Typography.Heading
-                  className="text-[16rem] md:text-[20rem] text-gs-primary leading-[2] font-base"
+                  className="text-[13rem] md:text-[18rem] text-gs-primary leading-[2] font-base"
                   level={2}
                 >
                   {parser(t("greatest_show_25.form.success_text_2"))}
                 </Typography.Heading>
                 <Typography.Heading
-                  className="text-[16rem] md:text-[20rem] text-gs-primary leading-[2] font-base"
+                  className="text-[13rem] md:text-[18rem] text-gs-primary leading-[2] font-base"
                   level={2}
                 >
                   {parser(t("greatest_show_25.form.success_text_3"))}
                 </Typography.Heading>
-
+                <Typography.Heading
+                  className="text-[13rem] md:text-[18rem] text-gs-primary leading-[2] font-base"
+                  level={2}
+                >
+                  {parser(t("greatest_show_25.form.success_text_4"))}
+                </Typography.Heading>
+                <Typography.Heading
+                  className="text-[13rem] md:text-[18rem] text-gs-primary leading-[2] font-base"
+                  level={2}
+                >
+                  {parser(t("greatest_show_25.form.success_text_5"))}
+                </Typography.Heading>
                 <center className="mt-[20rem]">
                   <SecondaryButton
                     className={cn(
