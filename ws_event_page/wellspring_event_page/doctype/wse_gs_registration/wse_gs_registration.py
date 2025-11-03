@@ -162,6 +162,7 @@ def send_registration_email(email_template, sender, recipients, subject, args):
     """Helper function to send registration emails."""
     frappe.sendmail(
         sender=sender,
+        cc=[sender],
         recipients=recipients,
         subject=subject,
         template=email_template,
