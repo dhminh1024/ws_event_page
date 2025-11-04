@@ -57,7 +57,7 @@ const useRegistration = () => {
             },
             FRAPPE_APIS.UPLOAD_REGISTRATION_FILE.METHOD_STRING
           );
-          alert(JSON.stringify(uploadResponse));
+          // alert(JSON.stringify(uploadResponse));
         }
       } catch (uploadError) {
         toast.error("Failed", {
