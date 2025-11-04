@@ -83,6 +83,12 @@ def get_columns():
             "width": 150,
         },
         {
+            "fieldname": "attach_file",
+            "fieldtype": "Data",
+            "label": "Attachment",
+            "width": 150,
+        },
+        {
             "fieldname": "status",
             "fieldtype": "Data",
             "label": "Status",
@@ -118,6 +124,7 @@ def get_data():
 			`tabWSE GS Registration`.entry_participants,
 			`tabWSE GS Registration`.instrumental_info,
 			`tabWSE GS Registration`.talent_info,
+			`tabWSE GS Registration`.attach_file,
 			`tabWSE GS Registration`.status,
 			`tabWSE GS Registration`.creation,
 			`tabWSE GS Program`.title_en AS program_title
@@ -130,6 +137,12 @@ def get_data():
 			`tabWSE GS Registration`.creation DESC;
 	"""
     data = frappe.db.sql(query, as_dict=True)
+
+    # Convert relative file paths to full URLs
+    site_url = frappe.utils.get_url()
+    for row in data:
+        if row.get("attach_file") and row["attach_file"].startswith("/"):
+            row["attach_file"] = site_url + row["attach_file"]
 
     return data
 

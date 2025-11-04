@@ -182,6 +182,10 @@ def upload_registration_file(registration_id: str):
     # Use Frappe's handler - automatically handles guest permissions
     file_doc = frappe_upload_file()
 
+    registration = frappe.get_doc("WSE GS Registration", registration_id)
+    registration.attach_file = file_doc.file_url
+    registration.save(ignore_permissions=True)
+
     return {
         "message": "Tải tệp tin thành công | Attachment uploaded successfully",
         "registration_id": registration_id,
