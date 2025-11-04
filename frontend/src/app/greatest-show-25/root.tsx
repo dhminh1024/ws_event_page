@@ -4,11 +4,11 @@ import GlobalStyle from "./global";
 import { EventPageProvider } from "@/lib/event-page/event-page-provider";
 import { HRSettingProvider } from "./context/hr-setting-provider";
 import ReactGA from "react-ga";
-import { Toaster, toast } from 'sonner'
+import { Toaster, toast } from "sonner";
 
 const GAID = "G-ERLLHRP52G"; // Replace with your Google Analytics ID
 ReactGA.initialize(GAID);
-ReactGA.pageview(window.location.pathname + window.location.search);
+ReactGA.send({ hitType: "pageview" });
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
