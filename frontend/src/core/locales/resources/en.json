@@ -318,7 +318,7 @@
       "entry_participants_label": "Members (Max 25 people)",
       "entry_participants_required": "Please enter member information",
       "entry_participants_placeholder": "Full name (required); class, department (if any). Example: Nguyen Van A – Class 8.8",
-      "entry_file_label": "Upload music/video file (Maximum 100MB)",
+      "entry_file_label": "Upload beat file/beat video file to support your performance (Maximum 100MB)",
       "entry_file_button": "Upload file",
       "entry_file_invalid": "Please upload a valid file (mp3, mp4, mov, wmv, avi)",
       "entry_file_too_large": "File size exceeds 100MB",

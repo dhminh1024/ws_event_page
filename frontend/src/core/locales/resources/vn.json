@@ -319,7 +319,7 @@
       "entry_participants_required": "Hãy nhập thông tin người tham gia",
       "entry_participants_placeholder": "Họ và tên (bắt buộc); lớp, phòng ban (nếu có). Ví dụ: Nguyễn Văn A - Lớp 8.8",
       "entry_participants_max": "Vượt quá số lượng người tham gia cho phép (tối đa 25 người)",
-      "entry_file_label": "Đăng tải file nhạc/video biểu diễn (Dung lượng tối đa 100MB)",
+      "entry_file_label": "Đăng tải file beat nhạc/video beat nhạc hỗ trợ biểu diễn (Dung lượng tối đa 100MB)",
       "entry_file_button": "Tải file lên",
       "entry_file_invalid": "Vui lòng tải file định dạng hợp lệ (mp3, mp4, mov, wmv, avi)",
       "entry_file_too_large": "Kích thước file vượt quá 100MB",
