@@ -12,6 +12,7 @@ import parser from "html-react-parser";
 import { DimondBlock } from "../components/dimond-block";
 import Typography from "../components/typography";
 import { SecondaryButton } from "../components/button";
+
 export const Component = () => {
   const navigate = useNavigate();
   const { t, currentLanguage } = useLocales();
@@ -32,6 +33,36 @@ export const Component = () => {
           },
           (_, i) =>
             event?.variables?.[`round_1_rule_${i + 1}_${currentLanguage}`]
+              ?.value || ""
+        ),
+      },
+      {
+        id: "where-am-i",
+        img: Round2Image,
+        title:
+          event?.variables?.[`round_2_title_${currentLanguage}`]?.value || "",
+        rules: Array.from(
+          {
+            length:
+              Number(event?.variables?.[`round_2_rules_number`]?.value) || 0,
+          },
+          (_, i) =>
+            event?.variables?.[`round_2_rule_${i + 1}_${currentLanguage}`]
+              ?.value || ""
+        ),
+      },
+      {
+        id: "here-am-i",
+        img: Round3Image,
+        title:
+          event?.variables?.[`round_3_title_${currentLanguage}`]?.value || "",
+        rules: Array.from(
+          {
+            length:
+              Number(event?.variables?.[`round_3_rules_number`]?.value) || 0,
+          },
+          (_, i) =>
+            event?.variables?.[`round_3_rule_${i + 1}_${currentLanguage}`]
               ?.value || ""
         ),
       },
@@ -81,7 +112,7 @@ export const Component = () => {
           ))}
         </div>
         <center>
-          <Link to={`/greatest-show-25`}>
+          <Link to={`/greatest-show-25#${params.id}`}>
             <SecondaryButton
               className={cn(
                 "text-[14rem] text-center md:text-[23rem] font-base italic p-[16rem_30rem] md:p-[30rem_80rem] md:rounded-[13rem] mb-40 inline-flex items-center cursor-pointer hover:scale-105 transition-transform duration-200"

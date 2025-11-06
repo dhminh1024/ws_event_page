@@ -11,5 +11,11 @@ export default function HappyBoxLayout({ children }: PropsWithChildren) {
     smoothTouch: true,
   });
 
-  return <>{children}</>;
+  return (
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        {children}
+      </div>
+    </div>
+  );
 }

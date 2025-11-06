@@ -265,7 +265,7 @@ export const JourneySection: FC<JourneySectionProps> = ({
         )}
         <div className="flex flex-col md:flex-row">
           {/* Milestone 1: Within Me */}
-          <div className="">
+          <div id="within-me" className="">
             <div className={cn({ relative: !isDesktop })}>
               {!isDesktop && (
                 <img
@@ -379,7 +379,7 @@ export const JourneySection: FC<JourneySectionProps> = ({
           </div>
 
           {/* Milestone 2: Where Am I */}
-          <div className="">
+          <div id="where-am-i" className="">
             <div className={cn({ relative: !isDesktop })}>
               {!isDesktop && (
                 <img
@@ -485,7 +485,7 @@ export const JourneySection: FC<JourneySectionProps> = ({
           </div>
 
           {/* Milestone 3: Here I Am */}
-          <div className="">
+          <div id="here-am-i" className="">
             <div className={cn({ relative: !isDesktop })}>
               {!isDesktop && (
                 <img
