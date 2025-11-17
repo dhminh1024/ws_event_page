@@ -668,6 +668,11 @@ export const RegisterForm: FC<RegisterFormProps> = ({ className }) => {
                     {parser(t("greatest_show_25.form.footer_note_4"))}
                   </Typography.Paragraph>
                 </div>
+                <div className="col-span-full mt-30">
+                  <Typography.Paragraph className="text-[14rem] md:text-[26rem] font-medium mb-40 md:mb-0">
+                    {parser(t("greatest_show_25.form.footer_note_5"))}
+                  </Typography.Paragraph>
+                </div>
               </div>
             </section>
 
