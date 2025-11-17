@@ -1,0 +1,41 @@
+meta {
+  name: Get Certificate
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{url}}/api/method/ws_event_page.api.kindergarten_demo_day.certificate.get_certificate
+  body: none
+  auth: none
+}
+
+query {
+  certificate_token: {{demoCertificateToken}}
+}
+
+docs {
+  Retrieve certificate information using a certificate token.
+
+  This endpoint is used to display the certificate to parents who received
+  the certificate URL via email.
+
+  Required Parameters:
+  - certificate_token: Unique token (32-byte URL-safe string)
+
+  Response includes:
+  - student_name: Student's full name
+  - student_dob: Date of birth
+  - event_title: Event name
+  - event_datetime: When event occurred
+  - group_photo: Path to group photo
+  - kindergarten_name: Kindergarten name
+  - kindergarten_logo: Kindergarten logo path
+  - parent_submissions: Array of all registered parents
+  - total_parent_submissions: Count of parents
+
+  Token Notes:
+  - Tokens never expire
+  - Same token works for all parents of same student
+  - Token is cryptographically secure (secrets.token_urlsafe(32))
+}

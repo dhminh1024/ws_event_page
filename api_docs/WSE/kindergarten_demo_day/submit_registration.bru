@@ -1,0 +1,51 @@
+meta {
+  name: Submit Registration
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{url}}/api/method/ws_event_page.api.kindergarten_demo_day.registration.submit_registration
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "visit_event": "{{demoEventName}}",
+    "student_full_name": "Jane Smith",
+    "student_dob": "2020-05-15",
+    "parent_full_name": "Mary Smith",
+    "parent_email": "mary.smith@example.com",
+    "parent_phone_number": "0987654321"
+  }
+}
+
+docs {
+  Submit a parent registration for a student's event certificate.
+  
+  RATE LIMITED: 10 requests per hour per IP address
+  
+  Required Fields:
+  - visit_event: Event name/ID
+  - student_full_name: Student's full name (min 2 chars)
+  - student_dob: Date of birth (YYYY-MM-DD, not in future)
+  - parent_full_name: Parent's full name
+  - parent_email: Valid email address
+  - parent_phone_number: Phone number (min 10 digits)
+  
+  Behavior:
+  - If student already registered: Adds new parent to existing registration
+  - If new student: Creates new registration with certificate token
+  - Sends email to parent with certificate URL
+  - Returns same certificate URL for all parents of same student
+  
+  Response includes:
+  - certificate_url: URL to access certificate
+  - certificate_token: Unique token
+  - is_new_registration: true if new student, false if additional parent
+}

@@ -1,0 +1,29 @@
+meta {
+  name: Get Event Details
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{url}}/api/method/ws_event_page.api.kindergarten_demo_day.visit_event.get_event_details
+  body: none
+  auth: none
+}
+
+query {
+  event_name: {{demoEventName}}
+}
+
+docs {
+  Get detailed information about a specific kindergarten visit event.
+
+  Includes:
+  - Event details (title, datetime, location)
+  - Kindergarten information
+  - List of registered students
+  - Registration count
+  - Group photo URL
+
+  Required Parameters:
+  - event_name: Name/ID of the visit event
+}

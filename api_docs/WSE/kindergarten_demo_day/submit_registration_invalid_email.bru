@@ -1,0 +1,40 @@
+meta {
+  name: Submit Registration (Invalid Email)
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{url}}/api/method/ws_event_page.api.kindergarten_demo_day.registration.submit_registration
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "visit_event": "{{demoEventName}}",
+    "student_full_name": "Bob Williams",
+    "student_dob": "2020-07-20",
+    "parent_full_name": "Sarah Williams",
+    "parent_email": "invalid-email",
+    "parent_phone_number": "0912345678"
+  }
+}
+
+docs {
+  TEST CASE: Invalid Email Format
+  
+  Expected Response:
+  {
+    "message": {
+      "success": false,
+      "message": "Invalid email format"
+    }
+  }
+  
+  This tests the email validation logic.
+}
