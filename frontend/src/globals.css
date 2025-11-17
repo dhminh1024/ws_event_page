@@ -156,8 +156,15 @@ layer(base);
     --background-image-gs25-gradient-8: linear-gradient(
     to right,
     #A12FFD,
-    #073498 
+    #073498
   );
+
+  --color-kdd-primary: #ff6b6b;
+  --color-kdd-primary-hover: #ff5252;
+  --color-kdd-primary-light: #ffe5e5;
+  --color-kdd-secondary: #4ecdc4;
+  --color-kdd-text: #2d3436;
+  --color-kdd-text-secondary: #636e72;
 
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
