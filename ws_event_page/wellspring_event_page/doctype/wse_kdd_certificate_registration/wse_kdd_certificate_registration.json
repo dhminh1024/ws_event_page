@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-11-17 12:05:08.418169",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "parent_full_name",
+  "parent_email",
+  "parent_phone_number",
+  "registration_datetime"
+ ],
+ "fields": [
+  {
+   "fieldname": "parent_full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Parent Full Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "parent_email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Parent Email",
+   "reqd": 1
+  },
+  {
+   "fieldname": "parent_phone_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Parent Phone Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "registration_datetime",
+   "fieldtype": "Datetime",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Registration Datetime",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-11-17 12:07:54.023223",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE KDD Certificate Registration",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
