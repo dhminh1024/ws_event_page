@@ -298,7 +298,7 @@
         "secondary_students_description": "Học sinh Trung học: <br/> từ Khối 6 - Khối 12",
         "parent_teacher_staff": "Phụ huynh - Giáo viên - Nhân viên",
         "parent_teacher_staff_heading": "Bảng C",
-        "parent_teacher_staff_description": "<ul className=\"pl-[15rem] md:pl-[40rem]\" style=\"list-style: disc; text-align:left\"><li>Cựu Học sinh</li><li>Phụ huynh & Học sinh</li><li>Học sinh & Giáo viên</li><li>Giáo viên</li><li>Nhân viên</li><li>Phụ huynh & Giáo viên</li></ul>"
+        "parent_teacher_staff_description": "<ul className=\"pl-[15rem] md:pl-[40rem]\" style=\"list-style: disc; text-align:left\"><li>Cựu Học sinh</li><li>Phụ huynh/ Người thân học sinh<br className=\"block md:hidden\"> & Học sinh</li><li>Học sinh & Giáo viên</li><li>Giáo viên</li><li>Nhân viên</li><li>Phụ huynh & Giáo viên</li></ul>"
       },
       "group_required": "Hãy chọn một đối tượng dự thi",
       "entry_name": "Tên tiết mục dự thi",

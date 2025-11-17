@@ -238,14 +238,14 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                 <div className="absolute top-[23%] left-[50%] md:top-[52%] px-[4%] w-full md:left-0 flex flex-1 flex-col justify-start md:justify-center">
                   <div
                     className={cn(
-                      " text-gs25-primary md:text-center text-[14rem] uppercase md:text-[30rem] font-extrabold mb-0 md:mb-40"
+                      " text-gs25-primary md:text-center text-[14rem] uppercase md:text-[30rem] font-extrabold mb-0"
                     )}
                   >
                     {option.heading}
                   </div>
                   <div
                     className={cn(
-                      "md:px-80 text-gs25-secondary text-[8.5rem] md:text-[22rem] font-medium mb-40",
+                      "md:px-80 text-gs25-secondary text-[7rem] md:text-[20rem] font-medium mb-40",
                       {
                         "md:text-center": index !== 2,
                       }

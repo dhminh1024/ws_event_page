@@ -298,7 +298,7 @@
         "secondary_students_description": "Secondary Students: <br/> Grades 6–12",
         "parent_teacher_staff": "Parents – Teachers – Staff",
         "parent_teacher_staff_heading": "Group C",
-        "parent_teacher_staff_description": "<ul className=\"pl-[15rem] md:pl-[40rem]\" style=\"list-style: disc; text-align:left\"><li>Alumni</li><li>Parents & Students</li><li>Students & Teachers</li><li>Teachers</li><li>Staff</li><li>Parents & Teachers</li></ul>"
+        "parent_teacher_staff_description": "<ul className=\"pl-[15rem] md:pl-[40rem]\" style=\"list-style: disc; text-align:left\"><li>Alumni</li><li>Parents/ Relatives & Students</li><li>Students & Teachers</li><li>Teachers</li><li>Staff</li><li>Parents & Teachers</li></ul>"
       },
       "group_required": "Please select a participant category",
       "entry_name": "Performance Title",
