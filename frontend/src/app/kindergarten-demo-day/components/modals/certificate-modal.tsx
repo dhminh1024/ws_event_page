@@ -9,6 +9,8 @@ import { Input } from "@atoms/input";
 import { Label } from "@atoms/label";
 import { PrimaryButton, SecondaryButton } from "../button";
 import { cn } from "@/core/utils/shadcn-utils";
+import { toJpeg } from "html-to-image";
+import download from "downloadjs";
 
 export type CertificateModalProps = {
   open: boolean;
@@ -21,6 +23,8 @@ export type CertificateModalProps = {
   }) => void;
   loading?: boolean;
 };
+
+const rules = ["WebView", "(iPhone|iPod|iPad)(?!.*Safari/)", "Android.*(wv)"];
 
 export const CertificateModal: React.FC<CertificateModalProps> = ({
   open,
@@ -76,6 +80,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
       onSubmit(formData);
     }
   };
+
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -163,7 +168,10 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
 
           {/* Student's Full Name */}
           <div>
-            <Label htmlFor="studentFullName" className="text-kdd-text text-[14rem]">
+            <Label
+              htmlFor="studentFullName"
+              className="text-kdd-text text-[14rem]"
+            >
               Student's Full Name <span className="text-red-500">*</span>
             </Label>
             <Input
