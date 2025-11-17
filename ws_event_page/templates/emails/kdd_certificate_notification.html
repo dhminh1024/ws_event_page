@@ -1,0 +1,197 @@
+{% extends "templates/emails/ws_newsletter_template.html" %} {% block content %}
+
+<div class="container text-center" style="text-align: center; color: #172a52">
+  <div>
+    <h1 style="text-align: center">
+      <span style="color: #f05023">CHỨNG NHẬN THAM GIA</span>
+      <br />
+      <span style="color: #172a52">BUỔI TRẢI NGHIỆM MẦM NON</span>
+      <br />
+      <span style="color: #f5aa1e">WELLSPRING SAIGON</span>
+    </h1>
+    <h3 style="text-align: center; color: #3b6dae">
+      KINDERGARTEN DEMO DAY CERTIFICATE OF PARTICIPATION
+    </h3>
+  </div>
+
+  <div style="margin: 30px auto; max-width: 600px; text-align: left">
+    <p style="font-size: 16px; line-height: 1.6">
+      Xin chào Quý phụ huynh
+      <strong style="color: #f05023">{{parent_name}}</strong>,
+    </p>
+    <p style="font-size: 16px; line-height: 1.6">
+      <em
+        >Dear parent
+        <strong style="color: #f05023">{{parent_name}}</strong>,</em
+      >
+    </p>
+
+    <p style="font-size: 16px; line-height: 1.6; margin-top: 20px">
+      Cảm ơn bạn đã đăng ký cho bé
+      <strong style="color: #3b6dae">{{student_name}}</strong> tham gia buổi
+      trải nghiệm tại Wellspring Saigon.
+    </p>
+    <p style="font-size: 16px; line-height: 1.6">
+      <em
+        >Thank you for registering
+        <strong style="color: #3b6dae">{{student_name}}</strong> for the
+        Kindergarten Demo Day at Wellspring Saigon.</em
+      >
+    </p>
+
+    <p style="font-size: 16px; line-height: 1.6; margin-top: 20px">
+      Chứng nhận tham gia của bé đã được tạo và sẵn sàng để xem. Vui lòng nhấn
+      vào nút bên dưới để xem và tải chứng nhận.
+    </p>
+    <p style="font-size: 16px; line-height: 1.6">
+      <em
+        >Your child's certificate of participation is now ready. Please click
+        the button below to view and download the certificate.</em
+      >
+    </p>
+  </div>
+
+  <!-- Certificate Access Button -->
+  <div style="text-align: center; margin: 40px auto">
+    <a
+      href="{{certificate_url}}"
+      style="
+        background-color: #f05023;
+        color: white;
+        padding: 15px 40px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        display: inline-block;
+      "
+    >
+      XEM CHỨNG NHẬN | VIEW CERTIFICATE
+    </a>
+  </div>
+
+  <!-- Certificate Details -->
+  <table
+    class="table"
+    style="
+      background-color: azure;
+      border: 1px solid #3b6dae;
+      margin: 20px auto;
+      max-width: 600px;
+    "
+  >
+    <tbody style="color: #3d517b">
+      <tr>
+        <td
+          style="
+            border-color: #3b6dae;
+            text-align: right;
+            padding: 10px;
+            font-weight: bold;
+          "
+        >
+          Tên bé | <em>Student Name</em>:
+        </td>
+        <td style="border-color: #3b6dae; padding: 10px">{{student_name}}</td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border-color: #3b6dae;
+            text-align: right;
+            padding: 10px;
+            font-weight: bold;
+          "
+        >
+          Sự kiện | <em>Event</em>:
+        </td>
+        <td style="border-color: #3b6dae; padding: 10px">{{event_title}}</td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border-color: #3b6dae;
+            text-align: right;
+            padding: 10px;
+            font-weight: bold;
+          "
+        >
+          Phụ huynh | <em>Parent</em>:
+        </td>
+        <td style="border-color: #3b6dae; padding: 10px">{{parent_name}}</td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border-color: #3b6dae;
+            text-align: right;
+            padding: 10px;
+            font-weight: bold;
+          "
+        >
+          Email:
+        </td>
+        <td style="border-color: #3b6dae; padding: 10px">{{parent_email}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Important Notes -->
+  <div
+    style="
+      margin: 30px auto;
+      max-width: 600px;
+      text-align: left;
+      background-color: #fff8e1;
+      padding: 20px;
+      border-radius: 5px;
+      border-left: 4px solid #f5aa1e;
+    "
+  >
+    <p style="font-size: 14px; line-height: 1.6; margin: 0">
+      <strong style="color: #f5aa1e"
+        >Lưu ý quan trọng | Important Notes:</strong
+      >
+    </p>
+    <ul style="font-size: 14px; line-height: 1.6; margin-top: 10px">
+      <li>
+        Vui lòng lưu email này để truy cập chứng nhận sau này. <br />
+        <em>Please save this email for future access to the certificate.</em>
+      </li>
+      <li>
+        Nếu bạn cần gửi lại link chứng nhận, vui lòng liên hệ với trường. <br />
+        <em
+          >If you need to resend the certificate link, please contact the
+          school.</em
+        >
+      </li>
+      <li>
+        Mỗi bé sẽ có một chứng nhận duy nhất cho sự kiện này. <br />
+        <em>Each child will have one unique certificate for this event.</em>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin: 30px auto; max-width: 600px; text-align: left">
+    <p style="font-size: 16px; line-height: 1.6">
+      Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi.
+    </p>
+    <p style="font-size: 16px; line-height: 1.6">
+      <em>If you have any questions, please feel free to contact us.</em>
+    </p>
+
+    <p style="font-size: 16px; line-height: 1.6; margin-top: 20px">
+      Trân trọng, <br />
+      <strong style="color: #3b6dae">Wellspring Saigon</strong>
+    </p>
+    <p style="font-size: 16px; line-height: 1.6">
+      <em
+        >Best regards, <br />
+        <strong style="color: #3b6dae">Wellspring Saigon</strong></em
+      >
+    </p>
+  </div>
+</div>
+
+{% endblock %}

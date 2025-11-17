@@ -1,0 +1,26 @@
+meta {
+  name: Get List of Events
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{url}}/api/method/ws_event_page.api.kindergarten_demo_day.visit_event.get_list_of_events
+  body: none
+  auth: none
+}
+
+query {
+  ~kindergarten: ABC-KG-001
+  ~registration_open: 1
+}
+
+docs {
+  Get a list of kindergarten visit events with optional filtering.
+
+  Query Parameters:
+  - kindergarten (optional): Filter by kindergarten name
+  - registration_open (optional): "1" for open, "0" for closed
+
+  Note: Uncomment query parameters by removing the ~ prefix to use them.
+}

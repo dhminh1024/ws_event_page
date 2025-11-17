@@ -1,0 +1,37 @@
+meta {
+  name: Resend Certificate Email (Wrong Email)
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{url}}/api/method/ws_event_page.api.kindergarten_demo_day.certificate.resend_certificate_email
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "certificate_token": "{{demoCertificateToken}}",
+    "parent_email": "wrong.email@example.com"
+  }
+}
+
+docs {
+  TEST CASE: Resend to Email Not in Registration
+  
+  Expected Response:
+  {
+    "message": {
+      "success": false,
+      "message": "Email address not found in registration records"
+    }
+  }
+  
+  This tests the security validation that only registered parents
+  can request certificate resend, preventing email spam.
+}

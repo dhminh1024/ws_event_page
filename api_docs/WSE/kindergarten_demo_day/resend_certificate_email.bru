@@ -1,0 +1,46 @@
+meta {
+  name: Resend Certificate Email
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{url}}/api/method/ws_event_page.api.kindergarten_demo_day.certificate.resend_certificate_email
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "certificate_token": "{{demoCertificateToken}}",
+    "parent_email": "{{demoParentEmail}}"
+  }
+}
+
+docs {
+  Resend certificate email to a parent who lost the original email.
+  
+  Required Fields:
+  - certificate_token: The certificate token
+  - parent_email: Parent's email (must match a registered parent)
+  
+  Validation:
+  - Email must belong to one of the registered parents for that student
+  - Email lookup is case-insensitive
+  - Certificate token must be valid
+  
+  Use Cases:
+  - Parent lost original email
+  - Email went to spam
+  - Parent changed devices
+  - Multiple family members need access
+  
+  Response:
+  - Success: "Certificate email has been resent to {email}"
+  - Error: "Email address not found in registration records"
+  - Error: "Invalid certificate token"
+}
