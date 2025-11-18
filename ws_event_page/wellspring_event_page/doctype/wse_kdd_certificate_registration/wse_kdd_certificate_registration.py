@@ -23,6 +23,7 @@ class WSEKDDCertificateRegistration(Document):
         parent_phone_number: DF.Data
         parentfield: DF.Data
         parenttype: DF.Data
+        rating: DF.Rating
         registration_datetime: DF.Datetime | None
     # end: auto-generated types
 

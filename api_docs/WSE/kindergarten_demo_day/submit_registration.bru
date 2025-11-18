@@ -21,31 +21,46 @@ body:json {
     "student_dob": "2020-05-15",
     "parent_full_name": "Mary Smith",
     "parent_email": "mary.smith@example.com",
-    "parent_phone_number": "0987654321"
+    "parent_phone_number": "0987654321",
+    "rating": 5
   }
 }
 
 docs {
-  Submit a parent registration for a student's event certificate.
-  
+  Submit a parent registration for an existing student's event certificate.
+
+  IMPORTANT: Student registration MUST already exist (created by admin) before parents can submit.
+
   RATE LIMITED: 10 requests per hour per IP address
-  
+
   Required Fields:
   - visit_event: Event name/ID
-  - student_full_name: Student's full name (min 2 chars)
-  - student_dob: Date of birth (YYYY-MM-DD, not in future)
+  - student_full_name: Student's full name (must match existing registration)
+  - student_dob: Date of birth (YYYY-MM-DD, must match existing registration)
   - parent_full_name: Parent's full name
   - parent_email: Valid email address
   - parent_phone_number: Phone number (min 10 digits)
-  
+  - rating: Parent's rating of the event (1-5 stars, required)
+
   Behavior:
-  - If student already registered: Adds new parent to existing registration
-  - If new student: Creates new registration with certificate token
-  - Sends email to parent with certificate URL
+  - Validates student registration exists (by student_full_name + student_dob + visit_event)
+  - Checks if parent already submitted (by parent_full_name + parent_email)
+  - If parent NOT exists: Adds parent to certificate registration submissions child table
+  - If parent EXISTS: Skips adding, but resends certificate email
+  - Always sends email to parent with certificate URL
   - Returns same certificate URL for all parents of same student
-  
+
   Response includes:
   - certificate_url: URL to access certificate
   - certificate_token: Unique token
-  - is_new_registration: true if new student, false if additional parent
+  - student_name: Student's full name
+  - event_title: Event title
+  - already_registered: true if parent already submitted, false if new
+
+  Error Cases:
+  - Student registration not found → Returns error message
+
+  Duplicate Prevention:
+  - Same parent (name + email) cannot register twice for same student
+  - Duplicate submission returns success but doesn't add to child table
 }

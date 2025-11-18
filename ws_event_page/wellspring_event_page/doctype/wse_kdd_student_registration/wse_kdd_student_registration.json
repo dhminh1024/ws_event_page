@@ -81,7 +81,7 @@
   },
   {
    "fieldname": "certificate_url",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Certificate URL",
    "read_only": 1
   },
@@ -92,7 +92,6 @@
   {
    "fieldname": "certificate_token",
    "fieldtype": "Data",
-   "hidden": 1,
    "label": "Certificate Token",
    "read_only": 1
   },
@@ -110,8 +109,8 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-17 12:09:29.205598",
- "modified_by": "Administrator",
+ "modified": "2025-11-18 10:40:44.623660",
+ "modified_by": "minh.do@wellspringsaigon.edu.vn",
  "module": "Wellspring Event Page",
  "name": "WSE KDD Student Registration",
  "owner": "Administrator",

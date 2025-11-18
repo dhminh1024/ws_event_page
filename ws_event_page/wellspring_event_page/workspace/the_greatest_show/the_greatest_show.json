@@ -85,8 +85,8 @@
    "type": "Link"
   }
  ],
- "modified": "2025-10-30 15:47:31.035342",
- "modified_by": "Administrator",
+ "modified": "2025-11-18 09:35:53.593631",
+ "modified_by": "minh.do@wellspringsaigon.edu.vn",
  "module": "Wellspring Event Page",
  "name": "The Greatest Show",
  "number_cards": [
@@ -112,7 +112,7 @@
  "public": 1,
  "quick_lists": [],
  "roles": [],
- "sequence_id": 23.0,
+ "sequence_id": 20.0,
  "shortcuts": [
   {
    "color": "Grey",
