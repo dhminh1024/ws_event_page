@@ -1,0 +1,22 @@
+{
+ "creation": "2025-11-18 00:00:00",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "document_type": "WSE KDD Visit Event",
+ "dynamic_filters_json": "[]",
+ "filters_json": "[[\"WSE KDD Visit Event\",\"registration_open\",\"=\",1,false]]",
+ "function": "Count",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "label": "KDD Open Events",
+ "modified": "2025-11-18 10:10:11.088574",
+ "modified_by": "minh.do@wellspringsaigon.edu.vn",
+ "module": "Wellspring Event Page",
+ "name": "KDD Open Events",
+ "owner": "Administrator",
+ "report_function": "Sum",
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Daily",
+ "type": "Document Type"
+}

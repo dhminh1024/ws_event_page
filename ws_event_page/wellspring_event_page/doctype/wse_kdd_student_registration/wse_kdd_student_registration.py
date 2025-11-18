@@ -21,7 +21,7 @@ class WSEKDDStudentRegistration(Document):
         certificate_generated: DF.Check
         certificate_registration_submission: DF.Table[WSEKDDCertificateRegistration]
         certificate_token: DF.Data | None
-        certificate_url: DF.Data | None
+        certificate_url: DF.SmallText | None
         kindergarten: DF.Link | None
         student_dob: DF.Date | None
         student_full_name: DF.Data
@@ -43,9 +43,10 @@ class WSEKDDStudentRegistration(Document):
         """Generate a unique, secure certificate token.
 
         Uses secrets.token_urlsafe to generate a cryptographically strong random token.
+        Token is 16 bytes (~22 characters) for balance between security and URL friendliness.
         """
         if not self.certificate_token:
-            self.certificate_token = secrets.token_urlsafe(32)
+            self.certificate_token = secrets.token_urlsafe(16)
 
     def generate_certificate_url(self):
         """Generate the certificate URL using the token."""
@@ -140,13 +141,14 @@ class WSEKDDStudentRegistration(Document):
 
         return None
 
-    def add_parent_submission(self, parent_full_name, parent_email, parent_phone_number):
+    def add_parent_submission(self, parent_full_name, parent_email, parent_phone_number, rating):
         """Add a new parent submission to the child table.
 
         Args:
             parent_full_name: Full name of the parent
             parent_email: Email address of the parent
             parent_phone_number: Phone number of the parent
+            rating: Parent's rating of the event (1-5 stars)
 
         Returns:
             dict: The added child row
@@ -158,6 +160,7 @@ class WSEKDDStudentRegistration(Document):
         row.parent_full_name = parent_full_name
         row.parent_email = parent_email
         row.parent_phone_number = parent_phone_number
+        row.rating = rating
         row.registration_datetime = now_datetime()
 
         return row

@@ -14,13 +14,14 @@ def submit_registration(
     student_dob,
     parent_full_name,
     parent_email,
-    parent_phone_number
+    parent_phone_number,
+    rating
 ):
-    """Submit a parent registration for a student's event certificate.
+    """Submit a parent registration for an existing student's event certificate.
 
-    This endpoint handles both new student registrations and additional parent
-    submissions for existing students. Multiple parents can register for the
-    same student, and all will receive the same certificate URL.
+    Student registration must already exist before parents can submit.
+    Multiple parents can register for the same student, and all will receive
+    the same certificate URL.
 
     Rate Limited: 10 requests per hour per IP address
 
@@ -31,6 +32,7 @@ def submit_registration(
         parent_full_name (str): Full name of the parent
         parent_email (str): Email address of the parent
         parent_phone_number (str): Phone number of the parent
+        rating (int): Parent's rating of the event (1-5 stars)
 
     Returns:
         dict: Response containing certificate URL and success status
@@ -46,10 +48,24 @@ def submit_registration(
         )
 
         # Validate required fields
-        if not all([visit_event, student_full_name, parent_full_name, parent_email, parent_phone_number]):
+        if not all([visit_event, student_full_name, parent_full_name, parent_email, parent_phone_number, rating is not None]):
             return {
                 "success": False,
                 "message": _("All fields are required")
+            }
+
+        # Validate rating
+        try:
+            rating = int(rating)
+            if rating < 1 or rating > 5:
+                return {
+                    "success": False,
+                    "message": _("Rating must be between 1 and 5")
+                }
+        except (ValueError, TypeError):
+            return {
+                "success": False,
+                "message": _("Rating must be a valid number")
             }
 
         # Sanitize all inputs
@@ -75,6 +91,7 @@ def submit_registration(
         parent_full_name = sanitized_data["parent_full_name"]
         parent_email = sanitized_data["parent_email"]
         parent_phone_number = sanitized_data["parent_phone_number"]
+        # rating is already validated and converted to int above
 
         # Check if event exists
         if not frappe.db.exists("WSE KDD Visit Event", visit_event):
@@ -98,7 +115,7 @@ def submit_registration(
                 "message": _("Certificate is not available yet. Please contact the school.")
             }
 
-        # Check for existing registration
+        # Check for existing registration (REQUIRED)
         from ws_event_page.wellspring_event_page.doctype.wse_kdd_student_registration.wse_kdd_student_registration import (
             WSEKDDStudentRegistration
         )
@@ -109,41 +126,36 @@ def submit_registration(
             student_dob=student_dob
         )
 
-        if existing_registration:
+        if not existing_registration:
+            return {
+                "success": False,
+                "message": _("Student registration not found. Please ensure the student name and date of birth are correct, or contact the school administrator.")
+            }
+
+        # Check if parent already submitted (by parent_full_name and parent_email)
+        parent_already_exists = False
+        for submission in existing_registration.certificate_registration_submission:
+            if (submission.parent_full_name == parent_full_name and
+                submission.parent_email == parent_email):
+                parent_already_exists = True
+                break
+
+        if not parent_already_exists:
             # Add new parent submission to existing registration
             existing_registration.add_parent_submission(
                 parent_full_name=parent_full_name,
                 parent_email=parent_email,
-                parent_phone_number=parent_phone_number
+                parent_phone_number=parent_phone_number,
+                rating=rating
             )
             existing_registration.save(ignore_permissions=True)
 
-            registration = existing_registration
-            is_new_registration = False
-
-        else:
-            # Create new student registration
-            registration = frappe.get_doc({
-                "doctype": "WSE KDD Student Registration",
-                "visit_event": visit_event,
-                "student_full_name": student_full_name,
-                "student_dob": student_dob
-            })
-
-            # Add first parent submission
-            registration.append("certificate_registration_submission", {
-                "parent_full_name": parent_full_name,
-                "parent_email": parent_email,
-                "parent_phone_number": parent_phone_number
-            })
-
-            registration.insert(ignore_permissions=True)
-            is_new_registration = True
+        registration = existing_registration
 
         # Commit the transaction
         frappe.db.commit()
 
-        # Send email to parent with certificate URL
+        # Send email to parent with certificate URL (always send, even for duplicate submissions)
         try:
             from ws_event_page.api.kindergarten_demo_day.email import send_certificate_email
 
@@ -161,7 +173,12 @@ def submit_registration(
                 title="KDD Certificate Email Failed"
             )
 
-        # Build response
+        # Build response with appropriate message
+        if parent_already_exists:
+            message = _("You have already submitted a registration for this student. Certificate URL has been resent to your email.")
+        else:
+            message = _("Registration submitted successfully! Certificate URL has been sent to your email.")
+
         return {
             "success": True,
             "data": {
@@ -169,9 +186,9 @@ def submit_registration(
                 "certificate_token": registration.certificate_token,
                 "student_name": registration.student_full_name,
                 "event_title": event.title,
-                "is_new_registration": is_new_registration
+                "already_registered": parent_already_exists
             },
-            "message": _("Registration submitted successfully! Certificate URL has been sent to your email.")
+            "message": message
         }
 
     except frappe.ValidationError as ve:

@@ -1,0 +1,20 @@
+{
+ "creation": "2025-11-18 00:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "dynamic_filters_json": "[]",
+ "filters_json": "[]",
+ "idx": 0,
+ "is_public": 0,
+ "is_standard": 1,
+ "label": "KDD Certificates Generated",
+ "method": "ws_event_page.api.kindergarten_demo_day.number_cards.get_certificates_with_open_registration",
+ "modified": "2025-11-18 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "KDD Certificates Generated",
+ "owner": "Administrator",
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Daily",
+ "type": "Custom"
+}
