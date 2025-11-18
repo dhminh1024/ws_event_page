@@ -9,8 +9,6 @@ import { Input } from "@atoms/input";
 import { Label } from "@atoms/label";
 import { PrimaryButton, SecondaryButton } from "../button";
 import { cn } from "@/core/utils/shadcn-utils";
-import { toJpeg } from "html-to-image";
-import download from "downloadjs";
 
 export type CertificateModalProps = {
   open: boolean;
@@ -24,7 +22,6 @@ export type CertificateModalProps = {
   loading?: boolean;
 };
 
-const rules = ["WebView", "(iPhone|iPod|iPad)(?!.*Safari/)", "Android.*(wv)"];
 
 export const CertificateModal: React.FC<CertificateModalProps> = ({
   open,

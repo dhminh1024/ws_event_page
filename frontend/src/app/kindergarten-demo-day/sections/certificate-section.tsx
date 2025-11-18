@@ -1,4 +1,4 @@
-import { HTMLAttributes, type FC, useRef } from "react";
+import { HTMLAttributes, type FC, useRef, useState } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
 import { useLocales } from "@/core/hooks/use-locales";
 import { Container } from "../components/container";
@@ -6,243 +6,190 @@ import { Heading, Text } from "../components/typography";
 import { toJpeg } from "html-to-image";
 import download from "downloadjs";
 import { jsPDF } from "jspdf";
+import { Dialog, DialogContent } from "@atoms/dialog";
+import CertBackground from "../assets/images/cert-bg.png";
+import LogoPrimary from "../assets/images/cert-logo-primary.png";
+import BrandLogo from "../assets/images/brand-1.png";
+import LogoSecondary from "../assets/images/cert-logo-secondary.png";
+import CertHeading from "../assets/images/cert-heading.png";
+import LogoHappyJourney from "../assets/images/cert-logo-hj.png";
+import DecorItem1 from "../assets/images/cert-item-1.png";
+import DecorItem2 from "../assets/images/cert-item-2.png";
+import DecorItem3 from "../assets/images/cert-item-3.png";
+import DecorItem4 from "../assets/images/cert-item-4.png";
+import { PrimaryButton } from "../components/button";
 
-export type CertificateSectionProps = HTMLAttributes<HTMLDivElement> & {
+export type CertificateProps = HTMLAttributes<HTMLDivElement> & {
   studentName: string;
 };
 const rules = ["WebView", "(iPhone|iPod|iPad)(?!.*Safari/)", "Android.*(wv)"];
 
-export const CertificateSection: FC<CertificateSectionProps> = ({
+export const Certificate: FC<CertificateProps> = ({
   className,
   studentName,
 }) => {
   const { currentLanguage } = useLocales();
   const certificateRef = useRef<HTMLDivElement>(null);
+  const [downloadProgress, setDownloadProgress] = useState(0);
+  const isCancelRef = useRef(false);
 
-  const currentYear = new Date().getFullYear();
-  const currentDate = new Date().toLocaleDateString(
-    currentLanguage === "vn" ? "vi-VN" : "en-US",
-    {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
+  const buildPng = async (target: HTMLElement | null) => {
+    if (!target) return null;
+    const cert = target;
+
+    // Get the actual dimensions of the certificate element
+    const rect = cert.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+
+    // Update progress to show we're starting
+    setDownloadProgress(10);
+
+    // Check if cancelled
+    if (isCancelRef.current) {
+      throw new Error("Download cancelled by user");
     }
-  );
 
-  // const handleDownloadJPEG = async () => {
-  //   if (!certificateRef.current) return;
+    // Generate the image with high quality
+    const dataUrl = await toJpeg(cert, {
+      quality: 1.0, // Maximum quality
+      pixelRatio: 1, // Keep original size (6000px width)
+      backgroundColor: "#ffffff",
+      width: width, // Maintain original width
+      height: height, // Maintain original height
+    });
 
-  //   try {
-  //     const dataUrl = await toJpeg(certificateRef.current, {
-  //       quality: 1.0,
-  //       pixelRatio: 2,
-  //       backgroundColor: "#ffffff",
-  //     });
+    // Update progress after image generation
+    setDownloadProgress(70);
 
-  //     download(
-  //       dataUrl,
-  //       `certificate-${studentName.replace(/\s+/g, "-")}.jpg`,
-  //       "image/jpeg"
-  //     );
-  //   } catch (error) {
-  //     console.error("Error generating JPEG:", error);
-  //     alert(
-  //       "Failed to generate JPEG. Please try again or use the Print option."
-  //     );
-  //   }
-  // };
-
-  const buildPng = async () => {
-    console.log(certificateRef.current);
-    
-    if (!certificateRef.current) return;
-
-    let dataUrl = "";
-    const minDataLength = 2000000;
-    let i = 0;
-    const maxAttempts = 10;
-
-    while (dataUrl.length < minDataLength && i < maxAttempts) {
-      dataUrl = await toJpeg(certificateRef.current);
-      i += 1;
+    // Check if cancelled before blob conversion
+    if (isCancelRef.current) {
+      throw new Error("Download cancelled by user");
     }
 
     // Convert Data URL to Blob
+    setDownloadProgress(90); // 90%
     const blob = await (await fetch(dataUrl)).blob();
-
+    setDownloadProgress(100);
     return blob;
-    // // // Create a Blob URL for the download
-    // // const url = URL.createObjectURL(blob);
-
-    // // Create an anchor element and trigger the download
-    // const link = document.createElement('a');
-    // link.href = `kitefasterCustomUrlScheme://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg`;
-    // link.setAttribute('download', 'card.png'); // Set the filename
-    // document.body.appendChild(link);
-    // link.click();
-    // document.body.removeChild(link);
-
-    // // Clean up the Blob URL
-    // // URL.revokeObjectURL(url);
   };
 
-  const handleDownload = async () => {
-    const ua = window.navigator.userAgent;
-    const regex = new RegExp(`(${rules.join("|")})`, "ig");
-
-    if (ua.match(regex) && /android/i.test(ua)) {
-      alert("No support for WebView on Android devices.");
-      return;
-    }
-
-    let dataUrl = await buildPng();
-    download(dataUrl, `certificate_${new Date().getTime()}`);
-  };
-
-  const handleDownloadPDF = async () => {
-    if (!certificateRef.current) return;
-
+  const handleDownloadPhoto = async () => {
+    isCancelRef.current = false;
+    setDownloadProgress(0);
     try {
-      const dataUrl = await toJpeg(certificateRef.current, {
-        quality: 1.0,
-        pixelRatio: 2,
-        backgroundColor: "#ffffff",
-      });
-
-      // Convert data URL to image for PDF
-      const img = new Image();
-      img.src = dataUrl;
-
-      img.onload = () => {
-        const imgWidth = 297; // A4 width in mm (landscape)
-        const imgHeight = 210; // A4 height in mm (landscape)
-
-        const pdf = new jsPDF({
-          orientation: "landscape",
-          unit: "mm",
-          format: "a4",
-        });
-
-        pdf.addImage(dataUrl, "JPEG", 0, 0, imgWidth, imgHeight);
-        pdf.save(`certificate-${studentName.replace(/\s+/g, "-")}.pdf`);
-      };
+      const pngBlob = await buildPng(document.getElementById("certificate"));
+      if (pngBlob) {
+        download(pngBlob, "certificate-photo.jpg", "image/jpeg");
+      }
     } catch (error) {
-      console.error("Error generating PDF:", error);
-      alert(
-        "Failed to generate PDF. Please try again or use the Print option."
-      );
+      console.error("Error generating certificate image:", error);
+    } finally {
+      // Reset progress after a short delay
+      setTimeout(() => {
+        resetProcess();
+      }, 1000);
     }
+  };
+
+  const resetProcess = () => {
+    setDownloadProgress(0);
+    isCancelRef.current = true;
   };
 
   return (
-    <div className={cn("py-[20rem] md:py-[30rem] bg-gray-50", className)}>
-      <Container>
-        <div className="max-w-[1920px] mx-auto">
-          {/* Certificate Card */}
-          <div
-            ref={certificateRef}
-            data-certificate
-            className="bg-white shadow-2xl rounded-[2.5rem] border-[10rem] border-kdd-primary p-[10rem] md:p-[20rem] relative overflow-hidden"
-          >
-            {/* Decorative corners */}
-            <div className="absolute top-0 left-0 w-[30rem] h-[30rem] border-t-[5rem] border-l-[5rem] border-kdd-secondary"></div>
-            <div className="absolute top-0 right-0 w-[30rem] h-[30rem] border-t-[5rem] border-r-[5rem] border-kdd-secondary"></div>
-            <div className="absolute bottom-0 left-0 w-[30rem] h-[30rem] border-b-[5rem] border-l-[5rem] border-kdd-secondary"></div>
-            <div className="absolute bottom-0 right-0 w-[30rem] h-[30rem] border-b-[5rem] border-r-[5rem] border-kdd-secondary"></div>
-
-            <div className="text-center space-y-[10rem]">
-              {/* Header */}
-              <div className="space-y-[2.5rem]">
-                <Heading level={1} className="text-kdd-primary">
-                  {currentLanguage === "vn" ? "Giấy Chứng Nhận" : "Certificate"}
-                </Heading>
-                <p className="text-[6.25rem] md:text-[7.5rem] text-gray-600 font-semibold uppercase tracking-wider">
-                  {currentLanguage === "vn"
-                    ? "Chứng Nhận Tham Gia"
-                    : "Certificate of Participation"}
-                </p>
-              </div>
-
-              {/* Divider */}
-              <div className="flex items-center justify-center gap-[5rem]">
-                <div className="h-[1.25rem] w-[30rem] bg-kdd-primary"></div>
-                <div className="w-[5rem] h-[5rem] rotate-45 bg-kdd-primary"></div>
-                <div className="h-[1.25rem] w-[30rem] bg-kdd-primary"></div>
-              </div>
-
-              {/* Content */}
-              <div className="space-y-[7.5rem] py-[10rem]">
-                <p className="text-[5.625rem] md:text-[6.25rem] text-gray-700">
-                  {currentLanguage === "vn"
-                    ? "Giấy chứng nhận này được trao cho"
-                    : "This certificate is presented to"}
-                </p>
-
-                <Heading
-                  level={2}
-                  className="text-kdd-secondary font-serif italic py-[5rem] border-b-[0.625rem] border-t-[0.625rem] border-kdd-primary"
-                >
-                  {studentName}
-                </Heading>
-
-                <p className="text-[5rem] md:text-[5.625rem] text-gray-700 leading-relaxed max-w-2xl mx-auto">
-                  {currentLanguage === "vn"
-                    ? `Đã tích cực tham gia Ngày Hội Mẫu Giáo ${currentYear} tại Wellspring Sài Gòn. Chúng tôi ghi nhận sự nhiệt tình và năng lượng tuyệt vời của em trong suốt chương trình.`
-                    : `For active participation in Kindergarten Demo Day ${currentYear} at Wellspring Saigon. We recognize your wonderful enthusiasm and energy throughout the program.`}
-                </p>
-              </div>
-
-              {/* Date and Signature Section */}
-              <div className="pt-[15rem] space-y-[10rem]">
-                <p className="text-gray-600">
-                  {currentLanguage === "vn" ? "Ngày cấp:" : "Date:"}{" "}
-                  <span className="font-semibold">{currentDate}</span>
-                </p>
-
-                <div className="flex justify-center gap-[20rem] md:gap-[40rem] pt-[10rem]">
-                  <div className="text-center space-y-[2.5rem]">
-                    <div className="h-[20rem] border-t-[0.625rem] border-gray-400 w-[60rem]"></div>
-                    <p className="text-[4.375rem] text-gray-600 font-semibold">
-                      {currentLanguage === "vn" ? "Ban Giám Hiệu" : "Principal"}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Wellspring Logo Placeholder */}
-              <div className="pt-[10rem]">
-                <p className="text-[7.5rem] md:text-[9.375rem] font-bold text-kdd-primary">
-                  WELLSPRING SAIGON
-                </p>
-              </div>
-            </div>
+    <center>
+      <div
+        ref={certificateRef}
+        id={"certificate"}
+        className={cn("w-[2000px] h-[1414px] p-[2%] relative", className)}
+        style={{
+          backgroundImage: `url(${CertBackground})`,
+          backgroundSize: "cover",
+        }}
+      >
+        <img
+          src={DecorItem1}
+          alt="DecorItem1"
+          className="w-[8%] h-auto absolute top-[30%] right-[7%]"
+        />
+        <img
+          src={DecorItem2}
+          alt="DecorItem2"
+          className="w-[7%] h-auto absolute bottom-[20%] right-[8%]"
+        />
+        <img
+          src={DecorItem3}
+          alt="DecorItem3"
+          className="w-[8%] h-auto absolute top-[30%] left-[8%]"
+        />
+        <img
+          src={DecorItem4}
+          alt="DecorItem4"
+          className="w-[8%] h-auto absolute bottom-[15%] left-[7%]"
+        />
+        <div className="h-[15%] flex justify-between">
+          <div className="flex gap-[10%]">
+            <img
+              className="w-auto h-[70%]"
+              src={LogoPrimary}
+              alt="LogoPrimary"
+            />
+            <img className="w-auto h-[70%]" src={BrandLogo} alt="BrandLogo" />
           </div>
-
-          {/* Action Buttons */}
-          <div className="flex flex-wrap justify-center gap-[5rem] mt-[10rem]">
-            <button
-              onClick={handleDownload}
-              className="px-[10rem] py-[3.75rem] bg-kdd-primary text-white text-[5rem] rounded-[2.5rem] hover:bg-kdd-primary-hover transition-all duration-300 print:hidden"
-            >
-              {currentLanguage === "vn"
-                ? "Tải Ảnh (JPEG)"
-                : "Download Photo (JPEG)"}
-            </button>
-            <button
-              onClick={handleDownloadPDF}
-              className="px-[10rem] py-[3.75rem] bg-kdd-secondary text-white text-[5rem] rounded-[2.5rem] hover:opacity-90 transition-all duration-300 print:hidden"
-            >
-              {currentLanguage === "vn" ? "Tải PDF" : "Download PDF"}
-            </button>
-            <button
-              onClick={() => window.print()}
-              className="px-[10rem] py-[3.75rem] bg-gray-600 text-white text-[5rem] rounded-[2.5rem] hover:bg-gray-700 transition-all duration-300 print:hidden"
-            >
-              {currentLanguage === "vn" ? "In" : "Print"}
-            </button>
-          </div>
+          <img
+            className="w-auto h-full"
+            src={LogoSecondary}
+            alt="LogoSecondary"
+          />
         </div>
-      </Container>
-    </div>
+        <div className="photo w-[80%] mt-[5%] relative">
+          <div
+            className={cn(
+              "w-[80%] border-8 border-white bg-gray-300 mt-100 mx-auto rounded-[20rem] aspect-16/9",
+              "shadow-[5rem_2rem_0rem_1rem_rgba(0,0,0,0.2)] relative rotate-[-2deg] overflow-hidden"
+            )}
+          >
+            {/* <img
+              className="w-full h-full object-cover object-center"
+              src={
+                "https://wellspring-production.s3.ap-southeast-1.amazonaws.com/large_t6_7a37e50a12.jpg"
+              }
+              alt=""
+            /> */}
+            <img
+              className="w-[13%] h-auto absolute bottom-0 right-0 mx-auto bg-white rounded-[20%_0%_0%_0%] p-[1%]"
+              src={LogoHappyJourney}
+              alt="Logo Happy Journey"
+            />
+          </div>
+          <img
+            className="w-[50%] h-auto absolute bottom-[-9%] left-0 right-0 mx-auto"
+            src={CertHeading}
+            alt="Certificate Heading"
+          />
+        </div>
+        <p className="bg-[#009483] text-[30px] inline-block text-white px-[2%] py-[0%] rounded-full mt-[3%]">
+          28.11.2025
+        </p>
+        <p className="text-[#F05023] text-[50px] font-black uppercase mt-[2%]">
+          {studentName}
+        </p>
+        <p className="text-[#009483] text-[28px] font-bold mt-[2%]">
+          On this joyful day, you explored the wonders of Wellspring Saigon –
+          The Happy School – for the very first time.
+        </p>
+        <p className="text-[#009483] text-[28px] font-bold">
+          We proudly awarded you as:
+          <span className="text-[#F05023] ml-[10px]">A Little Inventor.</span>
+        </p>
+      </div>
+      <p className="text-[20rem] text-white">
+        Downloading: {downloadProgress}%
+      </p>
+      <PrimaryButton className="mt-[20px]" onClick={handleDownloadPhoto}>
+        Download Photo
+      </PrimaryButton>
+    </center>
   );
 };
