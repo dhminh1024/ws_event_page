@@ -79,8 +79,8 @@
    "type": "Link"
   }
  ],
- "modified": "2025-10-29 14:11:54.042372",
- "modified_by": "Administrator",
+ "modified": "2025-11-18 09:35:53.466870",
+ "modified_by": "minh.do@wellspringsaigon.edu.vn",
  "module": "Wellspring Event Page",
  "name": "Happy Run Event",
  "number_cards": [
@@ -110,7 +110,7 @@
    "role": "WSE HR Admin"
   }
  ],
- "sequence_id": 17.0,
+ "sequence_id": 18.0,
  "shortcuts": [
   {
    "color": "Grey",

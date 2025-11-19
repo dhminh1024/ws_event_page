@@ -38,8 +38,8 @@
    "type": "Link"
   }
  ],
- "modified": "2025-10-29 14:11:54.081065",
- "modified_by": "Administrator",
+ "modified": "2025-11-18 09:35:53.505570",
+ "modified_by": "minh.do@wellspringsaigon.edu.vn",
  "module": "Wellspring Event Page",
  "name": "Nutrition Journey",
  "number_cards": [
@@ -61,7 +61,7 @@
    "role": "WSE NJ Admin"
   }
  ],
- "sequence_id": 18.0,
+ "sequence_id": 19.0,
  "shortcuts": [],
  "title": "Nutrition Journey"
 }

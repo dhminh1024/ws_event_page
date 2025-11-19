@@ -156,8 +156,15 @@ layer(base);
     --background-image-gs25-gradient-8: linear-gradient(
     to right,
     #A12FFD,
-    #073498 
+    #073498
   );
+
+  --color-kdd-primary: #ff6b6b;
+  --color-kdd-primary-hover: #ff5252;
+  --color-kdd-primary-light: #ffe5e5;
+  --color-kdd-secondary: #4ecdc4;
+  --color-kdd-text: #2d3436;
+  --color-kdd-text-secondary: #636e72;
 
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
@@ -335,53 +342,6 @@ layer(base);
     --scroll-track: 0 0% 0%;
   }
 
-  .dark {
-    --background: 231 30% 16%;
-    --foreground: 220 9% 70%;
-    --card: 231 30% 22%;
-    --card-foreground: 219 40% 25%;
-    --popover: 231 30% 28%;
-    --popover-foreground: 220 9% 70%;
-    --primary: 13 86% 54%;
-    --primary-foreground: 210 20% 98%;
-    --secondary: 215 27.9% 13%;
-    --secondary-foreground: 210 20% 98%;
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
-    --accent: 219 40% 20%;
-    --accent-foreground: 210 20% 98%;
-    --destructive: 0 62.8% 50%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 240 12% 26%;
-    --input: 220 8% 47%;
-    --ring: 192 100% 20%;
-
-    --brand-primary: 212 100% 17%;
-    --brand-secondary: 192 100% 25%;
-    --brand-teal: 173 100% 29%;
-    --brand-green: 89 64% 34%;
-    --brand-orange: 13 86% 54%;
-    --brand-blue: 204 83% 55%;
-    --brand-yellow: 38 96% 54%;
-    --brand-red: 0 100% 50%;
-    --brand-violet: 270 98% 50%;
-
-    --page-foreground: 0 0% 30%;
-    --page-cream: 31 100% 92%; /* #FFECD8 */
-    --page-red: 359 70% 30%; /* #6A0809 */
-    --page-honey: 39 100% 55%; /* #FFAD18 */
-    --page-brick: 22 100% 62%; /* #FF843E */
-    --page-deep-blue: 221 56% 21%; /* #172A52 */
-    --page-mint: 63 46% 83%; /* #E6E8C1 */
-    --page-light-yellow: 51 71% 73%; /*  #EBDC87*/
-    --page-light-red: 359 57% 49%; /*  #C63638*/
-
-    --success: 89 64% 34%;
-    --danger: 0 100% 50%;
-
-    --scroll-thumb: 220 9% 50%;
-    --scroll-track: 0 0% 0%;
-  }
 }
 
 @layer base {
@@ -461,5 +421,31 @@ layer(base);
   #smooth-content {
     overflow: visible;
     width: 100%;
+  }
+}
+
+/* Custom scrollbar styles */
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-lg;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-lg hover:bg-gray-400;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+
+  /* Firefox scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(209, 213, 219) rgb(243, 244, 246);
   }
 }

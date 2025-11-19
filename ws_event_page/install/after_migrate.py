@@ -7,6 +7,7 @@ def create_roles_if_not_exists():
         {"role_name": "WSE GS Admin", "desk_access": 1},
         {"role_name": "WSE AC Admin", "desk_access": 1},
         {"role_name": "WSE NJ Admin", "desk_access": 1},
+        {"role_name": "WSE KDD Admin", "desk_access": 1},
     ]
 
     for role in roles:

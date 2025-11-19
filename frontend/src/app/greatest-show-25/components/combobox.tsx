@@ -154,7 +154,7 @@ export const Combobox: FC<ComboboxProps> = ({
           aria-expanded={open}
           disabled={disabled}
           className={cn(
-            "flex justify-between text-left h-168 border-hr-primary w-full rounded-[5rem] bg-white",
+            "flex justify-between text-left h-10 border-hr-primary w-full rounded-[5rem] bg-white",
             className
           )}
         >
