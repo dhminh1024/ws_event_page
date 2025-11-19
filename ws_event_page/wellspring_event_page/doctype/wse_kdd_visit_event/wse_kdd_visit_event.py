@@ -40,7 +40,7 @@ class WSEKDDVisitEvent(Document):
             frappe.msgprint(
                 msg="Group photo is required when registration is open. Certificate generation requires a group photo.",
                 title="Missing Group Photo",
-                indicator="orange"
+                indicator="orange",
             )
 
     def generate_registration_link(self):
@@ -48,9 +48,11 @@ class WSEKDDVisitEvent(Document):
         if self.name:
             base_url = get_url()
             # Remove trailing slash if present
-            base_url = base_url.rstrip('/')
+            base_url = base_url.rstrip("/")
             # Generate the registration link
-            self.registration_link = f"{base_url}/events/kindergarten-demo-day?event={self.name}"
+            self.registration_link = (
+                f"{base_url}/events/kindergarten-demo-day?event={self.name}"
+            )
 
     def get_registered_students(self):
         """Get list of registered students for this event.
@@ -65,11 +67,10 @@ class WSEKDDVisitEvent(Document):
                 "name",
                 "student_full_name",
                 "student_dob",
-                "certificate_generated",
                 "certificate_url",
-                "kindergarten"
+                "kindergarten",
             ],
-            order_by="creation desc"
+            order_by="creation desc",
         )
 
     def get_registration_count(self):
@@ -79,6 +80,5 @@ class WSEKDDVisitEvent(Document):
             int: Number of registered students
         """
         return frappe.db.count(
-            "WSE KDD Student Registration",
-            filters={"visit_event": self.name}
+            "WSE KDD Student Registration", filters={"visit_event": self.name}
         )

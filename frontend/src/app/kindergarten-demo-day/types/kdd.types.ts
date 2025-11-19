@@ -18,7 +18,6 @@ export interface RegisteredStudent {
   name: string;
   student_full_name: string;
   student_dob: string;
-  certificate_generated: boolean;
   certificate_url?: string;
 }
 
@@ -81,7 +80,6 @@ export interface CertificateData {
   group_photo?: string;
   parent_name: string;
   parent_email: string;
-  certificate_generated: boolean;
   certificate_pdf_url?: string;
   registration_date: string;
 }

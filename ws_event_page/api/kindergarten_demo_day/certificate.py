@@ -41,15 +41,6 @@ def get_certificate(certificate_token):
         # Get the registration document
         registration = frappe.get_doc("WSE KDD Student Registration", registration_name)
 
-        # Check if certificate is generated
-        if not registration.certificate_generated:
-            return {
-                "success": False,
-                "message": _(
-                    "Certificate is not yet available. Please check back later or contact the school."
-                ),
-            }
-
         # Get certificate data
         certificate_data = registration.get_certificate_data()
 
