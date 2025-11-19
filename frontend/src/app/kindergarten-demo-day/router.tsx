@@ -24,11 +24,7 @@ export const KINDERGARTEN_DEMO_DAY_ROUTES: RouteObject[] = [
           {
             index: true,
             lazy: () => import("./pages/welcome.page"),
-          },
-          {
-            path: "certificate/:studentName",
-            lazy: () => import("./pages/certificate.page"),
-          },
+          }
         ],
       },
     ],

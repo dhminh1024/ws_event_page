@@ -1,6 +1,7 @@
 import { GSEventVariable } from "@/app/greatest-show-25/types/variables";
 import { HBEventVariable } from "@/app/happy-box/types/variables";
 import { HREventVariable } from "@/app/happy-run/types/variables";
+import { KDDEventVariable } from "@/app/kindergarten-demo-day/types/variables";
 import { EventVariable } from "@/app/nutrition-journey/types/variables";
 import { ACEventVariable } from "@/app/placement-test/types/variables";
 import { WSEEvent } from "@/types/WellspringEventPage/WSEEvent";
@@ -36,6 +37,7 @@ export interface WSEEventResponse extends Omit<WSEEvent, "variables"> {
     HREventVariable &
     ACEventVariable &
     GSEventVariable &
+    KDDEventVariable &
     Record<string, VariableType>;
   mutate: any;
 }

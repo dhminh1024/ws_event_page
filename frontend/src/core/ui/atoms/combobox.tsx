@@ -19,7 +19,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@atoms/popover";
 import { Button } from "@atoms/button";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { removeAccents } from "@/lib/utils/common";
-import styled from "styled-components";
+import { Input } from "./input";
 
 export type SelectItemType = {
   heading?: string;
@@ -52,17 +52,6 @@ export type ComboboxProps = {
   searchable?: boolean;
 };
 
-const ComboboxStyled = styled(Command)`
-  [cmdk-group-heading]{
-    padding: 7rem 7rem;
-    line-height: 12rem;
-    font-size: 12rem!important;
-    font-weight: 600;
-    color: hsl(var(--brand-orange));
-    opacity:0.8
-  }
-`
-
 export const Combobox: FC<ComboboxProps> = ({
   id,
   className,
@@ -79,14 +68,14 @@ export const Combobox: FC<ComboboxProps> = ({
   align = "start",
   searchable = true,
 }) => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [itemSelected, setItemSelected] = useState<SelectItemType>();
 
   //   console.log(value)
   const handleSelect = (item: SelectItemType) => {
     if (item.value && item.value !== itemSelected) {
-      setItemSelected(item);
+      !value && setItemSelected(item);
       onSelect?.(item.value);
     }
     setOpen(false);
@@ -123,47 +112,52 @@ export const Combobox: FC<ComboboxProps> = ({
   useEffect(() => {
     if (value && items && items?.length > 0) {
       // console.log("VALUE targetItem",targetItem);
-      const targetItem = findItemOption(value, items);
+      let targetItem = findItemOption(value, items);
       setItemSelected(targetItem);
     }
     if (!value && itemSelected) {
       setItemSelected(undefined);
     }
-  }, [value, items, itemSelected]);
+  }, [value, JSON.stringify(items)]);
 
   useEffect(() => {
     if (defaultValue && !itemSelected) {
-      const targetItem = findItemOption(defaultValue, items);
+      let targetItem = findItemOption(defaultValue, items);
       setItemSelected(targetItem);
       // targetItem?.value && onSelect?.(targetItem.value)
     }
-  }, [defaultValue, items, itemSelected]);
+  }, [defaultValue, JSON.stringify(items)]);
 
   return (
     <Popover
       open={open}
       modal={true}
-      onOpenChange={(open: boolean) => !disabled && setOpen(open)}
+      onOpenChange={(open: boolean | ((prevState: boolean) => boolean)) =>
+        !disabled && setOpen(open)
+      }
+
     >
       <PopoverTrigger asChild>
-        <Button
-          id={id}
-          variant="outline"
-          ref={buttonRef}
-          role="combobox"
-          aria-expanded={open}
-          disabled={disabled}
-          className={cn(
-            "flex justify-between text-left h-10 border-hr-primary w-full rounded-[5rem] bg-white",
-            className
-          )}
-        >
-          <p className="line-clamp-1">
-            {prefixSelected}
-            {itemSelected ? itemSelected.label : placeholder}
-          </p>
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
+        <div className="" ref={buttonRef as React.RefObject<HTMLDivElement>}>
+          <Button
+            id={id}
+            type="button"
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            disabled={disabled}
+            className={cn(
+              "flex h-10 justify-between bg-transparent text-left",
+              className
+            )}
+          >
+            <p className="line-clamp-1">
+              {prefixSelected}
+              {itemSelected ? itemSelected.label : placeholder}
+            </p>
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </div>
       </PopoverTrigger>
       <PopoverContent
         align={align}
@@ -172,21 +166,16 @@ export const Combobox: FC<ComboboxProps> = ({
           width: (buttonRef.current && buttonRef.current.offsetWidth) || 100,
         }}
       >
-        <ComboboxStyled className="bg-white" filter={handleFilter}>
+        <Command filter={handleFilter}>
           {items.length > 0 && searchable && (
-            <CommandInput
-              className="h-152 p-[5rem_5rem] text-[14rem]"
-              placeholder={searchPlaceholder}
-            />
+            <CommandInput placeholder={searchPlaceholder} />
           )}
+
           <CommandList>
-            <CommandEmpty className="text-[16rem]">
-              No results found.
-            </CommandEmpty>
             {items.length === 0 && (
-              <p className="text-center text-[16rem] w-full p-2 text-foreground">
+              <div className="w-full p-2 text-center text-foreground">
                 {emptyContent}
-              </p>
+              </div>
             )}
             {items?.map((item, index) => {
               if (item?.children && item.children.length > 0) {
@@ -197,7 +186,7 @@ export const Combobox: FC<ComboboxProps> = ({
                   >
                     {item.children.map((child, index) => (
                       <CommandItem
-                        className="text-[16rem] p-[8rem_5rem]! bg-white! hover:bg-slate-200! text-hr-primary! data-[disabled='true']:pointer-events-none data-disabled:pointer-events-auto! data-[disabled='true']:opacity-50 data-disabled:opacity-100!"
+                        className="data-[disabled='true']:pointer-events-none data-disabled:pointer-events-auto! data-[disabled='true']:opacity-50 data-disabled:opacity-100!"
                         key={`${item.value}_${index}`}
                         // value={child.value}
                         onSelect={() => handleSelect(child)}
@@ -218,7 +207,7 @@ export const Combobox: FC<ComboboxProps> = ({
               }
               return (
                 <CommandItem
-                  className="text-[16rem] p-[8rem_5rem]! bg-white! hover:bg-slate-200! text-hr-primary! data-[disabled='true']:pointer-events-none data-disabled:pointer-events-auto! data-[disabled='true']:opacity-50 data-disabled:opacity-100!"
+                  className="data-[disabled='true']:pointer-events-none data-disabled:pointer-events-auto! data-[disabled='true']:opacity-50 data-disabled:opacity-100!"
                   key={`${item.value}${index}`}
                   //   value={item.value}
                   onSelect={() => handleSelect(item)}
@@ -236,7 +225,7 @@ export const Combobox: FC<ComboboxProps> = ({
               );
             })}
           </CommandList>
-        </ComboboxStyled>
+        </Command>
       </PopoverContent>
     </Popover>
   );
