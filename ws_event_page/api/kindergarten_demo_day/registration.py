@@ -7,7 +7,7 @@ from frappe.rate_limiter import rate_limit
 
 
 @frappe.whitelist(allow_guest=True)
-@rate_limit(limit=10, seconds=3600)  # 10 requests per hour
+@rate_limit(limit=100, seconds=3600)  # 10 requests per hour
 def submit_registration(
     visit_event,
     student_full_name,
