@@ -19,6 +19,7 @@ import DecorItem3 from "../assets/images/cert-item-3.png";
 import DecorItem4 from "../assets/images/cert-item-4.png";
 import { Button } from "@atoms/button";
 import { format } from "date-fns";
+import { useResponsive } from "@/core/hooks/use-reponsive";
 
 export type CertificateProps = HTMLAttributes<HTMLDivElement> & {
   studentName: string;
@@ -35,7 +36,7 @@ export const Certificate: FC<CertificateProps> = ({
   image,
   submitDate,
 }) => {
-  const { currentLanguage } = useLocales();
+  const { isDesktop } = useResponsive();
   const certificateRef = useRef<HTMLDivElement>(null);
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [isDownloading, setIsDownloading] = useState(false);
@@ -212,7 +213,7 @@ export const Certificate: FC<CertificateProps> = ({
           <div className="w-full">
             <div
               className={cn("photo w-[80%] relative", {
-                "w-[60%] mt-[-10%]": heightScreen < 1000,
+                "w-[60%] mt-[-10%]": isDesktop && heightScreen < 1000,
               })}
             >
               <div
@@ -248,7 +249,7 @@ export const Certificate: FC<CertificateProps> = ({
               className={cn(
                 "bg-[#009483] text-[15px] md:text-[25px] xl:text-[30px] inline-block text-white px-[2%] py-[0%] rounded-full mt-[3%]",
                 {
-                  "mt-[2%] xl:text-[20px]": heightScreen < 1000,
+                  "mt-[2%] xl:text-[20px]": isDesktop && heightScreen < 1000,
                 }
               )}
             >
@@ -258,7 +259,7 @@ export const Certificate: FC<CertificateProps> = ({
               className={cn(
                 "text-[#F05023] text-[30px] md:text-[50px] xl:text-[50px] font-black uppercase mt-[2%]",
                 {
-                  "mt-[1%] xl:text-[40px]": heightScreen < 1000,
+                  "mt-[1%] xl:text-[40px]": isDesktop && heightScreen < 1000,
                 }
               )}
             >
@@ -268,7 +269,7 @@ export const Certificate: FC<CertificateProps> = ({
               className={cn(
                 "text-[#009483] text-[14px] xs:text-[16px] md:text-[20px] xl:text-[28px] font-bold mt-[2%]",
                 {
-                  "mt-[1%] xl:text-[20px]": heightScreen < 1000,
+                  "mt-[1%] xl:text-[20px]": isDesktop && heightScreen < 1000,
                 }
               )}
             >
@@ -279,7 +280,7 @@ export const Certificate: FC<CertificateProps> = ({
               className={cn(
                 "text-[#009483] text-[14px] xs:text-[16px] md:text-[20px] xl:text-[28px] font-bold",
                 {
-                  "xl:text-[20px]": heightScreen < 1000,
+                  "xl:text-[20px]": isDesktop && heightScreen < 1000,
                 }
               )}
             >
