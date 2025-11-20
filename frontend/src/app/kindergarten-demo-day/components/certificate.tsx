@@ -236,11 +236,11 @@ export const Certificate: FC<CertificateProps> = ({
             <p className="text-[#F05023] text-[20px] xs:text-[30px] md:text-[40px] xl:text-[50px] font-black uppercase mt-[4%] xs:mt-[2%]">
               {studentName}
             </p>
-            <p className="text-[#009483] text-[12px] xs:text-[16px] md:text-[20px] xl:text-[28px] font-bold mt-[2%]">
+            <p className="text-[#009483] text-[14px] xs:text-[16px] md:text-[20px] xl:text-[28px] font-bold mt-[2%]">
               On this joyful day, you explored the wonders of Wellspring Saigon
               – The Happy School – for the very first time.
             </p>
-            <p className="text-[#009483] text-[12px] xs:text-[16px] md:text-[20px] xl:text-[28px] font-bold">
+            <p className="text-[#009483] text-[14px] xs:text-[16px] md:text-[20px] xl:text-[28px] font-bold">
               We proudly awarded you as:
               <span className="text-[#F05023] ml-[10px]">
                 A Little Inventor.
@@ -338,10 +338,18 @@ export const Certificate: FC<CertificateProps> = ({
       </div>
 
       <div className="flex flex-col md:flex-row px-20 gap-4 justify-center fixed z-9999 bottom-10 left-0 right-0 mx-auto">
-        <Button className="cursor-pointer text-xl" size="lg" onClick={handleDownloadPhoto}>
+        <Button
+          className="cursor-pointer text-xl"
+          size="lg"
+          onClick={handleDownloadPhoto}
+        >
           Download Photo
         </Button>
-        <Button className="cursor-pointer text-xl" size="lg" onClick={handleDownloadPDF}>
+        <Button
+          className="cursor-pointer text-xl"
+          size="lg"
+          onClick={handleDownloadPDF}
+        >
           Download PDF
         </Button>
       </div>
