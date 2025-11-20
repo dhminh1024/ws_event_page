@@ -6,7 +6,9 @@ from frappe import _
 from frappe.utils import get_url
 
 
-def send_certificate_email(parent_email, student_name, certificate_url, event_title, parent_name):
+def send_certificate_email(
+    parent_email, student_name, certificate_url, event_title, parent_name
+):
     """Send certificate notification email to parent.
 
     Args:
@@ -22,13 +24,14 @@ def send_certificate_email(parent_email, student_name, certificate_url, event_ti
     Raises:
         Exception: If email sending fails
     """
+    from frappe.email.doctype.email_template.email_template import get_email_template
+
     try:
         # Validate inputs
-        if not all([parent_email, student_name, certificate_url, event_title, parent_name]):
+        if not all(
+            [parent_email, student_name, certificate_url, event_title, parent_name]
+        ):
             frappe.throw(_("All email parameters are required"))
-
-        # Get email template
-        template_path = "ws_event_page/templates/emails/kdd_certificate_notification.html"
 
         # Prepare template context
         context = {
@@ -36,14 +39,28 @@ def send_certificate_email(parent_email, student_name, certificate_url, event_ti
             "parent_email": parent_email,
             "student_name": student_name,
             "event_title": event_title,
-            "certificate_url": certificate_url
+            "certificate_url": certificate_url,
         }
 
-        # Render email content
-        email_content = frappe.render_template(template_path, context)
+        # Check if email template "KDD Certificate Notification" exists
+        template_exists = frappe.db.exists(
+            "Email Template", "KDD Certificate Notification"
+        )
+        if not template_exists:
+            # Get email template
+            template_path = (
+                "ws_event_page/templates/emails/kdd_certificate_notification.html"
+            )
 
-        # Email subject
-        subject = _("Chứng nhận tham gia | Certificate of Participation - {0}").format(student_name)
+            # Render email content
+            email_content = frappe.render_template(template_path, context)
+
+            # Email subject
+            subject = f" WSSG Chứng nhận tham gia | Certificate of Participation - {student_name}"
+        else:
+            email_template = get_email_template("KDD Certificate Notification", context)
+            email_content = email_template.get("message")
+            subject = email_template.get("subject")
 
         # Send email
         frappe.sendmail(
@@ -54,7 +71,7 @@ def send_certificate_email(parent_email, student_name, certificate_url, event_ti
             reference_doctype="WSE KDD Student Registration",
             reference_name=None,  # Can be set if needed
             unsubscribe_message=None,
-            delayed=False
+            delayed=False,
         )
 
         # Log successful email
@@ -68,10 +85,7 @@ def send_certificate_email(parent_email, student_name, certificate_url, event_ti
     except Exception as e:
         # Log error
         error_msg = f"Failed to send certificate email to {parent_email}: {str(e)}"
-        frappe.log_error(
-            message=error_msg,
-            title="KDD Certificate Email Error"
-        )
+        frappe.log_error(message=error_msg, title="KDD Certificate Email Error")
         raise Exception(error_msg)
 
 
@@ -91,15 +105,10 @@ def send_bulk_certificate_emails(visit_event):
         registrations = frappe.get_all(
             "WSE KDD Student Registration",
             filters={"visit_event": visit_event},
-            fields=["name"]
+            fields=["name"],
         )
 
-        results = {
-            "total": len(registrations),
-            "sent": 0,
-            "failed": 0,
-            "errors": []
-        }
+        results = {"total": len(registrations), "sent": 0, "failed": 0, "errors": []}
 
         # Get event details
         event = frappe.get_doc("WSE KDD Visit Event", visit_event)
@@ -116,22 +125,18 @@ def send_bulk_certificate_emails(visit_event):
                         student_name=registration.student_full_name,
                         certificate_url=registration.certificate_url,
                         event_title=event.title,
-                        parent_name=submission.parent_full_name
+                        parent_name=submission.parent_full_name,
                     )
                     results["sent"] += 1
 
                 except Exception as e:
                     results["failed"] += 1
-                    results["errors"].append({
-                        "email": submission.parent_email,
-                        "error": str(e)
-                    })
+                    results["errors"].append(
+                        {"email": submission.parent_email, "error": str(e)}
+                    )
 
         return results
 
     except Exception as e:
-        frappe.log_error(
-            message=str(e),
-            title="KDD Bulk Email Error"
-        )
+        frappe.log_error(message=str(e), title="KDD Bulk Email Error")
         raise
