@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@atoms/select";
+import { useLocales } from "@/core/hooks/use-locales";
 
 const CertificateModal = lazy(() =>
   import("@/app/kindergarten-demo-day/components/certificate-modal").then(
@@ -28,6 +29,7 @@ const CertificateModal = lazy(() =>
 );
 
 const WelcomePage = () => {
+  const { t } = useLocales();
   const events = useEventPageContext();
   const [searchParams, setSearchParams] = useSearchParams();
   const eventName = searchParams.get("event") || undefined;
@@ -76,20 +78,6 @@ const WelcomePage = () => {
           className="w-screen h-screen"
           logoBrand={eventName && eventVisit?.kindergarten_data?.logo}
         />
-        {/* <img
-          className="w-full h-full object-cover bg-slate-100"
-          src={events.variables.banner_image?.value}
-          alt=""
-        /> */}
-        {/* {eventName && eventVisit?.kindergarten_data?.logo && (
-          <div className="absolute top-[7%] left-[55%] w-[20%] h-[13%]">
-            <img
-              src={eventVisit?.kindergarten_data?.logo}
-              className="w-full h-full object-contain object-left"
-              alt=""
-            />
-          </div>
-        )} */}
 
         <div className="fixed bottom-[45%] md:bottom-20 w-full max-w-4xl xl:max-w-6xl p-10 left-[50%] translate-x-[-50%] flex justify-center">
           {!isLoadingEvents && eventsList && eventsList.length > 0 && (
@@ -121,7 +109,7 @@ const WelcomePage = () => {
                 className="text-lg md:text-3xl h-10 md:h-15 rounded-full text-center w-full"
                 onClick={() => handleEventSelect(eventSelected || "")}
               >
-                Go to Event
+                {t("kindergarten_demo_day.go_to_event")}
               </Button>
             </div>
           )}
@@ -129,7 +117,9 @@ const WelcomePage = () => {
         {eventName && (
           <CertificateModal>
             <Button className="fixed bottom-[15%] rounded-full left-[50%] translate-x-[-50%] h-20 px-10 cursor-pointer">
-              <span className=" text-4xl">Get Certificate</span>
+              <span className=" text-4xl">
+                {t("kindergarten_demo_day.get_certificate")}
+              </span>
             </Button>
           </CertificateModal>
         )}

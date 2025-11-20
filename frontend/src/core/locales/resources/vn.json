@@ -379,6 +379,8 @@
     }
   },
   "kindergarten_demo_day": {
+    "go_to_event": "Đến sự kiện",
+    "get_certificate": "Lấy chứng nhận",
     "modal_title": "Yêu cầu Giấy chứng nhận",
     "modal_description": "Vui lòng điền thông tin bên dưới để nhận giấy chứng nhận",
     "section_student_info": "Thông tin Học sinh",
