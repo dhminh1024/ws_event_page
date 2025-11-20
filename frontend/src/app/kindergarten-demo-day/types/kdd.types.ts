@@ -92,3 +92,28 @@ export interface GetCertificateResponse {
   data?: CertificateData;
   message: string;
 }
+
+/**
+ * Event list item (simplified version for listing)
+ */
+export interface EventListItem {
+  name: string;
+  title: string;
+  event_datetime: string;
+  kindergarten: string;
+  kindergarten_title?: string;
+  kindergarten_logo?: string;
+  registration_open: boolean;
+  registration_link?: string;
+  group_photo?: string;
+  registration_count: number;
+}
+
+/**
+ * API response for get_list_of_events
+ */
+export interface EventListResponse {
+  success: boolean;
+  data: EventListItem[];
+  message: string;
+}

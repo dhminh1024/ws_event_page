@@ -50,8 +50,6 @@ export const useGetCertificate = (certificateToken?: string, skip: boolean = fal
     }
   );
 
-  console.log(data);
-  
 
   return {
     /** The certificate data wrapped in API response */

@@ -9,10 +9,13 @@ import { Input } from "@atoms/input";
 import { Label } from "@atoms/label";
 import { cn } from "@/core/utils/shadcn-utils";
 import { Button } from "@atoms/button";
-import { useEventVisit } from "../../api/use-event-visit";
-import { useSubmitRegistration } from "../../api/use-submit-registration";
+import { useEventVisit } from "../api/use-event-visit";
+import { useSubmitRegistration } from "../api/use-submit-registration";
 import { Combobox } from "@atoms/combobox";
 import { useSearchParams } from "react-router-dom";
+import { parseDate } from "@/core/utils/common";
+
+import { useLocales } from "@/core/hooks/use-locales";
 
 export type CertificateModalProps = PropsWithChildren & {
   open?: boolean;
@@ -24,6 +27,8 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
   onOpenChange: controlledOnOpenChange,
   children,
 }) => {
+  const { t } = useLocales();
+
   // Internal state management for uncontrolled usage
   const [internalOpen, setInternalOpen] = React.useState(false);
 
@@ -78,89 +83,104 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
     // }
   };
 
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBlurChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let input = e.target.value;
 
-    // Remove all non-digits
-    const digitsOnly = input.replace(/\D/g, "");
-
-    // Format as DD/MM/YYYY
-    let formatted = "";
-    if (digitsOnly.length > 0) {
-      formatted = digitsOnly.slice(0, 2);
-      if (digitsOnly.length >= 3) {
-        formatted += "/" + digitsOnly.slice(2, 4);
-      }
-      if (digitsOnly.length >= 5) {
-        formatted += "/" + digitsOnly.slice(4, 8);
-      }
+    // Auto re-format date by dd/MM/yyyy on blur
+    const parts = input.split(/\/|-|\./);
+    let formatted = input;
+    if (parts.length === 3) {
+      let day = parts[0].padStart(2, "0").slice(0, 2);
+      let month = parts[1].padStart(2, "0").slice(0, 2);
+      let year = parts[2].padStart(4, "0").slice(0, 4);
+      formatted = `${day}/${month}/${year}`;
+      setDateDisplay(formatted);
+      setFormData((prev) => ({
+        ...prev,
+        studentDateOfBirth: `${year}-${month}-${day}`,
+      }));
+    }
+    // Auto add 10081998 -> 10/08/1998
+    else if (/^\d{8}$/.test(input)) {
+      let day = input.slice(0, 2);
+      let month = input.slice(2, 4);
+      let year = input.slice(4, 8);
+      formatted = `${day}/${month}/${year}`;
+      setDateDisplay(formatted);
+      setFormData((prev) => ({
+        ...prev,
+        studentDateOfBirth: `${year}-${month}-${day}`,
+      }));
     }
 
-    setDateDisplay(formatted);
+    // Validate with database
+    // Validate against selected student's DOB
+    if (formData.studentFullName) {
+      const selectedStudent = studentList.find(
+        (student) => student.student_full_name === formData.studentFullName
+      );
 
-    // Convert dd/mm/yyyy to yyyy-mm-dd for storage when complete
-    if (digitsOnly.length === 8) {
-      const day = digitsOnly.slice(0, 2);
-      const month = digitsOnly.slice(2, 4);
-      const year = digitsOnly.slice(4, 8);
-      const isoDate = `${year}-${month}-${day}`;
-      setFormData((prev) => ({ ...prev, studentDateOfBirth: isoDate }));
-
-      // Validate against selected student's DOB
-      if (formData.studentFullName) {
-        const selectedStudent = studentList.find(
-          (student) => student.student_full_name === formData.studentFullName
+      if (selectedStudent?.student_dob) {
+        const studentDOB = selectedStudent.student_dob;
+        console.log(
+          parseDate(formatted, "dd/MM/yyyy").getTime(),
+          parseDate(studentDOB, "yyyy-MM-dd").getTime()
         );
 
-        if (selectedStudent?.student_dob) {
-          const studentDOB = selectedStudent.student_dob;
-          if (isoDate !== studentDOB) {
-            setErrors((prev) => ({
-              ...prev,
-              studentDateOfBirth:
-                "⚠️ Date of birth does not match student record. Please verify and try again.",
-            }));
-          } else {
-            // Clear error if date matches
-            if (errors.studentDateOfBirth) {
-              setErrors((prev) => ({ ...prev, studentDateOfBirth: "" }));
-            }
-          }
+        if (
+          parseDate(formatted, "dd/MM/yyyy").getTime() !==
+          parseDate(studentDOB, "yyyy-MM-dd").getTime()
+        ) {
+          setErrors((prev) => ({
+            ...prev,
+            studentDateOfBirth: t("kindergarten_demo_day.error_dob_mismatch"),
+          }));
         } else {
-          // Clear error if no DOB on record to verify against
+          // Clear error if date matches
           if (errors.studentDateOfBirth) {
             setErrors((prev) => ({ ...prev, studentDateOfBirth: "" }));
           }
         }
+      } else {
+        // Clear error if no DOB on record to verify against
+        if (errors.studentDateOfBirth) {
+          setErrors((prev) => ({ ...prev, studentDateOfBirth: "" }));
+        }
       }
-    } else {
-      setFormData((prev) => ({ ...prev, studentDateOfBirth: "" }));
     }
+  };
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let input = e.target.value;
+
+    // Format input as dd/mm/yyyy
+    setDateDisplay(input);
+    setFormData((prev) => ({ ...prev, studentDateOfBirth: input }));
   };
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
 
     if (!formData.parentFullName.trim()) {
-      newErrors.parentFullName = "Parent's full name is required";
+      newErrors.parentFullName = t("kindergarten_demo_day.error_parent_name_required");
     }
 
     if (!formData.parentEmail.trim()) {
-      newErrors.parentEmail = "Email is required";
+      newErrors.parentEmail = t("kindergarten_demo_day.error_email_required");
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.parentEmail)) {
-      newErrors.parentEmail = "Please enter a valid email address";
+      newErrors.parentEmail = t("kindergarten_demo_day.error_email_invalid");
     }
 
     if (!formData.parentPhone.trim()) {
-      newErrors.parentPhone = "Phone number is required";
+      newErrors.parentPhone = t("kindergarten_demo_day.error_phone_required");
     }
 
     if (!formData.studentFullName.trim()) {
-      newErrors.studentFullName = "Student's full name is required";
+      newErrors.studentFullName = t("kindergarten_demo_day.error_student_name_required");
     }
 
     if (!formData.studentDateOfBirth) {
-      newErrors.studentDateOfBirth = "Date of birth is required";
+      newErrors.studentDateOfBirth = t("kindergarten_demo_day.error_dob_required");
     } else {
       // Verify date of birth matches student record
       const selectedStudent = studentList.find(
@@ -169,14 +189,13 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
 
       if (selectedStudent?.student_dob) {
         if (formData.studentDateOfBirth !== selectedStudent.student_dob) {
-          newErrors.studentDateOfBirth =
-            "⚠️ Date of birth does not match student record. Please verify and try again.";
+          newErrors.studentDateOfBirth = t("kindergarten_demo_day.error_dob_mismatch");
         }
       }
     }
 
     if (formData.rating === 0) {
-      newErrors.rating = "Please rate your experience";
+      newErrors.rating = t("kindergarten_demo_day.error_rating_required");
     }
 
     setErrors(newErrors);
@@ -215,7 +234,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
     }
 
     if (!eventName) {
-      setErrors({ general: "Event not found. Please refresh the page." });
+      setErrors({ general: t("kindergarten_demo_day.error_event_not_found") });
       return;
     }
 
@@ -241,13 +260,13 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
         setErrors({
           general:
             result?.message ||
-            "Failed to submit registration. Please try again.",
+            t("kindergarten_demo_day.error_registration_failed"),
         });
       }
     } catch (error) {
       console.error("Registration submission error:", error);
       setErrors({
-        general: "An unexpected error occurred. Please try again later.",
+        general: t("kindergarten_demo_day.error_unexpected"),
       });
     }
   };
@@ -261,6 +280,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
       <CustomDialog
         open={open || false}
         onOpenChange={onOpenChange || (() => {})}
+        disableOutsideClick={true}
       >
         <CustomDialogContent
           className="w-full max-w-[768px] relative bg-white rounded-2xl border-0 shadow-2xl p-0 gap-0 overflow-hidden"
@@ -269,39 +289,36 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
         >
           <div className="h-full flex flex-col">
             {/* Header Section */}
-            <CustomDialogHeader className="bg-kdd-primary/5 p-4 md:p-8 space-y-2">
+            <CustomDialogHeader className="bg-kdd-primary/10 p-4 md:p-8 space-y-2">
               <CustomDialogTitle className="text-xl md:text-3xl font-bold text-kdd-text text-center tracking-tight">
-                Request Certificate
+                {t("kindergarten_demo_day.modal_title")}
               </CustomDialogTitle>
               <p className="text-kdd-text-secondary text-center text-xs md:text-sm font-medium">
-                Please fill in the information below to receive your certificate
+                {t("kindergarten_demo_day.modal_description")}
               </p>
             </CustomDialogHeader>
 
-            <form
-              onSubmit={handleSubmit}
-              className="flex-1 "
-            >
+            <form onSubmit={handleSubmit} className="flex-1 ">
               <div className="flex-1 p-4 md:p-8 max-h-[65vh] overflow-x-hidden space-y-2">
                 {/* Student Information Section */}
                 <div className="space-y-2 pt-2">
                   <h3 className="text-lg font-bold text-kdd-text pb-2 border-b border-gray-100">
-                    Student Information
+                    {t("kindergarten_demo_day.section_student_info")}
                   </h3>
 
                   {/* Student's Full Name - Searchable Select */}
                   <div className="space-y-2">
                     <Label className="text-kdd-text font-semibold text-sm">
-                      Full Name <span className="text-kdd-primary">*</span>
+                      {t("kindergarten_demo_day.label_student_name")} <span className="text-destructive">*</span>
                     </Label>
                     {/* <Combobox options={studentOptions} /> */}
                     <Combobox
                       items={studentOptions}
                       value={formData.studentFullName}
                       onSelect={handleStudentSelect}
-                      placeholder="Search for student..."
-                      searchPlaceholder="Type to search..."
-                      emptyContent="No student found"
+                      placeholder={t("kindergarten_demo_day.placeholder_student_name")}
+                      searchPlaceholder={t("kindergarten_demo_day.placeholder_search")}
+                      emptyContent={t("kindergarten_demo_day.empty_student")}
                       className={cn(
                         "h-12 w-full text-base border-gray-200 focus:border-kdd-primary rounded-lg transition-all duration-200 bg-slate-100 hover:bg-white",
                         errors.studentFullName &&
@@ -332,19 +349,23 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                       htmlFor="studentDateOfBirth"
                       className="text-kdd-text font-semibold text-sm"
                     >
-                      Date of Birth <span className="text-kdd-primary">*</span>
+                      {t("kindergarten_demo_day.label_student_dob")} <span className="text-destructive">*</span>
                     </Label>
+                    <p className="text-xs text-muted-foreground">
+                      {t("kindergarten_demo_day.label_dob_example")}
+                    </p>
                     <Input
                       id="studentDateOfBirth"
                       type="text"
                       value={dateDisplay}
                       onChange={handleDateChange}
+                      onBlur={handleBlurChange}
                       className={cn(
                         "h-12 text-base border-gray-200 focus:border-kdd-primary focus:ring-kdd-primary rounded-lg transition-all duration-200 bg-gray-50/50 focus:bg-white",
                         errors.studentDateOfBirth &&
                           "border-kdd-primary bg-red-50/30"
                       )}
-                      placeholder="DD/MM/YYYY"
+                      placeholder={t("kindergarten_demo_day.placeholder_dob")}
                       maxLength={10}
                     />
                     {formData.studentFullName &&
@@ -363,7 +384,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                               clipRule="evenodd"
                             />
                           </svg>
-                          Date verified ✓
+                          {t("kindergarten_demo_day.date_verified")}
                         </p>
                       )}
                     {errors.studentDateOfBirth && (
@@ -388,7 +409,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                 {/* Parent Information Section */}
                 <div className="space-y-2">
                   <h3 className="text-lg font-bold text-kdd-text pb-2 border-b border-gray-100">
-                    Parent Information
+                    {t("kindergarten_demo_day.section_parent_info")}
                   </h3>
 
                   {/* Parent's Full Name */}
@@ -397,7 +418,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                       htmlFor="parentFullName"
                       className="text-kdd-text font-semibold text-sm"
                     >
-                      Full Name <span className="text-kdd-primary">*</span>
+                      {t("kindergarten_demo_day.label_parent_name")} <span className="text-destructive">*</span>
                     </Label>
                     <Input
                       id="parentFullName"
@@ -411,7 +432,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                         errors.parentFullName &&
                           "border-kdd-primary bg-red-50/30"
                       )}
-                      placeholder="Enter parent's full name"
+                      placeholder={t("kindergarten_demo_day.placeholder_parent_name")}
                     />
                     {errors.parentFullName && (
                       <p className="text-kdd-primary text-sm font-medium flex items-center gap-1.5">
@@ -437,7 +458,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                       htmlFor="parentEmail"
                       className="text-kdd-text font-semibold text-sm"
                     >
-                      Email Address <span className="text-kdd-primary">*</span>
+                      {t("kindergarten_demo_day.label_parent_email")} <span className="text-destructive">*</span>
                     </Label>
                     <Input
                       id="parentEmail"
@@ -450,7 +471,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                         "h-12 text-base border-gray-200 focus:border-kdd-primary focus:ring-kdd-primary rounded-lg transition-all duration-200 bg-gray-50/50 focus:bg-white",
                         errors.parentEmail && "border-kdd-primary bg-red-50/30"
                       )}
-                      placeholder="example@email.com"
+                      placeholder={t("kindergarten_demo_day.placeholder_parent_email")}
                     />
                     {errors.parentEmail && (
                       <p className="text-kdd-primary text-sm font-medium flex items-center gap-1.5">
@@ -476,7 +497,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                       htmlFor="parentPhone"
                       className="text-kdd-text font-semibold text-sm"
                     >
-                      Phone Number <span className="text-kdd-primary">*</span>
+                      {t("kindergarten_demo_day.label_parent_phone")} <span className="text-destructive">*</span>
                     </Label>
                     <Input
                       id="parentPhone"
@@ -489,7 +510,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                         "h-12 text-base border-gray-200 focus:border-kdd-primary focus:ring-kdd-primary rounded-lg transition-all duration-200 bg-gray-50/50 focus:bg-white",
                         errors.parentPhone && "border-kdd-primary bg-red-50/30"
                       )}
-                      placeholder="Enter phone number"
+                      placeholder={t("kindergarten_demo_day.placeholder_parent_phone")}
                     />
                     {errors.parentPhone && (
                       <p className="text-kdd-primary text-sm font-medium flex items-center gap-1.5">
@@ -515,16 +536,16 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                   {/* Rating Stars */}
                   <div className="space-y-3">
                     <Label className="text-kdd-text font-semibold text-sm">
-                      How was your experience?{" "}
-                      <span className="text-kdd-primary">*</span>
+                      {t("kindergarten_demo_day.label_rating")}{" "}
+                      <span className="text-destructive">*</span>
                     </Label>
                     <div className="flex justify-center gap-4 py-4">
                       {[
-                        { value: 1, emoji: "😢", label: "Poor" },
-                        { value: 2, emoji: "😕", label: "Fair" },
-                        { value: 3, emoji: "😊", label: "Good" },
-                        { value: 4, emoji: "😍", label: "Great" },
-                        { value: 5, emoji: "🤩", label: "Amazing" },
+                        { value: 1, emoji: "😢", label: t("kindergarten_demo_day.rating_poor") },
+                        { value: 2, emoji: "😕", label: t("kindergarten_demo_day.rating_fair") },
+                        { value: 3, emoji: "😊", label: t("kindergarten_demo_day.rating_good") },
+                        { value: 4, emoji: "😍", label: t("kindergarten_demo_day.rating_great") },
+                        { value: 5, emoji: "🤩", label: t("kindergarten_demo_day.rating_amazing") },
                       ].map((rating) => {
                         const isActive = rating.value === formData.rating;
                         const isHovered = rating.value === hoveredStar;
@@ -643,11 +664,20 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                         ></path>
                       </svg>
-                      Submitting...
+                      {t("kindergarten_demo_day.button_submitting")}
                     </span>
                   ) : (
-                    "Request Certificate"
+                    t("kindergarten_demo_day.button_submit")
                   )}
+                </Button>
+
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={() => onOpenChange?.(false)}
+                  className="w-full h-14 text-base font-medium text-kdd-text-secondary hover:text-kdd-text rounded-xl transition-all duration-200 mt-3"
+                >
+                  {t("kindergarten_demo_day.button_cancel")}
                 </Button>
               </div>
             </form>

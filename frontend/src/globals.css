@@ -159,10 +159,10 @@ layer(base);
     #073498
   );
 
-  --color-kdd-primary: #ff6b6b;
-  --color-kdd-primary-hover: #ff5252;
-  --color-kdd-primary-light: #ffe5e5;
-  --color-kdd-secondary: #4ecdc4;
+  --color-kdd-primary: #002855;
+  --color-kdd-primary-hover: #03356e;
+  --color-kdd-primary-light: #bee9e4;
+  --color-kdd-secondary: #009684;
   --color-kdd-text: #2d3436;
   --color-kdd-text-secondary: #636e72;
 
