@@ -1,4 +1,4 @@
-import { HTMLAttributes, type FC, useRef, useState } from "react";
+import { HTMLAttributes, type FC, useRef, useState, useEffect } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
 import { useLocales } from "@/core/hooks/use-locales";
 
@@ -41,6 +41,14 @@ export const Certificate: FC<CertificateProps> = ({
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadType, setDownloadType] = useState<"photo" | "pdf">("photo");
   const isCancelRef = useRef(false);
+  const [heightScreen, setHeightScreen] = useState<number>(0);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setHeightScreen(window.innerHeight);
+    });
+    setHeightScreen(window.innerHeight);
+  }, []);
 
   const buildPng = async (target: HTMLElement | null) => {
     if (!target) return null;
@@ -202,7 +210,11 @@ export const Certificate: FC<CertificateProps> = ({
         </div>
         <div className="flex-1 mx-auto w-full max-w-[1480px] relative z-50 flex items-center">
           <div className="w-full">
-            <div className="photo w-[80%] mt-[5%] relative">
+            <div
+              className={cn("photo w-[80%] mt-[5%] relative", {
+                "w-[60%] mt-[-10%]": heightScreen < 1000,
+              })}
+            >
               <div
                 className={cn(
                   "w-full xl:w-[80%] bg-gray-300 mt-10 mx-auto rounded-[20px] aspect-video",
@@ -230,17 +242,46 @@ export const Certificate: FC<CertificateProps> = ({
                 alt="Certificate Heading"
               />
             </div>
-            <p className="bg-[#009483] text-[15px] md:text-[25px] xl:text-[30px] inline-block text-white px-[2%] py-[0%] rounded-full mt-[3%]">
+
+            <p
+              className={cn(
+                "bg-[#009483] text-[15px] md:text-[25px] xl:text-[30px] inline-block text-white px-[2%] py-[0%] rounded-full mt-[3%]",
+                {
+                  "mt-[2%] xl:text-[20px]": heightScreen < 1000,
+                }
+              )}
+            >
               {format(submitDate || new Date(), "dd.MM.yyyy")}
             </p>
-            <p className="text-[#F05023] text-[20px] xs:text-[30px] md:text-[40px] xl:text-[50px] font-black uppercase mt-[4%] xs:mt-[2%]">
+            <p
+              className={cn(
+                "text-[#F05023] text-[30px] md:text-[50px] xl:text-[50px] font-black uppercase mt-[2%]",
+                {
+                  "mt-[1%] xl:text-[40px]": heightScreen < 1000,
+                }
+              )}
+            >
               {studentName}
             </p>
-            <p className="text-[#009483] text-[14px] xs:text-[16px] md:text-[20px] xl:text-[28px] font-bold mt-[2%]">
+            <p
+              className={cn(
+                "text-[#009483] text-[14px] xs:text-[16px] md:text-[20px] xl:text-[28px] font-bold mt-[2%]",
+                {
+                  "mt-[1%] xl:text-[20px]": heightScreen < 1000,
+                }
+              )}
+            >
               On this joyful day, you explored the wonders of Wellspring Saigon
               – The Happy School – for the very first time.
             </p>
-            <p className="text-[#009483] text-[14px] xs:text-[16px] md:text-[20px] xl:text-[28px] font-bold">
+            <p
+              className={cn(
+                "text-[#009483] text-[14px] xs:text-[16px] md:text-[20px] xl:text-[28px] font-bold",
+                {
+                  "xl:text-[20px]": heightScreen < 1000,
+                }
+              )}
+            >
               We proudly awarded you as:
               <span className="text-[#F05023] ml-[10px]">
                 A Little Inventor.
