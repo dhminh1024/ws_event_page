@@ -344,12 +344,13 @@ export const Certificate: FC<CertificateProps> = ({
                 "shadow-[5px_2px_0px_1px_rgba(0,0,0,0.2)] relative rotate-[-2deg] overflow-hidden"
               )}
             >
-              <img
-                className="w-full h-full object-cover object-center"
-                src={image}
-                crossOrigin="anonymous"
-                alt=""
-              />
+              {image && (
+                <img
+                  className="w-full h-full object-cover object-center"
+                  src={image}
+                  alt=""
+                />
+              )}
               <img
                 className="w-[13%] h-auto absolute bottom-0 right-0 mx-auto bg-white rounded-[20%_0%_0%_0%] p-[1%]"
                 src={LogoHappyJourney}
