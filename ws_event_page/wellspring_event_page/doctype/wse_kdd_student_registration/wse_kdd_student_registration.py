@@ -16,14 +16,15 @@ class WSEKDDStudentRegistration(Document):
 
     if TYPE_CHECKING:
         from frappe.types import DF
-        from ws_event_page.wellspring_event_page.doctype.wse_kdd_certificate_registration.wse_kdd_certificate_registration import WSEKDDCertificateRegistration
+        from ws_event_page.wellspring_event_page.doctype.wse_kdd_certificate_registration.wse_kdd_certificate_registration import (
+            WSEKDDCertificateRegistration,
+        )
 
-        certificate_generated: DF.Check
         certificate_registration_submission: DF.Table[WSEKDDCertificateRegistration]
         certificate_token: DF.Data | None
         certificate_url: DF.SmallText | None
         kindergarten: DF.Link | None
-        student_dob: DF.Date | None
+        student_dob: DF.Date
         student_full_name: DF.Data
         visit_event: DF.Link
     # end: auto-generated types
@@ -52,22 +53,13 @@ class WSEKDDStudentRegistration(Document):
         """Generate the certificate URL using the token."""
         if self.certificate_token and self.visit_event:
             base_url = get_url()
-            base_url = base_url.rstrip('/')
+            base_url = base_url.rstrip("/")
             self.certificate_url = (
                 f"{base_url}/events/kindergarten-demo-day?"
                 f"event={self.visit_event}&"
                 f"action=certificate&"
                 f"certificate_token={self.certificate_token}"
             )
-
-    def check_and_generate_certificate(self):
-        """Check if certificate can be generated based on group photo availability."""
-        if self.visit_event:
-            event = frappe.get_doc("WSE KDD Visit Event", self.visit_event)
-            if event.group_photo:
-                self.certificate_generated = 1
-            else:
-                self.certificate_generated = 0
 
     def validate_student_data(self):
         """Validate student full name and DOB format."""
@@ -93,9 +85,11 @@ class WSEKDDStudentRegistration(Document):
             age_years = (today - dob).days / 365.25
             if age_years > 10:
                 frappe.msgprint(
-                    msg=_("Student appears to be over 10 years old. Please verify the date of birth."),
+                    msg=_(
+                        "Student appears to be over 10 years old. Please verify the date of birth."
+                    ),
                     title=_("Age Verification"),
-                    indicator="orange"
+                    indicator="orange",
                 )
 
     def validate_event_registration_open(self):
@@ -121,19 +115,14 @@ class WSEKDDStudentRegistration(Document):
         student_full_name = " ".join(student_full_name.split())
 
         # Search for existing registration
-        filters = {
-            "visit_event": visit_event,
-            "student_full_name": student_full_name
-        }
+        filters = {"visit_event": visit_event, "student_full_name": student_full_name}
 
         # Add DOB to filter if provided
         if student_dob:
             filters["student_dob"] = student_dob
 
         existing = frappe.db.get_value(
-            "WSE KDD Student Registration",
-            filters=filters,
-            fieldname="name"
+            "WSE KDD Student Registration", filters=filters, fieldname="name"
         )
 
         if existing:
@@ -141,7 +130,9 @@ class WSEKDDStudentRegistration(Document):
 
         return None
 
-    def add_parent_submission(self, parent_full_name, parent_email, parent_phone_number, rating):
+    def add_parent_submission(
+        self, parent_full_name, parent_email, parent_phone_number, rating
+    ):
         """Add a new parent submission to the child table.
 
         Args:
@@ -171,11 +162,12 @@ class WSEKDDStudentRegistration(Document):
         Returns:
             dict: Certificate data including student info, event details, and group photo
         """
-        if not self.certificate_generated:
-            frappe.throw(_("Certificate has not been generated yet"))
-
         event = frappe.get_doc("WSE KDD Visit Event", self.visit_event)
-        kindergarten = frappe.get_doc("WSE KDD Kindergarten", self.kindergarten) if self.kindergarten else None
+        kindergarten = (
+            frappe.get_doc("WSE KDD Kindergarten", self.kindergarten)
+            if self.kindergarten
+            else None
+        )
 
         return {
             "student_name": self.student_full_name,
@@ -186,5 +178,5 @@ class WSEKDDStudentRegistration(Document):
             "kindergarten_name": kindergarten.title if kindergarten else None,
             "kindergarten_logo": kindergarten.logo if kindergarten else None,
             "certificate_token": self.certificate_token,
-            "certificate_url": self.certificate_url
+            "certificate_url": self.certificate_url,
         }

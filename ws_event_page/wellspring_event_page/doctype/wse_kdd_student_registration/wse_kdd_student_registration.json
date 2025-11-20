@@ -13,9 +13,8 @@
   "column_break_jlgr",
   "student_dob",
   "section_break_zdtn",
-  "certificate_generated",
-  "column_break_zqap",
   "certificate_url",
+  "column_break_zqap",
   "certificate_token",
   "section_break_kdkh",
   "certificate_registration_submission"
@@ -63,21 +62,12 @@
   {
    "fieldname": "student_dob",
    "fieldtype": "Date",
-   "label": "Student DOB"
+   "label": "Student DOB",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_zdtn",
    "fieldtype": "Section Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "certificate_generated",
-   "fieldtype": "Check",
-   "in_filter": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Certificate Generated",
-   "read_only": 1
   },
   {
    "fieldname": "certificate_url",
@@ -109,7 +99,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-18 10:40:44.623660",
+ "modified": "2025-11-19 17:51:42.257099",
  "modified_by": "minh.do@wellspringsaigon.edu.vn",
  "module": "Wellspring Event Page",
  "name": "WSE KDD Student Registration",
