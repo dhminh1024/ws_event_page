@@ -211,7 +211,7 @@ export const Certificate: FC<CertificateProps> = ({
         <div className="flex-1 mx-auto w-full max-w-[1480px] relative z-50 flex items-center">
           <div className="w-full">
             <div
-              className={cn("photo w-[80%] mt-[5%] relative", {
+              className={cn("photo w-[80%] relative", {
                 "w-[60%] mt-[-10%]": heightScreen < 1000,
               })}
             >
@@ -222,12 +222,13 @@ export const Certificate: FC<CertificateProps> = ({
                 )}
               >
                 <div className="w-full h-full border-8 rounded-[20px] border-white overflow-hidden">
-                  <img
-                    className="w-full h-full object-cover object-center "
-                    src={image}
-                    crossOrigin="anonymous"
-                    alt=""
-                  />
+                  {image && (
+                    <img
+                      className="w-full h-full object-cover object-center "
+                      src={image}
+                      alt=""
+                    />
+                  )}
                 </div>
 
                 <img
