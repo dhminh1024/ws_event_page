@@ -33,7 +33,6 @@ class WSEKDDStudentRegistration(Document):
         """Generate certificate token and URL before inserting the document."""
         self.generate_certificate_token()
         self.generate_certificate_url()
-        self.check_and_generate_certificate()
 
     def validate(self):
         """Validate student registration data."""
