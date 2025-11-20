@@ -376,6 +376,8 @@
     }
   },
   "kindergarten_demo_day": {
+    "go_to_event": "Go to Event",
+    "get_certificate": "Get Certificate",
     "modal_title": "Request Certificate",
     "modal_description": "Please fill in the information below to receive your certificate",
     "section_student_info": "Student Information",
