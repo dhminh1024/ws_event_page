@@ -68,14 +68,31 @@ export const Certificate: FC<CertificateProps> = ({
       throw new Error("Download cancelled by user");
     }
 
-    // Generate the image with high quality
-    const dataUrl = await toJpeg(cert, {
-      quality: 1.0, // Maximum quality
-      pixelRatio: 1, // Keep original size (6000px width)
-      backgroundColor: "#ffffff",
-      width: width, // Maintain original width
-      height: height, // Maintain original height
-    });
+    let dataUrl = "";
+    const minDataLength = 1000000;
+    let i = 0;
+    const maxAttempts = 10;
+
+    while (dataUrl.length < minDataLength && i < maxAttempts) {
+      dataUrl = await toJpeg(cert, {
+        quality: 1.0, // Maximum quality
+        pixelRatio: 1, // Keep original size (6000px width)
+        backgroundColor: "#ffffff",
+        width: width, // Maintain original width
+        height: height, // Maintain original height
+      });
+      i += 1;
+      setDownloadProgress(10 + (i / maxAttempts) * 50); // Update progress
+    }
+
+    // // Generate the image with high quality
+    // const dataUrl = await toJpeg(cert, {
+    //   quality: 1.0, // Maximum quality
+    //   pixelRatio: 1, // Keep original size (6000px width)
+    //   backgroundColor: "#ffffff",
+    //   width: width, // Maintain original width
+    //   height: height, // Maintain original height
+    // });
 
     // Update progress after image generation
     setDownloadProgress(70);
@@ -209,10 +226,10 @@ export const Certificate: FC<CertificateProps> = ({
             alt="LogoSecondary"
           />
         </div>
-        <div className="flex-1 mx-auto w-full max-w-[1480px] relative z-50 flex items-center">
+        <div className="flex-1 left-[50%] translate-x-[-50%] w-full max-w-[1480px] relative z-50 flex items-center">
           <div className="w-full">
             <div
-              className={cn("photo w-[80%] relative", {
+              className={cn("photo w-[80%] mt-[5%] left-0 right-0 mx-auto relative", {
                 "w-[60%] mt-[-10%]": isDesktop && heightScreen < 1000,
               })}
             >
@@ -293,11 +310,11 @@ export const Certificate: FC<CertificateProps> = ({
         </div>
       </div>
       {/* Dom to download */}
-      <div className="fixed top-full left-full z-[-1]">
+      <div className=" top-full left-full fixed z-[-1]">
         <div
           ref={certificateRef}
           id={"certificate"}
-          className={cn("w-[2000px] h-[1414px] p-[2%] ", className)}
+          className={cn("w-[2000px] h-[1414px] relative", className)}
           style={{
             backgroundImage: `url(${CertBackground})`,
             backgroundSize: "cover",
@@ -338,7 +355,7 @@ export const Certificate: FC<CertificateProps> = ({
               alt="LogoSecondary"
             />
           </div>
-          <div className="photo w-[80%] mt-[5%] relative">
+          <div className="photo w-[80%] mt-[5%] left-0 right-0 mx-auto relative">
             <div
               className={cn(
                 "w-[80%] border-8 border-white bg-gray-300 mt-10 mx-auto rounded-[20px] aspect-16/9",
