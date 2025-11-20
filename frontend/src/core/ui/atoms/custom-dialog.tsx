@@ -6,6 +6,7 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 export interface CustomDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  disableOutsideClick?: boolean;
 }
 
 export interface CustomDialogContentProps extends PropsWithChildren {
@@ -21,6 +22,7 @@ export interface CustomDialogTitleProps extends React.HTMLAttributes<HTMLHeading
 const CustomDialog: React.FC<PropsWithChildren<CustomDialogProps>> = ({
   open,
   onOpenChange,
+  disableOutsideClick = false,
   children,
 }) => {
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -29,7 +31,7 @@ const CustomDialog: React.FC<PropsWithChildren<CustomDialogProps>> = ({
     if (!open) return;
 
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+      if (e.key === "Escape" && !disableOutsideClick) {
         onOpenChange(false);
       }
     };
@@ -41,7 +43,7 @@ const CustomDialog: React.FC<PropsWithChildren<CustomDialogProps>> = ({
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "";
     };
-  }, [open, onOpenChange]);
+  }, [open, onOpenChange, disableOutsideClick]);
 
   if (!open) return null;
 
@@ -50,8 +52,8 @@ const CustomDialog: React.FC<PropsWithChildren<CustomDialogProps>> = ({
       ref={dialogRef}
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={(e) => {
-        // Close when clicking on the container (outside content)
-        if (e.target === e.currentTarget) {
+        // Close when clicking on the container (outside content) - only if not disabled
+        if (e.target === e.currentTarget && !disableOutsideClick) {
           onOpenChange(false);
         }
       }}
@@ -63,8 +65,8 @@ const CustomDialog: React.FC<PropsWithChildren<CustomDialogProps>> = ({
       <div
         className="relative z-50 animate-in fade-in-0 zoom-in-95 slide-in-from-top-[48%] w-full flex justify-center"
         onClick={(e) => {
-          // Close when clicking in this container but outside the content
-          if (e.target === e.currentTarget) {
+          // Close when clicking in this container but outside the content - only if not disabled
+          if (e.target === e.currentTarget && !disableOutsideClick) {
             onOpenChange(false);
           }
         }}
