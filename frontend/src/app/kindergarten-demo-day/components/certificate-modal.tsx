@@ -162,7 +162,9 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
     const newErrors: Record<string, string> = {};
 
     if (!formData.parentFullName.trim()) {
-      newErrors.parentFullName = t("kindergarten_demo_day.error_parent_name_required");
+      newErrors.parentFullName = t(
+        "kindergarten_demo_day.error_parent_name_required"
+      );
     }
 
     if (!formData.parentEmail.trim()) {
@@ -176,11 +178,15 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
     }
 
     if (!formData.studentFullName.trim()) {
-      newErrors.studentFullName = t("kindergarten_demo_day.error_student_name_required");
+      newErrors.studentFullName = t(
+        "kindergarten_demo_day.error_student_name_required"
+      );
     }
 
     if (!formData.studentDateOfBirth) {
-      newErrors.studentDateOfBirth = t("kindergarten_demo_day.error_dob_required");
+      newErrors.studentDateOfBirth = t(
+        "kindergarten_demo_day.error_dob_required"
+      );
     } else {
       // Verify date of birth matches student record
       const selectedStudent = studentList.find(
@@ -189,14 +195,16 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
 
       if (selectedStudent?.student_dob) {
         if (formData.studentDateOfBirth !== selectedStudent.student_dob) {
-          newErrors.studentDateOfBirth = t("kindergarten_demo_day.error_dob_mismatch");
+          newErrors.studentDateOfBirth = t(
+            "kindergarten_demo_day.error_dob_mismatch"
+          );
         }
       }
     }
 
-    if (formData.rating === 0) {
-      newErrors.rating = t("kindergarten_demo_day.error_rating_required");
-    }
+    // if (formData.rating === 0) {
+    //   newErrors.rating = t("kindergarten_demo_day.error_rating_required");
+    // }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -246,7 +254,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
         parent_full_name: formData.parentFullName,
         parent_email: formData.parentEmail,
         parent_phone_number: formData.parentPhone,
-        rating: formData.rating,
+        rating: formData.rating || 5,
       });
 
       if (result?.success && result.data?.certificate_url) {
@@ -309,15 +317,20 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                   {/* Student's Full Name - Searchable Select */}
                   <div className="space-y-2">
                     <Label className="text-kdd-text font-semibold text-sm">
-                      {t("kindergarten_demo_day.label_student_name")} <span className="text-destructive">*</span>
+                      {t("kindergarten_demo_day.label_student_name")}{" "}
+                      <span className="text-destructive">*</span>
                     </Label>
                     {/* <Combobox options={studentOptions} /> */}
                     <Combobox
                       items={studentOptions}
                       value={formData.studentFullName}
                       onSelect={handleStudentSelect}
-                      placeholder={t("kindergarten_demo_day.placeholder_student_name")}
-                      searchPlaceholder={t("kindergarten_demo_day.placeholder_search")}
+                      placeholder={t(
+                        "kindergarten_demo_day.placeholder_student_name"
+                      )}
+                      searchPlaceholder={t(
+                        "kindergarten_demo_day.placeholder_search"
+                      )}
                       emptyContent={t("kindergarten_demo_day.empty_student")}
                       className={cn(
                         "h-12 w-full text-base border-gray-200 focus:border-kdd-primary rounded-lg transition-all duration-200 bg-slate-100 hover:bg-white",
@@ -326,7 +339,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                       )}
                     />
                     {errors.studentFullName && (
-                      <p className="text-kdd-primary text-sm font-medium flex items-center gap-1.5">
+                      <p className="text-destructive text-sm font-medium flex items-center gap-1.5">
                         <svg
                           className="w-4 h-4"
                           fill="currentColor"
@@ -349,7 +362,8 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                       htmlFor="studentDateOfBirth"
                       className="text-kdd-text font-semibold text-sm"
                     >
-                      {t("kindergarten_demo_day.label_student_dob")} <span className="text-destructive">*</span>
+                      {t("kindergarten_demo_day.label_student_dob")}{" "}
+                      <span className="text-destructive">*</span>
                     </Label>
                     <p className="text-xs text-muted-foreground">
                       {t("kindergarten_demo_day.label_dob_example")}
@@ -388,7 +402,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                         </p>
                       )}
                     {errors.studentDateOfBirth && (
-                      <p className="text-kdd-primary text-sm font-medium flex items-center gap-1.5">
+                      <p className="text-destructive text-sm font-medium flex items-center gap-1.5">
                         <svg
                           className="w-4 h-4"
                           fill="currentColor"
@@ -418,7 +432,8 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                       htmlFor="parentFullName"
                       className="text-kdd-text font-semibold text-sm"
                     >
-                      {t("kindergarten_demo_day.label_parent_name")} <span className="text-destructive">*</span>
+                      {t("kindergarten_demo_day.label_parent_name")}{" "}
+                      <span className="text-destructive">*</span>
                     </Label>
                     <Input
                       id="parentFullName"
@@ -432,10 +447,12 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                         errors.parentFullName &&
                           "border-kdd-primary bg-red-50/30"
                       )}
-                      placeholder={t("kindergarten_demo_day.placeholder_parent_name")}
+                      placeholder={t(
+                        "kindergarten_demo_day.placeholder_parent_name"
+                      )}
                     />
                     {errors.parentFullName && (
-                      <p className="text-kdd-primary text-sm font-medium flex items-center gap-1.5">
+                      <p className="text-destructive text-sm font-medium flex items-center gap-1.5">
                         <svg
                           className="w-4 h-4"
                           fill="currentColor"
@@ -458,7 +475,8 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                       htmlFor="parentEmail"
                       className="text-kdd-text font-semibold text-sm"
                     >
-                      {t("kindergarten_demo_day.label_parent_email")} <span className="text-destructive">*</span>
+                      {t("kindergarten_demo_day.label_parent_email")}{" "}
+                      <span className="text-destructive">*</span>
                     </Label>
                     <Input
                       id="parentEmail"
@@ -471,10 +489,12 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                         "h-12 text-base border-gray-200 focus:border-kdd-primary focus:ring-kdd-primary rounded-lg transition-all duration-200 bg-gray-50/50 focus:bg-white",
                         errors.parentEmail && "border-kdd-primary bg-red-50/30"
                       )}
-                      placeholder={t("kindergarten_demo_day.placeholder_parent_email")}
+                      placeholder={t(
+                        "kindergarten_demo_day.placeholder_parent_email"
+                      )}
                     />
                     {errors.parentEmail && (
-                      <p className="text-kdd-primary text-sm font-medium flex items-center gap-1.5">
+                      <p className="text-destructive text-sm font-medium flex items-center gap-1.5">
                         <svg
                           className="w-4 h-4"
                           fill="currentColor"
@@ -497,7 +517,8 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                       htmlFor="parentPhone"
                       className="text-kdd-text font-semibold text-sm"
                     >
-                      {t("kindergarten_demo_day.label_parent_phone")} <span className="text-destructive">*</span>
+                      {t("kindergarten_demo_day.label_parent_phone")}{" "}
+                      <span className="text-destructive">*</span>
                     </Label>
                     <Input
                       id="parentPhone"
@@ -510,10 +531,12 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                         "h-12 text-base border-gray-200 focus:border-kdd-primary focus:ring-kdd-primary rounded-lg transition-all duration-200 bg-gray-50/50 focus:bg-white",
                         errors.parentPhone && "border-kdd-primary bg-red-50/30"
                       )}
-                      placeholder={t("kindergarten_demo_day.placeholder_parent_phone")}
+                      placeholder={t(
+                        "kindergarten_demo_day.placeholder_parent_phone"
+                      )}
                     />
                     {errors.parentPhone && (
-                      <p className="text-kdd-primary text-sm font-medium flex items-center gap-1.5">
+                      <p className="text-destructive text-sm font-medium flex items-center gap-1.5">
                         <svg
                           className="w-4 h-4"
                           fill="currentColor"
@@ -532,8 +555,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                 </div>
 
                 {/* Rating Section */}
-                <div className="space-y-5 pt-2">
-                  {/* Rating Stars */}
+                {/* <div className="space-y-5 pt-2">
                   <div className="space-y-3">
                     <Label className="text-kdd-text font-semibold text-sm">
                       {t("kindergarten_demo_day.label_rating")}{" "}
@@ -541,11 +563,31 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                     </Label>
                     <div className="flex justify-center gap-4 py-4">
                       {[
-                        { value: 1, emoji: "😢", label: t("kindergarten_demo_day.rating_poor") },
-                        { value: 2, emoji: "😕", label: t("kindergarten_demo_day.rating_fair") },
-                        { value: 3, emoji: "😊", label: t("kindergarten_demo_day.rating_good") },
-                        { value: 4, emoji: "😍", label: t("kindergarten_demo_day.rating_great") },
-                        { value: 5, emoji: "🤩", label: t("kindergarten_demo_day.rating_amazing") },
+                        {
+                          value: 1,
+                          emoji: "😢",
+                          label: t("kindergarten_demo_day.rating_poor"),
+                        },
+                        {
+                          value: 2,
+                          emoji: "😕",
+                          label: t("kindergarten_demo_day.rating_fair"),
+                        },
+                        {
+                          value: 3,
+                          emoji: "😊",
+                          label: t("kindergarten_demo_day.rating_good"),
+                        },
+                        {
+                          value: 4,
+                          emoji: "😍",
+                          label: t("kindergarten_demo_day.rating_great"),
+                        },
+                        {
+                          value: 5,
+                          emoji: "🤩",
+                          label: t("kindergarten_demo_day.rating_amazing"),
+                        },
                       ].map((rating) => {
                         const isActive = rating.value === formData.rating;
                         const isHovered = rating.value === hoveredStar;
@@ -584,7 +626,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                               className={cn(
                                 "text-xs font-semibold transition-colors duration-200",
                                 isActive
-                                  ? "text-kdd-primary"
+                                  ? "text-destructive"
                                   : isHovered
                                   ? "text-kdd-text"
                                   : "text-kdd-text-secondary"
@@ -597,7 +639,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                       })}
                     </div>
                     {errors.rating && (
-                      <p className="text-kdd-primary text-sm font-medium flex items-center gap-1.5 justify-center">
+                      <p className="text-destructive text-sm font-medium flex items-center gap-1.5 justify-center">
                         <svg
                           className="w-4 h-4"
                           fill="currentColor"
@@ -613,7 +655,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                       </p>
                     )}
                   </div>
-                </div>
+                </div> */}
 
                 {/* General Error Message */}
                 {errors.general && (
