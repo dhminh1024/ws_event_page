@@ -378,8 +378,8 @@
   "kindergarten_demo_day": {
     "go_to_event": "Go to Event",
     "get_certificate": "Get Certificate",
-    "modal_title": "Request Certificate",
-    "modal_description": "Please fill in the information below to receive your certificate",
+    "modal_title": "Certificates of Participation",
+    "modal_description": "Thank you for joining us for a wonderful and engaging Experience Day at Wellspring Saigon. Parents, please kindly fill in the information below to receive your child’s participation certificate.",
     "section_student_info": "Student Information",
     "section_parent_info": "Parent Information",
     "label_student_name": "Full Name",
