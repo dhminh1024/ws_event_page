@@ -25,12 +25,12 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
   const { t, currentLanguage } = useLocales();
   const { isDesktop } = useResponsive();
   const event = useEventPageContext();
-  const defaultDate = "2025-02-15";
+  const defaultDate = "2025-11-23 17:00";
   const targetDate = useMemo(
     () => event?.variables.countdown_date?.value || defaultDate,
     [event?.variables.countdown_date?.value]
   );
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft(parseDate(targetDate,"yyyy-MM-dd")));
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft(parseDate(targetDate,"yyyy-MM-dd HH:mm")));
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const targetDateRef = useRef(targetDate);
 
@@ -44,7 +44,8 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
     timerRef.current = setInterval(() => {
       const newTimeLeft = getTimeLeft(parseDate(targetDateRef.current,"yyyy-MM-dd HH:mm"));
       setTimeLeft(newTimeLeft);
-
+      console.log(newTimeLeft);
+      
       if (
         newTimeLeft.days === 0 &&
         newTimeLeft.hours === 0 &&
