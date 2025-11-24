@@ -42,7 +42,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
   useEffect(() => {
     // Create timer (only once on mount)
     timerRef.current = setInterval(() => {
-      const newTimeLeft = getTimeLeft(parseDate(targetDateRef.current,"yyyy-MM-dd"));
+      const newTimeLeft = getTimeLeft(parseDate(targetDateRef.current,"yyyy-MM-dd HH:mm"));
       setTimeLeft(newTimeLeft);
 
       if (
