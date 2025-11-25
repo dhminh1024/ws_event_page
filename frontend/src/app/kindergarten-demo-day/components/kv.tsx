@@ -1,9 +1,9 @@
 import { HTMLAttributes, type FC } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
-import BackgroundDesktop from "../assets/images/kv-bg-desktop.png";
-import BackgroundMobile from "../assets/images/kv-bg-mobile.png";
+import BackgroundDesktop from "../assets/images/kv-bg-desktop.webp";
+import BackgroundMobile from "../assets/images/kv-bg-mobile.webp";
 import LogoPrimary from "../assets/images/cert-logo-primary.png";
-import KVContent from "../assets/images/kv-content.png";
+import KVContent from "../assets/images/kv-content.webp";
 import { useResponsive } from "@/core/hooks/use-reponsive";
 export type KvProps = HTMLAttributes<HTMLDivElement> & {
   logoBrand?: string;

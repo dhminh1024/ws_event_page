@@ -712,7 +712,6 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                     t("kindergarten_demo_day.button_submit")
                   )}
                 </Button>
-
                 <Button
                   type="button"
                   variant="ghost"
@@ -723,7 +722,6 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                 </Button>
               </div>
             </form>
-
             {/* Form Section */}
           </div>
         </CustomDialogContent>
