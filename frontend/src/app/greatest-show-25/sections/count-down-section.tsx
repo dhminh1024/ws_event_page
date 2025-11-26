@@ -139,7 +139,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
         </div>
       </div>
       {event?.variables[`countdown_button_text_${currentLanguage}`]?.value && (
-        <Link to={event?.variables.countdown_url_redirect?.value || "/"}>
+        <Link to={event?.variables.countdown_url_redirect?.value || "/"} target="_blank">
           <PrimaryButton className="h-auto p-[8rem_25rem] md:p-[35rem_50rem] my-40 md:my-80">
             <Typography.Text className="font-black text-[12rem] md:text-[35rem]">
               {
