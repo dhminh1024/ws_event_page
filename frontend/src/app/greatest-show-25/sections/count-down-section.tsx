@@ -30,9 +30,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
     () => event?.variables.countdown_date?.value || defaultDate,
     [event?.variables.countdown_date?.value]
   );
-  const [timeLeft, setTimeLeft] = useState(
-    getTimeLeft(parseDate(targetDate, "yyyy-MM-dd"))
-  );
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft(parseDate(targetDate,"yyyy-MM-dd")));
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const targetDateRef = useRef(targetDate);
 
@@ -44,9 +42,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
   useEffect(() => {
     // Create timer (only once on mount)
     timerRef.current = setInterval(() => {
-      const newTimeLeft = getTimeLeft(
-        parseDate(targetDateRef.current, "yyyy-MM-dd")
-      );
+      const newTimeLeft = getTimeLeft(parseDate(targetDateRef.current,"yyyy-MM-dd"));
       setTimeLeft(newTimeLeft);
 
       if (
@@ -137,18 +133,13 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
           </span>
         </div>
       </div>
-      {event?.variables[`countdown_button_text_${currentLanguage}`]?.value && (
-        <Link to={event?.variables.countdown_url_redirect?.value || "/"}>
-          <PrimaryButton className="h-auto p-[8rem_25rem] md:p-[35rem_50rem] my-40 md:my-80">
-            <Typography.Text className="font-black text-[12rem] md:text-[35rem]">
-              {
-                event?.variables[`countdown_button_text_${currentLanguage}`]
-                  ?.value
-              }
-            </Typography.Text>
-          </PrimaryButton>
-        </Link>
-      )}
+      <Link to="registration">
+        <PrimaryButton className="h-auto p-[8rem_25rem] md:p-[35rem_50rem] my-40 md:my-80">
+          <Typography.Text className="font-black text-[12rem] md:text-[35rem]">
+            {t("greatest_show_25.buttons.join_now")}
+          </Typography.Text>
+        </PrimaryButton>
+      </Link>
     </section>
   );
 };
