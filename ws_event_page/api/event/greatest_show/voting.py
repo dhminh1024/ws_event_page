@@ -29,7 +29,6 @@ def get_finalists(gs_program=None):
 		fields=[
 			"name",
 			"finalist_name",
-			"performer_name",
 			"entry_category",
 			"entry_group",
 			"thumbnail",
