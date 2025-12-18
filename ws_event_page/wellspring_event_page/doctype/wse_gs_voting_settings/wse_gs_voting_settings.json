@@ -1,0 +1,124 @@
+{
+ "actions": [],
+ "creation": "2025-01-15 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "voting_period_section",
+  "voting_enabled",
+  "voting_start_datetime",
+  "voting_end_datetime",
+  "auth_section",
+  "require_social_auth",
+  "enable_facebook_login",
+  "display_section",
+  "show_vote_counts",
+  "votes_per_user",
+  "fraud_detection_section",
+  "fraud_score_threshold"
+ ],
+ "fields": [
+  {
+   "fieldname": "voting_period_section",
+   "fieldtype": "Section Break",
+   "label": "Voting Period"
+  },
+  {
+   "default": "0",
+   "fieldname": "voting_enabled",
+   "fieldtype": "Check",
+   "label": "Voting Enabled"
+  },
+  {
+   "fieldname": "voting_start_datetime",
+   "fieldtype": "Datetime",
+   "label": "Voting Start Date/Time"
+  },
+  {
+   "fieldname": "voting_end_datetime",
+   "fieldtype": "Datetime",
+   "label": "Voting End Date/Time"
+  },
+  {
+   "fieldname": "auth_section",
+   "fieldtype": "Section Break",
+   "label": "Authentication"
+  },
+  {
+   "default": "1",
+   "description": "Nếu tắt, cho phép vote bằng email đơn giản",
+   "fieldname": "require_social_auth",
+   "fieldtype": "Check",
+   "label": "Require Social Authentication"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_facebook_login",
+   "fieldtype": "Check",
+   "label": "Enable Facebook Login"
+  },
+  {
+   "fieldname": "display_section",
+   "fieldtype": "Section Break",
+   "label": "Display Settings"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_vote_counts",
+   "fieldtype": "Check",
+   "label": "Show Vote Counts Publicly"
+  },
+  {
+   "default": "1",
+   "description": "Currently only 1 is supported",
+   "fieldname": "votes_per_user",
+   "fieldtype": "Int",
+   "label": "Votes Per User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fraud_detection_section",
+   "fieldtype": "Section Break",
+   "label": "Fraud Detection"
+  },
+  {
+   "default": "50",
+   "description": "Votes with fraud score >= this value will be automatically marked as suspicious (0-100)",
+   "fieldname": "fraud_score_threshold",
+   "fieldtype": "Int",
+   "label": "Fraud Score Threshold"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-01-15 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE GS Voting Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "WSE GS Admin",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

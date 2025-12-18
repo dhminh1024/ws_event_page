@@ -1,0 +1,152 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-15 10:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "program_section",
+  "gs_program",
+  "display_order",
+  "is_active",
+  "entry_info_section",
+  "finalist_name",
+  "column_break_entry",
+  "entry_category",
+  "entry_group",
+  "media_section",
+  "video_url",
+  "thumbnail",
+  "voting_section",
+  "vote_count"
+ ],
+ "fields": [
+  {
+   "fieldname": "program_section",
+   "fieldtype": "Section Break",
+   "label": "Program"
+  },
+  {
+   "fieldname": "gs_program",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "GS Program",
+   "options": "WSE GS Program",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active"
+  },
+  {
+   "default": "0",
+   "fieldname": "display_order",
+   "fieldtype": "Int",
+   "label": "Display Order"
+  },
+  {
+   "fieldname": "entry_info_section",
+   "fieldtype": "Section Break",
+   "label": "Entry Information"
+  },
+  {
+   "fieldname": "finalist_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Finalist Name (T\u00ean ti\u1ebft m\u1ee5c)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_entry",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "entry_category",
+   "fieldtype": "Select",
+   "label": "Entry Category",
+   "options": "Singing\nDancing\nInstrumental\nOther"
+  },
+  {
+   "fieldname": "entry_group",
+   "fieldtype": "Select",
+   "label": "Entry Group",
+   "options": "Group A\nGroup B\nGroup C"
+  },
+  {
+   "fieldname": "media_section",
+   "fieldtype": "Section Break",
+   "label": "Media"
+  },
+  {
+   "fieldname": "video_url",
+   "fieldtype": "Data",
+   "label": "Video URL (YouTube/Vimeo)"
+  },
+  {
+   "fieldname": "thumbnail",
+   "fieldtype": "Attach Image",
+   "label": "Thumbnail"
+  },
+  {
+   "fieldname": "voting_section",
+   "fieldtype": "Section Break",
+   "label": "Voting"
+  },
+  {
+   "default": "0",
+   "fieldname": "vote_count",
+   "fieldtype": "Int",
+   "label": "Vote Count",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-16 16:17:50.333108",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE GS Finalist",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "WSE GS Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
