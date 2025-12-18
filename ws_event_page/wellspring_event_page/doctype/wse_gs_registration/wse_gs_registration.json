@@ -7,6 +7,8 @@
  "engine": "InnoDB",
  "field_order": [
   "gs_program",
+  "column_break_ghog",
+  "status",
   "primary_contact_section",
   "full_name",
   "email",
@@ -21,8 +23,7 @@
   "instrumental_info",
   "section_break_umho",
   "entry_participants",
-  "attach_file",
-  "status"
+  "attach_file"
  ],
  "fields": [
   {
@@ -68,7 +69,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Cancelled\nApproved\nWaitting",
+   "options": "Cancelled\nApproved\nWaiting for Approval",
    "read_only": 1
   },
   {
@@ -80,7 +81,7 @@
    "fieldname": "entry_group",
    "fieldtype": "Select",
    "label": "Entry group",
-   "options": "Primary students\nSecondary students\nAdult",
+   "options": "Group A\nGroup B\nGroup C",
    "reqd": 1
   },
   {
@@ -135,12 +136,16 @@
    "label": "GS Program",
    "options": "WSE GS Program",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ghog",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-29 16:10:00.350441",
+ "modified": "2025-10-30 15:41:05.877511",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE GS Registration",

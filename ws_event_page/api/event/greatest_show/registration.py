@@ -4,18 +4,19 @@ from fileinput import filename
 from typing import Dict
 
 import frappe
+from frappe.handler import upload_file as frappe_upload_file
 from frappe.utils.file_manager import save_file
 
 ENTRY_GROUP_CHOICES = {
-    "primary students": "Primary students",
-    "primary": "Primary students",
-    "primary_students": "Primary students",
-    "secondary students": "Secondary students",
-    "secondary": "Secondary students",
-    "secondary_students": "Secondary students",
-    "adult": "Adult",
-    "parent": "Adult",
-    "parent_teacher_staff": "Adult",
+    "primary students": "Group A",
+    "primary": "Group A",
+    "primary_students": "Group A",
+    "secondary students": "Group B",
+    "secondary": "Group B",
+    "secondary_students": "Group B",
+    "adult": "Group C",
+    "parent": "Group C",
+    "parent_teacher_staff": "Group C",
 }
 
 ENTRY_CATEGORY_CHOICES = {
@@ -34,11 +35,15 @@ FIELD_LABELS_VN = {
 }
 
 
-def _normalize_choice(value: str | None, mapping: Dict[str, str], field_label: str) -> str:
+def _normalize_choice(
+    value: str | None, mapping: Dict[str, str], field_label: str
+) -> str:
     field_label_vn = FIELD_LABELS_VN.get(field_label, field_label)
 
     if not value:
-        frappe.throw(f"{field_label_vn.capitalize()} là bắt buộc | {field_label.capitalize()} is required")
+        frappe.throw(
+            f"{field_label_vn.capitalize()} là bắt buộc | {field_label.capitalize()} is required"
+        )
 
     key = value.strip().lower()
     normalized = mapping.get(key)
@@ -49,7 +54,9 @@ def _normalize_choice(value: str | None, mapping: Dict[str, str], field_label: s
     if value in mapping.values():
         return value
 
-    frappe.throw(f"{field_label_vn.capitalize()} không hợp lệ: {value} | Invalid {field_label}: {value}")
+    frappe.throw(
+        f"{field_label_vn.capitalize()} không hợp lệ: {value} | Invalid {field_label}: {value}"
+    )
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])
@@ -77,7 +84,9 @@ def create_registration(
             "No active Greatest Show program is currently available for registration"
         )
 
-    normalized_group = _normalize_choice(entry_group, ENTRY_GROUP_CHOICES, "entry group")
+    normalized_group = _normalize_choice(
+        entry_group, ENTRY_GROUP_CHOICES, "entry group"
+    )
     normalized_category = _normalize_choice(
         entry_category, ENTRY_CATEGORY_CHOICES, "entry category"
     )
@@ -112,7 +121,7 @@ def create_registration(
             "entry_participants": (entry_participants or "").strip() or None,
             "instrumental_info": (instrumental_info or "").strip() or None,
             "talent_info": (talent_info or "").strip() or None,
-            "status": "Waitting",
+            "status": "Waiting for Approval",
             "gs_program": current_program.name,
         }
     )
@@ -126,6 +135,7 @@ def create_registration(
         "program_title": current_program.title_en,
     }
 
+
 def _clear_registration_attachments(docname: str) -> None:
     attachments = frappe.get_all(
         "File",
@@ -137,43 +147,44 @@ def _clear_registration_attachments(docname: str) -> None:
     for attachment in attachments:
         frappe.delete_doc("File", attachment.name, ignore_permissions=True)
 
+
 @frappe.whitelist(allow_guest=True, methods=["POST"])
 def upload_registration_file(registration_id: str):
     """Upload or replace the performance attachment for an existing registration."""
 
-    frappe.log("upload_registration_file called with registration_id: {}".format(registration_id))
+    frappe.log(
+        "upload_registration_file called with registration_id: {}".format(
+            registration_id
+        )
+    )
+
     if not registration_id:
         frappe.throw("Mã đăng ký là bắt buộc | Registration ID is required")
 
-    # doc = frappe.get_doc("WSE GS Registration", registration_id)
+    # Validate registration exists
+    if not frappe.db.exists("WSE GS Registration", registration_id):
+        frappe.throw("Không tìm thấy đăng ký | Registration not found")
 
-    file = frappe.request.files.get("attach_file") or frappe.request.files.get("file")
-    if not file:
+    # Check if file is uploaded
+    files = frappe.request.files
+    if not (files.get("attach_file") or files.get("file")):
         frappe.throw("Không có tệp tin được tải lên | No file uploaded")
 
+    # Clear old attachments
     _clear_registration_attachments(registration_id)
 
-    # file_doc = save_file(
-    #     fname=upload.filename,
-    #     content=upload.stream.read(),
-    #     dt=doc.doctype,
-    #     dn=registration_id,
-    #     is_private=0,
-    # )
-    # doc.db_set("attach_file", file_doc.file_url)
-    file_content = file.stream.read()
-    file_doc = frappe.get_doc(
-        {
-            "doctype": "File",
-            "attached_to_doctype": "WSE GS Registration",
-            "attached_to_name": registration_id,
-            "attached_to_field": "attach_file",
-            # "folder": student_application.student_folder,
-            "file_name": file.filename,
-            "is_private": 1,
-            "content": file_content,
-        }
-    ).save()
+    # Setup form_dict for Frappe's upload_file handler
+    frappe.form_dict.doctype = "WSE GS Registration"
+    frappe.form_dict.docname = registration_id
+    frappe.form_dict.fieldname = "attach_file"
+    frappe.form_dict.is_private = 0  # Changed to public for easier guest access
+
+    # Use Frappe's handler - automatically handles guest permissions
+    file_doc = frappe_upload_file()
+
+    registration = frappe.get_doc("WSE GS Registration", registration_id)
+    registration.attach_file = file_doc.file_url
+    registration.save(ignore_permissions=True)
 
     return {
         "message": "Tải tệp tin thành công | Attachment uploaded successfully",
@@ -215,9 +226,7 @@ def cancel_registration(registration_id: str):
     registration = frappe.get_doc("WSE GS Registration", registration_id)
 
     if registration.status == GSRegistrationStatus.CANCELLED.value:
-        frappe.throw(
-            "Đăng ký đã được huỷ trước đó | Registration is already cancelled"
-        )
+        frappe.throw("Đăng ký đã được huỷ trước đó | Registration is already cancelled")
 
     if registration.status == GSRegistrationStatus.APPROVED.value:
         frappe.throw(
@@ -231,5 +240,35 @@ def cancel_registration(registration_id: str):
 
     return {
         "message": "Đăng ký đã được huỷ | Registration has been cancelled",
+        "registration_id": registration.name,
+    }
+
+
+@frappe.whitelist()
+def approve_registration(registration_id: str):
+    """Approve a registration."""
+    from ws_event_page.wellspring_event_page.doctype.wse_gs_registration.wse_gs_registration import (
+        GSRegistrationStatus,
+    )
+
+    registration = frappe.get_doc("WSE GS Registration", registration_id)
+
+    if registration.status == GSRegistrationStatus.CANCELLED.value:
+        frappe.throw(
+            "Không thể phê duyệt đăng ký đã huỷ | "
+            "Cannot approve cancelled registration"
+        )
+
+    if registration.status == GSRegistrationStatus.APPROVED.value:
+        frappe.throw(
+            "Đăng ký đã được phê duyệt trước đó | " "Registration is already approved"
+        )
+
+    registration.status = GSRegistrationStatus.APPROVED.value
+    registration.save()
+    registration.send_approval_email()
+
+    return {
+        "message": "Đăng ký đã được phê duyệt | Registration has been approved",
         "registration_id": registration.name,
     }

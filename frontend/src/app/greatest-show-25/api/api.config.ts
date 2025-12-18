@@ -46,5 +46,40 @@ export const FRAPPE_APIS = {
     METHOD_STRING:
       "ws_event_page.api.event.greatest_show.registration.upload_registration_file",
     SWR_KEY: "upload_registration_file",
+  },
+  GET_CURRENT_PROGRAM: {
+    METHOD_STRING:
+      "ws_event_page.api.event.greatest_show.program.get_current_program",
+    SWR_KEY: "get_current_greatest_show_program",
+  },
+  GET_FINALISTS: {
+    METHOD_STRING:
+      "ws_event_page.api.event.greatest_show.voting.get_finalists",
+    SWR_KEY: "get_greatest_show_finalists",
+  },
+  GET_VOTING_SETTINGS: {
+    METHOD_STRING:
+      "ws_event_page.api.event.greatest_show.voting.get_voting_settings",
+    SWR_KEY: "get_greatest_show_voting_settings",
+  },
+  CAST_VOTE: {
+    METHOD_STRING:
+      "ws_event_page.api.event.greatest_show.voting.cast_vote",
+    SWR_KEY: "cast_greatest_show_vote",
+  },
+  GET_USER: {
+    METHOD_STRING:
+      "ws_event_page.api.event.greatest_show.voting.get_user",
+    SWR_KEY: "get_greatest_show_user",
+  },
+  VERIFY_GOOGLE_TOKEN: {
+    METHOD_STRING:
+      "ws_event_page.api.event.greatest_show.social_auth.verify_google_token",
+    SWR_KEY: "verify_google_token",
+  },
+  SAVE_SOCIAL_USER: {
+    METHOD_STRING:
+      "ws_event_page.api.event.greatest_show.social_auth.save_social_user",
+    SWR_KEY: "save_social_user",
   }
 };

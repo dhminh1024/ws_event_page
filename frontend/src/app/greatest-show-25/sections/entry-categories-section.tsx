@@ -22,11 +22,11 @@ import {
   drawLineSVG,
 } from "../components/animate";
 import { useInView } from "react-intersection-observer";
-import BlockIcon1 from "@greatest-show-25/assets/images/singing-icon.png";
-import BlockIcon2 from "@greatest-show-25/assets/images/dancing-icon.png";
-import BlockIcon3 from "@greatest-show-25/assets/images/intrusment-icon.png";
-import BlockIcon4 from "@greatest-show-25/assets/images/free-icon.png";
-import CategoryCardImage from "../assets/images/category-card.png";
+import BlockIcon1 from "@greatest-show-25/assets/images/singing-icon.webp";
+import BlockIcon2 from "@greatest-show-25/assets/images/dancing-icon.webp";
+import BlockIcon3 from "@greatest-show-25/assets/images/intrusment-icon.webp";
+import BlockIcon4 from "@greatest-show-25/assets/images/free-icon.webp";
+import CategoryCardImage from "../assets/images/category-card.webp";
 import { useResponsive } from "@/core/hooks/use-reponsive";
 export type EntryCategoriesSectionProps = HTMLAttributes<HTMLDivElement> &
   PropsWithChildren & {};
@@ -45,14 +45,11 @@ export const EntryCategoriesSection = forwardRef<
   const { isDesktop } = useResponsive();
 
   const event = useEventPageContext();
-  const kitTitleRef = useRef<HTMLImageElement>(null);
-  const kitDescRef = useRef<HTMLDivElement>(null);
-  const kitCurlyArrowRef = useRef<SVGSVGElement>(null);
-  const kitItem1Ref = useRef<HTMLDivElement>(null);
-  const kitItem2Ref = useRef<HTMLDivElement>(null);
-  const kitItem3Ref = useRef<HTMLDivElement>(null);
-  const kitItem4Ref = useRef<HTMLDivElement>(null);
-  const kitItem5Ref = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLImageElement>(null);
+  const categoryItem1Ref = useRef<HTMLDivElement>(null);
+  const categoryItem2Ref = useRef<HTMLDivElement>(null);
+  const categoryItem3Ref = useRef<HTMLDivElement>(null);
+  const categoryItem4Ref = useRef<HTMLDivElement>(null);
 
   const categories = useMemo(
     () => [
@@ -65,6 +62,7 @@ export const EntryCategoriesSection = forwardRef<
         cardDesc:
           event?.variables?.[`category_item_1_desc_${currentLanguage}`]
             ?.value || "",
+        ref: categoryItem1Ref,
       },
       {
         title: t("greatest_show_25.category_item_2"),
@@ -75,6 +73,7 @@ export const EntryCategoriesSection = forwardRef<
         cardDesc:
           event?.variables?.[`category_item_2_desc_${currentLanguage}`]
             ?.value || "",
+        ref: categoryItem2Ref,
       },
       {
         title: t("greatest_show_25.category_item_3"),
@@ -85,6 +84,7 @@ export const EntryCategoriesSection = forwardRef<
         cardDesc:
           event?.variables?.[`category_item_3_desc_${currentLanguage}`]
             ?.value || "",
+        ref: categoryItem3Ref,
       },
       {
         title: t("greatest_show_25.category_item_4"),
@@ -95,6 +95,7 @@ export const EntryCategoriesSection = forwardRef<
         cardDesc:
           event?.variables?.[`category_item_4_desc_${currentLanguage}`]
             ?.value || "",
+        ref: categoryItem4Ref,
       },
     ],
     [currentLanguage]
@@ -111,43 +112,13 @@ export const EntryCategoriesSection = forwardRef<
   useEffect(() => {
     if (!inView) return;
     setTimeout(() => {
-      animateZoomInOut(kitTitleRef?.current);
-
-      drawLineSVG(
-        kitCurlyArrowRef?.current,
-        kitCurlyArrowRef?.current?.querySelector("path#line"),
-        { start: "top 100%", end: "top 40%" }
-      );
-      drawLineSVG(
-        kitCurlyArrowRef?.current,
-        kitCurlyArrowRef?.current?.querySelector("path#arrow"),
-        { start: "top 40%", end: "top 0%" }
-      );
-
-      // if (!isDesktop) return;
-      animateFadeInBottom(kitDescRef?.current, {
-        start: "top 100%",
-        end: "top center",
-      });
-      animateFadeInBottom(kitItem1Ref?.current, {
-        start: "top 100%",
-        end: "top center",
-      });
-      animateFadeInBottom(kitItem2Ref?.current, {
-        start: "top 100%",
-        end: "top center",
-      });
-      animateFadeInBottom(kitItem3Ref?.current, {
-        start: "top 100%",
-        end: "top center",
-      });
-      animateFadeInBottom(kitItem4Ref?.current, {
-        start: "top 100%",
-        end: "top center",
-      });
-      animateFadeInBottom(kitItem5Ref?.current, {
-        start: "top 100%",
-        end: "top center",
+      animateZoomInOut(headingRef?.current);
+      categories.forEach((category) => {
+        animateBounceUp(category.ref.current, {
+          start: "top 100%",
+          end: "top 50%",
+          scrub: true,
+        });
       });
     }, 200);
   }, [inView]);
@@ -155,9 +126,7 @@ export const EntryCategoriesSection = forwardRef<
   return (
     <section ref={myRef} className={cn("overflow-hidden", className)}>
       <div className="w-[90%] mx-auto py-80 md:py-240">
-        <SectionHeading
-        //   ref={headingRef}
-        >
+        <SectionHeading ref={headingRef}>
           {t("greatest_show_25.category_heading")}
         </SectionHeading>
         <div className="grid md:grid-cols-2 gap-x-60 w-[90%] mx-auto">
@@ -167,37 +136,39 @@ export const EntryCategoriesSection = forwardRef<
               key={index}
               onClick={() => !isDesktop && toggleCard(index)}
             >
-              <div
-                className={cn(
-                  "group-hover:scale-0 transition-transform duration-300",
-                  {
-                    "scale-0": showCard === index,
-                  }
-                )}
-              >
-                <img src={category.img} alt={category.title} />
-                <Typography.Heading className="-mt-100 md:-mt-160 text-[16rem] md:text-[26rem] font-extrabold uppercase text-center text-gs25-primary">
-                  {category.title}
-                </Typography.Heading>
+              <div ref={category.ref}>
+                <div
+                  className={cn(
+                    "group-hover:scale-0 transition-transform duration-300",
+                    {
+                      "scale-0": showCard === index,
+                    }
+                  )}
+                >
+                  <img src={category.img} alt={category.title} />
+                  <Typography.Heading className="-mt-100 md:-mt-160 text-[16rem] md:text-[26rem] font-extrabold uppercase text-center text-gs25-primary">
+                    {category.title}
+                  </Typography.Heading>
+                </div>
               </div>
               <div
                 className={cn(
-                  "absolute top-[50%] left-[50%] translate-[-50%] m-auto w-[90%] md:w-[80%] h-auto group-hover:scale-100 group-visited:scale-100 group-focus:scale-100 scale-0 transition-transform duration-300",
+                  "absolute top-[50%] left-[50%] translate-[-50%] m-auto w-[90%] md:w-[80%] h-auto group-hover:scale-100 group-visited:scale-100 group-focus:scale-100 scale-0 transition-transform duration-300 text-center",
                   {
                     "scale-100": showCard === index,
                   }
                 )}
               >
                 <img src={CategoryCardImage} alt="" />
-                <div className="absolute top-0 left-0 text-center p-60 md:p-80 pt-100 md:pt-140 h-full flex flex-col">
-                  <Typography.Heading className="text-[14rem] md:text-[26rem] font-extrabold uppercase text-center text-white mb-20 md:mb-40">
-                    {category.cardTitle}
-                  </Typography.Heading>
+                <div className="absolute top-0 left-0 text-center p-60 md:p-120 mx-auto pt-100 md:pt-180 w-full h-full flex flex-col">
+                  <div className="text-[14rem] md:text-[23rem] font-extrabold uppercase text-center text-white mb-20 md:mb-40">
+                    {parser(category.cardTitle)}
+                  </div>
                   <div
                     className={cn(
                       "text-[10rem] flex flex-col gap-y-20 md:text-[18rem] text-white font-semibold  text-center",
                       {
-                        "text-[11rem] md:text-[14rem]":
+                        "text-[11rem] md:text-[18rem]":
                           currentLanguage === "en",
                       }
                     )}

@@ -19,18 +19,18 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { animateZoomInOut, drawSVG } from "@happy-run/components/animate";
 import Typography from "@/app/happy-box/components/typography";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
-import TargetBox1 from "@greatest-show-25/assets/images/target_1.png";
-import TargetBox2 from "@greatest-show-25/assets/images/target_2.png";
-import TargetBox3 from "@greatest-show-25/assets/images/target_3.png";
-import TargetBox4 from "@greatest-show-25/assets/images/target_4.png";
+import TargetBox1 from "@greatest-show-25/assets/images/target_1.webp";
+import TargetBox2 from "@greatest-show-25/assets/images/target_2.webp";
+import TargetBox3 from "@greatest-show-25/assets/images/target_3.webp";
+import TargetBox4 from "@greatest-show-25/assets/images/target_4.webp";
 import { useResponsive } from "@/core/hooks/use-reponsive";
 import { useInView } from "react-intersection-observer";
-import Group1 from "@greatest-show-25/assets/images/group-1.png";
-import Group2 from "@greatest-show-25/assets/images/group-2.png";
-import Group3 from "@greatest-show-25/assets/images/group-3.png";
-import Group1Mobile from "@greatest-show-25/assets/images/group-1-mb.png";
-import Group2Mobile from "@greatest-show-25/assets/images/group-2-mb.png";
-import Group3Mobile from "@greatest-show-25/assets/images/group-3-mb.png";
+import Group1 from "@greatest-show-25/assets/images/group-1.webp";
+import Group2 from "@greatest-show-25/assets/images/group-2.webp";
+import Group3 from "@greatest-show-25/assets/images/group-3.webp";
+import Group1Mobile from "@greatest-show-25/assets/images/group-1-mb.webp";
+import Group2Mobile from "@greatest-show-25/assets/images/group-2-mb.webp";
+import Group3Mobile from "@greatest-show-25/assets/images/group-3-mb.webp";
 import Container from "../components/container";
 import { animateFadeInTop } from "../components/animate";
 import { el } from "date-fns/locale/el";
@@ -56,6 +56,10 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
   const target2Ref = useRef<HTMLDivElement>(null);
   const target3Ref = useRef<HTMLDivElement>(null);
   const target4Ref = useRef<HTMLDivElement>(null);
+
+  const group1Ref = useRef<HTMLDivElement>(null);
+  const group2Ref = useRef<HTMLDivElement>(null);
+  const group3Ref = useRef<HTMLDivElement>(null);
 
   const scheduleData = useMemo(
     () => [
@@ -99,6 +103,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
           "greatest_show_25.form.group_items.primary_students_description"
         ),
         image: isDesktop ? Group1 : Group1Mobile,
+        ref: group1Ref,
       },
       {
         value: "secondary",
@@ -110,6 +115,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
           "greatest_show_25.form.group_items.secondary_students_description"
         ),
         image: isDesktop ? Group2 : Group2Mobile,
+        ref: group2Ref,
       },
       {
         value: "parent_teacher_staff",
@@ -121,6 +127,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
           "greatest_show_25.form.group_items.parent_teacher_staff_description"
         ),
         image: isDesktop ? Group3 : Group3Mobile,
+        ref: group3Ref,
       },
     ],
     [currentLanguage, isDesktop]
@@ -138,7 +145,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
       scheduleData.forEach((item, index) => {
         gsap.fromTo(
           item.ref.current,
-          { y: 500, opacity: 0 },
+          { y: isDesktop ? 500 : 300, opacity: 0 },
           {
             y: 0,
             opacity: 1,
@@ -146,8 +153,27 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
             scrollTrigger: {
               trigger: item.ref.current,
               scrub: true,
-              start: `top ${120 - (index * 10)}%`,
-              end: "top 80%",
+              start: `top ${120 - index * (isDesktop ? 10 : 0)}%`,
+              end: `top ${isDesktop ? 80 : 40}%`,
+              // markers: true,
+            },
+          }
+        );
+      });
+      groupOptions.forEach((item, index) => {
+        gsap.fromTo(
+          item.ref.current,
+          { x: isDesktop ? 0 : -300, y: isDesktop ? 500 : 0, opacity: 0 },
+          {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            scrollTrigger: {
+              trigger: item.ref.current,
+              scrub: true,
+              start: `top ${100 - index * (isDesktop ? 10 : 0)}%`,
+              end: `top 40%`,
               // markers: true,
             },
           }
@@ -182,7 +208,7 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
                   <div className="absolute top-[40%] left-0 w-full flex flex-col">
                     <Typography.Heading
                       level={2}
-                      className="text-center mb-20 md:mb-40 text-[13rem] md:text-[23rem] text-gs25-primary font-extrabold leading-60 md:leading-120 uppercase"
+                      className="text-center mb-20 md:mb-40 text-[13rem] md:text-[18rem] text-gs25-primary font-extrabold leading-60 md:leading-120 uppercase"
                     >
                       {parser(item.heading)}
                     </Typography.Heading>
@@ -204,21 +230,22 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
           {groupOptions.map((option, index) => {
             return (
               <div
+                ref={option.ref}
                 key={option.value}
                 className={cn("relative flex flex-col justify-between")}
               >
                 <img className="w-full" src={option.image} alt={option.label} />
-                <div className="absolute top-[23%] left-[50%] md:top-[55%] px-[4%] w-full md:left-0 flex flex-1 flex-col justify-start md:justify-center">
+                <div className="absolute top-[23%] left-[50%] md:top-[52%] px-[4%] w-full md:left-0 flex flex-1 flex-col justify-start md:justify-center">
                   <div
                     className={cn(
-                      " text-gs25-primary md:text-center text-[14rem] uppercase md:text-[30rem] font-extrabold mb-0 md:mb-40"
+                      " text-gs25-primary md:text-center text-[14rem] uppercase md:text-[30rem] font-extrabold mb-0"
                     )}
                   >
                     {option.heading}
                   </div>
                   <div
                     className={cn(
-                      "md:px-80 text-gs25-secondary text-[10rem] md:text-[22rem] font-medium mb-40",
+                      "md:px-80 text-gs25-secondary text-[7rem] md:text-[20rem] font-medium mb-40",
                       {
                         "md:text-center": index !== 2,
                       }

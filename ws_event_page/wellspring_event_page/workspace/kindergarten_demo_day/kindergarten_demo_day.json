@@ -1,0 +1,117 @@
+{
+ "charts": [
+  {
+   "chart_name": "KDD Certificate Registration",
+   "label": "Certificate Registration Submissions"
+  }
+ ],
+ "content": "[{\"id\":\"2XW7gxt9Vm\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Kindergarten Demo Day</span>\",\"col\":12}},{\"id\":\"2TGwg9Rxaj\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Kindergarten Import\",\"col\":4}},{\"id\":\"A7xp80zPBe\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Visit Event Import\",\"col\":4}},{\"id\":\"c28m2gk0Tc\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student Registration Import\",\"col\":4}},{\"id\":\"wP05Zi16J_\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Visit Events\",\"col\":3}},{\"id\":\"1agaE6GiTN\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Kindergarten\",\"col\":3}},{\"id\":\"3yosepHPIk\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Students\",\"col\":3}},{\"id\":\"UN6lLZRd1Y\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Submissions\",\"col\":3}},{\"id\":\"bh1Q4z8kxi\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Certificate Registration Submissions\",\"col\":12}},{\"id\":\"57aQaDdXrW\",\"type\":\"card\",\"data\":{\"card_name\":\"List\",\"col\":4}}]",
+ "creation": "2025-11-18 09:35:43.347330",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "solid-success",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Kindergarten Demo Day",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "List",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Kindergartens",
+   "link_count": 0,
+   "link_to": "WSE KDD Kindergarten",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Visit Events",
+   "link_count": 0,
+   "link_to": "WSE KDD Visit Event",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Registrations",
+   "link_count": 0,
+   "link_to": "WSE KDD Student Registration",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2025-11-18 10:49:16.487202",
+ "modified_by": "minh.do@wellspringsaigon.edu.vn",
+ "module": "Wellspring Event Page",
+ "name": "Kindergarten Demo Day",
+ "number_cards": [
+  {
+   "label": "Kindergarten",
+   "number_card_name": "KDD Kindergartens"
+  },
+  {
+   "label": "Submissions",
+   "number_card_name": "KDD Certificates Generated"
+  },
+  {
+   "label": "Visit Events",
+   "number_card_name": "KDD Open Events"
+  },
+  {
+   "label": "Students",
+   "number_card_name": "KDD Students Registered"
+  }
+ ],
+ "owner": "minh.do@wellspringsaigon.edu.vn",
+ "parent_page": "Wellspring Events",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "WSE KDD Admin"
+  }
+ ],
+ "sequence_id": 17.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Visit Event Import",
+   "type": "URL",
+   "url": "/app/data-import?reference_doctype=WSE+KDD+Visit+Event"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Kindergarten Import",
+   "type": "URL",
+   "url": "/app/data-import?reference_doctype=WSE+KDD+Kindergarten"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Student Registration Import",
+   "type": "URL",
+   "url": "/app/data-import?reference_doctype=WSE+KDD+Student+Registration"
+  }
+ ],
+ "title": "Kindergarten Demo Day"
+}

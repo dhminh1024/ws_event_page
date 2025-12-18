@@ -1,11 +1,19 @@
 {
  "charts": [
   {
+   "chart_name": "GS Entry Category Chart",
+   "label": "Category"
+  },
+  {
    "chart_name": "GS Daily Registration Chart",
    "label": "Daily Registration"
+  },
+  {
+   "chart_name": "GS Entry Group Chart",
+   "label": "Group"
   }
  ],
- "content": "[{\"id\":\"MMM2HUGjoQ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">The Greatest Show</span>\",\"col\":12}},{\"id\":\"4unyn3bu3H\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Home page\",\"col\":10}},{\"id\":\"j-L-9MYQdF\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"L\u01b0\u1ee3t \u0110\u0103ng K\u00fd\",\"col\":3}},{\"id\":\"QjuSWZvlx3\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Ch\u1edd Duy\u1ec7t\",\"col\":3}},{\"id\":\"2pZelL9DGa\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0110\u00e3 Duy\u1ec7t\",\"col\":3}},{\"id\":\"yzxcEvji7Q\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0110\u00e3 Hu\u1ef7\",\"col\":3}},{\"id\":\"osOHbczpYv\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Daily Registration\",\"col\":12}},{\"id\":\"-i38Qkdj3X\",\"type\":\"card\",\"data\":{\"card_name\":\"Admin\",\"col\":4}}]",
+ "content": "[{\"id\":\"MMM2HUGjoQ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">The Greatest Show</span>\",\"col\":12}},{\"id\":\"4unyn3bu3H\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Home page\",\"col\":10}},{\"id\":\"j-L-9MYQdF\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"L\u01b0\u1ee3t \u0110\u0103ng K\u00fd\",\"col\":3}},{\"id\":\"QjuSWZvlx3\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Ch\u1edd Duy\u1ec7t\",\"col\":3}},{\"id\":\"2pZelL9DGa\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0110\u00e3 Duy\u1ec7t\",\"col\":3}},{\"id\":\"yzxcEvji7Q\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0110\u00e3 Hu\u1ef7\",\"col\":3}},{\"id\":\"osOHbczpYv\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Daily Registration\",\"col\":12}},{\"id\":\"XzEAkozhGF\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Category\",\"col\":6}},{\"id\":\"7dgBhxWWf0\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Group\",\"col\":6}},{\"id\":\"-i38Qkdj3X\",\"type\":\"card\",\"data\":{\"card_name\":\"Admin\",\"col\":6}},{\"id\":\"Xu5uSuQQcw\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":6}}]",
  "creation": "2025-10-29 14:17:02.066997",
  "custom_blocks": [],
  "docstatus": 0,
@@ -56,10 +64,29 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Registration Report",
+   "link_count": 0,
+   "link_to": "WSE GS Registration Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
   }
  ],
- "modified": "2025-10-29 17:42:38.607364",
- "modified_by": "Administrator",
+ "modified": "2025-11-18 09:35:53.593631",
+ "modified_by": "minh.do@wellspringsaigon.edu.vn",
  "module": "Wellspring Event Page",
  "name": "The Greatest Show",
  "number_cards": [
@@ -85,14 +112,14 @@
  "public": 1,
  "quick_lists": [],
  "roles": [],
- "sequence_id": 23.0,
+ "sequence_id": 20.0,
  "shortcuts": [
   {
    "color": "Grey",
    "doc_view": "List",
    "label": "Home page",
    "type": "URL",
-   "url": "/the-greatest-show"
+   "url": "/events/the-greatest-show"
   }
  ],
  "title": "The Greatest Show"

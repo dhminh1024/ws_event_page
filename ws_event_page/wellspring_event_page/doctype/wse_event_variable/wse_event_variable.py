@@ -18,8 +18,9 @@ class WSEEventVariable(Document):
 		parent: DF.Data
 		parentfield: DF.Data
 		parenttype: DF.Data
+		pdf: DF.Attach | None
 		variable_name: DF.Data
-		variable_type: DF.Literal["Text", "Image", "Video"]
+		variable_type: DF.Literal["Text", "Image", "Video", "PDF"]
 		variable_value: DF.Text | None
 		video: DF.Attach | None
 	# end: auto-generated types

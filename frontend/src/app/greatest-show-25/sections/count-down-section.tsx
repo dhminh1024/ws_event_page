@@ -7,14 +7,14 @@ import {
   type FC,
 } from "react";
 import { cn } from "@/core/utils/shadcn-utils";
-import BackgroundImage from "../assets/images/bg-countdown.png";
+import BackgroundImage from "../assets/images/bg-countdown.webp";
 import Typography from "@/app/happy-box/components/typography";
 import parser from "html-react-parser";
 import { useLocales } from "@/core/hooks/use-locales";
 import { PrimaryButton } from "../components/button";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { differenceInDays, differenceInMinutes, format } from "date-fns";
-import { getTimeLeft } from "@/lib/utils/common";
+import { getTimeLeft, parseDate } from "@/lib/utils/common";
 import { Link } from "react-router-dom";
 import Counter from "@atoms/counter";
 import { useResponsive } from "@/core/hooks/use-reponsive";
@@ -25,12 +25,14 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
   const { t, currentLanguage } = useLocales();
   const { isDesktop } = useResponsive();
   const event = useEventPageContext();
-  const defaultDate = "2025-02-15";
+  const defaultDate = "2025-11-23 17:00";
   const targetDate = useMemo(
     () => event?.variables.countdown_date?.value || defaultDate,
     [event?.variables.countdown_date?.value]
   );
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft(targetDate));
+  const [timeLeft, setTimeLeft] = useState(
+    getTimeLeft(parseDate(targetDate, "yyyy-MM-dd HH:mm"))
+  );
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const targetDateRef = useRef(targetDate);
 
@@ -42,8 +44,11 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
   useEffect(() => {
     // Create timer (only once on mount)
     timerRef.current = setInterval(() => {
-      const newTimeLeft = getTimeLeft(targetDateRef.current);
+      const newTimeLeft = getTimeLeft(
+        parseDate(targetDateRef.current, "yyyy-MM-dd HH:mm")
+      );
       setTimeLeft(newTimeLeft);
+      console.log(newTimeLeft);
 
       if (
         newTimeLeft.days === 0 &&
@@ -64,7 +69,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
         clearInterval(timerRef.current);
         timerRef.current = null;
       }
-    };
+    };``
   }, []); // Empty dependency array - only run once
 
   // console.log(timeLeft);
@@ -80,7 +85,7 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
     >
       <Typography.Heading
         level={2}
-        className="text-white text-[13rem] md:text-[35rem]"
+        className="text-brand-honey text-[13rem] md:text-[35rem]"
       >
         {parser(
           event.variables[`countdown_text_${currentLanguage}`]?.value || ""
@@ -91,41 +96,63 @@ export const CountDownSection: FC<CountDownSectionProps> = ({ className }) => {
       </Typography.Paragraph>
       <span className="text-[40rem] "></span>
       <div className="text-[10rem] md:text-[28rem] text-white">
-        <div className="flex justify-center items-end gap-20 md:gap-20">
-          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_prefix")}</span>
+        <div className="flex justify-center items-end gap-0 md:gap-20">
+          <span className="text-[10rem] leading-40 md:leading-80 md:text-[20rem]">
+            {t("greatest_show_25.count_down_text_prefix")}
+          </span>
           <Counter
             value={timeLeft.days}
-            fontSize={isDesktop ? "44rem" : "18rem"}
+            fontSize={isDesktop ? "44rem" : "14rem"}
+            gap={isDesktop ? 8 : 0}
             places={[10, 1]}
           />
-          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_days")}</span>
+          <span className="text-[10rem] leading-40 md:leading-80 md:text-[20rem]">
+            {t("greatest_show_25.count_down_text_days")}
+          </span>
           <Counter
             value={timeLeft.hours}
-            fontSize={isDesktop ? "44rem" : "18rem"}
+            fontSize={isDesktop ? "44rem" : "14rem"}
+            gap={isDesktop ? 8 : 0}
             places={[10, 1]}
           />
-          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_hours")}</span>
+          <span className="text-[10rem] leading-40 md:leading-80 md:text-[20rem]">
+            {t("greatest_show_25.count_down_text_hours")}
+          </span>
           <Counter
             value={timeLeft.minutes}
-            fontSize={isDesktop ? "44rem" : "18rem"}
+            fontSize={isDesktop ? "44rem" : "14rem"}
+            gap={isDesktop ? 8 : 0}
             places={[10, 1]}
           />
-          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_minutes")}</span>
+          <span className="text-[10rem] leading-40 md:leading-80 md:text-[20rem]">
+            {t("greatest_show_25.count_down_text_minutes")}
+          </span>
           <Counter
             value={timeLeft.seconds}
-            fontSize={isDesktop ? "44rem" : "18rem"}
+            fontSize={isDesktop ? "44rem" : "14rem"}
+            gap={isDesktop ? 8 : 0}
             places={[10, 1]}
           />
-          <span className="text-[16rem] md:text-[20rem]">{t("greatest_show_25.count_down_text_seconds")}</span>
+          <span className="text-[10rem] leading-40 md:leading-80 md:text-[20rem]">
+            {t("greatest_show_25.count_down_text_seconds")}
+          </span>
         </div>
       </div>
-      <Link to="registration">
-        <PrimaryButton className="h-auto p-[8rem_25rem] md:p-[35rem_50rem] my-40 md:my-80">
-          <Typography.Text className="font-black text-[12rem] md:text-[35rem]">
-            {t("happy_run.buttons.register_now")}
-          </Typography.Text>
-        </PrimaryButton>
-      </Link>
+      {event?.variables[`countdown_button_text_${currentLanguage}`]?.value && (
+        <Link
+          to={event?.variables.countdown_url_redirect?.value || "/"}
+          target="_blank"
+        >
+          <PrimaryButton className="h-auto p-[8rem_25rem] md:p-[35rem_50rem] my-40 md:my-80">
+            <Typography.Text className="font-black text-[12rem] md:text-[35rem]">
+              {
+                event?.variables[`countdown_button_text_${currentLanguage}`]
+                  ?.value
+              }
+            </Typography.Text>
+          </PrimaryButton>
+        </Link>
+      )}
     </section>
   );
 };

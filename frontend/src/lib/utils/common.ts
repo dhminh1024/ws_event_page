@@ -106,7 +106,7 @@ export function removeAccents(text: string) {
   return text
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\s+/g,' ')
+    .replace(/\s+/g, " ")
     .toLowerCase();
 }
 
@@ -162,13 +162,13 @@ export const getCroppedImg = async (
   pixelCrop: { x: number; y: number; width: number; height: number },
   rotation = 0,
   flip = { horizontal: false, vertical: false }
-): Promise<{file:Blob|null,url:string}> => {
+): Promise<{ file: Blob | null; url: string }> => {
   const image = await createImage(imageSrc);
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
 
   if (!ctx) {
-    return {file:null,url:""};
+    return { file: null, url: "" };
   }
 
   const rotRad = getRadianAngle(rotation);
@@ -215,18 +215,18 @@ export const getCroppedImg = async (
   // As a blob
   return new Promise((resolve, reject) => {
     canvas.toBlob((blob) => {
-      if(!blob) return;
+      if (!blob) return;
       resolve({ file: blob, url: URL.createObjectURL(blob) });
     }, "image/jpeg");
   });
-}
+};
 
-export const createImage = (url:string): Promise<HTMLImageElement> =>
+export const createImage = (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
     const image = new Image();
-    image.addEventListener('load', () => resolve(image));
-    image.addEventListener('error', (error) => reject(error));
-    image.setAttribute('crossOrigin', 'anonymous'); // needed to avoid cross-origin issues on CodeSandbox
+    image.addEventListener("load", () => resolve(image));
+    image.addEventListener("error", (error) => reject(error));
+    image.setAttribute("crossOrigin", "anonymous"); // needed to avoid cross-origin issues on CodeSandbox
     image.src = url;
   });
 
@@ -237,7 +237,7 @@ export function getRadianAngle(degreeValue: number) {
 /**
  * Returns the new bounding area of a rotated rectangle.
  */
-export function rotateSize(width:number, height:number, rotation:number) {
+export function rotateSize(width: number, height: number, rotation: number) {
   const rotRad = getRadianAngle(rotation);
 
   return {
@@ -248,24 +248,24 @@ export function rotateSize(width:number, height:number, rotation:number) {
   };
 }
 
-export function getTimeLeft(targetDate: string) {
+export function getTimeLeft(targetDate?: Date) {
   const now = new Date();
-  const target = new Date(targetDate).getTime();
+  const target = targetDate?.getTime() || now.getTime();
   const timeDiff = target - now.getTime();
 
   return {
-    total: timeDiff,
-    days: Math.floor(timeDiff / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((timeDiff / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((timeDiff / (1000 * 60)) % 60),
-    seconds: Math.floor((timeDiff / 1000) % 60),
+    total: Math.max(0, timeDiff),
+    days: Math.floor(Math.max(0, timeDiff) / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((Math.max(0, timeDiff) / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((Math.max(0, timeDiff) / (1000 * 60)) % 60),
+    seconds: Math.floor((Math.max(0, timeDiff) / 1000) % 60),
   };
 }
 
-
 export const toPascalCase = (text: string) => {
-  return text.toLowerCase()
-    .split(' ')
+  return text
+    .toLowerCase()
+    .split(" ")
     .map((t) => t.charAt(0).toUpperCase() + t.slice(1))
-    .join(' ')
-}
+    .join(" ");
+};

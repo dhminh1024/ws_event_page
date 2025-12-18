@@ -1,0 +1,21 @@
+{
+ "creation": "2025-11-18 00:00:00",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "dynamic_filters_json": "[]",
+ "filters_json": "[]",
+ "function": "Count",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "label": "KDD Students Registered",
+ "method": "ws_event_page.api.kindergarten_demo_day.number_cards.get_students_with_open_registration",
+ "modified": "2025-11-18 10:20:49.980759",
+ "modified_by": "minh.do@wellspringsaigon.edu.vn",
+ "module": "Wellspring Event Page",
+ "name": "KDD Students Registered",
+ "owner": "Administrator",
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Daily",
+ "type": "Custom"
+}

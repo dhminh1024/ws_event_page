@@ -12,6 +12,9 @@ export const EVENT_PAGES = {
     SITE_URL: "placement-test",
   },
   GREATEST_SHOW_25: {
-    SITE_URL: "the-greatest-show",
+    SITE_URL: "greatest-show-25",
+  },
+  KINDERGARTEN_DEMO_DAY: {
+    SITE_URL: "kindergarten-demo-day",
   },
 };

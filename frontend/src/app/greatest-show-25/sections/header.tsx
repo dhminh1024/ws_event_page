@@ -6,9 +6,9 @@ import { useAuthWSCode } from "@/lib/auth/auth-ws-code/use-auth-ws-code";
 import { useNavigate } from "react-router-dom";
 import { EVENT_PAGES } from "@/config/event-pages";
 import { cleanPath } from "@/lib/utils/common";
-import LogoWhitedPrimary from "@greatest-show-25/assets/images/logo-white.png";
-import LogoJourney from "@greatest-show-25/assets/images/logo-hj.png";
-import GSLogo from "@greatest-show-25/assets/images/gs-logo.png";
+import LogoWhitedPrimary from "@greatest-show-25/assets/images/logo-white.webp";
+import LogoJourney from "@greatest-show-25/assets/images/logo-hj.webp";
+import GSLogo from "@greatest-show-25/assets/images/gs-logo.webp";
 import { LanguageSwitcher } from "../components/language-switcher";
 import { LanguageSelector } from "../components/language-selector";
 

@@ -1,0 +1,208 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-15 10:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "vote_section",
+  "gs_program",
+  "finalist",
+  "voter_section",
+  "voter",
+  "voter_email",
+  "voter_name",
+  "audit_section",
+  "voted_at",
+  "ip_address",
+  "user_agent",
+  "device_fingerprint",
+  "referrer",
+  "fraud_detection_section",
+  "is_valid",
+  "is_suspicious",
+  "fraud_score",
+  "fraud_reasons",
+  "column_break_fraud",
+  "reviewed_by",
+  "reviewed_at"
+ ],
+ "fields": [
+  {
+   "fieldname": "vote_section",
+   "fieldtype": "Section Break",
+   "label": "Vote Target"
+  },
+  {
+   "fieldname": "gs_program",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "GS Program",
+   "options": "WSE GS Program",
+   "reqd": 1
+  },
+  {
+   "fieldname": "finalist",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Finalist",
+   "options": "WSE GS Finalist",
+   "reqd": 1
+  },
+  {
+   "fieldname": "voter_section",
+   "fieldtype": "Section Break",
+   "label": "Voter"
+  },
+  {
+   "fieldname": "voter",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Voter",
+   "options": "WSE GS Users",
+   "reqd": 1
+  },
+  {
+   "fieldname": "voter_email",
+   "fieldtype": "Data",
+   "label": "Voter Email",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "voter_name",
+   "fieldtype": "Data",
+   "label": "Voter Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "audit_section",
+   "fieldtype": "Section Break",
+   "label": "Audit Trail"
+  },
+  {
+   "fieldname": "voted_at",
+   "fieldtype": "Datetime",
+   "label": "Voted At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ip_address",
+   "fieldtype": "Data",
+   "label": "IP Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "user_agent",
+   "fieldtype": "Small Text",
+   "label": "User Agent",
+   "read_only": 1
+  },
+  {
+   "fieldname": "device_fingerprint",
+   "fieldtype": "Data",
+   "label": "Device Fingerprint",
+   "length": 64,
+   "read_only": 1
+  },
+  {
+   "fieldname": "referrer",
+   "fieldtype": "Data",
+   "label": "Referrer",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fraud_detection_section",
+   "fieldtype": "Section Break",
+   "label": "Fraud Detection"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_valid",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Is Valid"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_suspicious",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Is Suspicious"
+  },
+  {
+   "default": "0",
+   "fieldname": "fraud_score",
+   "fieldtype": "Int",
+   "label": "Fraud Score",
+   "description": "0-100, higher means more suspicious"
+  },
+  {
+   "fieldname": "fraud_reasons",
+   "fieldtype": "Small Text",
+   "label": "Fraud Reasons",
+   "description": "Reasons why this vote is marked as suspicious"
+  },
+  {
+   "fieldname": "column_break_fraud",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reviewed_by",
+   "fieldtype": "Link",
+   "label": "Reviewed By",
+   "options": "User"
+  },
+  {
+   "fieldname": "reviewed_at",
+   "fieldtype": "Datetime",
+   "label": "Reviewed At"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-15 16:45:46.427129",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE GS Vote",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "WSE GS Admin",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "Guest"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

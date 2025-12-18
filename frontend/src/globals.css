@@ -156,8 +156,21 @@ layer(base);
     --background-image-gs25-gradient-8: linear-gradient(
     to right,
     #A12FFD,
-    #073498 
+    #073498
   );
+  --background-image-gs25-gradient-9: linear-gradient(
+    to bottom,
+    #07063F,
+    #3F2588,
+    #07063F
+  );
+
+  --color-kdd-primary: #002855;
+  --color-kdd-primary-hover: #03356e;
+  --color-kdd-primary-light: #bee9e4;
+  --color-kdd-secondary: #009684;
+  --color-kdd-text: #2d3436;
+  --color-kdd-text-secondary: #636e72;
 
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
@@ -169,6 +182,7 @@ layer(base);
   --animate-fade-out: fade-out 0.5s linear;
   --animate-swing-left: swing-left 5s ease-in-out infinite alternate;
   --animate-swing-right: swing-right 5s ease-in-out infinite alternate;
+  --animate-gradient-shift: gradient-shift 3s ease infinite;
 
   @keyframes accordion-down {
     from {
@@ -220,6 +234,14 @@ layer(base);
       transform: rotate(-3deg) scale(1);
     }
   }
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 0%;
+    }
+  }
 }
 
 /*
@@ -253,6 +275,23 @@ layer(base);
 
 @utility bg-scroll-golden {
   @apply bg-[linear-gradient(90deg,#BC8824_0%,#FCECA1_47%,#B98520_100%)];
+}
+
+@utility bg-gs25-gradient-1-animated {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 100, 255, 1) 0%,
+    rgba(171, 123, 255, 1) 12.5%,
+    rgba(2, 169, 255, 1) 25%,
+    rgba(140, 40, 255, 1) 37.5%,
+    rgba(255, 100, 255, 1) 50%,
+    rgba(171, 123, 255, 1) 62.5%,
+    rgba(2, 169, 255, 1) 75%,
+    rgba(140, 40, 255, 1) 87.5%,
+    rgba(255, 100, 255, 1) 100%
+  );
+  background-size: 200% 100%;
+  animation: gradient-shift 4s linear infinite;
 }
 
 @layer base {
@@ -309,53 +348,6 @@ layer(base);
     --scroll-track: 0 0% 0%;
   }
 
-  .dark {
-    --background: 231 30% 16%;
-    --foreground: 220 9% 70%;
-    --card: 231 30% 22%;
-    --card-foreground: 219 40% 25%;
-    --popover: 231 30% 28%;
-    --popover-foreground: 220 9% 70%;
-    --primary: 13 86% 54%;
-    --primary-foreground: 210 20% 98%;
-    --secondary: 215 27.9% 13%;
-    --secondary-foreground: 210 20% 98%;
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
-    --accent: 219 40% 20%;
-    --accent-foreground: 210 20% 98%;
-    --destructive: 0 62.8% 50%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 240 12% 26%;
-    --input: 220 8% 47%;
-    --ring: 192 100% 20%;
-
-    --brand-primary: 212 100% 17%;
-    --brand-secondary: 192 100% 25%;
-    --brand-teal: 173 100% 29%;
-    --brand-green: 89 64% 34%;
-    --brand-orange: 13 86% 54%;
-    --brand-blue: 204 83% 55%;
-    --brand-yellow: 38 96% 54%;
-    --brand-red: 0 100% 50%;
-    --brand-violet: 270 98% 50%;
-
-    --page-foreground: 0 0% 30%;
-    --page-cream: 31 100% 92%; /* #FFECD8 */
-    --page-red: 359 70% 30%; /* #6A0809 */
-    --page-honey: 39 100% 55%; /* #FFAD18 */
-    --page-brick: 22 100% 62%; /* #FF843E */
-    --page-deep-blue: 221 56% 21%; /* #172A52 */
-    --page-mint: 63 46% 83%; /* #E6E8C1 */
-    --page-light-yellow: 51 71% 73%; /*  #EBDC87*/
-    --page-light-red: 359 57% 49%; /*  #C63638*/
-
-    --success: 89 64% 34%;
-    --danger: 0 100% 50%;
-
-    --scroll-thumb: 220 9% 50%;
-    --scroll-track: 0 0% 0%;
-  }
 }
 
 @layer base {
@@ -392,7 +384,7 @@ layer(base);
   }
   @font-face {
     font-family: "Race Champion";
-    src: url(/greatest-shơ-25/fonts/race_champion.ttf);
+    src: url(/happy-run/fonts/race_champion.ttf);
     ascent-override: 90%; /* Điều chỉnh chiều cao phần trên */
     descent-override: 20%; /* Điều chỉnh chiều cao phần dưới */
     line-gap-override: 0%; /* Bỏ khoảng cách dòng */
@@ -419,5 +411,47 @@ layer(base);
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* GSAP ScrollSmoother wrapper styles */
+  #smooth-wrapper {
+    overflow: hidden;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  #smooth-content {
+    overflow: visible;
+    width: 100%;
+  }
+}
+
+/* Custom scrollbar styles */
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-lg;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-lg hover:bg-gray-400;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+
+  /* Firefox scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(209, 213, 219) rgb(243, 244, 246);
   }
 }

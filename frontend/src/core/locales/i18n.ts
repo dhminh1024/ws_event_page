@@ -10,7 +10,7 @@ i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .use(LanguageDetector)
   .init({
-    // lng: defaultLocale,
+    lng: defaultLocale,
     fallbackLng: defaultLocale,
     supportedLngs: supportedLocales,
     detection: {

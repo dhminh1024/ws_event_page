@@ -35,7 +35,7 @@ export const FAQSection: FC<FAQSectionProps> = ({ className }) => {
           FAQ
         </h2>
         <Accordion className="mt-0 md:mt-160" type="multiple">
-          {Array.from({ length: 6 }).map((_, index) => (
+          {Array.from({ length: Number(event?.variables?.faq_number?.value) || 0 }).map((_, index) => (
             <AccordionItem
               key={index}
               value={"item" + (index + 1)}
@@ -57,7 +57,7 @@ export const FAQSection: FC<FAQSectionProps> = ({ className }) => {
                   </DimondBlock>
                   <p
                     title={t(`happy_run.info_item_title_${index + 1}`)}
-                    className="ml-200 md:ml-480 w-[80%] md:w-[88%] line-clamp-1 mb-0 text-[12rem] text-white md:text-[28rem] uppercase font-extrabold"
+                    className="ml-200 md:ml-480 w-[80%] md:w-[88%] mb-0 text-[10rem] text-white md:text-[22rem] uppercase font-extrabold"
                   >
                     {event.variables[
                       `faq_${index + 1}_question_${currentLanguage}`
@@ -66,7 +66,7 @@ export const FAQSection: FC<FAQSectionProps> = ({ className }) => {
                 </div>
               </AccordionTrigger>
               <AccordionContent className="relative mt-80 md:mt-160 md:pl-400 pr-200">
-                <div className="text-[14rem] md:text-[24rem] text-gs25-secondary font-semibold md:leading-150!">
+                <div className="text-[11rem] md:text-[24rem] text-gs25-secondary font-semibold md:leading-150!">
                   {parser(
                     event.variables[
                       `faq_${index + 1}_answer_${currentLanguage}`
