@@ -42,7 +42,7 @@ export const ConfirmVoteDialog: FC<ConfirmVoteDialogProps> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px]  bg-white rounded-[10rem]! overflow-hidden p-128 md:p-80">
+      <DialogContent className="max-w-[90vw] md:max-w-[700px] rounded-[10rem] md:rounded-[15rem] bg-gs25-background overflow-hidden p-128 md:p-80">
         <DialogHeader>
           <DialogTitle className=""></DialogTitle>
           <DialogDescription className="text-[14rem] md:text-[16rem] text-gray-700 space-y-64">
@@ -63,7 +63,7 @@ export const ConfirmVoteDialog: FC<ConfirmVoteDialogProps> = ({
           <PrimaryButton
             onClick={handleConfirm}
             disabled={isLoading}
-            className="w-full px-128 cursor-pointer py-48 text-[14rem] md:text-[14rem] rounded-[8rem]"
+            className="w-full px-128 cursor-pointer py-48! h-168! text-[14rem] md:text-[14rem] rounded-[8rem]"
           >
             {isLoading
               ? t("greatest_show_25.voting_button_vote")
