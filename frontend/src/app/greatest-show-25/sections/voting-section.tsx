@@ -261,7 +261,7 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
 
     return (
       <section
-        className={cn("overflow-hidden bg-gs25-gradient-9", className)}
+        className={cn("overflow-hidden bg-gs25-secondary bg-gs25-gradient-9", className)}
         {...props}
       >
         <div className="w-[90%] mx-auto py-80 md:py-160">
@@ -271,7 +271,7 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
           </Typography.Heading>
 
           <center>
-            <div className=" text-white text-[10rem] md:text-[14rem] text-center mb-80 md:mb-80">
+            <div className=" text-white text-[10rem] md:text-[14rem] text-center mb-80 md:mb-200">
               {parser(
                 event?.variables[`voting_desc_${currentLanguage}`]?.value || ""
               )}
