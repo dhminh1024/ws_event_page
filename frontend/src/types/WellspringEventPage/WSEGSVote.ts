@@ -2,6 +2,7 @@ export type WSEGSVote = {
   name: string;
   gs_program: string;
   finalist: string;
+  is_cancelled: 0 | 1;
   voter: string;
   voter_email: string;
   voter_name: string | null;
