@@ -158,6 +158,12 @@ layer(base);
     #A12FFD,
     #073498
   );
+  --background-image-gs25-gradient-9: linear-gradient(
+    to bottom,
+    #07063F,
+    #3F2588,
+    #07063F
+  );
 
   --color-kdd-primary: #002855;
   --color-kdd-primary-hover: #03356e;

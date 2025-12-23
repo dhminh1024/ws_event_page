@@ -8,6 +8,9 @@ import { BackgroundGradient } from "../components/background";
 import { useResponsive } from "@/core/hooks/use-reponsive";
 import gsap from "gsap";
 import ScrollSmoother from "gsap/ScrollSmoother";
+
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import env from "@/config/env";
 const HeaderSection = lazy(() =>
   import("@greatest-show-25/sections/header").then((module) => ({
     default: module.Header,
@@ -27,6 +30,11 @@ const MenuBar = lazy(() =>
 const CountDownSection = lazy(() =>
   import("@greatest-show-25/sections/count-down-section").then((module) => ({
     default: module.CountDownSection,
+  }))
+);
+const VotingSection = lazy(() =>
+  import("@greatest-show-25/sections/voting-section").then((module) => ({
+    default: module.VotingSection,
   }))
 );
 const TeaserSection = lazy(() =>
@@ -115,23 +123,26 @@ export const Component: FC = () => {
   }, []);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <BackgroundGradient className="relative">
-        <HeaderSection className="px-80 md:px-240" />
-        <MenuBar className="-mt-184 md:-mt-220" />
-        <HeroSection id="overview" />
-        <CountDownSection />
-        <TeaserSection id="happy-run" />
-        <TargetSection />
-        <EntryCategoriesSection />
-        <AwardsSection />
-        <JourneySection />
-        <FAQSection />
-        <PhotosSection />
-        <ContactSection />
-        <FooterSection />
-      </BackgroundGradient>
-    </Suspense>
+    <GoogleOAuthProvider clientId={env.VITE_GOOGLE_CLIENT_ID}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <BackgroundGradient className="relative">
+          <HeaderSection className="px-80 md:px-240" />
+          <MenuBar className="-mt-184 md:-mt-220" />
+          <HeroSection id="overview" />
+          <CountDownSection />
+          <VotingSection />
+          <TeaserSection id="happy-run" />
+          <TargetSection />
+          <EntryCategoriesSection />
+          <AwardsSection />
+          <JourneySection />
+          <FAQSection />
+          <PhotosSection />
+          <ContactSection />
+          <FooterSection />
+        </BackgroundGradient>
+      </Suspense>
+    </GoogleOAuthProvider>
   );
 };
 

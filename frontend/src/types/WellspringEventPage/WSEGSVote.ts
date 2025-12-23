@@ -1,0 +1,24 @@
+export type WSEGSVote = {
+  name: string;
+  gs_program: string;
+  finalist: string;
+  is_cancelled: 0 | 1;
+  voter: string;
+  voter_email: string;
+  voter_name: string | null;
+  voted_at: string | null;
+  ip_address: string | null;
+  user_agent: string | null;
+  device_fingerprint: string | null;
+  referrer: string | null;
+  is_valid: 0 | 1;
+  is_suspicious: 0 | 1;
+  fraud_score: number;
+  fraud_reasons: string | null;
+  reviewed_by: string | null;
+  reviewed_at: string | null;
+  creation: string;
+  modified: string;
+  owner: string;
+  modified_by: string;
+};
