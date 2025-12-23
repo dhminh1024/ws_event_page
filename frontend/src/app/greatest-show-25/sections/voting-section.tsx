@@ -292,7 +292,7 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
             finalists &&
             finalists.length > 0 && (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-24 md:gap-240">
-                {finalists.map((finalist, index) => (
+                {finalists.sort((a,b)=>b.vote_count - a.vote_count).map((finalist, index) => (
                   <FinalistCard
                     key={finalist.name}
                     finalist={finalist}
