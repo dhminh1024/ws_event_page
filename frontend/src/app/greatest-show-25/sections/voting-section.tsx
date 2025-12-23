@@ -259,6 +259,7 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
       return url;
     };
 
+    if(finalists.length === 0) return null
     return (
       <section
         className={cn("overflow-hidden bg-gs25-secondary bg-gs25-gradient-9", className)}
@@ -288,8 +289,8 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
           {/* Grid of Finalists */}
           {!isLoadingFinalists &&
             !isLoadingSettings &&
-            !isAuthLoading &&
-            finalists &&
+            !isAuthLoading && 
+            finalists && 
             finalists.length > 0 && (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-24 md:gap-240">
                 {finalists.sort((a,b)=>b.vote_count - a.vote_count).map((finalist, index) => (
