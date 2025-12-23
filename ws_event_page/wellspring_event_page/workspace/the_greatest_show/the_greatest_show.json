@@ -29,8 +29,27 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Registration Report",
+   "link_count": 0,
+   "link_to": "WSE GS Registration Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Admin",
-   "link_count": 3,
+   "link_count": 5,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -68,25 +87,26 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Reports",
-   "link_count": 1,
+   "label": "GS Finalist",
+   "link_count": 0,
+   "link_to": "WSE GS Finalist",
    "link_type": "DocType",
    "onboard": 0,
-   "type": "Card Break"
+   "type": "Link"
   },
   {
    "hidden": 0,
-   "is_query_report": 1,
-   "label": "Registration Report",
+   "is_query_report": 0,
+   "label": "GS Votes",
    "link_count": 0,
-   "link_to": "WSE GS Registration Report",
-   "link_type": "Report",
-   "onboard": 1,
+   "link_to": "WSE GS Vote",
+   "link_type": "DocType",
+   "onboard": 0,
    "type": "Link"
   }
  ],
- "modified": "2025-11-18 09:35:53.593631",
- "modified_by": "minh.do@wellspringsaigon.edu.vn",
+ "modified": "2025-12-23 10:20:23.262309",
+ "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "The Greatest Show",
  "number_cards": [
