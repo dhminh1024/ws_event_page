@@ -20,6 +20,7 @@ class WSEGSVote(Document):
 		fraud_score: DF.Int
 		gs_program: DF.Link
 		ip_address: DF.Data | None
+		is_cancelled: DF.Check
 		is_suspicious: DF.Check
 		is_valid: DF.Check
 		referrer: DF.Data | None
@@ -84,10 +85,35 @@ class WSEGSVote(Document):
 				frappe.DuplicateEntryError,
 			)
 
-	def on_submit(self):
-		"""Update vote count on finalist after submission."""
-		pass  # We'll use atomic SQL update in API instead
+	def after_insert(self):
+		"""Update vote count on finalist after insert."""
+		self.update_finalist_vote_count()
 
-	def on_cancel(self):
-		"""Decrement vote count on cancel."""
-		pass  # We'll use atomic SQL update in API instead
+	def on_update(self):
+		"""Update vote count when vote is modified (e.g., cancelled)."""
+		# Check if is_cancelled field changed
+		if self.has_value_changed("is_cancelled"):
+			self.update_finalist_vote_count()
+
+	def on_trash(self):
+		"""Update vote count when vote is deleted."""
+		self.update_finalist_vote_count()
+
+	def update_finalist_vote_count(self):
+		"""Recalculate and update vote count for the finalist."""
+		if not self.finalist:
+			return
+
+		# Count valid, non-cancelled votes for this finalist
+		vote_count = frappe.db.count(
+			"WSE GS Vote",
+			filters={
+				"finalist": self.finalist,
+				"is_valid": 1,
+				"is_cancelled": 0,
+			}
+		)
+
+		# Update finalist vote count
+		frappe.db.set_value("WSE GS Finalist", self.finalist, "vote_count", vote_count, update_modified=False)
+		frappe.db.commit()
