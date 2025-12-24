@@ -6,6 +6,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "ac_event",
   "title",
   "date",
   "start_time",
@@ -13,9 +14,21 @@
   "column_break_whak",
   "max_capacity",
   "current_registered",
+  "is_full",
   "is_enabled"
  ],
  "fields": [
+  {
+   "fieldname": "ac_event",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "AC Event",
+   "options": "WSE AC Event",
+   "reqd": 1,
+   "search_index": 1
+  },
   {
    "fieldname": "date",
    "fieldtype": "Date",
@@ -72,6 +85,14 @@
    "in_standard_filter": 1,
    "label": "Current Registered",
    "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.current_registered >= doc.max_capacity",
+   "fieldname": "is_full",
+   "fieldtype": "Check",
+   "label": "Is Full",
    "read_only": 1
   },
   {

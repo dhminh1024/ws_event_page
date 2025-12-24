@@ -10,6 +10,8 @@ export interface WSEACTestSlot{
 	parentfield?: string
 	parenttype?: string
 	idx?: number
+	/**	AC Event : Link - WSE AC Event	*/
+	ac_event: string
 	/**	Title : Data	*/
 	title?: string
 	/**	Date : Date	*/

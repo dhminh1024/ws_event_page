@@ -8,6 +8,7 @@
  "engine": "InnoDB",
  "field_order": [
   "general_section",
+  "ac_event",
   "registration_number",
   "contact_email",
   "student_full_name",
@@ -111,6 +112,15 @@
    "fieldname": "general_section",
    "fieldtype": "Section Break",
    "label": "General"
+  },
+  {
+   "fieldname": "ac_event",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_standard_filter": 1,
+   "label": "AC Event",
+   "options": "WSE AC Event",
+   "search_index": 1
   },
   {
    "fieldname": "student_grade",

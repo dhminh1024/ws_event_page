@@ -5,7 +5,7 @@
    "label": "Student Grade"
   }
  ],
- "content": "[{\"id\":\"Sy-C7k-S5a\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Admission Event Check In</span>\",\"col\":12}},{\"id\":\"CwfomKMTZX\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Leads\",\"col\":4}},{\"id\":\"ILS0G_tjaX\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Event - Confirmation Email Sent\",\"col\":4}},{\"id\":\"z0BXzHH7aq\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Event - Checked In\",\"col\":4}},{\"id\":\"3RKNCJJzyB\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Waiting For Invitation\",\"col\":3}},{\"id\":\"_5FsHgu6DT\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Invitation Email Sent\",\"col\":3}},{\"id\":\"GRkfF_FTi_\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Registered\",\"col\":3}},{\"id\":\"uL_2FJdiez\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Checked In\",\"col\":3}},{\"id\":\"NvUIKHXrx-\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Student Grade\",\"col\":12}},{\"id\":\"kSt3LH69PQ\",\"type\":\"card\",\"data\":{\"card_name\":\"Lists\",\"col\":4}},{\"id\":\"7gW92oGkux\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Placement Test Check In Page\",\"col\":3}}]",
+ "content": "[{\"id\":\"Sy-C7k-S5a\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Admission Event Check In</span>\",\"col\":12}},{\"id\":\"CwfomKMTZX\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Leads\",\"col\":4}},{\"id\":\"ILS0G_tjaX\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Event - Confirmation Email Sent\",\"col\":4}},{\"id\":\"z0BXzHH7aq\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Event - Checked In\",\"col\":4}},{\"id\":\"3RKNCJJzyB\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Waiting For Invitation\",\"col\":3}},{\"id\":\"_5FsHgu6DT\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Invitation Email Sent\",\"col\":3}},{\"id\":\"GRkfF_FTi_\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Registered\",\"col\":3}},{\"id\":\"uL_2FJdiez\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Checked In\",\"col\":3}},{\"id\":\"NvUIKHXrx-\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Student Grade\",\"col\":12}},{\"id\":\"kSt3LH69PQ\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":4}},{\"id\":\"7gW92oGkux\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Placement Test Check In Page\",\"col\":3}}]",
  "creation": "2025-02-18 16:24:44.900993",
  "custom_blocks": [],
  "docstatus": 0,
@@ -21,8 +21,8 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Lists",
-   "link_count": 3,
+   "label": "Quick Links",
+   "link_count": 5,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -30,9 +30,19 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Leads",
+   "label": "WSE AC Leads",
    "link_count": 0,
    "link_to": "WSE AC Lead",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "WSE AC Test Slots",
+   "link_count": 0,
+   "link_to": "WSE AC Test Slot",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -50,16 +60,26 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Test Slots",
+   "label": "WSE AC Settings",
    "link_count": 0,
-   "link_to": "WSE AC Test Slot",
+   "link_to": "WSE AC Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "WSE AC Events",
+   "link_count": 0,
+   "link_to": "WSE AC Event",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   }
  ],
- "modified": "2025-11-18 09:35:53.404176",
- "modified_by": "minh.do@wellspringsaigon.edu.vn",
+ "modified": "2025-12-24 11:46:45.635665",
+ "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "Admission Event Check In",
  "number_cards": [

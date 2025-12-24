@@ -10,6 +10,8 @@ export interface WSEACLead{
 	parentfield?: string
 	parenttype?: string
 	idx?: number
+	/**	AC Event : Link - WSE AC Event	*/
+	ac_event?: string
 	/**	Registration Number : Data	*/
 	registration_number: string
 	/**	Contact Email : Data	*/

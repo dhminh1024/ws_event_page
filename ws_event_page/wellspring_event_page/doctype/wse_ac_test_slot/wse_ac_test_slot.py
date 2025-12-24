@@ -14,10 +14,12 @@ class WSEACTestSlot(Document):
     if TYPE_CHECKING:
         from frappe.types import DF
 
+        ac_event: DF.Link
         current_registered: DF.Int
         date: DF.Date
         end_time: DF.Time
         is_enabled: DF.Check
+        is_full: DF.Check
         max_capacity: DF.Int
         start_time: DF.Time
         title: DF.Data | None
@@ -29,10 +31,25 @@ class WSEACTestSlot(Document):
             frappe.throw("Start time must be before end time")
 
     def before_save(self):
+        # Validate capacity
+        if self.current_registered > self.max_capacity:
+            frappe.throw("Test slot is full")
+
+        # Update is_full flag
+        self.is_full = self.current_registered >= self.max_capacity
+
+        # Update title
         self.title = f"{self.date} | {self.start_time} - {self.end_time} | {self.current_registered}/{self.max_capacity}"
 
-    def calculate_current_registered(self):
+    def calculate_current_registered(self, factor=0):
+        """
+        Calculate and update current registered count atomically.
+
+        Args:
+            factor: Amount to add to the count (1 for new registration, -1 for removal).
+        """
         self.current_registered = frappe.db.count(
             "WSE AC Lead", {"registered_slot": self.name}
         )
+        self.current_registered += factor
         self.save()

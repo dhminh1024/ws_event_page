@@ -5,45 +5,88 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "open_test_registration",
-  "open_nhtn_event",
-  "test_result_attachment",
-  "column_break_cvzp",
-  "test_registration_closing_time"
+  "current_event_section",
+  "current_event",
+  "payment_section",
+  "bank_account_number",
+  "bank_account_name",
+  "bank_bin_number",
+  "column_break_payment",
+  "bank_name",
+  "bank_short_name",
+  "payment_amount",
+  "payment_info_template"
  ],
  "fields": [
   {
-   "fieldname": "column_break_cvzp",
+   "fieldname": "current_event_section",
+   "fieldtype": "Section Break",
+   "label": "Current Event"
+  },
+  {
+   "description": "The currently active admission check-in event",
+   "fieldname": "current_event",
+   "fieldtype": "Link",
+   "label": "Current Event",
+   "options": "WSE AC Event"
+  },
+  {
+   "fieldname": "payment_section",
+   "fieldtype": "Section Break",
+   "label": "Payment Information"
+  },
+  {
+   "default": "0531000929292",
+   "fieldname": "bank_account_number",
+   "fieldtype": "Data",
+   "label": "Bank Account Number"
+  },
+  {
+   "default": "Công ty TNHH MTV Đầu Tư và Phát Triển Giáo Dục SSG",
+   "fieldname": "bank_account_name",
+   "fieldtype": "Data",
+   "label": "Bank Account Name"
+  },
+  {
+   "default": "970436",
+   "fieldname": "bank_bin_number",
+   "fieldtype": "Data",
+   "label": "Bank BIN Number"
+  },
+  {
+   "fieldname": "column_break_payment",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "test_registration_closing_time",
-   "fieldtype": "Datetime",
-   "label": "Test Registration Closing Time"
+   "default": "Ngân hàng TMCP Ngoại Thương Việt Nam (VCB) - Chi nhánh Gia Định",
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name"
   },
   {
-   "default": "0",
-   "fieldname": "open_nhtn_event",
-   "fieldtype": "Check",
-   "label": "Open NHTN Event"
+   "default": "VCB",
+   "fieldname": "bank_short_name",
+   "fieldtype": "Data",
+   "label": "Bank Short Name"
   },
   {
-   "default": "1",
-   "fieldname": "open_test_registration",
-   "fieldtype": "Check",
-   "label": "Open Test Registration"
+   "default": "2000000",
+   "fieldname": "payment_amount",
+   "fieldtype": "Currency",
+   "label": "Payment Amount"
   },
   {
-   "default": "0",
-   "fieldname": "test_result_attachment",
-   "fieldtype": "Check",
-   "label": "Test Result Attachment"
+   "default": "{student_name} {registration_number} PHI KS NH25-26",
+   "description": "Template for payment info. Use {student_name} and {registration_number} as placeholders.",
+   "fieldname": "payment_info_template",
+   "fieldtype": "Data",
+   "label": "Payment Info Template"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-03-25 11:36:07.069949",
+ "modified": "2025-12-24 15:00:00.000000",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE AC Settings",
@@ -70,6 +113,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

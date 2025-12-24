@@ -8,6 +8,19 @@ from ws_event_page.wellspring_event_page.doctype.wse_ac_lead.wse_ac_lead import 
 from enum import Enum
 
 
+def get_current_event():
+    """
+    Get the current active event from WSE AC Settings.
+
+    Returns:
+        Document: The current WSE AC Event document, or None if not set.
+    """
+    settings = frappe.get_single("WSE AC Settings")
+    if not settings.current_event:
+        return None
+    return frappe.get_doc("WSE AC Event", settings.current_event)
+
+
 @frappe.whitelist(methods=["POST"])
 def send_result_confirmation_emails(lead_ids_str):
     lead_ids = lead_ids_str.split(",")
@@ -141,15 +154,29 @@ def register_for_test(lead_id, test_slot_id, booking_id, switch_slot=0, send_ema
 
 @frappe.whitelist(allow_guest=True, methods=["GET"])
 def get_all_test_slots(booking_id):
-    # validate booking id
+    """
+    Get all test slots for the lead's event or current event.
+    """
+    # Validate booking id
     try:
         lead = frappe.get_doc("WSE AC Lead", {"booking_id": booking_id})
     except Exception:
         frappe.throw(WSEACErrorCode.INVALID_BOOKING_ID.value)
 
+    # Build filters based on event
+    filters = {"is_enabled": 1}
+
+    # Prefer lead's event, then current event
+    if lead.ac_event:
+        filters["ac_event"] = lead.ac_event
+    else:
+        event = get_current_event()
+        if event:
+            filters["ac_event"] = event.name
+
     test_slots = frappe.get_all(
         "WSE AC Test Slot",
-        filters={"is_enabled": 1},
+        filters=filters,
         fields="*",
         order_by="date, start_time",
     )
@@ -159,17 +186,40 @@ def get_all_test_slots(booking_id):
 
 @frappe.whitelist(allow_guest=True, methods=["GET"])
 def get_ac_settings():
+    """
+    Get current event settings for the frontend.
+    Returns event settings if available, otherwise falls back to legacy settings.
+    """
+    event = get_current_event()
+
+    if event:
+        # Use event settings
+        is_registration_closed = False
+        current_time = frappe.utils.get_datetime(frappe.utils.now())
+
+        if not event.open_test_registration:
+            is_registration_closed = True
+        elif event.test_registration_closing_time and (
+            current_time > event.test_registration_closing_time
+        ):
+            is_registration_closed = True
+
+        response = event.as_dict()
+        response["is_registration_closed"] = is_registration_closed
+        return response
+
+    # Legacy fallback to settings
     settings = frappe.get_single("WSE AC Settings")
     is_registration_closed = False
     current_time = frappe.utils.get_datetime(frappe.utils.now())
 
     if not settings.open_test_registration:
         is_registration_closed = True
-    elif (settings.test_registration_closing_time) and (
+    elif settings.test_registration_closing_time and (
         current_time > settings.test_registration_closing_time
     ):
         is_registration_closed = True
 
-    settings = settings.as_dict()
-    settings["is_registration_closed"] = is_registration_closed
-    return settings
+    response = settings.as_dict()
+    response["is_registration_closed"] = is_registration_closed
+    return response
