@@ -1,18 +1,29 @@
-/**
- * WSE GS Users DocType
- * Stores social login user data for Greatest Show 25 voting
- */
-export type WSEGSUsers = {
-  name: string; // Email (autoname field)
-  email: string;
-  full_name: string;
-  facebook_user_id?: string;
-  facebook_profile_picture?: string;
-  first_login?: string;
-  last_login?: string;
-  total_votes: number;
-  creation: string;
-  modified: string;
-  owner: string;
-  modified_by: string;
-};
+
+export interface WSEGSUsers{
+	creation: string
+	name: string
+	modified: string
+	owner: string
+	modified_by: string
+	docstatus: 0 | 1 | 2
+	parent?: string
+	parentfield?: string
+	parenttype?: string
+	idx?: number
+	/**	Email : Data	*/
+	email: string
+	/**	Full Name : Data	*/
+	full_name?: string
+	/**	Facebook User ID : Data	*/
+	facebook_user_id?: string
+	/**	Profile Picture URL : Data	*/
+	facebook_profile_picture?: string
+	/**	First Login : Datetime	*/
+	first_login?: string
+	/**	Last Login : Datetime	*/
+	last_login?: string
+	/**	Total Votes : Int	*/
+	total_votes?: number
+	/**	Access Token : Password	*/
+	access_token?: string
+}
