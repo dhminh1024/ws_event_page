@@ -306,8 +306,9 @@ def preview_leads_for_sync(school_year, grade=None):
                 LIMIT 1
             ) as contact_email,
             (
-                SELECT p.parent_full_name
+                SELECT par.full_name
                 FROM `tabParent Information Details` p
+                JOIN `tabParent` par ON p.full_name = par.name
                 WHERE p.parent = l.name
                     AND p.parenttype = 'Leads'
                     AND p.email IS NOT NULL
