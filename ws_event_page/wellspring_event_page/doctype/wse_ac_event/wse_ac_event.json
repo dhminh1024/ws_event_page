@@ -17,7 +17,12 @@
   "open_nhtn_event",
   "column_break_settings",
   "test_registration_closing_time",
-  "test_result_attachment"
+  "test_result_attachment",
+  "checkin_images_section",
+  "checkin_bg_main",
+  "checkin_bg_active",
+  "column_break_checkin_images",
+  "checkin_bg_idle"
  ],
  "fields": [
   {
@@ -92,6 +97,33 @@
    "fieldname": "test_result_attachment",
    "fieldtype": "Check",
    "label": "Test Result Attachment"
+  },
+  {
+   "fieldname": "checkin_images_section",
+   "fieldtype": "Section Break",
+   "label": "Check-in Page Images"
+  },
+  {
+   "description": "Main/initial background image for check-in page",
+   "fieldname": "checkin_bg_main",
+   "fieldtype": "Attach Image",
+   "label": "Main Background"
+  },
+  {
+   "description": "Background during check-in state",
+   "fieldname": "checkin_bg_active",
+   "fieldtype": "Attach Image",
+   "label": "Active Background"
+  },
+  {
+   "fieldname": "column_break_checkin_images",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Background after reset/idle state",
+   "fieldname": "checkin_bg_idle",
+   "fieldtype": "Attach Image",
+   "label": "Idle Background"
   }
  ],
  "index_web_pages_for_search": 1,

@@ -7,6 +7,16 @@
  "field_order": [
   "current_event_section",
   "current_event",
+  "email_templates_section",
+  "confirmation_email_template",
+  "test_invitation_after_event_template",
+  "test_invitation_general_template",
+  "test_registration_confirmation_template",
+  "column_break_email_templates",
+  "result_ds1_template",
+  "result_ds2_template",
+  "result_ds3_template",
+  "result_ds4_template",
   "payment_section",
   "bank_account_number",
   "bank_account_name",
@@ -29,6 +39,71 @@
    "fieldtype": "Link",
    "label": "Current Event",
    "options": "WSE AC Event"
+  },
+  {
+   "fieldname": "email_templates_section",
+   "fieldtype": "Section Break",
+   "label": "Email Templates"
+  },
+  {
+   "description": "Email template for NHTN event confirmation",
+   "fieldname": "confirmation_email_template",
+   "fieldtype": "Link",
+   "label": "Confirmation Email Template",
+   "options": "Email Template"
+  },
+  {
+   "description": "Email template for test invitation (leads who checked in at event)",
+   "fieldname": "test_invitation_after_event_template",
+   "fieldtype": "Link",
+   "label": "Test Invitation (After Event) Template",
+   "options": "Email Template"
+  },
+  {
+   "description": "Email template for test invitation (general leads)",
+   "fieldname": "test_invitation_general_template",
+   "fieldtype": "Link",
+   "label": "Test Invitation (General) Template",
+   "options": "Email Template"
+  },
+  {
+   "description": "Email template for test slot registration confirmation",
+   "fieldname": "test_registration_confirmation_template",
+   "fieldtype": "Link",
+   "label": "Test Registration Confirmation Template",
+   "options": "Email Template"
+  },
+  {
+   "fieldname": "column_break_email_templates",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Email template for DS1 pass result",
+   "fieldname": "result_ds1_template",
+   "fieldtype": "Link",
+   "label": "Result DS1 (Pass) Template",
+   "options": "Email Template"
+  },
+  {
+   "description": "Email template for DS2 pass result",
+   "fieldname": "result_ds2_template",
+   "fieldtype": "Link",
+   "label": "Result DS2 (Pass) Template",
+   "options": "Email Template"
+  },
+  {
+   "description": "Email template for DS3 pass result",
+   "fieldname": "result_ds3_template",
+   "fieldtype": "Link",
+   "label": "Result DS3 (Pass) Template",
+   "options": "Email Template"
+  },
+  {
+   "description": "Email template for DS4 fail result",
+   "fieldname": "result_ds4_template",
+   "fieldtype": "Link",
+   "label": "Result DS4 (Fail) Template",
+   "options": "Email Template"
   },
   {
    "fieldname": "payment_section",
@@ -86,7 +161,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-12-24 15:00:00.000000",
+ "modified": "2025-12-24 16:00:00.000000",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE AC Settings",

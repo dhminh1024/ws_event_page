@@ -1,5 +1,5 @@
 
-export interface WSEACEvent {
+export interface WSEACEvent{
 	creation: string
 	name: string
 	modified: string
@@ -12,9 +12,9 @@ export interface WSEACEvent {
 	idx?: number
 	/**	Title : Data	*/
 	title: string
-	/**	School Year : Data	*/
+	/**	School Year : Data - e.g., 2025-2026	*/
 	school_year?: string
-	/**	Is Active : Check	*/
+	/**	Is Active : Check - Managed by WSE AC Settings	*/
 	is_active?: 0 | 1
 	/**	Expired Date : Datetime	*/
 	expired_date?: string
@@ -26,6 +26,10 @@ export interface WSEACEvent {
 	test_registration_closing_time?: string
 	/**	Test Result Attachment : Check	*/
 	test_result_attachment?: 0 | 1
-	/**	Computed: Is Registration Closed	*/
-	is_registration_closed?: boolean
+	/**	Main Background : Attach Image - Main/initial background image for check-in page	*/
+	checkin_bg_main?: string
+	/**	Active Background : Attach Image - Background during check-in state	*/
+	checkin_bg_active?: string
+	/**	Idle Background : Attach Image - Background after reset/idle state	*/
+	checkin_bg_idle?: string
 }

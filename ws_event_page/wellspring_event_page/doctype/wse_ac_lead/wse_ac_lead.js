@@ -73,6 +73,14 @@ frappe.ui.form.on("WSE AC Lead", {
         "background-color": "#007bff",
         color: "#fff",
       });
+
+      // Add button to open booking form
+      if (frm.doc.booking_id) {
+        frm.add_custom_button("Open Booking Form", () => {
+          const url = `/events/placement-test/registration/${frm.doc.booking_id}`;
+          window.open(url, "_blank");
+        });
+      }
     }
   },
 });

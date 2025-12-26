@@ -185,6 +185,31 @@ def get_all_test_slots(booking_id):
 
 
 @frappe.whitelist(allow_guest=True, methods=["GET"])
+def get_checkin_page_images():
+    """
+    Get all background images for check-in page from current event.
+
+    Returns:
+        dict: Contains 'main', 'active', and 'idle' image URLs.
+    """
+    defaults = {
+        "main": "/assets/ws_event_page/images/KV_TS_2526.jpg",
+        "active": "/assets/ws_event_page/images/NHTN_BG_02.jpg",
+        "idle": "/assets/ws_event_page/images/NHTN_BG_01.jpg",
+    }
+
+    event = get_current_event()
+    if event:
+        return {
+            "main": event.checkin_bg_main or defaults["main"],
+            "active": event.checkin_bg_active or defaults["active"],
+            "idle": event.checkin_bg_idle or defaults["idle"],
+        }
+
+    return defaults
+
+
+@frappe.whitelist(allow_guest=True, methods=["GET"])
 def get_ac_settings():
     """
     Get current event settings for the frontend.
@@ -223,3 +248,236 @@ def get_ac_settings():
     response = settings.as_dict()
     response["is_registration_closed"] = is_registration_closed
     return response
+
+
+# Gender mapping from SMSGender to WSE AC Lead
+GENDER_MAP = {
+    "001": "Male",
+    "002": "Female",
+    "Nam": "Male",
+    "Nữ": "Female",
+}
+
+
+@frappe.whitelist()
+def preview_leads_for_sync(school_year, grade=None):
+    """
+    Preview leads from CRM Leads doctype for sync to WSE AC Lead.
+
+    Args:
+        school_year: School Year link value (e.g., "2025-2026")
+        grade: Optional Educational Grade code (e.g., "G01")
+
+    Returns:
+        dict: Contains current_event info and list of leads to preview
+    """
+    # Get current AC event
+    event = get_current_event()
+    if not event:
+        frappe.throw("No active WSE AC Event configured in settings")
+
+    # Build filters for Leads query
+    filters = {
+        "school_year": school_year,
+        "status": "Waiting Verification",
+        "registernumber": ["is", "set"],
+    }
+    if grade:
+        filters["registergrade"] = grade
+
+    # Query leads with parent information
+    leads = frappe.db.sql(
+        """
+        SELECT
+            l.name as lead_name,
+            l.studentfullname as student_full_name,
+            l.registernumber as registration_number,
+            l.registergrade as student_grade,
+            l.genderid as gender_id,
+            g.namevie as gender_name,
+            (
+                SELECT p.email
+                FROM `tabParent Information Details` p
+                WHERE p.parent = l.name
+                    AND p.parenttype = 'Leads'
+                    AND p.email IS NOT NULL
+                    AND p.email != ''
+                ORDER BY p.ismaincontact DESC, p.idx
+                LIMIT 1
+            ) as contact_email,
+            (
+                SELECT p.parent_full_name
+                FROM `tabParent Information Details` p
+                WHERE p.parent = l.name
+                    AND p.parenttype = 'Leads'
+                    AND p.email IS NOT NULL
+                    AND p.email != ''
+                ORDER BY p.ismaincontact DESC, p.idx
+                LIMIT 1
+            ) as parent_full_name,
+            (
+                SELECT p.phone_number
+                FROM `tabParent Information Details` p
+                WHERE p.parent = l.name
+                    AND p.parenttype = 'Leads'
+                    AND p.email IS NOT NULL
+                    AND p.email != ''
+                ORDER BY p.ismaincontact DESC, p.idx
+                LIMIT 1
+            ) as mobile_number
+        FROM `tabLeads` l
+        LEFT JOIN `tabSMSGender` g ON l.genderid = g.name
+        WHERE l.school_year = %(school_year)s
+            AND l.status = 'Waiting Verification'
+            AND l.registernumber IS NOT NULL
+            AND l.registernumber != ''
+            {grade_filter}
+        ORDER BY l.registernumber
+        """.format(
+            grade_filter="AND l.registergrade = %(grade)s" if grade else ""
+        ),
+        {"school_year": school_year, "grade": grade},
+        as_dict=True,
+    )
+
+    # Get existing WSE AC Lead registration numbers to mark duplicates
+    existing_reg_numbers = set(
+        frappe.get_all(
+            "WSE AC Lead",
+            filters={"ac_event": event.name},
+            pluck="registration_number",
+        )
+    )
+
+    # Process leads for preview
+    preview_data = []
+    for lead in leads:
+        # Convert gender
+        gender = GENDER_MAP.get(lead.gender_id, GENDER_MAP.get(lead.gender_name, ""))
+
+        # Check if already exists
+        is_duplicate = lead.registration_number in existing_reg_numbers
+
+        preview_data.append(
+            {
+                "lead_name": lead.lead_name,
+                "ac_event": event.name,
+                "ac_event_title": event.title,
+                "student_full_name": lead.student_full_name,
+                "registration_number": lead.registration_number,
+                "student_grade": lead.student_grade,
+                "student_gender": gender,
+                "contact_email": lead.contact_email,
+                "parent_full_name": lead.parent_full_name,
+                "mobile_number": lead.mobile_number,
+                "is_duplicate": is_duplicate,
+            }
+        )
+
+    return {
+        "event": {"name": event.name, "title": event.title},
+        "leads": preview_data,
+        "total": len(preview_data),
+        "duplicates": sum(1 for l in preview_data if l["is_duplicate"]),
+    }
+
+
+@frappe.whitelist(methods=["POST"])
+def sync_leads_to_ac(leads_json):
+    """
+    Create WSE AC Lead records from CRM Leads data.
+
+    Args:
+        leads_json: JSON string of leads to sync (from preview)
+
+    Returns:
+        dict: Summary of sync results (created, skipped, failed)
+    """
+    import json
+
+    leads_data = json.loads(leads_json) if isinstance(leads_json, str) else leads_json
+
+    # Get current AC event
+    event = get_current_event()
+    if not event:
+        frappe.throw("No active WSE AC Event configured in settings")
+
+    results = {"created": [], "skipped": [], "failed": []}
+
+    for lead in leads_data:
+        try:
+            # Skip duplicates
+            if lead.get("is_duplicate"):
+                results["skipped"].append(
+                    {
+                        "registration_number": lead["registration_number"],
+                        "reason": "Already exists",
+                    }
+                )
+                continue
+
+            # Skip if no email
+            if not lead.get("contact_email"):
+                results["skipped"].append(
+                    {
+                        "registration_number": lead["registration_number"],
+                        "reason": "No parent email",
+                    }
+                )
+                continue
+
+            # Double-check for existing record
+            if frappe.db.exists(
+                "WSE AC Lead", {"registration_number": lead["registration_number"]}
+            ):
+                results["skipped"].append(
+                    {
+                        "registration_number": lead["registration_number"],
+                        "reason": "Already exists",
+                    }
+                )
+                continue
+
+            # Create new WSE AC Lead
+            ac_lead = frappe.get_doc(
+                {
+                    "doctype": "WSE AC Lead",
+                    "ac_event": event.name,
+                    "registration_number": lead["registration_number"],
+                    "student_full_name": lead["student_full_name"],
+                    "student_grade": lead["student_grade"],
+                    "student_gender": lead["student_gender"],
+                    "contact_email": lead["contact_email"],
+                    "parent_full_name": lead.get("parent_full_name"),
+                    "mobile_number": lead.get("mobile_number"),
+                    "status": "New",
+                    "progress_status": "Waiting For Invitation",
+                }
+            )
+            ac_lead.insert(ignore_permissions=True)
+
+            results["created"].append(
+                {
+                    "registration_number": lead["registration_number"],
+                    "name": ac_lead.name,
+                }
+            )
+
+        except Exception as e:
+            results["failed"].append(
+                {
+                    "registration_number": lead.get("registration_number", "Unknown"),
+                    "error": str(e),
+                }
+            )
+
+    frappe.db.commit()
+
+    return {
+        "created_count": len(results["created"]),
+        "skipped_count": len(results["skipped"]),
+        "failed_count": len(results["failed"]),
+        "created": results["created"],
+        "skipped": results["skipped"],
+        "failed": results["failed"],
+    }

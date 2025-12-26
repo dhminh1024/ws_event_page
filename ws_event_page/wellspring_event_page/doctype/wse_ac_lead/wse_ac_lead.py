@@ -69,12 +69,7 @@ class WSEACLead(Document):
         invitation_sent_at: DF.Datetime | None
         mobile_number: DF.Data | None
         parent_full_name: DF.Data | None
-        progress_status: DF.Literal[
-            "Waiting For Invitation",
-            "Invitation Email Sent",
-            "Registered For Test",
-            "Checked In Test",
-        ]
+        progress_status: DF.Literal["Waiting For Invitation", "Invitation Email Sent", "Registered For Test", "Checked In Test"]
         qr_code: DF.AttachImage | None
         registered_slot: DF.Link | None
         registration_number: DF.Data
@@ -85,9 +80,7 @@ class WSEACLead(Document):
         status: DF.Literal["New", "Confirmation Email Sent", "Checked in"]
         student_full_name: DF.Data
         student_gender: DF.Literal["Male", "Female"]
-        student_grade: DF.Literal[
-            "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "K9", "K10", "K11", "K12"
-        ]
+        student_grade: DF.Literal["G01", "G02", "G03", "G04", "G05", "G06", "G07", "G08", "G09", "G10", "G11", "G12"]
         test_checked_in_at: DF.Datetime | None
         test_registered_at: DF.Datetime | None
         test_slot_date: DF.Date | None
@@ -185,18 +178,39 @@ class WSEACLead(Document):
         self.booking_id = hashlib.md5(encode).hexdigest()[:16]
 
     def send_result_confirmation_email(self):
+        from frappe.email.doctype.email_template.email_template import get_email_template
+
         # send confirmation email
         event_settings = self._get_event_settings()
+        settings = frappe.get_single("WSE AC Settings")
 
-        template = ""
+        # Get template based on result type
+        template_name = None
+        template_type = None
         if self.result_type == WSEACResultType.PASS_TYPE_1.value:
-            template = "ac_ds1_pass_confirmation"
+            template_name = settings.result_ds1_template
+            template_type = "Result DS1 (Pass)"
         elif self.result_type == WSEACResultType.PASS_TYPE_2.value:
-            template = "ac_ds2_pass_confirmation"
+            template_name = settings.result_ds2_template
+            template_type = "Result DS2 (Pass)"
         elif self.result_type == WSEACResultType.PASS_TYPE_3.value:
-            template = "ac_ds3_pass_confirmation"
+            template_name = settings.result_ds3_template
+            template_type = "Result DS3 (Pass)"
         elif self.result_type == WSEACResultType.FAIL_TYPE.value:
-            template = "ac_ds4_fail_confirmation"
+            template_name = settings.result_ds4_template
+            template_type = "Result DS4 (Fail)"
+
+        if not template_name:
+            frappe.throw(
+                f"{template_type} email template not configured. "
+                "Please set it in WSE AC Settings."
+            )
+
+        if not frappe.db.exists("Email Template", template_name):
+            frappe.throw(
+                f"Email template '{template_name}' not found. "
+                "Please create it or update WSE AC Settings."
+            )
 
         attachments = []
         if event_settings.test_result_attachment:
@@ -215,64 +229,99 @@ class WSEACLead(Document):
                 ]
             attachments = [item for item in attachments if item]
 
-        if template:
-            frappe.sendmail(
-                sender="admissions@wellspringsaigon.edu.vn",
-                reply_to="admissions@wellspringsaigon.edu.vn",
-                recipients=[self.contact_email],
-                cc=["admissions@wellspringsaigon.edu.vn"],
-                attachments=attachments,
-                subject="[WSSG.SY2025-2026] BÁO CÁO KẾT QUẢ KHẢO SÁT ĐẦU VÀO | THE STUDENT PLACEMENT TEST REPORT",
-                template=template,
-                args={"lead": self},
-                # now=True,
-            )
-            self.status = WSEACLeadStatus.CONFIRMATION_EMAIL_SENT.value
-            self.save()
-        else:
-            frappe.throw(
-                f"ERROR sending result confirmation email: Student {self.student_full_name} - Undefined Result Type!"
-            )
+        args = {"lead": self}
+        email_template = get_email_template(template_name, args)
+
+        frappe.sendmail(
+            sender="admissions@wellspringsaigon.edu.vn",
+            reply_to="admissions@wellspringsaigon.edu.vn",
+            recipients=[self.contact_email],
+            cc=["admissions@wellspringsaigon.edu.vn"],
+            attachments=attachments,
+            subject=email_template.get("subject"),
+            message=email_template.get("message"),
+        )
+        self.status = WSEACLeadStatus.CONFIRMATION_EMAIL_SENT.value
+        self.save()
 
     def send_confirmation_email(self):
+        from frappe.email.doctype.email_template.email_template import get_email_template
+
         event_settings = self._get_event_settings()
         if not event_settings.open_nhtn_event:
             frappe.throw(WSEACErrorCode.EVENT_CLOSED.value)
 
         # send confirmation email
         if self.status == WSEACLeadStatus.NEW.value:
+            settings = frappe.get_single("WSE AC Settings")
+            template_name = settings.confirmation_email_template
+
+            if not template_name:
+                frappe.throw(
+                    "Confirmation email template not configured. "
+                    "Please set it in WSE AC Settings."
+                )
+
+            if not frappe.db.exists("Email Template", template_name):
+                frappe.throw(
+                    f"Email template '{template_name}' not found. "
+                    "Please create it or update WSE AC Settings."
+                )
+
+            args = {"lead": self}
+            email_template = get_email_template(template_name, args)
 
             frappe.sendmail(
                 sender="admissions@wellspringsaigon.edu.vn",
                 reply_to="admissions@wellspringsaigon.edu.vn",
                 recipients=[self.contact_email],
-                subject='WSSG. SY2025-2026 | Xac nhan tham du Ngay hoi Trai nghiem "Cung con khoi dau Hanh phuc"_Confirmation of attending the Experience Day_22.02.2025',
-                template="ac_confirmation_email",
-                args={"lead": self},
+                subject=email_template.get("subject"),
+                message=email_template.get("message"),
             )
             self.status = WSEACLeadStatus.CONFIRMATION_EMAIL_SENT.value
             self.save()
 
     def send_test_invitation_email(self):
+        from frappe.email.doctype.email_template.email_template import get_email_template
+
         is_test_registration_open(allow_admin=False, lead=self)
 
         # send test invitation email
         if self.progress_status == WSEACTestStatus.WAITING_FOR_INVITATION.value:
+            settings = frappe.get_single("WSE AC Settings")
+
+            # Choose template based on lead status
+            if self.status == WSEACLeadStatus.CHECKED_IN.value:
+                template_name = settings.test_invitation_after_event_template
+                template_type = "Test Invitation (After Event)"
+            else:
+                template_name = settings.test_invitation_general_template
+                template_type = "Test Invitation (General)"
+
+            if not template_name:
+                frappe.throw(
+                    f"{template_type} email template not configured. "
+                    "Please set it in WSE AC Settings."
+                )
+
+            if not frappe.db.exists("Email Template", template_name):
+                frappe.throw(
+                    f"Email template '{template_name}' not found. "
+                    "Please create it or update WSE AC Settings."
+                )
+
+            args = {
+                "lead": self,
+                "registration_link": f"{frappe.utils.get_url()}/events/placement-test/registration/{self.booking_id}",
+            }
+            email_template = get_email_template(template_name, args)
+
             frappe.sendmail(
                 sender="admissions@wellspringsaigon.edu.vn",
                 reply_to="admissions@wellspringsaigon.edu.vn",
                 recipients=[self.contact_email],
-                subject="[ WSSG.SY2025-2026 ] THƯ MỜI ĐĂNG KÝ KHẢO SÁT ĐẦU VÀO LỚP 1 | INVITATION TO REGISTER FOR THE GRADE 1 PLACEMENT TEST",
-                template=(
-                    "ac_test_invitation_after_event"
-                    if self.status == WSEACLeadStatus.CHECKED_IN.value
-                    else "ac_test_invitation_general"
-                ),
-                args={
-                    "lead": self,
-                    "registration_link": f"{frappe.utils.get_url()}/events/placement-test/registration/{self.booking_id}",
-                },
-                # now=True,
+                subject=email_template.get("subject"),
+                message=email_template.get("message"),
             )
             self.progress_status = WSEACTestStatus.INVITATION_EMAIL_SENT.value
             self.invitation_sent_at = frappe.utils.now()
@@ -291,8 +340,25 @@ class WSEACLead(Document):
         return vietqr_url
 
     def send_test_registration_confirmation_email(self):
+        from frappe.email.doctype.email_template.email_template import get_email_template
+
         # send test registration confirmation email
         if self.progress_status == WSEACTestStatus.REGISTERED_FOR_TEST.value:
+            settings = frappe.get_single("WSE AC Settings")
+            template_name = settings.test_registration_confirmation_template
+
+            if not template_name:
+                frappe.throw(
+                    "Test Registration Confirmation email template not configured. "
+                    "Please set it in WSE AC Settings."
+                )
+
+            if not frappe.db.exists("Email Template", template_name):
+                frappe.throw(
+                    f"Email template '{template_name}' not found. "
+                    "Please create it or update WSE AC Settings."
+                )
+
             test_slot = frappe.get_doc("WSE AC Test Slot", self.registered_slot)
             # Determine weekday of test_slot.date
             weekday_en = test_slot.date.strftime("%A")
@@ -309,7 +375,6 @@ class WSEACLead(Document):
             test_slot_date = test_slot.date.strftime("%d/%m/%Y")
 
             # Get payment info from settings
-            settings = frappe.get_single("WSE AC Settings")
             account_number = settings.bank_account_number
             account_name = settings.bank_account_name
             bin_number = settings.bank_bin_number
@@ -321,36 +386,37 @@ class WSEACLead(Document):
                 registration_number=self.registration_number,
             )
 
+            args = {
+                "lead": self,
+                "test_slot": test_slot,
+                "weekday_vn": weekday_vn,
+                "weekday_en": weekday_en,
+                "test_slot_start_time": test_slot_start_time,
+                "test_slot_date": test_slot_date,
+                "payment_qr_code": self.generate_qr_payment_code(
+                    account_number,
+                    account_name,
+                    bin_number,
+                    bank_short_name,
+                    amount,
+                    add_info,
+                ),
+                "account_number": account_number,
+                "account_name": account_name,
+                "bin_number": bin_number,
+                "bank_name": bank_name,
+                "bank_short_name": bank_short_name,
+                "amount": amount,
+                "add_info": add_info,
+            }
+            email_template = get_email_template(template_name, args)
+
             frappe.sendmail(
                 sender="admissions@wellspringsaigon.edu.vn",
                 reply_to="admissions@wellspringsaigon.edu.vn",
                 recipients=[self.contact_email],
-                subject="[WSSG.SY2025-2026] XÁC NHẬN LỊCH KHẢO SÁT ĐẦU VÀO KHỐI 1 | CONFIRMATION OF THE GRADE 1 PLACEMENTEST SCHEDULE ",
-                template="ac_test_registration_confirmation",
-                args={
-                    "lead": self,
-                    "test_slot": test_slot,
-                    "weekday_vn": weekday_vn,
-                    "weekday_en": weekday_en,
-                    "test_slot_start_time": test_slot_start_time,
-                    "test_slot_date": test_slot_date,
-                    "payment_qr_code": self.generate_qr_payment_code(
-                        account_number,
-                        account_name,
-                        bin_number,
-                        bank_short_name,
-                        amount,
-                        add_info,
-                    ),
-                    "account_number": account_number,
-                    "account_name": account_name,
-                    "bin_number": bin_number,
-                    "bank_name": bank_name,
-                    "bank_short_name": bank_short_name,
-                    "amount": amount,
-                    "add_info": add_info,
-                },
-                # now=True,
+                subject=email_template.get("subject"),
+                message=email_template.get("message"),
             )
 
     def register_for_test(self, slot_id, send_email=1):
