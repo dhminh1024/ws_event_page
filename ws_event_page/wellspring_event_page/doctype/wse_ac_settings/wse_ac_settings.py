@@ -19,7 +19,22 @@ class WSEACSettings(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
+		bank_account_name: DF.Data | None
+		bank_account_number: DF.Data | None
+		bank_bin_number: DF.Data | None
+		bank_name: DF.Data | None
+		bank_short_name: DF.Data | None
+		confirmation_email_template: DF.Link | None
 		current_event: DF.Link | None
+		payment_amount: DF.Currency
+		payment_info_template: DF.Data | None
+		result_ds1_template: DF.Link | None
+		result_ds2_template: DF.Link | None
+		result_ds3_template: DF.Link | None
+		result_ds4_template: DF.Link | None
+		test_invitation_after_event_template: DF.Link | None
+		test_invitation_general_template: DF.Link | None
+		test_registration_confirmation_template: DF.Link | None
 	# end: auto-generated types
 
 	def on_update(self):

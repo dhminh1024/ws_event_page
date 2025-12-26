@@ -70,7 +70,12 @@ class WSEACLead(Document):
         invitation_sent_at: DF.Datetime | None
         mobile_number: DF.Data | None
         parent_full_name: DF.Data | None
-        progress_status: DF.Literal["Waiting For Invitation", "Invitation Email Sent", "Registered For Test", "Checked In Test"]
+        progress_status: DF.Literal[
+            "Waiting For Invitation",
+            "Invitation Email Sent",
+            "Registered For Test",
+            "Checked In Test",
+        ]
         qr_code: DF.AttachImage | None
         registered_slot: DF.Link | None
         registration_number: DF.Data
@@ -81,7 +86,20 @@ class WSEACLead(Document):
         status: DF.Literal["New", "Confirmation Email Sent", "Checked in"]
         student_full_name: DF.Data
         student_gender: DF.Data
-        student_grade: DF.Literal["G01", "G02", "G03", "G04", "G05", "G06", "G07", "G08", "G09", "G10", "G11", "G12"]
+        student_grade: DF.Literal[
+            "G01",
+            "G02",
+            "G03",
+            "G04",
+            "G05",
+            "G06",
+            "G07",
+            "G08",
+            "G09",
+            "G10",
+            "G11",
+            "G12",
+        ]
         test_checked_in_at: DF.Datetime | None
         test_registered_at: DF.Datetime | None
         test_slot_date: DF.Date | None
@@ -179,7 +197,9 @@ class WSEACLead(Document):
         self.booking_id = hashlib.md5(encode).hexdigest()[:16]
 
     def send_result_confirmation_email(self):
-        from frappe.email.doctype.email_template.email_template import get_email_template
+        from frappe.email.doctype.email_template.email_template import (
+            get_email_template,
+        )
 
         # send confirmation email
         event_settings = self._get_event_settings()
@@ -246,7 +266,9 @@ class WSEACLead(Document):
         self.save()
 
     def send_confirmation_email(self):
-        from frappe.email.doctype.email_template.email_template import get_email_template
+        from frappe.email.doctype.email_template.email_template import (
+            get_email_template,
+        )
 
         event_settings = self._get_event_settings()
         if not event_settings.open_nhtn_event:
@@ -283,7 +305,9 @@ class WSEACLead(Document):
             self.save()
 
     def send_test_invitation_email(self):
-        from frappe.email.doctype.email_template.email_template import get_email_template
+        from frappe.email.doctype.email_template.email_template import (
+            get_email_template,
+        )
 
         is_test_registration_open(allow_admin=False, lead=self)
 
@@ -341,7 +365,9 @@ class WSEACLead(Document):
         return vietqr_url
 
     def send_test_registration_confirmation_email(self):
-        from frappe.email.doctype.email_template.email_template import get_email_template
+        from frappe.email.doctype.email_template.email_template import (
+            get_email_template,
+        )
 
         # send test registration confirmation email
         if self.progress_status == WSEACTestStatus.REGISTERED_FOR_TEST.value:
@@ -382,10 +408,13 @@ class WSEACLead(Document):
             bank_name = settings.bank_name
             bank_short_name = settings.bank_short_name
             amount = settings.payment_amount
-            add_info = settings.payment_info_template.format(
-                student_name=self.student_full_name,
-                registration_number=self.registration_number,
-            )
+            if settings.payment_info_template:
+                add_info = settings.payment_info_template.format(
+                    student_full_name=self.student_full_name,
+                    registration_number=self.registration_number,
+                )
+            else:
+                add_info = f"{self.student_full_name} - {self.registration_number}"
 
             args = {
                 "lead": self,
@@ -469,9 +498,7 @@ class WSEACLead(Document):
 
             except Exception:
                 if attempt == (max_retries - 1):
-                    frappe.throw(
-                        "System is busy, please try again later"
-                    )
+                    frappe.throw("System is busy, please try again later")
                 else:
                     frappe.db.commit()
 
@@ -485,6 +512,7 @@ class WSEACLead(Document):
         self.save()
 
         # Send confirmation email if requested
+        print("Send email:", send_email)
         if str(send_email) == "1":
             self.send_test_registration_confirmation_email()
 

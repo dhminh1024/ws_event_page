@@ -117,7 +117,7 @@
    "label": "Bank Account Number"
   },
   {
-   "default": "Công ty TNHH MTV Đầu Tư và Phát Triển Giáo Dục SSG",
+   "default": "C\u00f4ng ty TNHH MTV \u0110\u1ea7u T\u01b0 v\u00e0 Ph\u00e1t Tri\u1ec3n Gi\u00e1o D\u1ee5c SSG",
    "fieldname": "bank_account_name",
    "fieldtype": "Data",
    "label": "Bank Account Name"
@@ -133,7 +133,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "Ngân hàng TMCP Ngoại Thương Việt Nam (VCB) - Chi nhánh Gia Định",
+   "default": "Ng\u00e2n h\u00e0ng TMCP Ngo\u1ea1i Th\u01b0\u01a1ng Vi\u1ec7t Nam (VCB) - Chi nh\u00e1nh Gia \u0110\u1ecbnh",
    "fieldname": "bank_name",
    "fieldtype": "Data",
    "label": "Bank Name"
@@ -151,8 +151,8 @@
    "label": "Payment Amount"
   },
   {
-   "default": "{student_name} {registration_number} PHI KS NH25-26",
-   "description": "Template for payment info. Use {student_name} and {registration_number} as placeholders.",
+   "default": "{student_full_name} {registration_number} PHI KS NH25-26",
+   "description": "Template for payment info. Must use {student_full_name} and {registration_number} as placeholders!",
    "fieldname": "payment_info_template",
    "fieldtype": "Data",
    "label": "Payment Info Template"
@@ -161,7 +161,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-12-24 16:00:00.000000",
+ "modified": "2025-12-26 15:48:02.321591",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE AC Settings",
