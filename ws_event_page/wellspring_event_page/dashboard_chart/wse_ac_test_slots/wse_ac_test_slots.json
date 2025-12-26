@@ -1,37 +1,23 @@
 {
-  "based_on": "",
-  "chart_name": "WSE AC Test Slots",
-  "chart_type": "Group By",
-  "creation": "2025-02-24 10:09:47.980531",
-  "docstatus": 0,
-  "doctype": "Dashboard Chart",
-  "document_type": "WSE AC Test Slot",
-  "dynamic_filters_json": "[]",
-  "filters_json": "[[\"WSE AC Test Slot\",\"is_enabled\",\"=\",1,false]]",
-  "group_by_based_on": "date",
-  "group_by_type": "Count",
-  "idx": 0,
-  "is_public": 0,
-  "is_standard": 1,
-  "last_synced_on": "2025-02-24 10:06:27.395376",
-  "modified": "2025-02-24 10:13:50.781967",
-  "modified_by": "Administrator",
-  "module": "Wellspring Event Page",
-  "name": "WSE AC Test Slots",
-  "number_of_groups": 0,
-  "owner": "Administrator",
-  "parent_document_type": "",
-  "roles": [
-    {
-      "role": "WSE AC Admin"
-    }
-  ],
-  "source": "",
-  "time_interval": "Yearly",
-  "timeseries": 0,
-  "timespan": "Last Year",
-  "type": "Bar",
-  "use_report_chart": 0,
-  "value_based_on": "",
-  "y_axis": []
+ "chart_name": "WSE AC Test Slots",
+ "chart_type": "Custom",
+ "creation": "2025-02-24 10:09:47.980531",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "idx": 0,
+ "is_public": 0,
+ "is_standard": 1,
+ "modified": "2025-12-24 14:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE AC Test Slots",
+ "owner": "Administrator",
+ "roles": [
+  {
+   "role": "WSE AC Admin"
+  }
+ ],
+ "source": "WSE AC Test Slots",
+ "timeseries": 0,
+ "type": "Bar"
 }

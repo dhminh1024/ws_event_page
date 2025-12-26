@@ -1,0 +1,178 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:WSEAC-{YYYY}-{####}",
+ "creation": "2025-12-24 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title_section",
+  "title",
+  "school_year",
+  "column_break_info",
+  "is_active",
+  "expired_date",
+  "settings_section",
+  "open_test_registration",
+  "open_nhtn_event",
+  "column_break_settings",
+  "test_registration_closing_time",
+  "test_result_attachment",
+  "checkin_images_section",
+  "checkin_bg_main",
+  "checkin_bg_active",
+  "column_break_checkin_images",
+  "checkin_bg_idle"
+ ],
+ "fields": [
+  {
+   "fieldname": "title_section",
+   "fieldtype": "Section Break",
+   "label": "Event Information"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "school_year",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "School Year",
+   "description": "e.g., 2025-2026"
+  },
+  {
+   "fieldname": "column_break_info",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "Managed by WSE AC Settings",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Is Active",
+   "read_only": 1
+  },
+  {
+   "fieldname": "expired_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Expired Date"
+  },
+  {
+   "fieldname": "settings_section",
+   "fieldtype": "Section Break",
+   "label": "Event Settings"
+  },
+  {
+   "default": "1",
+   "fieldname": "open_test_registration",
+   "fieldtype": "Check",
+   "label": "Open Test Registration"
+  },
+  {
+   "default": "0",
+   "fieldname": "open_nhtn_event",
+   "fieldtype": "Check",
+   "label": "Open NHTN Event"
+  },
+  {
+   "fieldname": "column_break_settings",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "test_registration_closing_time",
+   "fieldtype": "Datetime",
+   "label": "Test Registration Closing Time"
+  },
+  {
+   "default": "0",
+   "fieldname": "test_result_attachment",
+   "fieldtype": "Check",
+   "label": "Test Result Attachment"
+  },
+  {
+   "fieldname": "checkin_images_section",
+   "fieldtype": "Section Break",
+   "label": "Check-in Page Images"
+  },
+  {
+   "description": "Main/initial background image for check-in page",
+   "fieldname": "checkin_bg_main",
+   "fieldtype": "Attach Image",
+   "label": "Main Background"
+  },
+  {
+   "description": "Background during check-in state",
+   "fieldname": "checkin_bg_active",
+   "fieldtype": "Attach Image",
+   "label": "Active Background"
+  },
+  {
+   "fieldname": "column_break_checkin_images",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Background after reset/idle state",
+   "fieldname": "checkin_bg_idle",
+   "fieldtype": "Attach Image",
+   "label": "Idle Background"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "WSE AC Lead",
+   "link_fieldname": "ac_event"
+  },
+  {
+   "link_doctype": "WSE AC Test Slot",
+   "link_fieldname": "ac_event"
+  }
+ ],
+ "modified": "2025-12-24 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE AC Event",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "WSE AC Admin",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}

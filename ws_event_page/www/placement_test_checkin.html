@@ -11,7 +11,7 @@
 
     <style>
       body {
-        background-image: url("/assets/ws_event_page/images/KV_TS_2526.jpg");
+        /* background-image: url("/assets/ws_event_page/images/KV_TS_2526.jpg"); */
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -95,8 +95,33 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
+      // Background image URLs (will be loaded from API)
+      let bgImages = {
+        main: "#",
+        active: "#",
+        idle: "#",
+      };
+
+      // Load background images from API
+      function loadBackgroundImages() {
+        $.ajax({
+          url: "/api/method/ws_event_page.api.event.admission_checkin.lead.get_checkin_page_images",
+          type: "GET",
+          success: function (r) {
+            if (r.message) {
+              bgImages = r.message;
+              // Apply main background after loading
+              $("body").css("background-image", "url('" + bgImages.main + "')");
+            }
+          },
+        });
+      }
+
       $(document).ready(function () {
         let countdownInterval; // Declare countdownInterval
+
+        // Load dynamic backgrounds
+        loadBackgroundImages();
 
         window.onload = () => $("#hidden-input").focus();
         // window.addEventListener("click", () => $("#hidden-input").focus());
@@ -135,10 +160,7 @@
             e.preventDefault();
             var inputValue = $(this).val();
 
-            $("body").css(
-              "background-image",
-              "url('/assets/ws_event_page/images/NHTN_BG_02.jpg')"
-            );
+            $("body").css("background-image", "url('" + bgImages.active + "')");
             $("#display-registration-number").text(inputValue);
             $("#display-registration-number").show();
             $("#spinner").show();
@@ -236,7 +258,7 @@
                   $("#hidden-input").focus();
                   $("body").css(
                     "background-image",
-                    "url('/assets/ws_event_page/images/NHTN_BG_01.jpg')"
+                    "url('" + bgImages.idle + "')"
                   );
                 }
               }, 1000); // Update every second (1000 ms)

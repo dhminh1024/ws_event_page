@@ -10,6 +10,8 @@ export interface WSEACTestSlot{
 	parentfield?: string
 	parenttype?: string
 	idx?: number
+	/**	AC Event : Link - WSE AC Event	*/
+	ac_event: string
 	/**	Title : Data	*/
 	title?: string
 	/**	Date : Date	*/
@@ -22,6 +24,8 @@ export interface WSEACTestSlot{
 	max_capacity: number
 	/**	Current Registered : Int	*/
 	current_registered?: number
+	/**	Is Full : Check	*/
+	is_full?: 0 | 1
 	/**	Is Enabled : Check	*/
 	is_enabled?: 0 | 1
 }
