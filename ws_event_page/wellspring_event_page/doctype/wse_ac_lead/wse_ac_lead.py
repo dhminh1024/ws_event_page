@@ -79,7 +79,7 @@ class WSEACLead(Document):
         result_type: DF.Literal["DS1", "DS2", "DS3", "DS4"]
         status: DF.Literal["New", "Confirmation Email Sent", "Checked in"]
         student_full_name: DF.Data
-        student_gender: DF.Literal["Male", "Female"]
+        student_gender: DF.Data
         student_grade: DF.Literal["G01", "G02", "G03", "G04", "G05", "G06", "G07", "G08", "G09", "G10", "G11", "G12"]
         test_checked_in_at: DF.Datetime | None
         test_registered_at: DF.Datetime | None
