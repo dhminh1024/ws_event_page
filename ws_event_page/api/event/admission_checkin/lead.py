@@ -250,15 +250,6 @@ def get_ac_settings():
     return response
 
 
-# Gender mapping from SMSGender to WSE AC Lead
-GENDER_MAP = {
-    "001": "Male",
-    "002": "Female",
-    "Nam": "Male",
-    "Nữ": "Female",
-}
-
-
 @frappe.whitelist()
 def preview_leads_for_sync(school_year, grade=None):
     """
@@ -353,8 +344,8 @@ def preview_leads_for_sync(school_year, grade=None):
     # Process leads for preview
     preview_data = []
     for lead in leads:
-        # Convert gender
-        gender = GENDER_MAP.get(lead.gender_id, GENDER_MAP.get(lead.gender_name, ""))
+        # Use Vietnamese gender name directly from CRM
+        gender = lead.gender_name or ""
 
         # Check if already exists
         is_duplicate = lead.registration_number in existing_reg_numbers

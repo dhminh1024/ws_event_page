@@ -9,4 +9,5 @@ yarn.lock
 
 ws_event_page/public/frontend
 ws_event_page/www/events.html
+ws_event_page/scripts/
 CLAUDE_LOCAL.md
