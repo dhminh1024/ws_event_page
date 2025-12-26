@@ -147,7 +147,7 @@ def register_for_test(lead_id, test_slot_id, booking_id, switch_slot=0, send_ema
             prev_test_slot.calculate_current_registered()
 
     else:
-        lead.register_for_test(test_slot_id)
+        lead.register_for_test(test_slot_id, send_email)
 
     return lead.as_dict()
 

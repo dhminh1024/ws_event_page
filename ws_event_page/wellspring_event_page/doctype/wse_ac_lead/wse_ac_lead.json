@@ -279,13 +279,14 @@
   {
    "fieldname": "crm_lead_id",
    "fieldtype": "Data",
-   "label": "CRM Lead ID"
+   "label": "CRM Lead ID",
+   "read_only": 1
   }
  ],
  "image_field": "qr_code",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-12-26 14:47:20.043309",
+ "modified": "2025-12-26 15:15:51.735453",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE AC Lead",
