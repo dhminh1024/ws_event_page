@@ -435,6 +435,7 @@ def sync_leads_to_ac(leads_json):
                 {
                     "doctype": "WSE AC Lead",
                     "ac_event": event.name,
+                    "crm_lead_id": lead.get("lead_name"),
                     "registration_number": lead["registration_number"],
                     "student_full_name": lead["student_full_name"],
                     "student_grade": lead["student_grade"],
