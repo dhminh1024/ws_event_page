@@ -19,6 +19,7 @@
   "mobile_number",
   "student_grade",
   "qr_code",
+  "crm_lead_id",
   "status_section",
   "status",
   "column_break_jpyd",
@@ -274,12 +275,17 @@
    "in_standard_filter": 1,
    "label": "Student Gender",
    "reqd": 1
+  },
+  {
+   "fieldname": "crm_lead_id",
+   "fieldtype": "Data",
+   "label": "CRM Lead ID"
   }
  ],
  "image_field": "qr_code",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-12-26 12:39:33.199560",
+ "modified": "2025-12-26 14:47:20.043309",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE AC Lead",

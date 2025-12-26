@@ -65,6 +65,7 @@ class WSEACLead(Document):
         booking_id: DF.Data | None
         congratz_letter: DF.Attach | None
         contact_email: DF.Data
+        crm_lead_id: DF.Data | None
         group_name: DF.Data | None
         invitation_sent_at: DF.Datetime | None
         mobile_number: DF.Data | None

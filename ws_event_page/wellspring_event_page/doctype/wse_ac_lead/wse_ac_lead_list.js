@@ -256,16 +256,16 @@ function render_preview_table(data, dialog) {
   let table_html = `
     <div style="max-height: 400px; overflow-y: auto;">
       <table class="table table-bordered table-sm" style="font-size: 12px;">
-        <thead style="position: sticky; top: 0; background: white;">
+        <thead style="position: sticky; top: 0; z-index: 1;">
           <tr>
-            <th>Status</th>
-            <th>Reg. Number</th>
-            <th>Student Name</th>
-            <th>Grade</th>
-            <th>Gender</th>
-            <th>Parent Email</th>
-            <th>Parent Name</th>
-            <th>Mobile</th>
+            <th style="background: white;">Status</th>
+            <th style="background: white;">Reg. Number</th>
+            <th style="background: white;">Student Name</th>
+            <th style="background: white;">Grade</th>
+            <th style="background: white;">Gender</th>
+            <th style="background: white;">Parent Email</th>
+            <th style="background: white;">Parent Name</th>
+            <th style="background: white;">Mobile</th>
           </tr>
         </thead>
         <tbody>
