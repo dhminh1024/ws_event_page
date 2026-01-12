@@ -30,6 +30,9 @@ import { LoginRequiredDialog } from "../components/login-required-dialog";
 import { ConfirmVoteDialog } from "../components/confirm-vote-dialog";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import parser from "html-react-parser";
+import Top1Badge from "../assets/images/top-1.png"
+import Top2Badge from "../assets/images/top-2.png"
+import Top3Badge from "../assets/images/top-3.png"
 
 export type VotingSectionProps = HTMLAttributes<HTMLDivElement> &
   PropsWithChildren & {};
@@ -60,7 +63,10 @@ const FinalistCard: FC<FinalistCardProps> = ({
   const { t } = useLocales();
 
   return (
-    <div className={cn("", hasVotedForThisFinalist && "relative")}>
+    <div className={cn("relative", hasVotedForThisFinalist && "relative")}>
+      {finalistIndex === 0 && <img src={Top1Badge} alt="Top 1 Badge" className="absolute w-[50%] h-auto z-20 top-0 left-[50%] translate-x-[-50%] translate-y-[-50%]" />}
+      {finalistIndex === 1 && <img src={Top2Badge} alt="Top 2 Badge" className="absolute w-[50%] h-auto z-20 top-0 left-[50%] translate-x-[-50%] translate-y-[-50%]" />}
+      {finalistIndex === 2 && <img src={Top3Badge} alt="Top 3 Badge" className="absolute w-[50%] h-auto z-20 top-0 left-[50%] translate-x-[-50%] translate-y-[-50%]" />}
       {/* Thumbnail */}
       <div
         className={cn(
