@@ -59,6 +59,23 @@ def send_confirmation_emails(lead_ids_str):
 
 
 @frappe.whitelist(methods=["POST"])
+def send_event_invitation_emails(lead_ids_str):
+    """Send event invitation emails to selected leads."""
+    lead_ids = lead_ids_str.split(",")
+    count = 0
+    for lead_id in lead_ids:
+        lead = frappe.get_doc("WSE AC Lead", lead_id)
+        if lead.status == WSEACLeadStatus.NEW.value:
+            lead.send_event_invitation_email()
+            count += 1
+
+    return {
+        "message": f"{count}/{len(lead_ids)} email(s) have been queued for sending",
+        "count": count,
+    }
+
+
+@frappe.whitelist(methods=["POST"])
 def send_test_invitation_emails(lead_ids_str):
     lead_ids = lead_ids_str.split(",")
     count = 0
@@ -88,6 +105,8 @@ def lead_checkin(lead_id):
     lead = frappe.get_doc("WSE AC Lead", lead_id)
     if lead.status in [
         WSEACLeadStatus.NEW.value,
+        WSEACLeadStatus.EVENT_INVITATION_SENT.value,
+        WSEACLeadStatus.REGISTERED_FOR_EVENT.value,
         WSEACLeadStatus.CONFIRMATION_EMAIL_SENT.value,
     ]:
         lead.status = WSEACLeadStatus.CHECKED_IN.value
@@ -118,6 +137,18 @@ def get_lead_by_booking_id(booking_id):
     except Exception:
         frappe.throw(WSEACErrorCode.INVALID_BOOKING_ID.value)
 
+    return lead.as_dict()
+
+
+@frappe.whitelist(allow_guest=True, methods=["POST"])
+def register_for_event(booking_id):
+    """Register a lead for the event using their booking ID."""
+    try:
+        lead = frappe.get_doc("WSE AC Lead", {"booking_id": booking_id})
+    except Exception:
+        frappe.throw(WSEACErrorCode.INVALID_BOOKING_ID.value)
+
+    lead.register_for_event()
     return lead.as_dict()
 
 

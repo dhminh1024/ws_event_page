@@ -7,8 +7,13 @@
  "field_order": [
   "current_event_section",
   "current_event",
+  "email_config_section",
+  "email_sender",
+  "email_reply_to",
+  "email_cc",
   "email_templates_section",
   "confirmation_email_template",
+  "event_invitation_email_template",
   "test_invitation_after_event_template",
   "test_invitation_general_template",
   "test_registration_confirmation_template",
@@ -41,6 +46,35 @@
    "options": "WSE AC Event"
   },
   {
+   "fieldname": "email_config_section",
+   "fieldtype": "Section Break",
+   "label": "Email Configuration"
+  },
+  {
+   "default": "admissions@wellspringsaigon.edu.vn",
+   "description": "Sender email address for all AC Lead emails",
+   "fieldname": "email_sender",
+   "fieldtype": "Data",
+   "label": "Email Sender",
+   "options": "Email"
+  },
+  {
+   "default": "admissions@wellspringsaigon.edu.vn",
+   "description": "Reply-to email address for all AC Lead emails",
+   "fieldname": "email_reply_to",
+   "fieldtype": "Data",
+   "label": "Email Reply To",
+   "options": "Email"
+  },
+  {
+   "default": "admissions@wellspringsaigon.edu.vn",
+   "description": "CC email address for result confirmation emails",
+   "fieldname": "email_cc",
+   "fieldtype": "Data",
+   "label": "Email CC",
+   "options": "Email"
+  },
+  {
    "fieldname": "email_templates_section",
    "fieldtype": "Section Break",
    "label": "Email Templates"
@@ -50,6 +84,13 @@
    "fieldname": "confirmation_email_template",
    "fieldtype": "Link",
    "label": "Confirmation Email Template",
+   "options": "Email Template"
+  },
+  {
+   "description": "Email template for event invitation with registration link",
+   "fieldname": "event_invitation_email_template",
+   "fieldtype": "Link",
+   "label": "Event Invitation Email Template",
    "options": "Email Template"
   },
   {

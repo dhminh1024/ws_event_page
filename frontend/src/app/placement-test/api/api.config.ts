@@ -19,4 +19,9 @@ export const FRAPPE_APIS = {
       "ws_event_page.api.event.admission_checkin.lead.register_for_test",
     SWR_KEY: "register_for_test",
   },
+  REGISTER_FOR_EVENT: {
+    METHOD_STRING:
+      "ws_event_page.api.event.admission_checkin.lead.register_for_event",
+    SWR_KEY: "register_for_event",
+  },
 };

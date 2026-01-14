@@ -26,6 +26,20 @@ export const PLACEMENT_TEST_ROUTES: RouteObject[] = [
           },
         ],
       },
+      {
+        path: "event-registration",
+        element: (
+          <PlacementTestLayout>
+            <Outlet />
+          </PlacementTestLayout>
+        ),
+        children: [
+          {
+            path: ":id",
+            lazy: () => import("./event-registration"),
+          },
+        ],
+      },
     ],
   },
 ];

@@ -3,27 +3,41 @@
 
 frappe.listview_settings["WSE AC Lead"] = {
   onload(listview) {
-    // listview.page.add_action_item("Send Confirmation Emails", () => {
-    //   let names = [];
-    //   $.each(listview.get_checked_items(), function (key, value) {
-    //     names.push(value.name);
-    //   });
-    //   if (names.length === 0) {
-    //     frappe.throw(__("No rows selected."));
-    //   }
-    //   send_confirmation_emails(names, listview);
-    // });
+    listview.page.add_action_item("Send Event Invitation Emails", () => {
+      let names = [];
+      $.each(listview.get_checked_items(), function (key, value) {
+        names.push(value.name);
+      });
+      if (names.length === 0) {
+        frappe.throw(__("No rows selected."));
+      }
+      send_event_invitation_emails(names, listview);
+    });
 
-    // listview.page.add_action_item("Send Invitation Emails", () => {
-    //   let names = [];
-    //   $.each(listview.get_checked_items(), function (key, value) {
-    //     names.push(value.name);
-    //   });
-    //   if (names.length === 0) {
-    //     frappe.throw(__("No rows selected."));
-    //   }
-    //   send_invitation_emails(names, listview);
-    // });
+    listview.page.add_action_item(
+      "Send Registration Confirmation Emails",
+      () => {
+        let names = [];
+        $.each(listview.get_checked_items(), function (key, value) {
+          names.push(value.name);
+        });
+        if (names.length === 0) {
+          frappe.throw(__("No rows selected."));
+        }
+        send_confirmation_emails(names, listview);
+      }
+    );
+
+    listview.page.add_action_item("Send Test Invitation Emails", () => {
+      let names = [];
+      $.each(listview.get_checked_items(), function (key, value) {
+        names.push(value.name);
+      });
+      if (names.length === 0) {
+        frappe.throw(__("No rows selected."));
+      }
+      send_test_invitation_emails(names, listview);
+    });
 
     listview.page.add_action_item("Send Result Confirmation Emails", () => {
       let names = [];
@@ -99,7 +113,7 @@ function send_confirmation_emails(names, listview) {
   );
 }
 
-function send_invitation_emails(names, listview) {
+function send_test_invitation_emails(names, listview) {
   // convert names to string
   names_str = names.join(",");
   frappe.confirm(
@@ -108,6 +122,29 @@ function send_invitation_emails(names, listview) {
       frappe.call({
         method:
           "ws_event_page.api.event.admission_checkin.lead.send_test_invitation_emails",
+        args: {
+          lead_ids_str: names_str,
+        },
+        callback: function (r) {
+          if (r.message) {
+            message = r.message.message;
+            frappe.msgprint(message);
+            listview.refresh();
+          }
+        },
+      });
+    }
+  );
+}
+
+function send_event_invitation_emails(names, listview) {
+  names_str = names.join(",");
+  frappe.confirm(
+    "Are you sure you want to send the event invitation emails?",
+    function () {
+      frappe.call({
+        method:
+          "ws_event_page.api.event.admission_checkin.lead.send_event_invitation_emails",
         args: {
           lead_ids_str: names_str,
         },
@@ -178,12 +215,16 @@ function show_sync_dialog(listview) {
       );
 
       if (leads_to_sync.length === 0) {
-        frappe.msgprint(__("No valid leads to sync (all are duplicates or missing email)"));
+        frappe.msgprint(
+          __("No valid leads to sync (all are duplicates or missing email)")
+        );
         return;
       }
 
       frappe.confirm(
-        __("Are you sure you want to create {0} AC Lead(s)?", [leads_to_sync.length]),
+        __("Are you sure you want to create {0} AC Lead(s)?", [
+          leads_to_sync.length,
+        ]),
         function () {
           frappe.call({
             method:
@@ -240,11 +281,15 @@ function render_preview_table(data, dialog) {
     <div style="margin-bottom: 10px;">
       <strong>Event:</strong> ${data.event.title} (${data.event.name})<br/>
       <strong>Total leads:</strong> ${data.total} |
-      <span style="color: orange;">Duplicates (will skip): ${data.duplicates}</span> |
+      <span style="color: orange;">Duplicates (will skip): ${
+        data.duplicates
+      }</span> |
       <span style="color: green;">New: ${data.total - data.duplicates}</span>
     </div>
   `;
-  $(dialog.fields_dict.preview_stats.$wrapper).find("#preview-stats").html(stats_html);
+  $(dialog.fields_dict.preview_stats.$wrapper)
+    .find("#preview-stats")
+    .html(stats_html);
 
   if (data.leads.length === 0) {
     $(dialog.fields_dict.preview_table.$wrapper)
@@ -278,7 +323,8 @@ function render_preview_table(data, dialog) {
       ? '<span class="badge badge-danger" style="background-color: red;">No Email</span>'
       : '<span class="badge badge-success" style="background-color: green;">New</span>';
 
-    const row_class = lead.is_duplicate || !lead.contact_email ? 'style="opacity: 0.5;"' : "";
+    const row_class =
+      lead.is_duplicate || !lead.contact_email ? 'style="opacity: 0.5;"' : "";
 
     table_html += `
       <tr ${row_class}>
@@ -315,9 +361,13 @@ function show_sync_result(result, listview) {
   if (result.created.length > 0) {
     result_html += `
       <details>
-        <summary style="cursor: pointer; color: green;">Created (${result.created.length})</summary>
+        <summary style="cursor: pointer; color: green;">Created (${
+          result.created.length
+        })</summary>
         <ul style="max-height: 150px; overflow-y: auto;">
-          ${result.created.map((l) => `<li>${l.registration_number}</li>`).join("")}
+          ${result.created
+            .map((l) => `<li>${l.registration_number}</li>`)
+            .join("")}
         </ul>
       </details>
     `;
@@ -326,9 +376,13 @@ function show_sync_result(result, listview) {
   if (result.skipped.length > 0) {
     result_html += `
       <details>
-        <summary style="cursor: pointer; color: orange;">Skipped (${result.skipped.length})</summary>
+        <summary style="cursor: pointer; color: orange;">Skipped (${
+          result.skipped.length
+        })</summary>
         <ul style="max-height: 150px; overflow-y: auto;">
-          ${result.skipped.map((l) => `<li>${l.registration_number}: ${l.reason}</li>`).join("")}
+          ${result.skipped
+            .map((l) => `<li>${l.registration_number}: ${l.reason}</li>`)
+            .join("")}
         </ul>
       </details>
     `;
@@ -337,9 +391,13 @@ function show_sync_result(result, listview) {
   if (result.failed.length > 0) {
     result_html += `
       <details open>
-        <summary style="cursor: pointer; color: red;">Failed (${result.failed.length})</summary>
+        <summary style="cursor: pointer; color: red;">Failed (${
+          result.failed.length
+        })</summary>
         <ul style="max-height: 150px; overflow-y: auto;">
-          ${result.failed.map((l) => `<li>${l.registration_number}: ${l.error}</li>`).join("")}
+          ${result.failed
+            .map((l) => `<li>${l.registration_number}: ${l.error}</li>`)
+            .join("")}
         </ul>
       </details>
     `;

@@ -1,0 +1,17 @@
+{
+ "creation": "2025-01-08 10:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "idx": 0,
+ "is_public": 0,
+ "is_standard": 1,
+ "label": "WSE AC Event - Registered for Event",
+ "method": "ws_event_page.api.event.admission_checkin.number_card_methods.get_registered_for_event",
+ "modified": "2025-01-08 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Wellspring Event Page",
+ "name": "WSE AC Event - Registered for Event",
+ "owner": "Administrator",
+ "show_percentage_stats": 0,
+ "type": "Custom"
+}
