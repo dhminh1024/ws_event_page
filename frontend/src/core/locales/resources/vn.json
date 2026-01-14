@@ -225,6 +225,17 @@
     "registration_failed": {
       "title": "Đăng ký thất bại",
       "message": "Rất tiếc, đã có lỗi xảy ra. Xin vui lòng thử lại sau."
+    },
+    "event_registration": {
+      "title": "Xác nhận tham dự sự kiện",
+      "confirm_button": "Xác nhận tham dự",
+      "success_title": "Đăng ký thành công",
+      "success_message": "Cảm ơn bạn đã xác nhận tham dự. Bạn sẽ nhận được email xác nhận với thông tin chi tiết sự kiện trong thời gian sớm nhất.",
+      "error_title": "Đăng ký thất bại",
+      "error_message": "Rất tiếc, đã có lỗi xảy ra. Xin vui lòng thử lại sau.",
+      "already_registered": "Bạn đã đăng ký tham dự sự kiện này",
+      "wait_for_confirmation": "Vui lòng chờ email xác nhận với mã QR và phân nhóm của bạn.",
+      "invalid_link": "Đường dẫn đăng ký không hợp lệ hoặc đã hết hạn"
     }
   },
   "greatest_show_25": {

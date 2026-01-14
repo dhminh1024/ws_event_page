@@ -5,7 +5,7 @@
    "label": "Student Grade"
   }
  ],
- "content": "[{\"id\":\"Sy-C7k-S5a\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Admission Event Check In</span>\",\"col\":12}},{\"id\":\"CwfomKMTZX\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Leads\",\"col\":4}},{\"id\":\"ILS0G_tjaX\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Event - Confirmation Email Sent\",\"col\":4}},{\"id\":\"z0BXzHH7aq\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Event - Checked In\",\"col\":4}},{\"id\":\"3RKNCJJzyB\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Waiting For Invitation\",\"col\":3}},{\"id\":\"_5FsHgu6DT\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Invitation Email Sent\",\"col\":3}},{\"id\":\"GRkfF_FTi_\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Registered\",\"col\":3}},{\"id\":\"uL_2FJdiez\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Checked In\",\"col\":3}},{\"id\":\"NvUIKHXrx-\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Student Grade\",\"col\":12}},{\"id\":\"kSt3LH69PQ\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":4}},{\"id\":\"7gW92oGkux\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Placement Test Check In Page\",\"col\":3}}]",
+ "content": "[{\"id\":\"Sy-C7k-S5a\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Admission Event Check In</span>\",\"col\":12}},{\"id\":\"CwfomKMTZX\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Leads\",\"col\":12}},{\"id\":\"auVcQJHZPi\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Event - Invitation Sent\",\"col\":3}},{\"id\":\"ILS0G_tjaX\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Event - Confirmation Email Sent\",\"col\":3}},{\"id\":\"5SSivkbEEj\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Event - Registered for Event\",\"col\":3}},{\"id\":\"z0BXzHH7aq\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Event - Checked In\",\"col\":3}},{\"id\":\"3RKNCJJzyB\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Waiting For Invitation\",\"col\":3}},{\"id\":\"_5FsHgu6DT\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Invitation Email Sent\",\"col\":3}},{\"id\":\"GRkfF_FTi_\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Registered\",\"col\":3}},{\"id\":\"uL_2FJdiez\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Test - Checked In\",\"col\":3}},{\"id\":\"NvUIKHXrx-\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Student Grade\",\"col\":12}},{\"id\":\"kSt3LH69PQ\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":4}},{\"id\":\"7gW92oGkux\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Placement Test Check In Page\",\"col\":3}}]",
  "creation": "2025-02-18 16:24:44.900993",
  "custom_blocks": [],
  "docstatus": 0,
@@ -78,7 +78,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-12-24 11:46:45.635665",
+ "modified": "2026-01-14 14:42:08.742487",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "Admission Event Check In",
@@ -92,6 +92,10 @@
    "number_card_name": "WSE AC Confirmation Email Sent"
   },
   {
+   "label": "Event - Invitation Sent",
+   "number_card_name": "WSE AC Event - Invitation Sent"
+  },
+  {
    "label": "Total Leads",
    "number_card_name": "WSE AC Total Leads"
   },
@@ -102,6 +106,10 @@
   {
    "label": "Event - Checked In",
    "number_card_name": "WSE AC Lead Checked In"
+  },
+  {
+   "label": "Event - Registered for Event",
+   "number_card_name": "WSE AC Event - Registered for Event"
   },
   {
    "label": "Test - Registered",

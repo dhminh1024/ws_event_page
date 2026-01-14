@@ -113,3 +113,31 @@ def get_checked_in_test():
     if current_event:
         filters["ac_event"] = current_event
     return frappe.db.count("WSE AC Lead", filters)
+
+
+@frappe.whitelist()
+def get_event_invitation_sent():
+    """
+    Get count of leads with status 'Event Invitation Sent' in the current event.
+
+    Used by Number Card: WSE AC Event - Invitation Sent
+    """
+    current_event = _get_current_event()
+    filters = {"status": "Event Invitation Sent"}
+    if current_event:
+        filters["ac_event"] = current_event
+    return frappe.db.count("WSE AC Lead", filters)
+
+
+@frappe.whitelist()
+def get_registered_for_event():
+    """
+    Get count of leads with status 'Registered for event' in the current event.
+
+    Used by Number Card: WSE AC Event - Registered for Event
+    """
+    current_event = _get_current_event()
+    filters = {"status": "Registered for event"}
+    if current_event:
+        filters["ac_event"] = current_event
+    return frappe.db.count("WSE AC Lead", filters)

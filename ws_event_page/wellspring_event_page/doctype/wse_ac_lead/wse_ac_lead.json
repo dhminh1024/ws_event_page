@@ -19,10 +19,13 @@
   "mobile_number",
   "student_grade",
   "qr_code",
+  "crm_lead_id",
   "status_section",
   "status",
-  "column_break_jpyd",
   "group_name",
+  "column_break_jpyd",
+  "event_invitation_sent_at",
+  "event_registered_at",
   "test_booking_section",
   "booking_id",
   "progress_status",
@@ -105,7 +108,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "New\nConfirmation Email Sent\nChecked in",
+   "options": "New\nEvent Invitation Sent\nRegistered for event\nConfirmation Email Sent\nChecked in",
    "reqd": 1
   },
   {
@@ -130,8 +133,7 @@
    "in_standard_filter": 1,
    "label": "Student Grade",
    "non_negative": 1,
-   "options": "G01\nG02\nG03\nG04\nG05\nG06\nG07\nG08\nG09\nG10\nG11\nG12",
-   "read_only": 1
+   "options": "G01\nG02\nG03\nG04\nG05\nG06\nG07\nG08\nG09\nG10\nG11\nG12"
   },
   {
    "fieldname": "qr_code",
@@ -150,6 +152,18 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Group Name"
+  },
+  {
+   "fieldname": "event_invitation_sent_at",
+   "fieldtype": "Datetime",
+   "label": "Event Invitation Sent At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "event_registered_at",
+   "fieldtype": "Datetime",
+   "label": "Event Registered At",
+   "read_only": 1
   },
   {
    "fieldname": "test_booking_section",
@@ -268,19 +282,24 @@
   },
   {
    "fieldname": "student_gender",
-   "fieldtype": "Select",
+   "fieldtype": "Data",
    "in_filter": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Student Gender",
-   "options": "Male\nFemale",
    "reqd": 1
+  },
+  {
+   "fieldname": "crm_lead_id",
+   "fieldtype": "Data",
+   "label": "CRM Lead ID",
+   "read_only": 1
   }
  ],
  "image_field": "qr_code",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-12-26 10:49:47.131607",
+ "modified": "2026-01-08 13:21:07.093063",
  "modified_by": "Administrator",
  "module": "Wellspring Event Page",
  "name": "WSE AC Lead",

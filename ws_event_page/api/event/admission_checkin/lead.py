@@ -59,6 +59,23 @@ def send_confirmation_emails(lead_ids_str):
 
 
 @frappe.whitelist(methods=["POST"])
+def send_event_invitation_emails(lead_ids_str):
+    """Send event invitation emails to selected leads."""
+    lead_ids = lead_ids_str.split(",")
+    count = 0
+    for lead_id in lead_ids:
+        lead = frappe.get_doc("WSE AC Lead", lead_id)
+        if lead.status == WSEACLeadStatus.NEW.value:
+            lead.send_event_invitation_email()
+            count += 1
+
+    return {
+        "message": f"{count}/{len(lead_ids)} email(s) have been queued for sending",
+        "count": count,
+    }
+
+
+@frappe.whitelist(methods=["POST"])
 def send_test_invitation_emails(lead_ids_str):
     lead_ids = lead_ids_str.split(",")
     count = 0
@@ -88,6 +105,8 @@ def lead_checkin(lead_id):
     lead = frappe.get_doc("WSE AC Lead", lead_id)
     if lead.status in [
         WSEACLeadStatus.NEW.value,
+        WSEACLeadStatus.EVENT_INVITATION_SENT.value,
+        WSEACLeadStatus.REGISTERED_FOR_EVENT.value,
         WSEACLeadStatus.CONFIRMATION_EMAIL_SENT.value,
     ]:
         lead.status = WSEACLeadStatus.CHECKED_IN.value
@@ -122,6 +141,18 @@ def get_lead_by_booking_id(booking_id):
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])
+def register_for_event(booking_id):
+    """Register a lead for the event using their booking ID."""
+    try:
+        lead = frappe.get_doc("WSE AC Lead", {"booking_id": booking_id})
+    except Exception:
+        frappe.throw(WSEACErrorCode.INVALID_BOOKING_ID.value)
+
+    lead.register_for_event()
+    return lead.as_dict()
+
+
+@frappe.whitelist(allow_guest=True, methods=["POST"])
 def register_for_test(lead_id, test_slot_id, booking_id, switch_slot=0, send_email=1):
     lead = frappe.get_doc("WSE AC Lead", lead_id)
 
@@ -147,7 +178,7 @@ def register_for_test(lead_id, test_slot_id, booking_id, switch_slot=0, send_ema
             prev_test_slot.calculate_current_registered()
 
     else:
-        lead.register_for_test(test_slot_id)
+        lead.register_for_test(test_slot_id, send_email)
 
     return lead.as_dict()
 
@@ -250,15 +281,6 @@ def get_ac_settings():
     return response
 
 
-# Gender mapping from SMSGender to WSE AC Lead
-GENDER_MAP = {
-    "001": "Male",
-    "002": "Female",
-    "Nam": "Male",
-    "Nữ": "Female",
-}
-
-
 @frappe.whitelist()
 def preview_leads_for_sync(school_year, grade=None):
     """
@@ -306,8 +328,9 @@ def preview_leads_for_sync(school_year, grade=None):
                 LIMIT 1
             ) as contact_email,
             (
-                SELECT p.parent_full_name
+                SELECT par.full_name
                 FROM `tabParent Information Details` p
+                JOIN `tabParent` par ON p.full_name = par.name
                 WHERE p.parent = l.name
                     AND p.parenttype = 'Leads'
                     AND p.email IS NOT NULL
@@ -352,8 +375,8 @@ def preview_leads_for_sync(school_year, grade=None):
     # Process leads for preview
     preview_data = []
     for lead in leads:
-        # Convert gender
-        gender = GENDER_MAP.get(lead.gender_id, GENDER_MAP.get(lead.gender_name, ""))
+        # Use Vietnamese gender name directly from CRM
+        gender = lead.gender_name or ""
 
         # Check if already exists
         is_duplicate = lead.registration_number in existing_reg_numbers
@@ -443,6 +466,7 @@ def sync_leads_to_ac(leads_json):
                 {
                     "doctype": "WSE AC Lead",
                     "ac_event": event.name,
+                    "crm_lead_id": lead.get("lead_name"),
                     "registration_number": lead["registration_number"],
                     "student_full_name": lead["student_full_name"],
                     "student_grade": lead["student_grade"],
