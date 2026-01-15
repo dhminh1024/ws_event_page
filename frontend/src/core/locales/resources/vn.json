@@ -209,7 +209,7 @@
   "placement_test": {
     "registration_title": "Đăng ký lịch khảo sát",
     "registration_closed": "Form đăng ký đã đóng",
-    "registration_number": "STT",
+    "registration_number": "Mã đăng ký",
     "registration_start": "Bắt đầu đăng ký",
     "time_slots": "Thời gian",
     "capacity": "# Đã đăng ký",
@@ -230,11 +230,11 @@
       "title": "Xác nhận tham dự sự kiện",
       "confirm_button": "Xác nhận tham dự",
       "success_title": "Đăng ký thành công",
-      "success_message": "Cảm ơn bạn đã xác nhận tham dự. Bạn sẽ nhận được email xác nhận với thông tin chi tiết sự kiện trong thời gian sớm nhất.",
+      "success_message": "Cảm ơn Quý Phụ huynh đã xác nhận tham dự sự kiện. Phòng Tuyển sinh sẽ gửi email xác nhận và thông tin hướng dẫn trong thời gian sớm nhất.",
       "error_title": "Đăng ký thất bại",
       "error_message": "Rất tiếc, đã có lỗi xảy ra. Xin vui lòng thử lại sau.",
-      "already_registered": "Bạn đã đăng ký tham dự sự kiện này",
-      "wait_for_confirmation": "Vui lòng chờ email xác nhận với mã QR và phân nhóm của bạn.",
+      "already_registered": "Học sinh đã đăng ký tham gia Sự kiện",
+      "wait_for_confirmation": "Chúc mừng Học sinh đã đăng ký thành công tham dự sự kiện 24/01/2026. Quý Phụ huynh vui lòng chờ email xác nhận và thông tin hướng dẫn tiếp theo từ Phòng Tuyển sinh.",
       "invalid_link": "Đường dẫn đăng ký không hợp lệ hoặc đã hết hạn"
     }
   },

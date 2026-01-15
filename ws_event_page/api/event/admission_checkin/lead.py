@@ -48,7 +48,7 @@ def send_confirmation_emails(lead_ids_str):
     count = 0
     for lead_id in lead_ids:
         lead = frappe.get_doc("WSE AC Lead", lead_id)
-        if lead.status == WSEACLeadStatus.NEW.value:
+        if lead.status == WSEACLeadStatus.REGISTERED_FOR_EVENT.value:
             lead.send_confirmation_email()
             count += 1
 
