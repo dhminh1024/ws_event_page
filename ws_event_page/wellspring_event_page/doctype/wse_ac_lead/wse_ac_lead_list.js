@@ -3,6 +3,17 @@
 
 frappe.listview_settings["WSE AC Lead"] = {
   onload(listview) {
+    // Add default filter for current event
+    frappe.db
+      .get_single_value("WSE AC Settings", "current_event")
+      .then(function (current_event) {
+        if (current_event) {
+          listview.filter_area.set_standard_filter([
+            ["WSE AC Lead", "ac_event", "=", current_event],
+          ]);
+        }
+      });
+
     listview.page.add_action_item("Send Event Invitation Emails", () => {
       let names = [];
       $.each(listview.get_checked_items(), function (key, value) {
