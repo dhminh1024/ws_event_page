@@ -230,11 +230,11 @@
       "title": "Event Registration Confirmation",
       "confirm_button": "Confirm Attendance",
       "success_title": "Registration Successful",
-      "success_message": "Thank you for confirming your attendance. You will receive a confirmation email with event details shortly.",
+      "success_message": "Thank you for confirming your attendance at the event. The Admissions Office will send a confirmation email and instructions shortly.",
       "error_title": "Registration Failed",
       "error_message": "Sorry, an error occurred. Please try again later.",
-      "already_registered": "You have already registered for this event",
-      "wait_for_confirmation": "Please wait for the confirmation email with your QR code and group assignment.",
+      "already_registered": "Student has registered to attend the Event.",
+      "wait_for_confirmation": "Congratulations! Student has successfully registered to attend the event on 24/01/2026. Parents, please wait for a confirmation email and further instructions from the Admissions Office.",
       "invalid_link": "Invalid or expired registration link"
     }
   },
