@@ -40,6 +40,7 @@ export type VotingSectionProps = HTMLAttributes<HTMLDivElement> &
 interface FinalistCardProps {
   finalist: WSEGSFinalist;
   finalistIndex: number;
+  rank: number; // Thứ hạng thực sự (1, 2, 3) dựa trên vote_count
   onVote: (finalistId: string, finalistName: string) => void;
   onViewVideo: (finalistIndex: number) => void;
   hasVotedForThisFinalist: boolean;
@@ -52,6 +53,7 @@ interface FinalistCardProps {
 const FinalistCard: FC<FinalistCardProps> = ({
   finalist,
   finalistIndex,
+  rank,
   onVote,
   onViewVideo,
   hasVotedForThisFinalist,
@@ -64,13 +66,13 @@ const FinalistCard: FC<FinalistCardProps> = ({
 
   return (
     <div className={cn("relative", hasVotedForThisFinalist && "relative")}>
-      {finalistIndex === 0 && <img src={Top1Badge} alt="Top 1 Badge" className="absolute w-[50%] h-auto z-20 top-0 left-[50%] translate-x-[-50%] translate-y-[-50%]" />}
-      {finalistIndex === 1 && <img src={Top2Badge} alt="Top 2 Badge" className="absolute w-[50%] h-auto z-20 top-0 left-[50%] translate-x-[-50%] translate-y-[-50%]" />}
-      {finalistIndex === 2 && <img src={Top3Badge} alt="Top 3 Badge" className="absolute w-[50%] h-auto z-20 top-0 left-[50%] translate-x-[-50%] translate-y-[-50%]" />}
+      {rank === 1 && (finalist?.vote_count || 0) > 0 && <img src={Top1Badge} alt="Top 1 Badge" className="absolute w-[50%] h-auto z-20 top-0 left-[50%] translate-x-[-50%] translate-y-[-50%]" />}
+      {rank === 2 && (finalist?.vote_count || 0) > 0 && <img src={Top2Badge} alt="Top 2 Badge" className="absolute w-[50%] h-auto z-20 top-0 left-[50%] translate-x-[-50%] translate-y-[-50%]" />}
+      {rank === 3 && (finalist?.vote_count || 0) > 0 && <img src={Top3Badge} alt="Top 3 Badge" className="absolute w-[50%] h-auto z-20 top-0 left-[50%] translate-x-[-50%] translate-y-[-50%]" />}
       {/* Thumbnail */}
       <div
         className={cn(
-          "group relative aspect-square w-full overflow-hidden bg-gs25-secondary p-5 md:p-10 rounded-[10rem] hover:scale-105 transition-transform duration-300",
+          "group relative  w-full overflow-hidden bg-gs25-secondary p-5 md:p-10 rounded-[10rem] hover:scale-105 transition-transform duration-300",
           "before:content-[''] before:absolute before:inset-0 before:bg-gs25-gradient-2 before:bg-opacity-30 before:z-1"
         )}
       >
@@ -78,7 +80,7 @@ const FinalistCard: FC<FinalistCardProps> = ({
           <img
             src={finalist.thumbnail}
             alt={finalist.finalist_name}
-            className="w-full h-full relative z-10 object-cover rounded-[10rem]"
+            className="w-full h-auto relative z-10 rounded-[10rem]"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-500">
@@ -175,7 +177,7 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
 
     // Fetch data using custom hooks
     const {
-      finalists,
+      finalists: apiFinalists,
       isLoading: isLoadingFinalists,
       refetch: refetchFinalists,
     } = useFinalists();
@@ -184,6 +186,10 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
       showVoteCount,
       isLoading: isLoadingSettings,
     } = useVotingSettings();
+
+    // Use mock data for testing or real API data
+    const finalists = apiFinalists;
+
     console.log("currentUserId", currentUserId);
 
     const { castVote, votingFinalistId } = useCastVote(currentUserId);
@@ -295,24 +301,41 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
           {/* Grid of Finalists */}
           {!isLoadingFinalists &&
             !isLoadingSettings &&
-            !isAuthLoading && 
-            finalists && 
+            !isAuthLoading &&
+            finalists &&
             finalists.length > 0 && (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-24 md:gap-240">
-                {finalists.sort((a,b)=>b.vote_count - a.vote_count).map((finalist, index) => (
-                  <FinalistCard
-                    key={finalist.name}
-                    finalist={finalist}
-                    finalistIndex={index}
-                    onVote={handleVote}
-                    onViewVideo={handleViewVideo}
-                    hasVotedForThisFinalist={voted.includes(finalist.name)}
-                    hasVotedForAny={hasVotedForAny}
-                    isVoting={votingFinalistId === finalist.name}
-                    showVoteCount={showVoteCount}
-                    isVotingActive={isVotingActive}
-                  />
-                ))}
+                {(() => {
+                  // Sort finalists by vote count descending
+                  const sortedFinalists = [...finalists].sort((a, b) => (b.vote_count || 0) - (a.vote_count || 0));
+
+                  // Get unique vote counts sorted descending to determine rank levels
+                  // Example: [100, 80, 60, 40] -> rank 1 = 100, rank 2 = 80, rank 3 = 60, rank 4 = 40
+                  const uniqueVoteCounts = [...new Set(sortedFinalists.map(f => f.vote_count || 0))].sort((a, b) => b - a);
+
+                  // Calculate rank based on unique vote count position
+                  // Same vote_count = same rank
+                  const getRank = (voteCount: number): number => {
+                    const rankIndex = uniqueVoteCounts.indexOf(voteCount);
+                    return rankIndex + 1; // rank starts from 1
+                  };
+
+                  return sortedFinalists.map((finalist, index) => (
+                    <FinalistCard
+                      key={finalist.name}
+                      finalist={finalist}
+                      finalistIndex={index}
+                      rank={getRank(finalist.vote_count || 0)}
+                      onVote={handleVote}
+                      onViewVideo={handleViewVideo}
+                      hasVotedForThisFinalist={voted.includes(finalist.name)}
+                      hasVotedForAny={hasVotedForAny}
+                      isVoting={votingFinalistId === finalist.name}
+                      showVoteCount={showVoteCount}
+                      isVotingActive={isVotingActive}
+                    />
+                  ));
+                })()}
               </div>
             )}
 
