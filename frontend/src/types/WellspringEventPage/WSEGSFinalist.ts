@@ -28,4 +28,6 @@ export interface WSEGSFinalist{
 	thumbnail?: string
 	/**	Vote Count : Int	*/
 	vote_count?: number
+	/**	Last Voted At : Datetime	*/
+	last_voted_at?: string
 }

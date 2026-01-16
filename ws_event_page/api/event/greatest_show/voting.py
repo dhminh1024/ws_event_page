@@ -34,6 +34,7 @@ def get_finalists(gs_program=None):
 			"thumbnail",
 			"video_url",
 			"vote_count",
+			"last_voted_at",
 			"display_order"
 		],
 		order_by="display_order asc, finalist_name asc"
@@ -163,12 +164,13 @@ def cast_vote(finalist_id, voter_id=None, voter_email=None, device_fingerprint=N
 	})
 	vote.insert(ignore_permissions=True)
 
-	# Update vote count on finalist
+	# Update vote count and last_voted_at on finalist
 	frappe.db.sql("""
 		UPDATE `tabWSE GS Finalist`
-		SET vote_count = vote_count + 1
+		SET vote_count = vote_count + 1,
+			last_voted_at = %s
 		WHERE name = %s
-	""", finalist_id)
+	""", (now, finalist_id))
 
 	# Get updated vote count
 	updated_count = frappe.db.get_value("WSE GS Finalist", finalist_id, "vote_count")

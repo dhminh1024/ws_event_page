@@ -87,7 +87,7 @@ class WSEGSVote(Document):
 
 	def after_insert(self):
 		"""Update vote count on finalist after insert."""
-		self.update_finalist_vote_count()
+		self.update_finalist_vote_count(is_new_vote=True)
 
 	def on_update(self):
 		"""Update vote count when vote is modified (e.g., cancelled)."""
@@ -99,8 +99,12 @@ class WSEGSVote(Document):
 		"""Update vote count when vote is deleted."""
 		self.update_finalist_vote_count()
 
-	def update_finalist_vote_count(self):
-		"""Recalculate and update vote count for the finalist."""
+	def update_finalist_vote_count(self, is_new_vote=False):
+		"""Recalculate and update vote count for the finalist.
+
+		Args:
+			is_new_vote: If True, also updates the last_voted_at timestamp.
+		"""
 		if not self.finalist:
 			return
 
@@ -116,4 +120,15 @@ class WSEGSVote(Document):
 
 		# Update finalist vote count
 		frappe.db.set_value("WSE GS Finalist", self.finalist, "vote_count", vote_count, update_modified=False)
+
+		# Update last_voted_at timestamp only for new votes
+		if is_new_vote:
+			frappe.db.set_value(
+				"WSE GS Finalist",
+				self.finalist,
+				"last_voted_at",
+				frappe.utils.now_datetime(),
+				update_modified=False
+			)
+
 		frappe.db.commit()

@@ -306,8 +306,16 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
             finalists.length > 0 && (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-24 md:gap-240">
                 {(() => {
-                  // Sort finalists by vote count descending
-                  const sortedFinalists = [...finalists].sort((a, b) => (b.vote_count || 0) - (a.vote_count || 0));
+                  // Sort finalists by vote count descending, then by last_voted_at ascending (earlier first)
+                  const sortedFinalists = [...finalists].sort((a, b) => {
+                    const voteCountDiff = (b.vote_count || 0) - (a.vote_count || 0);
+                    if (voteCountDiff !== 0) return voteCountDiff;
+
+                    // If vote counts are equal, sort by last_voted_at ascending (earlier first)
+                    const aTime = a.last_voted_at ? new Date(a.last_voted_at).getTime() : Infinity;
+                    const bTime = b.last_voted_at ? new Date(b.last_voted_at).getTime() : Infinity;
+                    return aTime - bTime;
+                  });
 
                   // Get unique vote counts sorted descending to determine rank levels
                   // Example: [100, 80, 60, 40] -> rank 1 = 100, rank 2 = 80, rank 3 = 60, rank 4 = 40
