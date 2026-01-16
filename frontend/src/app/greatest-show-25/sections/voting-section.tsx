@@ -319,21 +319,21 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
 
                   // Get unique vote counts sorted descending to determine rank levels
                   // Example: [100, 80, 60, 40] -> rank 1 = 100, rank 2 = 80, rank 3 = 60, rank 4 = 40
-                  const uniqueVoteCounts = [...new Set(sortedFinalists.map(f => f.vote_count || 0))].sort((a, b) => b - a);
+                  // const uniqueVoteCounts = [...new Set(sortedFinalists.map(f => f.vote_count || 0))].sort((a, b) => b - a);
 
                   // Calculate rank based on unique vote count position
                   // Same vote_count = same rank
-                  const getRank = (voteCount: number): number => {
-                    const rankIndex = uniqueVoteCounts.indexOf(voteCount);
-                    return rankIndex + 1; // rank starts from 1
-                  };
+                  // const getRank = (voteCount: number): number => {
+                  //   const rankIndex = uniqueVoteCounts.indexOf(voteCount);
+                  //   return rankIndex + 1; // rank starts from 1
+                  // };
 
                   return sortedFinalists.map((finalist, index) => (
                     <FinalistCard
                       key={finalist.name}
                       finalist={finalist}
                       finalistIndex={index}
-                      rank={getRank(finalist.vote_count || 0)}
+                      rank={index + 1}
                       onVote={handleVote}
                       onViewVideo={handleViewVideo}
                       hasVotedForThisFinalist={voted.includes(finalist.name)}
