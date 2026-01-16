@@ -18,7 +18,8 @@
   "video_url",
   "thumbnail",
   "voting_section",
-  "vote_count"
+  "vote_count",
+  "last_voted_at"
  ],
  "fields": [
   {
@@ -100,6 +101,12 @@
    "fieldname": "vote_count",
    "fieldtype": "Int",
    "label": "Vote Count",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_voted_at",
+   "fieldtype": "Datetime",
+   "label": "Last Voted At",
    "read_only": 1
   }
  ],
