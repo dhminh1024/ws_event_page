@@ -132,12 +132,42 @@ def test_checkin(lead_id):
 
 @frappe.whitelist(allow_guest=True, methods=["GET"])
 def get_lead_by_booking_id(booking_id):
+    """
+    Get lead by booking ID with event registration status.
+
+    Returns:
+        dict: Lead data including:
+            - is_event_registration_closed (bool): Whether event registration is closed
+            - event_registration_closing_time (str, optional): The closing time if set
+    """
     try:
         lead = frappe.get_doc("WSE AC Lead", {"booking_id": booking_id})
     except Exception:
         frappe.throw(WSEACErrorCode.INVALID_BOOKING_ID.value)
 
-    return lead.as_dict()
+    # Get event registration status
+    is_event_registration_closed = False
+    event_registration_closing_time = None
+
+    event = None
+    if lead.ac_event:
+        event = frappe.get_doc("WSE AC Event", lead.ac_event)
+    else:
+        event = get_current_event()
+
+    if event:
+        event_registration_closing_time = event.event_registration_closing_time
+        if not event.open_nhtn_event:
+            is_event_registration_closed = True
+        elif event.event_registration_closing_time:
+            current_time = frappe.utils.get_datetime(frappe.utils.now())
+            if current_time > event.event_registration_closing_time:
+                is_event_registration_closed = True
+
+    response = lead.as_dict()
+    response["is_event_registration_closed"] = is_event_registration_closed
+    response["event_registration_closing_time"] = event_registration_closing_time
+    return response
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])

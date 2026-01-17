@@ -19,6 +19,10 @@ class WSEACEvent(Document):
     if TYPE_CHECKING:
         from frappe.types import DF
 
+        checkin_bg_active: DF.AttachImage | None
+        checkin_bg_idle: DF.AttachImage | None
+        checkin_bg_main: DF.AttachImage | None
+        event_registration_closing_time: DF.Datetime | None
         expired_date: DF.Datetime | None
         is_active: DF.Check
         open_nhtn_event: DF.Check

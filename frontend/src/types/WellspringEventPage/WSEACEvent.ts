@@ -24,6 +24,8 @@ export interface WSEACEvent{
 	open_nhtn_event?: 0 | 1
 	/**	Test Registration Closing Time : Datetime	*/
 	test_registration_closing_time?: string
+	/**	Event Registration Closing Time : Datetime	*/
+	event_registration_closing_time?: string
 	/**	Test Result Attachment : Check	*/
 	test_result_attachment?: 0 | 1
 	/**	Main Background : Attach Image - Main/initial background image for check-in page	*/
