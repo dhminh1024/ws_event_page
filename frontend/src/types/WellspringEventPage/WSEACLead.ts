@@ -75,4 +75,8 @@ export interface WSEACLead {
   result_report?: string;
   /**	Congratulation Letter : Attach	*/
   congratz_letter?: string;
+  /** Whether event registration is closed (computed field from API) */
+  is_event_registration_closed?: boolean;
+  /** Event registration closing time (computed field from API) */
+  event_registration_closing_time?: string;
 }

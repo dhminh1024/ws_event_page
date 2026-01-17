@@ -235,7 +235,9 @@
       "error_message": "Rất tiếc, đã có lỗi xảy ra. Xin vui lòng thử lại sau.",
       "already_registered": "Học sinh đã đăng ký tham gia Sự kiện",
       "wait_for_confirmation": "Chúc mừng Học sinh đã đăng ký thành công tham dự sự kiện 24/01/2026. Quý Phụ huynh vui lòng chờ email xác nhận và thông tin hướng dẫn tiếp theo từ Phòng Tuyển sinh.",
-      "invalid_link": "Đường dẫn đăng ký không hợp lệ hoặc đã hết hạn"
+      "invalid_link": "Đường dẫn đăng ký không hợp lệ hoặc đã hết hạn",
+      "event_closed": "Đăng ký sự kiện đã đóng",
+      "deadline": "Hạn đăng ký: <b>{{time}}</b>"
     }
   },
   "greatest_show_25": {

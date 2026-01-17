@@ -11,6 +11,8 @@ import BannerTopPC from "./assets/images/banner-top-pc.jpg";
 import BannerTopMB from "./assets/images/banner-top-mb.jpg";
 import { useResponsive } from "@/core/hooks/use-reponsive";
 import { ModalProps, NotificationModal } from "./components/notification-modal";
+import { format } from "date-fns";
+import parser from "html-react-parser";
 
 export const Component = () => {
   const { t, currentLanguage } = useLocales();
@@ -31,6 +33,10 @@ export const Component = () => {
     message: ReactNode;
   }>();
   const [registered, setRegistered] = useState(false);
+
+  // Derive event registration status from API response
+  const isEventClosed = lead?.is_event_registration_closed ?? false;
+  const closingTime = lead?.event_registration_closing_time;
 
   // Check if already registered for event
   useEffect(() => {
@@ -130,7 +136,24 @@ export const Component = () => {
               </div>
 
               <div className="text-center">
-                {registered ? (
+                {/* Show deadline when registration is open and closing time is set */}
+                {!isEventClosed && closingTime && (
+                  <p className="text-pt-primary mb-4 text-sm">
+                    {parser(
+                      t("placement_test.event_registration.deadline", {
+                        time: format(new Date(closingTime), "HH:mm dd/MM/yyyy"),
+                      })
+                    )}
+                  </p>
+                )}
+
+                {isEventClosed ? (
+                  <div className="flex flex-col items-center gap-4">
+                    <span className="text-lg font-semibold text-gray-600">
+                      {t("placement_test.event_registration.event_closed")}
+                    </span>
+                  </div>
+                ) : registered ? (
                   <div className="flex flex-col items-center gap-4">
                     <div className="flex items-center gap-2 text-green-600">
                       <Check className="w-6 h-6" />

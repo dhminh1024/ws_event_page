@@ -45,6 +45,7 @@ class WSEACErrorCode(Enum):
     TEST_SLOT_FULL = "WSEAC-E205: Test slot is full"
     TEST_REGISTRATION_CLOSED = "WSEAC-E206: Test registration is closed"
     TEST_REGISTRATION_EXPIRED = "WSEAC-E207: Test registration is expired"
+    EVENT_REGISTRATION_EXPIRED = "WSEAC-E208: Event registration has expired"
 
 
 class WSEACResultType(Enum):
@@ -344,6 +345,12 @@ class WSEACLead(Document):
         event_settings = self._get_event_settings()
         if not event_settings.open_nhtn_event:
             frappe.throw(WSEACErrorCode.EVENT_CLOSED.value)
+
+        # Check closing time
+        if event_settings.event_registration_closing_time:
+            current_time = frappe.utils.get_datetime(frappe.utils.now())
+            if current_time > event_settings.event_registration_closing_time:
+                frappe.throw(WSEACErrorCode.EVENT_REGISTRATION_EXPIRED.value)
 
         if self.status in [
             WSEACLeadStatus.NEW.value,
