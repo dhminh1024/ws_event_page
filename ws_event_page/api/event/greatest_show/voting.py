@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from datetime import datetime
+from frappe.utils import get_datetime
 
 
 @frappe.whitelist(allow_guest=True, methods=["GET"])
@@ -51,12 +51,12 @@ def get_voting_settings():
 	settings = frappe.get_single("WSE GS Voting Settings")
 
 	# Calculate if voting is currently active
-	now = datetime.now()
+	now = get_datetime()
 	is_voting_active = False
 
 	if settings.voting_enabled:
-		start_time = settings.voting_start_datetime
-		end_time = settings.voting_end_datetime
+		start_time = get_datetime(settings.voting_start_datetime) if settings.voting_start_datetime else None
+		end_time = get_datetime(settings.voting_end_datetime) if settings.voting_end_datetime else None
 
 		if start_time and end_time:
 			if start_time <= now <= end_time:
@@ -99,11 +99,14 @@ def cast_vote(finalist_id, voter_id=None, voter_email=None, device_fingerprint=N
 		frappe.throw(_("Voting is not currently enabled"))
 
 	# Check voting period
-	now = datetime.now()
-	if settings.voting_start_datetime and now < settings.voting_start_datetime:
+	now = get_datetime()
+	start_time = get_datetime(settings.voting_start_datetime) if settings.voting_start_datetime else None
+	end_time = get_datetime(settings.voting_end_datetime) if settings.voting_end_datetime else None
+
+	if start_time and now < start_time:
 		frappe.throw(_("Voting has not started yet"))
 
-	if settings.voting_end_datetime and now > settings.voting_end_datetime:
+	if end_time and now > end_time:
 		frappe.throw(_("Voting period has ended"))
 
 	# Get finalist to verify it exists and is active
@@ -164,13 +167,8 @@ def cast_vote(finalist_id, voter_id=None, voter_email=None, device_fingerprint=N
 	})
 	vote.insert(ignore_permissions=True)
 
-	# Update vote count and last_voted_at on finalist
-	frappe.db.sql("""
-		UPDATE `tabWSE GS Finalist`
-		SET vote_count = vote_count + 1,
-			last_voted_at = %s
-		WHERE name = %s
-	""", (now, finalist_id))
+	# Note: vote_count and last_voted_at are updated by the after_insert() hook
+	# in WSE GS Vote DocType via update_finalist_vote_count(is_new_vote=True)
 
 	# Get updated vote count
 	updated_count = frappe.db.get_value("WSE GS Finalist", finalist_id, "vote_count")
@@ -339,14 +337,7 @@ def mark_vote_invalid(vote_id, reason=None):
 	vote.reviewed_at = frappe.utils.now_datetime()
 	vote.save(ignore_permissions=True)
 
-	# Decrement vote count on finalist
-	frappe.db.sql("""
-		UPDATE `tabWSE GS Finalist`
-		SET vote_count = GREATEST(0, vote_count - 1)
-		WHERE name = %s
-	""", vote.finalist)
-
-	frappe.db.commit()
+	# Note: vote_count is recalculated by the on_update() hook when is_valid changes
 
 	return {
 		"success": True,
@@ -372,8 +363,6 @@ def mark_vote_valid(vote_id):
 
 	vote = frappe.get_doc("WSE GS Vote", vote_id)
 
-	was_invalid = vote.is_valid == 0
-
 	# Mark as valid
 	vote.is_valid = 1
 	vote.is_suspicious = 0
@@ -381,15 +370,7 @@ def mark_vote_valid(vote_id):
 	vote.reviewed_at = frappe.utils.now_datetime()
 	vote.save(ignore_permissions=True)
 
-	# Increment vote count on finalist if it was previously invalid
-	if was_invalid:
-		frappe.db.sql("""
-			UPDATE `tabWSE GS Finalist`
-			SET vote_count = vote_count + 1
-			WHERE name = %s
-		""", vote.finalist)
-
-	frappe.db.commit()
+	# Note: vote_count is recalculated by the on_update() hook when is_valid changes
 
 	return {
 		"success": True,

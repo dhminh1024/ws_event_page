@@ -90,9 +90,8 @@ class WSEGSVote(Document):
 		self.update_finalist_vote_count(is_new_vote=True)
 
 	def on_update(self):
-		"""Update vote count when vote is modified (e.g., cancelled)."""
-		# Check if is_cancelled field changed
-		if self.has_value_changed("is_cancelled"):
+		"""Update vote count when vote is modified (e.g., cancelled or validity changed)."""
+		if self.has_value_changed("is_cancelled") or self.has_value_changed("is_valid"):
 			self.update_finalist_vote_count()
 
 	def on_trash(self):
