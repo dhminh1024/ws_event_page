@@ -167,13 +167,8 @@ def cast_vote(finalist_id, voter_id=None, voter_email=None, device_fingerprint=N
 	})
 	vote.insert(ignore_permissions=True)
 
-	# Update vote count and last_voted_at on finalist
-	frappe.db.sql("""
-		UPDATE `tabWSE GS Finalist`
-		SET vote_count = vote_count + 1,
-			last_voted_at = %s
-		WHERE name = %s
-	""", (now, finalist_id))
+	# Note: vote_count and last_voted_at are updated by the after_insert() hook
+	# in WSE GS Vote DocType via update_finalist_vote_count(is_new_vote=True)
 
 	# Get updated vote count
 	updated_count = frappe.db.get_value("WSE GS Finalist", finalist_id, "vote_count")
@@ -342,14 +337,7 @@ def mark_vote_invalid(vote_id, reason=None):
 	vote.reviewed_at = frappe.utils.now_datetime()
 	vote.save(ignore_permissions=True)
 
-	# Decrement vote count on finalist
-	frappe.db.sql("""
-		UPDATE `tabWSE GS Finalist`
-		SET vote_count = GREATEST(0, vote_count - 1)
-		WHERE name = %s
-	""", vote.finalist)
-
-	frappe.db.commit()
+	# Note: vote_count is recalculated by the on_update() hook when is_valid changes
 
 	return {
 		"success": True,
@@ -375,8 +363,6 @@ def mark_vote_valid(vote_id):
 
 	vote = frappe.get_doc("WSE GS Vote", vote_id)
 
-	was_invalid = vote.is_valid == 0
-
 	# Mark as valid
 	vote.is_valid = 1
 	vote.is_suspicious = 0
@@ -384,15 +370,7 @@ def mark_vote_valid(vote_id):
 	vote.reviewed_at = frappe.utils.now_datetime()
 	vote.save(ignore_permissions=True)
 
-	# Increment vote count on finalist if it was previously invalid
-	if was_invalid:
-		frappe.db.sql("""
-			UPDATE `tabWSE GS Finalist`
-			SET vote_count = vote_count + 1
-			WHERE name = %s
-		""", vote.finalist)
-
-	frappe.db.commit()
+	# Note: vote_count is recalculated by the on_update() hook when is_valid changes
 
 	return {
 		"success": True,

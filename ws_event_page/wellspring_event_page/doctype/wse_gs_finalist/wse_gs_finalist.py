@@ -36,3 +36,24 @@ class WSEGSFinalist(Document):
 		if self.is_active and self.gs_program:
 			# Check if program is current/active
 			pass
+
+	def recalculate_vote_count(self):
+		"""Recalculate vote count from all valid, non-cancelled votes."""
+		vote_count = frappe.db.count(
+			"WSE GS Vote",
+			filters={
+				"finalist": self.name,
+				"is_valid": 1,
+				"is_cancelled": 0,
+			},
+		)
+		self.db_set("vote_count", vote_count, update_modified=False)
+		return vote_count
+
+
+@frappe.whitelist()
+def recalculate_vote_count(finalist_id):
+	"""API method to recalculate vote count for a finalist."""
+	finalist = frappe.get_doc("WSE GS Finalist", finalist_id)
+	new_count = finalist.recalculate_vote_count()
+	return {"vote_count": new_count}
