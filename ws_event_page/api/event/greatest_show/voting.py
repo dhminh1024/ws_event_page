@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from datetime import datetime
+from frappe.utils import get_datetime
 
 
 @frappe.whitelist(allow_guest=True, methods=["GET"])
@@ -51,12 +51,12 @@ def get_voting_settings():
 	settings = frappe.get_single("WSE GS Voting Settings")
 
 	# Calculate if voting is currently active
-	now = datetime.now()
+	now = get_datetime()
 	is_voting_active = False
 
 	if settings.voting_enabled:
-		start_time = settings.voting_start_datetime
-		end_time = settings.voting_end_datetime
+		start_time = get_datetime(settings.voting_start_datetime) if settings.voting_start_datetime else None
+		end_time = get_datetime(settings.voting_end_datetime) if settings.voting_end_datetime else None
 
 		if start_time and end_time:
 			if start_time <= now <= end_time:
@@ -99,11 +99,14 @@ def cast_vote(finalist_id, voter_id=None, voter_email=None, device_fingerprint=N
 		frappe.throw(_("Voting is not currently enabled"))
 
 	# Check voting period
-	now = datetime.now()
-	if settings.voting_start_datetime and now < settings.voting_start_datetime:
+	now = get_datetime()
+	start_time = get_datetime(settings.voting_start_datetime) if settings.voting_start_datetime else None
+	end_time = get_datetime(settings.voting_end_datetime) if settings.voting_end_datetime else None
+
+	if start_time and now < start_time:
 		frappe.throw(_("Voting has not started yet"))
 
-	if settings.voting_end_datetime and now > settings.voting_end_datetime:
+	if end_time and now > end_time:
 		frappe.throw(_("Voting period has ended"))
 
 	# Get finalist to verify it exists and is active
