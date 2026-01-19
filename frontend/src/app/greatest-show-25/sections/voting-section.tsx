@@ -187,8 +187,16 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
       isLoading: isLoadingSettings,
     } = useVotingSettings();
 
-    // Use mock data for testing or real API data
-    const finalists = apiFinalists;
+    // Sort finalists by vote count descending, then by last_voted_at ascending (earlier first)
+    const sortedFinalists = [...(apiFinalists || [])].sort((a, b) => {
+      const voteCountDiff = (b.vote_count || 0) - (a.vote_count || 0);
+      if (voteCountDiff !== 0) return voteCountDiff;
+
+      // If vote counts are equal, sort by last_voted_at ascending (earlier first)
+      const aTime = a.last_voted_at ? new Date(a.last_voted_at).getTime() : Infinity;
+      const bTime = b.last_voted_at ? new Date(b.last_voted_at).getTime() : Infinity;
+      return aTime - bTime;
+    });
 
     console.log("currentUserId", currentUserId);
 
@@ -245,13 +253,13 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
     };
 
     const handleNextFinalist = () => {
-      if (finalists && currentFinalistIndex < finalists.length - 1) {
+      if (sortedFinalists && currentFinalistIndex < sortedFinalists.length - 1) {
         setCurrentFinalistIndex(currentFinalistIndex + 1);
       }
     };
 
     // Get current finalist data
-    const currentFinalist = finalists[currentFinalistIndex];
+    const currentFinalist = sortedFinalists[currentFinalistIndex];
     const currentVideoUrl = currentFinalist?.video_url || "";
     const currentVideoTitle = currentFinalist?.finalist_name || "";
 
@@ -271,7 +279,7 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
       return url;
     };
 
-    if(finalists.length === 0) return null
+    if(sortedFinalists.length === 0) return null
     return (
       <section
         className={cn("overflow-hidden bg-gs25-secondary bg-gs25-gradient-9", className)}
@@ -302,48 +310,24 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
           {!isLoadingFinalists &&
             !isLoadingSettings &&
             !isAuthLoading &&
-            finalists &&
-            finalists.length > 0 && (
+            sortedFinalists &&
+            sortedFinalists.length > 0 && (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-24 md:gap-240">
-                {(() => {
-                  // Sort finalists by vote count descending, then by last_voted_at ascending (earlier first)
-                  const sortedFinalists = [...finalists].sort((a, b) => {
-                    const voteCountDiff = (b.vote_count || 0) - (a.vote_count || 0);
-                    if (voteCountDiff !== 0) return voteCountDiff;
-
-                    // If vote counts are equal, sort by last_voted_at ascending (earlier first)
-                    const aTime = a.last_voted_at ? new Date(a.last_voted_at).getTime() : Infinity;
-                    const bTime = b.last_voted_at ? new Date(b.last_voted_at).getTime() : Infinity;
-                    return aTime - bTime;
-                  });
-
-                  // Get unique vote counts sorted descending to determine rank levels
-                  // Example: [100, 80, 60, 40] -> rank 1 = 100, rank 2 = 80, rank 3 = 60, rank 4 = 40
-                  // const uniqueVoteCounts = [...new Set(sortedFinalists.map(f => f.vote_count || 0))].sort((a, b) => b - a);
-
-                  // Calculate rank based on unique vote count position
-                  // Same vote_count = same rank
-                  // const getRank = (voteCount: number): number => {
-                  //   const rankIndex = uniqueVoteCounts.indexOf(voteCount);
-                  //   return rankIndex + 1; // rank starts from 1
-                  // };
-
-                  return sortedFinalists.map((finalist, index) => (
-                    <FinalistCard
-                      key={finalist.name}
-                      finalist={finalist}
-                      finalistIndex={index}
-                      rank={index + 1}
-                      onVote={handleVote}
-                      onViewVideo={handleViewVideo}
-                      hasVotedForThisFinalist={voted.includes(finalist.name)}
-                      hasVotedForAny={hasVotedForAny}
-                      isVoting={votingFinalistId === finalist.name}
-                      showVoteCount={showVoteCount}
-                      isVotingActive={isVotingActive}
-                    />
-                  ));
-                })()}
+                {sortedFinalists.map((finalist, index) => (
+                  <FinalistCard
+                    key={finalist.name}
+                    finalist={finalist}
+                    finalistIndex={index}
+                    rank={index + 1}
+                    onVote={handleVote}
+                    onViewVideo={handleViewVideo}
+                    hasVotedForThisFinalist={voted.includes(finalist.name)}
+                    hasVotedForAny={hasVotedForAny}
+                    isVoting={votingFinalistId === finalist.name}
+                    showVoteCount={showVoteCount}
+                    isVotingActive={isVotingActive}
+                  />
+                ))}
               </div>
             )}
 
@@ -351,7 +335,7 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
           {!isLoadingFinalists &&
             !isLoadingSettings &&
             !isAuthLoading &&
-            (!finalists || finalists.length === 0) && (
+            (!sortedFinalists || sortedFinalists.length === 0) && (
               <div className="text-center text-white text-[16rem]">
                 {t("greatest_show_25.no_finalists")}
               </div>
@@ -391,7 +375,7 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
                 </button>
               )}
 
-              <div className="w-[75%] mx-auto">
+              <div className="w-[90%] max-w-[1280px] mx-auto">
                 {/* Video iframe */}
                 <div className="relative w-full h-0 pb-[56.25%] rounded-lg overflow-hidden shadow-lg">
                   <iframe
@@ -443,7 +427,7 @@ export const VotingSection = forwardRef<HTMLDivElement, VotingSectionProps>(
               </div>
 
               {/* Next Button */}
-              {finalists && currentFinalistIndex < finalists.length - 1 && (
+              {sortedFinalists && currentFinalistIndex < sortedFinalists.length - 1 && (
                 <button
                   onClick={handleNextFinalist}
                   className="absolute right-0 md:right-[2%] cursor-pointer duration-300 top-1/2 -translate-y-1/2 z-10 hover:scale-110 transition-transform"
