@@ -248,13 +248,14 @@ def get_all_test_slots(booking_id):
 @frappe.whitelist(allow_guest=True, methods=["GET"])
 def get_checkin_page_images():
     """
-    Get all background images for check-in page from current event.
+    Get all background images and event status flags for check-in pages.
 
     Returns:
-        dict: Contains 'main', 'active', and 'idle' image URLs.
+        dict: Contains 'main', 'active', 'idle' image URLs,
+              and 'open_nhtn_event', 'open_test_registration' status flags.
     """
     defaults = {
-        "main": "/assets/ws_event_page/images/KV_TS_2526.jpg",
+        "main": "/assets/ws_event_page/images/NHTN_BG_01.jpg",
         "active": "/assets/ws_event_page/images/NHTN_BG_02.jpg",
         "idle": "/assets/ws_event_page/images/NHTN_BG_01.jpg",
     }
@@ -265,9 +266,15 @@ def get_checkin_page_images():
             "main": event.checkin_bg_main or defaults["main"],
             "active": event.checkin_bg_active or defaults["active"],
             "idle": event.checkin_bg_idle or defaults["idle"],
+            "open_nhtn_event": event.open_nhtn_event,
+            "open_test_registration": event.open_test_registration,
         }
 
-    return defaults
+    return {
+        **defaults,
+        "open_nhtn_event": False,
+        "open_test_registration": False,
+    }
 
 
 @frappe.whitelist(allow_guest=True, methods=["GET"])

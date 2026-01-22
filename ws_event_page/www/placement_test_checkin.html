@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -11,7 +11,6 @@
 
     <style>
       body {
-        /* background-image: url("/assets/ws_event_page/images/KV_TS_2526.jpg"); */
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -77,9 +76,53 @@
           transform: rotate(360deg);
         }
       }
+
+      .announcement-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 40, 85, 0.95);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      .announcement-text {
+        color: white;
+        font-size: 2.5rem;
+        text-align: center;
+        max-width: 800px;
+        line-height: 1.5;
+      }
+      .announcement-text.vietnamese {
+        margin-bottom: 30px;
+      }
+      .announcement-text.english {
+        color: #f0f0f0;
+        font-size: 2rem;
+      }
     </style>
   </head>
   <body>
+    <!-- Announcement overlay for closed test registration -->
+    <div
+      id="announcement-overlay"
+      class="announcement-overlay"
+      style="display: none"
+    >
+      <div class="announcement-text vietnamese">
+        Đăng ký kiểm tra hiện chưa mở.<br />Vui lòng quay lại sau.
+      </div>
+      <div class="announcement-text english">
+        Test registration is not currently open.<br />Please come back later.
+      </div>
+    </div>
+
     <input type="text" id="hidden-input" class="hidden-input" value="G1-122" />
     <div class="container">
       <div id="display-registration-number" class="display-title"></div>
@@ -102,7 +145,7 @@
         idle: "#",
       };
 
-      // Load background images from API
+      // Load background images and event status from API
       function loadBackgroundImages() {
         $.ajax({
           url: "/api/method/ws_event_page.api.event.admission_checkin.lead.get_checkin_page_images",
@@ -112,6 +155,12 @@
               bgImages = r.message;
               // Apply main background after loading
               $("body").css("background-image", "url('" + bgImages.main + "')");
+
+              // Check if test registration is open
+              if (!r.message.open_test_registration) {
+                $("#announcement-overlay").show();
+                $(".container").hide();
+              }
             }
           },
         });
@@ -190,12 +239,12 @@
                           " | " +
                           lead.test_slot_start_time +
                           " - " +
-                          lead.test_slot_end_time
+                          lead.test_slot_end_time,
                       );
                       $("#checkin-success").show();
                     } else {
                       $("#display-test-slot").html(
-                        "Không tìm thấy đăng ký lịch thi!"
+                        "Không tìm thấy đăng ký lịch thi!",
                       );
                     }
                     $("#spinner").hide();
@@ -240,7 +289,7 @@
               // Start a new countdown interval
               countdownInterval = setInterval(function () {
                 $("#countdown-timer").text(
-                  `Xoá dữ liệu trong (Clearing data in) : ${countdown} giây (seconds)`
+                  `Xoá dữ liệu trong (Clearing data in) : ${countdown} giây (seconds)`,
                 ); // Display countdown
                 countdown--;
 
@@ -258,7 +307,7 @@
                   $("#hidden-input").focus();
                   $("body").css(
                     "background-image",
-                    "url('" + bgImages.idle + "')"
+                    "url('" + bgImages.idle + "')",
                   );
                 }
               }, 1000); // Update every second (1000 ms)
