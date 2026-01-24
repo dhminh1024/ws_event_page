@@ -216,7 +216,7 @@
     "registered_slot": "Lịch đã đăng ký",
     "registration_success": {
       "title": "Đăng ký thành công",
-      "message": "Cảm ơn bạn đã đăng ký tham gia khảo sát. Email xác nhận sẽ được gủi tới <b>{{email}}</b>"
+      "message": "Cảm ơn Quý Phụ huynh đã đăng ký Lịch khảo sát cho Học sinh. Thư xác nhận và thông tin hướng dẫn sẽ được gửi đến <b>{{email}}</b>"
     },
     "registration_max_capacity": {
       "title": "Đăng ký thất bại",
