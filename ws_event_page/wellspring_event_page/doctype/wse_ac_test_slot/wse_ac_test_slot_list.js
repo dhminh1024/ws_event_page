@@ -13,5 +13,33 @@ frappe.listview_settings["WSE AC Test Slot"] = {
           ]);
         }
       });
+
+    // Add action button to recalculate counts for selected slots
+    listview.page.add_action_item(__("Recalculate Counts"), () => {
+      let names = [];
+      $.each(listview.get_checked_items(), function (key, value) {
+        names.push(value.name);
+      });
+      if (names.length === 0) {
+        frappe.throw(__("No rows selected."));
+      }
+
+      frappe.confirm(
+        __("Recalculate counts for {0} selected slot(s)?", [names.length]),
+        function () {
+          frappe.call({
+            method:
+              "ws_event_page.api.event.admission_checkin.lead.recalculate_test_slot_counts",
+            args: { slot_ids_str: names.join(",") },
+            callback: function (r) {
+              if (r.message) {
+                frappe.msgprint(r.message.message);
+                listview.refresh();
+              }
+            },
+          });
+        }
+      );
+    });
   },
 };

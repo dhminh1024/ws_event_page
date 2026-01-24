@@ -74,6 +74,32 @@ frappe.ui.form.on("WSE AC Lead", {
         color: "#fff",
       });
 
+      // Add Cancel Registration button (only if registered for test)
+      if (frm.doc.progress_status === "Registered For Test") {
+        let cancelBtn = frm.add_custom_button("Cancel Registration", () => {
+          frappe.confirm(
+            "Are you sure you want to cancel this test registration?",
+            () => {
+              frappe.call({
+                method:
+                  "ws_event_page.api.event.admission_checkin.lead.cancel_test_registration",
+                args: {
+                  lead_id: frm.doc.name,
+                  booking_id: frm.doc.booking_id,
+                },
+                callback: (r) => {
+                  if (r.message) {
+                    frappe.msgprint(r.message.message);
+                    frm.reload_doc();
+                  }
+                },
+              });
+            }
+          );
+        });
+        cancelBtn.addClass("btn-danger");
+      }
+
       // Add button to open booking form
       if (frm.doc.booking_id) {
         frm.add_custom_button("Open Booking Form", () => {
