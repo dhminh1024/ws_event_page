@@ -133,10 +133,30 @@ class WSEACLead(Document):
         return settings
 
     def before_save(self):
-        # if registered_slot is changed, check if the new slot is full and update the current_registered field
+        """Update test slot counts when registered_slot changes via desk edit."""
+        # Skip if called from register_for_test() - it handles counts itself
+        if getattr(self.flags, "skip_slot_sync", False):
+            return
+
         previous_doc = self.get_doc_before_save()
         if previous_doc and previous_doc.registered_slot != self.registered_slot:
-            pass
+            # Decrement old slot count
+            if previous_doc.registered_slot:
+                old_slot = frappe.get_doc(
+                    "WSE AC Test Slot", previous_doc.registered_slot
+                )
+                old_slot.calculate_current_registered(-1)
+
+            # Increment new slot count (if registering to a new slot)
+            if self.registered_slot:
+                new_slot = frappe.get_doc("WSE AC Test Slot", self.registered_slot)
+                new_slot.calculate_current_registered(1)
+
+    def on_trash(self):
+        """Decrement test slot count when lead is deleted."""
+        if self.registered_slot:
+            test_slot = frappe.get_doc("WSE AC Test Slot", self.registered_slot)
+            test_slot.calculate_current_registered(-1)
 
     def generate_qr_code(self):
         # generate qr code
@@ -510,7 +530,8 @@ class WSEACLead(Document):
         Register for a test slot with concurrent access handling.
 
         Uses retry mechanism to handle race conditions during simultaneous
-        registrations.
+        registrations. Only TimestampMismatchError triggers retry; other
+        errors fail immediately.
         """
         is_test_registration_open(lead=self)
 
@@ -518,58 +539,56 @@ class WSEACLead(Document):
         if self.registered_slot == slot_id:
             frappe.throw(WSEACErrorCode.ALREADY_REGISTERED_FOR_SLOT.value)
 
-        # Get previous slot for potential decrement
-        prev_slot = None
-        if self.registered_slot:
-            prev_slot = frappe.get_doc("WSE AC Test Slot", self.registered_slot)
-
+        # Store previous slot ID (not document) for reloading in retry loop
+        prev_slot_id = self.registered_slot
         max_retries = 8
-        is_full = False
 
         for attempt in range(max_retries):
             if attempt > 0:
                 time.sleep(0.5)
 
             try:
-                # Reload test slot to get fresh data
+                # Use savepoint for rollback capability on failure
+                frappe.db.savepoint("register_test")
+
+                # Reload test slot fresh each attempt
                 test_slot = frappe.get_doc("WSE AC Test Slot", slot_id)
 
-                # Check if slot is enabled
+                # Check if slot is enabled (fail immediately, don't retry)
                 if not test_slot.is_enabled:
                     frappe.throw(WSEACErrorCode.TEST_SLOT_DISABLED.value)
 
-                # Check if slot is already full
-                if test_slot.is_full:
-                    is_full = True
-                    break
+                # Note: We don't check test_slot.is_full here because the stored
+                # flag may be stale. Instead, calculate_current_registered() will
+                # count from DB and validate capacity with the real count.
 
-                # Atomically increment new slot count
+                # Increment new slot count (will throw if slot is actually full)
                 test_slot.calculate_current_registered(1)
 
-                # Decrement previous slot if changing registration
-                if prev_slot:
+                # Decrement previous slot if changing registration (reload fresh)
+                if prev_slot_id:
+                    prev_slot = frappe.get_doc("WSE AC Test Slot", prev_slot_id)
                     prev_slot.calculate_current_registered(-1)
 
-                break
+                # Update lead registration details (inside retry block)
+                self.registered_slot = slot_id
+                self.progress_status = WSEACTestStatus.REGISTERED_FOR_TEST.value
+                self.test_registered_at = frappe.utils.now()
+                # Skip before_save slot sync - we handle counts directly above
+                self.flags.skip_slot_sync = True
+                self.save()
 
-            except Exception:
+                break  # Success - exit retry loop
+
+            except frappe.exceptions.TimestampMismatchError:
+                # Only retry on timestamp mismatch (concurrent modification)
+                frappe.db.rollback(save_point="register_test")
                 if attempt == (max_retries - 1):
                     frappe.throw("System is busy, please try again later")
-                else:
-                    frappe.db.commit()
-
-        if is_full:
-            frappe.throw(WSEACErrorCode.TEST_SLOT_FULL.value)
-
-        # Update lead registration details
-        self.registered_slot = slot_id
-        self.progress_status = WSEACTestStatus.REGISTERED_FOR_TEST.value
-        self.test_registered_at = frappe.utils.now()
-        self.save()
+                # Otherwise continue to next attempt
 
         # Send confirmation email if requested
-        print("Send email:", send_email)
-        if str(send_email) == "1":
+        if frappe.utils.cint(send_email):
             self.send_test_registration_confirmation_email()
 
 

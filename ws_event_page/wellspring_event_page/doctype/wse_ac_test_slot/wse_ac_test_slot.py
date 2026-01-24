@@ -47,9 +47,20 @@ class WSEACTestSlot(Document):
 
         Args:
             factor: Amount to add to the count (1 for new registration, -1 for removal).
+
+        Raises:
+            frappe.ValidationError: If the slot would exceed max capacity after the operation.
         """
         self.current_registered = frappe.db.count(
             "WSE AC Lead", {"registered_slot": self.name}
         )
         self.current_registered += factor
+
+        # Check capacity BEFORE saving (after we have real count from DB)
+        # This prevents race conditions where the stored is_full flag is stale
+        if self.current_registered > self.max_capacity:
+            frappe.throw(
+                f"Test slot is full ({self.max_capacity}/{self.max_capacity})"
+            )
+
         self.save()

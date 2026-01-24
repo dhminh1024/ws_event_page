@@ -540,3 +540,86 @@ def sync_leads_to_ac(leads_json):
         "skipped": results["skipped"],
         "failed": results["failed"],
     }
+
+
+@frappe.whitelist(methods=["POST"])
+def cancel_test_registration(lead_id, booking_id):
+    """
+    Cancel a lead's test registration.
+    Clears registered_slot, resets progress_status, clears test_registered_at.
+
+    Args:
+        lead_id: The WSE AC Lead document name.
+        booking_id: The booking ID to verify the request.
+
+    Returns:
+        dict: Success message.
+    """
+    lead = frappe.get_doc("WSE AC Lead", lead_id)
+
+    if lead.booking_id != booking_id:
+        frappe.throw(WSEACErrorCode.INVALID_BOOKING_ID.value)
+
+    if lead.progress_status != WSEACTestStatus.REGISTERED_FOR_TEST.value:
+        frappe.throw("Lead is not registered for a test")
+
+    # Store old slot for decrementing
+    old_slot_id = lead.registered_slot
+
+    # Clear registration fields
+    lead.registered_slot = None
+    lead.test_registered_at = None
+
+    # Reset progress_status based on invitation_sent_at
+    if lead.invitation_sent_at:
+        lead.progress_status = WSEACTestStatus.INVITATION_EMAIL_SENT.value
+    else:
+        lead.progress_status = WSEACTestStatus.WAITING_FOR_INVITATION.value
+
+    # Skip slot sync in before_save - we handle it here
+    lead.flags.skip_slot_sync = True
+    lead.save()
+
+    # Decrement old slot count
+    if old_slot_id:
+        old_slot = frappe.get_doc("WSE AC Test Slot", old_slot_id)
+        old_slot.calculate_current_registered(-1)
+
+    return {"message": "Registration cancelled successfully"}
+
+
+@frappe.whitelist(methods=["POST"])
+def recalculate_test_slot_counts(slot_ids_str):
+    """
+    Recalculate current_registered for selected test slots from actual DB data.
+    Fixes any count desync issues.
+
+    Args:
+        slot_ids_str: Comma-separated list of test slot IDs.
+
+    Returns:
+        dict: Summary of recalculation results.
+    """
+    if (
+        "WSE AC Admin" not in frappe.get_roles()
+        and "System Manager" not in frappe.get_roles()
+    ):
+        frappe.throw("Permission denied - Admin role required")
+
+    slot_ids = slot_ids_str.split(",")
+    fixed_count = 0
+
+    for slot_name in slot_ids:
+        slot = frappe.get_doc("WSE AC Test Slot", slot_name)
+        old_count = slot.current_registered
+        actual_count = frappe.db.count("WSE AC Lead", {"registered_slot": slot_name})
+
+        if old_count != actual_count:
+            slot.current_registered = actual_count
+            slot.save()
+            fixed_count += 1
+
+    frappe.db.commit()
+    return {
+        "message": f"Recalculated {len(slot_ids)} slot(s), fixed {fixed_count} with wrong counts"
+    }
