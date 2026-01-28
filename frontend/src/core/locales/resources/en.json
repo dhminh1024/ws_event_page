@@ -210,6 +210,7 @@
   "placement_test": {
     "registration_title": "Placement Test Registration",
     "registration_closed": "The form is currently closed!",
+    "no_test_slots": "There are no available test slots for your grade at this time. Please contact the Admissions Office for further assistance.",
     "registration_number": "Registration Number:",
     "time_slots": "Time",
     "capacity": "Capacity",
