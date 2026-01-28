@@ -22,6 +22,7 @@ class WSEACTestSlot(Document):
         is_full: DF.Check
         max_capacity: DF.Int
         start_time: DF.Time
+        student_grade: DF.Literal["G01", "G02", "G03", "G04", "G05", "G06", "G07", "G08", "G09", "G10", "G11", "G12"]
         title: DF.Data | None
     # end: auto-generated types
 
@@ -39,7 +40,7 @@ class WSEACTestSlot(Document):
         self.is_full = self.current_registered >= self.max_capacity
 
         # Update title
-        self.title = f"{self.date} | {self.start_time} - {self.end_time} | {self.current_registered}/{self.max_capacity}"
+        self.title = f"{self.student_grade} | {self.date} | {self.start_time} - {self.end_time} | {self.current_registered}/{self.max_capacity}"
 
     def calculate_current_registered(self, factor=0):
         """

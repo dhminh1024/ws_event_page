@@ -189,6 +189,25 @@ def register_for_test(lead_id, test_slot_id, booking_id, switch_slot=0, send_ema
     if lead.booking_id != booking_id:
         frappe.throw(WSEACErrorCode.INVALID_BOOKING_ID.value)
 
+    # Validate slot grade matches lead grade
+    slot = frappe.get_doc("WSE AC Test Slot", test_slot_id)
+    if slot.student_grade and slot.student_grade != lead.student_grade:
+        frappe.throw("This test slot is not available for your grade")
+
+    # Validate lead's grade is in opened grades (if configured)
+    event = None
+    if lead.ac_event:
+        event = frappe.get_doc("WSE AC Event", lead.ac_event)
+    else:
+        event = get_current_event()
+
+    if event and event.test_registration_opened_grades:
+        opened_grades = [
+            g.strip() for g in event.test_registration_opened_grades.split(",") if g.strip()
+        ]
+        if opened_grades and lead.student_grade not in opened_grades:
+            frappe.throw("Test registration is not open for your grade")
+
     if lead.registered_slot:
         if not switch_slot:
             frappe.throw(WSEACErrorCode.ALREADY_REGISTERED.value)
@@ -222,16 +241,30 @@ def get_all_test_slots(booking_id):
     except Exception:
         frappe.throw(WSEACErrorCode.INVALID_BOOKING_ID.value)
 
-    # Build filters based on event
-    filters = {"is_enabled": 1}
-
-    # Prefer lead's event, then current event
+    # Determine the event
+    event = None
     if lead.ac_event:
-        filters["ac_event"] = lead.ac_event
+        event = frappe.get_doc("WSE AC Event", lead.ac_event)
     else:
         event = get_current_event()
-        if event:
-            filters["ac_event"] = event.name
+
+    if not event:
+        return []
+
+    # Check if lead's grade is in opened grades (if configured)
+    if event.test_registration_opened_grades:
+        opened_grades = [
+            g.strip() for g in event.test_registration_opened_grades.split(",") if g.strip()
+        ]
+        if opened_grades and lead.student_grade not in opened_grades:
+            return []
+
+    # Build filters — filter by grade
+    filters = {
+        "is_enabled": 1,
+        "ac_event": event.name,
+        "student_grade": lead.student_grade,
+    }
 
     test_slots = frappe.get_all(
         "WSE AC Test Slot",

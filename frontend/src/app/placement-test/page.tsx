@@ -63,7 +63,7 @@ export function CustomDayContent(props: DayCalendarProps) {
             "absolute left-0 right-0 m-auto bottom-[-5px] dot w-1 h-1 bg-pt-ember rounded-full mx-auto",
             {
               "bg-white": props.activeModifiers.selected,
-            }
+            },
           )}
         ></div>
       )}
@@ -115,15 +115,15 @@ export const Component = () => {
     if (lead?.registered_slot && !dateSelected) {
       // console.log("SET SLOT", lead?.registered_slot);
       setDateSelected(
-        currentSlot?.date ? new Date(currentSlot?.date) : undefined
+        currentSlot?.date ? new Date(currentSlot?.date) : undefined,
       );
       setSlotSelected(lead?.registered_slot);
     } else if (!dateSelected) {
-      // console.log("SET FIRST SLOT", testSlots?.[0].name);
+      // console.log("SET FIRST SLOT", testSlots?.[0]?.name);
       setDateSelected(
-        testSlots?.[0].date ? new Date(testSlots?.[0].date) : undefined
+        testSlots?.[0]?.date ? new Date(testSlots[0].date) : undefined,
       );
-      setSlotSelected(testSlots?.[0].name);
+      setSlotSelected(testSlots?.[0]?.name);
     }
   }, [lead, dateSelected, testSlots, currentSlot]);
 
@@ -148,7 +148,7 @@ export const Component = () => {
           message: parser(
             t("placement_test.registration_success.message", {
               email: lead?.contact_email,
-            })
+            }),
           ),
         });
       } catch (error: any) {
@@ -256,12 +256,12 @@ export const Component = () => {
                         {format(
                           parseDate(currentSlot?.date, "yyyy-MM-dd"),
                           "EEEE, dd/MM/yyyy",
-                          { locale: getDateLocale(currentLanguage) }
+                          { locale: getDateLocale(currentLanguage) },
                         ) +
                           " | " +
                           format(
                             parseDate("2025-01-01 " + currentSlot.start_time),
-                            "HH:mm"
+                            "HH:mm",
                           )}
                         <Check className="text-green-500 w-5 h-5 inline" />
                       </p>
@@ -287,16 +287,16 @@ export const Component = () => {
                 {useMemo(
                   () => (
                     <CalendarStyled
-                      key={testSlots?.[0].name}
+                      key={testSlots?.[0]?.name}
                       mode="single"
                       defaultMonth={
-                        testSlots?.[0].date
+                        testSlots?.[0]?.date
                           ? new Date(testSlots[0].date)
                           : new Date()
                       }
                       disabled={(date) =>
                         !Object.keys(dayGroupBy || {})?.includes(
-                          format(date, "dd/MM").toString()
+                          format(date, "dd/MM").toString(),
                         )
                       }
                       showOutsideDays={false}
@@ -309,107 +309,113 @@ export const Component = () => {
                       onSelect={(date) => date && setDateSelected(date)}
                     />
                   ),
-                  [testSlots, dateSelected, currentLanguage, dayGroupBy]
+                  [testSlots, dateSelected, currentLanguage, dayGroupBy],
                 )}
               </div>
               <div className="p-5 h-full">
-                {dateSelected && (
-                  <div className="h-full flex flex-col justify-between">
-                    <div className="">
-                      <p className="font-bold text-pt-primary mb-5">
-                        <span className="text-md md:text-xl mr-2 text-pt-ember">
-                          {dateSelected &&
-                            format(dateSelected, "EEEE", {
-                              locale: getDateLocale(currentLanguage),
-                            })}
-                        </span>
-                        <span className="opacity-80 text-sm">
-                          {dateSelected &&
-                            format(dateSelected, "dd MMM yyyy", {
-                              locale: getDateLocale(currentLanguage),
-                            })}
-                        </span>
-                      </p>
-                      <div className="flex flex-col gap-2">
-                        <div className="flex justify-between text-sm text-hr-primary/80">
-                          <span>{t("placement_test.time_slots")}</span>
-                          <span>{t("placement_test.capacity")}</span>
-                        </div>
-                        {testSlots
-                          ?.filter(
-                            (slot) =>
-                              dateSelected &&
-                              format(
-                                parseDate(slot.date, "yyyy-MM-dd"),
-                                "yyyy-MM-dd"
-                              ) === format(dateSelected, "yyyy-MM-dd")
-                          )
-                          // .sort((a, b) => {
-                          //   return (
-                          //     new Date("2025-01-01 " + a.start_time).getHours() -
-                          //     new Date("2025-01-01 " + b.start_time).getHours()
-                          //   );
-                          // })
-                          .map((slot) => (
-                            <Button
-                              key={slot.name}
-                              className={cn(
-                                "text-pt-primary border-pt-primary bg-pt-background/20 hover:bg-slate-200 hover:text-pt-primary flex justify-between",
-                                {
-                                  "bg-pt-primary! text-white!":
-                                    slot.name === slotSelected,
-                                },
-                                {
-                                  "opacity-50":
-                                    slot.current_registered ===
-                                    slot.max_capacity,
-                                }
-                              )}
-                              disabled={
-                                slot.current_registered === slot.max_capacity
-                              }
-                              variant="outline"
-                              onClick={() => setSlotSelected(slot.name)}
-                            >
-                              <span>
-                                {format(
-                                  parseDate("2025-01-01 " + slot.start_time),
-                                  "HH:mm"
-                                )}{" "}
-                                -{" "}
-                                {format(
-                                  parseDate("2025-01-01 " + slot.end_time),
-                                  "HH:mm"
-                                )}
-                              </span>
-                              <span>{`${slot.current_registered}/${slot.max_capacity}`}</span>
-                            </Button>
-                          ))}
-                      </div>
-                      <div className="w-full mt-5">
-                        {!isOpenRegistration && (
-                          <p className="text-sm italic text-destructive mb-1">
-                            {t("placement_test.registration_closed")}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                    <Button
-                      className="w-full"
-                      onClick={handleSubmit}
-                      disabled={
-                        !isOpenRegistration ||
-                        lead?.registered_slot === slotSelected ||
-                        !slotSelected ||
-                        loading
-                      }
-                    >
-                      {loading && (
-                        <Loader2 className="mr-2 animate-spin w-4 h-4 text-white" />
-                      )}
-                      Submit
-                    </Button>
+                {!testSlots || testSlots.length === 0 ? (
+                  <div className="text-center text-pt-ember/80 py-5">
+                    <p>{t("placement_test.no_test_slots")}</p>
                   </div>
+                ) : (
+                  dateSelected && (
+                    <div className="h-full flex flex-col justify-between">
+                      <div className="">
+                        <p className="font-bold text-pt-primary mb-5">
+                          <span className="text-md md:text-xl mr-2 text-pt-ember">
+                            {dateSelected &&
+                              format(dateSelected, "EEEE", {
+                                locale: getDateLocale(currentLanguage),
+                              })}
+                          </span>
+                          <span className="opacity-80 text-sm">
+                            {dateSelected &&
+                              format(dateSelected, "dd MMM yyyy", {
+                                locale: getDateLocale(currentLanguage),
+                              })}
+                          </span>
+                        </p>
+                        <div className="flex flex-col gap-2">
+                          <div className="flex justify-between text-sm text-hr-primary/80">
+                            <span>{t("placement_test.time_slots")}</span>
+                            <span>{t("placement_test.capacity")}</span>
+                          </div>
+                          {testSlots
+                            ?.filter(
+                              (slot) =>
+                                dateSelected &&
+                                format(
+                                  parseDate(slot.date, "yyyy-MM-dd"),
+                                  "yyyy-MM-dd",
+                                ) === format(dateSelected, "yyyy-MM-dd"),
+                            )
+                            // .sort((a, b) => {
+                            //   return (
+                            //     new Date("2025-01-01 " + a.start_time).getHours() -
+                            //     new Date("2025-01-01 " + b.start_time).getHours()
+                            //   );
+                            // })
+                            .map((slot) => (
+                              <Button
+                                key={slot.name}
+                                className={cn(
+                                  "text-pt-primary border-pt-primary bg-pt-background/20 hover:bg-slate-200 hover:text-pt-primary flex justify-between",
+                                  {
+                                    "bg-pt-primary! text-white!":
+                                      slot.name === slotSelected,
+                                  },
+                                  {
+                                    "opacity-50":
+                                      slot.current_registered ===
+                                      slot.max_capacity,
+                                  },
+                                )}
+                                disabled={
+                                  slot.current_registered === slot.max_capacity
+                                }
+                                variant="outline"
+                                onClick={() => setSlotSelected(slot.name)}
+                              >
+                                <span>
+                                  {format(
+                                    parseDate("2025-01-01 " + slot.start_time),
+                                    "HH:mm",
+                                  )}{" "}
+                                  -{" "}
+                                  {format(
+                                    parseDate("2025-01-01 " + slot.end_time),
+                                    "HH:mm",
+                                  )}
+                                </span>
+                                <span>{`${slot.current_registered}/${slot.max_capacity}`}</span>
+                              </Button>
+                            ))}
+                        </div>
+                        <div className="w-full mt-5">
+                          {!isOpenRegistration && (
+                            <p className="text-sm italic text-destructive mb-1">
+                              {t("placement_test.registration_closed")}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <Button
+                        className="w-full"
+                        onClick={handleSubmit}
+                        disabled={
+                          !isOpenRegistration ||
+                          lead?.registered_slot === slotSelected ||
+                          !slotSelected ||
+                          loading
+                        }
+                      >
+                        {loading && (
+                          <Loader2 className="mr-2 animate-spin w-4 h-4 text-white" />
+                        )}
+                        Submit
+                      </Button>
+                    </div>
+                  )
                 )}
               </div>
             </div>
@@ -417,7 +423,8 @@ export const Component = () => {
             <span className="ml-2 hidden"></span>
             <div className="my-2 ml-5 pr-5 text-sm text-pt-primary">
               {parser(
-                event.variables?.[`footer_text_${currentLanguage}`]?.value || ""
+                event.variables?.[`footer_text_${currentLanguage}`]?.value ||
+                  "",
               )}
             </div>
           </div>

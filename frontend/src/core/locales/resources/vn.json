@@ -209,6 +209,7 @@
   "placement_test": {
     "registration_title": "Đăng ký lịch khảo sát",
     "registration_closed": "Form đăng ký đã đóng",
+    "no_test_slots": "Hiện tại chưa có lịch khảo sát cho khối lớp của bạn. Quý Phụ huynh vui lòng liên hệ Phòng Tuyển sinh để được hỗ trợ thêm.",
     "registration_number": "Mã đăng ký",
     "registration_start": "Bắt đầu đăng ký",
     "time_slots": "Thời gian",
