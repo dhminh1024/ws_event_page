@@ -163,7 +163,7 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
                   ref={kitItem1Ref}
                   className="w-[35%] md:w-[25%] mx-80 md:mx-0 inline-block"
                 >
-                  <DimondBlock className="w-full h-full rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-linear-to-tr bg-brand-persian from-brand-teal/40 to-brand-persian ">
+                  <DimondBlock className="w-full h-full rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-linear-to-tr from-brand-teal to-brand-persian ">
                     <img
                       src={event?.variables.item_bib?.value}
                       className="absolute w-[65%] h-[75%] object-contain top-0 left-0 right-0 bottom-0 m-auto "
@@ -232,7 +232,7 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
                   ref={kitItem2Ref}
                   className="w-[35%] md:w-[25%] mx-80 md:mx-0 inline-block"
                 >
-                  <DimondBlock className="rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-linear-to-tr from-brand-honey bg-black to-brand-lime/80">
+                  <DimondBlock className="rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-linear-to-tr from-brand-honey to-brand-lime/80">
                     <img
                       src={event?.variables.item_tshirt?.value + "?abcde"}
                       className="absolute w-[65%] h-[75%] object-contain top-0 left-0 right-0 bottom-0 m-auto "
@@ -289,7 +289,7 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
                   ref={kitItem3Ref}
                   className="w-[35%] md:w-[25%] mx-80 md:mx-0 inline-block"
                 >
-                  <DimondBlock className="-mt-80 md:mt-0 rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-linear-to-tr from-brand-honey/80 bg-black to-brand-amber/90">
+                  <DimondBlock className="-mt-80 md:mt-0 rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-linear-to-tr from-brand-honey/80  to-brand-amber/90">
                     <img
                       src={event?.variables.item_medals?.value + "?abcde"}
                       className="absolute w-[65%] h-[75%] object-contain top-0 left-0 right-0 bottom-0 m-auto "
@@ -348,7 +348,7 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
                   ref={kitItem4Ref}
                   className="w-[35%] md:w-[25%] mx-80 md:mx-0 inline-block"
                 >
-                  <DimondBlock className="rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-linear-to-tr from-brand-lime/80 bg-black to-brand-persian/90">
+                  <DimondBlock className="rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-linear-to-tr from-brand-lime/80  to-brand-persian/90">
                     <img
                       src={event?.variables.item_hat?.value + "?abcde"}
                       className="absolute w-[65%] h-[75%] object-contain top-0 left-0 right-0 bottom-0 m-auto "
@@ -405,7 +405,7 @@ export const KitSection = forwardRef<HTMLDivElement, KitSectionProps>(
                   ref={kitItem5Ref}
                   className="w-[35%] md:w-[25%] mx-80 md:mx-0 inline-block"
                 >
-                  <DimondBlock className="rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-linear-to-tr from-brand-honey/90 bg-black to-brand-honey/80">
+                  <DimondBlock className="rounded-[20rem] md:rounded-[40rem] pb-[100%]  shadow-[inset_0rem_0rem_20rem_10rem_#00000055] bg-linear-to-tr from-brand-honey/90  to-brand-honey/80">
                     <img
                       src={event?.variables.item_bottle?.value + "?abcde"}
                       className="absolute w-[65%] h-[75%] object-contain top-0 left-0 right-0 bottom-0 m-auto "

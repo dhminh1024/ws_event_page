@@ -50,7 +50,7 @@ export const InfoSection: FC<InfoSectionProps> = ({ className }) => {
                 <div className="relative ">
                   <DimondBlock
                     className={cn(
-                      "absolute top-0 bottom-0 m-auto -left-80 md:-left-200 w-180 h-180 md:w-400 md:h-400 mr-200 rounded-[10rem] md:rounded-[30rem] bg-linear-to-tr bg-white drop-shadow-[2rem_-2rem_2rem_#00000083] md:drop-shadow-[10rem_-5rem_5rem_#00000083]",
+                      "absolute top-0 bottom-0 m-auto -left-80 md:-left-200 w-180 h-180 md:w-400 md:h-400 mr-200 rounded-[10rem] md:rounded-[20rem] bg-linear-to-tr  drop-shadow-[2rem_-2rem_2rem_#00000083] md:drop-shadow-[10rem_-5rem_5rem_#00000083]",
                       c
                     )}
                   >
