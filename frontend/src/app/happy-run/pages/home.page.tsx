@@ -3,7 +3,10 @@ import { Helmet } from "react-helmet-async";
 import { useLocales } from "@/core/hooks/use-locales";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { lazy, Suspense, useEffect } from "react";
-import { useInView } from "react-intersection-observer";
+import { useResponsive } from "@/core/hooks/use-reponsive";
+import gsap from "gsap";
+import ScrollSmoother from "gsap/ScrollSmoother";
+import { useSmoothScroll } from "../hooks/use-smooth-scroll";
 
 const HeaderSection = lazy(() =>
   import("@happy-run/sections/header").then((module) => ({
@@ -78,35 +81,66 @@ const SpringSection = lazy(() =>
 export const Component: FC = () => {
   const { t, currentLanguage } = useLocales();
   const event = useEventPageContext();
+  const { isDesktop } = useResponsive();
+
+  // Initialize smooth scroll
+  useSmoothScroll();
+
+  const scrollToSection = (section: HTMLElement) => {
+    if (!section) return;
+
+    // Get ScrollSmoother instance if it exists
+    const smoother = ScrollSmoother.get();
+
+    // Space in top offset
+    const offset = isDesktop ? 150 : 60;
+
+    if (smoother) {
+      // Use ScrollSmoother's scrollTo method
+      smoother.scrollTo(section, true, `top ${offset}px`);
+    } else {
+      // Fallback to gsap scrollTo for smooth animation
+      const sectionTop =
+        section.getBoundingClientRect().top + window.scrollY - offset;
+
+      gsap.to(window, {
+        duration: 1,
+        scrollTo: { y: sectionTop, autoKill: true },
+        ease: "power2.inOut",
+      });
+    }
+  };
+
+  // Handle hash navigation on page load
+  useEffect(() => {
+    setTimeout(() => {
+      const hash = window.location.hash;
+      if (!hash) return;
+      const section = document.querySelector<HTMLElement>(hash);
+      section && scrollToSection(section);
+    }, 500);
+  }, []);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className="bg-hr-background rela">
-        {/* <Scroll /> */}
-        {/* <Helmet>
-          <title>
-            {t("common.home_page")} |{" "}
-            {currentLanguage === "en"
-              ? event.variables.event_title_vn?.value
-              : event.variables.event_title_en?.value}
-          </title>
-        </Helmet> */}
-
-        <HeaderSection className="px-80 md:px-240" />
-        <MenuBar className="-mt-184 md:-mt-220" />
-        <HeroSection id="overview" />
-        <CountDownSection />
-        <TeaserSection id="happy-run" />
-        <TargetSection />
-        <RouteSection />
-        <TicketSection />
-        <KitSection />
-        <InfoSection />
-        <StationSection />
-        <SummerSection id="happy-summer" />
-        <FAQSection id="faq" />
-        <SpringSection />
-        <FooterSection />
+      <div id="smooth-wrapper">
+        <div id="smooth-content" className="bg-hr-background">
+          <HeaderSection className="px-80 md:px-240" />
+          <MenuBar className="-mt-184 md:-mt-220" />
+          <HeroSection id="overview" />
+          <CountDownSection />
+          <TeaserSection id="happy-run" />
+          <TargetSection />
+          <RouteSection />
+          <TicketSection />
+          <KitSection />
+          <InfoSection />
+          <StationSection />
+          <SummerSection id="happy-summer" />
+          <FAQSection id="faq" />
+          <SpringSection />
+          <FooterSection />
+        </div>
       </div>
     </Suspense>
   );

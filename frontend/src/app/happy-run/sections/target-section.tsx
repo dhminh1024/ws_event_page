@@ -52,7 +52,6 @@ import {
   SVGRoadMobile3,
 } from "../components/svg";
 import { useResponsive } from "@/core/hooks/use-reponsive";
-import { useInView } from "react-intersection-observer";
 
 export type TargetSectionProps = HTMLAttributes<HTMLDivElement> & {};
 
@@ -64,10 +63,6 @@ gsap.registerPlugin(ScrollTrigger);
 // });
 
 export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
-  const { ref: myRef, inView } = useInView({
-    triggerOnce: true,
-    rootMargin: "300px",
-  });
   const { t, currentLanguage } = useLocales();
   const { isDesktop } = useResponsive();
   const events = useEventPageContext();
@@ -139,7 +134,6 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
   };
 
   useLayoutEffect(() => {
-    if (!inView) return;
     setTimeout(() => {
       // Heading
       animateZoomInOut(headingRef.current, {
@@ -152,19 +146,16 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
       animateTarget3();
       animateTarget4();
     }, 200);
-  }, [inView]);
+  }, []);
 
   return (
     <section
-      ref={myRef}
       className={cn(
         "pt-40 md:pt-200 mx-auto overflow-hidden",
         className
       )}
     >
-      {inView && (
-        <>
-          <div className="w-[90%] mx-auto">
+      <div className="w-[90%] mx-auto">
             <SectionHeading
               ref={headingRef}
               className="text-[10rem] md:text-[30rem] py-12 md:py-32 px-140 md:px-400 italic font-extrabold mb-200"
@@ -419,8 +410,6 @@ export const TargetSection: FC<TargetSectionProps> = ({ className }) => {
               </div>
             </div>
           </div>
-        </>
-      )}
     </section>
   );
 };

@@ -11,15 +11,10 @@ import { PrimaryButton } from "../components/button";
 import { ItemModal } from "../components/item-modal";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
 import { Link } from "react-router-dom";
-import { useInView } from "react-intersection-observer";
 
 export type TicketSectionProps = HTMLAttributes<HTMLDivElement> & {};
 
 export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
-  const { ref: myRef, inView } = useInView({
-    triggerOnce: true,
-    rootMargin: "300px",
-  });
   const { t, currentLanguage } = useLocales();
   const { settings } = useHRSettings();
   const event = useEventPageContext();
@@ -32,7 +27,6 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
   const ticketReflectiveRounded2Ref = useRef(null);
 
   useEffect(() => {
-    if (!inView) return;
     setTimeout(() => {
       if (!ticket1Ref.current) return;
       gsap
@@ -78,147 +72,143 @@ export const TicketSection: FC<TicketSectionProps> = ({ className }) => {
           { x: "50%", y: "0%", opacity: 0.2, duration: 5, ease: "none" }
         );
     }, 200);
-  }, [inView]);
+  }, []);
 
   return (
     <section
-      ref={myRef}
       className={cn("relative z-[] bg-hr-lime py-160", className)}
     >
-      {inView && (
-        <div className="w-[90%] mx-auto">
-          <SectionHeading
-            //   ref={headingRef}
-            className="text-[10rem] md:text-[30rem] py-12 md:py-32 px-140 md:px-400 italic font-extrabold mb-80 md:mb-200"
-          >
-            {t("happy_run.ticket_heading")}
-          </SectionHeading>
-          <center>
-            <Typography.Paragraph className="text-[9rem] md:text-[20rem] text-hr-blue">
-              {t("happy_run.ticket_description")}
-            </Typography.Paragraph>
-          </center>
-          <div
-            className="relative z-5 flex gap-x-[2%] md:gap-x-[10%] justify-center py-80 md:py-160"
-            style={{
-              transformStyle: "preserve-3d",
-              perspective: "1000px",
-            }}
-          >
-            <ItemModal
-              content={(close) => (
-                <div className="relative">
-                  <img
-                    className="w-full"
-                    src={
-                      event.variables?.[
-                        currentLanguage === "en"
-                          ? "ticket_well_being_detail_en"
-                          : "ticket_well_being_detail_vn"
-                      ]?.value
-                    }
-                    alt="ticket image"
-                  />
-                  <div
-                    className="w-[5%] h-[5%] absolute top-0 right-0"
-                    onClick={close}
-                  ></div>
-                </div>
-              )}
-            >
-              <div
-                ref={ticket1Ref}
-                className="relative z-5 overflow-hidden rounded-[5rem] md:rounded-[20rem] w-[50%] md:w-[40%]"
-              >
-                <img
-                  className="w-full h-auto"
-                  src={TicketWellbeingImage}
-                  alt="ticket image"
-                />
-                <div
-                  ref={ticketReflective1Ref}
-                  className="blur-[3px] effect absolute top-[-20%] bottom-0 m-auto left-[-10%] z-20 h-[160%] rotate-25 w-[20%] bg-[linear-gradient(90deg,#ffffff00,#ffffffd1,#ffffff00)]"
-                ></div>
-                <div
-                  ref={ticketReflectiveRounded1Ref}
-                  className="blur-[20px] effect absolute left-[0%] top-[0%] m-auto z-20 w-[50%] aspect-square rounded-full bg-[linear-gradient(90deg,#ffffff00,#ffffff55,#ffffff00)]"
-                ></div>
-                <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center">
-                  <Typography.Paragraph className="text-[14rem] md:text-[36rem] drop-shadow-[0rem_3rem_2rem_#333] md:drop-shadow-[0rem_10rem_5rem_#333] font-extrabold text-white uppercase">
-                    Well-Being
-                  </Typography.Paragraph>
-                  <Typography.Paragraph className="text-[25rem] md:text-[80rem] leading-64 md:leading-280 font-extrabold text-hr-blue uppercase">
-                    {settings?.wellbeing_ticket_price.toLocaleString("vi-VN")}
-                    <span className="text-[13rem] md:text-[40rem] ml-20 md:ml-40">
-                      VND
-                    </span>
-                  </Typography.Paragraph>
-                </div>
-              </div>
-            </ItemModal>
-            <ItemModal
-              content={(close) => (
-                <div className="relative">
-                  <img
-                    className="w-full"
-                    src={
-                      event.variables?.[
-                        currentLanguage === "en"
-                          ? "ticket_happy_run_detail_en"
-                          : "ticket_happy_run_detail_vn"
-                      ]?.value
-                    }
-                    alt="ticket image"
-                  />
-                  <div
-                    className="w-[5%] h-[5%] absolute top-0 right-0"
-                    onClick={close}
-                  ></div>
-                </div>
-              )}
-            >
-              <div
-                ref={ticket2Ref}
-                className="relative z-5 overflow-hidden rounded-[5rem] md:rounded-[20rem] w-[50%] md:w-[40%]"
-              >
+      <div className="w-[90%] mx-auto">
+        <SectionHeading
+          className="text-[10rem] md:text-[30rem] py-12 md:py-32 px-140 md:px-400 italic font-extrabold mb-80 md:mb-200"
+        >
+          {t("happy_run.ticket_heading")}
+        </SectionHeading>
+        <center>
+          <Typography.Paragraph className="text-[9rem] md:text-[20rem] text-hr-blue">
+            {t("happy_run.ticket_description")}
+          </Typography.Paragraph>
+        </center>
+        <div
+          className="relative z-5 flex gap-x-[2%] md:gap-x-[10%] justify-center py-80 md:py-160"
+          style={{
+            transformStyle: "preserve-3d",
+            perspective: "1000px",
+          }}
+        >
+          <ItemModal
+            content={(close) => (
+              <div className="relative">
                 <img
                   className="w-full"
-                  src={TicketHappyRunImage}
+                  src={
+                    event.variables?.[
+                      currentLanguage === "en"
+                        ? "ticket_well_being_detail_en"
+                        : "ticket_well_being_detail_vn"
+                    ]?.value
+                  }
                   alt="ticket image"
                 />
                 <div
-                  ref={ticketReflective2Ref}
-                  className="blur-[3px] effect absolute top-[-20%] bottom-0 m-auto right-0 z-20 h-[160%] rotate-[-25deg] w-[20%] bg-[linear-gradient(90deg,#ffffff00,#ffffffc6,#ffffff00)]"
+                  className="w-[5%] h-[5%] absolute top-0 right-0"
+                  onClick={close}
                 ></div>
-                <div
-                  ref={ticketReflectiveRounded2Ref}
-                  className="blur-[20px] effect absolute left-[-10%] top-[-20%] m-auto z-20 w-[70%] aspect-square rounded-full bg-[linear-gradient(90deg,#ffffff00,#ffffff90,#ffffff00)]"
-                ></div>
-                <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center">
-                  <Typography.Paragraph className="text-[14rem] md:text-[36rem] drop-shadow-[0rem_3rem_2rem_#333] md:drop-shadow-[0rem_10rem_5rem_#333] font-extrabold text-white uppercase">
-                    Happy Run
-                  </Typography.Paragraph>
-                  <Typography.Paragraph className="text-[25rem] md:text-[80rem] leading-64 md:leading-280 font-extrabold text-hr-blue uppercase">
-                    {settings?.happy_run_ticket_price.toLocaleString("vi-VN")}
-                    <span className="text-[13rem] md:text-[40rem] ml-20 md:ml-40">
-                      VND
-                    </span>
-                  </Typography.Paragraph>
-                </div>
               </div>
-            </ItemModal>
-          </div>
-          <center>
-            <Link to="registration">
-              <PrimaryButton className="h-auto p-[8rem_25rem]  md:p-[40rem_50rem] my-40 md:my-80">
-                <Typography.Text className="font-black text-[18rem] md:text-[35rem]">
-                  {t("happy_run.buttons.register_now")}
-                </Typography.Text>
-              </PrimaryButton>
-            </Link>
-          </center>
+            )}
+          >
+            <div
+              ref={ticket1Ref}
+              className="relative z-5 overflow-hidden rounded-[5rem] md:rounded-[20rem] w-[50%] md:w-[40%]"
+            >
+              <img
+                className="w-full h-auto"
+                src={TicketWellbeingImage}
+                alt="ticket image"
+              />
+              <div
+                ref={ticketReflective1Ref}
+                className="blur-[3px] effect absolute top-[-20%] bottom-0 m-auto left-[-10%] z-20 h-[160%] rotate-25 w-[20%] bg-[linear-gradient(90deg,#ffffff00,#ffffffd1,#ffffff00)]"
+              ></div>
+              <div
+                ref={ticketReflectiveRounded1Ref}
+                className="blur-[20px] effect absolute left-[0%] top-[0%] m-auto z-20 w-[50%] aspect-square rounded-full bg-[linear-gradient(90deg,#ffffff00,#ffffff55,#ffffff00)]"
+              ></div>
+              <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center">
+                <Typography.Paragraph className="text-[14rem] md:text-[36rem] drop-shadow-[0rem_3rem_2rem_#333] md:drop-shadow-[0rem_10rem_5rem_#333] font-extrabold text-white uppercase">
+                  Well-Being
+                </Typography.Paragraph>
+                <Typography.Paragraph className="text-[25rem] md:text-[80rem] leading-64 md:leading-280 font-extrabold text-hr-blue uppercase">
+                  {settings?.wellbeing_ticket_price.toLocaleString("vi-VN")}
+                  <span className="text-[13rem] md:text-[40rem] ml-20 md:ml-40">
+                    VND
+                  </span>
+                </Typography.Paragraph>
+              </div>
+            </div>
+          </ItemModal>
+          <ItemModal
+            content={(close) => (
+              <div className="relative">
+                <img
+                  className="w-full"
+                  src={
+                    event.variables?.[
+                      currentLanguage === "en"
+                        ? "ticket_happy_run_detail_en"
+                        : "ticket_happy_run_detail_vn"
+                    ]?.value
+                  }
+                  alt="ticket image"
+                />
+                <div
+                  className="w-[5%] h-[5%] absolute top-0 right-0"
+                  onClick={close}
+                ></div>
+              </div>
+            )}
+          >
+            <div
+              ref={ticket2Ref}
+              className="relative z-5 overflow-hidden rounded-[5rem] md:rounded-[20rem] w-[50%] md:w-[40%]"
+            >
+              <img
+                className="w-full"
+                src={TicketHappyRunImage}
+                alt="ticket image"
+              />
+              <div
+                ref={ticketReflective2Ref}
+                className="blur-[3px] effect absolute top-[-20%] bottom-0 m-auto right-0 z-20 h-[160%] rotate-[-25deg] w-[20%] bg-[linear-gradient(90deg,#ffffff00,#ffffffc6,#ffffff00)]"
+              ></div>
+              <div
+                ref={ticketReflectiveRounded2Ref}
+                className="blur-[20px] effect absolute left-[-10%] top-[-20%] m-auto z-20 w-[70%] aspect-square rounded-full bg-[linear-gradient(90deg,#ffffff00,#ffffff90,#ffffff00)]"
+              ></div>
+              <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center">
+                <Typography.Paragraph className="text-[14rem] md:text-[36rem] drop-shadow-[0rem_3rem_2rem_#333] md:drop-shadow-[0rem_10rem_5rem_#333] font-extrabold text-white uppercase">
+                  Happy Run
+                </Typography.Paragraph>
+                <Typography.Paragraph className="text-[25rem] md:text-[80rem] leading-64 md:leading-280 font-extrabold text-hr-blue uppercase">
+                  {settings?.happy_run_ticket_price.toLocaleString("vi-VN")}
+                  <span className="text-[13rem] md:text-[40rem] ml-20 md:ml-40">
+                    VND
+                  </span>
+                </Typography.Paragraph>
+              </div>
+            </div>
+          </ItemModal>
         </div>
-      )}
+        <center>
+          <Link to="registration">
+            <PrimaryButton className="h-auto p-[8rem_25rem]  md:p-[40rem_50rem] my-40 md:my-80">
+              <Typography.Text className="font-black text-[18rem] md:text-[35rem]">
+                {t("happy_run.buttons.register_now")}
+              </Typography.Text>
+            </PrimaryButton>
+          </Link>
+        </center>
+      </div>
     </section>
   );
 };
