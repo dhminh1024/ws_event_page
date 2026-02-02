@@ -59,7 +59,7 @@ export const HeroSection: FC<HeroSectionProps> = ({ className, ...props }) => {
 
   return (
     <>
-      <div className="w-full md:w-[90%] mx-auto bg-linear-to-b from-brand-teal to-brand-persian shadow-[inset_0rem_0rem_20rem_10rem_#00000055] p-40 rounded-[8rem] md:rounded-[25rem] my-40 md:my-200">
+      <div className="w-[90%] mx-auto bg-linear-to-b from-brand-teal to-brand-persian shadow-[inset_0rem_0rem_20rem_10rem_#00000055] p-40 rounded-[8rem] md:rounded-[25rem] my-40 md:my-200">
         <BorderWrapper
           dashedArray={isDesktop ? 16 : 10}
           radius={isDesktop ? 20 : 10}

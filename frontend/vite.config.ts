@@ -6,6 +6,7 @@ import proxyOptions from "./proxyOptions";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  assetsInclude: ["**/*.glb", "**/*.gltf"],
   server: {
     port: 8080,
     proxy: proxyOptions,
