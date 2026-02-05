@@ -1,26 +1,54 @@
-import React, { HTMLAttributes, useState, type FC } from "react";
+import React, { HTMLAttributes, useEffect, useRef, useState, type FC } from "react";
 import Container from "../components/container";
 import { useLocales } from "@/core/hooks/use-locales";
 import { cn } from "@/core/utils/shadcn-utils";
 import ScrollButton from "../components/scroll-button";
 import Typography from "../components/typography";
-import { Popover, PopoverContent, PopoverTrigger } from "@atoms/popover";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import { useSticky } from "@/core/hooks/use-sticky";
 import { useEventPageContext } from "@/lib/event-page/use-event-page";
-import { LanguageSelector } from "../components/language-selector";
 import Marquee from "react-fast-marquee";
 import { LanguageSwitcher } from "../components/language-switcher";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
 export type MenuBarProps = HTMLAttributes<HTMLDivElement> & {};
 
 export const MenuBar: FC<MenuBarProps> = ({ className }) => {
   const { t } = useLocales();
   // const { ref, isSticky } = useSticky();
   const event = useEventPageContext();
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!navRef.current) return;
+
+    let st: ScrollTrigger | null = null;
+
+    // Delay to allow page to fully render
+    const timer = setTimeout(() => {
+      if (!navRef.current) return;
+
+      st = ScrollTrigger.create({
+        trigger: navRef.current,
+        start: "top top",
+        end: "+=999999", // Keep pinned throughout entire scroll
+        pin: true,
+        pinSpacing: false,
+        invalidateOnRefresh: true, // Recalculate on refresh
+      });
+    }, 50);
+
+    return () => {
+      clearTimeout(timer);
+      if (st) {
+        st.kill();
+      }
+    };
+  }, []);
+
   return (
     <section
-      // ref={ref}
+      ref={navRef}
       id="navbar"
       aria-labelledby="introduction-title"
       className={cn("sticky top-0 left-0 z-9999", className)}
@@ -85,7 +113,7 @@ const NavBar = ({
             <ScrollButton to={navItem.to}>
               <div
                 className={cn(
-                  "h-full w-340 md:w-800 cursor-pointer rounded-t-[5rem] md:rounded-t-[10rem] px-20 text-center bg-linear-to-t from-[#174C73] to-[#0C729D] hover:from-[#E16A17] hover:to-[#FFD200] border-t-[2rem] md:border-t-[5rem] border-[#0C7AA5] hover:border-[#FFD000]"
+                  "h-full w-340 md:w-800 rounded-t-[5rem] md:rounded-t-[10rem] px-20 text-center bg-linear-to-t from-[#174C73] to-[#0C729D] hover:from-[#E16A17] hover:to-[#FFD200] border-t-[2rem] md:border-t-[5rem] border-[#0C7AA5] hover:border-[#FFD000]"
                 )}
               >
                 <div className="flex py-16 md:py-32 h-full items-center justify-center rounded-t-[10rem]">
