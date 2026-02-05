@@ -2,223 +2,518 @@
   class="container"
   style="width: 100%; margin: auto; padding: 10px 0px; text-align: justify"
 >
+  <!-- Vietnamese Section -->
   <div
     class="section vn-language"
     style="margin-bottom: 30px; color: #102131 !important"
   >
+    <h2 style="text-align: center; color: #3d5caf; margin-bottom: 5px">
+      THƯ MỜI ĐĂNG KÝ LỊCH KHẢO SÁT ĐẦU VÀO
+    </h2>
+    <h2 style="text-align: center; color: #4ead5b; margin: 10px 0">
+      NĂM HỌC 2026-2027
+    </h2>
+
     <p>
       Kính gửi Quý Phụ huynh Học sinh
-      <strong>{{lead.student_full_name}}</strong>, Số thứ tự:
+      <strong>{{lead.student_full_name}}</strong>, Mã đăng ký:
       <strong>{{lead.registration_number}}</strong>,
     </p>
 
+    {% if lead.student_grade == "G01" %}
     <p>
-      Wellspring Saigon cảm ơn Quý Phụ huynh đã quan tâm và đăng ký tham gia
-      chương trình Tuyển sinh "Trưởng thành Hạnh phúc - Kết nối Tương lai" dành
-      cho Học sinh Lớp 1 năm học 2025-2026, cũng như lựa chọn Nhà trường là môi
-      trường học tập tiềm năng cho con em sắp tới.
+      Wellspring Saigon vui mừng thông báo Học sinh đã chính thức đủ điều kiện
+      tham dự <strong>vòng phỏng vấn 1:1</strong> thuộc quy trình tuyển sinh Lớp
+      1 năm học 2026–2027.
     </p>
-
     <p>
-      Tiếp theo, Nhà trường xin thông tin chi tiết về chương trình “<strong
-        >Khảo sát đầu vào</strong
-      >” như sau:
+      Chúng tôi trân trọng kính mời Học sinh tham dự buổi phỏng vấn dành cho Học
+      sinh lớp 1 như sau:
     </p>
+    {% else %}
+    <p>
+      Wellspring Saigon vui mừng thông báo Học sinh đã chính thức đủ điều kiện
+      tham dự <strong>khảo sát đầu vào</strong> năm học 2026–2027.
+    </p>
+    <p>Chúng tôi trân trọng kính mời Học sinh tham dự buổi khảo sát như sau:</p>
+    {% endif %}
 
-    <ul>
-      <li>
-        <strong>Thời gian tổ chức:</strong> vào sáng Thứ Bảy (ngày 01/03/2025)
-        và các ngày trong tuần (từ Thứ Hai ngày 03/03/2025 đến Thứ Sáu ngày
-        14/03/2025).
-      </li>
-      <li>
-        <strong>Hình thức khảo sát:</strong> Học sinh sẽ được Phỏng vấn trực
-        tiếp 1:1 tối đa 30 phút, bao gồm:
-        <ul>
-          <li>15 phút với Giáo viên Chương trình Quốc tế.</li>
-          <li>15 phút với Giáo viên Chương trình Việt Nam.</li>
-        </ul>
-      </li>
-      <li>
-        <strong>Hướng dẫn đăng ký:</strong> Quý Phụ huynh vui lòng đăng ký
-        <u>lịch khảo sát</u> phù hợp cho Học sinh tại đường dẫn:
-        <p>
+    <!-- Event Details Table -->
+    <table
+      style="
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 14px;
+      "
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            width: 30%;
+            vertical-align: top;
+          "
+        >
+          Thời gian tổ chức
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {% if lead.student_grade == "G01" %} Từ Thứ Tư, 28/01/2026 đến Thứ
+          Sáu, 06/02/2026<br />Sáng Thứ Bảy, 07/02/2026 {% else %} Từ Thứ Năm,
+          05/03/2026 đến Thứ Sáu, 13/03/2026 {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Hình thức khảo sát
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {% if lead.student_grade == "G01" %}
+          <strong>Phỏng vấn trực tiếp 1:1</strong> (tối đa 30 phút):
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>15 phút với Giáo viên Chương trình Quốc tế</li>
+            <li>15 phút với Giáo viên Chương trình Việt Nam</li>
+          </ul>
+          {% elif lead.student_grade == "G02" %}
+          <strong>Đối với lớp 2:</strong> khoảng 100 phút bao gồm:
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>Toán và Tiếng Việt (bài viết)</li>
+            <li>Phỏng vấn với Giáo viên Chương trình Quốc tế</li>
+          </ul>
+          {% elif lead.student_grade in ["G03", "G04", "G05"] %}
+          <strong>Đối với lớp 3-5:</strong> khoảng 120 – 150 phút; bao gồm:
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>Toán và Tiếng Việt (bài viết)</li>
+            <li>Tiếng Anh (Nghe nói & Đọc hiểu)</li>
+          </ul>
+          {% else %}
+          <strong>Đối với lớp 6-11:</strong> khoảng 150 – 180 phút; bao gồm:
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>Toán và Ngữ Văn (bài viết)</li>
+            <li>Tiếng Anh (Nghe nói & Đọc hiểu)</li>
+          </ul>
+          {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Hướng dẫn đăng ký
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          Quý Phụ huynh đăng ký lịch phù hợp tại:
+          <a href="{{registration_link}}" target="_blank" style="color: #3d5caf"
+            >Đăng ký tại đây</a
+          ><br /><br />
+          {% if lead.student_grade == "G01" %}
+          <em style="color: #666"
+            ><strong>Lưu ý:</strong> Hệ thống đặt lịch được vận hành theo nguyên
+            tắc "đăng ký trước – ưu tiên trước". Hệ thống sẽ tự động đóng vào
+            11:00 sáng Thứ Ba, 27/01/2026.</em
+          >
+          {% else %}
+          <em style="color: #666"
+            ><strong>Lưu ý:</strong> Hệ thống đặt lịch được vận hành theo nguyên
+            tắc "đăng ký trước – ưu tiên trước". Hệ thống sẽ tự động đóng vào
+            Thứ Sáu, 27/02/2026.</em
+          >
+          {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Phí khảo sát
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          <strong>2.000.000 VNĐ</strong>/Học sinh/lần khảo sát
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Hồ sơ cần mang theo
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {% if lead.student_grade == "G01" %} 01 hình thẻ Học sinh (3x4 hoặc
+          4x6), nếu Phụ huynh chưa nộp khi đăng ký Tuyển sinh {% else %}
+          <em>(nếu Phụ huynh chưa nộp khi đăng ký Tuyển sinh)</em>
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>Một (01) ảnh thẻ của Học sinh (kích thước 3x4 hoặc 4x6)</li>
+            <li>
+              Một (01) bản photo hoặc bản scan Bảng điểm/Học bạ trong 02 năm học
+              gần nhất
+            </li>
+          </ul>
+          {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Thông báo kết quả
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {% if lead.student_grade == "G01" %} Hội đồng Tuyển sinh sẽ gửi Báo
+          cáo kết quả cho Quý Phụ huynh vào <strong>27/02/2026</strong>, làm căn
+          cứ để gia đình quyết định kế hoạch học tập Lớp 1 cho năm học
+          2026–2027. {% else %} Kết quả sẽ được gửi trực tiếp đến email Phụ
+          huynh, dự kiến từ sau <strong>03 – 05 ngày làm việc</strong> sau khi
+          Học sinh hoàn thành khảo sát. {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Biểu phí & ưu đãi năm học 2026–2027
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          Quý Phụ huynh vui lòng tham khảo Biểu phí và Chính sách ưu đãi tại:
           <a
-            class="btn btn-primary"
-            href="{{registration_link}}"
+            href="https://wellspringsaigon.us2.list-manage.com/track/click?u=8f7936947bca63b5d50d5d2f6&id=3e2f106718&e=d89bf5c293"
             target="_blank"
-            >Form Đăng Ký</a
+            style="color: #3d5caf"
+            >Xem tại đây</a
           >
-        </p>
-        <p>
-          <em>
-            <u>Lưu ý:</u> Form đăng ký được thiết lập theo chế độ ưu tiên cho
-            những Phụ huynh sắp xếp lịch hẹn và lựa chọn trước; thứ tự sắp xếp
-            khung giờ tùy thuộc vào thời điểm Quý Phụ huynh đăng ký trên Hệ
-            thống. Form đăng ký sẽ được đóng tự động vào
-            <span style="color: #f05023">
-              17:00 giờ Thứ Năm, ngày 27/02/2025</span
-            >.
-          </em>
-        </p>
-      </li>
-      <li>
-        <strong>Phí khảo sát:</strong> 2.000.000 VNĐ/Học sinh/lần khảo sát.
-        <p>
-          <em
-            ><u>Lưu ý:</u> Phụ huynh vui lòng mang theo 01 hình thẻ Học sinh
-            (kích thước 3x4 hoặc 4x6) nếu chưa cung cấp cho Nhà trường khi đăng
-            ký Tuyển sinh.</em
-          >
-        </p>
-      </li>
-      <li>
-        <strong>Kết quả khảo sát:</strong> Kết quả sẽ được gửi trực tiếp đến
-        email Phụ huynh, dự kiến từ sau ngày 27/02/2026.
-      </li>
-      <li>
-        <strong>Biểu phí và ưu đãi:</strong> Quý Phụ huynh tham khảo thêm Biểu
-        phí và Chính sách ưu đãi tài chính năm học 2025-2026
-        <a
-          href="https://wellspring-production.s3.ap-southeast-1.amazonaws.com/WSSG_Bieu_phi_Chinh_sach_uu_dai_Tai_chinh_Fee_Schedule_SY_2025_2026_1_20af38a1b1.pdf"
-          target="_blank"
-          >tại đây</a
-        >.
-      </li>
-    </ul>
+        </td>
+      </tr>
+    </table>
 
     <p>
-      Quý Phụ huynh có bất kỳ thắc mắc nào hoặc cần thêm thông tin, vui lòng
-      liên hệ với Phòng Tuyển sinh qua:
+      Quý Phụ huynh nếu có thắc mắc hoặc cần hỗ trợ thêm thông tin, vui lòng
+      liên hệ Phòng Tuyển sinh theo thông tin sau:
     </p>
 
-    <ul>
+    <ul style="list-style: none; padding-left: 0">
       <li>
-        <span style="width: 10px; margin-right: 5px">📞</span
-        ><strong>Hotline:</strong> 0937 099 229
+        <span style="margin-right: 5px">📞</span><strong>Hotline:</strong> 0937
+        099 229
       </li>
       <li>
-        <span style="width: 10px; margin-right: 5px">✉️</span
+        <span style="margin-right: 5px">✉️</span
         ><strong>Email:</strong> admissions@wellspringsaigon.edu.vn
       </li>
     </ul>
 
     <p>
-      Nhà trường rất háo hức chờ đón sự tham gia của các em Học sinh trong
-      chương trình khảo sát sắp tới.
+      {% if lead.student_grade == "G01" %} Wellspring Saigon trân trọng cảm ơn
+      Quý Phụ huynh và mong chờ buổi gặp gỡ Học sinh trong vòng phỏng vấn tiếp
+      theo. {% else %} Wellspring Saigon trân trọng cảm ơn Quý Phụ huynh và mong
+      chờ buổi gặp gỡ Học sinh trong buổi khảo sát. {% endif %}
     </p>
 
-    <p>Trân trọng cảm ơn,</p>
-    <p><strong>Hội đồng Tuyển sinh Wellspring Saigon</strong></p>
+    <p>Trân trọng,</p>
+    <p><strong>Hội đồng Tuyển sinh</strong></p>
+    <p>
+      Hệ thống Trường Phổ thông Song ngữ Liên cấp Quốc tế Wellspring –
+      Wellspring Saigon
+    </p>
   </div>
 
   <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0" />
 
-  <!-- English Version -->
+  <!-- English Section -->
   <div class="section en-language" style="color: #00539c !important">
+    <h2 style="text-align: center; color: #3d5caf; margin-bottom: 5px">
+      INVITATION TO REGISTER FOR THE PLACEMENT TEST
+    </h2>
+    <h2 style="text-align: center; color: #4ead5b; margin: 10px 0">
+      SCHOOL YEAR 2026-2027
+    </h2>
+
     <p>
       Dear Parents of Student
-      <strong>{{lead.student_full_name}}</strong>, Order Number:
+      <strong>{{lead.student_full_name}}</strong>, Registration Number:
       <strong>{{lead.registration_number}}</strong>,
     </p>
 
+    {% if lead.student_grade == "G01" %}
     <p>
-      Thank you for your interest and registration in Wellspring Saigon’
-      Enrollment Program school year 2025-2026 "A journey of Joyful Growth and
-      Future connections", as a potential learning environment for your
-      children.
+      Wellspring Saigon is pleased to announce that the student is officially
+      eligible to participate in the <strong>1:1 Interview round</strong> of the
+      Grade 1 Admissions Process for the 2026–2027 school year.
     </p>
-
     <p>
-      Next, we would now like to provide detailed information regarding the
-      upcoming <strong>Placement Test:</strong>
+      We respectfully invite the student to attend the Grade 1 Interview session
+      as follows:
     </p>
+    {% else %}
+    <p>
+      Wellspring Saigon is pleased to announce that the student is officially
+      eligible to participate in the <strong>Placement Test</strong> for the
+      2026–2027 school year.
+    </p>
+    <p>
+      We respectfully invite the student to attend the Placement Test as
+      follows:
+    </p>
+    {% endif %}
 
-    <ul>
-      <li>
-        <strong>Schedule:</strong> on Saturday (March 1st 2025), and weekdays
-        (from Monday March 3rd 2025 to Friday March 14th 2025).
-      </li>
-      <li>
-        <strong>Format:</strong> Each student will participate in a 1:1 directly
-        interview, maximum of 30 minutes, including:
-        <ul>
-          <li>15 minutes with an International Program teacher.</li>
-          <li>15 minutes with a Vietnamese Program teacher.</li>
-        </ul>
-      </li>
-      <li>
-        <strong>Registration Instructions:</strong> Parents are kindly requested
-        to select a suitable placement test schedule for your child via the
-        following registration link:
-        <p style="display: flex; justify-content: center">
+    <!-- Event Details Table - English -->
+    <table
+      style="
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 14px;
+      "
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            width: 30%;
+            vertical-align: top;
+          "
+        >
+          Schedule
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {% if lead.student_grade == "G01" %} From Wednesday, January 28th,
+          2026 to Friday, February 6th, 2026<br />On Saturday morning, February
+          7th, 2026 {% else %} From Thursday, March 5th, 2026 to Friday, March
+          13th, 2026 {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Placement Test Format
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {% if lead.student_grade == "G01" %}
+          <strong>1:1 in-person interview</strong> (up to 30 minutes):
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>15 minutes with an International Program Teacher</li>
+            <li>15 minutes with a Vietnamese Program Teacher</li>
+          </ul>
+          {% elif lead.student_grade == "G02" %}
+          <strong>For Grade 2:</strong> approximately 100 minutes, including:
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>Math and Vietnamese (written test)</li>
+            <li>Interview with the International Program Teacher</li>
+          </ul>
+          {% elif lead.student_grade in ["G03", "G04", "G05"] %}
+          <strong>For Grades 3-5:</strong> approximately 120 – 150 minutes;
+          including:
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>Math and Vietnamese (written test)</li>
+            <li>English (Speaking & Reading Comprehension)</li>
+          </ul>
+          {% else %}
+          <strong>For Grades 6-11:</strong> approximately 150 – 180 minutes;
+          including:
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>Math and Literature (written test)</li>
+            <li>English (Speaking & Reading Comprehension)</li>
+          </ul>
+          {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Registration Instructions
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          Parents are kindly requested to register for a suitable schedule at:
+          <a href="{{registration_link}}" target="_blank" style="color: #3d5caf"
+            >Register here</a
+          ><br /><br />
+          {% if lead.student_grade == "G01" %}
+          <em style="color: #666"
+            ><strong>Please note:</strong> The appointment booking system
+            operates on a first-come, first-served basis. The system will
+            automatically close at 11:00 AM on Tuesday, January 27th, 2026.</em
+          >
+          {% else %}
+          <em style="color: #666"
+            ><strong>Please note:</strong> The appointment booking system
+            operates on a first-come, first-served basis. The system will
+            automatically close on Friday, February 27th, 2026.</em
+          >
+          {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Placement Test Fee
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          <strong>2,000,000 VND</strong>/student per placement test
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Required Documents
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {% if lead.student_grade == "G01" %} 01 student photo (size 3x4cm or
+          4x6cm) on the test day, in case it has not been submitted during the
+          enrollment registration process. {% else %}
+          <em>(if not provided during enrollment registration)</em>
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>One (01) student ID photo (size 3x4 cm or 4x6 cm)</li>
+            <li>
+              One (01) photocopy or scanned copies of the report card/academic
+              records for the last two school years
+            </li>
+          </ul>
+          {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Placement Test Results
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {% if lead.student_grade == "G01" %} The School Board of Admissions
+          will inform Parents about the Interview result on
+          <strong>February 27, 2026</strong>, as a basis for Parents to decide
+          on the study plan for Grade 1 student in this coming 2026-2027 School
+          Year. {% else %} The results will be sent directly to the Parents'
+          email, expected to be within <strong>03 – 05 working days</strong>
+          after the student completes the Placement test. {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Fees Schedule & Financial Incentive Policy
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          Parents may refer to the Fee Schedule and Financial Incentive Policy
+          2026-2027:
           <a
-            class="btn btn-primary"
-            href="{{registration_link}}"
+            href="https://wellspringsaigon.us2.list-manage.com/track/click?u=8f7936947bca63b5d50d5d2f6&id=3e2f106718&e=d89bf5c293"
             target="_blank"
-            >Registration Form</a
+            style="color: #3d5caf"
+            >View here</a
           >
-        </p>
-        <p>
-          <em>
-            <u>Notes:</u> The registration form operates on a first-come,
-            first-served basis. The available time slots will be assigned based
-            on the time of registration. The form will automatically close at
-            <span style="color: #f05023"
-              >5:00 PM on Thursday, February 27th 2025.</span
-            >
-          </em>
-        </p>
-      </li>
-      <li>
-        <strong>Placement Test Fee:</strong> 2,000,000 VND/student per placement
-        test.
-        <p>
-          <em
-            ><u>Notes:</u> Parents are requested to bring one student ID photo
-            (size 3x4 cm or 4x6 cm) if it has not been submitted during the
-            enrollment process.</em
-          >
-        </p>
-      </li>
-      <li>
-        <strong>Placement Test Results:</strong> The Admissions Office will send
-        the placement test results directly to the parent's registered email
-        starting from March 24, 2025.
-      </li>
-      <li>
-        <strong>Fees Schedule & Financial Incentive Policy:</strong> Parents may
-        refer to the Fee Schedule and Financial Incentive Policy 2025-2026
-        <a
-          href="https://wellspring-production.s3.ap-southeast-1.amazonaws.com/WSSG_Bieu_phi_Chinh_sach_uu_dai_Tai_chinh_Fee_Schedule_SY_2025_2026_1_20af38a1b1.pdf"
-          target="_blank"
-          >here</a
-        >.
-      </li>
-    </ul>
+        </td>
+      </tr>
+    </table>
 
     <p>
       For any inquiries or further information, please do not hesitate to
-      contact the <strong>Admissions Office</strong> via:
+      contact the Admissions Office:
     </p>
 
-    <ul>
+    <ul style="list-style: none; padding-left: 0">
       <li>
-        <span style="width: 10px; margin-right: 5px">📞</span
-        ><strong>Hotline:</strong> 0937 099 229
+        <span style="margin-right: 5px">📞</span><strong>Hotline:</strong> 0937
+        099 229
       </li>
       <li>
-        <span style="width: 10px; margin-right: 5px">✉️</span
+        <span style="margin-right: 5px">✉️</span
         ><strong>Email:</strong> admissions@wellspringsaigon.edu.vn
       </li>
     </ul>
 
     <p>
-      We look forward to welcoming our young learners to the upcoming placement
-      test.
+      {% if lead.student_grade == "G01" %} Wellspring Saigon sincerely
+      appreciates Parents' support and looks forward to meeting the student in
+      the upcoming Interview session. {% else %} Wellspring Saigon sincerely
+      appreciates Parents' support and looks forward to meeting the student in
+      the upcoming Placement Test. {% endif %}
     </p>
 
     <p>Best regards,</p>
-    <p><strong>Wellspring Saigon Admission Team</strong></p>
+    <p><strong>Admissions Committee</strong></p>
+    <p>Wellspring International Bilingual Schools - Wellspring Saigon</p>
   </div>
 </div>

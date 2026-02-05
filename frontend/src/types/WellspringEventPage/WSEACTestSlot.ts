@@ -12,6 +12,8 @@ export interface WSEACTestSlot{
 	idx?: number
 	/**	AC Event : Link - WSE AC Event	*/
 	ac_event: string
+	/**	Student Grade : Small Text - Comma-separated grades (e.g., G01,G02,G03)	*/
+	student_grade: string
 	/**	Title : Data	*/
 	title?: string
 	/**	Date : Date	*/

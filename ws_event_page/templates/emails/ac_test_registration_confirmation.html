@@ -2,300 +2,791 @@
   class="container"
   style="width: 100%; margin: auto; padding: 10px 0px; text-align: justify"
 >
+  <!-- Vietnamese Section -->
   <div
     class="section vn-language"
     style="margin-bottom: 30px; color: #102131 !important"
   >
+    <h2 style="text-align: center; color: #3d5caf; margin-bottom: 5px">
+      XÁC NHẬN ĐĂNG KÝ LỊCH KHẢO SÁT THÀNH CÔNG
+    </h2>
+    <h2 style="text-align: center; color: #4ead5b; margin: 10px 0">
+      NĂM HỌC 2026-2027
+    </h2>
+
     <p>
       Kính gửi Quý Phụ huynh Học sinh
-      <strong>{{lead.student_full_name}}</strong>, Số thứ tự:
+      <strong>{{lead.student_full_name}}</strong>, Mã đăng ký:
       <strong>{{lead.registration_number}}</strong>,
     </p>
 
+    {% if lead.student_grade == "G01" %}
     <p>
-      Wellspring Saigon cảm ơn Quý Phụ huynh đã đăng ký thành công lịch “<strong
-        >Khảo sát đầu vào</strong
-      >” dành cho Học sinh lớp 1 năm học 2025-2026.
+      Wellspring Saigon trân trọng cảm ơn Quý Phụ huynh đã đồng hành cùng Nhà
+      trường trong những chuẩn bị đầu tiên cho hành trình vào Lớp 1 của con.
     </p>
 
     <p>
-      Lịch khảo sát đầu vào của Học sinh
-      <strong>{{lead.student_full_name}}</strong> được xác nhận như sau:
+      Nhà trường vui mừng xác nhận Học sinh đã được mời tham dự
+      <strong>buổi phỏng vấn 1:1</strong> - cơ hội để thầy cô lắng nghe, quan
+      sát và hiểu hơn về sự sẵn sàng của con trước khi bước vào Lớp 1 năm học
+      2026-2027.
     </p>
+    {% else %}
+    <p>
+      Wellspring Saigon cảm ơn Quý Phụ huynh đã đăng ký thành công lịch Khảo sát
+      đầu vào năm học 2026-2027 cho Học sinh.
+    </p>
+    {% endif %}
 
-    <ul>
-      <li>
-        <strong>Thời gian khảo sát:</strong> lúc
-        <span style="color: #f05023"
-          >{{test_slot_start_time}}, {{weekday_vn}}, ngày {{test_slot_date}}
-        </span>
+    <h3 style="color: #00539c; margin-top: 20px">Thông tin Lịch khảo sát</h3>
+
+    <!-- Test Schedule Table -->
+    <table
+      style="
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 14px;
+      "
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            width: 30%;
+            vertical-align: top;
+          "
+        >
+          Thời gian khảo sát
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          <strong
+            >{{test_slot_start_time}} giờ, {{weekday_vn}}, ngày
+            {{test_slot_date}}</strong
+          >
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Địa điểm
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {% if lead.student_grade == "G01" %} Trường Wellspring Saigon – Cổng
+          số 1<br />
+          Khu nhà A-Plus, KDC Saigon Pearl<br />
+          92 Nguyễn Hữu Cảnh, P. Thạnh Mỹ Tây, TP. Hồ Chí Minh {% else %} Trường
+          Wellspring Saigon – Cổng B<br />
+          Khu nhà A-B, KDC Saigon Pearl<br />
+          92 Nguyễn Hữu Cảnh, P. Thạnh Mỹ Tây, TP. Hồ Chí Minh {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Hình thức khảo sát
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {% if lead.student_grade == "G01" %}
+          <strong>Phỏng vấn trực tiếp 1:1</strong> tối đa 30 phút, bao gồm:
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>15 phút với Giáo viên Chương trình Quốc tế.</li>
+            <li>15 phút với Giáo viên Chương trình Việt Nam.</li>
+          </ul>
+          {% elif lead.student_grade == "G02" %}
+          <strong>Đối với lớp 2:</strong> khoảng 100 phút bao gồm:
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>Toán và Tiếng Việt (bài viết); và</li>
+            <li>Phỏng vấn với Giáo viên Chương trình Quốc tế.</li>
+          </ul>
+          {% elif lead.student_grade in ["G03", "G04", "G05"] %}
+          <strong>Đối với lớp 3-5:</strong> khoảng 120 – 150 phút; bao gồm:
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>Toán và Tiếng Việt (bài viết); và</li>
+            <li>Tiếng Anh (Nghe nói & Đọc hiểu).</li>
+          </ul>
+          {% else %}
+          <strong>Đối với lớp 6-11:</strong> khoảng 150 – 180 phút; bao gồm:
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>Toán và Ngữ Văn (bài viết); và</li>
+            <li>Tiếng Anh (Nghe nói & Đọc hiểu).</li>
+          </ul>
+          {% endif %}
+        </td>
+      </tr>
+    </table>
+
+    <h3 style="color: #00539c; margin-top: 20px">
+      Lưu ý quan trọng cho Học sinh và Phụ huynh đi cùng
+    </h3>
+    <ul style="padding-left: 20px">
+      <li style="margin-bottom: 8px">
+        {% if lead.student_grade == "G01" %} Vui lòng đến trường bằng
+        <strong>Cổng số 1</strong> và xuất trình tin nhắn hoặc nội dung email
+        lịch khảo sát này với Bảo vệ để được hỗ trợ thủ tục vào trường. {% else
+        %} Vui lòng đến trường bằng <strong>Cổng B</strong> và xuất trình tin
+        nhắn hoặc nội dung email lịch khảo sát này với Bảo vệ để được hỗ trợ thủ
+        tục vào trường. {% endif %}
       </li>
-      <li>
-        <strong>Địa điểm:</strong> Cổng B - Trường Wellspring Saigon, Số 92
-        Nguyễn Hữu Cảnh, Phường 22, Quận Bình Thạnh, TP.HCM.
-      </li>
-      <li>
-        <strong>Hình thức khảo sát:</strong> Học sinh sẽ thực hiện Phỏng vấn
-        trực tiếp 1:1 tối đa 30 phút, bao gồm:
-        <ul>
-          <li>15 phút với Giáo viên Chương trình Quốc tế.</li>
-          <li>15 phút với Giáo viên Chương trình Việt Nam.</li>
-        </ul>
-      </li>
-
-      <li>
-        <strong>Lưu ý quan trọng cho Học sinh và Phụ huynh đi cùng:</strong>
-
-        <ol>
-          <li>
-            Vui lòng đến trường bằng Cổng B và xuất trình tin nhắn hoặc nội dung
-            email lịch khảo sát này với Bảo vệ Cổng B để được hỗ trợ thủ tục vào
-            trường.
-          </li>
-          <li>
-            Vui lòng có mặt tại Phòng Tuyển sinh đúng giờ thông báo,
-            <span style="color: #f05023">trước 15 phút</span> so với thời gian
-            khảo sát đã đăng ký để thực hiện các thủ tục cần thiết.
-          </li>
-        </ol>
-      </li>
-
-      <li>
-        <strong>Phí khảo sát:</strong> 2.000.000vnd/Học sinh/lần. Phụ huynh vui
-        lòng lựa chọn một trong các hình thức thanh toán sau:
-        <ol>
-          <li>
-            Thanh toán trực tiếp bằng tiền mặt hoặc cà thẻ tại Phòng Kế toán:
-            vào ngày Học sinh đến trường tham gia khảo sát.
-          </li>
-
-          <li>
-            Thanh toán chuyển khoản theo số tài khoản bên dưới trước 01 (một)
-            ngày lịch khảo sát đã đăng ký:
-
-            <table
-              style="
-                padding: 5px;
-                border: 1px solid #3b6dae;
-                border-collapse: collapse;
-              "
-            >
-              <tbody>
-                <tr style="border: 1px solid #3b6dae">
-                  <td style="padding: 5px; border: 1px solid #3b6dae">
-                    Người thụ hưởng
-                  </td>
-                  <td style="padding: 5px; border: 1px solid #3b6dae">
-                    <strong>{{account_name}}</strong>
-                  </td>
-                  <td rowspan="4" style="padding: 5px 10px; text-align: center">
-                    <p style="font-weight: bold">QR code:</p>
-                    <img
-                      src="{{payment_qr_code}}"
-                      alt="Payment QR Code"
-                      style="width: 150px; height: 150px"
-                    />
-                  </td>
-                </tr>
-                <tr style="border: 1px solid #3b6dae">
-                  <td style="padding: 5px; border: 1px solid #3b6dae">
-                    Số tài khoản
-                  </td>
-                  <td style="padding: 5px; border: 1px solid #3b6dae">
-                    <strong>{{account_number}}</strong>
-                  </td>
-                </tr>
-                <tr style="border: 1px solid #3b6dae">
-                  <td style="padding: 5px; border: 1px solid #3b6dae">
-                    Tại ngân hàng
-                  </td>
-                  <td style="padding: 5px; border: 1px solid #3b6dae">
-                    <strong>{{bank_name}}</strong>
-                  </td>
-                </tr>
-                <tr style="border: 1px solid #3b6dae">
-                  <td style="padding: 5px; border: 1px solid #3b6dae">
-                    Nội dung chuyển khoản
-                  </td>
-                  <td style="padding: 5px; border: 1px solid #3b6dae">
-                    <strong>{{add_info}}</strong>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
-        </ol>
+      <li style="margin-bottom: 8px">
+        Để buổi khảo sát diễn ra hiệu quả, Học sinh nên đến sớm khoảng
+        <strong>10–15 phút</strong> để làm quen không gian và chuẩn bị tâm lý.
       </li>
     </ul>
 
+    <h3 style="color: #00539c; margin-top: 20px">
+      Phí khảo sát và hình thức thanh toán
+    </h3>
+    <p><strong>Phí khảo sát:</strong> 2.000.000 VNĐ/Học sinh/lần</p>
+    <p>Phụ huynh vui lòng lựa chọn một trong các hình thức thanh toán sau:</p>
+    <ul style="padding-left: 20px">
+      <li style="margin-bottom: 8px">
+        <strong>Thanh toán trực tiếp</strong> bằng tiền mặt hoặc cà thẻ tại
+        Phòng Kế toán: vào ngày Học sinh đến trường tham gia khảo sát.
+      </li>
+      <li style="margin-bottom: 8px">
+        <strong>Thanh toán chuyển khoản</strong> theo số tài khoản bên dưới
+        trước 01 (một) ngày lịch khảo sát đã đăng ký:
+      </li>
+    </ul>
+
+    <!-- Bank Account Table -->
+    <table
+      style="
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 14px;
+      "
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            width: 30%;
+            vertical-align: top;
+          "
+        >
+          Người thụ hưởng
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {{account_name}}
+        </td>
+        <td
+          rowspan="4"
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+            vertical-align: middle;
+            width: 150px;
+          "
+        >
+          <strong>QR code:</strong><br />
+          <img
+            src="{{payment_qr_code}}"
+            alt="QR Code"
+            style="width: 120px; height: 120px; margin-top: 10px"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Số tài khoản
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          <strong>{{account_number}}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Ngân hàng
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {{bank_name}}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Nội dung chuyển khoản
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          <em>{{add_info}}</em>
+        </td>
+      </tr>
+    </table>
+
+    <h3 style="color: #00539c; margin-top: 20px">
+      Các mốc tiếp theo trong quy trình tuyển sinh
+    </h3>
+
+    <!-- Next Steps Table with Important Notes inside -->
+    <table
+      style="
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 14px;
+      "
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            width: 30%;
+            vertical-align: top;
+          "
+        >
+          Báo cáo kết quả
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {% if lead.student_grade == "G01" %} Hội đồng Tuyển sinh sẽ gửi Báo
+          cáo kết quả phỏng vấn của Học sinh vào
+          <strong>27/02/2026</strong>. Báo cáo này giúp Quý Phụ huynh cân nhắc
+          và đưa ra quyết định phù hợp cho kế hoạch học tập Lớp 1 trong năm học
+          2026–2027. {% else %} Kết quả sẽ được gửi trực tiếp đến email Phụ
+          huynh, dự kiến từ sau <strong>03 – 05 ngày làm việc</strong> sau khi
+          Học sinh hoàn thành khảo sát. {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Biểu phí và ưu đãi
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          Quý Phụ huynh tham khảo thêm Biểu phí và Chính sách ưu đãi tài chính
+          năm học 2026-2027
+          <a
+            href="https://wellspring-production.s3.ap-southeast-1.amazonaws.com/WSSG_Bieu_Phi_2026_2027_Tuition_fees_v11_7542d9bf71.pdf"
+            target="_blank"
+            style="color: #3d5caf"
+            >tại đây</a
+          >.
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Lưu ý quan trọng
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          <ul style="margin: 0; padding-left: 20px">
+            <li style="margin-bottom: 8px">
+              {% if lead.student_grade == "G01" %} Việc tham dự phỏng vấn 1:1
+              <strong>không đảm bảo quyền nhập học</strong>. {% else %} Việc
+              tham dự khảo sát <strong>không đảm bảo quyền nhập học</strong>. {%
+              endif %}
+            </li>
+            <li style="margin-bottom: 8px">
+              Tuyển sinh được xem là hoàn tất khi:
+              <ul style="padding-left: 20px; margin-top: 5px">
+                <li>Học sinh đạt yêu cầu theo tiêu chí tuyển sinh; và</li>
+                <li>
+                  Quý Phụ huynh hoàn tất Thủ tục nhập học, bao gồm các nghĩa vụ
+                  học phí theo Biểu phí hiện hành, trong vòng
+                  <strong>07 ngày làm việc</strong> kể từ ngày nhận được thông
+                  báo kết quả.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+
     <p>
-      Quý Phụ huynh có bất kỳ thắc mắc nào hoặc cần thêm thông tin, vui lòng
-      liên hệ với Phòng Tuyển sinh qua:
+      Quý Phụ huynh nếu có thắc mắc hoặc cần hỗ trợ thêm thông tin, vui lòng
+      liên hệ Phòng Tuyển sinh theo thông tin sau:
     </p>
 
-    <ul>
+    <ul style="list-style: none; padding-left: 0">
       <li>
-        <span style="width: 10px; margin-right: 5px">📞</span
-        ><strong>Hotline:</strong> 0937 099 229
+        <span style="margin-right: 5px">📞</span><strong>Hotline:</strong> 0937
+        099 229
       </li>
       <li>
-        <span style="width: 10px; margin-right: 5px">✉️</span
+        <span style="margin-right: 5px">✉️</span
         ><strong>Email:</strong> admissions@wellspringsaigon.edu.vn
       </li>
     </ul>
 
-    <p>Nhà trường rất háo hức chờ đón Học sinh tham gia khảo sát.</p>
+    <p>
+      {% if lead.student_grade == "G01" %} Wellspring Saigon trân trọng cảm ơn
+      sự tin tưởng của Quý Phụ huynh và rất mong được gặp gỡ Học sinh trong buổi
+      phỏng vấn sắp tới — một cột mốc ý nghĩa trong hành trình khám phá tiềm
+      năng và nuôi dưỡng những bước khởi đầu đầy hứng khởi của con. {% else %}
+      Wellspring Saigon trân trọng cảm ơn sự tin tưởng của Quý Phụ huynh và rất
+      mong được gặp gỡ Học sinh trong buổi khảo sát sắp tới — một cột mốc ý
+      nghĩa trong hành trình khám phá tiềm năng và nuôi dưỡng những bước khởi
+      đầu đầy hứng khởi của con. {% endif %}
+    </p>
 
     <p>Trân trọng cảm ơn,</p>
-    <p><strong>Hội đồng Tuyển sinh Wellspring Saigon</strong></p>
+    <p><strong>Hội đồng Tuyển sinh</strong></p>
+    <p>
+      Hệ thống Trường Phổ thông Song ngữ Liên cấp Quốc tế Wellspring –
+      Wellspring Saigon
+    </p>
   </div>
 
   <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0" />
 
-  <!-- English Version -->
+  <!-- English Section -->
   <div class="section en-language" style="color: #00539c !important">
+    <h2 style="text-align: center; color: #3d5caf; margin-bottom: 5px">
+      CONFIRMATION OF SUCCESSFUL PLACEMENT TEST SCHEDULE
+    </h2>
+    <h2 style="text-align: center; color: #4ead5b; margin: 10px 0">
+      SCHOOL YEAR 2026-2027
+    </h2>
+
     <p>
       Dear Parents of Student
-      <strong>{{lead.student_full_name}}</strong>, Order Number:
+      <strong>{{lead.student_full_name}}</strong>, Registration Number:
       <strong>{{lead.registration_number}}</strong>,
     </p>
 
+    {% if lead.student_grade == "G01" %}
     <p>
-      Thank you for your successfully registration in Wellspring Saigon
-      Placement Test Program for new Grade 1 Students of the school year
-      2025-2026.
+      Wellspring Saigon sincerely appreciates Parents for accompanying the
+      School in the initial preparations for the Student's journey into Grade 1.
     </p>
 
     <p>
-      Next, we would now like to provide detailed information regarding the
-      upcoming <strong>Placement Test:</strong>
+      We are pleased to confirm that the Student has been invited to attend the
+      <strong>1:1 Interview</strong> - an opportunity for teachers to listen,
+      observe, and gain a deeper understanding of the Student's readiness for
+      entering Grade 1 in the 2026–2027 school year.
     </p>
+    {% else %}
+    <p>
+      Wellspring Saigon sincerely thanks Parents for successfully registering
+      the Student for the Placement Test for the 2026–2027 school year.
+    </p>
+    {% endif %}
 
-    <ul>
-      <li>
-        <strong>Date and Time:</strong>
-        <span style="color: #f05023"
-          >{{test_slot_start_time}}, {{weekday_en}}, {{test_slot_date}}</span
-        >
-      </li>
-      <li>
-        <strong>Location:</strong> Gate B - Wellspring Saigon, 92 Nguyen Huu
-        Canh Street, Ward 22, Binh Thanh District, HCMC.
-      </li>
-      <li>
-        <strong>Format:</strong> Each student will participate in a 1:1
-        interview, lasting a maximum of 30 minutes, consisting of:
-        <ul>
-          <li>15 minutes with an International Program teacher.</li>
-          <li>15 minutes with a Vietnamese Program teacher.</li>
-        </ul>
-      </li>
+    <h3 style="color: #00539c; margin-top: 20px">Placement Test Information</h3>
 
-      <li>
-        <strong>Important Notes for Students and Parents:</strong>
-
-        <ol>
-          <li>
-            Please enter through Gate B and present the confirmation message
-            with the assigned time slot or email to the Gate B security staff
-            for assistance with entry procedures.
-          </li>
-          <li>
-            Please arrive at the Admissions Office on time as scheduled,
-            <span style="color: #f05023">at least 15 minutes</span> before your
-            placement test time, to complete the necessary procedures.
-          </li>
-        </ol>
-      </li>
-
-      <li>
-        <strong>Placement Test Fee:</strong> 2,000,000 VND/student per placement
-        test. Parents may complete the payment using one of the following
-        methods:
-        <ol>
-          <li>
-            Cash or card payment at the Finance & Accounting Office on the
-            assessment day.
-          </li>
-
-          <li>
-            Bank transfer at least one day before the registered assessment date
-            to the following account:
-          </li>
-        </ol>
-        <table
+    <!-- Test Schedule Table - English -->
+    <table
+      style="
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 14px;
+      "
+    >
+      <tr>
+        <td
           style="
-            padding: 5px;
-            border: 1px solid #3b6dae;
-            border-collapse: collapse;
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            width: 30%;
+            vertical-align: top;
           "
         >
-          <tbody>
-            <tr style="border: 1px solid #3b6dae">
-              <td style="padding: 5px; border: 1px solid #3b6dae">
-                <strong>Beneficiary</strong>
-              </td>
-              <td style="padding: 5px; border: 1px solid #3b6dae">
-                SSG Education Investment and Development Co., Ltd.
-              </td>
-              <td rowspan="4" style="padding: 5px 10px; text-align: center">
-                <p style="font-weight: bold">QR code:</p>
-                <img
-                  src="{{payment_qr_code}}"
-                  alt="Payment QR Code"
-                  style="width: 150px; height: 150px"
-                />
-              </td>
-            </tr>
-            <tr style="border: 1px solid #3b6dae">
-              <td style="padding: 5px; border: 1px solid #3b6dae">
-                <strong>Account Number</strong>
-              </td>
-              <td style="padding: 5px; border: 1px solid #3b6dae">
-                {{account_number}}
-              </td>
-            </tr>
-            <tr style="border: 1px solid #3b6dae">
-              <td style="padding: 5px; border: 1px solid #3b6dae">
-                <strong>Bank</strong>
-              </td>
-              <td style="padding: 5px; border: 1px solid #3b6dae">
-                Vietnam Joint Stock Commercial Bank for Foreign Trade
-                (Vietcombank) - Gia Định Branch
-              </td>
-            </tr>
-            <tr style="border: 1px solid #3b6dae">
-              <td style="padding: 5px; border: 1px solid #3b6dae">
-                <strong>Transfer Details</strong>
-              </td>
-              <td style="padding: 5px; border: 1px solid #3b6dae">
-                {{add_info}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+          Schedule Time
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          <strong
+            >{{test_slot_start_time}}, {{weekday_en}},
+            {{test_slot_date}}</strong
+          >
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Location
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {% if lead.student_grade == "G01" %} Wellspring Saigon School – Gate
+          1<br />
+          Block A-Plus, Saigon Pearl Residential<br />
+          No. 92 Nguyen Huu Canh Street, Thanh My Tay Ward, Ho Chi Minh City {%
+          else %} Wellspring Saigon School – Gate B<br />
+          Block A-B, Saigon Pearl Residential<br />
+          No. 92 Nguyen Huu Canh Street, Thanh My Tay Ward, Ho Chi Minh City {%
+          endif %}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Placement Test Format
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {% if lead.student_grade == "G01" %}
+          <strong>1:1 in-person Interview</strong> (up to 30 minutes),
+          including:
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>15 minutes with an International Program Teacher</li>
+            <li>15 minutes with a Vietnamese Program Teacher</li>
+          </ul>
+          {% elif lead.student_grade == "G02" %}
+          <strong>For Grade 2:</strong> approximately 100 minutes, including:
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>Math and Vietnamese (written test); and</li>
+            <li>Interview with the International Program Teacher.</li>
+          </ul>
+          {% elif lead.student_grade in ["G03", "G04", "G05"] %}
+          <strong>For Grades 3-5:</strong> approximately 120 – 150 minutes;
+          including:
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>Math and Vietnamese (written test); and</li>
+            <li>English (Speaking & Reading Comprehension).</li>
+          </ul>
+          {% else %}
+          <strong>For Grades 6-11:</strong> approximately 150 – 180 minutes;
+          including:
+          <ul style="margin: 5px 0; padding-left: 20px">
+            <li>Math and Literature (written test); and</li>
+            <li>English (Speaking & Reading Comprehension).</li>
+          </ul>
+          {% endif %}
+        </td>
+      </tr>
+    </table>
+
+    <h3 style="color: #00539c; margin-top: 20px">
+      Important Notes for Students and Parents
+    </h3>
+    <ul style="padding-left: 20px">
+      <li style="margin-bottom: 8px">
+        {% if lead.student_grade == "G01" %} Please enter through
+        <strong>Gate 1</strong> and present the confirmation message with the
+        assigned time slot or email to the security staff for assistance with
+        entry procedures. {% else %} Please enter through
+        <strong>Gate B</strong> and present the confirmation message with the
+        assigned time slot or email to the security staff for assistance with
+        entry procedures. {% endif %}
+      </li>
+      <li style="margin-bottom: 8px">
+        To ensure an effective assessment session, the Student is encouraged to
+        arrive <strong>10–15 minutes early</strong> to get familiar with the
+        environment and feel more comfortable before the session begins.
       </li>
     </ul>
 
+    <h3 style="color: #00539c; margin-top: 20px">
+      Placement Test Fee and Payment Method
+    </h3>
+    <p>
+      <strong>Placement Test Fee:</strong> 2,000,000 VND/student per placement
+      test
+    </p>
+    <p>Parents may complete the payment using one of the following methods:</p>
+    <ul style="padding-left: 20px">
+      <li style="margin-bottom: 8px">
+        <strong>Cash or card payment</strong> at the Finance & Accounting Office
+        on the assessment day.
+      </li>
+      <li style="margin-bottom: 8px">
+        <strong>Bank transfer</strong> at least one day before the registered
+        assessment date to the following account:
+      </li>
+    </ul>
+
+    <!-- Bank Account Table - English -->
+    <table
+      style="
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 14px;
+      "
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            width: 30%;
+            vertical-align: top;
+          "
+        >
+          Beneficiary
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {{account_name}}
+        </td>
+        <td
+          rowspan="4"
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+            vertical-align: middle;
+            width: 150px;
+          "
+        >
+          <strong>QR code:</strong><br />
+          <img
+            src="{{payment_qr_code}}"
+            alt="QR Code"
+            style="width: 120px; height: 120px; margin-top: 10px"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Account Number
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          <strong>{{account_number}}</strong>
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Bank
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {{bank_name}}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Transfer Details
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          <em>{{add_info}}</em>
+        </td>
+      </tr>
+    </table>
+
+    <h3 style="color: #00539c; margin-top: 20px">
+      Next Steps in the Admission Process
+    </h3>
+
+    <!-- Next Steps Table with Important Notes inside - English -->
+    <table
+      style="
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 14px;
+      "
+    >
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            width: 30%;
+            vertical-align: top;
+          "
+        >
+          Placement Test Results
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          {% if lead.student_grade == "G01" %} The School Board of Admissions
+          will inform Parents about the Placement test result on
+          <strong>February 27, 2026</strong>, as a basis for Parents to decide
+          on the study plan for Grade 1 student in this coming 2026-2027 School
+          Year. {% else %} The results will be sent directly to the Parents'
+          email, expected to be within
+          <strong>03 – 05 working days</strong> after the student completes the
+          Placement test. {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Fees Schedule & Financial Incentive Policy
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          Parents may refer to the Fee Schedule and Financial Incentive Policy
+          2026-2027
+          <a
+            href="https://wellspring-production.s3.ap-southeast-1.amazonaws.com/WSSG_Bieu_Phi_2026_2027_Tuition_fees_v11_7542d9bf71.pdf"
+            target="_blank"
+            style="color: #3d5caf"
+            >here</a
+          >.
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #f5f5f5;
+            font-weight: bold;
+            vertical-align: top;
+          "
+        >
+          Important Notes
+        </td>
+        <td style="border: 1px solid #ddd; padding: 12px; vertical-align: top">
+          <ul style="margin: 0; padding-left: 20px">
+            <li style="margin-bottom: 8px">
+              {% if lead.student_grade == "G01" %} Participation in the 1:1
+              Interview
+              <strong>does not guarantee admission</strong> for the student. {%
+              else %} Participation in the Placement Test
+              <strong>does not guarantee admission</strong> for the student. {%
+              endif %}
+            </li>
+            <li style="margin-bottom: 8px">
+              Enrollment is only considered successful when:
+              <ul style="padding-left: 20px; margin-top: 5px">
+                <li>The student meets the Placement test criteria; and</li>
+                <li>
+                  The Parents complete the enrollment procedures, including all
+                  tuition fee obligations (as specified in the Fee Schedule),
+                  within <strong>seven (07) working days</strong> from the date
+                  of receiving the Placement test results from the School.
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+
     <p>
       For any inquiries or further information, please do not hesitate to
-      contact the <strong>Admissions Office</strong> via:
+      contact the Admissions Office via:
     </p>
 
-    <ul>
+    <ul style="list-style: none; padding-left: 0">
       <li>
-        <span style="width: 10px; margin-right: 5px">📞</span
-        ><strong>Hotline:</strong> 0937 099 229
+        <span style="margin-right: 5px">📞</span><strong>Hotline:</strong> 0937
+        099 229
       </li>
       <li>
-        <span style="width: 10px; margin-right: 5px">✉️</span
+        <span style="margin-right: 5px">✉️</span
         ><strong>Email:</strong> admissions@wellspringsaigon.edu.vn
       </li>
     </ul>
 
-    <p>We look forward to welcoming students to the upcoming placement test.</p>
+    <p>
+      {% if lead.student_grade == "G01" %} Wellspring Saigon sincerely
+      appreciates your trust and looks forward to meeting the Student at the
+      upcoming interview — a meaningful milestone in the journey of discovering
+      potential and nurturing the child's exciting first steps. {% else %}
+      Wellspring Saigon sincerely appreciates your trust and looks forward to
+      meeting the Student at the upcoming Placement Test — a meaningful
+      milestone in the journey of discovering potential and nurturing the
+      child's exciting first steps. {% endif %}
+    </p>
 
     <p>Best regards,</p>
-    <p><strong>Wellspring Saigon Admission Team</strong></p>
+    <p><strong>Admissions Committee</strong></p>
+    <p>Wellspring International Bilingual Schools - Wellspring Saigon</p>
   </div>
 </div>
