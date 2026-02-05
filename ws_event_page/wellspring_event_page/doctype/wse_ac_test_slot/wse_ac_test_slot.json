@@ -31,13 +31,13 @@
    "search_index": 1
   },
   {
+   "description": "Comma-separated grades (e.g., G01,G02,G03). Valid: G01-G12",
    "fieldname": "student_grade",
-   "fieldtype": "Select",
+   "fieldtype": "Small Text",
    "in_filter": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Student Grade",
-   "options": "G01\nG02\nG03\nG04\nG05\nG06\nG07\nG08\nG09\nG10\nG11\nG12",
    "reqd": 1,
    "search_index": 1
   },

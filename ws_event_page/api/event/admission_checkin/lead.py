@@ -189,10 +189,12 @@ def register_for_test(lead_id, test_slot_id, booking_id, switch_slot=0, send_ema
     if lead.booking_id != booking_id:
         frappe.throw(WSEACErrorCode.INVALID_BOOKING_ID.value)
 
-    # Validate slot grade matches lead grade
+    # Validate slot grade matches lead grade (supports multi-grade slots)
     slot = frappe.get_doc("WSE AC Test Slot", test_slot_id)
-    if slot.student_grade and slot.student_grade != lead.student_grade:
-        frappe.throw("This test slot is not available for your grade")
+    if slot.student_grade:
+        slot_grades = [g.strip() for g in slot.student_grade.split(",") if g.strip()]
+        if slot_grades and lead.student_grade not in slot_grades:
+            frappe.throw("This test slot is not available for your grade")
 
     # Validate lead's grade is in opened grades (if configured)
     event = None
@@ -259,18 +261,18 @@ def get_all_test_slots(booking_id):
         if opened_grades and lead.student_grade not in opened_grades:
             return []
 
-    # Build filters — filter by grade
-    filters = {
-        "is_enabled": 1,
-        "ac_event": event.name,
-        "student_grade": lead.student_grade,
-    }
-
-    test_slots = frappe.get_all(
-        "WSE AC Test Slot",
-        filters=filters,
-        fields="*",
-        order_by="date, start_time",
+    # Query test slots using FIND_IN_SET for multi-grade support
+    test_slots = frappe.db.sql(
+        """
+        SELECT *
+        FROM `tabWSE AC Test Slot`
+        WHERE is_enabled = 1
+          AND ac_event = %(event_name)s
+          AND FIND_IN_SET(%(lead_grade)s, student_grade) > 0
+        ORDER BY date, start_time
+        """,
+        {"event_name": event.name, "lead_grade": lead.student_grade},
+        as_dict=True,
     )
 
     return test_slots
